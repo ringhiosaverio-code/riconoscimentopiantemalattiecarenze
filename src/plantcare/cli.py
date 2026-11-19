@@ -27,6 +27,9 @@ def cmd_check_taxonomy(_: argparse.Namespace) -> int:
     disease_hosts = {h for d in tax.diseases.values() for h in d.get("hosts", [])}
     no_disease = sorted(p for p in tax.plants if p not in disease_hosts)
     print(f"  colture senza malattie di riferimento ({len(no_disease)}): {', '.join(no_disease) or '-'}")
+    insect_hosts = {h for i in tax.insects.values() if i["role"] == "phytophagous" for h in i.get("hosts", [])}
+    no_insect = sorted(p for p in tax.plants if p not in insect_hosts)
+    print(f"  colture senza fitofagi di riferimento ({len(no_insect)}): {', '.join(no_insect) or '-'}")
     return 0
 
 

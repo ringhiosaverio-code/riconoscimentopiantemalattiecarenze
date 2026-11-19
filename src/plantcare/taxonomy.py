@@ -98,6 +98,12 @@ def validate(tax: Taxonomy) -> None:
     for ins_id, ins in tax.insects.items():
         if ins.get("role") not in INSECT_ROLES:
             errors.append(f"insetto '{ins_id}': ruolo non valido '{ins.get('role')}'")
+        for host in ins.get("hosts", []):
+            if host not in tax.plants:
+                errors.append(f"insetto '{ins_id}': ospite sconosciuto '{host}'")
+        for o in ins.get("organs", []):
+            if tax.plant_organs and o not in tax.plant_organs:
+                errors.append(f"insetto '{ins_id}': organo sconosciuto '{o}'")
 
     for dis_id, dis in tax.diseases.items():
         organs = dis.get("organs", [])

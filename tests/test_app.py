@@ -151,3 +151,28 @@ def test_predict_rejects_unknown_organ():
     client = TestClient(create_app(None))
     r = client.post("/predict", data={"organ": "zampa"}, files={"file": ("x.png", _png_bytes(), "image/png")})
     assert r.status_code == 400
+
+
+def test_every_crop_has_a_harmful_insect():
+    from plantcare.taxonomy import load_taxonomy
+    tax = load_taxonomy()
+    harmful_hosts = {h for i in tax.insects.values() if i["role"] == "phytophagous" for h in i.get("hosts", [])}
+    assert set(tax.plants) <= harmful_hosts, sorted(set(tax.plants) - harmful_hosts)
+
+
+def test_olive_has_its_main_pests_and_api_filters_them():
+    client = TestClient(create_app(None))
+    olive = client.get("/api/insects", params={"plant": "olea_europaea", "role": "phytophagous"}).json()
+    ids = {i["id"] for i in olive}
+    assert {"bactrocera_oleae", "prays_oleae", "saissetia_oleae", "euphyllura_olivina"} <= ids
+    assert all(i["role"]["id"] == "phytophagous" for i in olive)
+    card = client.get("/api/insects/prays_oleae").json()
+    assert card["scientific"] == "Prays oleae"
+    assert client.get("/api/insects/inesistente").status_code == 404
+
+
+def test_useful_insects_are_not_listed_as_pests():
+    from plantcare.taxonomy import load_taxonomy
+    tax = load_taxonomy()
+    for useful in ("coccinella_septempunctata", "chrysoperla_carnea", "aphidius_colemani", "apis_mellifera"):
+        assert tax.insects[useful]["role"] != "phytophagous"

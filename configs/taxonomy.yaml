@@ -14,7 +14,7 @@
 # ATTENZIONE: agenti, ospiti e sintomi sono un elenco iniziale da far
 # validare a un fitopatologo prima dell'uso. I sintomi per organo sono sintesi.
 
-version: 0.3.0
+version: 0.4.0
 
 # ---------------------------------------------------------------
 # 0. ORGANI DELLA PIANTA
@@ -894,23 +894,626 @@ diseases:
 # 4. INSETTI
 # ---------------------------------------------------------------
 # role: phytophagous | entomophagous | pollinator | neutral
+# role: phytophagous (fitofago dannoso) | entomophagous (utile) | pollinator (utile)
+# hosts: colture attaccate; organs: organi colpiti. Elenco dei fitofagi principali: da completare con un entomologo.
 insects:
-  # --- fitofagi ---
-  - {id: aphid_myzus_persicae, common: "Afide verde del pesco", role: phytophagous, order: Hemiptera, family: Aphididae}
-  - {id: whitefly_trialeurodes, common: "Aleurode delle serre", role: phytophagous, order: Hemiptera, family: Aleyrodidae}
-  - {id: colorado_beetle, common: "Dorifora della patata", role: phytophagous, order: Coleoptera, family: Chrysomelidae}
-  - {id: tuta_absoluta, common: "Tignola del pomodoro", role: phytophagous, order: Lepidoptera, family: Gelechiidae}
-  - {id: thrips_frankliniella, common: "Tripide dei fiori", role: phytophagous, order: Thysanoptera, family: Thripidae}
-  - {id: scaphoideus_titanus, common: "Cicalina della flavescenza", role: phytophagous, order: Hemiptera, family: Cicadellidae}
-  - {id: bactrocera_oleae, common: "Mosca delle olive", role: phytophagous, order: Diptera, family: Tephritidae}
-  # --- entomofagi (utili) ---
-  - {id: coccinella_septempunctata, common: "Coccinella a sette punti", role: entomophagous, order: Coleoptera, family: Coccinellidae}
-  - {id: chrysoperla_carnea, common: "Crisopa", role: entomophagous, order: Neuroptera, family: Chrysopidae}
-  - {id: aphidius_colemani, common: "Imenottero parassitoide degli afidi", role: entomophagous, order: Hymenoptera, family: Braconidae}
-  - {id: orius_laevigatus, common: "Antocoride predatore dei tripidi", role: entomophagous, order: Hemiptera, family: Anthocoridae}
-  - {id: phytoseiulus_persimilis, common: "Acaro predatore", role: entomophagous, order: Acari, family: Phytoseiidae, note: "Acaro, non insetto: incluso per utilità pratica"}
-  # --- impollinatori ---
-  - {id: apis_mellifera, common: "Ape domestica", role: pollinator, order: Hymenoptera, family: Apidae}
+  - id: bactrocera_oleae
+    common: Mosca delle olive
+    scientific: Bactrocera oleae
+    role: phytophagous
+    order: Diptera
+    family: Tephritidae
+    hosts: [olea_europaea]
+    organs: [fruit]
+  - id: prays_oleae
+    common: Tignola dell'olivo
+    scientific: Prays oleae
+    role: phytophagous
+    order: Lepidoptera
+    family: Yponomeutidae
+    hosts: [olea_europaea]
+    organs: [flower, inflorescence, leaf, fruit]
+  - id: saissetia_oleae
+    common: Cocciniglia nera dell'olivo
+    scientific: Saissetia oleae
+    role: phytophagous
+    order: Hemiptera
+    family: Coccidae
+    hosts: [olea_europaea]
+    organs: [branch, leaf]
+  - id: euphyllura_olivina
+    common: Psilla dell'olivo
+    scientific: Euphyllura olivina
+    role: phytophagous
+    order: Hemiptera
+    family: Aphalaridae
+    hosts: [olea_europaea]
+    organs: [inflorescence, flower]
+  - id: liothrips_oleae
+    common: Tripide dell'olivo
+    scientific: Liothrips oleae
+    role: phytophagous
+    order: Thysanoptera
+    family: Phlaeothripidae
+    hosts: [olea_europaea]
+    organs: [leaf]
+  - id: palpita_unionalis
+    common: Tignola fogliare dell'olivo
+    scientific: Palpita unionalis
+    role: phytophagous
+    order: Lepidoptera
+    family: Crambidae
+    hosts: [olea_europaea]
+    organs: [leaf]
+  - id: zeuzera_pyrina
+    common: Rodilegno giallo
+    scientific: Zeuzera pyrina
+    role: phytophagous
+    order: Lepidoptera
+    family: Cossidae
+    hosts: [olea_europaea, malus_domestica, pyrus_communis, prunus_persica]
+    organs: [branch, trunk]
+    note: 'Larve xilofaghe: gallerie nei rami e nel tronco'
+  - id: scaphoideus_titanus
+    common: Cicalina della flavescenza
+    scientific: Scaphoideus titanus
+    role: phytophagous
+    order: Hemiptera
+    family: Cicadellidae
+    hosts: [vitis_vinifera]
+    organs: [leaf, branch]
+    note: Vettore del fitoplasma della flavescenza dorata
+  - id: empoasca_vitis
+    common: Cicalina verde della vite
+    scientific: Empoasca vitis
+    role: phytophagous
+    order: Hemiptera
+    family: Cicadellidae
+    hosts: [vitis_vinifera]
+    organs: [leaf]
+  - id: lobesia_botrana
+    common: Tignoletta della vite
+    scientific: Lobesia botrana
+    role: phytophagous
+    order: Lepidoptera
+    family: Tortricidae
+    hosts: [vitis_vinifera]
+    organs: [inflorescence, fruit]
+  - id: eupoecilia_ambiguella
+    common: Tignoletta gialla della vite
+    scientific: Eupoecilia ambiguella
+    role: phytophagous
+    order: Lepidoptera
+    family: Tortricidae
+    hosts: [vitis_vinifera]
+    organs: [inflorescence, fruit]
+  - id: planococcus_ficus
+    common: Cocciniglia della vite
+    scientific: Planococcus ficus
+    role: phytophagous
+    order: Hemiptera
+    family: Pseudococcidae
+    hosts: [vitis_vinifera]
+    organs: [fruit, branch]
+  - id: daktulosphaira_vitifoliae
+    common: Fillossera della vite
+    scientific: Daktulosphaira vitifoliae
+    role: phytophagous
+    order: Hemiptera
+    family: Phylloxeridae
+    hosts: [vitis_vinifera]
+    organs: [root, leaf]
+    note: Forma radicicola e galligena
+  - id: drosophila_suzukii
+    common: Drosofila dell'ala macchiata
+    scientific: Drosophila suzukii
+    role: phytophagous
+    order: Diptera
+    family: Drosophilidae
+    hosts: [vitis_vinifera, prunus_persica, prunus_avium, fragaria_ananassa, actinidia_chinensis, malus_domestica]
+    organs: [fruit]
+    note: Ovideposizione su frutti integri e maturi
+  - id: tuta_absoluta
+    common: Tignola del pomodoro
+    scientific: Tuta absoluta
+    role: phytophagous
+    order: Lepidoptera
+    family: Gelechiidae
+    hosts: [solanum_lycopersicum, solanum_tuberosum, solanum_melongena]
+    organs: [leaf, fruit]
+  - id: whitefly_trialeurodes
+    common: Aleurode delle serre
+    scientific: Trialeurodes vaporariorum
+    role: phytophagous
+    order: Hemiptera
+    family: Aleyrodidae
+    hosts: [solanum_lycopersicum, capsicum_annuum, capsicum_annuum_peperoncino, cucumis_sativus, cucurbita_pepo, solanum_melongena, lactuca_sativa, fragaria_ananassa]
+    organs: [leaf]
+  - id: bemisia_tabaci
+    common: Aleurode del tabacco
+    scientific: Bemisia tabaci
+    role: phytophagous
+    order: Hemiptera
+    family: Aleyrodidae
+    hosts: [solanum_lycopersicum, capsicum_annuum, capsicum_annuum_peperoncino, cucumis_sativus, cucurbita_pepo, solanum_melongena]
+    organs: [leaf]
+    note: Vettore di virus (es. TYLCV, ToCV)
+  - id: thrips_frankliniella
+    common: Tripide occidentale dei fiori
+    scientific: Frankliniella occidentalis
+    role: phytophagous
+    order: Thysanoptera
+    family: Thripidae
+    hosts: [solanum_lycopersicum, capsicum_annuum, capsicum_annuum_peperoncino, solanum_melongena, fragaria_ananassa, cucumis_sativus]
+    organs: [flower, fruit, leaf]
+    note: Vettore del TSWV
+  - id: helicoverpa_armigera
+    common: Nottua gialla del pomodoro
+    scientific: Helicoverpa armigera
+    role: phytophagous
+    order: Lepidoptera
+    family: Noctuidae
+    hosts: [solanum_lycopersicum, capsicum_annuum, capsicum_annuum_peperoncino, solanum_melongena, cucurbita_pepo, zea_mays]
+    organs: [fruit, leaf]
+  - id: spodoptera_littoralis
+    common: Nottua egiziana del cotone
+    scientific: Spodoptera littoralis
+    role: phytophagous
+    order: Lepidoptera
+    family: Noctuidae
+    hosts: [solanum_lycopersicum, solanum_melongena, capsicum_annuum, cucurbita_pepo, zea_mays]
+    organs: [leaf, fruit]
+  - id: liriomyza_trifolii
+    common: Minatore fogliare
+    scientific: Liriomyza trifolii
+    role: phytophagous
+    order: Diptera
+    family: Agromyzidae
+    hosts: [solanum_lycopersicum, capsicum_annuum, solanum_melongena, cucumis_sativus, cucurbita_pepo, lactuca_sativa]
+    organs: [leaf]
+  - id: macrosiphum_euphorbiae
+    common: Afide della patata
+    scientific: Macrosiphum euphorbiae
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [solanum_tuberosum, solanum_lycopersicum, solanum_melongena, lactuca_sativa]
+    organs: [leaf]
+    note: Vettore di virus
+  - id: aphis_gossypii
+    common: Afide del cotone e del melone
+    scientific: Aphis gossypii
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [cucumis_sativus, cucurbita_pepo, capsicum_annuum, capsicum_annuum_peperoncino, solanum_melongena, citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, lactuca_sativa, fragaria_ananassa]
+    organs: [leaf, flower]
+    note: Vettore di virus
+  - id: aphid_myzus_persicae
+    common: Afide verde del pesco
+    scientific: Myzus persicae
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [prunus_persica, lactuca_sativa, capsicum_annuum, capsicum_annuum_peperoncino, solanum_tuberosum, solanum_lycopersicum, brassica_oleracea_italica]
+    organs: [leaf]
+    note: Vettore di molti virus
+  - id: colorado_beetle
+    common: Dorifora della patata
+    scientific: Leptinotarsa decemlineata
+    role: phytophagous
+    order: Coleoptera
+    family: Chrysomelidae
+    hosts: [solanum_tuberosum, solanum_lycopersicum, solanum_melongena]
+    organs: [leaf]
+  - id: phthorimaea_operculella
+    common: Tignola della patata
+    scientific: Phthorimaea operculella
+    role: phytophagous
+    order: Lepidoptera
+    family: Gelechiidae
+    hosts: [solanum_tuberosum, solanum_lycopersicum]
+    organs: [tuber, leaf]
+  - id: epitrix_cucumeris
+    common: Altica della patata
+    scientific: Epitrix cucumeris
+    role: phytophagous
+    order: Coleoptera
+    family: Chrysomelidae
+    hosts: [solanum_tuberosum, solanum_lycopersicum, solanum_melongena]
+    organs: [leaf]
+    note: Fori rotondi sulle foglie
+  - id: agriotes_spp
+    common: 'Elateride (larve: filo di ferro)'
+    scientific: Agriotes spp.
+    role: phytophagous
+    order: Coleoptera
+    family: Elateridae
+    hosts: [solanum_tuberosum, zea_mays, triticum_aestivum, triticum_durum]
+    organs: [root, tuber]
+  - id: nasonovia_ribisnigri
+    common: Afide della lattuga
+    scientific: Nasonovia ribisnigri
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [lactuca_sativa]
+    organs: [leaf]
+  - id: spodoptera_exigua
+    common: Nottua fenicia
+    scientific: Spodoptera exigua
+    role: phytophagous
+    order: Lepidoptera
+    family: Noctuidae
+    hosts: [cucurbita_pepo, cucumis_sativus, capsicum_annuum, capsicum_annuum_peperoncino]
+    organs: [leaf, fruit]
+  - id: thrips_tabaci
+    common: Tripide della cipolla
+    scientific: Thrips tabaci
+    role: phytophagous
+    order: Thysanoptera
+    family: Thripidae
+    hosts: [allium_cepa_tropea, allium_sativum]
+    organs: [leaf]
+    note: Rigature argentate sulle foglie
+  - id: delia_antiqua
+    common: Mosca della cipolla
+    scientific: Delia antiqua
+    role: phytophagous
+    order: Diptera
+    family: Anthomyiidae
+    hosts: [allium_cepa_tropea, allium_sativum]
+    organs: [bulb, root]
+  - id: brevicoryne_brassicae
+    common: Afide del cavolo
+    scientific: Brevicoryne brassicae
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [brassica_oleracea_italica]
+    organs: [leaf, inflorescence]
+  - id: plutella_xylostella
+    common: Tignola del cavolo
+    scientific: Plutella xylostella
+    role: phytophagous
+    order: Lepidoptera
+    family: Plutellidae
+    hosts: [brassica_oleracea_italica]
+    organs: [leaf]
+  - id: pieris_brassicae
+    common: Cavolaia maggiore
+    scientific: Pieris brassicae
+    role: phytophagous
+    order: Lepidoptera
+    family: Pieridae
+    hosts: [brassica_oleracea_italica]
+    organs: [leaf, inflorescence]
+  - id: pieris_rapae
+    common: Cavolaia minore
+    scientific: Pieris rapae
+    role: phytophagous
+    order: Lepidoptera
+    family: Pieridae
+    hosts: [brassica_oleracea_italica]
+    organs: [leaf, inflorescence]
+  - id: phyllotreta_spp
+    common: Altica delle crucifere
+    scientific: Phyllotreta spp.
+    role: phytophagous
+    order: Coleoptera
+    family: Chrysomelidae
+    hosts: [brassica_oleracea_italica]
+    organs: [leaf]
+    note: Fori rotondi sulle foglie
+  - id: delia_radicum
+    common: Mosca del cavolo
+    scientific: Delia radicum
+    role: phytophagous
+    order: Diptera
+    family: Anthomyiidae
+    hosts: [brassica_oleracea_italica]
+    organs: [root]
+  - id: sitobion_avenae
+    common: Afide dei cereali
+    scientific: Sitobion avenae
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [triticum_aestivum, triticum_durum]
+    organs: [leaf, inflorescence]
+  - id: oulema_melanopus
+    common: Crioceride dei cereali
+    scientific: Oulema melanopus
+    role: phytophagous
+    order: Coleoptera
+    family: Chrysomelidae
+    hosts: [triticum_aestivum, triticum_durum]
+    organs: [leaf]
+  - id: cephus_pygmaeus
+    common: Cefide del culmo
+    scientific: Cephus pygmaeus
+    role: phytophagous
+    order: Hymenoptera
+    family: Cephidae
+    hosts: [triticum_aestivum, triticum_durum]
+    organs: [stem]
+  - id: sitophilus_granarius
+    common: Punteruolo dei cereali
+    scientific: Sitophilus granarius
+    role: phytophagous
+    order: Coleoptera
+    family: Curculionidae
+    hosts: [triticum_aestivum, triticum_durum, zea_mays]
+    organs: [fruit]
+    note: Infestazione delle granelle in deposito
+  - id: ostrinia_nubilalis
+    common: Piralide del mais
+    scientific: Ostrinia nubilalis
+    role: phytophagous
+    order: Lepidoptera
+    family: Crambidae
+    hosts: [zea_mays]
+    organs: [stem, fruit]
+  - id: sesamia_nonagrioides
+    common: Sesamia del mais
+    scientific: Sesamia nonagrioides
+    role: phytophagous
+    order: Lepidoptera
+    family: Noctuidae
+    hosts: [zea_mays]
+    organs: [stem, fruit]
+  - id: diabrotica_virgifera
+    common: Diabrotica del mais
+    scientific: Diabrotica virgifera virgifera
+    role: phytophagous
+    order: Coleoptera
+    family: Chrysomelidae
+    hosts: [zea_mays]
+    organs: [root]
+  - id: rhopalosiphum_maidis
+    common: Afide del mais
+    scientific: Rhopalosiphum maidis
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [zea_mays]
+    organs: [leaf, inflorescence]
+  - id: cydia_pomonella
+    common: Carpocapsa
+    scientific: Cydia pomonella
+    role: phytophagous
+    order: Lepidoptera
+    family: Tortricidae
+    hosts: [malus_domestica, pyrus_communis]
+    organs: [fruit]
+  - id: cacopsylla_pyri
+    common: Psilla del pero
+    scientific: Cacopsylla pyri
+    role: phytophagous
+    order: Hemiptera
+    family: Psyllidae
+    hosts: [pyrus_communis]
+    organs: [leaf, branch]
+    note: Melata e danni al frutto
+  - id: aphis_pomi
+    common: Afide verde del melo
+    scientific: Aphis pomi
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [malus_domestica, pyrus_communis]
+    organs: [leaf, branch]
+  - id: eriosoma_lanigerum
+    common: Afide lanigero del melo
+    scientific: Eriosoma lanigerum
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [malus_domestica]
+    organs: [branch, trunk, root]
+  - id: anthonomus_pomorum
+    common: Antonomo del melo
+    scientific: Anthonomus pomorum
+    role: phytophagous
+    order: Coleoptera
+    family: Curculionidae
+    hosts: [malus_domestica]
+    organs: [flower, inflorescence]
+  - id: lepidosaphes_ulmi
+    common: Cocciniglia a virgola
+    scientific: Lepidosaphes ulmi
+    role: phytophagous
+    order: Hemiptera
+    family: Diaspididae
+    hosts: [malus_domestica, pyrus_communis]
+    organs: [branch, fruit]
+  - id: quadraspidiotus_perniciosus
+    common: Cocciniglia di San José
+    scientific: Quadraspidiotus perniciosus
+    role: phytophagous
+    order: Hemiptera
+    family: Diaspididae
+    hosts: [malus_domestica, pyrus_communis, prunus_persica, prunus_avium, actinidia_chinensis]
+    organs: [branch, fruit]
+  - id: anarsia_lineatella
+    common: Anarsia del pesco
+    scientific: Anarsia lineatella
+    role: phytophagous
+    order: Lepidoptera
+    family: Gelechiidae
+    hosts: [prunus_persica]
+    organs: [branch, fruit]
+  - id: grapholita_molesta
+    common: Grafolita orientale
+    scientific: Grapholita molesta
+    role: phytophagous
+    order: Lepidoptera
+    family: Tortricidae
+    hosts: [prunus_persica, malus_domestica, pyrus_communis]
+    organs: [branch, fruit]
+  - id: capnodis_tenebrionis
+    common: Buprestide del pesco
+    scientific: Capnodis tenebrionis
+    role: phytophagous
+    order: Coleoptera
+    family: Buprestidae
+    hosts: [prunus_persica, prunus_avium]
+    organs: [root, trunk]
+  - id: rhagoletis_cerasi
+    common: Mosca della ciliegia
+    scientific: Rhagoletis cerasi
+    role: phytophagous
+    order: Diptera
+    family: Tephritidae
+    hosts: [prunus_avium]
+    organs: [fruit]
+  - id: myzus_cerasi
+    common: Afide nero del ciliegio
+    scientific: Myzus cerasi
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [prunus_avium]
+    organs: [leaf]
+  - id: metcalfa_pruinosa
+    common: Cicalina cerosa
+    scientific: Metcalfa pruinosa
+    role: phytophagous
+    order: Hemiptera
+    family: Flatidae
+    hosts: [actinidia_chinensis, citrus_sinensis, vitis_vinifera, malus_domestica]
+    organs: [leaf, branch]
+    note: Melata e secrezioni cerose
+  - id: aleurothrixus_floccosus
+    common: Aleurode fioccoso
+    scientific: Aleurothrixus floccosus
+    role: phytophagous
+    order: Hemiptera
+    family: Aleyrodidae
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia]
+    organs: [leaf]
+  - id: icerya_purchasi
+    common: Cocciniglia cotonosa degli agrumi
+    scientific: Icerya purchasi
+    role: phytophagous
+    order: Hemiptera
+    family: Monophlebidae
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata]
+    organs: [branch, leaf]
+  - id: ceratitis_capitata
+    common: Mosca mediterranea della frutta
+    scientific: Ceratitis capitata
+    role: phytophagous
+    order: Diptera
+    family: Tephritidae
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, persea_americana, annona_cherimola, prunus_persica, malus_domestica]
+    organs: [fruit]
+    note: Mosca soggetta a monitoraggio fitosanitario
+  - id: phyllocnistis_citrella
+    common: Minatore serpentino degli agrumi
+    scientific: Phyllocnistis citrella
+    role: phytophagous
+    order: Lepidoptera
+    family: Gracillariidae
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia]
+    organs: [leaf]
+  - id: aonidiella_aurantii
+    common: Cocciniglia rossa di California
+    scientific: Aonidiella aurantii
+    role: phytophagous
+    order: Hemiptera
+    family: Diaspididae
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia]
+    organs: [leaf, fruit, branch]
+  - id: planococcus_citri
+    common: Cocciniglia farinosa degli agrumi
+    scientific: Planococcus citri
+    role: phytophagous
+    order: Hemiptera
+    family: Pseudococcidae
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, annona_cherimola, persea_americana]
+    organs: [fruit, branch, root]
+  - id: balaninus_nucum
+    common: Balanino del nocciolo
+    scientific: Balaninus nucum
+    role: phytophagous
+    order: Coleoptera
+    family: Curculionidae
+    hosts: [corylus_avellana]
+    organs: [fruit]
+    note: Larve nel frutto
+  - id: gonocerus_acuteangulatus
+    common: Cimice del nocciolo
+    scientific: Gonocerus acuteangulatus
+    role: phytophagous
+    order: Hemiptera
+    family: Coreidae
+    hosts: [corylus_avellana, citrus_sinensis]
+    organs: [fruit, leaf]
+  - id: otiorhynchus_sulcatus
+    common: Otiorinco
+    scientific: Otiorhynchus sulcatus
+    role: phytophagous
+    order: Coleoptera
+    family: Curculionidae
+    hosts: [fragaria_ananassa]
+    organs: [root, leaf]
+    note: Larve radicicole, adulti notturni che rodono le foglie
+  - id: chaetosiphon_fragaefolii
+    common: Afide della fragola
+    scientific: Chaetosiphon fragaefolii
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [fragaria_ananassa]
+    organs: [leaf]
+  - id: cosmopolites_sordidus
+    common: Punteruolo del banano
+    scientific: Cosmopolites sordidus
+    role: phytophagous
+    order: Coleoptera
+    family: Curculionidae
+    hosts: [musa_spp]
+    organs: [root, trunk]
+    note: Gallerie nel rizoma
+  - id: scirtothrips_perseae
+    common: Tripide dell'avocado
+    scientific: Scirtothrips perseae
+    role: phytophagous
+    order: Thysanoptera
+    family: Thripidae
+    hosts: [persea_americana]
+    organs: [leaf, fruit]
+  - id: heilipus_lauri
+    common: Punteruolo del seme dell'avocado
+    scientific: Heilipus lauri
+    role: phytophagous
+    order: Coleoptera
+    family: Curculionidae
+    hosts: [persea_americana]
+    organs: [fruit]
+  - id: dactylopius_opuntiae
+    common: Cocciniglia del fico d'India
+    scientific: Dactylopius opuntiae
+    role: phytophagous
+    order: Hemiptera
+    family: Dactylopiidae
+    hosts: [opuntia_ficus_indica]
+    organs: [leaf, fruit]
+  - id: capitophorus_elaeagni
+    common: Afide del carciofo
+    scientific: Capitophorus elaeagni
+    role: phytophagous
+    order: Hemiptera
+    family: Aphididae
+    hosts: [cynara_cardunculus]
+    organs: [leaf, inflorescence]
+  - {id: coccinella_septempunctata, common: Coccinella a sette punti, scientific: Coccinella septempunctata, role: entomophagous, order: Coleoptera, family: Coccinellidae}
+  - {id: chrysoperla_carnea, common: Crisopa, scientific: Chrysoperla carnea, role: entomophagous, order: Neuroptera, family: Chrysopidae}
+  - {id: aphidius_colemani, common: Imenottero parassitoide degli afidi, scientific: Aphidius colemani, role: entomophagous, order: Hymenoptera, family: Braconidae}
+  - {id: orius_laevigatus, common: Antocoride predatore dei tripidi, scientific: Orius laevigatus, role: entomophagous, order: Hemiptera, family: Anthocoridae}
+  - {id: phytoseiulus_persimilis, common: Acaro predatore, scientific: Phytoseiulus persimilis, role: entomophagous, order: Acari, family: Phytoseiidae, note: 'Acaro, non insetto: incluso per utilità pratica'}
+  - {id: apis_mellifera, common: Ape domestica, scientific: Apis mellifera, role: pollinator, order: Hymenoptera, family: Apidae}
 
 # ---------------------------------------------------------------
 # 5. CARENZE NUTRIZIONALI

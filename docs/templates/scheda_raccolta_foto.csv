@@ -1,0 +1,2 @@
+image_id,file,date,time,farm_code,crop_id,plant_code,organ,view,scale_reference,symptoms_observed,disease_candidate,insect_candidate,healthy_reference,lab_sample_id,diagnosis_source,diagnosis_reference,photographer_role,device,consent_id,notes
+2026-06-12_AZ03_olea_P01_fruit_01,2026-06-12_AZ03_olea_P01_fruit_01.jpg,2026-06-12,10:35,AZ03,olea_europaea,P01,fruit,close_up,coin_2cm,fori circolari con galleria,olive_anthracnose,,no,,visual_only,,tecnico,smartphone 12MP,CONS-AZ03-2026,esempio: non sostituire con dati reali

@@ -64,6 +64,16 @@ class KnowledgeBase:
     def list_organs(self) -> list[dict[str, str]]:
         return [{"id": k, "label": v["label"]} for k, v in self.tax.plant_organs.items()]
 
+    def list_insects(self, plant_id: str | None = None, role: str | None = None) -> list[dict[str, Any]]:
+        out = []
+        for i in self.tax.insects.values():
+            if plant_id and plant_id not in i.get("hosts", []):
+                continue
+            if role and i["role"] != role:
+                continue
+            out.append(self.insect_card(i["id"]))
+        return sorted(out, key=lambda c: c["name"])
+
     def insect_card(self, insect_id: str) -> dict[str, Any] | None:
         i = self.tax.insects.get(insect_id)
         if i is None:
@@ -79,7 +89,10 @@ class KnowledgeBase:
             "name": i["common"],
             "order": i.get("order"),
             "family": i.get("family"),
+            "scientific": i.get("scientific"),
             "role": {"id": i["role"], "label": role_labels.get(i["role"], i["role"])},
+            "hosts": [{"id": h, "name": self.plant_name(h)} for h in i.get("hosts", [])],
+            "organs": [{"id": o, "label": self.organ_label(o)} for o in i.get("organs", [])],
             "note": i.get("note"),
         }
 

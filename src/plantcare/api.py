@@ -223,8 +223,15 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
         return card
 
     @app.get("/api/insects")
-    def insects() -> list[dict]:
-        return [kb.insect_card(i) for i in sorted(tax.insects)]
+    def insects(plant: str | None = None, role: str | None = None) -> list[dict]:
+        return kb.list_insects(plant_id=plant, role=role)
+
+    @app.get("/api/insects/{insect_id}")
+    def insect(insect_id: str) -> dict:
+        card = kb.insect_card(insect_id)
+        if card is None:
+            raise HTTPException(status_code=404, detail="Insetto non trovato")
+        return card
 
     @app.get("/api/nutrients")
     def nutrients() -> dict:
