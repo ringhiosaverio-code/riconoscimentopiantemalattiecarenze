@@ -1,0 +1,25 @@
+# Baseline: un backbone condiviso con tre teste (coltura, malattia PlantVillage, fitofago IP102).
+# Valori di partenza: da tarare sul set di validazione.
+
+manifest: data/processed/manifest.csv
+data_root: data/raw
+output_dir: models/baseline
+
+# Backbone timm. Con pretrained: true servono i pesi scaricati da Hugging Face
+# (serve accesso di rete). efficientnet_b0 è un buon compromesso per dispositivi mobili;
+# per la versione finale valutare DINOv2 (vit_small_patch14_dinov2).
+backbone: efficientnet_b0
+pretrained: true
+image_size: 224
+dropout: 0.2
+
+heads: [plant, disease, pest]
+head_weights: {plant: 1.0, disease: 1.0, pest: 1.0}
+
+epochs: 15
+batch_size: 32
+lr: 3.0e-4
+weight_decay: 1.0e-4
+num_workers: 4
+seed: 42
+# device: cuda   # omettere per rilevamento automatico

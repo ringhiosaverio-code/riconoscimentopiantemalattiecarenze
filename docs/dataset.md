@@ -1,19 +1,42 @@
-# Dataset: piano di raccolta e licenze
+# Dataset: piano di raccolta, pipeline e licenze
 
-Questo file descrive cosa raccogliere e come. I dati grezzi **non vanno nel repository** (sono in `data/`, ignorata da git).
+I dati grezzi **non vanno nel repository** (sono in `data/`, ignorata da git).
 
-## Schema dei metadati per immagine
+## Dataset usati nella baseline
 
-Ogni immagine ha un record con almeno questi campi:
+| Dataset | Compito | Layout atteso in `data/raw/` | Come si ottiene |
+|---|---|---|---|
+| PlantVillage | coltura + malattia | `plantvillage/` con cartelle `Coltura___Malattia` (es. `raw/color/` del repository spMohanty) | Repository pubblico su GitHub e mirror (Kaggle, Hugging Face); verificare la licenza |
+| IP102 | fitofago (102 classi) | `ip102/images/` + `train.txt`, `val.txt`, `test.txt` | Repository GitHub xpwu95/IP102, con permesso per uso accademico |
+
+## Pipeline
+
+```bash
+plantcare build-manifest --check   # crea data/processed/manifest.csv e controlla duplicati e immagini corrotte
+plantcare train -c configs/train_baseline.yaml
+plantcare serve --checkpoint models/baseline/model.pt
+```
+
+Passi della pipeline:
+
+1. **Scansione.** PlantVillage: una riga per immagine, con coltura e malattia dal nome della cartella. IP102: righe dai file di split ufficiali.
+2. **Split.** PlantVillage: casuale stratificato per classe (70/15/15, seme fisso). IP102: split ufficiali.
+3. **Controllo duplicati tra split.** Hash SHA-256: foto identiche in split diversi sono una fuga di dati e vengono segnalate.
+4. **Controllo immagini.** Immagini corrotte segnalate prima dell'addestramento.
+5. **Manifest.** CSV con colonne `path, source, split, plant, disease, pest`. È l'unico ingresso del training.
+6. **Mappatura alla tassonomia.** `configs/label_maps.yaml` collega le classi grezze agli id di `configs/taxonomy.yaml`. Le classi non mappate restano grezze e vengono segnalate.
+
+## Schema dei metadati (dataset propri)
+
+Per i dati raccolti in proprio, il manifest si estende con questi campi:
 
 ```yaml
 image_id: "2026-06-12_tom_0001"
-file: "data/raw/tomato/2026-06-12_tom_0001.jpg"
 plant: solanum_lycopersicum
 pathogen_type: fungal           # id di pathogen_types
 diseases: [tomato_late_blight]  # lista, può essere vuota
-insects: []                     # id di insects, con ruolo implicito
-nutrients: []                   # es. [N] o [Fe, Mg]; vuota = nessuna carenza visibile
+insects: []                     # id di insects
+nutrients: []                   # es. [N] o [Fe, Mg]
 nutrients_undetermined: false
 organ: leaf                     # leaf | fruit | stem | root | flower | whole_plant
 diagnosis: expert               # lab | expert | visual_only
@@ -24,21 +47,38 @@ license: CC-BY-4.0
 source: "nome del dataset o raccolta propria"
 ```
 
+## Piano per le lacune
+
+I dataset pubblici non coprono tre aree. Per ciascuna serve una raccolta dedicata, con un riferimento diagnostico.
+
+### 1. Carenze nutrizionali
+
+- **Perché non bastano i dati pubblici:** non esistono dataset di qualità con carenze confermate da analisi.
+- **Metodo proposto:** prove in vaso con omissione controllata di un solo elemento per volta (es. piante di pomodoro o frumento senza azoto, poi senza ferro), con fotografie a intervalli regolari. Il riferimento è l'analisi del tessuto fogliare (macro e micro) in laboratorio, non il solo giudizio visivo.
+- **Controlli:** un gruppo di piante con nutrizione completa per ogni prova, per distinguere la carenza dallo stress generico.
+- **Responsabile scientifico:** un agronomo o un chimico del suolo che valida la mappa sintomo-carenza.
+
+### 2. Viroidi separati dai virus
+
+- **Perché non bastano i dati pubblici:** PlantVillage e gli altri dataset non distinguono viroidi e virus; spesso i sintomi si sovrappongono.
+- **Metodo proposto:** raccogliere foto di piante con diagnosi molecolare confermata (RT-PCR o sequenziamento) per il viroide della tuberizzazione fusiforme della patata e per i virus del pomodoro. Richiedere la collaborazione dei servizi fitosanitari regionali o di laboratori universitari che hanno già questi campioni.
+- **Regola:** nessuna etichetta "viroide" senza conferma molecolare; le foto senza conferma restano nella classe virale generica o nelle classi di sospetto.
+
+### 3. Entomofagi
+
+- **Perché non bastano i dati pubblici:** IP102 riguarda solo fitofagi; non esistono dataset agronomici di entomofagi.
+- **Metodo proposto:** foto di insetti utili catturati con trappole gialle o raccolta a vista nelle colture target, identificati da un entomologo fino al livello di famiglia o specie. Le specie utili più comuni (coccinellidi, crisopidi, imenotteri parassitoidi, antocoridi) sono le prime da coprire.
+- **Bilanciamento:** per ogni entomofago servono foto di più stadi (uovo, larva, adulto), perché l'aspetto cambia molto.
+- **Collaborazione:** centri di lotta biologica e servizi di difesa integrata, che già monitorano questi insetti.
+
 ## Regole di qualità
 
-1. **Una malattia confermata da laboratorio** ha più peso di una solo visiva. Marcare il campo `diagnosis`.
-2. **Foto di campo e di laboratorio** vanno tenute separate nei report, non mescolate nella stessa metrica.
-3. **Foto di piante sane** sono obbligatorie: senza di esse il modello segnala malattie ovunque.
-4. **Doppia annotazione** per il 10% delle immagini, con misura dell'accordo tra annotatori (kappa di Cohen).
-5. **Nessuna informazione personale** nelle immagini o nei metadati: niente volti, targhe, indirizzi precisi dei campi.
+1. Una diagnosi confermata da laboratorio pesa più di una solo visiva: campo `diagnosis`.
+2. Foto di campo e di laboratorio si riportano separatamente nelle metriche.
+3. Piante sane obbligatorie: senza di esse il modello segnala malattie ovunque.
+4. Doppia annotazione per il 10% delle immagini, con misura dell'accordo (kappa di Cohen).
+5. Nessuna informazione personale in immagini o metadati: niente volti, targhe, indirizzi precisi dei campi.
 
 ## Licenze
 
-Ogni dataset esterno ha la sua licenza. Verificarla prima di usarlo per addestrare un modello distribuito. Registrarla in un file `data/SOURCES.md` (non versionato) con: nome, URL, licenza, data di accesso.
-
-## Ordine di raccolta suggerito
-
-1. Dataset pubblici per il pre-addestramento e il benchmark (PlantVillage, PlantDoc, IP102, PlantNet-300K).
-2. Raccolta propria per le colture target, nelle stagioni di manifestazione dei sintomi.
-3. Raccolta dedicata per le carenze, con analisi del terreno o fogliare di laboratorio come riferimento.
-4. Raccolta dedicata per gli insetti utili delle colture target, anche con cattura e identificazione di un entomologo.
+Ogni dataset ha la sua licenza, che vincola il riuso dei pesi del modello. Registrare in `data/SOURCES.md` (non versionato): nome, URL, licenza, data di accesso.

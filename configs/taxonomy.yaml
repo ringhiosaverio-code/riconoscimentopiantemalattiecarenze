@@ -1,61 +1,75 @@
 # Tassonomia del sistema PlantCare
 # ---------------------------------------------------------------
-# Ogni classe ha un identificativo stabile (id), un nome leggibile e,
-# quando esiste, un riferimento standard (EPPO code, ID GBIF/Catalogue of Life,
-# codice di malattia, ecc.). Gli id NON vanno rinominati: il modello
-# e i dataset dipendono da essi.
+# Ogni classe ha un id stabile: NON rinominarlo (modelli e dataset dipendono da esso).
+# Campi delle colture:
+#   priority : 1 = coltura di maggior interesse agrario in Italia
+#              2 = coltura tropicale/subtropicale presente in Calabria
+#   zone     : italia | calabria_subtropicale
 #
-# Il sistema è MULTI-TASK: una foto può avere più etichette in parallelo
-# (es. pianta = pomodoro, malattia = peronospora, carenza = nessuna).
+# Nota: le malattie per ogni coltura sono un elenco iniziale da far
+# revisionare a un fitopatologo. Le carenze e i sintomi sono da validare.
 
-version: 0.1.0
+version: 0.2.0
 
 # ---------------------------------------------------------------
-# 1. SPECIE VEGETALI (colture di interesse agrario prioritarie)
+# 1. COLTURE
 # ---------------------------------------------------------------
 plants:
-  - {id: solanum_lycopersicum, common: Pomodoro, family: Solanaceae}
-  - {id: solanum_tuberosum, common: Patata, family: Solanaceae}
-  - {id: capsicum_annuum, common: Peperone, family: Solanaceae}
-  - {id: vitis_vinifera, common: Vite, family: Vitaceae}
-  - {id: malus_domestica, common: Melo, family: Rosaceae}
-  - {id: prunus_persica, common: Pesco, family: Rosaceae}
-  - {id: olea_europaea, common: Olivo, family: Oleaceae}
-  - {id: triticum_aestivum, common: Frumento tenero, family: Poaceae}
-  - {id: zea_mays, common: Mais, family: Poaceae}
-  - {id: citrus_sinensis, common: Arancio, family: Rutaceae}
-  - {id: lactuca_sativa, common: Lattuga, family: Asteraceae}
-  - {id: cucumis_sativus, common: Cetriolo, family: Cucurbitaceae}
-  - {id: actinidia_chinensis, common: Kiwi, family: Actinidiaceae}
-  # Estendibile: aggiungere qui nuove specie senza modificare il codice.
+  # --- priorità 1: colture di maggior interesse agrario in Italia ---
+  - {id: triticum_aestivum, common: Frumento tenero, family: Poaceae, priority: 1, zone: italia}
+  - {id: triticum_durum, common: Frumento duro, family: Poaceae, priority: 1, zone: italia}
+  - {id: zea_mays, common: Mais, family: Poaceae, priority: 1, zone: italia}
+  - {id: vitis_vinifera, common: Vite, family: Vitaceae, priority: 1, zone: italia}
+  - {id: olea_europaea, common: Olivo, family: Oleaceae, priority: 1, zone: italia}
+  - {id: solanum_lycopersicum, common: Pomodoro, family: Solanaceae, priority: 1, zone: italia}
+  - {id: solanum_tuberosum, common: Patata, family: Solanaceae, priority: 1, zone: italia}
+  - {id: malus_domestica, common: Melo, family: Rosaceae, priority: 1, zone: italia}
+  - {id: pyrus_communis, common: Pero, family: Rosaceae, priority: 1, zone: italia}
+  - {id: prunus_persica, common: Pesco, family: Rosaceae, priority: 1, zone: italia}
+  - {id: prunus_avium, common: Ciliegio dolce, family: Rosaceae, priority: 1, zone: italia}
+  - {id: actinidia_chinensis, common: Kiwi, family: Actinidiaceae, priority: 1, zone: italia}
+  - {id: citrus_sinensis, common: Arancio, family: Rutaceae, priority: 1, zone: italia}
+  - {id: citrus_limon, common: Limone, family: Rutaceae, priority: 1, zone: italia}
+  - {id: citrus_reticulata, common: Mandarino, family: Rutaceae, priority: 1, zone: italia}
+  - {id: corylus_avellana, common: Nocciolo, family: Betulaceae, priority: 1, zone: italia}
+  - {id: fragaria_ananassa, common: Fragola, family: Rosaceae, priority: 1, zone: italia}
+  - {id: lactuca_sativa, common: Lattuga, family: Asteraceae, priority: 1, zone: italia}
+  - {id: capsicum_annuum, common: Peperone, family: Solanaceae, priority: 1, zone: italia}
+  - {id: solanum_melongena, common: Melanzana, family: Solanaceae, priority: 1, zone: italia}
+  - {id: cucurbita_pepo, common: Zucchina, family: Cucurbitaceae, priority: 1, zone: italia}
+  - {id: cucumis_sativus, common: Cetriolo, family: Cucurbitaceae, priority: 1, zone: italia}
+  - {id: cynara_cardunculus, common: Carciofo, family: Asteraceae, priority: 1, zone: italia}
+  # --- priorità 2: tropicali / subtropicali presenti in Calabria ---
+  - {id: citrus_bergamia, common: Bergamotto, family: Rutaceae, priority: 2, zone: calabria_subtropicale}
+  - {id: persea_americana, common: Avocado, family: Lauraceae, priority: 2, zone: calabria_subtropicale}
+  - {id: musa_spp, common: Banano, family: Musaceae, priority: 2, zone: calabria_subtropicale}
+  - {id: annona_cherimola, common: Cherimoya, family: Annonaceae, priority: 2, zone: calabria_subtropicale}
+  - {id: opuntia_ficus_indica, common: Fico d'India, family: Cactaceae, priority: 2, zone: calabria_subtropicale}
+  # Estendibile: aggiungere qui nuove colture senza modificare il codice.
 
 # ---------------------------------------------------------------
-# 2. AGENTI DI DANNO (causa della patologia)
+# 2. AGENTI DI DANNO (categoria di primo livello)
 # ---------------------------------------------------------------
-# Il "tipo di agente" è la categoria di primo livello richiesta dal progetto.
-# Nota scientifica: dal solo sintomo visivo non sempre è possibile distinguere
-# la causa; per virus e viroidi la conferma richiede test di laboratorio
-# (ELISA, RT-PCR, sequenziamento). Il modello stima la PROBABILITÀ di categoria.
+# Dal solo sintomo visivo non sempre è possibile distinguere la causa:
+# per virus e viroidi la conferma richiede ELISA, RT-PCR o sequenziamento.
 pathogen_types:
-  - {id: fungal, label: Fungina, description: "Funghi e pseudofunghi (Oomiceti)"}
+  - {id: fungal, label: Fungina, description: "Funghi e Oomiceti (pseudofunghi)"}
   - {id: viral, label: Virale, description: "Virus a RNA o DNA"}
-  - {id: viroid, label: Viroide, description: "RNA circolare a singolo filamento privo di capside"}
+  - {id: viroid, label: Viroide, description: "RNA circolare a singolo filamento, privo di capside"}
   - {id: bacterial, label: Batterica, description: "Batteri e fitoplasmi (Mollicutes, trasmessi da vettori)"}
-  - {id: insect_induced, label: Causata da insetti, description: "Danni diretti o vettori di patogeni"}
-  - {id: nematode, label: Nematodica, description: "Nematodi fitoparassiti (opzionale, fase 2)"}
-  - {id: abiotic, label: Abiotica, description: "Stress idrico, termico, fitotossicità, grandine, ecc."}
+  - {id: insect_induced, label: Causata da insetti, description: "Danni diretti o da insetti vettori non riconducibili a un patogeno"}
+  - {id: nematode, label: Nematodica, description: "Nematodi fitoparassiti (fase 2)"}
+  - {id: abiotic, label: Abiotica, description: "Stress idrico, termico, fitotossicità, grandine"}
   - {id: nutritional, label: Nutrizionale, description: "Carenze o eccessi di macro/micro elementi"}
   - {id: healthy, label: Sana, description: "Nessun sintomo rilevato"}
 
 # ---------------------------------------------------------------
-# 3. MALATTIE (esempi iniziali per le colture prioritarie)
+# 3. MALATTIE
 # ---------------------------------------------------------------
-# Campi:
-#   pathogen_type : id di pathogen_types
-#   agent         : nome scientifico dell'agente causale
-#   hosts         : id di plants
-#   symptoms      : descrizione visiva (usata anche per annotare i dataset)
+# Campi: pathogen_type (id di pathogen_types), agent (nome scientifico),
+#        hosts (id di plants), symptoms (descrizione visiva)
 diseases:
+  # --- pomodoro ---
   - id: tomato_late_blight
     common: Peronospora del pomodoro
     pathogen_type: fungal
@@ -68,48 +82,135 @@ diseases:
     agent: Alternaria solani
     hosts: [solanum_lycopersicum, solanum_tuberosum]
     symptoms: Macchie brune concentriche a bersaglio sulle foglie più vecchie
-  - id: powdery_mildew_grapevine
-    common: Oidio della vite
-    pathogen_type: fungal
-    agent: Erysiphe necator
-    hosts: [vitis_vinifera]
-    symptoms: Feltro bianco-grigiastro polverulento su foglie, grappoli e germogli
   - id: tomato_mosaic_virus
     common: Mosaico del pomodoro
     pathogen_type: viral
     agent: Tomato mosaic virus (ToMV)
     hosts: [solanum_lycopersicum]
     symptoms: Mosaico clorotico, foglie deformate, filloidia
+  - id: tomato_leafminer_damage
+    common: Danno da Tuta absoluta
+    pathogen_type: insect_induced
+    agent: Tuta absoluta
+    hosts: [solanum_lycopersicum]
+    symptoms: Mine fogliari, erosioni e fori nei frutti
+  # --- patata ---
   - id: potato_spindle_tuber
     common: Tuberi fusiformi della patata
     pathogen_type: viroid
     agent: Potato spindle tuber viroid (PSTVd)
     hosts: [solanum_tuberosum, solanum_lycopersicum]
     symptoms: Foglie erette, nanismo, tuberi allungati e fusiformi
-  - id: bacterial_canker_kiwi
-    common: Cancro batterico del kiwi
+  # --- vite ---
+  - id: powdery_mildew_grapevine
+    common: Oidio della vite
+    pathogen_type: fungal
+    agent: Erysiphe necator
+    hosts: [vitis_vinifera]
+    symptoms: Feltro bianco-grigiastro polverulento su foglie, grappoli e germogli
+  - id: grapevine_flavescence_doree
+    common: Flavescenza dorata della vite
     pathogen_type: bacterial
-    agent: Pseudomonas syringae pv. actinidiae
-    hosts: [actinidia_chinensis]
-    symptoms: Essudati rossastri, cancri su tronco e rami, necrosi fogliare
+    agent: "Fitoplasma della flavescenza dorata (vettore: Scaphoideus titanus)"
+    hosts: [vitis_vinifera]
+    symptoms: Ingiallimento o arrossamento fogliare, accartocciamento verso il basso, grappoli disseccati
+  # --- olivo ---
   - id: olive_knot
     common: Rogna dell'olivo
     pathogen_type: bacterial
     agent: Pseudomonas savastanoi pv. savastanoi
     hosts: [olea_europaea]
     symptoms: Tumori legnosi su rami e tronco
-  - id: grapevine_flavescence_doree
-    common: Flavescenza dorata della vite
-    pathogen_type: bacterial          # fitoplasma (classe Mollicutes), non un batterio classico
-    agent: "Fitoplasma della flavescenza dorata (vettore: Scaphoideus titanus)"
-    hosts: [vitis_vinifera]
-    symptoms: Ingiallimento o arrossamento fogliare, accartocciamento verso il basso, grappoli disseccati
-  - id: insect_feeding_damage_generic
-    common: Danno diretto da insetti fitofagi (non identificato)
-    pathogen_type: insect_induced
-    agent: Insetti fitofagi non identificati
-    hosts: []
-    symptoms: Erosioni, fori, rosure, deformazioni fogliari senza patogeno identificabile
+  - id: olive_xylella_quick_decline
+    common: Complesso del disseccamento rapido dell'olivo
+    pathogen_type: bacterial
+    agent: Xylella fastidiosa subsp. pauca
+    hosts: [olea_europaea]
+    symptoms: Disseccamento di rami e chioma, clorosi e bruciature fogliari, a volte da un lato della pianta
+  # --- frumento e mais ---
+  - id: wheat_leaf_rust
+    common: Ruggine bruna del frumento
+    pathogen_type: fungal
+    agent: Puccinia triticina
+    hosts: [triticum_aestivum, triticum_durum]
+    symptoms: Pustole arancio-brune rotonde sulle foglie
+  - id: fusarium_head_blight
+    common: Fusariosi della spiga
+    pathogen_type: fungal
+    agent: Fusarium graminearum
+    hosts: [triticum_aestivum, triticum_durum, zea_mays]
+    symptoms: Spighette sbiancate, picchettatura rosata alla base della spiga
+  - id: maize_northern_leaf_blight
+    common: Brusone settentrionale del mais
+    pathogen_type: fungal
+    agent: Exserohilum turcicum
+    hosts: [zea_mays]
+    symptoms: Lesioni fusiformi grigio-verdi, poi brune, sulle foglie
+  # --- melo, pero, pesco, ciliegio, kiwi ---
+  - id: apple_scab
+    common: Ticchiolatura del melo
+    pathogen_type: fungal
+    agent: Venturia inaequalis
+    hosts: [malus_domestica]
+    symptoms: Macchie vellutate verde-oliva sulle foglie e sui frutti, poi necrotiche
+  - id: pear_fire_blight
+    common: Colpo di fuoco batterico
+    pathogen_type: bacterial
+    agent: Erwinia amylovora
+    hosts: [pyrus_communis, malus_domestica]
+    symptoms: Fiori e germogli anneriti e disseccati con aspetto a "pastorale"
+  - id: peach_plum_pox
+    common: Vaiolatura (Sharka)
+    pathogen_type: viral
+    agent: Plum pox virus (PPV)
+    hosts: [prunus_persica, prunus_avium]
+    symptoms: Anelli e macchie clorotiche sulle foglie e sui frutti, deformazioni dei frutti
+  - id: kiwi_bacterial_canker
+    common: Cancro batterico del kiwi
+    pathogen_type: bacterial
+    agent: Pseudomonas syringae pv. actinidiae
+    hosts: [actinidia_chinensis]
+    symptoms: Essudati rossastri, cancri su tronco e rami, necrosi fogliare
+  # --- agrumi ---
+  - id: citrus_tristeza
+    common: Tristezza degli agrumi
+    pathogen_type: viral
+    agent: Citrus tristeza virus (CTV)
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia]
+    symptoms: Clorosi, ingiallimento e declino della chioma, scanalature del legno
+  # --- orticole ---
+  - id: strawberry_grey_mould
+    common: Muffa grigia della fragola
+    pathogen_type: fungal
+    agent: Botrytis cinerea
+    hosts: [fragaria_ananassa]
+    symptoms: Feltro grigio sui frutti e sui fiori, marciume molle
+  - id: lettuce_downy_mildew
+    common: Peronospora della lattuga
+    pathogen_type: fungal
+    agent: Bremia lactucae
+    hosts: [lactuca_sativa]
+    symptoms: Macchie clorotiche sulla pagina superiore, muffa grigio-violacea sul rovescio
+  - id: cucumber_mosaic
+    common: Mosaico del cetriolo
+    pathogen_type: viral
+    agent: Cucumber mosaic virus (CMV)
+    hosts: [cucumis_sativus, cucurbita_pepo, capsicum_annuum]
+    symptoms: Mosaico, deformazioni fogliari, frutti con maculature
+  # --- tropicali (Calabria) ---
+  - id: avocado_root_rot
+    common: Marciume radicale dell'avocado
+    pathogen_type: fungal
+    agent: Phytophthora cinnamomi
+    hosts: [persea_americana]
+    symptoms: Ingiallimento e appassimento della chioma, radici annerite
+  - id: banana_panama_disease
+    common: Mal di Panama del banano
+    pathogen_type: fungal
+    agent: Fusarium oxysporum f.sp. cubense
+    hosts: [musa_spp]
+    symptoms: Ingiallimento delle foglie vecchie, rottura del pseudofusto, vascolare annerito
+  # --- sano ---
   - id: healthy
     common: Pianta sana
     pathogen_type: healthy
@@ -120,11 +221,7 @@ diseases:
 # ---------------------------------------------------------------
 # 4. INSETTI
 # ---------------------------------------------------------------
-# role:
-#   phytophagous  : fitofago (si nutre di piante; dannoso)
-#   entomophagous : entomofago (predatore o parassitoide di altri insetti; utile)
-#   pollinator    : impollinatore (utile, da proteggere)
-#   neutral       : altro / non classificato
+# role: phytophagous | entomophagous | pollinator | neutral
 insects:
   # --- fitofagi ---
   - {id: aphid_myzus_persicae, common: Afide verde del pesco, role: phytophagous, order: Hemiptera, family: Aphididae}
@@ -133,24 +230,24 @@ insects:
   - {id: tuta_absoluta, common: Tignola del pomodoro, role: phytophagous, order: Lepidoptera, family: Gelechiidae}
   - {id: thrips_frankliniella, common: Tripide dei fiori, role: phytophagous, order: Thysanoptera, family: Thripidae}
   - {id: scaphoideus_titanus, common: Cicalina della flavescenza, role: phytophagous, order: Hemiptera, family: Cicadellidae}
+  - {id: bactrocera_oleae, common: Mosca delle olive, role: phytophagous, order: Diptera, family: Tephritidae}
   # --- entomofagi (utili) ---
   - {id: coccinella_septempunctata, common: Coccinella a sette punti, role: entomophagous, order: Coleoptera, family: Coccinellidae}
   - {id: chrysoperla_carnea, common: Crisopa, role: entomophagous, order: Neuroptera, family: Chrysopidae}
   - {id: aphidius_colemani, common: Imenottero parassitoide degli afidi, role: entomophagous, order: Hymenoptera, family: Braconidae}
   - {id: orius_laevigatus, common: Antocoride predatore dei tripidi, role: entomophagous, order: Hemiptera, family: Anthocoridae}
-  - {id: phytoseiulus_persimilis, common: Acaro predatore (fitoseide), role: entomophagous, order: Acari, family: Phytoseiidae, note: "Acaro, non insetto: incluso per utilità pratica"}
+  - {id: phytoseiulus_persimilis, common: Acaro predatore, role: entomophagous, order: Acari, family: Phytoseiidae, note: "Acaro, non insetto: incluso per utilità pratica"}
   # --- impollinatori ---
   - {id: apis_mellifera, common: Ape domestica, role: pollinator, order: Hymenoptera, family: Apidae}
 
 # ---------------------------------------------------------------
 # 5. CARENZE NUTRIZIONALI
 # ---------------------------------------------------------------
-# class: macro (mg/kg nell'ordine dei g/kg) | micro (mg/kg o inferiori)
-# Nota: i sintomi sono spesso aspecifici e confondibili con virosi, stress
-# idrico o parassiti. Il modello deve sempre restituire anche "non determinabile".
+# I sintomi sono spesso aspecifici e confondibili con virosi, stress idrico o parassiti.
+# Il modello deve poter rispondere "non determinabile".
 nutrients:
   macro:
-    - {id: N, name: Azoto, symptoms: Clorosi uniforme delle foglie vecchie, stunting}
+    - {id: N, name: Azoto, symptoms: Clorosi uniforme delle foglie vecchie, crescita ridotta}
     - {id: P, name: Fosforo, symptoms: Colorazione violacea su foglie vecchie, crescita ridotta}
     - {id: K, name: Potassio, symptoms: Bordi fogliari necrotici su foglie vecchie}
     - {id: Ca, name: Calcio, symptoms: Marciume apicale dei frutti, necrosi dei giovani apici}
@@ -162,6 +259,6 @@ nutrients:
     - {id: Zn, name: Zinco, symptoms: Foglie piccole, internodi corti, rosettatura}
     - {id: Cu, name: Rame, symptoms: Apici appassiti, foglie scure e distorte}
     - {id: B, name: Boro, symptoms: Necrosi dei giovani germogli, frutti deformati}
-    - {id: Mo, name: Molibdeno, symptoms: Clorosi e necrosi marginale, deformazione lamina}
+    - {id: Mo, name: Molibdeno, symptoms: Clorosi e necrosi marginale, deformazione della lamina}
     - {id: Cl, name: Cloro, symptoms: Clorosi e necrosi su foglie vecchie (raro, quasi sempre da eccesso)}
   unknown: {id: unknown, name: Carenza non determinabile}

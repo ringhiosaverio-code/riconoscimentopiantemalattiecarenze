@@ -2,36 +2,34 @@
 
 Sistema di riconoscimento visivo (deep learning) per piante di interesse agrario, con l'obiettivo di:
 
-1. **riconoscere la specie vegetale**, con priorità alle colture agrarie;
+1. **riconoscere la coltura**, con priorità alle colture di maggior interesse agrario in Italia e a quelle tropicali/subtropicali presenti in Calabria;
 2. **riconoscere malattie** di origine fungina, virale, da viroidi, batterica e da danni di insetti;
-3. **riconoscere insetti** distinguendo gli **entomofagi** (utili: predatori, parassitoidi, impollinatori) dai **fitofagi** (dannosi);
-4. **stimare carenze nutrizionali** macro (N, P, K, Ca, Mg, S) e micro (Fe, Mn, Zn, Cu, B, Mo, Cl) dalle foto delle foglie.
+3. **riconoscere insetti** distinguendo gli **entomofagi** (utili) dai **fitofagi** (dannosi);
+4. **stimare carenze nutrizionali** macro (N, P, K, Ca, Mg, S) e micro (Fe, Mn, Zn, Cu, B, Mo, Cl) dalle foto.
 
-> **Avvertenza.** PlantCare è uno strumento di **supporto alla decisione** per tecnici e agricoltori, non una diagnosi.
-> Le immagini descrivono sintomi, non sempre la causa. Virus e viroidi richiedono conferma di laboratorio (ELISA, RT-PCR).
-> Le carenze hanno sintomi che si confondono con virosi, stress idrico e danni di parassiti: il sistema deve poter rispondere **"non determinabile"**.
+> **Avvertenza.** PlantCare è uno strumento di **supporto alla decisione**, non una diagnosi.
+> Le immagini descrivono sintomi, non sempre la causa. Virus e viroidi richiedono conferma di laboratorio.
+> Le carenze hanno sintomi confondibili con virosi, stress idrico e parassiti: il sistema può rispondere **"non determinabile"**.
+
+## Colture prioritarie
+
+- **Priorità 1 (Italia):** frumento tenero e duro, mais, vite, olivo, pomodoro, patata, melo, pero, pesco, ciliegio, kiwi, arancio, limone, mandarino, nocciolo, fragola, lattuga, peperone, melanzana, zucchina, cetriolo, carciofo.
+- **Priorità 2 (Calabria, tropicali/subtropicali):** bergamotto, avocado, banano, cherimoya, fico d'India.
+
+Le colture di priorità 2 hanno poche immagini pubbliche: per loro serve raccolta propria (vedi `docs/dataset.md`).
 
 ## Stato del progetto
 
 | Area | Stato |
 |---|---|
-| Tassonomia (specie, agenti, malattie, insetti, nutrienti) | Prima versione in `configs/taxonomy.yaml` |
-| Validazione della tassonomia e test | Implementata (`src/plantcare/taxonomy.py`, `tests/`) |
-| Documentazione di ricerca e dataset | `docs/ricerca.md`, `docs/dataset.md` |
-| Architettura del modello | `docs/architettura.md` |
-| Pipeline di dati e addestramento | Da fare |
-| Inferenza e interfaccia | Da fare |
-
-## Struttura
-
-```
-configs/taxonomy.yaml     Fonte unica di verità: classi, id stabili, riferimenti incrociati
-src/plantcare/            Pacchetto Python (caricamento e validazione tassonomia)
-tests/                    Test automatici
-docs/                     Ricerca, dataset, architettura
-data/                     Dati locali (non versionati)
-models/                   Pesi dei modelli (non versionati)
-```
+| Tassonomia (colture, agenti, malattie, insetti, nutrienti) | Versione 0.2.0 in `configs/taxonomy.yaml` |
+| Pipeline dei dati (PlantVillage, IP102, manifest, duplicati, immagini corrotte) | Implementata e testata su dati sintetici |
+| Addestramento multi-task (baseline) | Implementato e testato su dati sintetici |
+| Metriche (F1 per classe, ECE, copertura vs accuratezza) | Implementate |
+| Inferenza con astensione e avvertenze | Implementata |
+| Interfaccia web e API (`/predict`) | Implementata |
+| **Baseline reale su PlantVillage e IP102** | **Non ancora eseguita**: i dati non sono stati scaricati in questo ambiente |
+| Dati per carenze, viroidi, entomofagi | Da raccogliere (piano in `docs/dataset.md`) |
 
 ## Avvio rapido
 
@@ -41,29 +39,54 @@ pip install -e ".[dev]"
 pytest
 ```
 
-Per l'addestramento deep learning (in arrivo):
+Flusso completo, una volta scaricati i dataset in `data/raw/`:
 
 ```bash
-pip install -e ".[train]"
+plantcare check-taxonomy                       # tassonomia e copertura colture
+plantcare build-manifest --check               # manifest + controlli su duplicati e immagini
+plantcare train -c configs/train_baseline.yaml # baseline multi-task
+plantcare serve --checkpoint models/baseline/model.pt
+# poi aprire http://127.0.0.1:8000
+```
+
+## Struttura
+
+```
+configs/
+  taxonomy.yaml          fonte unica di verità: classi e id stabili
+  label_maps.yaml        etichette grezze dei dataset -> id della tassonomia
+  datasets.yaml          percorsi dei dataset per build-manifest
+  train_baseline.yaml    iperparametri della baseline
+src/plantcare/
+  taxonomy.py            caricamento e validazione della tassonomia
+  labelmap.py            mappatura delle etichette dei dataset
+  data/pipeline.py       scansione, split, duplicati, immagini corrotte, manifest
+  model.py               backbone condiviso e teste multi-task con perdita mascherata
+  train.py               addestramento e report
+  metrics.py             F1, ECE, copertura vs accuratezza
+  predict.py             inferenza con astensione e avvertenze
+  api.py                 interfaccia web e endpoint /predict
+  cli.py                 comando `plantcare`
+tests/                   test unitari e di integrazione (dati sintetici)
+docs/                    ricerca, dataset, architettura
 ```
 
 ## Principi di progetto
 
-- **Multi-task.** Una foto produce più risposte insieme: specie, tipo di agente, malattia, insetto, carenza. Un solo backbone condiviso, più teste di classificazione. Vedi `docs/architettura.md`.
+- **Multi-task.** Un backbone condiviso con teste per coltura, malattia e fitofago. Vedi `docs/architettura.md`.
 - **Gli id non si rinominano.** Modelli e dataset dipendono dagli id della tassonomia.
-- **Riferimenti scientifici.** Ogni classe di malattia e insetto deve avere agente causale o nome scientifico. Le fonti sono in `docs/ricerca.md`.
-- **Onestà sull'incertezza.** Il sistema restituisce probabilità e può astenersi. Non presenta mai una carenza o una virosi come certa solo da una foto.
-- **Validazione in campo.** I risultati su dataset da laboratorio sovrastimano le prestazioni reali. Serve un set di test raccolto in campo.
+- **Fonti verificate.** Ogni citazione in `docs/ricerca.md` riporta lo stato della verifica.
+- **Onestà sull'incertezza.** Probabilità, soglia di astensione e avvertenze per virosi e viroidi.
+- **Validazione in campo.** I risultati su dati di laboratorio sovrastimano le prestazioni reali. Serve un test di campo separato.
 
 ## Roadmap
 
-1. Consolidare la tassonomia con un agronomo o fitopatologo (revisione delle classi e dei sintomi).
-2. Raccogliere e licenziare i dataset (vedi `docs/dataset.md`), partendo da PlantVillage e IP102 per l'avvio.
-3. Addestrare un baseline (backbone pre-addestrato, teste multi-task) e misurarlo con metriche per classe.
+1. Scaricare PlantVillage e IP102, costruire il manifest e lanciare la prima baseline reale.
+2. Far revisionare tassonomia, malattie e sintomi da un fitopatologo o agronomo.
+3. Raccogliere dati per le colture di priorità 2 e per le lacune (carenze, viroidi, entomofagi).
 4. Costruire un set di test di campo, separato per località e stagione.
-5. Aggiungere carenze nutrizionali, per le quali i dati pubblici sono scarsi e va pianificata una raccolta dedicata.
-6. Interfaccia (API o app) con soglia di confidenza e indicazione "non determinabile".
+5. Passare a DINOv2 come backbone e confrontarlo con la baseline.
 
 ## Licenza
 
-Da definire prima della pubblicazione: i dataset scelti hanno licenze diverse e vincolano il riuso dei pesi.
+Da definire prima della pubblicazione: i dataset hanno licenze diverse e vincolano il riuso dei pesi.

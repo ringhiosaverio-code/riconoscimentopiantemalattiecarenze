@@ -1,0 +1,15 @@
+# Configurazione dei dataset per `plantcare build-manifest`.
+#
+# Layout atteso (vedi docs/dataset.md):
+#   data/raw/plantvillage/   cartelle "Coltura___Malattia" (es. raw/color/ del repo spMohanty)
+#   data/raw/ip102/          images/ + train.txt, val.txt, test.txt (split ufficiali)
+#
+# I dataset NON sono inclusi nel repository (licenze e dimensioni). Vanno scaricati
+# dalle fonti ufficiali e registrati in data/SOURCES.md.
+
+data_root: data/raw
+manifest: data/processed/manifest.csv
+seed: 42
+
+# IP102: nome della cartella con le immagini, dentro data_root/ip102
+ip102_images_dir: images
