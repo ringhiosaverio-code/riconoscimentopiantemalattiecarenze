@@ -181,7 +181,7 @@ def train(cfg: dict[str, Any]) -> TrainResult:
         scores = {h: macro_f1(v["true"], v["pred"]) for h, v in val.items() if len(v["true"])}
         mean_f1 = float(np.mean(list(scores.values()))) if scores else 0.0
         history.append({"epoch": epoch, "train_loss": running / max(1, len(train_dl)), "val_macro_f1": scores, "mean": mean_f1})
-        print(f"epoch {epoch}/{epochs} loss={running / max(1, len(train_dl)):.4f} val_macro_f1={mean_f1:.4f}")
+        print(f"epoch {epoch}/{epochs} loss={running / max(1, len(train_dl)):.4f} val_macro_f1={mean_f1:.4f}", flush=True)
 
         if mean_f1 > best:
             best = mean_f1

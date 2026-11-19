@@ -68,3 +68,33 @@ sources:
     date: "2020"
     status: riassunto_verificato
     note: "Fruits 75(4):170-179. Abstract letto: il bergamotto è innestato su arancio amaro, molto suscettibile al CTV, presente in Calabria."
+
+  # --- Riferimenti metodologici per i lettori ottici (non usati per le misure di gestione) ---
+  - id: fazari_2021_unirc
+    title: "Application of deep convolutional neural networks for the detection of anthracnose in olives using VIS/NIR hyperspectral images"
+    issuer: "Fazari A., Pellicer-Valero O.J., Gómez-Sanchís J., Bernardi B., Cubero S., Benalia S., Zimbalatti G., Blasco J. - Università Mediterranea di Reggio Calabria (Dip. Agraria) e IVIA"
+    type: universitario_calabria
+    url: "https://iris.unirc.it/retrieve/e2047588-ec47-7e24-e053-6605fe0afb29/Fazari_2021_COMPAG_Application_post%20print.pdf"
+    date: "2021"
+    status: riassunto_verificato
+    note: "Computers and Electronics in Agriculture 187 (2021). Rilevazione precoce della lebbra dell'olivo con CNN su immagini iperspettrali; dati non pubblici. Titolo e autori da confermare sul post-print."
+
+  - id: cruz_2017_xfido
+    title: "X-FIDO: An Effective Application for Detecting Olive Quick Decline Syndrome with Deep Learning and Data Fusion"
+    issuer: "Cruz A.C., Luvisi A., De Bellis L., Ampatzidis Y. - Università del Salento e University of Florida"
+    type: universitario_italia
+    doi: "10.3389/fpls.2017.01741"
+    url: "https://doi.org/10.3389/fpls.2017.01741"
+    date: "2017"
+    status: riassunto_verificato
+    note: "Frontiers in Plant Science 8:1741. Rilevazione del disseccamento rapido dell'olivo da foto di foglie."
+
+  - id: bruno_2023_cnr
+    title: "Olive disease classification based on an adaptive ensemble of two EfficientNet-b0 models, for smartphone images"
+    issuer: "Bruno A., Moroni D., Martinelli M. - CNR-ISTI, Pisa"
+    type: ricerca_italia
+    doi: "10.15439/2023F4794"
+    url: "https://publications.cnr.it/doc/479293"
+    date: "2023"
+    status: riassunto_verificato
+    note: "FedCSIS 2023. Insieme di due EfficientNet-B0 su foto da smartphone: principio usato anche nei lettori PlantCare (insieme di estrattori). Titolo esatto da confermare."

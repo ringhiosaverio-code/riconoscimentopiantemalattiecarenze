@@ -88,5 +88,5 @@ def test_plantvillage_classes_all_listed_in_label_map():
     mapping = load_label_map()["plantvillage"]
     assert len(mapping) == 38
     mapped = [v for v in mapping.values() if v]
-    assert len(mapped) == 20
+    assert len(mapped) == 26
     assert mapping["Tomato___Tomato_Yellow_Leaf_Curl_Virus"] == "tomato_yellow_leaf_curl"

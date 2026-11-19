@@ -11,27 +11,27 @@ plantvillage:
   Cherry_(including_sour)___Powdery_mildew: null
   Cherry_(including_sour)___healthy: healthy
   Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot: null
-  Corn_(maize)___Common_rust_: null
+  Corn_(maize)___Common_rust_: maize_common_rust
   Corn_(maize)___Northern_Leaf_Blight: maize_northern_leaf_blight
   Corn_(maize)___healthy: healthy
   Grape___Black_rot: null
-  Grape___Esca_(Black_Measles): null
+  Grape___Esca_(Black_Measles): grapevine_esca
   Grape___Leaf_blight_(Isariopsis_Leaf_Spot): null
   Grape___healthy: healthy
   Orange___Haunglongbing_(Citrus_greening): null
-  Peach___Bacterial_spot: null
+  Peach___Bacterial_spot: peach_bacterial_spot
   Peach___healthy: healthy
-  Pepper,_bell___Bacterial_spot: null
+  Pepper,_bell___Bacterial_spot: pepper_bacterial_spot
   Pepper,_bell___healthy: healthy
   Potato___Early_blight: tomato_early_blight
   Potato___Late_blight: tomato_late_blight
   Potato___healthy: healthy
   Raspberry___healthy: healthy
   Soybean___healthy: healthy
-  Squash___Powdery_mildew: null
+  Squash___Powdery_mildew: zucchini_powdery_mildew
   Strawberry___Leaf_scorch: null
   Strawberry___healthy: healthy
-  Tomato___Bacterial_spot: null
+  Tomato___Bacterial_spot: pepper_bacterial_spot
   Tomato___Early_blight: tomato_early_blight
   Tomato___Late_blight: tomato_late_blight
   Tomato___Leaf_Mold: null

@@ -37,6 +37,21 @@ Le colture di priorità 2 e 3 hanno poche immagini pubbliche: per loro serve rac
 | **Baseline reale su PlantVillage e IP102** | **Non ancora eseguita**: i dati non sono stati scaricati in questo ambiente |
 | Dati per carenze, viroidi, entomofagi | Da raccogliere (piano in `docs/dataset.md`) |
 
+## Lettori ottici
+
+L'app usa la fotocamera del telefono o del computer (oppure una foto caricata) e la passa a quattro **lettori ottici**:
+
+| Lettore | Cosa riconosce | Dati di addestramento |
+|---|---|---|
+| Coltura | la specie coltivata | PlantVillage, PlantDoc, iNatAg (iNaturalist), dataset AgML per coltura |
+| Malattia | malattie e danni visibili | PlantVillage (laboratorio), PlantDoc (campo), dataset AgML (vite, limone, pomodoro, melanzana, patata, cipolla, peperoncino, banano, cavolfiore, *Tuta absoluta*) |
+| Insetti e acari | 102 specie di insetti dannosi | IP102 (uso accademico) |
+| Carenze | macro e micro carenze | **non addestrato**: non esistono dataset di immagini di carenze verificati da analisi di laboratorio |
+
+Ogni lettore restituisce una **probabilità calibrata** (temperature scaling sulla validazione) e l'app mostra la sua **affidabilità misurata sul test**, separata per fonte (laboratorio o campo). Sotto la soglia di confidenza il lettore risponde "non determinabile".
+
+L'elenco dei dataset, con licenza e citazione, è in `configs/external_datasets.yaml`. Il download è riproducibile con `python -m plantcare.data.download`, l'importazione con `plantcare import-external`, l'addestramento con `plantcare train-readers`.
+
 ## Avvio rapido
 
 ```bash

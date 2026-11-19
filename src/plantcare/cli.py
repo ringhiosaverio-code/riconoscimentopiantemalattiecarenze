@@ -91,6 +91,74 @@ def cmd_train(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_import_external(args: argparse.Namespace) -> int:
+    """Importa PlantVillage e i dataset esterni in un manifest unificato (data/processed/manifest_v2.csv)."""
+    from plantcare.data import importers as im
+    from plantcare.data.pipeline import summarize, write_manifest
+    reg = {e["name"]: e for e in yaml.safe_load(open(ROOT / "configs" / "external_datasets.yaml", encoding="utf-8"))["datasets"]}
+    rows = []
+    steps = [("plantvillage", lambda: im.import_plantvillage(ROOT / "metadata" / "plantvillage" / "leaf-map.json")),
+             ("ip102", im.import_ip102), ("plantdoc", im.import_plantdoc), ("inatag", im.import_inatag)]
+    for name, e in reg.items():
+        if name.startswith("agml_"):
+            steps.append((name, lambda e=e: im.import_agml(e["name"], e["repo"], e["crop"])))
+    for name, fn in steps:
+        if args.only and name not in args.only:
+            continue
+        got = fn()
+        print(f"{name}: {len(got)} righe", flush=True)
+        rows += got
+    out = ROOT / "data" / "processed" / "manifest_v2.csv"
+    write_manifest(rows, out)
+    print(f"Manifest unificato: {out} ({len(rows)} righe)")
+    print(json.dumps(summarize(rows), ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_train_readers(args: argparse.Namespace) -> int:
+    """Estrae le caratteristiche, addestra e calibra i lettori, li valuta e salva il checkpoint."""
+    import numpy as np
+    import timm
+    from plantcare import readers as rd
+    from plantcare.data.pipeline import read_manifest
+    rows = read_manifest(ROOT / "data" / "processed" / "manifest_v2.csv")
+    paths = [ROOT / "data" / r["path"] for r in rows]
+    parts = []
+    for bb in args.backbone:
+        feat_dir = ROOT / "data" / "processed" / f"features_{bb}_{args.image_size}"
+        print(f"Estrazione caratteristiche: {bb}", flush=True)
+        parts.append(rd.extract_features(paths, bb, feat_dir, image_size=args.image_size,
+                                         num_workers=args.workers))
+    feats = np.concatenate(parts, axis=1)
+    dim = feats.shape[1]
+    readers, infos = {}, {}
+    for head in rd.HEADS:
+        hd = rd.prepare_head(rows, feats, head)
+        if hd is None:
+            print(f"{head}: nessun dato di addestramento, lettore non disponibile")
+            continue
+        r, info = rd.train_reader(hd, dim)
+        readers[head], infos[head] = r, info
+        t = info["test"]
+        print(f"{head}: {len(hd.classes)} classi, {info['arch']}, test acc={t['accuracy']:.4f} "
+              f"macroF1={t['macro_f1']:.4f} ECE={t['ece']:.4f} T={info['temperature']:.2f}", flush=True)
+    out_dir = ROOT / "models" / ("readers_" + "+".join(b.split(".")[0] for b in args.backbone))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    cfgs = [timm.data.resolve_data_config({"input_size": (3, args.image_size, args.image_size)},
+                                          model=timm.create_model(b, pretrained=False, num_classes=0,
+                                                                  **rd.backbone_kwargs(b, args.image_size)))
+            for b in args.backbone]
+    if any((c["mean"], c["std"]) != (cfgs[0]["mean"], cfgs[0]["std"]) for c in cfgs):
+        raise SystemExit("I backbone usano normalizzazioni diverse: non combinabili con un'unica trasformazione")
+    data_cfg = cfgs[0]
+    sources = sorted({r["source"] for r in rows})
+    rd.save_readers(out_dir / "readers.pt", args.backbone, readers, infos, data_cfg, sources, args.image_size)
+    rd.write_report(out_dir / "report.json", infos, {"backbones": args.backbone, "image_size": args.image_size,
+                                                    "sources": sources, "n_images": len(rows)})
+    print(f"Checkpoint: {out_dir / 'readers.pt'}")
+    return 0
+
+
 def cmd_serve(args: argparse.Namespace) -> int:
     import uvicorn
     from plantcare.api import create_app
@@ -113,6 +181,16 @@ def main(argv: list[str] | None = None) -> int:
     tr = sub.add_parser("train")
     tr.add_argument("-c", "--config", default=str(ROOT / "configs" / "train_baseline.yaml"))
     tr.set_defaults(func=cmd_train)
+
+    ie = sub.add_parser("import-external")
+    ie.add_argument("--only", nargs="*", default=None)
+    ie.set_defaults(func=cmd_import_external)
+
+    trd = sub.add_parser("train-readers")
+    trd.add_argument("--backbone", nargs="+", default=["vit_small_patch14_dinov2.lvd142m", "efficientnet_b0"])
+    trd.add_argument("--image-size", type=int, default=224)
+    trd.add_argument("--workers", type=int, default=2)
+    trd.set_defaults(func=cmd_train_readers)
 
     sv = sub.add_parser("serve")
     sv.add_argument("--checkpoint", default=None)

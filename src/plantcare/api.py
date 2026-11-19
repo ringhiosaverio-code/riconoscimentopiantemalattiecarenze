@@ -45,54 +45,66 @@ PAGE = """<!doctype html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PlantCare</title>
 <style>
-:root{--bg:#f6f7f4;--fg:#1d2420;--card:#fff;--accent:#2f6b3b;--muted:#4f5d54;--warn:#7a4f00;--warnbg:#fff4dc;--line:#0002}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121613;--fg:#e6ece7;--card:#1c231e;--accent:#7fc08f;--muted:#a9b6ad;--warn:#f0c674;--warnbg:#332a14;--line:#fff2}}
-:root[data-theme="dark"]{--bg:#121613;--fg:#e6ece7;--card:#1c231e;--accent:#7fc08f;--muted:#a9b6ad;--warn:#f0c674;--warnbg:#332a14;--line:#fff2}
+:root{--bg:#f6f7f4;--fg:#1d2420;--card:#fff;--accent:#2f6b3b;--muted:#4f5d54;--warn:#7a4f00;--warnbg:#fff4dc;--line:#0002;--bar:#2f6b3b33}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121613;--fg:#e6ece7;--card:#1c231e;--accent:#7fc08f;--muted:#a9b6ad;--warn:#f0c674;--warnbg:#332a14;--line:#fff2;--bar:#7fc08f33}}
+:root[data-theme="dark"]{--bg:#121613;--fg:#e6ece7;--card:#1c231e;--accent:#7fc08f;--muted:#a9b6ad;--warn:#f0c674;--warnbg:#332a14;--line:#fff2;--bar:#7fc08f33}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,sans-serif}
 main{max-width:760px;margin:0 auto;padding:16px}
 h1{font-size:1.7rem;color:var(--accent);margin:8px 0 4px}
 h2{font-size:1.1rem;margin:0 0 6px}
+h3{margin:4px 0}
 .card{background:var(--card);border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .muted{color:var(--muted);font-size:.92rem}
 button{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:11px 18px;font-size:1rem;cursor:pointer;min-height:44px}
 button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+button:disabled{opacity:.5}
 input[type=file]{width:100%;font-size:1rem;padding:8px 0}
 textarea,select{width:100%;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
 .warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 12px;margin:8px 0}
 .lab{border-left:4px solid var(--warn);padding-left:10px}
-table{width:100%;border-collapse:collapse;margin:6px 0}
-td{padding:6px 4px;border-bottom:1px solid var(--line)}
-td.p{text-align:right;white-space:nowrap}
-img.preview{max-width:100%;max-height:320px;border-radius:10px;display:block;margin-top:8px}
+video,img.preview{width:100%;max-height:360px;object-fit:cover;border-radius:10px;background:#000;display:block;margin-top:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.reader{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.cand{display:grid;grid-template-columns:1fr 64px;gap:6px;align-items:center;margin:4px 0}
+.bar{position:relative;background:var(--line);border-radius:6px;height:22px;overflow:hidden}
+.bar span{position:absolute;inset:0 auto 0 0;background:var(--bar)}
+.bar em{position:relative;padding:0 6px;font-style:normal;font-size:.88rem;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.p{text-align:right;font-variant-numeric:tabular-nums}
 ul.guide{padding-left:20px;margin:6px 0}
 footer{margin:24px 0;font-size:.85rem;color:var(--muted)}
 a{color:var(--accent)}
-.row{display:flex;gap:8px;flex-wrap:wrap}
 </style></head>
 <body><main>
 <h1>PlantCare</h1>
-<p class="muted">Riconoscimento visivo di colture, malattie e insetti. Supporto alla decisione per tecnici e agricoltori: non sostituisce la diagnosi di un tecnico abilitato.</p>
+<p class="muted">Lettori ottici per coltura, malattia, insetti e acari, carenze. Ogni lettore dà una probabilità calibrata. Supporto alla decisione per tecnici e agricoltori: non sostituisce la diagnosi di un tecnico abilitato.</p>
+
+<section class="card">
+<h2>Lettore ottico</h2>
+<p><label for="organ"><strong>Quale parte della pianta è colpita?</strong></label><br>
+<select id="organ" name="organ"><option value="">Non indicato</option></select></p>
+<video id="video" autoplay playsinline muted hidden></video>
+<canvas id="canvas" hidden></canvas>
+<div class="row">
+<button type="button" id="cam-start">Avvia fotocamera</button>
+<button type="button" id="cam-shot" disabled>Scatta e analizza</button>
+<button type="button" class="secondary" id="cam-stop" disabled>Spegni</button>
+</div>
+<p class="muted" id="cam-status"></p>
+<details><summary>Oppure carica una foto</summary>
+<form id="f"><input id="file" type="file" name="file" accept="image/*" capture="environment">
+<div id="preview"></div>
+<p><button type="submit">Analizza la foto</button></p></form>
+</details>
+</section>
 
 <section class="card">
 <h2>Come fotografare</h2>
 <ul class="guide">
-<li>Una foto ravvicinata della parte colpita (foglia, frutto, ramo) con luce naturale, senza flash.</li>
-<li>Foto a fuoco, sullo sfondo neutro quando possibile, con la parte sintomatica al centro.</li>
-<li>Per gli insetti: una foto dall'alto e una di profilo, con un riferimento di scala.</li>
-<li>Se possibile, aggiungere una foto di una pianta sana della stessa coltura per confronto.</li>
+<li>Inquadra da vicino la parte colpita, con luce naturale e senza flash.</li>
+<li>Tieni a fuoco la lesione, al centro dell'immagine.</li>
+<li>Per gli insetti: dall'alto e di profilo, con un riferimento di scala.</li>
 </ul>
-</section>
-
-<section class="card">
-<form id="f">
-<label for="file"><strong>Carica una foto</strong></label>
-<input id="file" type="file" name="file" accept="image/*" capture="environment" required>
-<p><label for="organ"><strong>Quale parte della pianta è colpita?</strong></label><br>
-<select id="organ" name="organ"><option value="">Non indicato</option></select></p>
-<div id="preview"></div>
-<p><button type="submit">Analizza</button></p>
-</form>
 </section>
 
 <div id="out" aria-live="polite"></div>
@@ -112,35 +124,63 @@ a{color:var(--accent)}
 </section>
 
 <footer>
-<p>Documentazione API: <a href="/docs">/docs</a> · Schede malattie: <a href="/api/diseases">/api/diseases</a> · Stato: <a href="/health">/health</a></p>
-<p>Il sistema risponde "non determinabile" quando la confidenza è bassa. Per virus, viroidi, batteri e nematodi serve sempre la conferma di laboratorio.</p>
+<p>Stato dei lettori: <a href="/api/readers">/api/readers</a> · Documentazione API: <a href="/docs">/docs</a> · Schede malattie: <a href="/api/diseases">/api/diseases</a></p>
+<p>La probabilità di ogni lettore è calibrata sul set di validazione; l'affidabilità indicata è misurata sul set di test. Sotto soglia il lettore risponde "non determinabile". Per virus, viroidi, batteri e nematodi serve sempre la conferma di laboratorio.</p>
 </footer>
 </main>
 <script>
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let last=null;
+const pct=x=>(x==null?'n.d.':(x*100).toFixed(1)+'%');
+let last=null,stream=null;
 fetch('/api/organs').then(r=>r.json()).then(list=>{const sel=$('organ');for(const o of list){const op=document.createElement('option');op.value=o.id;op.textContent=o.label;sel.appendChild(op);}}).catch(()=>{});
 $('file').addEventListener('change',()=>{const f=$('file').files[0];$('preview').innerHTML=f?'<img class="preview" alt="Anteprima della foto caricata" src="'+URL.createObjectURL(f)+'">':'';});
-function renderHead(name,h){
- let s='<h3 style="margin:10px 0 2px">'+esc(name==='plant'?'Coltura':name==='disease'?'Malattia':'Insetto')+': '+esc(h.answer)+'</h3>';
- if(h.card&&h.card.symptoms){s+='<p class="muted">'+esc(h.card.symptoms)+'</p>';}
+
+$('cam-start').addEventListener('click',async()=>{
+ try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:960}},audio:false});
+ const v=$('video');v.srcObject=stream;v.hidden=false;$('cam-shot').disabled=false;$('cam-stop').disabled=false;$('cam-status').textContent='Fotocamera attiva: inquadra la parte colpita e premi "Scatta e analizza".';}
+ catch(e){$('cam-status').textContent='Fotocamera non disponibile (permesso negato o pagina non in HTTPS). Usa "carica una foto".';}
+});
+$('cam-stop').addEventListener('click',()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('video').hidden=true;$('cam-shot').disabled=true;$('cam-stop').disabled=true;$('cam-status').textContent='';});
+$('cam-shot').addEventListener('click',()=>{
+ const v=$('video'),c=$('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);
+ c.toBlob(b=>{const fd=new FormData();fd.append('file',b,'scatto.jpg');analyze(fd);},'image/jpeg',0.92);
+});
+$('f').addEventListener('submit',e=>{e.preventDefault();if(!$('file').files[0])return;const fd=new FormData();fd.append('file',$('file').files[0]);analyze(fd);});
+
+function renderReader(head,h,status){
+ let s='<div class="reader"><h3>'+esc(h.reader)+': '+esc(h.answer)+'</h3>';
+ for(const c of h.candidates){s+='<div class="cand"><div class="bar"><span style="width:'+(c.probability*100).toFixed(1)+'%"></span><em>'+esc(c.name)+'</em></div><div class="p">'+pct(c.probability)+'</div></div>';}
  if(h.card&&h.card.agent){s+='<p class="muted">Agente: <em>'+esc(h.card.agent)+'</em></p>';}
- s+='<table>';for(const c of h.candidates){s+='<tr><td>'+esc(c.label)+'</td><td class="p">'+(c.probability*100).toFixed(1)+'%</td></tr>';}
- return s+'</table>';
+ if(status&&status.trained){s+='<p class="muted">Affidabilità del lettore sul test: accuratezza '+pct(status.test_accuracy)+', errore di calibrazione '+pct(status.calibration_error)+'</p>';}
+ return s+'</div>';
 }
-$('f').addEventListener('submit',async e=>{
- e.preventDefault();$('out').innerHTML='<div class="card">Analisi in corso…</div>';$('feedback-box').hidden=true;
- try{const r=await fetch('/predict',{method:'POST',body:new FormData($('f'))});const j=await r.json();
+function renderReferto(r){
+ if(!r||(!r.disease&&!r.plant&&!r.pest))return '';
+ let s='<div class="reader"><h3>Referto</h3>';
+ if(r.plant)s+='<p><strong>Coltura:</strong> '+esc(r.plant)+'</p>';
+ if(r.disease)s+='<p><strong>Malattia:</strong> '+esc(r.disease)+(r.agent?' (<em>'+esc(r.agent)+'</em>)':'')+'</p>';
+ if(r.cause)s+='<p><strong>Causa:</strong> '+esc(r.cause)+'</p>';
+ if(r.caused_by&&r.caused_by.length)s+='<p><strong>Provocata da:</strong> '+esc(r.caused_by.join(', '))+'</p>';
+ if(r.pest)s+='<p><strong>Insetto o acaro:</strong> '+esc(r.pest)+'</p>';
+ if(r.management&&r.management.length){s+='<p><strong>Misure ('+esc(r.management_status)+'):</strong></p><ul>';for(const m of r.management)s+='<li>'+esc(m)+'</li>';s+='</ul>';}
+ if(r.sources&&r.sources.length){s+='<p class="muted">Fonti: '+r.sources.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a>').join(' · ')+'</p>';}
+ return s+'</div>';
+}
+async function analyze(fd){
+ fd.append('organ',$('organ').value);
+ $('out').innerHTML='<div class="card">Analisi in corso…</div>';$('feedback-box').hidden=true;
+ try{const r=await fetch('/predict',{method:'POST',body:fd});const j=await r.json();
  if(!r.ok){$('out').innerHTML='<div class="card warn">'+esc(j.detail||'Errore')+'</div>';return;}
- last=j;let h='<section class="card">';
- for(const [name,v] of Object.entries(j.heads)){h+=renderHead(name,v);}
- if(j.organ){h+='<p class="muted">Organo indicato: '+esc(j.organ)+'</p>';}
+ last=j;let h='<section class="card"><h2>Risultato dei lettori</h2>';
+ for(const [name,v] of Object.entries(j.heads)){h+=renderReader(name,v,(j.readers||{})[name]);}
+ for(const [name,st] of Object.entries(j.readers||{})){if(!st.trained)h+='<div class="reader"><h3>'+esc(st.label)+'</h3><p class="muted">'+esc(st.note)+'</p></div>';}
+ h+=renderReferto(j.referto);
  for(const w of j.warnings){h+='<div class="warn'+(w.includes('laboratorio')?' lab':'')+'">'+esc(w)+'</div>';}
  h+='<p class="muted">'+esc(j.disclaimer)+'</p><p class="muted">Modello: '+esc(j.model_version)+' · soglia '+esc(j.abstain_threshold)+'</p></section>';
  $('out').innerHTML=h;$('feedback-box').hidden=false;$('fb-form').hidden=true;$('fb-status').textContent='';
  }catch(err){$('out').innerHTML='<div class="card warn">Errore di rete. Riprova.</div>';}
-});
+}
 $('ok').addEventListener('click',()=>sendFb('agree'));
 $('ko').addEventListener('click',()=>{$('fb-form').hidden=false;});
 $('send').addEventListener('click',()=>sendFb('disagree'));
@@ -216,6 +256,14 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
     @app.get("/api/plants")
     def plants(priority: int | None = None) -> list[dict]:
         return kb.list_plants(priority=priority)
+
+    @app.get("/api/readers")
+    def readers() -> dict:
+        if "predictor" not in state:
+            return {"model_loaded": False, "readers": {}}
+        return {"model_loaded": True, "model_version": state["predictor"].version,
+                "training_sources": state["predictor"].training_sources,
+                "readers": state["predictor"].readers_status()}
 
     @app.get("/api/organs")
     def organs() -> list[dict]:

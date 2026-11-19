@@ -13,3 +13,12 @@ NON copre:
   di addestramento e vanno distribuiti solo se le condizioni lo consentono.
 Prima di distribuire un modello addestrato, verificare le licenze di tutti i dataset usati
 e registrarle in data/SOURCES.md.
+
+DATASET USATI PER I LETTORI OTTICI (vedi configs/external_datasets.yaml)
+- IP102 (Wu et al., CVPR 2019): uso accademico. Un modello addestrato su IP102 NON va usato
+  commercialmente senza il permesso degli autori, anche se il mirror usato dichiara MIT.
+- PlantDoc (Singh et al., 2020): CC BY 4.0, attribuzione obbligatoria.
+- Dataset Project-AgML (UC Davis): CC BY 4.0 o MIT secondo la scheda di ciascuno, attribuzione obbligatoria.
+- iNatAg (Project-AgML): Apache-2.0 per il dataset; le foto iNaturalist hanno licenze Creative Commons
+  dei singoli autori.
+- PlantVillage (Hughes e Salathé): licenza da verificare alla fonte.

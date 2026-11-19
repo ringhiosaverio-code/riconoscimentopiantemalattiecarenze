@@ -1,0 +1,144 @@
+# Dataset di immagini esterni usati per l'addestramento.
+# Ogni voce: repository Hugging Face, file da scaricare, licenza, citazione, uso nel modello.
+# I file vanno in data/external/<name>/ (non versionati).
+#
+# NOTA LICENZE: la licenza indicata è quella dichiarata dalla fonte originale.
+# Se un mirror dichiara una licenza diversa da quella originale, vale l'originale.
+
+datasets:
+
+  - name: ip102
+    repo: EnmmmmOvO/insect-pest-dataset
+    files: ["data/*.parquet"]
+    use: pest
+    license: "Uso accademico (IP102 originale). Il mirror dichiara MIT, ma vale la licenza dell'autore: per uso commerciale serve il permesso."
+    citation: "Wu X. et al. (2019) IP102: A Large-Scale Benchmark Dataset for Insect Pest Recognition. CVPR 2019, pp. 8787-8796. DOI 10.1109/CVPR.2019.00899"
+    note: "Mirror con gli stessi split ufficiali (45.095 / 7.508 / 22.619 immagini)."
+
+  - name: plantdoc
+    repo: agyaatcoder/PlantDoc
+    files: ["data/*.parquet"]
+    use: disease_field
+    license: "CC BY 4.0"
+    citation: "Singh D. et al. (2020) PlantDoc: A Dataset for Visual Plant Disease Detection. CoDS-COMAD 2020, pp. 249-253. DOI 10.1145/3371158.3371196"
+    note: "Foto di campo con riquadri: le lesioni vengono ritagliate come immagini di classificazione."
+
+  - name: agml_lemon
+    repo: Project-AgML/lemon_leaf_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: citrus_limon
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+
+  - name: agml_eggplant
+    repo: Project-AgML/eggplant_disease_classification
+    files: ["raw/train-00000-of-00006.parquet", "raw/train-00001-of-00006.parquet"]
+    use: disease
+    crop: solanum_melongena
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+    note: "Solo 2 file su 6 per limiti di calcolo."
+
+  - name: agml_tom2024
+    repo: Project-AgML/TOM2024_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: solanum_lycopersicum
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+
+  - name: agml_onion
+    repo: Project-AgML/COLD_onion_leaf_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: allium_cepa_tropea
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+    note: "Cipolla generica: usata come riferimento per la cipolla di Tropea, che non ha un dataset dedicato."
+
+  - name: agml_chili
+    repo: Project-AgML/COLD_chili_leaf_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: capsicum_annuum_peperoncino
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+    note: "Peperoncino generico: usato come riferimento per il peperoncino calabrese."
+
+  - name: agml_grape
+    repo: Project-AgML/grape_leaf_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: vitis_vinifera
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+
+  - name: agml_banana
+    repo: Project-AgML/banana_leaf_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: musa_spp
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+
+  - name: agml_tuta
+    repo: Project-AgML/tuta_absoluta_tomato_leaf_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: solanum_lycopersicum
+    license: "MIT"
+    citation: "Shehu H.A. et al. (2025) Early detection of tomato leaf diseases using transformers and transfer learning. European Journal of Agronomy 168:127625"
+
+  - name: agml_potato
+    repo: Project-AgML/potato_leaf_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: solanum_tuberosum
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+
+  - name: agml_cauliflower
+    repo: Project-AgML/cauliflower_leaf_disease_classification
+    files: ["data/train-00000-of-00011.parquet"]
+    use: disease
+    crop: brassica_oleracea_italica
+    license: "CC BY 4.0"
+    citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
+    note: "Cavolfiore: brassica affine al broccolo, usata come riferimento. Solo 1 file su 11."
+
+  - name: inatag_crops
+    repo: Project-AgML/iNatAg-mini
+    files:
+      - olea_europaea.zip
+      - vitis_vinifera.zip
+      - citrus_limon.zip
+      - citrus_reticulata.zip
+      - citrus_sinensis.zip
+      - actinidia_chinensis.zip
+      - allium_cepa.zip
+      - allium_sativum.zip
+      - annona_cherimola.zip
+      - capsicum_annuum.zip
+      - corylus_avellana.zip
+      - cucumis_sativus.zip
+      - cucurbita_pepo.zip
+      - cynara_cardunculus.zip
+      - cynara_scolymus.zip
+      - fragaria_ananassa.zip
+      - malus_domestica.zip
+      - musa_acuminata.zip
+      - opuntia_ficus-indica.zip
+      - persea_americana.zip
+      - prunus_avium.zip
+      - prunus_persica.zip
+      - pyrus_communis.zip
+      - solanum_melongena.zip
+      - solanum_tuberosum.zip
+      - triticum_aestivum.zip
+      - triticum_durum.zip
+      - zea_mays.zip
+    use: plant
+    license: "Apache-2.0 (dataset); le singole foto iNaturalist hanno licenze Creative Commons dei loro autori"
+    citation: "iNatAg (Project-AgML, UC Davis), derivato da iNaturalist"
+    note: "Foto di piante intere e parti in condizioni reali, per il lettore della coltura."
