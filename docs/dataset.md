@@ -6,8 +6,8 @@ I dati grezzi **non vanno nel repository** (sono in `data/`, ignorata da git).
 
 | Dataset | Compito | Layout atteso in `data/raw/` | Come si ottiene |
 |---|---|---|---|
-| PlantVillage | coltura + malattia | `plantvillage/` con cartelle `Coltura___Malattia` (es. `raw/color/` del repository spMohanty) | Repository pubblico su GitHub e mirror (Kaggle, Hugging Face); verificare la licenza |
-| IP102 | fitofago (102 classi) | `ip102/images/` + `train.txt`, `val.txt`, `test.txt` | Repository GitHub xpwu95/IP102, con permesso per uso accademico |
+| PlantVillage | coltura + malattia (38 classi) | `plantvillage/` con cartelle `Coltura___Malattia` in `raw/color/`, più `leaf_grouping/leaf-map.json` | Repository spMohanty su GitHub (dati su Hugging Face `mohanty/PlantVillage`). Licenza indicata come CC BY-SA 3.0 nel loader: verificarla |
+| IP102 | fitofago (102 classi) | `ip102/images/` + `train.txt`, `val.txt`, `test.txt`; nomi in `configs/ip102_classes.yaml` | Download da Google Drive o AliyunDrive, linkati dal repository xpwu95/IP102; uso accademico |
 
 ## Pipeline
 
@@ -20,7 +20,7 @@ plantcare serve --checkpoint models/baseline/model.pt
 Passi della pipeline:
 
 1. **Scansione.** PlantVillage: una riga per immagine, con coltura e malattia dal nome della cartella. IP102: righe dai file di split ufficiali.
-2. **Split.** PlantVillage: casuale stratificato per classe (70/15/15, seme fisso). IP102: split ufficiali.
+2. **Split.** PlantVillage: per gruppo di foglia, usando `leaf_grouping/leaf-map.json` del dataset ufficiale. Tutte le foto di una stessa foglia vanno nello stesso split, altrimenti il risultato è ottimistico. Il README ufficiale riporta 54.306 immagini, 14 specie e 26 malattie. IP102: split ufficiali (train/val/test.txt).
 3. **Controllo duplicati tra split.** Hash SHA-256: foto identiche in split diversi sono una fuga di dati e vengono segnalate.
 4. **Controllo immagini.** Immagini corrotte segnalate prima dell'addestramento.
 5. **Manifest.** CSV con colonne `path, source, split, plant, disease, pest`. È l'unico ingresso del training.
@@ -82,3 +82,10 @@ I dataset pubblici non coprono tre aree. Per ciascuna serve una raccolta dedicat
 ## Licenze
 
 Ogni dataset ha la sua licenza, che vincola il riuso dei pesi del modello. Registrare in `data/SOURCES.md` (non versionato): nome, URL, licenza, data di accesso.
+
+## Verifiche sui dataset (fatte il 2026-11-19)
+
+- Nomi delle 38 classi PlantVillage: letti dal loader ufficiale `plant_village.py` del repository spMohanty. Sono in `configs/label_maps.yaml`: 20 collegate alla tassonomia, 18 senza corrispondenza (`null`).
+- Nomi delle 102 classi IP102: da `classes.txt` del repository xpwu95/IP102, indici 1-based (`configs/ip102_classes.yaml`).
+- Split ufficiali PlantVillage (`splits/*_train.txt`): non raggiungibili da questo ambiente, perché ospitati su Hugging Face. La pipeline usa la mappa dei gruppi foglia, che invece è accessibile.
+- Base degli indici nei file `train.txt` di IP102 (0 o 1): non verificata, perché i file non sono scaricabili da questo ambiente. Va controllata e impostata in `configs/datasets.yaml`.

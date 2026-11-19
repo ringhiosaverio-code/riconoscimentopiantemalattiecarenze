@@ -81,3 +81,12 @@ def test_label_map_rejects_unknown_target(tmp_path):
     bad.write_text("plantvillage:\n  Foo___bar: nonexistent_disease\nip102: {}\n", encoding="utf-8")
     with pytest.raises(ValueError, match="non presente"):
         load_label_map(bad)
+
+
+def test_plantvillage_classes_all_listed_in_label_map():
+    from plantcare.labelmap import load_label_map
+    mapping = load_label_map()["plantvillage"]
+    assert len(mapping) == 38
+    mapped = [v for v in mapping.values() if v]
+    assert len(mapped) == 20
+    assert mapping["Tomato___Tomato_Yellow_Leaf_Curl_Virus"] == "tomato_yellow_leaf_curl"

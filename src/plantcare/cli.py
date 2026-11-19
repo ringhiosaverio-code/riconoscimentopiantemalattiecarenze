@@ -39,13 +39,19 @@ def cmd_build_manifest(args: argparse.Namespace) -> int:
     # Convenzione: ogni dataset sta in data_root/<nome>, e i percorsi del manifest
     # sono relativi a data_root (es. 'plantvillage/color/Tomato___healthy/x.jpg').
     data_root = Path(cfg.get("data_root", ROOT / "data" / "raw"))
+    from plantcare.data.pipeline import load_leaf_map
     rows = []
     if (data_root / "plantvillage").is_dir():
-        for r in scan_plantvillage(data_root / "plantvillage", seed=cfg.get("seed", 42)):
+        leaf_path = data_root / "plantvillage" / "leaf_grouping" / "leaf-map.json"
+        leaf_map = load_leaf_map(leaf_path)
+        if not leaf_map:
+            print("Attenzione: mappa dei gruppi foglia assente, lo split PlantVillage sarà ottimistico", file=sys.stderr)
+        for r in scan_plantvillage(data_root / "plantvillage", seed=cfg.get("seed", 42), leaf_map=leaf_map):
             r.path = f"plantvillage/{r.path}"
             rows.append(r)
     if (data_root / "ip102").is_dir():
-        for r in scan_ip102(data_root / "ip102", images_dir=cfg.get("ip102_images_dir", "images")):
+        for r in scan_ip102(data_root / "ip102", images_dir=cfg.get("ip102_images_dir", "images"),
+                            label_base=cfg.get("ip102_label_base", 0)):
             r.path = f"ip102/{r.path}"
             rows.append(r)
     if not rows:

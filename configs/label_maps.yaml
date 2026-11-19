@@ -1,19 +1,44 @@
 # Mappatura delle etichette grezze dei dataset verso gli id della tassonomia.
-#
-# ATTENZIONE: i nomi delle cartelle PlantVillage sono quelli del repository spMohanty
-# e vanno verificati sulla copia scaricata. Le classi non elencate restano senza
-# mappatura: il sistema le segnala invece di indovinarle.
-# IP102 usa indici numerici: i nomi scientifici vanno aggiunti qui dopo verifica
-# con la documentazione ufficiale del dataset.
-
+# Generata dai nomi ufficiali del loader PlantVillage (38 classi).
+# null = classe senza corrispondenza in configs/taxonomy.yaml: resta nel modello
+# con il nome grezzo, ma non viene collegata alla tassonomia.
 plantvillage:
-  Tomato___Late_blight: tomato_late_blight
-  Tomato___Early_blight: tomato_early_blight
-  Tomato___Tomato_mosaic_virus: tomato_mosaic_virus
-  Potato___Late_blight: tomato_late_blight
-  Potato___Early_blight: tomato_early_blight
+  Apple___Apple_scab: apple_scab
+  Apple___Black_rot: null
+  Apple___Cedar_apple_rust: null
+  Apple___healthy: healthy
+  Blueberry___healthy: healthy
+  Cherry_(including_sour)___Powdery_mildew: null
+  Cherry_(including_sour)___healthy: healthy
+  Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot: null
+  Corn_(maize)___Common_rust_: null
+  Corn_(maize)___Northern_Leaf_Blight: maize_northern_leaf_blight
+  Corn_(maize)___healthy: healthy
+  Grape___Black_rot: null
+  Grape___Esca_(Black_Measles): null
+  Grape___Leaf_blight_(Isariopsis_Leaf_Spot): null
   Grape___healthy: healthy
-  Tomato___healthy: healthy
+  Orange___Haunglongbing_(Citrus_greening): null
+  Peach___Bacterial_spot: null
+  Peach___healthy: healthy
+  Pepper,_bell___Bacterial_spot: null
+  Pepper,_bell___healthy: healthy
+  Potato___Early_blight: tomato_early_blight
+  Potato___Late_blight: tomato_late_blight
   Potato___healthy: healthy
-
+  Raspberry___healthy: healthy
+  Soybean___healthy: healthy
+  Squash___Powdery_mildew: null
+  Strawberry___Leaf_scorch: null
+  Strawberry___healthy: healthy
+  Tomato___Bacterial_spot: null
+  Tomato___Early_blight: tomato_early_blight
+  Tomato___Late_blight: tomato_late_blight
+  Tomato___Leaf_Mold: null
+  Tomato___Septoria_leaf_spot: null
+  Tomato___Spider_mites Two-spotted_spider_mite: null
+  Tomato___Target_Spot: null
+  Tomato___Tomato_Yellow_Leaf_Curl_Virus: tomato_yellow_leaf_curl
+  Tomato___Tomato_mosaic_virus: tomato_mosaic_virus
+  Tomato___healthy: healthy
 ip102: {}

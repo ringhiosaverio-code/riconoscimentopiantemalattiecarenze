@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import json
 import random
 from collections import defaultdict
 from dataclasses import dataclass, asdict
@@ -52,15 +53,57 @@ def parse_plantvillage_folder(name: str) -> tuple[str, str]:
     return crop, name
 
 
-def scan_plantvillage(root: Path, seed: int = 42, val_frac: float = 0.15, test_frac: float = 0.15) -> list[ManifestRow]:
-    """Scansiona la cartella e assegna gli split in modo stratificato per classe.
+def leaf_identifier(file_name: str) -> str:
+    """Identificatore della foglia dal nome file, come nel loader ufficiale di PlantVillage."""
+    ident = file_name.replace("_final_masked", "")
+    if "___" in ident:
+        ident = ident.split("___")[-1]
+    ident = ident.split("copy")[0]
+    for ext in (".jpg", ".JPG", ".png", ".PNG"):
+        ident = ident.replace(ext, "")
+    return ident.strip().lower()
 
-    ATTENZIONE: PlantVillage non ha informazioni di località o di pianta.
-    Lo split casuale può far finire nello stesso split foto quasi identiche
-    (stessa foglia, angolo diverso). I risultati su questo split sono quindi
-    ottimistici: è il motivo per cui serve un test di campo separato.
+
+def resolve_leaf_id(file_name: str, class_name: str, leaf_map: dict[str, list[str]]) -> str:
+    """Gruppo foglia di un'immagine, con la stessa logica del loader ufficiale.
+
+    Immagini della stessa foglia condividono il gruppo e vanno nello stesso split.
+    Se la mappa non le conosce, il gruppo è l'immagine stessa (nessuna garanzia).
+    """
+    ident = leaf_identifier(file_name)
+    candidates = leaf_map.get(ident)
+    if not candidates:
+        return f"fallback_{ident}"
+    if len(candidates) == 1:
+        return candidates[0]
+    for c in candidates:
+        if class_name in c:
+            return c
+    return f"fallback_{ident}"
+
+
+def load_leaf_map(path: Path | None) -> dict[str, list[str]]:
+    if path is None or not path.exists():
+        return {}
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def scan_plantvillage(
+    root: Path,
+    seed: int = 42,
+    val_frac: float = 0.15,
+    test_frac: float = 0.15,
+    leaf_map: dict[str, list[str]] | None = None,
+) -> list[ManifestRow]:
+    """Scansiona la cartella e assegna gli split per gruppo di foglia, stratificando per classe.
+
+    Con `leaf_map` (leaf_grouping/leaf-map.json del dataset ufficiale) tutte le foto
+    della stessa foglia finiscono nello stesso split: è la protezione contro la fuga
+    di dati. Senza la mappa ogni foto è un gruppo a sé e lo split è ottimistico.
     """
     rng = random.Random(seed)
+    leaf_map = leaf_map or {}
     by_class: dict[str, list[Path]] = defaultdict(list)
     for folder in sorted(p for p in root.iterdir() if p.is_dir()):
         if "___" not in folder.name:
@@ -71,39 +114,56 @@ def scan_plantvillage(root: Path, seed: int = 42, val_frac: float = 0.15, test_f
 
     rows: list[ManifestRow] = []
     for cls, files in sorted(by_class.items()):
-        rng.shuffle(files)
+        groups: dict[str, list[Path]] = defaultdict(list)
+        for f in files:
+            gid = resolve_leaf_id(f.name, cls, leaf_map) if leaf_map else f"img_{f.as_posix()}"
+            groups[gid].append(f)
+        keys = sorted(groups)
+        rng.shuffle(keys)
         n = len(files)
-        n_test = max(1, round(n * test_frac)) if n >= 3 else 0
-        n_val = max(1, round(n * val_frac)) if n >= 3 else 0
-        for i, f in enumerate(files):
-            if i < n_test:
+        split_of: dict[str, str] = {}
+        filled = 0
+        for k in keys:
+            if filled < test_frac * n:
                 split = "test"
-            elif i < n_test + n_val:
+            elif filled < (test_frac + val_frac) * n:
                 split = "val"
             else:
                 split = "train"
-            crop, disease = parse_plantvillage_folder(cls)
-            rows.append(ManifestRow(
-                path=str(f.relative_to(root)),
-                source="plantvillage",
-                split=split,
-                plant=crop,
-                disease=disease,
-            ))
+            split_of[k] = split
+            filled += len(groups[k])
+        crop, disease = parse_plantvillage_folder(cls)
+        for gid, members in groups.items():
+            for f in members:
+                rows.append(ManifestRow(
+                    path=str(f.relative_to(root)),
+                    source="plantvillage",
+                    split=split_of[gid],
+                    plant=crop,
+                    disease=disease,
+                ))
     return rows
 
 
 # ---------------------------------------------------------------
 # IP102: file di split "percorso etichetta" (split ufficiali)
 # ---------------------------------------------------------------
-def scan_ip102(root: Path, images_dir: str = "images", split_files: dict[str, str] | None = None) -> list[ManifestRow]:
+def scan_ip102(
+    root: Path,
+    images_dir: str = "images",
+    split_files: dict[str, str] | None = None,
+    label_base: int = 0,
+) -> list[ManifestRow]:
     """Legge gli split ufficiali di IP102.
 
-    `split_files` mappa split -> nome file (default: train.txt, val.txt, test.txt).
-    Ogni riga del file: '<percorso_relativo_a_images_dir> <indice_intero>'.
-    Il valore di pest è l'indice originale (stringa), non un nome: i nomi
-    scientifici vanno aggiunti in configs/label_maps.yaml quando disponibili.
+    Ogni riga del file: '<percorso_relativo_a_images_dir> <etichetta>'.
+    `label_base` è la base degli indici nei file di split (0 o 1). Il valore
+    salvato in `pest` è l'indice 1-based di classes.txt, così corrisponde ai nomi
+    in configs/ip102_classes.yaml. Impostare label_base in modo errato sposta
+    tutte le etichette di una posizione: va controllato sul file scaricato.
     """
+    if label_base not in (0, 1):
+        raise ValueError("label_base deve essere 0 o 1")
     split_files = split_files or {"train": "train.txt", "val": "val.txt", "test": "test.txt"}
     rows: list[ManifestRow] = []
     for split, fname in split_files.items():
@@ -116,13 +176,22 @@ def scan_ip102(root: Path, images_dir: str = "images", split_files: dict[str, st
                 if len(parts) != 2:
                     continue
                 rel, label = parts
+                official = int(label) - label_base + 1
                 rows.append(ManifestRow(
                     path=str(Path(images_dir) / rel),
                     source="ip102",
                     split=split,
-                    pest=f"ip102_{int(label):03d}",
+                    pest=f"ip102_{official:03d}",
                 ))
     return rows
+
+
+def load_ip102_classes(path: Path) -> dict[int, str]:
+    """Nomi delle classi IP102 da configs/ip102_classes.yaml (indici 1-based)."""
+    import yaml
+    with open(path, encoding="utf-8") as fh:
+        raw = yaml.safe_load(fh)["classes"]
+    return {int(k): str(v) for k, v in raw.items()}
 
 
 # ---------------------------------------------------------------

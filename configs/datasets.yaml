@@ -13,3 +13,9 @@ seed: 42
 
 # IP102: nome della cartella con le immagini, dentro data_root/ip102
 ip102_images_dir: images
+# Base degli indici nei file train/val/test.txt di IP102: 0 o 1.
+# Verificare sul file scaricato (il minimo valore presente); classes.txt è 1-based.
+ip102_label_base: 0
+
+# PlantVillage: la mappa dei gruppi foglia (leaf_grouping/leaf-map.json) è letta
+# automaticamente da data/raw/plantvillage/leaf_grouping/ se presente.

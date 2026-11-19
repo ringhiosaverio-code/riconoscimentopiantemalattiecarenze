@@ -88,6 +88,12 @@ diseases:
     agent: Tomato mosaic virus (ToMV)
     hosts: [solanum_lycopersicum]
     symptoms: Mosaico clorotico, foglie deformate, filloidia
+  - id: tomato_yellow_leaf_curl
+    common: Accartocciamento giallo del pomodoro
+    pathogen_type: viral
+    agent: Tomato yellow leaf curl virus (TYLCV, Begomovirus)
+    hosts: [solanum_lycopersicum]
+    symptoms: Accartocciamento e ingiallimento dei margini fogliari, nanismo, fiori caduchi, trasmesso dalla mosca bianca
   - id: tomato_leafminer_damage
     common: Danno da Tuta absoluta
     pathogen_type: insect_induced

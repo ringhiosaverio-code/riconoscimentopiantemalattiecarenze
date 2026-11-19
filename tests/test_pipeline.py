@@ -44,10 +44,10 @@ def test_scan_plantvillage_assigns_all_splits(tmp_path):
 def test_scan_ip102_reads_official_split_files(tmp_path):
     _png(tmp_path / "images" / "a.jpg")
     (tmp_path / "train.txt").write_text("a.jpg 7\n", encoding="utf-8")
-    rows = scan_ip102(tmp_path)
+    rows = scan_ip102(tmp_path, label_base=0)  # base 0: etichetta 7 -> classe ufficiale 8
     assert len(rows) == 1
     assert rows[0].split == "train"
-    assert rows[0].pest == "ip102_007"
+    assert rows[0].pest == "ip102_008"
     assert rows[0].path == "images/a.jpg"
 
 
@@ -82,3 +82,45 @@ def test_manifest_roundtrip_and_summary(tmp_path):
 def _row(path, split, **kw):
     from plantcare.data.pipeline import ManifestRow
     return ManifestRow(path=path, source="test", split=split, **kw)
+
+
+def test_leaf_identifier_mirrors_official_loader():
+    from plantcare.data.pipeline import leaf_identifier
+    assert leaf_identifier("rutg._hl 3733.JPG") == "rutg._hl 3733"
+    assert leaf_identifier("img_final_masked.jpg") == "img"
+    assert leaf_identifier("a___b.png") == "b"
+
+
+def test_same_leaf_images_stay_in_same_split(tmp_path):
+    from plantcare.data.pipeline import scan_plantvillage
+    cls = "Tomato___Late_blight"
+    names = [f"leafA_{i}.jpg" for i in range(4)] + [f"leafB_{i}.jpg" for i in range(4)] + [f"leafC_{i}.jpg" for i in range(4)]
+    for n in names:
+        _png(tmp_path / cls / n)
+    # Tutte le foto di una stessa foglia hanno lo stesso gruppo
+    leaf_map = {}
+    for n in names:
+        leaf = n.split("_")[0]
+        leaf_map[n.replace(".jpg", "").lower()] = [f"{cls}:::{leaf}"]
+    rows = scan_plantvillage(tmp_path, seed=3, leaf_map=leaf_map)
+    by_leaf = {}
+    for r in rows:
+        leaf = Path(r.path).name.split("_")[0]
+        by_leaf.setdefault(leaf, set()).add(r.split)
+    assert all(len(s) == 1 for s in by_leaf.values()), by_leaf
+
+
+def test_ip102_label_base_is_applied(tmp_path):
+    _png(tmp_path / "images" / "a.jpg")
+    (tmp_path / "train.txt").write_text("a.jpg 0\n", encoding="utf-8")
+    rows0 = scan_ip102(tmp_path, label_base=0)
+    assert rows0[0].pest == "ip102_001"
+    (tmp_path / "train.txt").write_text("a.jpg 1\n", encoding="utf-8")
+    rows1 = scan_ip102(tmp_path, label_base=1)
+    assert rows1[0].pest == "ip102_001"
+
+
+def test_ip102_classes_file_has_102_names():
+    from plantcare.data.pipeline import load_ip102_classes
+    names = load_ip102_classes(Path(__file__).resolve().parents[1] / "configs" / "ip102_classes.yaml")
+    assert len(names) == 102 and names[1] == "rice leaf roller"
