@@ -23,7 +23,10 @@ def load_label_map(path: Path | str = DEFAULT_MAP_PATH, taxonomy: Taxonomy | Non
         for raw_label, target in (mapping or {}).items():
             if target is None:  # classe non ancora presente nella tassonomia
                 continue
-            if target not in tax.diseases and target not in tax.insects:
+            if source.endswith("_crops"):
+                if target not in tax.plants:
+                    errors.append(f"{source}:{raw_label} -> '{target}' non presente in taxonomy (plants)")
+            elif target not in tax.diseases and target not in tax.insects:
                 errors.append(f"{source}:{raw_label} -> '{target}' non presente in taxonomy")
     if errors:
         raise ValueError("Mappatura non valida:\n  - " + "\n  - ".join(errors))

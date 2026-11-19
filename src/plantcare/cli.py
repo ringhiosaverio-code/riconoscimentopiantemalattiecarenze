@@ -3,7 +3,7 @@
     plantcare check-taxonomy              verifica tassonomia e copertura colture
     plantcare build-manifest              crea data/processed/manifest.csv dai dataset
     plantcare train -c configs/train_baseline.yaml
-    plantcare serve                       avvia l'interfaccia web (PLANTCARE_CKPT)
+    plantcare serve                       avvia l'interfaccia web e l'API (PLANTCARE_CKPT)
 """
 
 from __future__ import annotations
@@ -42,8 +42,10 @@ def cmd_build_manifest(args: argparse.Namespace) -> int:
     from plantcare.data.pipeline import load_leaf_map
     rows = []
     if (data_root / "plantvillage").is_dir():
-        leaf_path = data_root / "plantvillage" / "leaf_grouping" / "leaf-map.json"
-        leaf_map = load_leaf_map(leaf_path)
+        # mappa dei gruppi foglia: copia nel dataset, altrimenti quella versionata nel repository
+        candidates = [data_root / "plantvillage" / "leaf_grouping" / "leaf-map.json",
+                      ROOT / "metadata" / "plantvillage" / "leaf-map.json"]
+        leaf_map = next((load_leaf_map(c) for c in candidates if c.exists()), {})
         if not leaf_map:
             print("Attenzione: mappa dei gruppi foglia assente, lo split PlantVillage sarà ottimistico", file=sys.stderr)
         for r in scan_plantvillage(data_root / "plantvillage", seed=cfg.get("seed", 42), leaf_map=leaf_map):

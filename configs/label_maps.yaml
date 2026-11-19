@@ -42,3 +42,20 @@ plantvillage:
   Tomato___Tomato_mosaic_virus: tomato_mosaic_virus
   Tomato___healthy: healthy
 ip102: {}
+
+# Colture PlantVillage (testa "plant") -> id di configs/taxonomy.yaml. null = coltura non in tassonomia.
+plantvillage_crops:
+  Apple: malus_domestica
+  Blueberry: null
+  Cherry_(including_sour): prunus_avium
+  Corn_(maize): zea_mays
+  Grape: vitis_vinifera
+  Orange: citrus_sinensis
+  Peach: prunus_persica
+  Pepper,_bell: capsicum_annuum
+  Potato: solanum_tuberosum
+  Raspberry: null
+  Soybean: null
+  Squash: cucurbita_pepo
+  Strawberry: fragaria_ananassa
+  Tomato: solanum_lycopersicum

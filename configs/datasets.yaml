@@ -17,5 +17,5 @@ ip102_images_dir: images
 # Verificare sul file scaricato (il minimo valore presente); classes.txt è 1-based.
 ip102_label_base: 0
 
-# PlantVillage: la mappa dei gruppi foglia (leaf_grouping/leaf-map.json) è letta
-# automaticamente da data/raw/plantvillage/leaf_grouping/ se presente.
+# PlantVillage: la mappa dei gruppi foglia è letta da data/raw/plantvillage/leaf_grouping/
+# se presente, altrimenti da metadata/plantvillage/leaf-map.json (versione nel repository).

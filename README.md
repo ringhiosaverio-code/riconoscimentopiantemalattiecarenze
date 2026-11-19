@@ -28,6 +28,9 @@ Le colture di priorità 2 hanno poche immagini pubbliche: per loro serve raccolt
 | Metriche (F1 per classe, ECE, copertura vs accuratezza) | Implementate |
 | Inferenza con astensione e avvertenze | Implementata |
 | Interfaccia web e API (`/predict`) | Implementata |
+| Schede per agronomi (malattie, insetti, colture, carenze) | Implementate (`/api/*`) |
+| Feedback degli agronomi (sì/no e correzione) | Implementato, attivo con `PLANTCARE_FEEDBACK_DIR` |
+| Immagine Docker per la pubblicazione | Scritta, **non ancora costruita né provata** |
 | **Baseline reale su PlantVillage e IP102** | **Non ancora eseguita**: i dati non sono stati scaricati in questo ambiente |
 | Dati per carenze, viroidi, entomofagi | Da raccogliere (piano in `docs/dataset.md`) |
 
@@ -49,6 +52,12 @@ plantcare serve --checkpoint models/baseline/model.pt
 # poi aprire http://127.0.0.1:8000
 ```
 
+## Per chi usa il sistema
+
+- **Agronomi e tecnici:** `docs/guida-agronomi.md` spiega come leggere il risultato, quando serve il laboratorio e come inviare un feedback.
+- **Validazione sul campo:** `docs/protocollo-validazione.md` definisce il protocollo per misurare le prestazioni reali.
+- **Pubblicazione del servizio:** `docs/deploy.md` elenca i requisiti (modello validato, licenza, privacy, revisione scientifica).
+
 ## Struttura
 
 ```
@@ -66,7 +75,10 @@ src/plantcare/
   metrics.py             F1, ECE, copertura vs accuratezza
   predict.py             inferenza con astensione e avvertenze
   api.py                 interfaccia web e endpoint /predict
+  kb.py                  schede per agronomi (malattie, insetti, colture, carenze)
   cli.py                 comando `plantcare`
+metadata/                 mappa dei gruppi foglia di PlantVillage (per lo split senza fuga di dati)
+Dockerfile                immagine per la pubblicazione (vedi docs/deploy.md)
 tests/                   test unitari e di integrazione (dati sintetici)
 docs/                    ricerca, dataset, architettura
 ```
@@ -89,4 +101,4 @@ docs/                    ricerca, dataset, architettura
 
 ## Licenza
 
-Da definire prima della pubblicazione: i dataset hanno licenze diverse e vincolano il riuso dei pesi.
+Da definire prima della pubblicazione. I dataset hanno licenze diverse e vincolano il riuso dei pesi del modello.
