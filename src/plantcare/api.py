@@ -28,6 +28,16 @@ from plantcare.labelmap import DEFAULT_MAP_PATH, load_label_map
 from plantcare.predict import Predictor
 from plantcare.taxonomy import DEFAULT_TAXONOMY_PATH, load_taxonomy
 
+ROOT_CONFIG = Path(__file__).resolve().parents[2] / "configs"
+KNOWLEDGE_PATH = ROOT_CONFIG / "knowledge_base.yaml"
+SOURCES_PATH = ROOT_CONFIG / "sources.yaml"
+
+
+def load_yaml(path: Path) -> dict:
+    import yaml
+    with open(path, encoding="utf-8") as fh:
+        return yaml.safe_load(fh) or {}
+
 MAX_BYTES = 10 * 1024 * 1024
 MAX_COMMENT = 500
 
@@ -157,7 +167,7 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
     feedback_dir = os.environ.get("PLANTCARE_FEEDBACK_DIR")
 
     tax = load_taxonomy(DEFAULT_TAXONOMY_PATH)
-    kb = KnowledgeBase(tax)
+    kb = KnowledgeBase(tax, knowledge=load_yaml(KNOWLEDGE_PATH), sources=load_yaml(SOURCES_PATH))
     label_map = load_label_map(DEFAULT_MAP_PATH, taxonomy=tax)
 
     app = FastAPI(
@@ -225,6 +235,10 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
     @app.get("/api/insects")
     def insects(plant: str | None = None, role: str | None = None) -> list[dict]:
         return kb.list_insects(plant_id=plant, role=role)
+
+    @app.get("/api/sources")
+    def sources() -> list[dict]:
+        return list(kb.sources.values())
 
     @app.get("/api/insects/{insect_id}")
     def insect(insect_id: str) -> dict:

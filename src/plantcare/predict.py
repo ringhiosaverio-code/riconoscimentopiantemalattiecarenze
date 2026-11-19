@@ -98,10 +98,39 @@ class Predictor:
         return {
             "heads": heads,
             "organ": organ,
+            "referto": self._referto(heads),
             "warnings": self._warnings(heads),
             "disclaimer": DISCLAIMER,
             MODEL_NAME_KEY: self.version,
             "abstain_threshold": self.abstain_threshold,
+        }
+
+    @staticmethod
+    def _referto(heads: dict[str, Any]) -> dict[str, Any]:
+        """Sintesi per l'agronomo: pianta, malattia, causa, origine e misure, dalle risposte confidenti."""
+        def answered(head: str) -> dict[str, Any] | None:
+            h = heads.get(head, {})
+            return h if h.get("answer") not in (None, UNDETERMINED) else None
+        plant = answered("plant")
+        disease = answered("disease")
+        card = disease.get("card") if disease else None
+        k = card.get("knowledge") if card else None
+        return {
+            "plant": plant["answer"] if plant else None,
+            "disease": card["name"] if card else (disease["answer"] if disease else None),
+            "agent": card.get("agent") if card else None,
+            "cause": k["cause"] if k else None,
+            "caused_by": (
+                [v["name"] for v in k["vectors"]] if k and k["vectors"]
+                else ([card["pathogen_type"]["label"]] if card else [])
+            ),
+            "management": [m["text"] for m in k["management"]] if k else [],
+            "management_status": (
+                "fonti verificate" if k and k.get("sources_verified")
+                else ("da completare con il tecnico" if not k else "fonti parziali")
+            ),
+            "lab_confirmation_required": bool(card and card.get("lab_confirmation_required")),
+            "sources": k["sources"] if k else [],
         }
 
     @staticmethod

@@ -1,0 +1,70 @@
+# Registro delle fonti usate per la base di conoscenza (configs/knowledge_base.yaml).
+# stato:
+#   testo_letto        = estratto il testo del documento e controllato il passaggio citato
+#   riassunto_verificato = metadati e riassunto dell'articolo confermati, testo completo non letto
+#   solo_metadati      = esistenza confermata, contenuto non letto (non usare per indicazioni tecniche)
+# Le sostanze attive e le dosi dei documenti non sono riportate nel sistema.
+
+sources:
+  - id: disc_calabria_2023
+    title: "Disciplinari di produzione integrata 2023 - Difesa e controllo infestanti, Regione Calabria (Allegato A)"
+    issuer: "Regione Calabria, Dipartimento Agricoltura"
+    type: regionale_calabria
+    url: "https://www.regione.calabria.it/wp-content/uploads/2023/06/Disciplinari-di-produzione-integrata-2023-parte-difesa-e-diserbo-Allegato-A.pdf"
+    status: testo_letto
+    note: "Sezioni olivo (pp. 91-93), vite (pp. 118-125), agrumi, monitoraggio con trappole (tab. 3, p. 15). Non cita la Xylella."
+
+  - id: arsac_agrumi_2025
+    title: "Bilancio fitosanitario Agrumi Calabria 2024-2025"
+    issuer: "ARSAC, Laboratori Fitopatologici e Servizio Fitosanitario Regionale"
+    type: regionale_calabria
+    url: "https://www.arsacweb.it/wp-content/uploads/2025/12/Agrumi-Bilancio-fitosanitario-CALABRIA-2024-2025-_arsac.pdf"
+    date: "2025-12-04"
+    status: testo_letto
+    note: "Avversità degli agrumi in Calabria nel 2024 e nel 2025, soglie e strategie di intervento."
+
+  - id: arsac_bollettino_area1_2020
+    title: "Bollettino agrometeorologico e di difesa fitosanitaria n. 20, area 1 (Cosentino)"
+    issuer: "ARSAC"
+    type: regionale_calabria
+    url: "https://www.arsacweb.it/wp-content/uploads/2020/08/20_08_11-Area1-Bollettino-arsac.pdf"
+    date: "2020-08-11"
+    status: testo_letto
+    note: "Documento del 2020: le soglie vanno confermate con il bollettino corrente."
+
+  - id: efsa_xylella_2019
+    title: "Update of the Scientific Opinion on the risks to plant health posed by Xylella fastidiosa in the EU territory"
+    issuer: "EFSA Panel on Plant Health"
+    type: europeo
+    doi: "10.2903/j.efsa.2019.5665"
+    url: "https://doi.org/10.2903/j.efsa.2019.5665"
+    date: "2019-05"
+    status: riassunto_verificato
+    note: "EFSA Journal 17(5). Riassunto e comunicato EFSA letti; DOI non risolto al sito Wiley dall'ambiente di verifica."
+
+  - id: eppo_xylefa
+    title: "Xylella fastidiosa (XYLEFA) - datasheet"
+    issuer: "EPPO Global Database"
+    type: internazionale
+    url: "https://gd.eppo.int/taxon/XYLEFA/datasheet"
+    status: testo_letto
+    note: "Vettori, assenza di cura chimica, categoria EPPO A2 e UE Allegato II B del regolamento 2019/2072."
+
+  - id: eppo_ppv
+    title: "Plum pox virus (PPV000) - datasheet"
+    issuer: "EPPO Global Database"
+    type: internazionale
+    url: "https://gd.eppo.int/taxon/PPV000/datasheet"
+    date: "2024-10-14"
+    status: testo_letto
+    note: "Vettori afidi non persistenti (Myzus persicae tra i principali), categoria EPPO A2 e UE RNQP Allegato IV."
+
+  - id: unirc_gullo_2020
+    title: "First observations of graft combination on bergamot fruit quality, Femminello cultivar"
+    issuer: "Gullo G., Dattola A., Zappia R. - Università Mediterranea di Reggio Calabria"
+    type: universitario_calabria
+    doi: "10.17660/th2020/75.4.4"
+    url: "https://unirc.unifind.cineca.it/resource/item/44857"
+    date: "2020"
+    status: riassunto_verificato
+    note: "Fruits 75(4):170-179. Abstract letto: il bergamotto è innestato su arancio amaro, molto suscettibile al CTV, presente in Calabria."

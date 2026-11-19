@@ -1,0 +1,160 @@
+# Base di conoscenza per agronomi: causa, vettori e misure di gestione per malattia e per insetto.
+# Ogni indicazione di gestione cita le fonti in configs/sources.yaml.
+# NON contiene sostanze attive, dosi o tempi di trattamento: le decide il tecnico
+# sulla base del disciplinare vigente e del bollettino corrente.
+# Le voci senza fonte non sono riportate.
+
+diseases:
+
+  olive_xylella_quick_decline:
+    cause: "Batterio Xylella fastidiosa subsp. pauca: colonizza lo xilema (i vasi che portano l'acqua)."
+    vectors: [philaenus_spumarius]
+    vector_note: "Unico vettore accertato in natura nella regione EPPO."
+    management:
+      - text: "Il batterio non può essere eliminato dalla pianta infetta in pieno campo: le piante colpite non guariscono."
+        sources: [efsa_xylella_2019, eppo_xylefa]
+      - text: "Il rame non cura la pianta e non impedisce la trasmissione da parte degli insetti."
+        sources: [eppo_xylefa]
+      - text: "I sintomi compaiono dopo un periodo asintomatico variabile: l'ispezione visiva non basta, serve un campionamento intensivo; l'eradicazione locale in oliveto è possibile solo con campionamento intenso e interventi rapidi."
+        sources: [efsa_xylella_2019]
+      - text: "La vegetazione spontanea può diventare un serbatoio del batterio e dei vettori: tenerne conto nella sorveglianza."
+        sources: [eppo_xylefa]
+      - text: "Ogni sospetto va segnalato al Servizio Fitosanitario Regionale per la conferma di laboratorio. Le norme di quarantena si applicano per la Xylella (EPPO: categoria A2, UE Allegato II B del regolamento 2019/2072): verificare le disposizioni vigenti."
+        sources: [eppo_xylefa]
+
+  olive_peacock_spot:
+    cause: "Fungo Spilocaea oleaginea (anamorfo di Venturia oleaginea): macchie circolari sulle foglie."
+    management:
+      - text: "Usare varietà poco suscettibili, sesti d'impianto non troppo fitti, favorire arieggiamento e insolazione della chioma, concimazioni equilibrate."
+        sources: [disc_calabria_2023]
+      - text: "Diagnosi precoce a luglio-agosto per individuare infezioni non ancora visibili; nelle zone e per le cultivar suscettibili, intervenire con il disciplinare."
+        sources: [disc_calabria_2023]
+
+  olive_anthracnose:
+    cause: "Fungo Colletotrichum spp. (lebbra o antracnosi): lesioni sulle olive."
+    management:
+      - text: "Operazioni di rimonda e di arieggiamento della chioma; anticipare la raccolta."
+        sources: [disc_calabria_2023]
+      - text: "Con infezioni medio-alte nell'annata precedente, intervenire prima della fioritura per devitalizzare i conidi presenti sulle olive residue (secondo il disciplinare)."
+        sources: [disc_calabria_2023]
+
+  olive_knot:
+    cause: "Batterio Pseudomonas savastanoi pv. savastanoi: tumori legnosi su rami e tronco."
+    management:
+      - text: "Eliminare e distruggere i rami colpiti."
+        sources: [disc_calabria_2023]
+      - text: "Potare in periodi asciutti, limitando i tagli grossi ed eliminando i rami infetti."
+        sources: [disc_calabria_2023]
+      - text: "Evitare micro-ferite nel periodo autunnale, soprattutto durante la raccolta."
+        sources: [disc_calabria_2023]
+
+  olive_verticillium_wilt:
+    cause: "Fungo Verticillium dahliae: appassimento di un lato della chioma."
+    management:
+      - text: "Asportare e bruciare i rami disseccati a 20-30 cm sotto il punto di infezione."
+        sources: [disc_calabria_2023]
+      - text: "Evitare consociazioni con solanacee."
+        sources: [disc_calabria_2023]
+
+  grapevine_esca:
+    cause: "Complesso di funghi del legno (Phaeomoniella chlamydospora, Phaeoacremonium aleophilum, Fomitiporia mediterranea): carie e necrosi del legno."
+    management:
+      - text: "Segnare in estate le piante infette e potarle separatamente dalle altre, per limitare la diffusione."
+        sources: [disc_calabria_2023]
+      - text: "Nelle piante molto attaccate: estirpare e bruciare. Nelle piante infette solo in parte: asportare le parti invase, bruciarle e allevare un nuovo germoglio dal legno sano, dopo aver disinfettato la superficie di taglio."
+        sources: [disc_calabria_2023]
+      - text: "Disinfettare gli attrezzi di taglio, con ipoclorito di sodio."
+        sources: [disc_calabria_2023]
+
+  grapevine_downy_mildew:
+    cause: "Oomicete Plasmopara viticola: macchie d'olio sulle foglie, muffa bianca sul rovescio."
+    management:
+      - text: "Nelle zone meridionali a basso rischio, osservare le prime macchie d'olio; gli interventi sono legati alla previsione delle piogge (secondo il disciplinare)."
+        sources: [disc_calabria_2023]
+      - text: "Il bollettino agrometeorologico ARSAC segnala la presenza della malattia nella stagione: consultarlo."
+        sources: [arsac_bollettino_area1_2020]
+
+  grapevine_flavescence_doree:
+    cause: "Fitoplasma (batterio senza parete) della flavescenza dorata, trasmesso dalla cicalina Scaphoideus titanus."
+    vectors: [scaphoideus_titanus]
+    management:
+      - text: "Monitoraggio della cicalina con pannelli gialli, secondo le densità del disciplinare (tabella 3)."
+        sources: [disc_calabria_2023]
+      - text: "Verificare le norme di lotta obbligatoria vigenti per il vettore: non sono ancora documentate per la Calabria in questa base di conoscenza."
+        sources: []
+
+  citrus_tristeza:
+    cause: "Citrus tristeza virus (CTV): clorosi, declino della chioma, scanalature del legno."
+    vectors: [aphis_gossypii]
+    vector_note: "Vettore: afidi. Aphis gossypii è presente sugli agrumi in Calabria (ARSAC 2025); il ruolo di vettore è da confermare con la letteratura specifica."
+    management:
+      - text: "Segnalare tempestivamente al Servizio Fitosanitario regionale i sintomi sospetti, per gli accertamenti di laboratorio."
+        sources: [disc_calabria_2023]
+      - text: "Usare materiale vivaistico esente da CTV e applicare le misure del regolamento UE 2019/2072, modificato dal 2021/2285 (citati nel disciplinare)."
+        sources: [disc_calabria_2023]
+      - text: "Il bergamotto in Calabria è innestato su arancio amaro, molto suscettibile al CTV: sono state sperimentate combinazioni di portinnesto alternative."
+        sources: [unirc_gullo_2020]
+
+  peach_plum_pox:
+    cause: "Plum pox virus (vaiolatura o sharka): virus delle drupacee, trasmesso dagli afidi."
+    vectors: [aphid_myzus_persicae]
+    vector_note: "EPPO: Aphis spiraecola, Phorodon humuli, Hyalopterus pruni e Myzus persicae sono i principali vettori; trasmissione non persistente."
+    management:
+      - text: "Le piante infette sono la principale fonte di inoculo: segnalare i sintomi sospetti al Servizio Fitosanitario Regionale."
+        sources: [eppo_ppv]
+      - text: "Il virus è classificato dall'EPPO come A2 e dalla UE come RNQP (Allegato IV): verificare le misure vigenti."
+        sources: [eppo_ppv]
+
+insects:
+
+  philaenus_spumarius:
+    cause: "Cicalina che trasmette il batterio della Xylella fastidiosa."
+    management:
+      - text: "La vegetazione spontanea può ospitare il vettore e il batterio: la sorveglianza deve includere anche le erbe intorno all'oliveto."
+        sources: [eppo_xylefa]
+
+  bactrocera_oleae:
+    cause: "Mosca delle olive: le femmine pungono le drupe e le larve scavano la polpa."
+    management:
+      - text: "Monitoraggio con trappole cromotropiche secondo le densità del disciplinare (tabella 3)."
+        sources: [disc_calabria_2023]
+      - text: "Per le olive da olio, la soglia di intervento del bollettino 2020 era il 10% di infestazione attiva; per le cultivar da mensa basta la presenza delle prime punture. Le soglie cambiano per cultivar, esposizione e destinazione: confermarle con il bollettino corrente."
+        sources: [arsac_bollettino_area1_2020]
+
+  prays_oleae:
+    cause: "Tignola dell'olivo: le larve attaccano fiori, frutti e foglie."
+    management:
+      - text: "Per le olive da olio, la soglia di intervento nella generazione carpofaga è il 10-15% di uova e/o larvette in penetrazione; per le olive da tavola il 5-7% (disciplinare)."
+        sources: [disc_calabria_2023]
+      - text: "Monitoraggio con trappole a feromone: intervenire quasi alla fine della curva di volo e prima dell'indurimento del nocciolo."
+        sources: [disc_calabria_2023]
+
+  ceratitis_capitata:
+    cause: "Mosca mediterranea della frutta: punture e larve nei frutti maturi, anche di agrumi."
+    management:
+      - text: "Monitoraggio con trappole; installare trappole attract and kill da fine agosto (ARSAC 2025)."
+        sources: [arsac_agrumi_2025]
+      - text: "Intervenire quando la popolazione supera la soglia o alle prime punture (ARSAC 2025)."
+        sources: [arsac_agrumi_2025]
+
+  planococcus_citri:
+    cause: "Cocciniglia farinosa: colonie cotonose su frutti, rami e radici."
+    management:
+      - text: "Potature razionali; ostacolare l'attività delle formiche che proteggono le cocciniglie; intervenire localmente prima della formazione dei cotonosi."
+        sources: [arsac_agrumi_2025]
+      - text: "Antagonisti naturali citati dall'ARSAC: Leptomastix dactylopii e Cryptolaemus montrouzieri."
+        sources: [arsac_agrumi_2025]
+
+  aphis_gossypii:
+    cause: "Afide del cotone e del melone: colonie su germogli e foglie, vettore di virus."
+    management:
+      - text: "Interventi solo al superamento della soglia, di solito a fine fioritura: nel 2024-2025 le infestazioni sono quasi sempre rimaste sotto soglia (ARSAC 2025)."
+        sources: [arsac_agrumi_2025]
+      - text: "Mantenere inerbito il terreno e ostacolare le formiche (ARSAC 2025)."
+        sources: [arsac_agrumi_2025]
+
+  scaphoideus_titanus:
+    cause: "Cicalina vettore del fitoplasma della flavescenza dorata."
+    management:
+      - text: "Monitoraggio con pannelli gialli, secondo le densità del disciplinare (tabella 3)."
+        sources: [disc_calabria_2023]

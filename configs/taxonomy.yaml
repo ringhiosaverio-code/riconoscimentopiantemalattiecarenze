@@ -14,7 +14,7 @@
 # ATTENZIONE: agenti, ospiti e sintomi sono un elenco iniziale da far
 # validare a un fitopatologo prima dell'uso. I sintomi per organo sono sintesi.
 
-version: 0.4.0
+version: 0.5.0
 
 # ---------------------------------------------------------------
 # 0. ORGANI DELLA PIANTA
@@ -1508,6 +1508,7 @@ insects:
     family: Aphididae
     hosts: [cynara_cardunculus]
     organs: [leaf, inflorescence]
+  - {id: philaenus_spumarius, common: "Sputacchina (vettore della Xylella)", scientific: "Philaenus spumarius", role: phytophagous, order: Hemiptera, family: Aphrophoridae, hosts: [olea_europaea], organs: [branch, leaf], note: "Unico vettore accertato in natura della Xylella nella regione EPPO (EPPO datasheet)"}
   - {id: coccinella_septempunctata, common: Coccinella a sette punti, scientific: Coccinella septempunctata, role: entomophagous, order: Coleoptera, family: Coccinellidae}
   - {id: chrysoperla_carnea, common: Crisopa, scientific: Chrysoperla carnea, role: entomophagous, order: Neuroptera, family: Chrysopidae}
   - {id: aphidius_colemani, common: Imenottero parassitoide degli afidi, scientific: Aphidius colemani, role: entomophagous, order: Hymenoptera, family: Braconidae}

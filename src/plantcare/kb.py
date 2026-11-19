@@ -19,8 +19,42 @@ LAB_NOTE = (
 
 
 class KnowledgeBase:
-    def __init__(self, taxonomy: Taxonomy):
+    def __init__(self, taxonomy: Taxonomy, knowledge: dict | None = None, sources: dict | None = None):
         self.tax = taxonomy
+        self.knowledge = (knowledge or {}).get("diseases", {}), (knowledge or {}).get("insects", {})
+        self.sources = {s["id"]: s for s in (sources or {}).get("sources", [])}
+
+    def _knowledge_for(self, kind: str, item_id: str) -> dict[str, Any] | None:
+        table = self.knowledge[0] if kind == "disease" else self.knowledge[1]
+        entry = table.get(item_id)
+        if entry is None:
+            return None
+        out: dict[str, Any] = {
+            "cause": entry.get("cause"),
+            "vectors": [{"id": v, "name": self.tax.insects[v]["common"] if v in self.tax.insects else v}
+                        for v in entry.get("vectors", [])],
+            "vector_note": entry.get("vector_note"),
+            "management": [],
+        }
+        used: set[str] = set()
+        for m in entry.get("management", []):
+            ids = m.get("sources", [])
+            used.update(ids)
+            out["management"].append({"text": m["text"], "sources": ids})
+        out["sources"] = [
+            {"id": s, "title": self.sources[s]["title"], "url": self.sources[s]["url"], "status": self.sources[s]["status"]}
+            for s in sorted(used) if s in self.sources
+        ]
+        out["sources_verified"] = bool(out["sources"]) and all(
+            x["status"] in ("testo_letto", "riassunto_verificato") for x in out["sources"])
+        out["disclaimer"] = (
+            "Misure indicative: le decisioni di trattamento e di lotta obbligatoria spettano al tecnico "
+            "e vanno prese secondo il disciplinare regionale vigente e il bollettino corrente."
+        )
+        return out
+
+    def insect_knowledge(self, insect_id: str) -> dict[str, Any] | None:
+        return self._knowledge_for("insect", insect_id)
 
     def plant_name(self, plant_id: str) -> str:
         p = self.tax.plants.get(plant_id)
@@ -45,6 +79,7 @@ class KnowledgeBase:
             "pathogen_type": {"id": d["pathogen_type"], "label": ptype.get("label", d["pathogen_type"])},
             "hosts": [{"id": h, "name": self.plant_name(h)} for h in d.get("hosts", [])],
             "symptoms": d.get("symptoms", ""),
+            "knowledge": self._knowledge_for("disease", d["id"]),
             "organs": [{"id": o, "label": self.organ_label(o)} for o in organs],
             "organ_symptoms": {o: organ_symptoms[o] for o in organs if o in organ_symptoms},
             "lab_confirmation_required": d["pathogen_type"] in LAB_REQUIRED_TYPES,
@@ -92,6 +127,7 @@ class KnowledgeBase:
             "scientific": i.get("scientific"),
             "role": {"id": i["role"], "label": role_labels.get(i["role"], i["role"])},
             "hosts": [{"id": h, "name": self.plant_name(h)} for h in i.get("hosts", [])],
+            "knowledge": self._knowledge_for("insect", i["id"]),
             "organs": [{"id": o, "label": self.organ_label(o)} for o in i.get("organs", [])],
             "note": i.get("note"),
         }

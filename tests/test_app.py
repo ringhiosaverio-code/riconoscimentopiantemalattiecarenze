@@ -176,3 +176,44 @@ def test_useful_insects_are_not_listed_as_pests():
     tax = load_taxonomy()
     for useful in ("coccinella_septempunctata", "chrysoperla_carnea", "aphidius_colemani", "apis_mellifera"):
         assert tax.insects[useful]["role"] != "phytophagous"
+
+
+def test_knowledge_references_are_consistent():
+    import yaml
+    from pathlib import Path
+    from plantcare.taxonomy import load_taxonomy
+    root = Path(__file__).resolve().parents[1] / "configs"
+    kb = yaml.safe_load(open(root / "knowledge_base.yaml", encoding="utf-8"))
+    src_ids = {s["id"] for s in yaml.safe_load(open(root / "sources.yaml", encoding="utf-8"))["sources"]}
+    tax = load_taxonomy()
+    for dis_id, entry in kb["diseases"].items():
+        assert dis_id in tax.diseases, dis_id
+        for v in entry.get("vectors", []):
+            assert v in tax.insects, (dis_id, v)
+        for m in entry.get("management", []):
+            for s in m.get("sources", []):
+                assert s in src_ids, (dis_id, s)
+    for ins_id, entry in kb["insects"].items():
+        assert ins_id in tax.insects, ins_id
+        for m in entry.get("management", []):
+            for s in m.get("sources", []):
+                assert s in src_ids, (ins_id, s)
+
+
+def test_olive_xylella_card_has_verified_knowledge():
+    client = TestClient(create_app(None))
+    card = client.get("/api/diseases/olive_xylella_quick_decline").json()
+    k = card["knowledge"]
+    assert "xilema" in k["cause"]
+    assert k["vectors"][0]["id"] == "philaenus_spumarius"
+    assert k["sources_verified"] is True
+    assert any("eradicazione" in m["text"] for m in k["management"])
+    assert all("dosi" not in m["text"].lower() for m in k["management"])
+    sources = client.get("/api/sources").json()
+    assert any(s["id"] == "efsa_xylella_2019" for s in sources)
+
+
+def test_disease_without_knowledge_is_explicit_about_it():
+    client = TestClient(create_app(None))
+    card = client.get("/api/diseases/tomato_mosaic_virus").json()
+    assert card["knowledge"] is None
