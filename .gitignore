@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Dati e pesi (grandi, non versionati: vedi docs/dataset.md)
+data/raw/
+data/processed/
+models/*.pt
+models/*.onnx
+runs/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
