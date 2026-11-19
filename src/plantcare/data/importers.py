@@ -87,8 +87,16 @@ INAT_SPECIES = {
     "triticum_aestivum": "triticum_aestivum", "triticum_durum": "triticum_durum", "zea_mays": "zea_mays",
 }
 
-# Etichette AgML che corrispondono a classi della tassonomia (il resto resta "<fonte>:<etichetta>")
+# Etichette AgML che corrispondono a classi della tassonomia (il resto resta "<fonte>:<etichetta>").
+# Chiave: (fonte, etichetta) oppure (fonte, etichetta, coltura) quando dipende dalla coltura.
 AGML_DISEASE = {
+    ("agml_tom2024", "alternaria-d", "solanum_lycopersicum"): "tomato_early_blight",
+    ("agml_tom2024", "tomato-late-blight-d", "solanum_lycopersicum"): "tomato_late_blight",
+    ("agml_tom2024", "tuta-absoluta-p", "solanum_lycopersicum"): "tomato_leafminer_damage",
+    ("agml_tom2024", "rust-d", "zea_mays"): "maize_common_rust",
+    ("agml_tom2024", "helminthosporiosis-d", "zea_mays"): "maize_northern_leaf_blight",
+    ("agml_lemon", "Anthracnose"): "citrus_anthracnose",
+    ("agml_chili", "powdery mildew"): "pepper_powdery_mildew",
     ("agml_grape", "Downy Mildew"): "grapevine_downy_mildew",
     ("agml_grape", "Powdery Mildew"): "powdery_mildew_grapevine",
     ("agml_banana", "segatoka"): "banana_black_sigatoka",
@@ -97,6 +105,16 @@ AGML_DISEASE = {
     ("agml_cauliflower", "Black Rot"): "broccoli_black_rot",
 }
 HEALTHY_WORDS = ("healthy", "health", "sano", "normal", "fresh")
+TOM2024_CROPS = {"Tomato": "solanum_lycopersicum", "Onion": "allium_cepa_tropea", "Maize": "zea_mays"}
+
+# Lettore delle carenze: etichette nutrizionali dichiarate dagli autori dei dataset (nutriente non indicato).
+DEFICIENCY = {
+    ("agml_lemon", "Deficiency Leaf"): "sintomi_di_carenza",
+    ("agml_chili", "nutritional"): "sintomi_di_carenza",
+    ("agml_tom2024", "excess-nitrogen-d"): "eccesso_di_azoto",
+}
+DEFICIENCY_SOURCES = {"agml_lemon", "agml_chili", "agml_tom2024"}
+NO_NUTRITIONAL_DISORDER = "nessun_disturbo_nutrizionale"
 
 
 def _save(img_bytes: bytes, out: Path, box: tuple | None = None) -> bool:
@@ -131,19 +149,26 @@ def _rel(p: Path) -> str:
     return p.relative_to(DATA).as_posix()
 
 
-def _label_names(repo: str) -> list[str] | None:
-    """Nomi delle classi dalla scheda del dataset su Hugging Face (cardData)."""
+def _label_names(repo: str, config: str = "raw") -> list[str] | None:
+    """Nomi delle classi dalla scheda del dataset su Hugging Face (cardData).
+
+    Se la scheda descrive più configurazioni (es. raw e augmented) usa quella richiesta.
+    """
     import urllib.request
     try:
         d = json.load(urllib.request.urlopen(f"https://huggingface.co/api/datasets/{repo}", timeout=60))
-        feats = d["cardData"]["dataset_info"]["features"]
-        for f in feats:
-            cl = f.get("dtype", {})
-            if isinstance(cl, dict) and "class_label" in cl:
-                names = cl["class_label"]["names"]
-                return [names[str(i)] for i in range(len(names))] if isinstance(names, dict) else list(names)
+        info = d["cardData"]["dataset_info"]
     except Exception:
         return None
+    infos = info if isinstance(info, list) else [info]
+    chosen = next((i for i in infos if i.get("config_name") == config), infos[0])
+    for f in chosen.get("features", []):
+        if f.get("name") != "label":
+            continue
+        cl = f.get("dtype", {})
+        if isinstance(cl, dict) and "class_label" in cl:
+            names = cl["class_label"]["names"]
+            return [names[str(i)] for i in range(len(names))] if isinstance(names, dict) else list(names)
     return None
 
 
@@ -216,7 +241,8 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     if not files:
         return []
     names = _label_names(repo)
-    recs = list(_parquet_rows(files, ["image", "label"]))
+    has_crop = "crop_type" in pq.ParquetFile(files[0]).schema_arrow.names
+    recs = list(_parquet_rows(files, ["image", "label"] + (["crop_type"] if has_crop else [])))
     # split stratificato per classe
     by_label = defaultdict(list)
     for i, r in enumerate(recs):
@@ -228,14 +254,22 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     rows = []
     for i, r in enumerate(recs):
         lab = names[r["label"]] if names and r["label"] < len(names) else f"label_{r['label']}"
-        if lab.lower().startswith(HEALTHY_WORDS):
+        row_crop = TOM2024_CROPS.get(r.get("crop_type"), crop) if has_crop else crop
+        deficiency = ""
+        if (name, lab) in DEFICIENCY:
+            deficiency = DEFICIENCY[(name, lab)]
+            dis = "disturbo_nutrizionale"
+        elif lab.lower().startswith(HEALTHY_WORDS):
             dis = "healthy"
         else:
-            dis = AGML_DISEASE.get((name, lab), f"{name}:{lab}")
-        plant = "capsicum_annuum" if crop == "capsicum_annuum_peperoncino" else crop  # stessa specie
+            dis = AGML_DISEASE.get((name, lab, row_crop)) or AGML_DISEASE.get((name, lab)) or f"{name}:{lab}"
+        if not deficiency and name in DEFICIENCY_SOURCES:
+            deficiency = NO_NUTRITIONAL_DISORDER
+        plant = "capsicum_annuum" if row_crop == "capsicum_annuum_peperoncino" else row_crop  # stessa specie
         out = IMG / name / split_of[i] / f"{i:06d}.jpg"
         if out.exists() or _save(r["image"]["bytes"], out):
-            rows.append(ManifestRow(path=_rel(out), source=name, split=split_of[i], plant=plant, disease=dis))
+            rows.append(ManifestRow(path=_rel(out), source=name, split=split_of[i], plant=plant, disease=dis,
+                                    deficiency=deficiency))
     return rows
 
 

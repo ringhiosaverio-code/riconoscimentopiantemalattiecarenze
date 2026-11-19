@@ -98,3 +98,12 @@ sources:
     date: "2023"
     status: riassunto_verificato
     note: "FedCSIS 2023. Insieme di due EfficientNet-B0 su foto da smartphone: principio usato anche nei lettori PlantCare (insieme di estrattori). Titolo esatto da confermare."
+
+  - id: nuzzaci_1983_uniba
+    title: "Gli Eriofidi (Acarina: Eriophyoidea) dell'olivo"
+    issuer: "Nuzzaci G., Parenzan P. - Università di Bari, Entomologica"
+    type: universitario_italia
+    url: "https://ojs.uniba.it/index.php/entomol/article/view/572"
+    date: "1983"
+    status: riassunto_verificato
+    note: "Rassegna delle specie di eriofidi dell'olivo (Aceria oleae, Oxycenus maxwelli, Tegolophus hassani, Ditrymacus athiasellus). Usata per il riconoscimento delle specie, non per le misure di difesa."

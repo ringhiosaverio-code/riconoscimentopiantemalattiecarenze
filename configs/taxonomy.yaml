@@ -14,7 +14,7 @@
 # ATTENZIONE: agenti, ospiti e sintomi sono un elenco iniziale da far
 # validare a un fitopatologo prima dell'uso. I sintomi per organo sono sintesi.
 
-version: 0.6.0
+version: 0.7.0
 
 # ---------------------------------------------------------------
 # 0. ORGANI DELLA PIANTA
@@ -827,6 +827,40 @@ diseases:
       leaf: "Erosioni fogliari, escrementi sulla pagina"
       inflorescence: "Larve che si nutrono delle infiorescenze"
 
+  # ===== NOCCIOLO =====
+  - id: hazelnut_bacterial_blight
+    common: "Necrosi batterica del nocciolo"
+    pathogen_type: bacterial
+    agent: "Xanthomonas arboricola pv. corylina (nel disciplinare: X. campestris pv. corylina)"
+    hosts: [corylus_avellana]
+    organs: [branch, leaf, flower]
+    symptoms: "Necrosi di gemme, rametti e foglie"
+    organ_symptoms:
+      branch: "Necrosi e disseccamento dei rametti dell'anno"
+      leaf: "Macchie necrotiche angolari"
+      flower: "Necrosi delle gemme e degli amenti"
+  - id: hazelnut_bacterial_canker
+    common: "Cancro batterico e moria del nocciolo"
+    pathogen_type: bacterial
+    agent: "Pseudomonas avellanae (P. syringae pv. avellanae)"
+    hosts: [corylus_avellana]
+    organs: [branch, trunk, leaf]
+    symptoms: "Disseccamento improvviso di rami e intere piante"
+    organ_symptoms:
+      branch: "Rami che disseccano improvvisamente in estate, con foglie che restano attaccate"
+      trunk: "Cancri e imbrunimento sottocorticale"
+      leaf: "Foglie avvizzite e disseccate sul ramo"
+  - id: hazelnut_cytospora
+    common: "Mal dello stacco del nocciolo"
+    pathogen_type: fungal
+    agent: "Cytospora corylicola"
+    hosts: [corylus_avellana]
+    organs: [branch, trunk]
+    symptoms: "Cancri e disseccamento di polloni e branche"
+    organ_symptoms:
+      branch: "Cancri depressi con picnidi, disseccamento delle branche"
+      trunk: "Cancri alla base dei polloni che si staccano"
+
   # ===== AVOCADO E BANANO (Calabria, priorità 2) =====
   - id: avocado_root_rot
     common: "Marciume radicale dell'avocado"
@@ -1509,10 +1543,22 @@ insects:
     hosts: [cynara_cardunculus]
     organs: [leaf, inflorescence]
   - {id: philaenus_spumarius, common: "Sputacchina (vettore della Xylella)", scientific: "Philaenus spumarius", role: phytophagous, order: Hemiptera, family: Aphrophoridae, hosts: [olea_europaea], organs: [branch, leaf], note: "Unico vettore accertato in natura della Xylella nella regione EPPO (EPPO datasheet)"}
-  - {id: tetranychus_urticae, common: "Ragnetto rosso", scientific: "Tetranychus urticae", role: phytophagous, group: acaro, order: Acari, family: Tetranychidae, hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, solanum_lycopersicum, capsicum_annuum, capsicum_annuum_peperoncino, solanum_melongena, prunus_avium], organs: [leaf, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: tetranychus_urticae, common: "Ragnetto rosso", scientific: "Tetranychus urticae", role: phytophagous, group: acaro, order: Acari, family: Tetranychidae, hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, solanum_lycopersicum, capsicum_annuum, capsicum_annuum_peperoncino, solanum_melongena, prunus_avium, fragaria_ananassa, corylus_avellana], organs: [leaf, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
   - {id: panonychus_citri, common: "Ragno rosso degli agrumi", scientific: "Panonychus citri", role: phytophagous, group: acaro, order: Acari, family: Tetranychidae, hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia], organs: [leaf, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
-  - {id: panonychus_ulmi, common: "Ragno rosso del melo", scientific: "Panonychus ulmi", role: phytophagous, group: acaro, order: Acari, family: Tetranychidae, hosts: [malus_domestica], organs: [leaf], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: panonychus_ulmi, common: "Ragno rosso del melo", scientific: "Panonychus ulmi", role: phytophagous, group: acaro, order: Acari, family: Tetranychidae, hosts: [malus_domestica, vitis_vinifera, pyrus_communis, prunus_persica, corylus_avellana], organs: [leaf], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
   - {id: polyphagotarsonemus_latus, common: "Acaro tarsonemide", scientific: "Polyphagotarsonemus latus", role: phytophagous, group: acaro, order: Acari, family: Tarsonemidae, hosts: [solanum_melongena, capsicum_annuum, capsicum_annuum_peperoncino], organs: [leaf, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: eotetranychus_carpini, common: "Ragnetto giallo", scientific: "Eotetranychus carpini", role: phytophagous, group: acaro, order: Acari, family: Tetranychidae, hosts: [vitis_vinifera, fragaria_ananassa, corylus_avellana], organs: [leaf], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: calepitrimerus_vitis, common: "Acariosi della vite (eriofide)", scientific: "Calepitrimerus vitis", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [vitis_vinifera], organs: [leaf, branch, inflorescence], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: phytocoptella_avellanae, common: "Eriofide delle gemme del nocciolo", scientific: "Phytocoptella avellanae", role: phytophagous, group: acaro, order: Acari, family: Phytoptidae, hosts: [corylus_avellana], organs: [branch], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: epitrimerus_pyri, common: "Eriofide rugginoso del pero", scientific: "Epitrimerus pyri", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [pyrus_communis], organs: [leaf, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: eriophyes_pyri, common: "Eriofide vescicoloso del pero", scientific: "Eriophyes pyri", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [pyrus_communis], organs: [leaf, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: eriophyes_sheldoni, common: "Acaro delle meraviglie degli agrumi", scientific: "Eriophyes (Aceria) sheldoni", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia], organs: [branch, fruit, flower], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: aculops_pelekassi, common: "Eriofide rugginoso degli agrumi", scientific: "Aculops pelekassi", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia], organs: [fruit, leaf], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: aculops_lycopersici, common: "Eriofide del pomodoro", scientific: "Aculops lycopersici", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [solanum_lycopersicum], organs: [leaf, stem, fruit], note: "Acaro, non insetto: incluso perché fitofago dannoso"}
+  - {id: aceria_oleae, common: "Eriofide delle bollosità dell'olivo", scientific: "Aceria oleae", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [olea_europaea], organs: [leaf, fruit], note: "Acaro, non insetto. Bollosità fogliari e drupe deformate (Nuzzaci e Parenzan 1983)"}
+  - {id: tegolophus_hassani, common: "Acaro rugginoso dell'olivo", scientific: "Tegolophus hassani", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [olea_europaea], organs: [flower, leaf], note: "Acaro, non insetto. Rugginosità e appassimento dei bocci fiorali (Nuzzaci e Parenzan 1983)"}
+  - {id: oxycenus_maxwelli, common: "Eriofide dei germogli dell'olivo", scientific: "Oxycenus maxwelli", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [olea_europaea], organs: [branch, inflorescence, fruit], note: "Acaro, non insetto. Ruolo dannoso discusso in letteratura (Nuzzaci e Parenzan 1983)"}
+  - {id: halyomorpha_halys, common: "Cimice asiatica", scientific: "Halyomorpha halys", role: phytophagous, order: Hemiptera, family: Pentatomidae, hosts: [pyrus_communis, prunus_persica, prunus_avium, corylus_avellana], organs: [fruit], note: "Citata nel disciplinare calabrese 2023 per pero, pesco, ciliegio e nocciolo"}
   - {id: coccinella_septempunctata, common: Coccinella a sette punti, scientific: Coccinella septempunctata, role: entomophagous, order: Coleoptera, family: Coccinellidae}
   - {id: chrysoperla_carnea, common: Crisopa, scientific: Chrysoperla carnea, role: entomophagous, order: Neuroptera, family: Chrysopidae}
   - {id: aphidius_colemani, common: Imenottero parassitoide degli afidi, scientific: Aphidius colemani, role: entomophagous, order: Hymenoptera, family: Braconidae}

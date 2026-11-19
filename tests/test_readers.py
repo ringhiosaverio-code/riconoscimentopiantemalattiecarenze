@@ -83,3 +83,19 @@ def test_readers_checkpoint_roundtrip_and_predictor(tmp_path):
     assert status["plant"]["trained"] is True
     assert status["deficiency"]["trained"] is False
     assert "carenze" in status["deficiency"]["note"]
+
+
+def test_feature_cache_is_indexed_by_path(tmp_path):
+    """Aggiungere immagini non sfasa le caratteristiche già calcolate."""
+    from plantcare.readers import extract_features
+    imgs = []
+    for i, col in enumerate([(255, 0, 0), (0, 255, 0), (0, 0, 255)]):
+        p = tmp_path / f"{i}.png"
+        Image.new("RGB", (32, 32), col).save(p)
+        imgs.append(p)
+    out = tmp_path / "feats"
+    a = extract_features(imgs[:2], "resnet18", out, chunk=1, batch_size=1, num_workers=0, image_size=32)
+    b = extract_features([imgs[2], imgs[0], imgs[1]], "resnet18", out, chunk=1, batch_size=1, num_workers=0,
+                         image_size=32)
+    assert np.allclose(b[1], a[0]) and np.allclose(b[2], a[1])
+    assert len(list(out.glob("block_*.npy"))) == 3  # una sola immagine nuova calcolata

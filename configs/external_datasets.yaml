@@ -33,12 +33,12 @@ datasets:
 
   - name: agml_eggplant
     repo: Project-AgML/eggplant_disease_classification
-    files: ["raw/train-00000-of-00006.parquet", "raw/train-00001-of-00006.parquet"]
+    files: ["raw/*.parquet"]
     use: disease
     crop: solanum_melongena
     license: "CC BY 4.0"
     citation: "Vedi scheda del dataset su Project-AgML (indice AgML, UC Davis)"
-    note: "Solo 2 file su 6 per limiti di calcolo."
+    note: "Tutti i 6 file originali: i primi due contengono solo foglie sane."
 
   - name: agml_tom2024
     repo: Project-AgML/TOM2024_disease_classification

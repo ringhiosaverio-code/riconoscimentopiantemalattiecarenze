@@ -145,6 +145,10 @@ diseases:
     - text: 'Il virus è classificato dall''EPPO come A2 e dalla UE come RNQP (Allegato IV): verificare le misure vigenti.'
       sources:
       - eppo_ppv
+    - text: Impiegare materiale vivaistico certificato; controlli periodici e, se si individuano sintomi, avvisare tempestivamente il Servizio Fitosanitario Regionale; applicare le prescrizioni degli ispettori
+        fitosanitari (disciplinare, pesco).
+      sources:
+      - disc_calabria_2023
   tomato_late_blight:
     cause: 'Oomicete Phytophthora infestans: macchie brune acquose su foglie e frutti.'
     management:
@@ -241,13 +245,13 @@ diseases:
   peach_bacterial_spot:
     cause: Batterio Xanthomonas arboricola pv. pruni (maculatura batterica).
     management:
-    - text: 'Il disciplinare calabrese per il pesco non è stato ancora letto in questa base: da completare con il tecnico.'
+    - text: Costituire nuovi impianti solo con piante sane; bruciare i residui della potatura (disciplinare, pesco).
       sources:
       - disc_calabria_2023
   citrus_mal_secco:
     cause: 'Fungo Phoma tracheiphila: disseccamento dei rametti dall''apice.'
     management:
-    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione agrumi del disciplinare.'
+    - text: Asportare e bruciare le parti infette, comprese le ceppaie; limitare le lavorazioni allo strato superficiale del terreno per contenere le ferite alle radici (disciplinare, agrumi).
       sources:
       - disc_calabria_2023
   cherry_leaf_spot:
@@ -268,6 +272,10 @@ diseases:
     - text: Interventi da inizio fioritura a caduta petali; in caso di pioggia o elevata umidità, anche dall'invaiatura fino a prossimità della raccolta (disciplinare, ciliegio).
       sources:
       - disc_calabria_2023
+    - text: 'Pesco: sesti adeguati alla vigoria di portinnesto e varietà; azoto e irrigazioni proporzionati per evitare eccesso di vegetazione; drenaggio; potature verdi; asportare e bruciare i frutti mummificati
+        (disciplinare, pesco).'
+      sources:
+      - disc_calabria_2023
   apple_scab:
     cause: 'Fungo Venturia inaequalis (ticchiolatura): macchie vellutate su foglie e frutti.'
     management:
@@ -285,6 +293,10 @@ diseases:
     - text: Asportare tempestivamente le fioriture secondarie e comunicare al Servizio Fitosanitario regionale ogni sospetto (disciplinare, melo).
       sources:
       - disc_calabria_2023
+    - text: 'Pero: stesse prescrizioni di lotta obbligatoria (D.M. 356/1999): tagli almeno 50 cm sotto i sintomi, disinfezione degli attrezzi, rilievi periodici e comunicazione al Servizio Fitosanitario
+        (disciplinare, pero).'
+      sources:
+      - disc_calabria_2023
   avocado_root_rot:
     cause: 'Phytophthora cinnamomi: marciume radicale.'
     management:
@@ -300,7 +312,7 @@ diseases:
   wheat_leaf_rust:
     cause: 'Puccinia triticina: pustole arancio-brune sulle foglie.'
     management:
-    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione frumento del disciplinare (da leggere).'
+    - text: Evitare le semine fitte; concimazioni azotate equilibrate; varietà resistenti, tolleranti o precoci (disciplinare, frumento).
       sources:
       - disc_calabria_2023
   allium_white_rot:
@@ -373,19 +385,27 @@ diseases:
   fusarium_head_blight:
     cause: Fusarium graminearum (fusariosi della spiga).
     management:
-    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione frumento e mais del disciplinare (da leggere).'
+    - text: 'Frumento: evitare le semine fitte, concimazioni azotate equilibrate, rotazione colturale, cultivar tolleranti; ammessa la concia del seme (disciplinare, frumento).'
+      sources:
+      - disc_calabria_2023
+    - text: 'Mais (marciume del fusto da Gibberella zeae, stessa specie del Fusarium graminearum): evitare semine troppo fitte, eccessi di azoto e squilibri idrici; ibridi resistenti o tolleranti (disciplinare,
+        mais).'
       sources:
       - disc_calabria_2023
   maize_northern_leaf_blight:
     cause: 'Exserohilum turcicum (brusone settentrionale): lesioni fusiformi sulle foglie.'
     management:
-    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione mais del disciplinare (da leggere).'
+    - text: 'Il disciplinare calabrese 2023 non tratta questa malattia per il mais: da completare con il tecnico.'
       sources:
       - disc_calabria_2023
   strawberry_grey_mould:
     cause: 'Botrytis cinerea (muffa grigia): feltro grigio su frutti e fiori.'
     management:
-    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione fragola del disciplinare (da leggere).'
+    - text: Evitare l'irrigazione sopra chioma (usare le manichette) ed eccessive concimazioni azotate; cultivar poco suscettibili; asportare la vecchia vegetazione e i frutti colpiti (disciplinare, fragola).
+      sources:
+      - disc_calabria_2023
+    - text: 'Cadenzare gli interventi in funzione del clima: con fioritura asciutta un solo intervento in pre-raccolta; con piogge e umidità elevate un intervento a inizio fioritura e uno o due in pre-raccolta
+        (disciplinare, fragola).'
       sources:
       - disc_calabria_2023
   tomato_spotted_wilt:
@@ -397,6 +417,91 @@ diseases:
       sources:
       - disc_calabria_2023
     - text: 'Nel peperone e nella melanzana: per le virosi trasmesse da afidi e tripidi è necessaria prevenzione con il tecnico al momento del trapianto (disciplinare).'
+      sources:
+      - disc_calabria_2023
+  peach_leaf_curl:
+    cause: 'Fungo Taphrina deformans (bolla del pesco): foglie accartocciate e ispessite.'
+    management:
+    - text: Primo intervento alla caduta delle foglie; poi a fine inverno, in forma preventiva, in relazione alla prima pioggia infettante dopo la rottura delle gemme a legno; in seguito solo in base all'andamento
+        climatico (disciplinare, pesco).
+      sources:
+      - disc_calabria_2023
+  hazelnut_bacterial_blight:
+    cause: 'Batterio Xanthomonas arboricola pv. corylina: necrosi di gemme, rametti e foglie.'
+    management:
+    - text: Eliminare gli organi infetti con la potatura; disinfettare attrezzi e tagli (solfato di rame o ipoclorito di sodio al 3%); concimazioni equilibrate (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+  hazelnut_bacterial_canker:
+    cause: 'Pseudomonas avellanae: cancro batterico e moria del nocciolo.'
+    management:
+    - text: Eliminare gli organi infetti; disinfettare attrezzi e tagli; concimazioni e irrigazioni equilibrate; buon drenaggio del terreno (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+    - text: Gli interventi vanno fatti quando sopraggiungono fattori predisponenti, come le gelate tardive primaverili (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+  hazelnut_cytospora:
+    cause: 'Fungo Cytospora corylicola: mal dello stacco e malattie del legno.'
+    management:
+    - text: Sostituire i vecchi impianti debilitati; preferire l'allevamento monocaule; sistemazione idonea del terreno; in potatura eliminare col fuoco le parti infette; proteggere i tagli ampi con mastici
+        o paste cicatrizzanti (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+  strawberry_powdery_mildew:
+    cause: Oidio della fragola.
+    management:
+    - text: Evitare eccessive concimazioni azotate; intervento dopo la ripresa vegetativa e, sulle cultivar sensibili, dalla fioritura alla raccolta ogni 7-8 giorni (disciplinare, fragola).
+      sources:
+      - disc_calabria_2023
+  strawberry_crown_rot:
+    cause: Phytophthora cactorum (marciume bruno della fragola).
+    management:
+    - text: Evitare l'irrigazione sopra chioma; trattare solo varietà sensibili o impianti colpiti l'anno precedente (disciplinare, fragola).
+      sources:
+      - disc_calabria_2023
+  wheat_septoria:
+    cause: Septoria tritici e Septoria nodorum (septoriosi del frumento).
+    management:
+    - text: Evitare le semine fitte; concimazioni azotate equilibrate; varietà resistenti e tolleranti (disciplinare, frumento).
+      sources:
+      - disc_calabria_2023
+  wheat_powdery_mildew:
+    cause: Oidio del frumento (Erysiphe/Blumeria graminis).
+    management:
+    - text: Evitare le semine fitte; concimazioni azotate equilibrate; varietà resistenti e tolleranti (disciplinare, frumento).
+      sources:
+      - disc_calabria_2023
+  zucchini_powdery_mildew:
+    cause: Oidio delle cucurbitacee (Podosphaera xanthii / Erysiphe cichoracearum).
+    management:
+    - text: 'Trattare alla comparsa dei primi sintomi, ripetendo a intervalli di 7-14 giorni secondo la persistenza e l''andamento stagionale; alternare meccanismi d''azione; varietà resistenti per i cicli
+        tardivi (disciplinare, sezione melone: indicazioni per le cucurbitacee, zucchino e cetriolo non hanno una sezione propria).'
+      sources:
+      - disc_calabria_2023
+  cucurbit_downy_mildew:
+    cause: Pseudoperonospora cubensis (peronospora delle cucurbitacee).
+    management:
+    - text: 'Raccogliere e distruggere i residui; arieggiare le colture protette; limitare le irrigazioni, soprattutto sulla parte aerea (disciplinare, sezione melone: indicazioni per le cucurbitacee, zucchino
+        e cetriolo non hanno una sezione propria).'
+      sources:
+      - disc_calabria_2023
+    - text: 'In pieno campo trattamenti ogni 6-10 giorni solo con condizioni favorevoli (periodi molto umidi, 10-30 °C); in serra di norma non servono (disciplinare, sezione melone: indicazioni per le cucurbitacee,
+        zucchino e cetriolo non hanno una sezione propria).'
+      sources:
+      - disc_calabria_2023
+  cucumber_gummy_stem_blight:
+    cause: Didymella bryoniae (cancro gommoso).
+    management:
+    - text: 'Seme sano; alcune varietà sono resistenti o tolleranti; intervenire tempestivamente sulle infezioni in atto (disciplinare, sezione melone: indicazioni per le cucurbitacee, zucchino e cetriolo
+        non hanno una sezione propria).'
+      sources:
+      - disc_calabria_2023
+  cucumber_angular_leaf_spot:
+    cause: Pseudomonas syringae pv. lachrymans (maculatura angolare).
+    management:
+    - text: 'Seme controllato; rotazioni di almeno 4 anni; concimazioni equilibrate; eliminare la vegetazione infetta senza interrarla; non irrigare con acque di canali o bacini non ripuliti (disciplinare,
+        sezione melone: indicazioni per le cucurbitacee, zucchino e cetriolo non hanno una sezione propria).'
       sources:
       - disc_calabria_2023
 insects:
@@ -434,6 +539,9 @@ insects:
     - text: Intervenire quando la popolazione supera la soglia o alle prime punture (ARSAC 2025).
       sources:
       - arsac_agrumi_2025
+    - text: 'Pesco e pero: soglia alla comparsa delle prime punture (disciplinare, pesco e pero).'
+      sources:
+      - disc_calabria_2023
   planococcus_citri:
     cause: 'Cocciniglia farinosa: colonie cotonose su frutti, rami e radici.'
     management:
@@ -476,6 +584,10 @@ insects:
     - text: Introduzione di predatori alla comparsa delle prime forme mobili, più lanci settimanali; distanziare il lancio di almeno 10 giorni da un intervento chimico (disciplinare, peperone e melanzana).
       sources:
       - disc_calabria_2023
+    - text: 'Fragola: introduzione di 4-10 predatori/m² (disciplinare, fragola). Pomodoro in serra: lanci di Phytoseiulus persimilis con 3-4 acari fitofagi per foglia (disciplinare, pomodoro in coltura
+        protetta).'
+      sources:
+      - disc_calabria_2023
   panonychus_citri:
     cause: 'Ragno rosso degli agrumi: infestazioni tardive, danni alla raccolta.'
     management:
@@ -489,15 +601,27 @@ insects:
         (disciplinare, melo).'
       sources:
       - disc_calabria_2023
+    - text: 'Vite: soglia del 60-70% di foglie con forme mobili a inizio vegetazione, 30-45% in piena estate (disciplinare, vite).'
+      sources:
+      - disc_calabria_2023
+    - text: 'Pesco e pero: soglia del 60% di foglie occupate; nel pesco di norma bastano gli antagonisti naturali (disciplinare, pesco e pero).'
+      sources:
+      - disc_calabria_2023
   polyphagotarsonemus_latus:
     cause: 'Acaro tarsonemide: deformazioni di apici e foglie della melanzana.'
     management:
     - text: Soglia d'intervento alla comparsa d'infestazione (disciplinare, melanzana).
       sources:
       - disc_calabria_2023
+    - text: 'Agrumi: intervenire alla presenza di frutti infestati (disciplinare, agrumi).'
+      sources:
+      - disc_calabria_2023
   bemisia_tabaci:
     cause: 'Aleurode del tabacco: vettore di virus, danni alle foglie.'
-    management: []
+    management:
+    - text: 'Fragola in serra: reti alle aperture contro l''ingresso degli adulti, pannelli gialli per il monitoraggio, plastiche fotoselettive; soglia di 10 neanidi per foglia (disciplinare, fragola).'
+      sources:
+      - disc_calabria_2023
   thrips_frankliniella:
     cause: 'Tripide occidentale dei fiori: danni a fiori e frutti, vettore del TSWV.'
     management:
@@ -521,6 +645,10 @@ insects:
       sources:
       - disc_calabria_2023
     - text: 'Peperone: lanci di Aphidius o predatori alla presenza generalizzata; nelle serre, reti antiafidi per prevenire l''ingresso (disciplinare, peperone).'
+      sources:
+      - disc_calabria_2023
+    - text: 'Pesco: a bottoni rosa basta la presenza di fondatrici; per le nettarine 3% di germogli infestati in pre e post fioritura; per pesche e percoche 3% in pre-fioritura e 10% dopo (disciplinare,
+        pesco).'
       sources:
       - disc_calabria_2023
   macrosiphum_euphorbiae:
@@ -574,6 +702,9 @@ insects:
     - text: Monitoraggio con trappole innescate con esche di aceto di succo; eliminare tempestivamente i frutti colpiti (disciplinare, ciliegio).
       sources:
       - disc_calabria_2023
+    - text: 'Fragola: monitoraggio con trappole a esca di aceto di succo di mela ed eliminazione tempestiva dei frutti colpiti (disciplinare, fragola).'
+      sources:
+      - disc_calabria_2023
   rhagoletis_cerasi:
     cause: 'Mosca della ciliegia: punture e larve nei frutti.'
     management:
@@ -588,6 +719,9 @@ insects:
       sources:
       - disc_calabria_2023
     - text: Scalzare le piante con sofferenza generale e bruciare la parte basale del tronco e le radici principali; in impianti giovani raccogliere a mano gli adulti (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+    - text: 'Pesco: stesse misure agronomiche del ciliegio (materiale di qualità, vigore, irrigazioni estive contro le larve, reti al colletto, raccolta manuale degli adulti) (disciplinare, pesco).'
       sources:
       - disc_calabria_2023
   zeuzera_pyrina:
@@ -606,6 +740,9 @@ insects:
     - text: 'Preferire la confusione e il disorientamento sessuale; soglia: 2 adulti per trappola in 1-2 settimane, o 0,5-1% di fori iniziali (verifiche su almeno 100-500 frutti/ha) (disciplinare, melo).'
       sources:
       - disc_calabria_2023
+    - text: 'Pero: soglia indicativa di 2 adulti per trappola in 1-2 settimane, o fori iniziali sull''1% di almeno 100 frutti/ha; installare la confusione sessuale all''inizio del volo (disciplinare, pero).'
+      sources:
+      - disc_calabria_2023
   aphis_pomi:
     cause: 'Afide verde del melo: danni da melata.'
     management:
@@ -622,5 +759,165 @@ insects:
     cause: 'Cocciniglia di San José: colonie su rami e frutti.'
     management:
     - text: Eliminare con la potatura i rami più infestati; intervenire a rottura gemme in presenza di infestazioni (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+  eotetranychus_carpini:
+    cause: 'Ragnetto giallo: decolorazioni fogliari.'
+    management:
+    - text: 'Vite: soglia del 60-70% di foglie con forme mobili a inizio vegetazione e del 30-45% in piena estate; i predatori naturali e i principi attivi selettivi aiutano il contenimento (disciplinare,
+        vite).'
+      sources:
+      - disc_calabria_2023
+    - text: 'Fragola: introduzione di 4-10 predatori/m²; con fitoseidi selvatici presenti si può ridurre il lancio (disciplinare, fragola).'
+      sources:
+      - disc_calabria_2023
+  calepitrimerus_vitis:
+    cause: 'Eriofide dell''acariosi della vite: germogli stentati e foglie deformate.'
+    management:
+    - text: 'Intervenire solo in caso di forte attacco: all''inizio della ripresa vegetativa se presente l''anno precedente, o con presenza accertata sulle foglie per evitare danni ai grappoli (disciplinare,
+        vite).'
+      sources:
+      - disc_calabria_2023
+  phytocoptella_avellanae:
+    cause: 'Eriofide delle gemme del nocciolo: gemme ingrossate che non si schiudono.'
+    management:
+    - text: Varietà con gemme robuste e serrate, cultivar meno suscettibili (es. Mortarella) (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+    - text: 'Campionamento alla ripresa vegetativa: 4 rami per pianta sul 10% delle piante per ettaro, contando le gemme infestate; soglia 15-20% di gemme infestate; intervenire alla migrazione dell''acaro
+        verso le gemme sane (disciplinare, nocciolo).'
+      sources:
+      - disc_calabria_2023
+  epitrimerus_pyri:
+    cause: Eriofide rugginoso del pero.
+    management:
+    - text: Intervenire solo se nell'annata precedente si sono verificati attacchi (disciplinare, pero).
+      sources:
+      - disc_calabria_2023
+  eriophyes_pyri:
+    cause: 'Eriofide vescicoloso del pero: vescicole sulle foglie.'
+    management:
+    - text: Se nell'annata precedente si sono verificati attacchi, intervenire a rottura gemme (disciplinare, pero).
+      sources:
+      - disc_calabria_2023
+  eriophyes_sheldoni:
+    cause: 'Acaro delle meraviglie: deformazioni di gemme, fiori e frutti degli agrumi.'
+    management:
+    - text: Equilibrare le concimazioni azotate, ridurre le potature, evitare stress idrici, lavorare il terreno per disturbare i nidi delle formiche (disciplinare, agrumi).
+      sources:
+      - disc_calabria_2023
+    - text: 'Soglia: 30% di gemme infestate, valutate con lente contafili 20x su 50 piante per appezzamento omogeneo (disciplinare, agrumi).'
+      sources:
+      - disc_calabria_2023
+  aculops_pelekassi:
+    cause: 'Eriofide rugginoso degli agrumi: rugginosità della buccia.'
+    management:
+    - text: 'Stesse misure agronomiche degli altri acari degli agrumi: concimazioni azotate equilibrate, potature ridotte, niente stress idrici, disturbo dei nidi di formiche (disciplinare, agrumi).'
+      sources:
+      - disc_calabria_2023
+  aculops_lycopersici:
+    cause: 'Eriofide del pomodoro: imbrunimento rugginoso di fusto e foglie.'
+    management:
+    - text: Intervenire alla presenza diffusa (disciplinare, pomodoro).
+      sources:
+      - disc_calabria_2023
+  aceria_oleae:
+    cause: Eriofide che causa bollosità fogliari con peli alterati e drupe deformate; segnalate infestazioni rilevanti in Puglia.
+    management:
+    - text: 'Specie descritta nella rassegna universitaria italiana sugli eriofidi dell''olivo; il disciplinare calabrese 2023 non prevede interventi specifici: valutare con il tecnico.'
+      sources:
+      - nuzzaci_1983_uniba
+      - disc_calabria_2023
+  tegolophus_hassani:
+    cause: 'Acaro rugginoso: rugginosità e appassimento dei bocci fiorali, a volte anche delle foglie.'
+    management:
+    - text: 'Specie descritta nella rassegna universitaria italiana; il disciplinare calabrese 2023 non prevede interventi specifici: valutare con il tecnico.'
+      sources:
+      - nuzzaci_1983_uniba
+      - disc_calabria_2023
+  oxycenus_maxwelli:
+    cause: Eriofide di germogli e infiorescenze; il suo ruolo dannoso è discusso in letteratura.
+    management:
+    - text: Nessun intervento specifico previsto dal disciplinare calabrese 2023.
+      sources:
+      - nuzzaci_1983_uniba
+      - disc_calabria_2023
+  cacopsylla_pyri:
+    management:
+    - text: 'Soglia: prevalente presenza di uova gialle; si consigliano lavaggi della vegetazione (disciplinare, pero).'
+      sources:
+      - disc_calabria_2023
+  grapholita_molesta:
+    cause: 'Cidia del pesco: larve nei germogli e nei frutti.'
+    management:
+    - text: Preferire confusione o disorientamento sessuale; senza confusione, soglia di 30 catture per trappola a settimana nella prima generazione e 10 nelle successive (disciplinare, pesco).
+      sources:
+      - disc_calabria_2023
+  anarsia_lineatella:
+    cause: 'Anarsia: larve nei germogli e nei frutti del pesco.'
+    management:
+    - text: Preferire la confusione sessuale; altrimenti soglia di 7 catture per trappola a settimana o 10 in due settimane (disciplinare, pesco).
+      sources:
+      - disc_calabria_2023
+  balaninus_nucum:
+    cause: 'Balanino: larve nel frutto del nocciolo.'
+    management:
+    - text: Valutare gli adulti con la tecnica dello scuotimento; soglia di 2 individui per pianta su 6 piante/ha nei punti a maggior rischio (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+  gonocerus_acuteangulatus:
+    cause: 'Cimice del nocciolo: punture sui frutti.'
+    management:
+    - text: Evitare consociazioni e vicinanza con zone che favoriscono le cimici; valutare gli adulti con la tecnica del frappage tra maggio e luglio; soglia 2 individui per pianta (disciplinare, nocciolo).
+      sources:
+      - disc_calabria_2023
+  chaetosiphon_fragaefolii:
+    management:
+    - text: 'Fragola: alla comparsa degli afidi lanciare 18-20 larve di predatore/m² (azione dopo 8-10 giorni); soglia chimica alla presenza generalizzata (disciplinare, fragola).'
+      sources:
+      - disc_calabria_2023
+  otiorhynchus_sulcatus:
+    management:
+    - text: 'Fragola: intervenire in presenza delle larve (disciplinare, fragola).'
+      sources:
+      - disc_calabria_2023
+  sitobion_avenae:
+    management:
+    - text: Evitare le semine fitte e concimazioni azotate squilibrate; esistono predatori naturali numerosi (sirfidi, coccinelle, crisope, imenotteri parassitoidi); soglia 80% di culmi con afidi (disciplinare,
+        frumento).
+      sources:
+      - disc_calabria_2023
+  diabrotica_virgifera:
+    management:
+    - text: La rotazione colturale è sufficiente a contenerla; altrimenti trappole cromotropiche gialle e bollettini; soglia di 50 adulti settimanali per due settimane consecutive, solo se si prevede mais
+        anche l'anno successivo; segnalarne la presenza ai Servizi fitosanitari (disciplinare, mais).
+      sources:
+      - disc_calabria_2023
+  ostrinia_nubilalis:
+    management:
+    - text: 'Mais: danni soprattutto nei primi raccolti; sfibratura degli stocchi; soglia solo con presenza accertata sulla II e III generazione (disciplinare, mais).'
+      sources:
+      - disc_calabria_2023
+  agriotes_spp:
+    management:
+    - text: 'Mais: evitare la successione a prati stabili per almeno 2 anni; rompere i medicai nell''estate precedente; monitoraggio delle larve con vasetti; con infestazioni in atto sarchiature ripetute
+        (disciplinare, mais).'
+      sources:
+      - disc_calabria_2023
+  rhopalosiphum_maidis:
+    management:
+    - text: 'Afidi dei cereali sul mais: non sono giustificati interventi specifici (disciplinare, mais).'
+      sources:
+      - disc_calabria_2023
+  whitefly_trialeurodes:
+    management:
+    - text: 'Melone in serra: soglia di almeno 10 stadi giovanili per foglia; trappole gialle e lanci di Encarsia formosa (4-6 pupari/m² ogni 7-15 giorni) con notti in serra ad almeno 16 °C (disciplinare,
+        melone).'
+      sources:
+      - disc_calabria_2023
+  halyomorpha_halys:
+    cause: 'Cimice asiatica: punture deformanti sui frutti.'
+    management:
+    - text: 'Citata dal disciplinare per pero, pesco, ciliegio e nocciolo, senza soglie specifiche: valutare con il bollettino corrente.'
       sources:
       - disc_calabria_2023

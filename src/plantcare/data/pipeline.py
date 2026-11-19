@@ -21,7 +21,7 @@ from pathlib import Path
 from PIL import Image, UnidentifiedImageError
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-MANIFEST_COLUMNS = ["path", "source", "split", "plant", "disease", "pest"]
+MANIFEST_COLUMNS = ["path", "source", "split", "plant", "disease", "pest", "deficiency"]
 SPLITS = ("train", "val", "test")
 
 
@@ -33,6 +33,7 @@ class ManifestRow:
     plant: str = ""
     disease: str = ""
     pest: str = ""
+    deficiency: str = ""
 
     def as_dict(self) -> dict[str, str]:
         return asdict(self)
@@ -250,7 +251,7 @@ def summarize(rows: list[ManifestRow]) -> dict[str, dict[str, int]]:
     out: dict[str, dict[str, int]] = {s: defaultdict(int) for s in SPLITS}
     for r in rows:
         out[r.split]["images"] += 1
-        for head in ("plant", "disease", "pest"):
+        for head in ("plant", "disease", "pest", "deficiency"):
             if getattr(r, head):
                 out[r.split][head] += 1
     return {k: dict(v) for k, v in out.items()}

@@ -72,22 +72,35 @@ class _ImageList(Dataset):
 @torch.no_grad()
 def extract_features(paths: list[Path], backbone_name: str, out_dir: Path, chunk: int = 4096,
                      batch_size: int = 64, num_workers: int = 2, image_size: int = 224) -> np.ndarray:
-    """Calcola le caratteristiche per ogni immagine, salvando un file per blocco (riprendibile)."""
+    """Caratteristiche per ogni immagine, con cache indicizzata per percorso (riprendibile).
+
+    Ogni blocco salva le caratteristiche (.npy) e l'elenco dei percorsi (.txt). A ogni esecuzione
+    si calcolano solo le immagini mancanti; il risultato segue l'ordine di `paths`.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
-    model, transform = build_backbone(backbone_name, image_size=image_size)
-    n_chunks = math.ceil(len(paths) / chunk)
-    for c in range(n_chunks):
-        f = out_dir / f"chunk_{c:04d}.npy"
-        if f.exists():
-            continue
-        sub = paths[c * chunk:(c + 1) * chunk]
-        dl = DataLoader(_ImageList(sub, transform, image_size), batch_size=batch_size, num_workers=num_workers)
-        feats = np.zeros((len(sub), model.num_features), dtype=np.float16)
-        for x, idx, ok in dl:
-            feats[idx.numpy()] = model(x).float().numpy().astype(np.float16)
-        np.save(f, feats)
-        print(f"  blocco {c + 1}/{n_chunks}", flush=True)
-    return np.concatenate([np.load(out_dir / f"chunk_{c:04d}.npy") for c in range(n_chunks)])
+    cache: dict[str, np.ndarray] = {}
+    for f in sorted(out_dir.glob("block_*.npy")):
+        names = (f.with_suffix(".txt")).read_text(encoding="utf-8").splitlines()
+        arr = np.load(f)
+        cache.update(zip(names, arr))
+    keys = [str(p) for p in paths]
+    missing = [p for p, k in zip(paths, keys) if k not in cache]
+    if missing:
+        model, transform = build_backbone(backbone_name, image_size=image_size)
+        start = len(list(out_dir.glob("block_*.npy")))
+        n_chunks = math.ceil(len(missing) / chunk)
+        for c in range(n_chunks):
+            sub = missing[c * chunk:(c + 1) * chunk]
+            dl = DataLoader(_ImageList(sub, transform, image_size), batch_size=batch_size, num_workers=num_workers)
+            feats = np.zeros((len(sub), model.num_features), dtype=np.float16)
+            for x, idx, ok in dl:
+                feats[idx.numpy()] = model(x).float().numpy().astype(np.float16)
+            stem = out_dir / f"block_{start + c:05d}"
+            np.save(stem.with_suffix(".npy"), feats)
+            stem.with_suffix(".txt").write_text("\n".join(str(p) for p in sub), encoding="utf-8")
+            cache.update(zip((str(p) for p in sub), feats))
+            print(f"  blocco {c + 1}/{n_chunks} ({len(missing)} immagini nuove)", flush=True)
+    return np.stack([cache[k] for k in keys])
 
 
 # ---------------------------------------------------------------------------

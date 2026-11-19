@@ -71,8 +71,18 @@ Il disciplinare calabrese copre le colture con sezioni per coltura. Per ciascuna
 | Cavolo a infiorescenza (broccolo) | letta: peronospora, batteriosi, alternariosi, tignola, cavolaia, afidi, altica, mosca, tripidi |
 | Cipolla | letta: peronospora, botrite, fusariosi, batteriosi, mosche, tripidi, nottue, nematodi |
 
-**Non ancora lette** (le schede esistono, le misure no): pero, pesco, nocciolo, fragola (sezione difesa), frumento, mais, zucchino, cetriolo, cocomero/melone, aglio, cavolo di altri tipi. Per queste le voci della base di conoscenza dicono "da leggere".
+| Pero | letta: colpo di fuoco, cocciniglia, psilla, carpocapsa, cidia, tentredine, ricamatori, rodilegni, ragnetto rosso, eriofidi |
+| Pesco | letta: bolla, corineo, mal bianco, monilia, cancri, cancro batterico, sharka, afidi, tripidi, cocciniglie, cidia, anarsia, ragnetto rosso, capnode |
+| Nocciolo | letta: mal dello stacco, necrosi batterica, cancro batterico e moria, eriofide delle gemme, acari, balanino, cimici |
+| Fragola | letta: oidio, muffa grigia, vaiolatura, marciume bruno, antracnosi, batteriosi, afidi, oziorrinco, tripidi, ragnetti, drosofila, aleurodidi |
+| Frumento | letta: carbone, carie, fusariosi, oidio, septoria, ruggini, afidi |
+| Mais | letta: carbone, marciume del fusto, batteriosi, virosi, diabrotica, elateridi, piralide, nottue, afidi |
+| Zucchino e cetriolo | **senza sezione propria** nel disciplinare: si usano le indicazioni della sezione melone (cucurbitacee: oidio, peronospora, cancro gommoso, batteriosi, afidi, aleurodidi, tripidi, minatori) e lo si dichiara in ogni voce |
+
+**Non coperti dal disciplinare**: aglio, cipolla rossa di Tropea come varietà (si usa la sezione cipolla), colture tropicali (avocado, banano, cherimoya, fico d'India), brusone settentrionale del mais.
 
 ## Acari fitofagi
 
-Sono nella tassonomia come fitofagi, con la nota che non sono insetti: ragnetto rosso (*Tetranychus urticae*), ragno rosso degli agrumi (*Panonychus citri*), ragno rosso del melo (*Panonychus ulmi*), acaro tarsonemide (*Polyphagotarsonemus latus*). Acari di olivo, vite e fragola, come l'eriofide della vite e l'acaro bronzato dell'olivo, non sono ancora verificati e non sono inseriti.
+Sono nella tassonomia come fitofagi, con la nota che non sono insetti: ragnetto rosso (*Tetranychus urticae*), ragno rosso degli agrumi (*Panonychus citri*), ragno rosso del melo (*Panonychus ulmi*), acaro tarsonemide (*Polyphagotarsonemus latus*). Aggiunti dal disciplinare: ragnetto giallo (*Eotetranychus carpini*) di vite, fragola e nocciolo; acariosi della vite (*Calepitrimerus vitis*); eriofide delle gemme del nocciolo; eriofidi del pero; acaro delle meraviglie ed eriofide rugginoso degli agrumi; eriofide del pomodoro. Ognuno ha soglie o misure del disciplinare.
+
+**Acari dell'olivo**: il disciplinare calabrese 2023 non li tratta. Le specie (*Aceria oleae*, *Tegolophus hassani*, *Oxycenus maxwelli*) sono inserite sulla base della rassegna universitaria di Nuzzaci e Parenzan (Università di Bari, 1983), letta nel riassunto. La fonte serve al riconoscimento delle specie, non dà misure di difesa.
