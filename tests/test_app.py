@@ -116,3 +116,38 @@ def test_index_page_contains_guide_and_feedback():
     html = client.get("/").text
     assert "Come fotografare" in html and "Il risultato è corretto" in html
     assert 'name="viewport"' in html
+
+
+def test_organs_endpoint_and_disease_filter():
+    client = TestClient(create_app(None))
+    organs = {o["id"] for o in client.get("/api/organs").json()}
+    assert {"leaf", "fruit", "trunk", "root", "tuber", "bulb"} <= organs
+    roots = client.get("/api/diseases", params={"organ": "root"}).json()
+    assert any(c["id"] == "olive_armillaria_root_rot" for c in roots)
+    assert all("root" in [o["id"] for o in c["organs"]] for c in roots)
+
+
+def test_disease_card_reports_organ_mismatch():
+    client = TestClient(create_app(None))
+    ok = client.get("/api/diseases/olive_knot", params={"organ": "trunk"}).json()
+    assert ok["organ_match"] is True
+    assert ok["symptoms_for_organ"].startswith("Tumori sul tronco")
+    miss = client.get("/api/diseases/olive_knot", params={"organ": "leaf"}).json()
+    assert miss["organ_match"] is False
+    assert "meno probabile" in miss["organ_note"]
+
+
+def test_every_disease_has_organ_symptoms_for_its_organs():
+    from plantcare.taxonomy import load_taxonomy
+    tax = load_taxonomy()
+    for dis_id, d in tax.diseases.items():
+        if d["pathogen_type"] == "healthy":
+            continue
+        assert d["organs"], dis_id
+        assert set(d.get("organ_symptoms", {})) <= set(d["organs"]), dis_id
+
+
+def test_predict_rejects_unknown_organ():
+    client = TestClient(create_app(None))
+    r = client.post("/predict", data={"organ": "zampa"}, files={"file": ("x.png", _png_bytes(), "image/png")})
+    assert r.status_code == 400

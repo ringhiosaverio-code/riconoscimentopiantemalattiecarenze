@@ -30,6 +30,22 @@ Quando l'ipotesi è di natura **virale, viroide, batterica o nematodica**, il si
 
 Non intervenire con trattamenti specifici senza conferma, salvo indicazioni del servizio fitosanitario.
 
+## Quale parte della pianta fotografare
+
+Il menu "Quale parte della pianta è colpita?" è importante: lo stesso agente causa sintomi diversi su foglia, frutto, tronco o radice. Il sistema mostra i sintomi dell'organo scelto e avvisa se la malattia non è descritta su quella parte.
+
+| Organo | Esempi |
+|---|---|
+| Foglia | macchie, muffe, ingiallimenti, mosaici |
+| Frutto | marciumi, croste, fori di insetti, cascola |
+| Fiore o infiorescenza | imbrunimenti, spiga o grappolo colpiti |
+| Ramo, fusto, germoglio | cancri, disseccamenti, pastorale |
+| Tronco o colletto | gommosi, cancri, carie del legno, cordoni miceliari |
+| Radice | marciumi, galle, micelio bianco |
+| Tubero o bulbo | rogna, marciumi molli, sclerozi, muffe |
+
+Per patologie del tronco e delle radici (es. mal dell'esca, marciume radicale, gommosi) foto ravvicinate del colletto o del legno sono più utili della chioma.
+
 ## Come fare una buona foto
 
 1. Foto ravvicinata della parte colpita, con luce naturale e senza flash.

@@ -26,21 +26,43 @@ class KnowledgeBase:
         p = self.tax.plants.get(plant_id)
         return p["common"] if p else plant_id
 
-    def disease_card(self, disease_id: str) -> dict[str, Any] | None:
+    def organ_label(self, organ_id: str) -> str:
+        o = self.tax.plant_organs.get(organ_id)
+        return o["label"] if o else organ_id
+
+    def disease_card(self, disease_id: str, organ: str | None = None) -> dict[str, Any] | None:
+        """Scheda malattia. Con `organ` indica se la malattia è descritta su quell'organo."""
         d = self.tax.diseases.get(disease_id)
         if d is None:
             return None
         ptype = self.tax.pathogen_types.get(d["pathogen_type"], {})
-        return {
+        organs = d.get("organs", [])
+        organ_symptoms = d.get("organ_symptoms", {})
+        card = {
             "id": d["id"],
             "name": d["common"],
             "agent": d.get("agent"),
             "pathogen_type": {"id": d["pathogen_type"], "label": ptype.get("label", d["pathogen_type"])},
             "hosts": [{"id": h, "name": self.plant_name(h)} for h in d.get("hosts", [])],
             "symptoms": d.get("symptoms", ""),
+            "organs": [{"id": o, "label": self.organ_label(o)} for o in organs],
+            "organ_symptoms": {o: organ_symptoms[o] for o in organs if o in organ_symptoms},
             "lab_confirmation_required": d["pathogen_type"] in LAB_REQUIRED_TYPES,
             "lab_note": LAB_NOTE if d["pathogen_type"] in LAB_REQUIRED_TYPES else None,
         }
+        if organ is not None:
+            card["selected_organ"] = {"id": organ, "label": self.organ_label(organ)}
+            card["organ_match"] = organ in organs or d["pathogen_type"] == "healthy"
+            card["symptoms_for_organ"] = organ_symptoms.get(organ)
+            if not card["organ_match"]:
+                card["organ_note"] = (
+                    f"Questa malattia è descritta su: {', '.join(self.organ_label(o) for o in organs)}. "
+                    f"Sull'organo indicato ({self.organ_label(organ)}) la diagnosi è meno probabile."
+                )
+        return card
+
+    def list_organs(self) -> list[dict[str, str]]:
+        return [{"id": k, "label": v["label"]} for k, v in self.tax.plant_organs.items()]
 
     def insect_card(self, insect_id: str) -> dict[str, Any] | None:
         i = self.tax.insects.get(insect_id)
@@ -61,10 +83,12 @@ class KnowledgeBase:
             "note": i.get("note"),
         }
 
-    def list_diseases(self, plant_id: str | None = None) -> list[dict[str, Any]]:
+    def list_diseases(self, plant_id: str | None = None, organ: str | None = None) -> list[dict[str, Any]]:
         out = []
         for d in self.tax.diseases.values():
             if plant_id and plant_id not in d.get("hosts", []):
+                continue
+            if organ and organ not in d.get("organs", []):
                 continue
             out.append(self.disease_card(d["id"]))
         return sorted(out, key=lambda c: c["name"])

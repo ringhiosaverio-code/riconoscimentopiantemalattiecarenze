@@ -55,7 +55,7 @@ class Predictor:
         self.transform = make_transforms(self.image_size, train=False)
 
     # ---- mappatura verso la tassonomia ----
-    def _taxonomy_link(self, head: str, raw: str) -> tuple[str | None, dict[str, Any] | None]:
+    def _taxonomy_link(self, head: str, raw: str, organ: str | None) -> tuple[str | None, dict[str, Any] | None]:
         source = "plantvillage"
         if head == "plant":
             tax_id = (self.label_map.get("plantvillage_crops") or {}).get(raw)
@@ -63,14 +63,14 @@ class Predictor:
             return tax_id, ({"name": card} if card else None)
         if head == "disease":
             tax_id = (self.label_map.get(source) or {}).get(raw)
-            card = self.kb.disease_card(tax_id) if (self.kb and tax_id) else None
+            card = self.kb.disease_card(tax_id, organ=organ) if (self.kb and tax_id) else None
             return tax_id, card
         if head == "pest":
             return None, None  # IP102 non è ancora collegata alla tassonomia degli insetti
         return None, None
 
     @torch.no_grad()
-    def predict(self, image: Image.Image) -> dict[str, Any]:
+    def predict(self, image: Image.Image, organ: str | None = None) -> dict[str, Any]:
         x = self.transform(image.convert("RGB")).unsqueeze(0).to(self.device)
         logits = self.model(x)
         heads: dict[str, Any] = {}
@@ -80,7 +80,7 @@ class Predictor:
             candidates = []
             for p, i in zip(top_p, top_i):
                 raw = self.idx_to_label[head][int(i)]
-                tax_id, card = self._taxonomy_link(head, raw)
+                tax_id, card = self._taxonomy_link(head, raw, organ)
                 candidates.append({
                     "label": raw,
                     "taxonomy_id": tax_id,
@@ -97,6 +97,7 @@ class Predictor:
             }
         return {
             "heads": heads,
+            "organ": organ,
             "warnings": self._warnings(heads),
             "disclaimer": DISCLAIMER,
             MODEL_NAME_KEY: self.version,
@@ -112,6 +113,8 @@ class Predictor:
             out.append(
                 f"«{card['name']}»: agente {card['pathogen_type']['label'].lower()}. Conferma di laboratorio consigliata prima di intervenire."
             )
+        if card and card.get("organ_note"):
+            out.append(card["organ_note"])
         if any(h.get("answer") == UNDETERMINED for h in heads.values()):
             out.append("Per una o più risposte la confidenza è insufficiente: serve una foto più nitida, ravvicinata e a fuoco.")
         return out

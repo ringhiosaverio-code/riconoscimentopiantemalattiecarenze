@@ -17,6 +17,7 @@ import yaml
 DEFAULT_TAXONOMY_PATH = Path(__file__).resolve().parents[2] / "configs" / "taxonomy.yaml"
 
 INSECT_ROLES = {"phytophagous", "entomophagous", "pollinator", "neutral"}
+PLANT_PRIORITIES = {1, 2, 3}
 NUTRIENT_CLASSES = {"macro", "micro"}
 
 
@@ -34,6 +35,7 @@ class Taxonomy:
     macro_nutrients: dict[str, dict[str, Any]]
     micro_nutrients: dict[str, dict[str, Any]]
     unknown_nutrient: dict[str, Any] = field(default_factory=dict)
+    plant_organs: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     # ---- viste utili al modello ----
     def class_ids(self, group: str) -> list[str]:
@@ -76,6 +78,7 @@ def load_taxonomy(path: Path | str = DEFAULT_TAXONOMY_PATH) -> Taxonomy:
         macro_nutrients=_index(nutrients.get("macro", []), "nutrients.macro"),
         micro_nutrients=_index(nutrients.get("micro", []), "nutrients.micro"),
         unknown_nutrient=nutrients.get("unknown", {}),
+        plant_organs=_index(raw.get("plant_organs", []), "plant_organs"),
     )
     validate(tax)
     return tax
@@ -95,6 +98,22 @@ def validate(tax: Taxonomy) -> None:
     for ins_id, ins in tax.insects.items():
         if ins.get("role") not in INSECT_ROLES:
             errors.append(f"insetto '{ins_id}': ruolo non valido '{ins.get('role')}'")
+
+    for dis_id, dis in tax.diseases.items():
+        organs = dis.get("organs", [])
+        if tax.plant_organs:
+            for o in organs:
+                if o not in tax.plant_organs:
+                    errors.append(f"malattia '{dis_id}': organo sconosciuto '{o}'")
+            for o in dis.get("organ_symptoms", {}):
+                if o not in organs:
+                    errors.append(f"malattia '{dis_id}': sintomo su organo '{o}' non dichiarato in organs")
+        if not organs:
+            errors.append(f"malattia '{dis_id}': manca l'elenco degli organi colpiti")
+
+    for plant_id, plant in tax.plants.items():
+        if plant.get("priority") not in PLANT_PRIORITIES:
+            errors.append(f"coltura '{plant_id}': priority deve essere 1, 2 o 3")
 
     # Ogni specie di malattia deve avere un agente o essere la classe 'sana'.
     for dis_id, dis in tax.diseases.items():

@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import HTMLResponse
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
@@ -78,6 +78,8 @@ a{color:var(--accent)}
 <form id="f">
 <label for="file"><strong>Carica una foto</strong></label>
 <input id="file" type="file" name="file" accept="image/*" capture="environment" required>
+<p><label for="organ"><strong>Quale parte della pianta è colpita?</strong></label><br>
+<select id="organ" name="organ"><option value="">Non indicato</option></select></p>
 <div id="preview"></div>
 <p><button type="submit">Analizza</button></p>
 </form>
@@ -108,6 +110,7 @@ a{color:var(--accent)}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let last=null;
+fetch('/api/organs').then(r=>r.json()).then(list=>{const sel=$('organ');for(const o of list){const op=document.createElement('option');op.value=o.id;op.textContent=o.label;sel.appendChild(op);}}).catch(()=>{});
 $('file').addEventListener('change',()=>{const f=$('file').files[0];$('preview').innerHTML=f?'<img class="preview" alt="Anteprima della foto caricata" src="'+URL.createObjectURL(f)+'">':'';});
 function renderHead(name,h){
  let s='<h3 style="margin:10px 0 2px">'+esc(name==='plant'?'Coltura':name==='disease'?'Malattia':'Insetto')+': '+esc(h.answer)+'</h3>';
@@ -122,6 +125,7 @@ $('f').addEventListener('submit',async e=>{
  if(!r.ok){$('out').innerHTML='<div class="card warn">'+esc(j.detail||'Errore')+'</div>';return;}
  last=j;let h='<section class="card">';
  for(const [name,v] of Object.entries(j.heads)){h+=renderHead(name,v);}
+ if(j.organ){h+='<p class="muted">Organo indicato: '+esc(j.organ)+'</p>';}
  for(const w of j.warnings){h+='<div class="warn'+(w.includes('laboratorio')?' lab':'')+'">'+esc(w)+'</div>';}
  h+='<p class="muted">'+esc(j.disclaimer)+'</p><p class="muted">Modello: '+esc(j.model_version)+' · soglia '+esc(j.abstain_threshold)+'</p></section>';
  $('out').innerHTML=h;$('feedback-box').hidden=false;$('fb-form').hidden=true;$('fb-status').textContent='';
@@ -182,7 +186,9 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
 
     # ---------------- predizione ----------------
     @app.post("/predict")
-    async def predict(file: UploadFile = File(...)) -> dict:
+    async def predict(file: UploadFile = File(...), organ: str | None = Form(None)) -> dict:
+        if organ and organ not in tax.plant_organs:
+            raise HTTPException(status_code=400, detail=f"Organo sconosciuto: {organ}")
         if "predictor" not in state:
             raise HTTPException(status_code=503, detail="Modello non caricato: impostare PLANTCARE_CKPT.")
         data = await file.read()
@@ -194,20 +200,24 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
             img = Image.open(io.BytesIO(data))
         except (UnidentifiedImageError, OSError):
             raise HTTPException(status_code=400, detail="Il file non è un'immagine riconosciuta.")
-        return state["predictor"].predict(img)
+        return state["predictor"].predict(img, organ=organ or None)
 
     # ---------------- schede per agronomi ----------------
     @app.get("/api/plants")
     def plants(priority: int | None = None) -> list[dict]:
         return kb.list_plants(priority=priority)
 
+    @app.get("/api/organs")
+    def organs() -> list[dict]:
+        return kb.list_organs()
+
     @app.get("/api/diseases")
-    def diseases(plant: str | None = None) -> list[dict]:
-        return kb.list_diseases(plant_id=plant)
+    def diseases(plant: str | None = None, organ: str | None = None) -> list[dict]:
+        return kb.list_diseases(plant_id=plant, organ=organ)
 
     @app.get("/api/diseases/{disease_id}")
-    def disease(disease_id: str) -> dict:
-        card = kb.disease_card(disease_id)
+    def disease(disease_id: str, organ: str | None = None) -> dict:
+        card = kb.disease_card(disease_id, organ=organ)
         if card is None:
             raise HTTPException(status_code=404, detail="Malattia non trovata")
         return card

@@ -13,10 +13,13 @@ Sistema di riconoscimento visivo (deep learning) per piante di interesse agrario
 
 ## Colture prioritarie
 
-- **Priorità 1 (Italia):** frumento tenero e duro, mais, vite, olivo, pomodoro, patata, melo, pero, pesco, ciliegio, kiwi, arancio, limone, mandarino, nocciolo, fragola, lattuga, peperone, melanzana, zucchina, cetriolo, carciofo.
+- **Priorità 1 (Italia):** frumento tenero e duro, mais, vite, **olivo**, pomodoro, patata, melo, pero, pesco, ciliegio, kiwi, arancio, limone, mandarino, nocciolo, fragola, lattuga, peperone, melanzana, zucchina, cetriolo, carciofo, **aglio**, **broccolo**.
 - **Priorità 2 (Calabria, tropicali/subtropicali):** bergamotto, avocado, banano, cherimoya, fico d'India.
+- **Priorità 3 (interesse locale in Calabria):** **cipolla rossa di Tropea**, **peperoncino calabrese**.
 
-Le colture di priorità 2 hanno poche immagini pubbliche: per loro serve raccolta propria (vedi `docs/dataset.md`).
+Ogni malattia è descritta per **organo colpito**: foglia, frutto, fiore, infiorescenza, fusto, ramo, tronco, radice, tubero, bulbo. L'utente indica la parte colpita e il sistema ne mostra i sintomi. Le colture con poche malattie note (cherimoya, nocciolo, fico d'India) sono dichiarate come tali.
+
+Le colture di priorità 2 e 3 hanno poche immagini pubbliche: per loro serve raccolta propria (vedi `docs/dataset.md`).
 
 ## Stato del progetto
 
@@ -28,7 +31,7 @@ Le colture di priorità 2 hanno poche immagini pubbliche: per loro serve raccolt
 | Metriche (F1 per classe, ECE, copertura vs accuratezza) | Implementate |
 | Inferenza con astensione e avvertenze | Implementata |
 | Interfaccia web e API (`/predict`) | Implementata |
-| Schede per agronomi (malattie, insetti, colture, carenze) | Implementate (`/api/*`) |
+| Schede per agronomi (malattie per organo, insetti, colture, carenze) | Implementate (`/api/*`), 77 malattie su 32 colture |
 | Feedback degli agronomi (sì/no e correzione) | Implementato, attivo con `PLANTCARE_FEEDBACK_DIR` |
 | Immagine Docker per la pubblicazione | Scritta, **non ancora costruita né provata** |
 | **Baseline reale su PlantVillage e IP102** | **Non ancora eseguita**: i dati non sono stati scaricati in questo ambiente |
