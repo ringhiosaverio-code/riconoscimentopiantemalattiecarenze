@@ -215,5 +215,5 @@ def test_olive_xylella_card_has_verified_knowledge():
 
 def test_disease_without_knowledge_is_explicit_about_it():
     client = TestClient(create_app(None))
-    card = client.get("/api/diseases/tomato_mosaic_virus").json()
+    card = client.get("/api/diseases/lettuce_downy_mildew").json()
     assert card["knowledge"] is None

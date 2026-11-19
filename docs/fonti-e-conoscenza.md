@@ -49,3 +49,30 @@ Le fonti sono in `configs/sources.yaml`. L'API le espone su `/api/sources`.
 
 - Non indica sostanze attive, dosi, né tempi di trattamento. Quelli sono nel disciplinare vigente e nella decisione del tecnico.
 - Non stabilisce se un'azienda è obbligata a un intervento di lotta: lo stabilisce la norma regionale o nazionale.
+
+## Copertura del disciplinare 2023 (letta nel testo)
+
+Il disciplinare calabrese copre le colture con sezioni per coltura. Per ciascuna colture letta sono state estratte le misure agronomiche, le soglie e le regole di segnalazione. Le colonne dei prodotti non sono state riportate.
+
+| Coltura | Stato |
+|---|---|
+| Olivo | letta: occhio di pavone, lebbra, rogna, verticilliosi, carie, tignola (soglie), fitofagi |
+| Vite (da tavola e da vino) | letta in parte: esca, peronospora, monitoraggio della flavescenza |
+| Agrumi | letta: tristezza (segnalazione), monitoraggio, cocciniglie, afidi, ragnetti (ARSAC 2025) |
+| Actinidia (kiwi) | letta: botrite, marciume del colletto, batteriosi, cocciniglia, eulia, metcalfa |
+| Ciliegio | letta: monilia, corineo, mosca della ciliegia, capnodis, drosofila, afidi, cocciniglie |
+| Melo | letta in parte: ticchiolatura, mal bianco, carpocapsa, colpo di fuoco, ragno rosso, afidi |
+| Pomodoro (pieno campo) | letta in parte: peronospora, alternariosi, virosi, muffa grigia |
+| Peperone | letta in parte: batteriosi, virosi, oidio, afidi, piralide, ragnetto |
+| Melanzana | letta in parte: muffa grigia, verticilliosi, peronospora, virosi, afidi, tripidi, tarsonemide, ragnetto |
+| Patata | letta: peronospora, rizottoniosi, virosi, dorifora, tignola, afidi, nematodi |
+| Lattuga | letta: peronospora, Rhizoctonia, batteriosi, virosi, afidi, liriomyza |
+| Carciofo | letta: peronospora, botrite, oidio, virosi, afidi |
+| Cavolo a infiorescenza (broccolo) | letta: peronospora, batteriosi, alternariosi, tignola, cavolaia, afidi, altica, mosca, tripidi |
+| Cipolla | letta: peronospora, botrite, fusariosi, batteriosi, mosche, tripidi, nottue, nematodi |
+
+**Non ancora lette** (le schede esistono, le misure no): pero, pesco, nocciolo, fragola (sezione difesa), frumento, mais, zucchino, cetriolo, cocomero/melone, aglio, cavolo di altri tipi. Per queste le voci della base di conoscenza dicono "da leggere".
+
+## Acari fitofagi
+
+Sono nella tassonomia come fitofagi, con la nota che non sono insetti: ragnetto rosso (*Tetranychus urticae*), ragno rosso degli agrumi (*Panonychus citri*), ragno rosso del melo (*Panonychus ulmi*), acaro tarsonemide (*Polyphagotarsonemus latus*). Acari di olivo, vite e fragola, come l'eriofide della vite e l'acaro bronzato dell'olivo, non sono ancora verificati e non sono inseriti.

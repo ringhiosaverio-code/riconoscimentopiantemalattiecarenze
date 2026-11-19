@@ -5,156 +5,622 @@
 # Le voci senza fonte non sono riportate.
 
 diseases:
-
   olive_xylella_quick_decline:
-    cause: "Batterio Xylella fastidiosa subsp. pauca: colonizza lo xilema (i vasi che portano l'acqua)."
-    vectors: [philaenus_spumarius]
-    vector_note: "Unico vettore accertato in natura nella regione EPPO."
+    cause: 'Batterio Xylella fastidiosa subsp. pauca: colonizza lo xilema (i vasi che portano l''acqua).'
+    vectors:
+    - philaenus_spumarius
+    vector_note: Unico vettore accertato in natura nella regione EPPO.
     management:
-      - text: "Il batterio non può essere eliminato dalla pianta infetta in pieno campo: le piante colpite non guariscono."
-        sources: [efsa_xylella_2019, eppo_xylefa]
-      - text: "Il rame non cura la pianta e non impedisce la trasmissione da parte degli insetti."
-        sources: [eppo_xylefa]
-      - text: "I sintomi compaiono dopo un periodo asintomatico variabile: l'ispezione visiva non basta, serve un campionamento intensivo; l'eradicazione locale in oliveto è possibile solo con campionamento intenso e interventi rapidi."
-        sources: [efsa_xylella_2019]
-      - text: "La vegetazione spontanea può diventare un serbatoio del batterio e dei vettori: tenerne conto nella sorveglianza."
-        sources: [eppo_xylefa]
-      - text: "Ogni sospetto va segnalato al Servizio Fitosanitario Regionale per la conferma di laboratorio. Le norme di quarantena si applicano per la Xylella (EPPO: categoria A2, UE Allegato II B del regolamento 2019/2072): verificare le disposizioni vigenti."
-        sources: [eppo_xylefa]
-
+    - text: 'Il batterio non può essere eliminato dalla pianta infetta in pieno campo: le piante colpite non guariscono.'
+      sources:
+      - efsa_xylella_2019
+      - eppo_xylefa
+    - text: Il rame non cura la pianta e non impedisce la trasmissione da parte degli insetti.
+      sources:
+      - eppo_xylefa
+    - text: 'I sintomi compaiono dopo un periodo asintomatico variabile: l''ispezione visiva non basta, serve un campionamento intensivo; l''eradicazione locale in oliveto è possibile solo con campionamento
+        intenso e interventi rapidi.'
+      sources:
+      - efsa_xylella_2019
+    - text: 'La vegetazione spontanea può diventare un serbatoio del batterio e dei vettori: tenerne conto nella sorveglianza.'
+      sources:
+      - eppo_xylefa
+    - text: 'Ogni sospetto va segnalato al Servizio Fitosanitario Regionale per la conferma di laboratorio. Le norme di quarantena si applicano per la Xylella (EPPO: categoria A2, UE Allegato II B del regolamento
+        2019/2072): verificare le disposizioni vigenti.'
+      sources:
+      - eppo_xylefa
   olive_peacock_spot:
-    cause: "Fungo Spilocaea oleaginea (anamorfo di Venturia oleaginea): macchie circolari sulle foglie."
+    cause: 'Fungo Spilocaea oleaginea (anamorfo di Venturia oleaginea): macchie circolari sulle foglie.'
     management:
-      - text: "Usare varietà poco suscettibili, sesti d'impianto non troppo fitti, favorire arieggiamento e insolazione della chioma, concimazioni equilibrate."
-        sources: [disc_calabria_2023]
-      - text: "Diagnosi precoce a luglio-agosto per individuare infezioni non ancora visibili; nelle zone e per le cultivar suscettibili, intervenire con il disciplinare."
-        sources: [disc_calabria_2023]
-
+    - text: Usare varietà poco suscettibili, sesti d'impianto non troppo fitti, favorire arieggiamento e insolazione della chioma, concimazioni equilibrate.
+      sources:
+      - disc_calabria_2023
+    - text: Diagnosi precoce a luglio-agosto per individuare infezioni non ancora visibili; nelle zone e per le cultivar suscettibili, intervenire con il disciplinare.
+      sources:
+      - disc_calabria_2023
+    - text: Varietà poco suscettibili, sesti non troppo fitti, arieggiamento e insolazione della chioma, concimazioni equilibrate; diagnosi precoce a luglio-agosto (disciplinare, olivo).
+      sources:
+      - disc_calabria_2023
   olive_anthracnose:
-    cause: "Fungo Colletotrichum spp. (lebbra o antracnosi): lesioni sulle olive."
+    cause: 'Fungo Colletotrichum spp. (lebbra o antracnosi): lesioni sulle olive.'
     management:
-      - text: "Operazioni di rimonda e di arieggiamento della chioma; anticipare la raccolta."
-        sources: [disc_calabria_2023]
-      - text: "Con infezioni medio-alte nell'annata precedente, intervenire prima della fioritura per devitalizzare i conidi presenti sulle olive residue (secondo il disciplinare)."
-        sources: [disc_calabria_2023]
-
+    - text: Operazioni di rimonda e di arieggiamento della chioma; anticipare la raccolta.
+      sources:
+      - disc_calabria_2023
+    - text: Con infezioni medio-alte nell'annata precedente, intervenire prima della fioritura per devitalizzare i conidi presenti sulle olive residue (secondo il disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: Rimonda e arieggiamento della chioma; anticipare la raccolta (disciplinare, olivo).
+      sources:
+      - disc_calabria_2023
   olive_knot:
-    cause: "Batterio Pseudomonas savastanoi pv. savastanoi: tumori legnosi su rami e tronco."
+    cause: 'Batterio Pseudomonas savastanoi pv. savastanoi: tumori legnosi su rami e tronco.'
     management:
-      - text: "Eliminare e distruggere i rami colpiti."
-        sources: [disc_calabria_2023]
-      - text: "Potare in periodi asciutti, limitando i tagli grossi ed eliminando i rami infetti."
-        sources: [disc_calabria_2023]
-      - text: "Evitare micro-ferite nel periodo autunnale, soprattutto durante la raccolta."
-        sources: [disc_calabria_2023]
-
+    - text: Eliminare e distruggere i rami colpiti.
+      sources:
+      - disc_calabria_2023
+    - text: Potare in periodi asciutti, limitando i tagli grossi ed eliminando i rami infetti.
+      sources:
+      - disc_calabria_2023
+    - text: Evitare micro-ferite nel periodo autunnale, soprattutto durante la raccolta.
+      sources:
+      - disc_calabria_2023
+    - text: Eliminare e distruggere i rami colpiti; potare in periodi asciutti limitando i tagli grossi; evitare micro-ferite in autunno e durante la raccolta (disciplinare, olivo).
+      sources:
+      - disc_calabria_2023
   olive_verticillium_wilt:
-    cause: "Fungo Verticillium dahliae: appassimento di un lato della chioma."
+    cause: 'Fungo Verticillium dahliae: appassimento di un lato della chioma.'
     management:
-      - text: "Asportare e bruciare i rami disseccati a 20-30 cm sotto il punto di infezione."
-        sources: [disc_calabria_2023]
-      - text: "Evitare consociazioni con solanacee."
-        sources: [disc_calabria_2023]
-
+    - text: Asportare e bruciare i rami disseccati a 20-30 cm sotto il punto di infezione.
+      sources:
+      - disc_calabria_2023
+    - text: Evitare consociazioni con solanacee.
+      sources:
+      - disc_calabria_2023
+    - text: Asportare e bruciare i rami disseccati a 20-30 cm sotto il punto di infezione; evitare consociazioni con solanacee (disciplinare, olivo).
+      sources:
+      - disc_calabria_2023
   grapevine_esca:
-    cause: "Complesso di funghi del legno (Phaeomoniella chlamydospora, Phaeoacremonium aleophilum, Fomitiporia mediterranea): carie e necrosi del legno."
+    cause: 'Complesso di funghi del legno (Phaeomoniella chlamydospora, Phaeoacremonium aleophilum, Fomitiporia mediterranea): carie e necrosi del legno.'
     management:
-      - text: "Segnare in estate le piante infette e potarle separatamente dalle altre, per limitare la diffusione."
-        sources: [disc_calabria_2023]
-      - text: "Nelle piante molto attaccate: estirpare e bruciare. Nelle piante infette solo in parte: asportare le parti invase, bruciarle e allevare un nuovo germoglio dal legno sano, dopo aver disinfettato la superficie di taglio."
-        sources: [disc_calabria_2023]
-      - text: "Disinfettare gli attrezzi di taglio, con ipoclorito di sodio."
-        sources: [disc_calabria_2023]
-
+    - text: Segnare in estate le piante infette e potarle separatamente dalle altre, per limitare la diffusione.
+      sources:
+      - disc_calabria_2023
+    - text: 'Nelle piante molto attaccate: estirpare e bruciare. Nelle piante infette solo in parte: asportare le parti invase, bruciarle e allevare un nuovo germoglio dal legno sano, dopo aver disinfettato
+        la superficie di taglio.'
+      sources:
+      - disc_calabria_2023
+    - text: Disinfettare gli attrezzi di taglio, con ipoclorito di sodio.
+      sources:
+      - disc_calabria_2023
   grapevine_downy_mildew:
-    cause: "Oomicete Plasmopara viticola: macchie d'olio sulle foglie, muffa bianca sul rovescio."
+    cause: 'Oomicete Plasmopara viticola: macchie d''olio sulle foglie, muffa bianca sul rovescio.'
     management:
-      - text: "Nelle zone meridionali a basso rischio, osservare le prime macchie d'olio; gli interventi sono legati alla previsione delle piogge (secondo il disciplinare)."
-        sources: [disc_calabria_2023]
-      - text: "Il bollettino agrometeorologico ARSAC segnala la presenza della malattia nella stagione: consultarlo."
-        sources: [arsac_bollettino_area1_2020]
-
+    - text: Nelle zone meridionali a basso rischio, osservare le prime macchie d'olio; gli interventi sono legati alla previsione delle piogge (secondo il disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: 'Il bollettino agrometeorologico ARSAC segnala la presenza della malattia nella stagione: consultarlo.'
+      sources:
+      - arsac_bollettino_area1_2020
+    - text: Nelle zone meridionali a basso rischio attendere le prime macchie d'olio; gli interventi sono legati alla previsione delle piogge (disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: 'Il bollettino agrometeorologico ARSAC segnala la presenza della malattia nella stagione: consultarlo (bollettino 2020).'
+      sources:
+      - arsac_bollettino_area1_2020
   grapevine_flavescence_doree:
-    cause: "Fitoplasma (batterio senza parete) della flavescenza dorata, trasmesso dalla cicalina Scaphoideus titanus."
-    vectors: [scaphoideus_titanus]
+    cause: Fitoplasma (batterio senza parete) della flavescenza dorata, trasmesso dalla cicalina Scaphoideus titanus.
+    vectors:
+    - scaphoideus_titanus
     management:
-      - text: "Monitoraggio della cicalina con pannelli gialli, secondo le densità del disciplinare (tabella 3)."
-        sources: [disc_calabria_2023]
-      - text: "Verificare le norme di lotta obbligatoria vigenti per il vettore: non sono ancora documentate per la Calabria in questa base di conoscenza."
-        sources: []
-
+    - text: Monitoraggio della cicalina con pannelli gialli, secondo le densità del disciplinare (tabella 3).
+      sources:
+      - disc_calabria_2023
+    - text: 'Verificare le norme di lotta obbligatoria vigenti per il vettore: non sono ancora documentate per la Calabria in questa base di conoscenza.'
+      sources: []
   citrus_tristeza:
-    cause: "Citrus tristeza virus (CTV): clorosi, declino della chioma, scanalature del legno."
-    vectors: [aphis_gossypii]
-    vector_note: "Vettore: afidi. Aphis gossypii è presente sugli agrumi in Calabria (ARSAC 2025); il ruolo di vettore è da confermare con la letteratura specifica."
+    cause: 'Citrus tristeza virus (CTV): clorosi, declino della chioma, scanalature del legno.'
+    vectors:
+    - aphis_gossypii
+    vector_note: 'Vettore: afidi. Aphis gossypii è presente sugli agrumi in Calabria (ARSAC 2025); il ruolo di vettore è da confermare con la letteratura specifica.'
     management:
-      - text: "Segnalare tempestivamente al Servizio Fitosanitario regionale i sintomi sospetti, per gli accertamenti di laboratorio."
-        sources: [disc_calabria_2023]
-      - text: "Usare materiale vivaistico esente da CTV e applicare le misure del regolamento UE 2019/2072, modificato dal 2021/2285 (citati nel disciplinare)."
-        sources: [disc_calabria_2023]
-      - text: "Il bergamotto in Calabria è innestato su arancio amaro, molto suscettibile al CTV: sono state sperimentate combinazioni di portinnesto alternative."
-        sources: [unirc_gullo_2020]
-
+    - text: Segnalare tempestivamente al Servizio Fitosanitario regionale i sintomi sospetti, per gli accertamenti di laboratorio.
+      sources:
+      - disc_calabria_2023
+    - text: Usare materiale vivaistico esente da CTV e applicare le misure del regolamento UE 2019/2072, modificato dal 2021/2285 (citati nel disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: 'Il bergamotto in Calabria è innestato su arancio amaro, molto suscettibile al CTV: sono state sperimentate combinazioni di portinnesto alternative.'
+      sources:
+      - unirc_gullo_2020
   peach_plum_pox:
-    cause: "Plum pox virus (vaiolatura o sharka): virus delle drupacee, trasmesso dagli afidi."
-    vectors: [aphid_myzus_persicae]
-    vector_note: "EPPO: Aphis spiraecola, Phorodon humuli, Hyalopterus pruni e Myzus persicae sono i principali vettori; trasmissione non persistente."
+    cause: 'Plum pox virus (vaiolatura o sharka): virus delle drupacee, trasmesso dagli afidi.'
+    vectors:
+    - aphid_myzus_persicae
+    vector_note: 'EPPO: Aphis spiraecola, Phorodon humuli, Hyalopterus pruni e Myzus persicae sono i principali vettori; trasmissione non persistente.'
     management:
-      - text: "Le piante infette sono la principale fonte di inoculo: segnalare i sintomi sospetti al Servizio Fitosanitario Regionale."
-        sources: [eppo_ppv]
-      - text: "Il virus è classificato dall'EPPO come A2 e dalla UE come RNQP (Allegato IV): verificare le misure vigenti."
-        sources: [eppo_ppv]
-
+    - text: 'Le piante infette sono la principale fonte di inoculo: segnalare i sintomi sospetti al Servizio Fitosanitario Regionale.'
+      sources:
+      - eppo_ppv
+    - text: 'Il virus è classificato dall''EPPO come A2 e dalla UE come RNQP (Allegato IV): verificare le misure vigenti.'
+      sources:
+      - eppo_ppv
+  tomato_late_blight:
+    cause: 'Oomicete Phytophthora infestans: macchie brune acquose su foglie e frutti.'
+    management:
+    - text: Interventi preventivi al verificarsi di condizioni favorevoli allo sviluppo (piogge e umidità elevata); in caso di infezione, prodotti ad azione curativa o antisporulante (disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: Ove disponibili, attenersi alle indicazioni dei bollettini fitosanitari (disciplinare).
+      sources:
+      - disc_calabria_2023
+  tomato_early_blight:
+    cause: 'Fungo Alternaria solani (alternariosi): macchie concentriche sulle foglie vecchie.'
+    management:
+    - text: Impiegare seme sano e ampie rotazioni colturali (disciplinare, pomodoro pieno campo).
+      sources:
+      - disc_calabria_2023
+    - text: 'Interventi specifici solo per attacchi gravi o in zone umide, alla comparsa dei primi sintomi: di norma sono già efficaci gli antiperonosporici (disciplinare).'
+      sources:
+      - disc_calabria_2023
+  tomato_mosaic_virus:
+    cause: Virus ToMV, trasmesso per contatto (seme, mani, attrezzi).
+    management:
+    - text: Usare piante certificate esenti da virus o varietà tolleranti (disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: Per i virus trasmessi per contatto è fondamentale il seme esente da virus o disinfettato (disciplinare, peperone).
+      sources:
+      - disc_calabria_2023
+  tomato_yellow_leaf_curl:
+    cause: 'Begomovirus TYLCV: accartocciamento e ingiallimento dei margini fogliari, trasmesso da mosca bianca.'
+    vectors:
+    - bemisia_tabaci
+    vector_note: 'Vettore: Bemisia tabaci (fonte EPPO; non citata nel disciplinare per questo virus).'
+    management:
+    - text: 'Piante certificate esenti da virus o varietà tolleranti; ampie rotazioni; controllo accurato delle erbe infestanti (disciplinare, pomodoro: gruppo delle virosi).'
+      sources:
+      - disc_calabria_2023
+    - text: Nelle zone a rischio, monitorare accuratamente la presenza dei vettori per un controllo tempestivo (disciplinare, pomodoro).
+      sources:
+      - disc_calabria_2023
+  cucumber_mosaic:
+    cause: Virus CMV, trasmesso da afidi in modo non persistente.
+    vectors:
+    - aphis_gossypii
+    - aphid_myzus_persicae
+    management:
+    - text: Le virosi trasmesse da afidi in modo non persistente richiedono le stesse misure di prevenzione generali (disciplinare, peperone e lattuga).
+      sources:
+      - disc_calabria_2023
+    - text: Eliminare le erbe infestanti dentro e intorno alla coltura, che possono essere serbatoio di virus e vettori (disciplinare, melanzana).
+      sources:
+      - disc_calabria_2023
+  potato_virus_y:
+    cause: Virus PVY, trasmesso da afidi.
+    vectors:
+    - macrosiphum_euphorbiae
+    vector_note: 'Afidi vettori: il disciplinare cita l''afide della patata; altri vettori da confermare.'
+    management:
+    - text: Usare tuberi-seme qualificati sanitariamente (seme certificato a basso livello di infezione virale); nella coltura da consumo fresco rinnovare il seme ogni anno (disciplinare, patata).
+      sources:
+      - disc_calabria_2023
+    - text: Anticipare o ritardare la semina per sfasare il ciclo rispetto al massimo di presenza degli afidi vettori; eliminare le piante nate da tuberi residui e le piante spontanee (disciplinare, patata).
+      sources:
+      - disc_calabria_2023
+  potato_verticillium_wilt:
+    cause: 'Verticillium dahliae: appassimento di un lato della pianta.'
+    management:
+    - text: 'Ampie rotazioni colturali e distruzione dei residui infetti; i riferimenti per le solanacee sono nel disciplinare (melanzana: innesto su cultivar resistenti e disinfezione del terreno con vapore).'
+      sources:
+      - disc_calabria_2023
+  potato_colorado_beetle:
+    cause: 'Dorifora della patata: defogliazione per larve e adulti.'
+    management:
+    - text: Intervenire con la soglia dell'infestazione generalizzata del disciplinare (patata).
+      sources:
+      - disc_calabria_2023
+    - text: 'Nella melanzana: intervenire sulle larve di prima generazione e su quelle di seconda; sulla terza generazione non sempre serve intervenire (disciplinare).'
+      sources:
+      - disc_calabria_2023
+  potato_rhizoctonia:
+    cause: 'Rhizoctonia solani: cancri alla base del fusto e sclerozi sui tuberi.'
+    management:
+    - text: Impiego di tuberi-seme sani; ampie rotazioni, in modo che la patata non torni sullo stesso terreno prima di 4-5 anni; pregermogliamento e semine poco profonde (disciplinare, patata).
+      sources:
+      - disc_calabria_2023
+    - text: Eliminare e distruggere le piante infette (disciplinare, patata).
+      sources:
+      - disc_calabria_2023
+  potato_dry_rot:
+    cause: Fusarium solani (marciume secco) del tubero.
+    management:
+    - text: Evitare di lesionare i tuberi durante la raccolta; conservare in locali freschi e aerati; non destinare alla moltiplicazione i tuberi infetti (disciplinare, patata).
+      sources:
+      - disc_calabria_2023
+  peach_bacterial_spot:
+    cause: Batterio Xanthomonas arboricola pv. pruni (maculatura batterica).
+    management:
+    - text: 'Il disciplinare calabrese per il pesco non è stato ancora letto in questa base: da completare con il tecnico.'
+      sources:
+      - disc_calabria_2023
+  citrus_mal_secco:
+    cause: 'Fungo Phoma tracheiphila: disseccamento dei rametti dall''apice.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione agrumi del disciplinare.'
+      sources:
+      - disc_calabria_2023
+  cherry_leaf_spot:
+    cause: 'Fungo Blumeriella jaapii: piccole macchie porpora sulla pagina superiore.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione ciliegio del disciplinare.'
+      sources:
+      - disc_calabria_2023
+  apple_brown_rot:
+    cause: 'Monilinia laxa (monilia): fiori imbruniti e marciume bruno dei frutti.'
+    management:
+    - text: Limitare l'azoto e intervenire con la potatura verde per contenere la vigoria e favorire luce e circolazione dell'aria (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+    - text: Asportare con la potatura rami e branche infetti (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+    - text: Interventi da inizio fioritura a caduta petali; in caso di pioggia o elevata umidità, anche dall'invaiatura fino a prossimità della raccolta (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+  apple_scab:
+    cause: 'Fungo Venturia inaequalis (ticchiolatura): macchie vellutate su foglie e frutti.'
+    management:
+    - text: Cadenzare i trattamenti a turno biologico, o a turno fisso o allungato in funzione dell'andamento climatico e della persistenza; ridurli o sospenderli dopo la fase del frutto noce se non ci
+        sono attacchi (disciplinare, melo).
+      sources:
+      - disc_calabria_2023
+  pear_fire_blight:
+    cause: 'Batterio Erwinia amylovora: colpo di fuoco, fiori e germogli anneriti.'
+    management:
+    - text: 'Lotta obbligatoria (D.M. 356 del 10/09/1999): asportare le parti colpite con tagli almeno 50 cm sotto il punto con sintomi; disinfettare gli attrezzi; bruciare subito il materiale asportato
+        (disciplinare, melo).'
+      sources:
+      - disc_calabria_2023
+    - text: Asportare tempestivamente le fioriture secondarie e comunicare al Servizio Fitosanitario regionale ogni sospetto (disciplinare, melo).
+      sources:
+      - disc_calabria_2023
+  avocado_root_rot:
+    cause: 'Phytophthora cinnamomi: marciume radicale.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: da completare con il tecnico.'
+      sources:
+      - disc_calabria_2023
+  banana_black_sigatoka:
+    cause: 'Pseudocercospora fijiensis: strisce nerastre sulle foglie.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: da completare con il tecnico.'
+      sources:
+      - disc_calabria_2023
+  wheat_leaf_rust:
+    cause: 'Puccinia triticina: pustole arancio-brune sulle foglie.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione frumento del disciplinare (da leggere).'
+      sources:
+      - disc_calabria_2023
+  allium_white_rot:
+    cause: 'Stromatinia cepivora (marciume bianco): micelio bianco alla base del bulbo, sclerozi neri.'
+    management:
+    - text: Ampi avvicendamenti colturali (il disciplinare indica di evitare il ritorno sullo stesso terreno per 8-10 anni in caso di Fusarium; per il marciume bianco, da verificare).
+      sources:
+      - disc_calabria_2023
+  onion_downy_mildew:
+    cause: 'Peronospora destructor (peronospora della cipolla): muffa violacea sulle foglie.'
+    management:
+    - text: Uso limitato dei fertilizzanti azotati; drenaggio accurato; destinare alla riproduzione solo bulbi sani; raccogliere e distruggere i residui delle colture colpite (disciplinare, cipolla).
+      sources:
+      - disc_calabria_2023
+    - text: Trattamenti iniziati quando le condizioni favoriscono la malattia (piogge ripetute e alta umidità), con turni di 7-14 giorni (disciplinare, cipolla).
+      sources:
+      - disc_calabria_2023
+  onion_botrytis_leaf_blight:
+    cause: 'Botrytis squamosa (botrite della cipolla): lesioni ovali biancastre sulle foglie.'
+    management:
+    - text: Intervenire alla comparsa dei primi sintomi in caso di condizioni favorevoli, ripetendo dopo 7-10 giorni (disciplinare, cipolla).
+      sources:
+      - disc_calabria_2023
+  allium_fusarium_basal_rot:
+    cause: 'Fusarium oxysporum f.sp. cepae (fusariosi): marciume basale, muffa rosata.'
+    management:
+    - text: Ampi avvicendamenti colturali per evitare il ritorno della coltura sullo stesso terreno per almeno 8-10 anni, oppure varietà tolleranti (disciplinare, cipolla).
+      sources:
+      - disc_calabria_2023
+    - text: Impiego di semi e bulbi sani; bulbi ben asciutti prima dello stoccaggio (disciplinare, cipolla).
+      sources:
+      - disc_calabria_2023
+  artichoke_rust:
+    cause: 'Ruggine del carciofo (non trattata in questa base: vedi carciofo nel disciplinare).'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione carciofo del disciplinare.'
+      sources:
+      - disc_calabria_2023
+  artichoke_verticillium:
+    cause: 'Verticillium dahliae nel carciofo: appassimento e imbrunimento vascolare.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione carciofo del disciplinare.'
+      sources:
+      - disc_calabria_2023
+  broccoli_black_rot:
+    cause: Xanthomonas campestris pv. campestris (marciume nero delle crucifere).
+    management:
+    - text: Impiegare seme sano; ampie rotazioni (almeno 4 anni); concimazioni azotate equilibrate; eliminare la vegetazione infetta; evitare ferite e irrigazioni per aspersione nei periodi umidi (disciplinare,
+        cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  broccoli_alternaria:
+    cause: 'Alternaria brassicae / Mycosphaerella brassicicola: macchie sulle foglie.'
+    management:
+    - text: Ampie rotazioni, non adottare alte densità d'impianto; intervenire alla comparsa dei sintomi (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  broccoli_downy_mildew:
+    cause: 'Peronospora brassicae / parassitica: macchie sulle foglie, muffa sul rovescio.'
+    management:
+    - text: Ampie rotazioni, drenaggio del suolo, eliminazione di piante e foglie infette, densità d'impianto non alta (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  broccoli_clubroot:
+    cause: 'Plasmodiophora brassicae (ernia del cavolo): galle radicali.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: da completare con il tecnico (ampie rotazioni sono indicate per le crucifere nel disciplinare).'
+      sources:
+      - disc_calabria_2023
+  fusarium_head_blight:
+    cause: Fusarium graminearum (fusariosi della spiga).
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione frumento e mais del disciplinare (da leggere).'
+      sources:
+      - disc_calabria_2023
+  maize_northern_leaf_blight:
+    cause: 'Exserohilum turcicum (brusone settentrionale): lesioni fusiformi sulle foglie.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione mais del disciplinare (da leggere).'
+      sources:
+      - disc_calabria_2023
+  strawberry_grey_mould:
+    cause: 'Botrytis cinerea (muffa grigia): feltro grigio su frutti e fiori.'
+    management:
+    - text: 'Nessuna misura specifica letta in questa base: consultare la sezione fragola del disciplinare (da leggere).'
+      sources:
+      - disc_calabria_2023
+  tomato_spotted_wilt:
+    cause: 'Tospovirus TSWV: anelli necrotici e bronzatura, trasmesso dai tripidi.'
+    vectors:
+    - thrips_frankliniella
+    management:
+    - text: Monitorare i tripidi vettori nelle zone a rischio; controllo tempestivo (disciplinare, pomodoro).
+      sources:
+      - disc_calabria_2023
+    - text: 'Nel peperone e nella melanzana: per le virosi trasmesse da afidi e tripidi è necessaria prevenzione con il tecnico al momento del trapianto (disciplinare).'
+      sources:
+      - disc_calabria_2023
 insects:
-
   philaenus_spumarius:
-    cause: "Cicalina che trasmette il batterio della Xylella fastidiosa."
+    cause: Cicalina che trasmette il batterio della Xylella fastidiosa.
     management:
-      - text: "La vegetazione spontanea può ospitare il vettore e il batterio: la sorveglianza deve includere anche le erbe intorno all'oliveto."
-        sources: [eppo_xylefa]
-
+    - text: 'La vegetazione spontanea può ospitare il vettore e il batterio: la sorveglianza deve includere anche le erbe intorno all''oliveto.'
+      sources:
+      - eppo_xylefa
   bactrocera_oleae:
-    cause: "Mosca delle olive: le femmine pungono le drupe e le larve scavano la polpa."
+    cause: 'Mosca delle olive: le femmine pungono le drupe e le larve scavano la polpa.'
     management:
-      - text: "Monitoraggio con trappole cromotropiche secondo le densità del disciplinare (tabella 3)."
-        sources: [disc_calabria_2023]
-      - text: "Per le olive da olio, la soglia di intervento del bollettino 2020 era il 10% di infestazione attiva; per le cultivar da mensa basta la presenza delle prime punture. Le soglie cambiano per cultivar, esposizione e destinazione: confermarle con il bollettino corrente."
-        sources: [arsac_bollettino_area1_2020]
-
+    - text: Monitoraggio con trappole cromotropiche secondo le densità del disciplinare (tabella 3).
+      sources:
+      - disc_calabria_2023
+    - text: 'Per le olive da olio, la soglia di intervento del bollettino 2020 era il 10% di infestazione attiva; per le cultivar da mensa basta la presenza delle prime punture. Le soglie cambiano per cultivar,
+        esposizione e destinazione: confermarle con il bollettino corrente.'
+      sources:
+      - arsac_bollettino_area1_2020
   prays_oleae:
-    cause: "Tignola dell'olivo: le larve attaccano fiori, frutti e foglie."
+    cause: 'Tignola dell''olivo: le larve attaccano fiori, frutti e foglie.'
     management:
-      - text: "Per le olive da olio, la soglia di intervento nella generazione carpofaga è il 10-15% di uova e/o larvette in penetrazione; per le olive da tavola il 5-7% (disciplinare)."
-        sources: [disc_calabria_2023]
-      - text: "Monitoraggio con trappole a feromone: intervenire quasi alla fine della curva di volo e prima dell'indurimento del nocciolo."
-        sources: [disc_calabria_2023]
-
+    - text: Per le olive da olio, la soglia di intervento nella generazione carpofaga è il 10-15% di uova e/o larvette in penetrazione; per le olive da tavola il 5-7% (disciplinare).
+      sources:
+      - disc_calabria_2023
+    - text: 'Monitoraggio con trappole a feromone: intervenire quasi alla fine della curva di volo e prima dell''indurimento del nocciolo.'
+      sources:
+      - disc_calabria_2023
   ceratitis_capitata:
-    cause: "Mosca mediterranea della frutta: punture e larve nei frutti maturi, anche di agrumi."
+    cause: 'Mosca mediterranea della frutta: punture e larve nei frutti maturi, anche di agrumi.'
     management:
-      - text: "Monitoraggio con trappole; installare trappole attract and kill da fine agosto (ARSAC 2025)."
-        sources: [arsac_agrumi_2025]
-      - text: "Intervenire quando la popolazione supera la soglia o alle prime punture (ARSAC 2025)."
-        sources: [arsac_agrumi_2025]
-
+    - text: Monitoraggio con trappole; installare trappole attract and kill da fine agosto (ARSAC 2025).
+      sources:
+      - arsac_agrumi_2025
+    - text: Intervenire quando la popolazione supera la soglia o alle prime punture (ARSAC 2025).
+      sources:
+      - arsac_agrumi_2025
   planococcus_citri:
-    cause: "Cocciniglia farinosa: colonie cotonose su frutti, rami e radici."
+    cause: 'Cocciniglia farinosa: colonie cotonose su frutti, rami e radici.'
     management:
-      - text: "Potature razionali; ostacolare l'attività delle formiche che proteggono le cocciniglie; intervenire localmente prima della formazione dei cotonosi."
-        sources: [arsac_agrumi_2025]
-      - text: "Antagonisti naturali citati dall'ARSAC: Leptomastix dactylopii e Cryptolaemus montrouzieri."
-        sources: [arsac_agrumi_2025]
-
+    - text: Potature razionali; ostacolare l'attività delle formiche che proteggono le cocciniglie; intervenire localmente prima della formazione dei cotonosi.
+      sources:
+      - arsac_agrumi_2025
+    - text: 'Antagonisti naturali citati dall''ARSAC: Leptomastix dactylopii e Cryptolaemus montrouzieri.'
+      sources:
+      - arsac_agrumi_2025
   aphis_gossypii:
-    cause: "Afide del cotone e del melone: colonie su germogli e foglie, vettore di virus."
+    cause: 'Afide del cotone e del melone: colonie su germogli e foglie, vettore di virus.'
     management:
-      - text: "Interventi solo al superamento della soglia, di solito a fine fioritura: nel 2024-2025 le infestazioni sono quasi sempre rimaste sotto soglia (ARSAC 2025)."
-        sources: [arsac_agrumi_2025]
-      - text: "Mantenere inerbito il terreno e ostacolare le formiche (ARSAC 2025)."
-        sources: [arsac_agrumi_2025]
-
+    - text: 'Interventi solo al superamento della soglia, di solito a fine fioritura: nel 2024-2025 le infestazioni sono quasi sempre rimaste sotto soglia (ARSAC 2025).'
+      sources:
+      - arsac_agrumi_2025
+    - text: Mantenere inerbito il terreno e ostacolare le formiche (ARSAC 2025).
+      sources:
+      - arsac_agrumi_2025
+    - text: 'Melanzana in pieno campo: soglia quando più del 50% delle piante ha colonie di Aphis gossypii (disciplinare).'
+      sources:
+      - disc_calabria_2023
+    - text: Intervenire prima del lancio degli ausiliari; dopo il lancio ritardare l'aficida 7-10 giorni dopo il fitoseide o 15-20 giorni dopo Orius (disciplinare, melanzana).
+      sources:
+      - disc_calabria_2023
   scaphoideus_titanus:
-    cause: "Cicalina vettore del fitoplasma della flavescenza dorata."
+    cause: Cicalina vettore del fitoplasma della flavescenza dorata.
     management:
-      - text: "Monitoraggio con pannelli gialli, secondo le densità del disciplinare (tabella 3)."
-        sources: [disc_calabria_2023]
+    - text: Monitoraggio con pannelli gialli, secondo le densità del disciplinare (tabella 3).
+      sources:
+      - disc_calabria_2023
+  tetranychus_urticae:
+    cause: 'Ragnetto rosso: colonie su foglie e frutti, decolorazione e perdita di funzione fogliare.'
+    management:
+    - text: 'Campionamenti visivi in campo; interventi al superamento della soglia: 10% di foglie infestate da forme mobili e 2% di frutti infestati per Tetranychus urticae sugli agrumi (ARSAC 2025).'
+      sources:
+      - arsac_agrumi_2025
+    - text: Nel peperone in pieno campo la soglia è il 20-30% di foglie con forme mobili; in serra, presenza di focolai con foglie decolorate (disciplinare, peperone).
+      sources:
+      - disc_calabria_2023
+    - text: Introduzione di predatori alla comparsa delle prime forme mobili, più lanci settimanali; distanziare il lancio di almeno 10 giorni da un intervento chimico (disciplinare, peperone e melanzana).
+      sources:
+      - disc_calabria_2023
+  panonychus_citri:
+    cause: 'Ragno rosso degli agrumi: infestazioni tardive, danni alla raccolta.'
+    management:
+    - text: Campionamenti visivi; soglia del 30% di foglie infestate o 3 acari per foglia (ARSAC 2025).
+      sources:
+      - arsac_agrumi_2025
+  panonychus_ulmi:
+    cause: 'Ragno rosso del melo: colonie fogliari.'
+    management:
+    - text: 'Soglia indicata dal disciplinare: 90% di foglie occupate; prima di trattare verificare la presenza di predatori (un Stethorus ogni 2-3 foglie è sufficiente a far regredire l''infestazione)
+        (disciplinare, melo).'
+      sources:
+      - disc_calabria_2023
+  polyphagotarsonemus_latus:
+    cause: 'Acaro tarsonemide: deformazioni di apici e foglie della melanzana.'
+    management:
+    - text: Soglia d'intervento alla comparsa d'infestazione (disciplinare, melanzana).
+      sources:
+      - disc_calabria_2023
+  bemisia_tabaci:
+    cause: 'Aleurode del tabacco: vettore di virus, danni alle foglie.'
+    management: []
+  thrips_frankliniella:
+    cause: 'Tripide occidentale dei fiori: danni a fiori e frutti, vettore del TSWV.'
+    management:
+    - text: 'Melanzana in coltura protetta: soglia alla presenza; lancio di Ambliseius swirskii (disciplinare, melanzana). Nella lattuga la soglia è la presenza (disciplinare).'
+      sources:
+      - disc_calabria_2023
+  liriomyza_trifolii:
+    cause: 'Minatore fogliare: mine sotto l''epidermide.'
+    management:
+    - text: Lancio del parassitoide Diglyphus isaea a 0,2 individui/m² alla comparsa di almeno 20 adulti catturati con trappole cromotropiche gialle; lancio dopo 7-10 giorni dal trapianto (disciplinare,
+        lattuga).
+      sources:
+      - disc_calabria_2023
+    - text: Trappole cromotropiche gialle; l'uso di piretroidi non è compatibile con il lancio degli ausiliari (disciplinare, lattuga).
+      sources:
+      - disc_calabria_2023
+  aphid_myzus_persicae:
+    cause: 'Afide verde: colonie su foglie, vettore di virus.'
+    management:
+    - text: 'Lattuga: intervenire alla presenza; le infestazioni sono rilevanti in primavera e autunno (disciplinare).'
+      sources:
+      - disc_calabria_2023
+    - text: 'Peperone: lanci di Aphidius o predatori alla presenza generalizzata; nelle serre, reti antiafidi per prevenire l''ingresso (disciplinare, peperone).'
+      sources:
+      - disc_calabria_2023
+  macrosiphum_euphorbiae:
+    cause: Afide della patata e della melanzana.
+    management:
+    - text: 'Patata: soglia dell''infestazione generalizzata (disciplinare, patata).'
+      sources:
+      - disc_calabria_2023
+    - text: 'Melanzana in pieno campo: soglia quando più del 10% delle piante è infestato da afidi diversi da Aphis gossypii (disciplinare).'
+      sources:
+      - disc_calabria_2023
+  colorado_beetle:
+    cause: Dorifora della patata.
+    management:
+    - text: Intervento alla soglia di infestazione generalizzata (patata); nella melanzana, sulle larve di prima e seconda generazione (disciplinare).
+      sources:
+      - disc_calabria_2023
+  delia_radicum:
+    cause: 'Mosca del cavolo: danni alle radici delle crucifere.'
+    management:
+    - text: Eliminare le crucifere spontanee e distruggere i residui delle colture di cavolo durante l'inverno; intervenire in base al controllo delle ovodeposizioni (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  plutella_xylostella:
+    cause: 'Tignola delle crucifere: larve che rodono le foglie.'
+    management:
+    - text: Trattare alla comparsa dei primi danni; ammesse Bacillus thuringiensis e Azadiractina, con limiti di numero per ciclo (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  pieris_brassicae:
+    cause: 'Cavolaia: larve che si nutrono di foglie e infiorescenze.'
+    management:
+    - text: Trattare alla comparsa dei primi danni (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  pieris_rapae:
+    cause: 'Cavolaia minore: larve che si nutrono di foglie e infiorescenze.'
+    management:
+    - text: Trattare alla comparsa dei primi danni (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  brevicoryne_brassicae:
+    cause: 'Afide del cavolo: colonie sulle foglie e sull''infiorescenza.'
+    management:
+    - text: Intervenire alla comparsa delle infestazioni (disciplinare, cavolo a infiorescenza).
+      sources:
+      - disc_calabria_2023
+  drosophila_suzukii:
+    cause: 'Drosofila dell''ala macchiata: ovideposizione su frutti integri e maturi.'
+    management:
+    - text: Monitoraggio con trappole innescate con esche di aceto di succo; eliminare tempestivamente i frutti colpiti (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+  rhagoletis_cerasi:
+    cause: 'Mosca della ciliegia: punture e larve nei frutti.'
+    management:
+    - text: Intervenire in fase di invaiatura dopo aver accertato la presenza degli adulti con trappole cromotropiche gialle, o seguendo i bollettini (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+  capnodis_tenebrionis:
+    cause: 'Buprestide: larve nel colletto e nel tronco, deperimento della chioma.'
+    management:
+    - text: Materiale di propagazione di qualità; evitare stress idrici e nutrizionali; irrigazioni estive frequenti in presenza accertata per uccidere le larve nel terreno, senza asfissia delle radici
+        (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+    - text: Scalzare le piante con sofferenza generale e bruciare la parte basale del tronco e le radici principali; in impianti giovani raccogliere a mano gli adulti (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
+  zeuzera_pyrina:
+    cause: 'Rodilegno giallo: larve che scavano gallerie nei rami e nel tronco.'
+    management:
+    - text: Ispezione visiva periodica per intercettare i fori di penetrazione; le larve si uccidono con un filo di ferro entro la galleria; pulire, disinfettare e chiudere i fori con mastice (disciplinare,
+        melograno).
+      sources:
+      - disc_calabria_2023
+    - text: Catture massali o confusione sessuale con trappole a feromoni (disciplinare, melograno).
+      sources:
+      - disc_calabria_2023
+  cydia_pomonella:
+    cause: 'Carpocapsa: larve nei frutti del melo e del pero.'
+    management:
+    - text: 'Preferire la confusione e il disorientamento sessuale; soglia: 2 adulti per trappola in 1-2 settimane, o 0,5-1% di fori iniziali (verifiche su almeno 100-500 frutti/ha) (disciplinare, melo).'
+      sources:
+      - disc_calabria_2023
+  aphis_pomi:
+    cause: 'Afide verde del melo: danni da melata.'
+    management:
+    - text: Intervenire alla presenza di danni da melata (disciplinare, melo).
+      sources:
+      - disc_calabria_2023
+  metcalfa_pruinosa:
+    cause: 'Cicalina cerosa: secrezioni cerose e melata.'
+    management:
+    - text: Intervenire solo in caso di infestazioni in atto (disciplinare, actinidia).
+      sources:
+      - disc_calabria_2023
+  quadraspidiotus_perniciosus:
+    cause: 'Cocciniglia di San José: colonie su rami e frutti.'
+    management:
+    - text: Eliminare con la potatura i rami più infestati; intervenire a rottura gemme in presenza di infestazioni (disciplinare, ciliegio).
+      sources:
+      - disc_calabria_2023
