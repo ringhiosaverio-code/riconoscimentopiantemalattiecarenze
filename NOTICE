@@ -1,0 +1,15 @@
+PlantCare
+Copyright 2026 PlantCare contributors
+
+Questo prodotto include software distribuito sotto Apache License 2.0.
+
+AVVERTENZA SUI DATI E SUI PESI DEL MODELLO
+La licenza Apache-2.0 copre il codice sorgente e la documentazione del repository.
+NON copre:
+- i dataset di addestramento (PlantVillage, IP102, ecc.), che hanno licenze e
+  condizioni d'uso proprie. IP102 è gratuito per uso accademico; l'uso commerciale
+  richiede il permesso dell'autore. La licenza di PlantVillage va verificata alla fonte;
+- i pesi del modello addestrati su tali dataset, che ereditano le restrizioni dei dati
+  di addestramento e vanno distribuiti solo se le condizioni lo consentono.
+Prima di distribuire un modello addestrato, verificare le licenze di tutti i dataset usati
+e registrarle in data/SOURCES.md.

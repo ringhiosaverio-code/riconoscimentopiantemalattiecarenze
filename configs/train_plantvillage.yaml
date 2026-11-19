@@ -1,0 +1,22 @@
+# Primo addestramento reale: PlantVillage (38 classi), teste coltura e malattia.
+# Da zero (pretrained: false) perché i pesi pre-addestrati su Hugging Face non sono
+# scaricabili da questo ambiente. Il pre-addestramento va riattivato appena disponibile.
+manifest: data/processed/manifest.csv
+data_root: data/raw
+output_dir: models/plantvillage_resnet18
+
+backbone: resnet18
+pretrained: false
+image_size: 160
+dropout: 0.2
+
+heads: [plant, disease]
+head_weights: {plant: 0.5, disease: 1.0}
+
+epochs: 10
+batch_size: 64
+lr: 1.0e-3
+weight_decay: 1.0e-4
+num_workers: 2
+seed: 42
+device: cpu

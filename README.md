@@ -104,4 +104,6 @@ docs/                    ricerca, dataset, architettura
 
 ## Licenza
 
-Da definire prima della pubblicazione. I dataset hanno licenze diverse e vincolano il riuso dei pesi del modello.
+Il codice e la documentazione sono rilasciati sotto **Apache License 2.0** (file `LICENSE`).
+
+Attenzione: la licenza **non** copre i dataset di addestramento né i pesi del modello addestrati su di essi. Per IP102 l'uso commerciale richiede il permesso dell'autore, e la licenza di PlantVillage va verificata alla fonte. Vedi `NOTICE`.

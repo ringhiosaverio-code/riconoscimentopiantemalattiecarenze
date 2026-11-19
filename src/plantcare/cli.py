@@ -41,15 +41,18 @@ def cmd_build_manifest(args: argparse.Namespace) -> int:
     data_root = Path(cfg.get("data_root", ROOT / "data" / "raw"))
     from plantcare.data.pipeline import load_leaf_map
     rows = []
-    if (data_root / "plantvillage").is_dir():
+    pv_dir = data_root / "plantvillage"
+    if (pv_dir / "raw" / "color").is_dir():  # layout del dataset ufficiale (zip di Hugging Face)
+        pv_dir = pv_dir / "raw" / "color"
+    if pv_dir.is_dir() and any(p.is_dir() and "___" in p.name for p in pv_dir.iterdir()):
         # mappa dei gruppi foglia: copia nel dataset, altrimenti quella versionata nel repository
         candidates = [data_root / "plantvillage" / "leaf_grouping" / "leaf-map.json",
                       ROOT / "metadata" / "plantvillage" / "leaf-map.json"]
         leaf_map = next((load_leaf_map(c) for c in candidates if c.exists()), {})
         if not leaf_map:
             print("Attenzione: mappa dei gruppi foglia assente, lo split PlantVillage sarà ottimistico", file=sys.stderr)
-        for r in scan_plantvillage(data_root / "plantvillage", seed=cfg.get("seed", 42), leaf_map=leaf_map):
-            r.path = f"plantvillage/{r.path}"
+        for r in scan_plantvillage(pv_dir, seed=cfg.get("seed", 42), leaf_map=leaf_map):
+            r.path = f"{pv_dir.relative_to(data_root).as_posix()}/{r.path}"
             rows.append(r)
     if (data_root / "ip102").is_dir():
         for r in scan_ip102(data_root / "ip102", images_dir=cfg.get("ip102_images_dir", "images"),

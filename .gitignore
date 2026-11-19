@@ -16,3 +16,6 @@ runs/
 .DS_Store
 .vscode/
 .idea/
+
+# Output di addestramento (checkpoint, log, report): non versionati
+models/

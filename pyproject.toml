@@ -7,6 +7,7 @@ name = "plantcare"
 version = "0.2.0"
 description = "Riconoscimento visivo di piante agrarie, malattie, insetti utili/dannosi e carenze nutrizionali"
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.10"
 dependencies = [
     "PyYAML>=6.0",

@@ -89,3 +89,12 @@ Ogni dataset ha la sua licenza, che vincola il riuso dei pesi del modello. Regis
 - Nomi delle 102 classi IP102: da `classes.txt` del repository xpwu95/IP102, indici 1-based (`configs/ip102_classes.yaml`).
 - Split ufficiali PlantVillage (`splits/*_train.txt`): non raggiungibili da questo ambiente, perché ospitati su Hugging Face. La pipeline usa la mappa dei gruppi foglia, che invece è accessibile.
 - Base degli indici nei file `train.txt` di IP102 (0 o 1): non verificata, perché i file non sono scaricabili da questo ambiente. Va controllata e impostata in `configs/datasets.yaml`.
+
+## Registro delle fonti usate
+
+| Dataset | Fonte scaricata | Data | Note |
+|---|---|---|---|
+| PlantVillage (raw/color, 38 classi, 54.305 immagini) | `data.zip` di Hugging Face `mohanty/PlantVillage`, con `leaf_grouping/leaf-map.json` | 2026-11-19 | Licenza da verificare alla fonte. Il README dichiara 54.306 immagini: il file scaricato ne contiene 54.305. |
+| IP102 | non scaricato | — | Download da Google Drive o AliyunDrive, non raggiungibile da questo ambiente |
+
+Il manifest generato contiene 37.902 immagini di train, 8.164 di val e 8.239 di test, con split per gruppo di foglia. Il controllo SHA-256 non ha trovato duplicati tra split, e nessuna immagine risulta corrotta.
