@@ -134,10 +134,16 @@ class Predictor:
             else:
                 tax_id = (self.label_map.get("plantvillage") or {}).get(raw)
             card = self.kb.disease_card(tax_id, organ=organ) if (self.kb and tax_id) else None
-            return tax_id, card, (card["name"] if card else raw.replace("___", " - ").replace("_", " "))
+            if card:
+                return tax_id, card, card["name"]
+            from plantcare.quiz import display_name
+            return None, None, display_name("disease", raw, self.kb, self.label_map, {})
         if head == "pest":
             name = self.ip102_names.get(raw, raw)
             return None, None, f"{name} (classe IP102)"
+        if head == "deficiency":
+            from plantcare.quiz import DEFICIENCY_NAMES
+            return None, None, DEFICIENCY_NAMES.get(raw, raw)
         return None, None, raw
 
     @torch.no_grad()

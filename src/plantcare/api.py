@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
@@ -73,11 +73,25 @@ video,img.preview{width:100%;max-height:360px;object-fit:cover;border-radius:10p
 .p{text-align:right;font-variant-numeric:tabular-nums}
 ul.guide{padding-left:20px;margin:6px 0}
 footer{margin:24px 0;font-size:.85rem;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tabs button{flex:1}
+.tabs button[aria-selected="false"]{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.quiz-img{width:100%;max-height:380px;object-fit:contain;border-radius:10px;background:#0001;display:block;margin:8px 0}
+.opts{display:grid;gap:8px}
+.opts button{text-align:left;background:var(--card);color:var(--fg);border:1px solid var(--line)}
+.opts button.ok{background:#2f6b3b;color:#fff;border-color:#2f6b3b}
+.opts button.ko{background:#a33;color:#fff;border-color:#a33}
+.score{font-variant-numeric:tabular-nums}
 a{color:var(--accent)}
 </style></head>
 <body><main>
 <h1>PlantCare</h1>
 <p class="muted">Lettori ottici per coltura, malattia, insetti e acari, carenze. Ogni lettore dà una probabilità calibrata. Supporto alla decisione per tecnici e agricoltori: non sostituisce la diagnosi di un tecnico abilitato.</p>
+<nav class="tabs" role="tablist">
+<button type="button" role="tab" id="t-reader" aria-selected="true">Lettore ottico</button>
+<button type="button" role="tab" id="t-quiz" aria-selected="false">Quiz</button>
+</nav>
+<div id="tab-reader">
 
 <section class="card">
 <h2>Lettore ottico</h2>
@@ -122,6 +136,26 @@ a{color:var(--accent)}
 </div>
 <p id="fb-status" class="muted"></p>
 </section>
+
+</div>
+
+<div id="tab-quiz" hidden>
+<section class="card">
+<h2>Quiz: riconosci dalla foto</h2>
+<p class="muted">Una foto e quattro risposte, una sola corretta. Le foto vengono dai dataset scientifici usati per addestrare i lettori, con l'etichetta degli autori.</p>
+<p><label for="q-cat"><strong>Categoria</strong></label><br>
+<select id="q-cat"><option value="any">Tutte</option></select></p>
+<div class="row"><button type="button" id="q-new">Nuova domanda</button></div>
+<p class="score muted" id="q-score">Punteggio: 0 su 0</p>
+<div id="q-box" hidden>
+<p><strong id="q-text"></strong> <span class="muted" id="q-catlabel"></span></p>
+<img class="quiz-img" id="q-img" alt="Foto della domanda">
+<div class="opts" id="q-opts"></div>
+<div id="q-exp"></div>
+</div>
+<p class="muted" id="q-status"></p>
+</section>
+</div>
 
 <footer>
 <p>Stato dei lettori: <a href="/api/readers">/api/readers</a> · Documentazione API: <a href="/docs">/docs</a> · Schede malattie: <a href="/api/diseases">/api/diseases</a></p>
@@ -181,6 +215,47 @@ async function analyze(fd){
  $('out').innerHTML=h;$('feedback-box').hidden=false;$('fb-form').hidden=true;$('fb-status').textContent='';
  }catch(err){$('out').innerHTML='<div class="card warn">Errore di rete. Riprova.</div>';}
 }
+function showTab(name){
+ const q=name==='quiz';$('tab-quiz').hidden=!q;$('tab-reader').hidden=q;
+ $('t-quiz').setAttribute('aria-selected',String(q));$('t-reader').setAttribute('aria-selected',String(!q));
+ if(q&&!quizLoaded)loadQuiz();
+}
+$('t-reader').addEventListener('click',()=>showTab('reader'));
+$('t-quiz').addEventListener('click',()=>showTab('quiz'));
+let quizLoaded=false,qTok=null,score={ok:0,tot:0};
+async function loadQuiz(){
+ quizLoaded=true;
+ try{const r=await fetch('/api/quiz/categories');const j=await r.json();
+ if(!j.enabled){$('q-status').textContent='Il quiz non è attivo su questo server: le immagini dei dataset non sono disponibili.';$('q-new').disabled=true;return;}
+ for(const [k,v] of Object.entries(j.categories)){const o=document.createElement('option');o.value=k;o.textContent=v.label+' ('+v.classes+' classi)';$('q-cat').appendChild(o);}
+ }catch(e){$('q-status').textContent='Errore di rete.';}
+}
+$('q-new').addEventListener('click',async()=>{
+ $('q-status').textContent='';$('q-exp').innerHTML='';
+ try{const r=await fetch('/api/quiz/question?category='+encodeURIComponent($('q-cat').value));const j=await r.json();
+ if(!r.ok){$('q-status').textContent=j.detail||'Errore';return;}
+ qTok=j.token;$('q-text').textContent=j.question;$('q-catlabel').textContent='· '+j.category_label;
+ $('q-img').src=j.image_url;
+ const box=$('q-opts');box.innerHTML='';
+ for(const o of j.options){const b=document.createElement('button');b.type='button';b.textContent=o.text;b.dataset.id=o.id;b.addEventListener('click',()=>answerQuiz(o.id));box.appendChild(b);}
+ $('q-box').hidden=false;
+ }catch(e){$('q-status').textContent='Errore di rete.';}
+});
+async function answerQuiz(choice){
+ if(!qTok)return;const tok=qTok;qTok=null;
+ const btns=[...$('q-opts').querySelectorAll('button')];btns.forEach(b=>b.disabled=true);
+ try{const r=await fetch('/api/quiz/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:tok,choice})});const j=await r.json();
+ if(!r.ok){$('q-status').textContent=j.detail||'Errore';return;}
+ btns.forEach(b=>{const id=Number(b.dataset.id);if(id===j.correct_id)b.classList.add('ok');else if(id===choice)b.classList.add('ko');});
+ score.tot++;if(j.correct)score.ok++;$('q-score').textContent='Punteggio: '+score.ok+' su '+score.tot;
+ const e=j.explanation||{};let h='<div class="reader"><p><strong>'+(j.correct?'Corretto!':'Sbagliato.')+'</strong> Risposta: '+esc(j.correct_text)+'</p>';
+ if(e.agent)h+='<p class="muted">Agente: <em>'+esc(e.agent)+'</em></p>';
+ if(e.text)h+='<p class="muted">'+esc(e.text)+'</p>';
+ if(e.organs&&e.organs.length)h+='<p class="muted">Organi colpiti: '+esc(e.organs.join(', '))+'</p>';
+ if(e.lab_note)h+='<div class="warn lab">'+esc(e.lab_note)+'</div>';
+ $('q-exp').innerHTML=h+'</div>';
+ }catch(err){$('q-status').textContent='Errore di rete.';}
+}
 $('ok').addEventListener('click',()=>sendFb('agree'));
 $('ko').addEventListener('click',()=>{$('fb-form').hidden=false;});
 $('send').addEventListener('click',()=>sendFb('disagree'));
@@ -194,6 +269,11 @@ async function sendFb(verdict){
 </script></body></html>"""
 
 
+class QuizAnswerIn(BaseModel):
+    token: str = Field(max_length=64)
+    choice: int = Field(ge=0, le=3)
+
+
 class FeedbackIn(BaseModel):
     verdict: Literal["agree", "disagree"]
     model_version: str = Field(max_length=200)
@@ -202,8 +282,13 @@ class FeedbackIn(BaseModel):
     role: Literal["agronomo", "tecnico", "agricoltore", "altro"] | None = None
 
 
-def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 0.5) -> FastAPI:
+def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 0.5,
+               quiz_manifest: str | Path | None = None, quiz_data_root: str | Path | None = None) -> FastAPI:
     ckpt = checkpoint or os.environ.get("PLANTCARE_CKPT")
+    default_manifest = ROOT_CONFIG.parent / "data" / "processed" / "manifest_v2.csv"
+    quiz_manifest = quiz_manifest or os.environ.get("PLANTCARE_QUIZ_MANIFEST") or (
+        default_manifest if default_manifest.exists() else None)
+    quiz_data_root = Path(quiz_data_root or os.environ.get("PLANTCARE_QUIZ_DATA", ROOT_CONFIG.parent / "data"))
     feedback_dir = os.environ.get("PLANTCARE_FEEDBACK_DIR")
 
     tax = load_taxonomy(DEFAULT_TAXONOMY_PATH)
@@ -218,6 +303,11 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
     state: dict[str, Predictor] = {}
     if ckpt:
         state["predictor"] = Predictor(ckpt, abstain_threshold=abstain_threshold, kb=kb, label_map=label_map)
+    quiz = None
+    if quiz_manifest and Path(quiz_manifest).exists():
+        from plantcare.quiz import QuizBank, load_ip102_names
+        quiz = QuizBank(Path(quiz_manifest), quiz_data_root, kb=kb, label_map=label_map,
+                        ip102_names=load_ip102_names(ROOT_CONFIG.parent))
 
     # ---------------- pagine e stato ----------------
     @app.get("/", response_class=HTMLResponse)
@@ -256,6 +346,42 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
     @app.get("/api/plants")
     def plants(priority: int | None = None) -> list[dict]:
         return kb.list_plants(priority=priority)
+
+    # ---------------- quiz ----------------
+    @app.get("/api/quiz/categories")
+    def quiz_categories() -> dict:
+        if quiz is None:
+            return {"enabled": False, "categories": {}}
+        from plantcare.quiz import CATEGORY_LABELS
+        return {"enabled": True,
+                "categories": {h: {"label": CATEGORY_LABELS[h], "classes": n} for h, n in quiz.available().items()}}
+
+    @app.get("/api/quiz/question")
+    def quiz_question(category: str = "any") -> dict:
+        if quiz is None:
+            raise HTTPException(status_code=503, detail="Quiz non attivo: immagini non disponibili su questo server.")
+        try:
+            return quiz.new_question(category)
+        except LookupError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+
+    @app.get("/api/quiz/image/{token}")
+    def quiz_image(token: str):
+        if quiz is None:
+            raise HTTPException(status_code=503, detail="Quiz non attivo")
+        try:
+            return FileResponse(quiz.image_path(token))
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Domanda scaduta o inesistente")
+
+    @app.post("/api/quiz/answer")
+    def quiz_answer(item: QuizAnswerIn) -> dict:
+        if quiz is None:
+            raise HTTPException(status_code=503, detail="Quiz non attivo")
+        try:
+            return quiz.answer(item.token, item.choice)
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Domanda scaduta o già risposta")
 
     @app.get("/api/readers")
     def readers() -> dict:

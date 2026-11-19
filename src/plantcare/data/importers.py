@@ -112,6 +112,8 @@ DEFICIENCY = {
     ("agml_lemon", "Deficiency Leaf"): "sintomi_di_carenza",
     ("agml_chili", "nutritional"): "sintomi_di_carenza",
     ("agml_tom2024", "excess-nitrogen-d"): "eccesso_di_azoto",
+    # marciume apicale: sintomo della carenza di calcio indicato anche in configs/taxonomy.yaml (nutriente Ca)
+    ("agml_tom2024", "blossom-end-rot-d"): "carenza_di_calcio",
 }
 DEFICIENCY_SOURCES = {"agml_lemon", "agml_chili", "agml_tom2024"}
 NO_NUTRITIONAL_DISORDER = "nessun_disturbo_nutrizionale"

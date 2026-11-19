@@ -52,6 +52,16 @@ Ogni lettore restituisce una **probabilità calibrata** (temperature scaling sul
 
 L'elenco dei dataset, con licenza e citazione, è in `configs/external_datasets.yaml`. Il download è riproducibile con `python -m plantcare.data.download`, l'importazione con `plantcare import-external`, l'addestramento con `plantcare train-readers`.
 
+## Quiz
+
+La scheda **Quiz** dell'app mostra una foto a caso e quattro risposte, una sola corretta. Le categorie sono colture, malattie e danni, insetti e acari, carenze, oppure tutte mescolate.
+- Le foto vengono dai dataset scientifici usati per l'addestramento, con l'etichetta dei loro autori.
+- Le risposte sbagliate sono scelte tra le classi della stessa categoria; per le malattie, quando possibile, tra quelle della stessa coltura.
+- La risposta corretta resta sul server fino alla risposta, e l'immagine viene servita senza esporre il percorso del file.
+- Dopo la risposta compare la spiegazione dalla scheda: agente, sintomi, organi colpiti, avviso di laboratorio.
+
+Il quiz è attivo quando sul server ci sono le immagini e il manifest (`data/processed/manifest_v2.csv`, oppure `PLANTCARE_QUIZ_MANIFEST` e `PLANTCARE_QUIZ_DATA`). Non è disponibile una categoria sull'organo colpito, perché le immagini dei dataset non hanno quell'etichetta.
+
 ## Avvio rapido
 
 ```bash
