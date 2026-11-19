@@ -62,6 +62,15 @@ La scheda **Quiz** dell'app mostra una foto a caso e quattro risposte, una sola 
 
 Il quiz è attivo quando sul server ci sono le immagini e il manifest (`data/processed/manifest_v2.csv`, oppure `PLANTCARE_QUIZ_MANIFEST` e `PLANTCARE_QUIZ_DATA`). Non è disponibile una categoria sull'organo colpito, perché le immagini dei dataset non hanno quell'etichetta.
 
+## Preparazione della botte
+
+La scheda **Botte** aiuta a preparare la miscela per un trattamento:
+- **Proporzioni**: dal volume della botte e dalla dose di etichetta (per ettolitro, per ettaro o in percentuale) calcola quanto prodotto mettere e quanta superficie copre la botte.
+- **Controlli**: segnala se la dose supera quella massima di etichetta inserita. Per i rameici calcola i kg di rame metallo per ettaro e li confronta con i limiti del disciplinare calabrese (28 kg/ha in 7 anni, media consigliata 4 kg/ha all'anno).
+- **Miscibilità**: ordine di caricamento per tipo di formulazione, incompatibilità documentate (zolfo con olio minerale e con prodotti alcalini, polisolfuro con olio), avvisi di temperatura, prova in barattolo.
+
+Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete neurale**: le dosi devono essere esatte e derivare dall'etichetta autorizzata, che prevale su qualunque calcolo. Il sistema non suggerisce quale prodotto usare né a che dose.
+
 ## Avvio rapido
 
 ```bash

@@ -1,0 +1,78 @@
+# Regole per la preparazione della botte. Ogni regola cita le fonti in configs/sources.yaml.
+# L'ETICHETTA DEL PRODOTTO PREVALE SEMPRE su queste regole generali.
+
+# Ordine generico di caricamento per tipo di formulazione (usare solo se l'etichetta non lo indica)
+formulation_order:
+  sources: [purdue_mixing_order, vt_bse351]
+  order:
+    - {id: WSB, label: "Sacchetti idrosolubili"}
+    - {id: WG, label: "Granuli idrodispersibili (WG/WDG)"}
+    - {id: WP, label: "Polvere bagnabile (WP)"}
+    - {id: SG, label: "Granuli idrosolubili (SG)"}
+    - {id: SC, label: "Sospensione concentrata (SC/FL)"}
+    - {id: SE, label: "Suspo-emulsione (SE)"}
+    - {id: EW, label: "Emulsione acqua-olio (EW)"}
+    - {id: CS, label: "Microincapsulato (CS)"}
+    - {id: EC, label: "Concentrato emulsionabile (EC)"}
+    - {id: OD, label: "Dispersione in olio (OD)"}
+    - {id: SL, label: "Concentrato solubile (SL)"}
+    - {id: ADJ, label: "Coadiuvante / bagnante"}
+    - {id: OTHER, label: "Altro / non indicato"}
+
+# Categorie di prodotto per cui esistono regole di compatibilità documentate
+categories:
+  - {id: altro, label: "Altro / nessuna delle seguenti"}
+  - {id: rame, label: "Rameico (rame)"}
+  - {id: zolfo, label: "Zolfo"}
+  - {id: olio_minerale, label: "Olio minerale (paraffinico)"}
+  - {id: polisolfuro, label: "Polisolfuro di calcio"}
+  - {id: alcalino, label: "Prodotto a reazione alcalina (es. poltiglia bordolese)"}
+  - {id: fosetil_al, label: "Fosetil-alluminio"}
+
+# Incompatibilità e intervalli tra categorie
+pairs:
+  - categories: [zolfo, olio_minerale]
+    level: non_miscelare
+    text: "Zolfo e olio minerale non vanno miscelati. Tra un trattamento con zolfo e uno con olio servono 15-21 giorni secondo le fonti (21 dall'olio ad alte dosi, 15 dall'olio estivo): controllare l'etichetta."
+    sources: [er_manuale_zolfo, er_manuale_oli]
+  - categories: [zolfo, polisolfuro]
+    level: non_miscelare
+    text: "Lo zolfo non è compatibile con prodotti a reazione alcalina come i polisolfuri."
+    sources: [er_manuale_zolfo]
+  - categories: [zolfo, alcalino]
+    level: non_miscelare
+    text: "Lo zolfo non è compatibile con prodotti a reazione alcalina (es. poltiglia bordolese)."
+    sources: [er_manuale_zolfo]
+  - categories: [polisolfuro, olio_minerale]
+    level: non_miscelare
+    text: "Polisolfuro di calcio e olio minerale vanno distanziati di almeno 15 giorni."
+    sources: [er_manuale_polisolfuro]
+
+# Regole di ordine speciali
+order_rules:
+  - when_category: fosetil_al
+    move_first_formulations: [SC, CS]
+    text: "Con fosetil-alluminio, i formulati SC o CS vanno immessi nella botte per primi."
+    sources: [bayer_miscele]
+
+# Avvisi di temperatura
+temperature:
+  - {category: zolfo, max_c: 30, text: "Zolfo: rischio di fitotossicità sopra i 30-32 °C.", sources: [er_manuale_zolfo]}
+  - {category: polisolfuro, max_c: 30, text: "Polisolfuro: non usare sopra i 30 °C né con previsione di gelate.", sources: [er_manuale_polisolfuro]}
+  - {category: olio_minerale, max_c: 30, text: "Olio minerale: rischio di fitotossicità con temperature elevate e umidità alta prolungata.", sources: [er_manuale_oli]}
+
+# Rame (disciplinare Regione Calabria 2023)
+copper:
+  limit_7y_kg_ha: 28
+  avg_year_kg_ha: 4
+  text: "Rame: non superare 28 kg/ha in 7 anni; si raccomanda di non superare in media 4 kg di rame per ettaro all'anno."
+  sources: [disc_calabria_2023]
+
+# Procedura generale di preparazione
+procedure:
+  - text: "Leggere l'etichetta di ogni prodotto: dosi, compatibilità e ordine di miscelazione indicati in etichetta prevalgono su queste indicazioni generali."
+    sources: [vt_bse351]
+  - text: "Se si miscelano prodotti per la prima volta, fare una prova in barattolo con le stesse proporzioni: rivela le incompatibilità fisiche (grumi, separazioni), non quelle chimiche."
+    sources: [edis_pi285]
+  - text: "Riempire la botte d'acqua per circa metà con l'agitatore acceso, poi aggiungere un prodotto alla volta nell'ordine indicato, aspettando che il precedente sia disperso; completare con l'acqua rimanente."
+    sources: [purdue_mixing_order]

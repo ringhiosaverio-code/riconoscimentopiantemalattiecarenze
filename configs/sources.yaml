@@ -107,3 +107,57 @@ sources:
     date: "1983"
     status: riassunto_verificato
     note: "Rassegna delle specie di eriofidi dell'olivo (Aceria oleae, Oxycenus maxwelli, Tegolophus hassani, Ditrymacus athiasellus). Usata per il riconoscimento delle specie, non per le misure di difesa."
+
+  # --- Preparazione della botte ---
+  - id: purdue_mixing_order
+    title: "Mixing order handout (schema Purdue, PSEP Vermont)"
+    issuer: "University of Vermont - Pesticide Safety Education Program (da Purdue University)"
+    type: universitario_internazionale
+    url: "https://uvm.edu/d10-files/documents/2024-11/PSEP_VTPA23CentrellaMixingOrderHandout.pdf"
+    status: riassunto_verificato
+    note: "Ordine: sacchetti idrosolubili; secchi WG/WP/SG uno alla volta; sospensioni SC/SE/EW/CS; liquidi EC/OD/SL; coadiuvanti per ultimi."
+  - id: vt_bse351
+    title: "BSE-351: tank mixing (WALES/DALES)"
+    issuer: "Virginia Tech, Cooperative Extension"
+    type: universitario_internazionale
+    url: "https://pubs.ext.vt.edu/BSE/bse-351/bse-351.html"
+    status: riassunto_verificato
+    note: "Leggere prima l'etichetta: l'ordine generico si usa solo se l'etichetta non lo indica."
+  - id: edis_pi285
+    title: "PI285: jar test per le miscele"
+    issuer: "University of Florida, IFAS Extension (EDIS)"
+    type: universitario_internazionale
+    url: "https://journals.flvc.org/edis/article/download/117653/119782/181394"
+    status: riassunto_verificato
+    note: "Prova in barattolo su piccola scala; non rileva le incompatibilità chimiche."
+  - id: er_manuale_zolfo
+    title: "Manuale basso impatto - Zolfo (scheda 9.2.2)"
+    issuer: "Regione Emilia-Romagna, Servizio fitosanitario"
+    type: regionale_italia
+    url: "https://agricoltura.regione.emilia-romagna.it/fitosanitario/difesa-sostenibile/uso-sostenibile/prodotti-fitosanitari/Manuale-basso-impatto/documenti/9-2-2-zolfo-14_03_24.pdf/@@download/file"
+    date: "2024-03-14"
+    status: riassunto_verificato
+    note: "Zolfo non compatibile con oli minerali e con prodotti alcalini (polisolfuri, poltiglia bordolese); 21 giorni da olio ad alte dosi, 15 da olio estivo; fitotossicità sopra 30-32 °C."
+  - id: er_manuale_oli
+    title: "Manuale basso impatto - Oli minerali (scheda 9.2.4)"
+    issuer: "Regione Emilia-Romagna, Servizio fitosanitario"
+    type: regionale_italia
+    url: "https://agricoltura.regione.emilia-romagna.it/fitosanitario/difesa-sostenibile/uso-sostenibile/prodotti-fitosanitari/Manuale-basso-impatto/documenti/9-2-4-oli-minerali-14_03_24.pdf/@@download/file"
+    date: "2024-03-14"
+    status: riassunto_verificato
+    note: "Olio ad alte dosi distanziato almeno 15 giorni dallo zolfo; rischio di fitotossicità con caldo e umidità elevata."
+  - id: er_manuale_polisolfuro
+    title: "Manuale basso impatto - Polisolfuro di calcio (scheda 9.2.3)"
+    issuer: "Regione Emilia-Romagna, Servizio fitosanitario"
+    type: regionale_italia
+    url: "https://agricoltura.regione.emilia-romagna.it/fitosanitario/difesa-sostenibile/uso-sostenibile/prodotti-fitosanitari/Manuale-basso-impatto/documenti/9-2-3-polisolfuro-di-calcio-14_03_24.pdf/@@download/file"
+    date: "2024-03-14"
+    status: riassunto_verificato
+    note: "Distanziare almeno 15 giorni da oli minerali; non usare sopra 30 °C né con previsione di gelate."
+  - id: bayer_miscele
+    title: "Le miscele di agrofarmaci (AgriCampus)"
+    issuer: "Bayer CropScience Italia"
+    type: tecnico_produttore
+    url: "https://www.cropscience.bayer.it/-/media/agricampus/documenti/miscele.pdf"
+    status: riassunto_verificato
+    note: "Con fosetil-Al e formulati SC o CS, questi ultimi vanno immessi per primi."

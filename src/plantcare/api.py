@@ -90,6 +90,7 @@ a{color:var(--accent)}
 <nav class="tabs" role="tablist">
 <button type="button" role="tab" id="t-reader" aria-selected="true">Lettore ottico</button>
 <button type="button" role="tab" id="t-quiz" aria-selected="false">Quiz</button>
+<button type="button" role="tab" id="t-tank" aria-selected="false">Botte</button>
 </nav>
 <div id="tab-reader">
 
@@ -157,6 +158,21 @@ a{color:var(--accent)}
 </section>
 </div>
 
+<div id="tab-tank" hidden>
+<section class="card">
+<h2>Prepara la botte</h2>
+<div class="warn" id="tk-legal"></div>
+<p><label>Volume della botte (litri)<br><input id="tk-vol" type="number" min="1" step="1" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label></p>
+<p><label>Volume d'acqua per ettaro (l/ha) <span class="muted">necessario per le dosi a ettaro e per il rame</span><br><input id="tk-wha" type="number" min="1" step="1" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label></p>
+<p><label>Temperatura prevista (°C) <span class="muted">facoltativa</span><br><input id="tk-temp" type="number" step="1" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label></p>
+<p><label>Rame già distribuito quest'anno (kg/ha) <span class="muted">facoltativo</span><br><input id="tk-cu" type="number" min="0" step="0.1" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label></p>
+<h3>Prodotti (dalla loro etichetta)</h3>
+<div id="tk-rows"></div>
+<div class="row"><button type="button" class="secondary" id="tk-add">Aggiungi prodotto</button><button type="button" id="tk-calc">Calcola</button></div>
+</section>
+<div id="tk-out" aria-live="polite"></div>
+</div>
+
 <footer>
 <p>Stato dei lettori: <a href="/api/readers">/api/readers</a> · Documentazione API: <a href="/docs">/docs</a> · Schede malattie: <a href="/api/diseases">/api/diseases</a></p>
 <p>La probabilità di ogni lettore è calibrata sul set di validazione; l'affidabilità indicata è misurata sul set di test. Sotto soglia il lettore risponde "non determinabile". Per virus, viroidi, batteri e nematodi serve sempre la conferma di laboratorio.</p>
@@ -199,6 +215,7 @@ function renderReferto(r){
  if(r.pest)s+='<p><strong>Insetto o acaro:</strong> '+esc(r.pest)+'</p>';
  if(r.management&&r.management.length){s+='<p><strong>Misure ('+esc(r.management_status)+'):</strong></p><ul>';for(const m of r.management)s+='<li>'+esc(m)+'</li>';s+='</ul>';}
  if(r.sources&&r.sources.length){s+='<p class="muted">Fonti: '+r.sources.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a>').join(' · ')+'</p>';}
+ if(r.management&&r.management.length){s+='<p><button type="button" class="secondary" onclick="showTab(\'tank\')">Prepara la botte</button></p>';}
  return s+'</div>';
 }
 async function analyze(fd){
@@ -216,12 +233,57 @@ async function analyze(fd){
  }catch(err){$('out').innerHTML='<div class="card warn">Errore di rete. Riprova.</div>';}
 }
 function showTab(name){
- const q=name==='quiz';$('tab-quiz').hidden=!q;$('tab-reader').hidden=q;
- $('t-quiz').setAttribute('aria-selected',String(q));$('t-reader').setAttribute('aria-selected',String(!q));
- if(q&&!quizLoaded)loadQuiz();
+ for(const t of ['reader','quiz','tank']){$('tab-'+t).hidden=(t!==name);$('t-'+t).setAttribute('aria-selected',String(t===name));}
+ if(name==='quiz'&&!quizLoaded)loadQuiz();
+ if(name==='tank'&&!tankLoaded)loadTank();
 }
 $('t-reader').addEventListener('click',()=>showTab('reader'));
 $('t-quiz').addEventListener('click',()=>showTab('quiz'));
+$('t-tank').addEventListener('click',()=>showTab('tank'));
+let tankLoaded=false,tankOpts=null;
+const opt=(v,t)=>'<option value="'+esc(v)+'">'+esc(t)+'</option>';
+async function loadTank(){
+ tankLoaded=true;
+ try{tankOpts=await (await fetch('/api/botte/opzioni')).json();$('tk-legal').textContent=tankOpts.legal_note;addRow();}
+ catch(e){$('tk-out').innerHTML='<div class="card warn">Errore di rete.</div>';}
+}
+function addRow(){
+ if($('tk-rows').children.length>=8)return;
+ const d=document.createElement('div');d.className='reader tk-row';
+ d.innerHTML='<p><label>Nome commerciale<br><input class="tk-name" maxlength="120" style="width:100%;font:inherit;padding:8px"></label></p>'+
+ '<div class="row"><label style="flex:1">Dose<br><input class="tk-dose" type="number" min="0" step="any" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label>'+
+ '<label style="flex:1">Unità<br><select class="tk-unit">'+opt('g/hl','g/hl')+opt('ml/hl','ml/hl')+opt('kg/ha','kg/ha')+opt('l/ha','l/ha')+opt('g/ha','g/ha')+opt('ml/ha','ml/ha')+opt('%','%')+'</select></label></div>'+
+ '<div class="row"><label style="flex:1">Formulazione<br><select class="tk-form">'+tankOpts.formulations.map(f=>opt(f.id,f.label)).join('')+'</select></label>'+
+ '<label style="flex:1">Tipo di prodotto<br><select class="tk-cat">'+tankOpts.categories.map(c=>opt(c.id,c.label)).join('')+'</select></label></div>'+
+ '<div class="row"><label style="flex:1">Dose massima in etichetta <span class="muted">(stessa unità)</span><br><input class="tk-max" type="number" min="0" step="any" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label>'+
+ '<label style="flex:1">Rame metallo g per kg o l <span class="muted">(solo rameici)</span><br><input class="tk-cug" type="number" min="0" step="any" inputmode="decimal" style="width:100%;font:inherit;padding:8px"></label></div>'+
+ '<p><button type="button" class="secondary tk-del">Rimuovi</button></p>';
+ d.querySelector('.tk-form').value='OTHER';
+ d.querySelector('.tk-del').addEventListener('click',()=>d.remove());
+ $('tk-rows').appendChild(d);
+}
+$('tk-add').addEventListener('click',addRow);
+const num=v=>v===''?null:Number(v);
+$('tk-calc').addEventListener('click',async()=>{
+ const products=[...document.querySelectorAll('.tk-row')].map(r=>({name:r.querySelector('.tk-name').value.trim()||'Prodotto',dose:num(r.querySelector('.tk-dose').value),unit:r.querySelector('.tk-unit').value,formulation:r.querySelector('.tk-form').value,category:r.querySelector('.tk-cat').value,label_max:num(r.querySelector('.tk-max').value),copper_g_per_unit:num(r.querySelector('.tk-cug').value)}));
+ const body={tank_l:num($('tk-vol').value),water_l_ha:num($('tk-wha').value),temperature_c:num($('tk-temp').value),copper_already_kg_ha:num($('tk-cu').value),products};
+ try{const r=await fetch('/api/botte',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();
+ if(!r.ok){const d=Array.isArray(j.detail)?'Controlla i campi: volume e dose devono essere maggiori di zero.':j.detail;$('tk-out').innerHTML='<div class="card warn">'+esc(d)+'</div>';return;}
+ let h='<section class="card"><h2>Risultato</h2>';
+ for(const e of j.errors)h+='<div class="warn">'+esc(e)+'</div>';
+ if(j.area_ha!=null)h+='<p>Una botte copre <strong>'+esc(j.area_ha)+' ha</strong> ('+esc(Math.round(j.area_ha*10000))+' m²).</p>';
+ h+='<table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left">Prodotto</th><th style="text-align:right">Nella botte</th><th style="text-align:right">Per ettaro</th></tr>';
+ for(const p of j.products){h+='<tr><td>'+esc(p.name)+(p.over_label?' ⚠':'')+'<br><span class="muted">'+esc(p.dose+' '+p.unit)+'</span></td><td style="text-align:right"><strong>'+esc(p.amount.value+' '+p.amount.unit)+'</strong></td><td style="text-align:right">'+(p.per_ha?esc(p.per_ha.value+' '+p.per_ha.unit):'–')+'</td></tr>';}
+ h+='</table>';
+ if(j.copper_kg_ha!=null)h+='<p>Rame metallo: <strong>'+esc(j.copper_kg_ha)+' kg/ha</strong></p>';
+ h+='<h3>Ordine di caricamento</h3><ol>'+j.order.map(o=>'<li>'+esc(o.name)+' <span class="muted">('+esc(o.formulation)+')</span></li>').join('')+'</ol>';
+ for(const w of j.warnings)h+='<div class="warn'+(w.level==='incompatibile'?' lab':'')+'">'+esc(w.text)+'</div>';
+ h+='<h3>Procedura</h3><ul>'+j.procedure.map(p=>'<li>'+esc(p.text)+'</li>').join('')+'</ul>';
+ const src=Object.values(j.sources||{});if(src.length)h+='<p class="muted">Fonti: '+src.map(s=>'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title)+'</a>').join(' · ')+'</p>';
+ h+='<p class="muted">'+esc(j.legal_note)+'</p></section>';
+ $('tk-out').innerHTML=h;
+ }catch(e){$('tk-out').innerHTML='<div class="card warn">Errore di rete.</div>';}
+});
 let quizLoaded=false,qTok=null,score={ok:0,tot:0};
 async function loadQuiz(){
  quizLoaded=true;
@@ -267,6 +329,24 @@ async function sendFb(verdict){
  catch(e){$('fb-status').textContent='Errore di rete.';}
 }
 </script></body></html>"""
+
+
+class TankProductIn(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    dose: float = Field(gt=0)
+    unit: Literal["g/hl", "ml/hl", "g/ha", "kg/ha", "ml/ha", "l/ha", "%"]
+    formulation: str = Field(default="OTHER", max_length=8)
+    category: str = Field(default="altro", max_length=32)
+    label_max: float | None = Field(default=None, gt=0)
+    copper_g_per_unit: float | None = Field(default=None, gt=0, le=1000)
+
+
+class TankIn(BaseModel):
+    tank_l: float = Field(gt=0, le=100000)
+    water_l_ha: float | None = Field(default=None, gt=0, le=20000)
+    temperature_c: float | None = Field(default=None, ge=-30, le=60)
+    copper_already_kg_ha: float | None = Field(default=None, ge=0, le=100)
+    products: list[TankProductIn] = Field(min_length=1, max_length=8)
 
 
 class QuizAnswerIn(BaseModel):
@@ -346,6 +426,30 @@ def create_app(checkpoint: str | Path | None = None, abstain_threshold: float = 
     @app.get("/api/plants")
     def plants(priority: int | None = None) -> list[dict]:
         return kb.list_plants(priority=priority)
+
+    # ---------------- preparazione della botte ----------------
+    from plantcare import sprayer as sp
+    mixing_rules = sp.load_rules()
+
+    @app.get("/api/botte/opzioni")
+    def tank_options() -> dict:
+        return {"units": sorted(sp.UNITS), "formulations": mixing_rules["formulation_order"]["order"],
+                "categories": mixing_rules["categories"], "legal_note": sp.LEGAL_NOTE}
+
+    @app.post("/api/botte")
+    def tank(item: TankIn) -> dict:
+        products = [sp.Product(**p.model_dump()) for p in item.products]
+        try:
+            res = sp.compute_tank(item.tank_l, products, item.water_l_ha, item.temperature_c,
+                                  item.copper_already_kg_ha, rules=mixing_rules)
+        except sp.SprayerError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+        out = sp.as_dict(res)
+        out["sources"] = {sid: {"title": kb.sources[sid]["title"], "url": kb.sources[sid]["url"]}
+                          for sid in {s for w in out["warnings"] for s in w["sources"]}
+                          | set(out["order_sources"]) | {s for p in out["procedure"] for s in p["sources"]}
+                          if sid in kb.sources}
+        return out
 
     # ---------------- quiz ----------------
     @app.get("/api/quiz/categories")
