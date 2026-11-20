@@ -215,7 +215,6 @@ function renderReferto(r){
  if(r.pest)s+='<p><strong>Insetto o acaro:</strong> '+esc(r.pest)+'</p>';
  if(r.management&&r.management.length){s+='<p><strong>Misure ('+esc(r.management_status)+'):</strong></p><ul>';for(const m of r.management)s+='<li>'+esc(m)+'</li>';s+='</ul>';}
  if(r.sources&&r.sources.length){s+='<p class="muted">Fonti: '+r.sources.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a>').join(' · ')+'</p>';}
- if(r.management&&r.management.length){s+='<p><button type="button" class="secondary" onclick="showTab(\'tank\')">Prepara la botte</button></p>';}
  return s+'</div>';
 }
 async function analyze(fd){
@@ -227,9 +226,10 @@ async function analyze(fd){
  for(const [name,v] of Object.entries(j.heads)){h+=renderReader(name,v,(j.readers||{})[name]);}
  for(const [name,st] of Object.entries(j.readers||{})){if(!st.trained)h+='<div class="reader"><h3>'+esc(st.label)+'</h3><p class="muted">'+esc(st.note)+'</p></div>';}
  h+=renderReferto(j.referto);
+ h+='<p><button type="button" class="secondary tk-open">Prepara la botte</button></p>';
  for(const w of j.warnings){h+='<div class="warn'+(w.includes('laboratorio')?' lab':'')+'">'+esc(w)+'</div>';}
  h+='<p class="muted">'+esc(j.disclaimer)+'</p><p class="muted">Modello: '+esc(j.model_version)+' · soglia '+esc(j.abstain_threshold)+'</p></section>';
- $('out').innerHTML=h;$('feedback-box').hidden=false;$('fb-form').hidden=true;$('fb-status').textContent='';
+ $('out').innerHTML=h;$('out').querySelector('.tk-open').addEventListener('click',()=>showTab('tank'));$('feedback-box').hidden=false;$('fb-form').hidden=true;$('fb-status').textContent='';
  }catch(err){$('out').innerHTML='<div class="card warn">Errore di rete. Riprova.</div>';}
 }
 function showTab(name){

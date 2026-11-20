@@ -217,3 +217,10 @@ def test_disease_without_knowledge_is_explicit_about_it():
     client = TestClient(create_app(None))
     card = client.get("/api/diseases/lettuce_downy_mildew").json()
     assert card["knowledge"] is None
+
+
+def test_page_has_no_inline_onclick_and_tank_button_is_wired():
+    """Gli handler inline con virgolette annidate hanno già rotto il JavaScript: si usano addEventListener."""
+    from plantcare.api import PAGE
+    assert "onclick=" not in PAGE
+    assert "tk-open" in PAGE and "showTab('tank')" in PAGE
