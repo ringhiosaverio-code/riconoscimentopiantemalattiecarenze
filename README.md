@@ -46,7 +46,9 @@ L'app usa la fotocamera del telefono o del computer (oppure una foto caricata) e
 | Coltura | la specie coltivata | PlantVillage, PlantDoc, iNatAg (iNaturalist), dataset AgML per coltura |
 | Malattia | malattie e danni visibili | PlantVillage (laboratorio), PlantDoc (campo), dataset AgML (vite, limone, pomodoro, melanzana, patata, cipolla, peperoncino, banano, cavolfiore, *Tuta absoluta*) |
 | Insetti e acari | 102 specie di insetti dannosi | IP102 (uso accademico) |
-| Carenze | macro e micro carenze | **non addestrato**: non esistono dataset di immagini di carenze verificati da analisi di laboratorio |
+| Carenze | sintomi di carenza, carenza di calcio, eccesso di azoto | dataset AgML di limone, peperoncino e pomodoro (etichette degli autori; il nutriente è indicato solo per calcio e azoto) |
+
+**Risultati** (dettagli in `docs/lettori-ottici.md`): sulle foto di campo il lettore della malattia raggiunge il 76% (PlantDoc), quello della coltura il 79-89%, quello degli insetti il 74% (IP102). Su foto di laboratorio (PlantVillage) si arriva al 99%: la differenza indica che servono più foto di campo.
 
 Ogni lettore restituisce una **probabilità calibrata** (temperature scaling sulla validazione) e l'app mostra la sua **affidabilità misurata sul test**, separata per fonte (laboratorio o campo). Sotto la soglia di confidenza il lettore risponde "non determinabile".
 

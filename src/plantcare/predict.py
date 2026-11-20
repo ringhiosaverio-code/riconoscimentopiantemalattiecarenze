@@ -211,11 +211,12 @@ class Predictor:
             "cause": k["cause"] if k else None,
             "caused_by": (
                 [v["name"] for v in k["vectors"]] if k and k["vectors"]
-                else ([card["pathogen_type"]["label"]] if card else [])
+                else ([card["pathogen_type"]["label"]] if card and card["pathogen_type"]["id"] != "healthy" else [])
             ),
             "management": [m["text"] for m in k["management"]] if k else [],
             "management_status": (
-                "fonti verificate" if k and k.get("sources_verified")
+                "nessun intervento necessario" if card and card["pathogen_type"]["id"] == "healthy"
+                else "fonti verificate" if k and k.get("sources_verified")
                 else ("da completare con il tecnico" if not k else "fonti parziali")
             ),
             "lab_confirmation_required": bool(card and card.get("lab_confirmation_required")),
