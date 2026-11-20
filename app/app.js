@@ -31,6 +31,14 @@
   getJSON('hypotheses.json').then(function (d) { DATA.hyp = d; }).catch(function () { DATA.hyp = null; });
   getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
   getJSON('difesa.json').then(function (d) { DATA.difesa = d; }).catch(function () { DATA.difesa = null; });
+  getJSON('note_legno.json').then(function (d) { DATA.noteLegno = d; }).catch(function () { DATA.noteLegno = []; });
+  // avviso quando coltura e organo indicano una malattia del legno (la foto della foglia non basta)
+  function woodNote(crop, organ) {
+    return (DATA.noteLegno || []).filter(function (n) { return n.colture.indexOf(crop) >= 0 && n.organi.indexOf(organ) >= 0; })
+      .map(function (n) {
+        return '<div class="warn"><strong>' + esc(n.titolo) + '</strong><br>' + esc(n.testo) + '<br><span class="muted">Fonti: ' + srcLinks(n.fonti) + '</span></div>';
+      }).join('');
+  }
 
   // ------------------------------------------------------------------ schede
   function showTab(name) {
@@ -327,6 +335,8 @@
     // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
     var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
     h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
+    var cropNow = crop || (answers.plant && answers.plant.label);
+    if (cropNow && organ) h += woodNote(cropNow, organ);
     var td = top(res.disease, 1)[0], dc = DATA.readers.disease.classes[td[1]];
     if (td[0] >= THRESHOLD && dc.cause !== 'sano') h += difesaBlock('disease', dc.label, crop, answers.plant && answers.plant.label);
     h += referto(answers, organ);

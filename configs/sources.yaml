@@ -257,3 +257,31 @@ sources:
     url: "https://gd.eppo.int/download/standard/131/pm7-007-02-en.pdf"
     status: testo_letto
     note: "L'identificazione dei pupari richiede il montaggio su vetrino e la chiave del protocollo; caratteri osservati al microscopio composto."
+  - id: petri_pcr_2012
+    title: "Real-Time PCR Detection of Phaeomoniella chlamydospora and Phaeoacremonium aleophilum (Applied and Environmental Microbiology)"
+    issuer: "American Society for Microbiology"
+    type: internazionale
+    url: "https://journals.asm.org/doi/10.1128/aem.07360-11"
+    status: riassunto_verificato
+    note: "Test PCR in tempo reale per i funghi della malattia di Petri nel legno; la diagnosi è complicata da assenza di sintomi e bassa concentrazione del fungo."
+  - id: gtd_editoriale_2023
+    title: "Editorial: Fungal pathogens causing the grapevine trunk diseases - biology and identification (Frontiers in Fungal Biology)"
+    issuer: "Frontiers"
+    type: internazionale
+    url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10512359/"
+    status: riassunto_verificato
+    note: "Malattie del legno della vite: funghi coinvolti e identificazione."
+  - id: disc_calabria_2026
+    title: "Disciplinari di produzione integrata 2026 - Difesa e controllo infestanti, Regione Calabria (Allegato A)"
+    issuer: "Regione Calabria (documento pubblicato da ARSAC)"
+    type: regionale_calabria
+    url: "https://www.arsacweb.it/wp-content/uploads/2026/04/Disciplinari-Difesa-e-Diserbo-2026-Regione-Calabria-Allegato-A_.pdf"
+    status: testo_letto
+    note: "Tabelle di difesa lette con scripts/import_disciplinare.py; vite da vino: mal dell'esca (Phaeoacremonium aleophilum, Phaeomoniella chlamydospora, Fomitiporia mediterranea)."
+  - id: petri_sintomi_2005
+    title: "4th International Workshop on Grapevine Trunk Diseases, abstracts (Phytopathologia Mediterranea 44, 2005)"
+    issuer: "Phytopathologia Mediterranea (copia University of California ANR)"
+    type: internazionale
+    url: "https://ucanr.edu/sites/default/files/2021-01/343528.pdf"
+    status: riassunto_verificato
+    note: "Malattia di Petri: viti di 1-5 anni, germogliamento tardivo, internodi corti, clorosi internervale, deperimento; nel legno striature brune e necrosi."

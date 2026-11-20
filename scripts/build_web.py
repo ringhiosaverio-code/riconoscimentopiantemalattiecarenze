@@ -304,6 +304,14 @@ def main() -> None:
                                            | {"url": f"https://gd.eppo.int/taxon/{o['eppo']}/categorization"}
                                            for o in lab["organismi_regolamentati"]]},
               open(APP / "data" / "lab.json", "w", encoding="utf-8"), ensure_ascii=False)
+    # avvisi per colture e organi in cui la foto non basta (malattie del legno), con le fonti
+    notes = load_yaml(ROOT / "configs" / "note_legno.yaml")["note"]
+    for n in notes:
+        miss = [f for f in n["fonti"] if f not in src]
+        if miss:
+            raise SystemExit(f"fonti sconosciute in configs/note_legno.yaml: {miss}")
+        n["fonti"] = [{"title": src[f]["title"], "url": src[f]["url"]} for f in n["fonti"]]
+    json.dump(notes, open(APP / "data" / "note_legno.json", "w", encoding="utf-8"), ensure_ascii=False)
     # difesa: Disciplinare Calabria (sostanze ammesse, limiti, sostanze uscite dall'elenco) e usi Gowan
     from plantcare import difesa as df
     json.dump(df.build_app_data(readers, {k: sorted(v) for k, v in crops_of.items()}),
