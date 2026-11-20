@@ -125,7 +125,7 @@ organismi_regolamentati:
     ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II B (presente in parte dell'UE)"
     tipo: quarantena
     lista_eppo: "A2"
-    classi: {pest: ["ip102_083"]}
+    classi: {pest: ["ip102_083", "inat:aleurocanthus_spiniferus"]}
     analisi: "Identificazione dei pupari al microscopio su preparati montati su vetrino."
     fonti: [eppo_pm7_007]
   - eppo: TOXOCI

@@ -42,8 +42,9 @@ DINO = "vit_small_patch14_dinov2.lvd142m"
 EFF = "efficientnet_b0"
 SPLIT_AT = 10
 TOK_DIR = ROOT / "data" / "processed" / "ft_tokens"
-FIELD_W = {"plantdoc": 3.0, "plantwild": 3.0}
-FIELD_SOURCES = ("plantdoc", "plantwild")  # foto di campo: misurate a parte e usate per scegliere il modello
+FIELD_W = {"plantdoc": 3.0, "plantwild": 3.0, "inat_calabria": 2.0}
+# foto di campo: misurate a parte e usate per scegliere il modello (inat_calabria: insetti della Calabria)
+FIELD_SOURCES = ("plantdoc", "plantwild", "inat_calabria")
 PV_TRAIN, PV_VAL = 8000, 2000
 TRAIN_CAP = {"pest": 300}
 SOURCE_CAP = {"train": 330, "val": 100}  # foto di train per classe (IP102 è molto numeroso: tokens su disco)

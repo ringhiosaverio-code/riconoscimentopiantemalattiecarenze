@@ -18,7 +18,7 @@ from plantcare.data.pipeline import read_manifest
 from plantcare.metrics import expected_calibration_error, macro_f1
 
 ROOT = Path(__file__).resolve().parents[1]
-FIELD = {"plantdoc": 3.0, "inatag": 3.0, "plantwild": 3.0}
+FIELD = {"plantdoc": 3.0, "inatag": 3.0, "plantwild": 3.0, "inat_calabria": 2.0}
 
 
 def load():
@@ -76,7 +76,7 @@ def calibrate(p_val, y_val):
 def report(name, p, hd):
     y = hd.y["test"].numpy(); pred = p.argmax(1).numpy(); src = np.array(hd.sources["test"])
     out = {"acc": float((pred == y).mean()), "f1": macro_f1(y, pred), "ece": expected_calibration_error(p.numpy(), y)}
-    for s in ("plantdoc", "inatag"):
+    for s in ("plantdoc", "inatag", "plantwild", "inat_calabria"):
         m = src == s
         if m.any(): out[s] = float((pred[m] == y[m]).mean())
     print(f"  {name:10s} " + " ".join(f"{k}={v:.4f}" for k, v in out.items()), flush=True)

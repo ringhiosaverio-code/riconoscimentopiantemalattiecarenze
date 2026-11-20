@@ -707,3 +707,37 @@ def contribution_rows() -> list[ManifestRow]:
         return [ManifestRow(path=r["path"], source="contributi", split=r["split"], plant=r["plant"],
                             disease=r["disease"], deficiency=r["deficiency"], organ=r.get("organ", ""))
                 for r in csv.DictReader(fh)]
+
+
+def import_inat_calabria(seed: int = 42) -> list[ManifestRow]:
+    """Insetti e acari della Calabria da iNaturalist (scripts/import_inat_train.py) per il lettore
+    degli insetti. Split per autore della foto (10% test, 10% validazione): lo stesso fotografo non
+    finisce in due split, perché spesso riprende più volte lo stesso individuo."""
+    man = EXT / "inat_calabria" / "manifest.json"
+    if not man.exists():
+        return []
+    rows = []
+    for key, e in sorted(json.load(open(man, encoding="utf-8")).items()):
+        for p in e.get("foto", []):
+            if not (DATA / p["path"]).exists():
+                continue
+            h = zlib.crc32(f"{seed}:{p['user']}".encode()) % 100
+            split = "test" if h < 10 else ("val" if h < 20 else "train")
+            rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant="", disease="",
+                                    pest=f"inat:{key}", deficiency="", organ=""))
+    return rows
+
+
+def append_inat_calabria() -> int:
+    """Aggiorna nel manifest le righe di inat_calabria senza rifare l'importazione di tutte le fonti."""
+    from dataclasses import asdict
+    from plantcare.data.pipeline import MANIFEST_COLUMNS
+    path = DATA / "processed" / "manifest_v2.csv"
+    rows = [r for r in csv.DictReader(open(path, encoding="utf-8")) if r["source"] != "inat_calabria"]
+    new = [asdict(r) for r in import_inat_calabria()]
+    with open(path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=MANIFEST_COLUMNS)
+        w.writeheader()
+        w.writerows(rows)
+        w.writerows({k: r.get(k, "") for k in MANIFEST_COLUMNS} for r in new)
+    return len(new)

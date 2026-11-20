@@ -318,7 +318,7 @@
     });
     var lev = hypLevel('pest', '95');
     if (lev) h += hypHtml(hypSet(probs, lev), function (i) { return R.classes[i].name; }, lev, 95, 'Ipotesi');
-    return h + '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + '. Addestrato su IP102 (102 insetti dannosi, soprattutto di riso, frumento, mais, erba medica, vite, agrumi e mango), concesso per uso accademico: mancano molte specie mediterranee, come la mosca delle olive.</p></details>';
+    return h + '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + '. Addestrato su IP102 (102 insetti dannosi di riso, frumento, mais, erba medica, vite, agrumi e mango, concesso per uso accademico) e, se il modello li comprende, sugli insetti e acari delle norme di difesa della Calabria con foto di iNaturalist (mosca delle olive, cocciniglie, aleurodidi...).</p></details>';
   }
 
   function top(probs, k) {

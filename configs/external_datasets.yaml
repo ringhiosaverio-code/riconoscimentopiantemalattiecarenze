@@ -239,3 +239,10 @@ datasets:
     license: "CC BY 4.0"
     citation: "Wang X., Liu J., Chen Q. (2025) An advanced deep learning method for pepper diseases and pests detection. Plant Methods 21. Dati: Mendeley DOI 10.17632/tg3z7xxkdb.1"
     note: "Nonostante il nome, le foto sono foglie di MELO in campo con le classi di ATLDSD (alternaria, maculatura bruna, maculatura grigia, mosaico, ruggine): verificato sulle immagini e con 3.082 copie quasi identiche in AppleLeaf9. Importate come melo con le etichette di AppleLeaf9; le classi ATLDSD di AppleLeaf9 sono escluse per non avere copie tra addestramento e test. Campione di 1.500 foto per classe, split per blocchi di 50 scatti consecutivi."
+
+  # --- insetti e acari della Calabria (lettore degli insetti) ---
+  - name: inat_calabria
+    use: pest
+    license: "CC0, CC BY o CC BY-NC (per foto, autore salvato): uso non commerciale e accademico"
+    citation: "iNaturalist (www.inaturalist.org), osservazioni 'research grade'; specie delle norme di difesa integrata della Regione Calabria 2026 (configs/quiz_calabria.yaml)"
+    note: "Scaricate con scripts/import_inat_train.py, al massimo 200 foto per specie e 5 per autore; split per autore (10% test, 10% validazione). Le foto restano fuori dal repository."

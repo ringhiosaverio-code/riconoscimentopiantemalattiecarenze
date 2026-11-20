@@ -11,6 +11,7 @@ import argparse
 import csv
 import json
 import random
+import re
 import shutil
 from collections import defaultdict
 from pathlib import Path
@@ -67,6 +68,11 @@ def load_yaml(p: Path) -> dict:
 
 
 def ip102_group(label: str) -> str:
+    """Gruppo di colture dell'insetto: quello di IP102, o la coltura del Disciplinare per le specie iNaturalist."""
+    if label.startswith("inat:"):
+        cal = {re.sub(r"[^a-z0-9]+", "_", e["taxon"].lower()).strip("_"): e
+               for e in load_yaml(ROOT / "configs" / "quiz_calabria.yaml").get("parassiti", [])}
+        return (cal.get(label[5:]) or {}).get("gruppo", "Calabria")
     k = int(label.split("_")[-1])
     return next(g for a, b, g in IP102_GROUPS if a <= k <= b)
 
@@ -165,6 +171,18 @@ def build_quiz(ck, heads, names: dict) -> None:
     print(f"quiz: {len(quiz)} foto, {size:.1f} MB")
 
 
+def pest_name(raw: str, ip_en: dict, ip_it: dict) -> str:
+    """Nome italiano di una classe del lettore degli insetti: IP102 (ip102_NNN) o iNaturalist (inat:<specie>)."""
+    if raw.startswith("inat:"):
+        cal = {re.sub(r"[^a-z0-9]+", "_", e["taxon"].lower()).strip("_"): e
+               for e in load_yaml(ROOT / "configs" / "quiz_calabria.yaml").get("parassiti", [])}
+        e = cal.get(raw[5:])
+        return f"{e['nome']} ({e['taxon']})" if e else raw[5:].replace("_", " ").capitalize()
+    k = int(raw.split("_")[-1])
+    en = ip_en.get(k, raw)
+    return ip_it.get(k) or en[:1].upper() + en[1:]
+
+
 def class_names(ck, kb, tax, label_map, heads) -> dict:
     ip_en = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_classes.yaml")["classes"].items()}
     ip_it = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_it.yaml")["names"].items()}
@@ -175,9 +193,7 @@ def class_names(ck, kb, tax, label_map, heads) -> dict:
         d = {}
         for raw in ck["readers"][h]["classes"]:
             if h == "pest":
-                k = int(raw.split("_")[-1])
-                en = ip_en.get(k, raw)
-                d[raw] = ip_it.get(k) or en[:1].upper() + en[1:]
+                d[raw] = pest_name(raw, ip_en, ip_it)
             elif h == "deficiency":
                 d[raw] = DEFICIENCY_NAMES.get(raw, raw)
             else:
@@ -256,9 +272,7 @@ def main() -> None:
                 # classi valide per ogni coltura (pianta sana, disturbo nutrizionale): mai filtrate
                 item["crops"] = [] if raw in GENERIC_CLASSES else sorted(crops_of.get(raw, ()))
             elif h == "pest":
-                k = int(raw.split("_")[-1])
-                en = ip_en.get(k, raw)
-                item["name"] = ip_it.get(k) or en[:1].upper() + en[1:]
+                item["name"] = pest_name(raw, ip_en, ip_it)
             else:
                 item["name"] = DEFICIENCY_NAMES.get(raw, raw)
             if (h, raw) in reg_of:

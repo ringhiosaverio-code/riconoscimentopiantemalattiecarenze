@@ -34,7 +34,7 @@ from plantcare import conformal as cf
 ROOT = Path(__file__).resolve().parents[1]
 MEAN = np.array([0.485, 0.456, 0.406], np.float32)
 STD = np.array([0.229, 0.224, 0.225], np.float32)
-FIELD = {"disease": ("plantdoc", "plantwild"), "plant": ("plantdoc", "plantwild", "inatag"), "pest": ("ip102",)}
+FIELD = {"disease": ("plantdoc", "plantwild"), "plant": ("plantdoc", "plantwild", "inatag"), "pest": ("ip102", "inat_calabria")}
 PEST_CAP = {"val": 30, "test": 50}  # foto IP102 per classe (sottoinsieme fisso)
 LEVELS = (0.95, 0.99)
 GENERIC_CLASSES = {"healthy", "disturbo_nutrizionale"}  # valide per ogni coltura: mai filtrate (come nell'app)
@@ -108,7 +108,7 @@ def main():
         field = [r for r in rows if r["split"] == sp and r["source"] in FIELD["plant"]]
         by = defaultdict(list)
         for r in rows:
-            if r["split"] == sp and r["source"] == "ip102":
+            if r["split"] == sp and r["source"] in ("ip102", "inat_calabria"):
                 by[r["pest"]].append(r)
         pest = [x for _, v in sorted(by.items()) for x in rng.sample(v, min(PEST_CAP[sp], len(v)))] if "pest" in heads else []
         if args.limit:
