@@ -1,5 +1,7 @@
 # PlantCare
 
+**Apri l'app:** https://ringhiosaverio-code.github.io/riconoscimentopiantemalattiecarenze/ (funziona da telefono: il modello gira nel browser, la foto non lascia il dispositivo).
+
 Sistema di riconoscimento visivo (deep learning) per piante di interesse agrario, con l'obiettivo di:
 
 1. **riconoscere la coltura**, con priorità alle colture di maggior interesse agrario in Italia e a quelle tropicali/subtropicali presenti in Calabria;
@@ -72,6 +74,22 @@ La scheda **Botte** aiuta a preparare la miscela per un trattamento:
 - **Miscibilità**: ordine di caricamento per tipo di formulazione, incompatibilità documentate (zolfo con olio minerale e con prodotti alcalini, polisolfuro con olio), avvisi di temperatura, prova in barattolo.
 
 Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete neurale**: le dosi devono essere esatte e derivare dall'etichetta autorizzata, che prevale su qualunque calcolo. Il sistema non suggerisce quale prodotto usare né a che dose.
+
+## App nel browser (GitHub Pages)
+
+`index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
+- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, 45 MB, accuratezza uguale al modello pieno sulle foto di test);
+- quiz con 320 foto da PlantDoc e Project-AgML (licenze CC BY o MIT, con attribuzione);
+- botte: stesso calcolatore della versione Python, verificato dai test;
+- il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico.
+
+Per ricostruirla dopo un nuovo addestramento:
+
+```bash
+PYTHONPATH=src python scripts/export_web_model.py --checkpoint models/readers_.../readers.pt --out /tmp/web/plantcare.onnx
+# quantizzazione per canale: vedi docs/lettori-ottici.md
+PYTHONPATH=src python scripts/build_web.py --model <modello quantizzato> --ort-dist <onnxruntime-web/dist>
+```
 
 ## Avvio rapido
 

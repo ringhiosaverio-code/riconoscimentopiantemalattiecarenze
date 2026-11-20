@@ -49,6 +49,7 @@ PAGE = """<!doctype html>
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121613;--fg:#e6ece7;--card:#1c231e;--accent:#7fc08f;--muted:#a9b6ad;--warn:#f0c674;--warnbg:#332a14;--line:#fff2;--bar:#7fc08f33}}
 :root[data-theme="dark"]{--bg:#121613;--fg:#e6ece7;--card:#1c231e;--accent:#7fc08f;--muted:#a9b6ad;--warn:#f0c674;--warnbg:#332a14;--line:#fff2;--bar:#7fc08f33}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,sans-serif}
 main{max-width:760px;margin:0 auto;padding:16px}
 h1{font-size:1.7rem;color:var(--accent);margin:8px 0 4px}
