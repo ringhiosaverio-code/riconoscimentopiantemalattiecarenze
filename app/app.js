@@ -19,10 +19,17 @@
       DATA.readers = a[0]; DATA.organs = a[1]; DATA.rules = a[2]; DATA.sources = a[3]; DATA.quiz = a[4]; DATA.causes = a[5]; DATA.quizTips = a[6];
       var sel = $('organ');
       DATA.organs.forEach(function (o) { var op = document.createElement('option'); op.value = o.id; op.textContent = o.label; sel.appendChild(op); });
+      var cs = $('crop');
+      DATA.readers.plant.classes.slice().sort(function (x, y) { return x.name.localeCompare(y.name, 'it'); }).forEach(function (c) {
+        var op = document.createElement('option'); op.value = c.label; op.textContent = c.name; cs.appendChild(op);
+      });
       renderInfo();
       wireInfo();
     })
     .catch(function () { $('model-status').textContent = "Errore nel caricamento dei dati dell'app: ricarica la pagina."; });
+  // facoltativi: senza questi file l'app mostra solo le probabilità
+  getJSON('hypotheses.json').then(function (d) { DATA.hyp = d; }).catch(function () { DATA.hyp = null; });
+  getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
 
   // ------------------------------------------------------------------ schede
   function showTab(name) {
@@ -108,12 +115,84 @@
           for (var i = 0; i < k; i++) probs.push((o[i] + o[k + i]) / 2);
           res[hd] = probs;
         });
+        res.crop = $('crop').value || null;
+        if (res.crop) res.disease = cropMask(res.disease, res.crop);
         render(res, (performance.now() - t0) / 1000);
       });
     }).catch(function (e) {
       $('prog').hidden = true;
       $('out').innerHTML = '<div class="card warn">Analisi non riuscita: ' + esc(e.message || e) + '. Controlla la connessione e riprova.</div>';
     });
+  }
+
+  // Coltura indicata dall'utente: probabilità delle malattie ristrette a quelle viste su quella coltura
+  // nell'addestramento (le classi senza coltura, come "pianta sana", restano), poi rinormalizzate.
+  function cropMask(probs, crop) {
+    var C = DATA.readers.disease.classes, out = probs.map(function (p, i) {
+      var cc = C[i].crops; return (!cc || !cc.length || cc.indexOf(crop) >= 0) ? p : 0;
+    });
+    var s = out.reduce(function (a, b) { return a + b; }, 0);
+    return s > 0 ? out.map(function (p) { return p / s; }) : probs;
+  }
+
+  // ------------------------------------------------------------------ ipotesi calibrate (predizione conforme)
+  // Elenco delle classi con probabilità >= soglia: la soglia è calibrata sulle foto di campo di validazione
+  // perché l'elenco contenga la risposta giusta 95 o 99 volte su 100 (verificato sul test).
+  function hypLevel(head, level, crop, cause) {
+    var H = DATA.hyp && DATA.hyp[head]; if (!H) return null;
+    if (cause) H = H.cause; else if (crop && H.con_coltura) H = H.con_coltura;
+    return H && H.livelli && H.livelli[level] ? H.livelli[level] : null;
+  }
+  function hypSet(probs, lev) {
+    return top(probs, probs.length).filter(function (x, k) { return k === 0 || x[0] >= lev.soglia_probabilita; });
+  }
+  function sureNote(head, p, crop) {
+    var s = hypLevel(head, 'sicura', crop);
+    if (!s || s.soglia > 1 || p < s.soglia || s.giuste == null) return '';
+    return ' <span class="sure">risposta sicura</span><span class="muted"> (con questa confidenza, sulle foto di campo di prova: giusta nel ' + pct(s.giuste) + ' dei casi)</span>';
+  }
+  function hypHtml(set, nameOf, lev, level, what) {
+    var item = function (x) { return '<li>' + esc(nameOf(x[1])) + ' <span class="muted">' + pct(x[0]) + '</span></li>'; };
+    var h = '<div class="hyp"><p><strong>' + what + ': ' + set.length + '</strong> <span class="muted">— sulle foto di campo di prova la risposta giusta era nell\'elenco ' +
+      pct(lev.copertura) + ' delle volte (obiettivo ' + level + ' su 100)</span></p><ol>' + set.slice(0, 6).map(item).join('') + '</ol>';
+    if (set.length > 6) h += '<details><summary>Altre ' + (set.length - 6) + ' ipotesi meno probabili</summary><ol start="7">' + set.slice(6).map(item).join('') + '</ol></details>';
+    if (set.length > 6) h += '<p class="muted">Elenco lungo: la foto da sola non basta. Indica la coltura, inquadra la parte colpita da vicino o chiedi un\'analisi.</p>';
+    return h + '</div>';
+  }
+
+  // ------------------------------------------------------------------ quando serve il laboratorio
+  function srcLinks(f) {
+    return f.map(function (x) { return '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.title) + '</a>'; }).join(' · ');
+  }
+  function labBlock(causeIds, nDisease, regs) {
+    var L = DATA.lab; if (!L) return '';
+    var A = L.analisi_per_causa, names = DATA.causes || {}, lines = [];
+    var real = causeIds.filter(function (c) { return c !== 'sano'; });
+    var doubt = real.length > 1 || nDisease > 1;
+    if (real.length > 1) lines.push('<p><strong>Dalla foto non si distingue tra: ' + esc(real.map(function (c) { return names[c] || c; }).join(', ')) + '.</strong> Per decidere serve un\'analisi.</p>');
+    var specific = regs.filter(function (r) { return r.o.analisi; }).map(function (r) { return r.cause; });
+    real.forEach(function (c) {
+      var a = A[c]; if (!a || (a.quando !== 'sempre' && !doubt) || specific.indexOf(c) >= 0) return;  // c'è l'analisi specifica
+      lines.push('<p><strong>' + esc(names[c] || c) + ':</strong> ' + esc(a.testo) + '<br><span class="muted">Fonte: ' + srcLinks(a.fonti) + '</span></p>');
+    });
+    if (!lines.length && real.length) lines.push('<p>Dalla foto la diagnosi è netta: il laboratorio serve solo se i sintomi non corrispondono alla scheda della malattia.</p>');
+    regs.forEach(function (r) { lines.push(regNote(r.o, r.p, '')); });
+    return lines.length ? '<div class="reader"><h3>Serve il laboratorio?</h3>' + lines.join('') + '</div>' : '';
+  }
+  // organismo regolamentato (categoria letta sulla scheda EPPO) e, se c'è, l'analisi del protocollo EPPO
+  function regNote(o, p, prefix) {
+    var link = ' (<a href="' + esc(o.url) + '" target="_blank" rel="noopener">scheda EPPO</a>)';
+    var head = esc(o.organismo) + ', probabilità stimata ' + pct(p) + '. ' + esc(o.ue) + '; EPPO: ' + esc(o.lista_eppo) + link + '.' + (o.nota ? ' ' + esc(o.nota) : '');
+    var an = o.analisi ? '<br><strong>Analisi:</strong> ' + esc(o.analisi) + ' <span class="muted">Fonte: ' + srcLinks(o.fonti) + '</span>' : '';
+    if (o.tipo === 'quarantena') return '<div class="warn">' + prefix + '<strong>Organismo da quarantena tra le ipotesi:</strong> ' + head + ' Se lo sospetti, contatta il Servizio Fitosanitario Regionale: la conferma spetta ai laboratori ufficiali.' + an + '</div>';
+    if (o.tipo === 'rnqp') return '<p class="muted">' + prefix + '<strong>Organismo regolamentato per il materiale di propagazione:</strong> ' + head + an + '</p>';
+    return '<div class="warn">' + prefix + '<strong>Organismo segnalato dall\'EPPO:</strong> ' + head + ' Se lo trovi, informa il Servizio Fitosanitario Regionale.' + an + '</div>';
+  }
+  function regsIn(head, set) {
+    var R = DATA.readers[head], L = DATA.lab, out = [];
+    if (!R || !L) return out;
+    set.forEach(function (x) { var c = R.classes[x[1]]; if (c.reg != null) out.push({ o: L.organismi_regolamentati[c.reg], p: x[0], cause: c.cause }); });
+    return out;
   }
 
   // Causa probabile: somma delle probabilità delle classi con la stessa causa (insetti, acari, funghi...).
@@ -130,20 +209,34 @@
     });
     var pests = (sum.insetto || 0) + (sum.acaro || 0);
     if (pests >= 0.3) h += '<p class="warn">Sintomi compatibili con insetti o acari (' + pct(pests) + '). Cerca l\'insetto o l\'acaro sulla pagina inferiore delle foglie, nei germogli e nei frutti, con una lente: fotografalo da vicino e controlla il lettore degli insetti.</p>';
-    return { html: h + '</div>', best: best };
+    // cause possibili al 99%: tutte quelle con probabilità sopra la soglia calibrata
+    var lev = hypLevel('disease', '99', null, true), ids = best ? [best.id] : t.slice(0, 2).map(function (x) { return x[1]; });
+    if (lev) {
+      ids = Object.keys(sum).filter(function (c) { return sum[c] >= lev.soglia_probabilita; }).sort(function (a, b) { return sum[b] - sum[a]; });
+      if (!ids.length) ids = [t[0][1]];
+      h += '<p><strong>Cause possibili: ' + esc(ids.map(function (c) { return names[c] || c; }).join(', ')) + '</strong> <span class="muted">— sulle foto di campo di prova la causa giusta era tra queste ' + pct(lev.copertura) + ' delle volte (obiettivo 99 su 100)</span></p>';
+    }
+    return { html: h + '</div>', best: best, ids: ids, pests: pests };
   }
 
   // Lettore degli insetti: separato dagli altri, perché ha senso solo se la foto mostra un insetto.
-  function pestBlock(probs) {
+  function pestBlock(probs, open) {
     var R = DATA.readers.pest;
     if (!R || !probs) return '';
     var t = top(probs, 3), ok = t[0][0] >= THRESHOLD;
-    var h = '<div class="reader"><h3>Lettore di insetti e acari: ' + esc(ok ? R.classes[t[0][1]].name : 'non determinabile') + '</h3>' +
+    // Il lettore non sa dire se nella foto c'è un insetto: su una foglia sana risponde comunque.
+    // Per questo resta chiuso, salvo quando i sintomi indicano insetti o acari.
+    var h = '<details class="reader"' + (open ? ' open' : '') + '><summary><strong>Lettore di insetti e acari: ' + esc(ok ? R.classes[t[0][1]].name : 'non determinabile') +
+      '</strong> <span class="muted">(solo se la foto mostra l\'insetto)</span></summary>' +
       '<p class="muted">Vale solo se la foto mostra un insetto o un acaro, non i suoi danni.</p>';
+    var c0 = R.classes[t[0][1]];
+    if (ok && c0.reg != null && DATA.lab) h += regNote(DATA.lab.organismi_regolamentati[c0.reg], t[0][0], 'Se la foto mostra davvero questo insetto: ');
     t.forEach(function (x) {
       h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(R.classes[x[1]].name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
     });
-    return h + '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + '. Addestrato su IP102 (102 insetti dannosi, soprattutto di riso, frumento, mais, erba medica, vite, agrumi e mango), concesso per uso accademico: mancano molte specie mediterranee, come la mosca delle olive.</p></div>';
+    var lev = hypLevel('pest', '95');
+    if (lev) h += hypHtml(hypSet(probs, lev), function (i) { return R.classes[i].name; }, lev, 95, 'Ipotesi');
+    return h + '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + '. Addestrato su IP102 (102 insetti dannosi, soprattutto di riso, frumento, mais, erba medica, vite, agrumi e mango), concesso per uso accademico: mancano molte specie mediterranee, come la mosca delle olive.</p></details>';
   }
 
   function top(probs, k) {
@@ -152,23 +245,40 @@
 
   function render(res, secs) {
     var organ = $('organ').value, h = '<section class="card"><h2>Risultato dei lettori</h2>';
-    var answers = {};
+    var answers = {}, crop = res.crop, dset = null;
     HEADS.forEach(function (hd) {
       var R = DATA.readers[hd], t = top(res[hd], 3), best = R.classes[t[0][1]];
       var ok = t[0][0] >= THRESHOLD;
+      if (hd === 'plant' && crop) {  // coltura indicata dall'utente: il lettore resta come confronto
+        var mine = R.classes.filter(function (c) { return c.label === crop; })[0];
+        answers.plant = mine || null;
+        h += '<div class="reader"><h3>Coltura indicata da te: ' + esc(mine ? mine.name : crop) + '</h3><p class="muted">Il lettore della coltura direbbe: ' +
+          esc(best.name) + ' (' + pct(t[0][0]) + '). Le malattie sono cercate solo tra quelle viste su questa coltura.</p></div>';
+        return;
+      }
       answers[hd] = ok ? best : null;
       h += '<div class="reader"><h3>' + esc(READER_LABELS[hd]) + ': ' + esc(ok ? best.name : 'non determinabile') + '</h3>';
+      if (ok && hd !== 'deficiency') h += '<p>' + sureNote(hd, t[0][0], hd === 'disease' && crop) + '</p>';
       t.forEach(function (x) {
         var c = R.classes[x[1]];
         h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(c.name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
       });
+      var lev = (hd === 'disease' || hd === 'plant') ? hypLevel(hd, hd === 'disease' ? '99' : '95', hd === 'disease' && crop) : null;
+      if (lev) {
+        var set = hypSet(res[hd], lev);
+        if (hd === 'disease') dset = set;
+        h += hypHtml(set, function (i) { return R.classes[i].name; }, lev, hd === 'disease' ? 99 : 95, 'Ipotesi');
+      }
       var field = R.field && (R.field.plantdoc || R.field.inatag);
       h += '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + (field ? '; su foto di campo: ' + pct(field.accuracy) : '') + '.</p></div>';
     });
     var cz = causeBlock(res.disease);
     answers.cause = cz.best;
     h += cz.html;
-    h += pestBlock(res.pest);
+    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3);
+    // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
+    var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
+    h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
     h += referto(answers, organ);
     h += '<p><button type="button" class="secondary" id="go-tank">Prepara la botte</button></p>';
     var unsure = HEADS.some(function (hd) { return !answers[hd]; });

@@ -1,0 +1,181 @@
+# Quando la foto non basta.
+#
+# 1. analisi_per_causa: per ogni causa (configs/disease_causes.yaml) l'analisi che conferma la
+#    diagnosi, con il passaggio del protocollo diagnostico EPPO (serie PM 7) che la giustifica.
+#    "sempre": la conferma serve anche quando il lettore è sicuro; "se_dubbio": serve quando tra le
+#    ipotesi ci sono cause diverse o malattie simili.
+# 2. organismi_regolamentati: classi dei lettori che corrispondono a organismi elencati dall'UE o
+#    dall'EPPO, con la categoria letta sulla scheda EPPO Global Database (pagina "categorization",
+#    consultata il 2026-11-20). Non si riportano qui obblighi di legge non verificati sul testo.
+#    tipo: quarantena (Allegato II del Reg. (UE) 2019/2072), rnqp (Allegato IV, materiale di
+#    propagazione), eppo (solo liste EPPO A1, A2 o di allerta).
+#
+# Le fonti sono in configs/sources.yaml (id uguali).
+
+analisi_per_causa:
+  virus:
+    quando: sempre
+    testo: "I virus non si riconoscono con certezza dai sintomi, che possono mancare: conferma con test sierologico (ELISA) o molecolare (RT-PCR); nei casi critici un secondo test con principio diverso."
+    fonti: [eppo_pm7_032]
+  viroide:
+    quando: sempre
+    testo: "I viroidi non producono proteine, quindi l'ELISA non li rileva: servono test molecolari (RT-PCR) e, per la specie, il sequenziamento."
+    fonti: [eppo_pm7_138]
+  batterio:
+    quando: sempre
+    testo: "Conferma con isolamento del batterio e test molecolari (PCR); per i fitoplasmi solo PCR (nested o real-time)."
+    fonti: [eppo_pm7_044, eppo_pm7_133]
+  nematode:
+    quando: sempre
+    testo: "Estrazione dei nematodi dal terreno o dalle radici e identificazione al microscopio."
+    fonti: [eppo_pm7_119]
+  nutrizionale:
+    quando: sempre
+    testo: "I sintomi delle carenze si confondono con altre cause (per esempio l'HLB degli agrumi somiglia alle carenze di zinco, rame o manganese, ma a chiazze asimmetriche): conferma con l'analisi fogliare e del terreno."
+    fonti: [eppo_pm7_121]
+  acaro:
+    quando: sempre
+    testo: "Gli acari si vedono con la lente, ma la specie si determina solo al microscopio su preparati (maschio e femmina adulti)."
+    fonti: [eppo_pm7_116]
+  insetto:
+    quando: se_dubbio
+    testo: "Cocciniglie, tripidi e aleurodidi si identificano alla specie solo al microscopio su preparati; molte larve di nottue non si distinguono tra loro a vista."
+    fonti: [eppo_pm7_038, eppo_pm7_056, eppo_pm7_124]
+  fungo:
+    quando: se_dubbio
+    testo: "Spesso riconoscibile dai sintomi; se tra le ipotesi ci sono malattie simili, conferma con isolamento, osservazione al microscopio o test molecolari (i sintomi della macchia nera degli agrumi, per esempio, si confondono con quelli di altre Phyllosticta)."
+    fonti: [eppo_pm7_017]
+
+organismi_regolamentati:
+  - eppo: LIBEAS
+    organismo: "'Candidatus Liberibacter asiaticus' (huanglongbing degli agrumi)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {disease: ["Orange___Haunglongbing_(Citrus_greening)"]}
+    analisi: "Conferma con real-time PCR su foglie sintomatiche: i sintomi somigliano alle carenze di zinco, rame o manganese, ma le chiazze sono asimmetriche."
+    fonti: [eppo_pm7_121]
+    nota: "La classe del lettore non distingue le tre specie di Liberibacter; la scheda verificata è quella di 'Ca. L. asiaticus'."
+  - eppo: GUIGCI
+    organismo: "Phyllosticta citricarpa (macchia nera degli agrumi)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {disease: ["agml_citrusfruit:black_spot"]}
+    analisi: "Conferma con isolamento o test molecolari: i sintomi si confondono con quelli di altre Phyllosticta e per distinguere P. citricarpa da P. paracitricarpa serve il sequenziamento."
+    fonti: [eppo_pm7_017]
+  - eppo: XANTCI
+    organismo: "Xanthomonas citri pv. citri (cancro batterico degli agrumi)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {disease: ["agml_lemon:Citrus Canker"]}
+    analisi: "Conferma con isolamento del batterio e almeno due test molecolari."
+    fonti: [eppo_pm7_044]
+  - eppo: LAPHFR
+    organismo: "Spodoptera frugiperda (nottua del mais, fall armyworm)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A2"
+    classi: {disease: ["agml_ccmt:zea_mays:fall armyworm", "agml_tom2024:spodoptera-frugiperda-a", "agml_tom2024:spodoptera-frugiperda-p"]}
+    analisi: "Le larve di Spodoptera non si distinguono con certezza a vista dalle altre nottue: identificazione degli adulti o test molecolari."
+    fonti: [eppo_pm7_124]
+  - eppo: PRODLI
+    organismo: "Spodoptera litura"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {pest: ["ip102_087"]}
+    analisi: "Le larve di S. litura e S. littoralis non si distinguono nella maggior parte degli stadi: identificazione degli adulti o test molecolari."
+    fonti: [eppo_pm7_124]
+  - eppo: DACUDO
+    organismo: "Bactrocera dorsalis (mosca orientale della frutta)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {pest: ["ip102_085"]}
+  - eppo: DACUTS
+    organismo: "Bactrocera tsuneonis"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {pest: ["ip102_086"]}
+  - eppo: DACUCT
+    organismo: "Bactrocera minax (mosca cinese degli agrumi)"
+    ue: "Nessuna voce UE specifica sulla scheda EPPO"
+    tipo: eppo
+    lista_eppo: "A1 (organismo assente dalla regione EPPO, raccomandato come organismo da quarantena)"
+    classi: {pest: ["ip102_084"]}
+  - eppo: SCITDO
+    organismo: "Scirtothrips dorsalis (tripide)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A"
+    tipo: quarantena
+    lista_eppo: "A2"
+    classi: {pest: ["ip102_093"]}
+    analisi: "Identificazione al microscopio su esemplari chiarificati montati su vetrino (100-600 ingrandimenti)."
+    fonti: [eppo_pm7_056]
+  - eppo: LYCMDE
+    organismo: "Lycorma delicatula (fulgoride maculato)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II A (dal 2021)"
+    tipo: quarantena
+    lista_eppo: "A1"
+    classi: {pest: ["ip102_068"]}
+  - eppo: ALECSN
+    organismo: "Aleurocanthus spiniferus (aleurodide spinoso degli agrumi)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II B (presente in parte dell'UE)"
+    tipo: quarantena
+    lista_eppo: "A2"
+    classi: {pest: ["ip102_083"]}
+    analisi: "Identificazione dei pupari al microscopio su preparati montati su vetrino."
+    fonti: [eppo_pm7_007]
+  - eppo: TOXOCI
+    organismo: "Toxoptera citricida (Aphis citricidus, afide bruno degli agrumi)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II B (presente in parte dell'UE)"
+    tipo: quarantena
+    lista_eppo: "A2"
+    classi: {pest: ["ip102_090"]}
+  - eppo: VITEVI
+    organismo: "Viteus vitifoliae (Daktulosphaira vitifoliae, fillossera della vite)"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV) e da quarantena in zone protette (Allegato III)"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {pest: ["ip102_060"]}
+  - eppo: PPV000
+    organismo: "Plum pox virus (vaiolatura delle drupacee, sharka)"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Reg. (UE) 2019/2072 Allegato IV): riguarda il materiale di propagazione"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {disease: ["peach_plum_pox"]}
+    analisi: "Conferma con ELISA o RT-PCR; nei casi critici un secondo test con principio diverso."
+    fonti: [eppo_pm7_032]
+  - eppo: TSWV00
+    organismo: "Tomato spotted wilt virus"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV)"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {disease: ["tomato_spotted_wilt"]}
+  - eppo: TYLCV0
+    organismo: "Tomato yellow leaf curl virus"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV)"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {disease: ["tomato_yellow_leaf_curl"]}
+  - eppo: FUSAC4
+    organismo: "Fusarium oxysporum f. sp. cubense razza tropicale 4 (malattia di Panama del banano)"
+    ue: "Nessuna voce UE sulla scheda EPPO"
+    tipo: eppo
+    lista_eppo: "A2 (dal 2024)"
+    classi: {disease: ["banana_panama_disease"]}
+    nota: "Dalla foto non si distingue la razza: la TR4 si accerta solo in laboratorio."
+  - eppo: LEUIOR
+    organismo: "Leucinodes orbonalis (piralide della melanzana)"
+    ue: "Misure di emergenza UE revocate nel 2024 (scheda EPPO)"
+    tipo: eppo
+    lista_eppo: "A1 (organismo assente dalla regione EPPO, raccomandato come organismo da quarantena)"
+    classi: {disease: ["agml_brinjalfruit:Shoot and Fruit Borer"]}
+  - eppo: EUTEBA
+    organismo: "Eutetranychus banksi (acaro texano degli agrumi)"
+    ue: "Nessuna voce UE sulla scheda EPPO"
+    tipo: eppo
+    lista_eppo: "Lista di allerta (dal 2024)"
+    classi: {disease: ["agml_citrusuat:Texas_mite"]}

@@ -74,6 +74,24 @@ Modello web quantizzato, stessa preparazione della foto del browser: PlantDoc ma
 
 In corso: seconda versione con i nuovi dataset (AppleLeaf9, CitrusUAT, agrumi frutti e foglie, susino, melograno, fico, patata in campo, ortaggi del Bangladesh, frutti di melanzana) e 3 blocchi riaddestrati (`scripts/riaddestra_tutto.sh`).
 
+## 6. Ipotesi calibrate e laboratorio (nell'app)
+
+**Ipotesi con garanzia di copertura.** Oltre alla risposta più probabile, l'app mostra l'elenco più corto di ipotesi che, sulle foto di campo di validazione (PlantDoc e PlantWild; per gli insetti IP102), contiene la risposta giusta 95 o 99 volte su 100: predizione conforme con soglia sulle probabilità (Sadinle et al. 2019; Angelopoulos et al. 2021, arXiv 2009.14193). La copertura si verifica sulle foto di test. Le soglie si calcolano con `scripts/calibrate_hypotheses.py` sul modello web e finiscono in `app/data/hypotheses.json`. La garanzia vale per foto simili a quelle di calibrazione; per le foto di Calabria e Sicilia va verificata con i contributi.
+
+Prova sull'insieme di lettori, foto di campo (prima del modello nuovo):
+
+| Cosa | Livello | Ipotesi in media | Copertura sul test |
+|---|---|---|---|
+| Causa (fungo, batterio, virus, insetto...) | 99% | 1,9 | 99,1% |
+| Malattia, coltura indicata | 99% | 7,3 (mediana 3) | 98,5% |
+| Malattia, coltura indicata | 95% | 1,8 | 94,4% |
+| Malattia, coltura non indicata | 99% | 26 (mediana 10) | 98,3% |
+| Insetti (IP102) | 95% | 5,2 (mediana 3) | 94,9% |
+
+Indicare la coltura nell'app ("Che coltura è?") restringe le malattie a quelle viste su quella coltura nell'addestramento: la malattia giusta passa dall'81,5% all'83,6% e l'elenco al 99% si accorcia da 26 a 7 ipotesi in media.
+
+**Quando serve il laboratorio.** `configs/lab_requirements.yaml` indica, per causa, l'analisi di conferma secondo i protocolli diagnostici EPPO (serie PM 7, letti nel testo): virus (ELISA, RT-PCR), viroidi (RT-PCR: non producono proteine), batteri e fitoplasmi (isolamento, PCR), nematodi (estrazione e microscopio), carenze (analisi fogliare: l'HLB somiglia alle carenze di zinco, rame e manganese), acari, cocciniglie e tripidi (microscopio su vetrino). Se le ipotesi al 99% contengono cause diverse, l'app scrive che dalla foto non si distinguono. Per 19 organismi presenti nei lettori riporta la categoria UE ed EPPO letta sulla scheda EPPO Global Database (11 da quarantena UE, 4 RNQP, 4 solo liste EPPO). Il lettore degli insetti risponde anche se nella foto non c'è un insetto: per questo resta chiuso, salvo quando i sintomi indicano insetti o acari, e i suoi avvisi sono condizionati ("se la foto mostra davvero questo insetto").
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:

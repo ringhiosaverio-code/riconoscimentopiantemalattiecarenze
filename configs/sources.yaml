@@ -161,3 +161,98 @@ sources:
     url: "https://www.cropscience.bayer.it/-/media/agricampus/documenti/miscele.pdf"
     status: riassunto_verificato
     note: "Con fosetil-Al e formulati SC o CS, questi ultimi vanno immessi per primi."
+
+  # Protocolli diagnostici EPPO (serie PM 7): passaggi letti nel PDF il 2026-11-20 e usati in
+  # configs/lab_requirements.yaml per dire quando serve il laboratorio.
+  - id: eppo_pm7_032
+    title: "PM 7/32 (2) Plum pox virus - protocollo diagnostico"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/156/pm7-032-2-en.pdf"
+    status: testo_letto
+    note: "Campioni sintomatici e asintomatici: DAS-ELISA, TAS-ELISA, RT-PCR convenzionale e real-time; nei casi critici secondo test con principio diverso."
+  - id: eppo_pm7_138
+    title: "PM 7/138 (1) Pospiviroids (genus Pospiviroid) - protocollo diagnostico"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/762/pm7-138-1-en.pdf"
+    status: testo_letto
+    note: "'Viroids do not code for any protein'; rilevamento con RT-PCR e real-time RT-PCR."
+  - id: eppo_pm7_044
+    title: "PM 7/44 (2) Xanthomonas citri pv. citri e pv. aurantifolii - protocollo diagnostico"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/168/pm7-044-2-en.pdf"
+    status: testo_letto
+    note: "Screening con isolamento e almeno due test molecolari."
+  - id: eppo_pm7_133
+    title: "PM 7/133 (1) Generic detection of phytoplasmas"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/741/pm7-133-1-en.pdf"
+    status: testo_letto
+    note: "Rilevamento generico dei fitoplasmi con PCR (nested con P1/P7 e R16F2n/R16R2, real-time)."
+  - id: eppo_pm7_119
+    title: "PM 7/119 (1) Nematode extraction"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/648/pm7-119-1-en.pdf"
+    status: testo_letto
+    note: "Metodi di estrazione da terreno e piante; i nematodi si identificano al microscopio."
+  - id: eppo_pm7_121
+    title: "PM 7/121 (2) 'Candidatus Liberibacter africanus', 'americanus' e 'asiaticus' (huanglongbing)"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/646/pm7-121-2-en.pdf"
+    status: testo_letto
+    note: "Sintomi fogliari simili alle carenze di zinco, rame o manganese, ma asimmetrici; screening con real-time PCR."
+  - id: eppo_pm7_116
+    title: "PM 7/116 (2) Tetranychus evansi"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/240/pm7-116-02-en.pdf"
+    status: testo_letto
+    note: "'Specific identification requires examination of slide mounted specimens of both an adult male and a female'."
+  - id: eppo_pm7_038
+    title: "PM 7/38 (2) Unaspis citri"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/162/pm7-038-2-en.pdf"
+    status: testo_letto
+    note: "Le cocciniglie si identificano su preparati chiarificati, colorati e montati su vetrino; identificazione formale al microscopio composto."
+  - id: eppo_pm7_056
+    title: "PM 7/56 (1) Scirtothrips aurantii, S. citri, S. dorsalis"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/180/pm7-056-1-en.pdf"
+    status: testo_letto
+    note: "Per l'identificazione servono esemplari chiarificati su vetrino, ingrandimento 100-600x."
+  - id: eppo_pm7_124
+    title: "PM 7/124 (1) Spodoptera littoralis, S. litura, S. frugiperda, S. eridania"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/649/pm7-124-1-en.pdf"
+    status: testo_letto
+    note: "Nessun carattere generale separa le larve di Spodoptera dalle altre nottue; larve di S. littoralis e S. litura indistinguibili nella maggior parte degli stadi."
+  - id: eppo_pm7_017
+    title: "PM 7/17 (3) Phyllosticta citricarpa"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/141/pm7-017-3-en.pdf"
+    status: testo_letto
+    note: "Sintomi confondibili con quelli di Phyllosticta citriasiana; identificazione morfologica difficile, sequenziamento per distinguere P. citricarpa da P. paracitricarpa."
+  - id: eppo_categorizzazione
+    title: "EPPO Global Database - pagine 'categorization' degli organismi in configs/lab_requirements.yaml"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/taxon/XANTCI/categorization"
+    date: "2026-11-20"
+    status: testo_letto
+    note: "Riga UE (allegati del Reg. (UE) 2019/2072) e lista EPPO lette per ogni codice; l'URL di ogni organismo è https://gd.eppo.int/taxon/<codice>/categorization."
+  - id: eppo_pm7_007
+    title: "PM 7/7 (2) Aleurocanthus citriperdus, A. spiniferus e A. woglumi"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/131/pm7-007-02-en.pdf"
+    status: testo_letto
+    note: "L'identificazione dei pupari richiede il montaggio su vetrino e la chiave del protocollo; caratteri osservati al microscopio composto."

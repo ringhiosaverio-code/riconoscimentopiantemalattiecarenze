@@ -52,6 +52,10 @@ a{color:var(--accent)}
 .pick .sq{position:absolute;border:3px solid #fff;outline:2px solid #000a;border-radius:4px;box-shadow:0 0 0 9999px #0006;cursor:move;touch-action:none}
 .pick{overflow:hidden;border-radius:10px}
 input[type=range]{padding:0;border:0;background:transparent}
+.hyp ol{margin:4px 0 4px 1.2em;padding:0}
+.hyp li{margin:2px 0}
+.hyp details summary{cursor:pointer;color:var(--accent)}
+.sure{display:inline-block;background:var(--ok);color:#fff;border-radius:6px;padding:0 6px;font-size:.85rem;font-weight:600}
 .progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0}
 .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
 </style>
@@ -73,6 +77,8 @@ input[type=range]{padding:0;border:0;background:transparent}
 <h2>Lettore ottico</h2>
 <label for="organ"><strong>Quale parte della pianta è colpita?</strong></label>
 <select id="organ"><option value="">Non indicato</option></select>
+<label for="crop" style="margin-top:8px"><strong>Che coltura è?</strong> <span class="muted">Se la indichi, le malattie si cercano solo tra quelle di questa coltura: meno errori e meno ipotesi.</span></label>
+<select id="crop"><option value="">Non indicata: la riconosce il lettore</option></select>
 <video id="video" autoplay playsinline muted hidden></video>
 <canvas id="canvas" hidden></canvas>
 <div class="row">

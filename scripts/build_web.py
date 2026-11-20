@@ -57,6 +57,9 @@ IP102_GROUPS = [(1, 14, "riso"), (15, 27, "mais"), (28, 36, "frumento"), (37, 44
 QUIZ_SIDE = 288
 
 
+GENERIC_CLASSES = {"healthy", "disturbo_nutrizionale"}  # non legate a una coltura
+
+
 def load_yaml(p: Path) -> dict:
     with open(p, encoding="utf-8") as fh:
         return yaml.safe_load(fh)
@@ -150,6 +153,10 @@ def main() -> None:
                     help="models/finetune_disease.json: metriche della fusione con il ramo riaddestrato")
     ap.add_argument("--improve-results", default=None,
                     help="models/improve_results.json: metriche dell'insieme di lettori, se il modello lo usa")
+    ap.add_argument("--pest-ft-results", default=None,
+                    help="models/finetune_pest.json: metriche della fusione con il ramo riaddestrato degli insetti")
+    ap.add_argument("--hypotheses", default=None,
+                    help="models/hypotheses.json (scripts/calibrate_hypotheses.py): soglie delle ipotesi al 95 e al 99%%")
     args = ap.parse_args()
 
     heads = HEADS + (["pest"] if args.with_pest else [])
@@ -174,6 +181,13 @@ def main() -> None:
     ip_en = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_classes.yaml")["classes"].items()}
     ip_it = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_it.yaml")["names"].items()}
     cause_names, cause_labels = load_causes()
+    lab = load_yaml(ROOT / "configs" / "lab_requirements.yaml")
+    reg_of = {(h, lbl): i for i, o in enumerate(lab["organismi_regolamentati"])
+              for h, lbls in o["classi"].items() for lbl in lbls}
+    crops_of = defaultdict(set)  # colture viste per ogni malattia nell'addestramento (filtro "coltura indicata")
+    for r in csv.DictReader(open(ROOT / "data" / "processed" / "manifest_v2.csv", encoding="utf-8")):
+        if r["split"] == "train" and r.get("disease") and r.get("plant"):
+            crops_of[r["disease"]].add(r["plant"])
     readers = {}
     for h in heads:
         classes = ck["readers"][h]["classes"]
@@ -194,12 +208,16 @@ def main() -> None:
                     raise SystemExit(f"causa mancante per la classe {raw!r}: aggiungerla in configs/disease_causes.yaml")
                 if tid:
                     item["card"] = kb.disease_card(tid)
+                # classi valide per ogni coltura (pianta sana, disturbo nutrizionale): mai filtrate
+                item["crops"] = [] if raw in GENERIC_CLASSES else sorted(crops_of.get(raw, ()))
             elif h == "pest":
                 k = int(raw.split("_")[-1])
                 en = ip_en.get(k, raw)
                 item["name"] = ip_it.get(k) or en[:1].upper() + en[1:]
             else:
                 item["name"] = DEFICIENCY_NAMES.get(raw, raw)
+            if (h, raw) in reg_of:
+                item["reg"] = reg_of[(h, raw)]
             items.append(item)
         t = report["readers"][h]["test"]
         field = {s: v for s, v in t["by_source"].items() if s in ("plantdoc", "inatag")}
@@ -215,7 +233,37 @@ def main() -> None:
             readers[h].update(test_accuracy=e["acc"], test_macro_f1=e["f1"], calibration_error=e["ece"],
                               field={"plantdoc": {"n": field.get("plantdoc", {}).get("n"), "accuracy": e["plantdoc"]}},
                               finetuned_branch=True)
+        if h == "pest" and args.pest_ft_results:
+            e = json.load(open(args.pest_ft_results, encoding="utf-8"))["fusione"]
+            readers[h].update(test_accuracy=e["acc"], test_macro_f1=e["f1"], calibration_error=e["ece"],
+                              finetuned_branch=True)
+    missing = [lbl for (h, lbl) in reg_of if h in readers and lbl not in {c["label"] for c in readers[h]["classes"]}]
+    if missing:
+        print(f"attenzione: classi di configs/lab_requirements.yaml assenti dai lettori: {missing}")
     json.dump(readers, open(APP / "data" / "readers.json", "w", encoding="utf-8"), ensure_ascii=False)
+
+    # --- quando serve il laboratorio, organismi regolamentati (schede EPPO), ipotesi calibrate ---
+    src = {x["id"]: x for x in load_yaml(ROOT / "configs" / "sources.yaml")["sources"]}
+    unknown = [f for v in lab["analisi_per_causa"].values() for f in v["fonti"] if f not in src] + \
+        [f for o in lab["organismi_regolamentati"] for f in o.get("fonti", []) if f not in src]
+    if unknown:
+        raise SystemExit(f"fonti sconosciute in configs/lab_requirements.yaml: {unknown}")
+    json.dump({"analisi_per_causa": {c: {"quando": v["quando"], "testo": v["testo"],
+                                         "fonti": [{"title": src[f]["title"], "url": src[f]["url"]} for f in v["fonti"]]}
+                                     for c, v in lab["analisi_per_causa"].items()},
+               "organismi_regolamentati": [{k: o[k] for k in ("organismo", "ue", "tipo", "lista_eppo", "eppo") if k in o}
+                                           | ({"nota": o["nota"]} if o.get("nota") else {})
+                                           | ({"analisi": o["analisi"], "fonti": [{"title": src[f]["title"], "url": src[f]["url"]}
+                                                                                for f in o.get("fonti", [])]}
+                                              if o.get("analisi") else {})
+                                           | {"url": f"https://gd.eppo.int/taxon/{o['eppo']}/categorization"}
+                                           for o in lab["organismi_regolamentati"]]},
+              open(APP / "data" / "lab.json", "w", encoding="utf-8"), ensure_ascii=False)
+    if args.hypotheses:
+        hyp = json.load(open(args.hypotheses, encoding="utf-8"))
+        if "disease" in hyp:
+            hyp["disease"].pop("colture_per_classe", None)
+        json.dump(hyp, open(APP / "data" / "hypotheses.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     json.dump(cause_names, open(APP / "data" / "causes.json", "w", encoding="utf-8"), ensure_ascii=False)
     json.dump(load_yaml(ROOT / "configs" / "quiz_tips.yaml"), open(APP / "data" / "quiz_tips.json", "w", encoding="utf-8"),
