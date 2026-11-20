@@ -46,6 +46,9 @@ plants:
   - {id: solanum_tuberosum, common: "Patata", family: Solanaceae, priority: 1, zone: italia}
   - {id: malus_domestica, common: "Melo", family: Rosaceae, priority: 1, zone: italia}
   - {id: pyrus_communis, common: "Pero", family: Rosaceae, priority: 1, zone: italia}
+  - {id: prunus_domestica, common: "Susino", family: Rosaceae, priority: 2, zone: italia}
+  - {id: ficus_carica, common: "Fico", family: Moraceae, priority: 2, zone: italia}
+  - {id: punica_granatum, common: "Melograno", family: Lythraceae, priority: 2, zone: italia}
   - {id: prunus_persica, common: "Pesco", family: Rosaceae, priority: 1, zone: italia}
   - {id: prunus_avium, common: "Ciliegio dolce", family: Rosaceae, priority: 1, zone: italia}
   - {id: actinidia_chinensis, common: "Kiwi", family: Actinidiaceae, priority: 1, zone: italia}
@@ -1440,7 +1443,7 @@ insects:
     role: phytophagous
     order: Diptera
     family: Tephritidae
-    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, persea_americana, annona_cherimola, prunus_persica, malus_domestica]
+    hosts: [citrus_sinensis, citrus_limon, citrus_reticulata, citrus_bergamia, persea_americana, annona_cherimola, prunus_persica, malus_domestica, ficus_carica, prunus_domestica, punica_granatum]
     organs: [fruit]
     note: Mosca soggetta a monitoraggio fitosanitario
   - id: phyllocnistis_citrella
@@ -1559,6 +1562,14 @@ insects:
   - {id: tegolophus_hassani, common: "Acaro rugginoso dell'olivo", scientific: "Tegolophus hassani", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [olea_europaea], organs: [flower, leaf], note: "Acaro, non insetto. Rugginosità e appassimento dei bocci fiorali (Nuzzaci e Parenzan 1983)"}
   - {id: oxycenus_maxwelli, common: "Eriofide dei germogli dell'olivo", scientific: "Oxycenus maxwelli", role: phytophagous, group: acaro, order: Acari, family: Eriophyidae, hosts: [olea_europaea], organs: [branch, inflorescence, fruit], note: "Acaro, non insetto. Ruolo dannoso discusso in letteratura (Nuzzaci e Parenzan 1983)"}
   - {id: halyomorpha_halys, common: "Cimice asiatica", scientific: "Halyomorpha halys", role: phytophagous, order: Hemiptera, family: Pentatomidae, hosts: [pyrus_communis, prunus_persica, prunus_avium, corylus_avellana], organs: [fruit], note: "Citata nel disciplinare calabrese 2023 per pero, pesco, ciliegio e nocciolo"}
+  - {id: choreutis_nemorana, common: "Tignola delle foglie del fico", scientific: "Choreutis nemorana", role: phytophagous, order: Lepidoptera, family: Choreutidae, hosts: [ficus_carica], organs: [leaf], note: "Le larve scheletrizzano e accartocciano le foglie"}
+  - {id: silba_adipata, common: "Mosca del fico", scientific: "Silba adipata", role: phytophagous, order: Diptera, family: Lonchaeidae, hosts: [ficus_carica], organs: [fruit]}
+  - {id: ceroplastes_rusci, common: "Cocciniglia del fico", scientific: "Ceroplastes rusci", role: phytophagous, order: Hemiptera, family: Coccidae, hosts: [ficus_carica], organs: [branch, leaf]}
+  - {id: cydia_funebrana, common: "Tignola del susino", scientific: "Grapholita (Cydia) funebrana", role: phytophagous, order: Lepidoptera, family: Tortricidae, hosts: [prunus_domestica], organs: [fruit]}
+  - {id: hoplocampa_minuta, common: "Tentredine del susino", scientific: "Hoplocampa minuta", role: phytophagous, order: Hymenoptera, family: Tenthredinidae, hosts: [prunus_domestica], organs: [fruit]}
+  - {id: brachycaudus_helichrysi, common: "Afide verde del susino", scientific: "Brachycaudus helichrysi", role: phytophagous, order: Hemiptera, family: Aphididae, hosts: [prunus_domestica], organs: [leaf]}
+  - {id: ectomyelois_ceratoniae, common: "Tignola del carrubo", scientific: "Ectomyelois ceratoniae", role: phytophagous, order: Lepidoptera, family: Pyralidae, hosts: [punica_granatum], organs: [fruit], note: "Le larve scavano i frutti del melograno"}
+  - {id: aphis_punicae, common: "Afide del melograno", scientific: "Aphis punicae", role: phytophagous, order: Hemiptera, family: Aphididae, hosts: [punica_granatum], organs: [leaf, flower]}
   - {id: coccinella_septempunctata, common: Coccinella a sette punti, scientific: Coccinella septempunctata, role: entomophagous, order: Coleoptera, family: Coccinellidae}
   - {id: chrysoperla_carnea, common: Crisopa, scientific: Chrysoperla carnea, role: entomophagous, order: Neuroptera, family: Chrysopidae}
   - {id: aphidius_colemani, common: Imenottero parassitoide degli afidi, scientific: Aphidius colemani, role: entomophagous, order: Hymenoptera, family: Braconidae}

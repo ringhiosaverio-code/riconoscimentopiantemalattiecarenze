@@ -22,6 +22,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Iterable
 
+import numpy as np
 import pyarrow.parquet as pq
 import yaml
 from PIL import Image
@@ -104,7 +105,17 @@ AGML_DISEASE = {
     ("agml_tuta", "infected"): "tomato_leafminer_damage",
     ("agml_potato", "Phytopthora"): "tomato_late_blight",
     ("agml_cauliflower", "Black Rot"): "broccoli_black_rot",
+    # melo: stesse classi di PlantVillage e PlantDoc; la maculatura "a occhio di rana" è la fase
+    # fogliare del marciume nero (Botryosphaeria obtusa)
+    ("agml_appleleaf9", "Scab"): "apple_scab",
+    ("agml_appleleaf9", "Rust"): "Apple___Cedar_apple_rust",
+    ("agml_appleleaf9", "Frogeye leaf spot"): "Apple___Black_rot",
+    # agrumi: HLB come in PlantVillage; cocciniglia rossa e suoi esiti (macchie gialle) in una classe
+    ("agml_citrusuat", "HLB"): "Orange___Haunglongbing_(Citrus_greening)",
+    ("agml_citrusuat", "Red_scale_sequelae"): "agml_citrusuat:Red_scale",
 }
+# Classi senza una diagnosi univoca (es. "foglia morta", "frutto non sano"): non usate.
+AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit")}
 HEALTHY_WORDS = ("healthy", "health", "sano", "normal", "fresh")
 TOM2024_CROPS = {"Tomato": "solanum_lycopersicum", "Onion": "allium_cepa_tropea", "Maize": "zea_mays"}
 
@@ -115,8 +126,15 @@ DEFICIENCY = {
     ("agml_tom2024", "excess-nitrogen-d"): "eccesso_di_azoto",
     # marciume apicale: sintomo della carenza di calcio indicato anche in configs/taxonomy.yaml (nutriente Ca)
     ("agml_tom2024", "blossom-end-rot-d"): "carenza_di_calcio",
+    # CitrusUAT (Gómez-Flores et al. 2024): carenze dei singoli nutrienti su arancio
+    ("agml_citrusuat", "Fe"): "carenza_di_ferro",
+    ("agml_citrusuat", "Mg"): "carenza_di_magnesio",
+    ("agml_citrusuat", "Mn"): "carenza_di_manganese",
+    ("agml_citrusuat", "N"): "carenza_di_azoto",
+    ("agml_citrusuat", "'N'"): "carenza_di_azoto",
+    ("agml_citrusuat", "Zn"): "carenza_di_zinco",
 }
-DEFICIENCY_SOURCES = {"agml_lemon", "agml_chili", "agml_tom2024"}
+DEFICIENCY_SOURCES = {"agml_lemon", "agml_chili", "agml_tom2024", "agml_citrusuat"}
 NO_NUTRITIONAL_DISORDER = "nessun_disturbo_nutrizionale"
 
 
@@ -254,9 +272,15 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     for lab, idxs in by_label.items():
         for j, s in zip(idxs, _split_random(len(idxs), seed + zlib.crc32(str(lab).encode()) % 1000)):
             split_of[j] = s
+    dup = set()
+    if name == "agml_appleleaf9":
+        dup = _plantvillage_duplicates(recs)
+        _same_split_for_duplicates(recs, split_of)
     rows = []
     for i, r in enumerate(recs):
         lab = names[r["label"]] if names and r["label"] < len(names) else f"label_{r['label']}"
+        if (name, lab) in AGML_SKIP or i in dup:
+            continue
         row_crop = TOM2024_CROPS.get(r.get("crop_type"), crop) if has_crop else crop
         deficiency = ""
         if (name, lab) in DEFICIENCY:
@@ -274,6 +298,61 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
             rows.append(ManifestRow(path=_rel(out), source=name, split=split_of[i], plant=plant, disease=dis,
                                     deficiency=deficiency))
     return rows
+
+
+def _dhash(img_bytes_or_path, size: int = 16) -> int:
+    src = io.BytesIO(img_bytes_or_path) if isinstance(img_bytes_or_path, bytes) else img_bytes_or_path
+    with Image.open(src) as im:
+        a = np.asarray(im.convert("L").resize((size + 1, size), Image.BILINEAR), dtype=np.int16)
+    bits = (a[:, 1:] > a[:, :-1]).flatten()
+    return int("".join("1" if b else "0" for b in bits), 2)
+
+
+def _plantvillage_duplicates(recs, max_dist: int = 24) -> set[int]:
+    """Indici delle foto che sono copie (anche ridimensionate) di foto di melo di PlantVillage.
+
+    AppleLeaf9 include PlantVillage: senza questo controllo le stesse foglie finirebbero sia
+    nell'addestramento sia nel test, gonfiando le misure.
+    """
+    pv = sorted((DATA / "raw" / "plantvillage" / "raw" / "color").glob("Apple___*/*"))
+    ref = np.array([_dhash(p) for p in pv if p.suffix.lower() in (".jpg", ".jpeg", ".png")], dtype=object)
+    if not len(ref):
+        return set()
+    ref_bits = np.array([[int(b) for b in f"{h:0256b}"] for h in ref], dtype=np.uint8)
+    out = set()
+    for i, r in enumerate(recs):
+        try:
+            h = _dhash(r["image"]["bytes"])
+        except Exception:
+            continue
+        q = np.array([int(b) for b in f"{h:0256b}"], dtype=np.uint8)
+        if (ref_bits != q).sum(1).min() <= max_dist:
+            out.add(i)
+    print(f"  agml_appleleaf9: {len(out)} copie di PlantVillage escluse", flush=True)
+    return out
+
+
+def _same_split_for_duplicates(recs, split_of: dict, max_dist: int = 24) -> None:
+    """Copie della stessa foto nello stesso split (AppleLeaf9 unisce Plant Pathology 2020 e 2021)."""
+    hashes = []
+    for r in recs:
+        try:
+            hashes.append(_dhash(r["image"]["bytes"]))
+        except Exception:
+            hashes.append(None)
+    ok = [i for i, h in enumerate(hashes) if h is not None]
+    bits = np.array([[int(b) for b in f"{hashes[i]:0256b}"] for i in ok], dtype=np.uint8)
+    packed = np.packbits(bits, axis=1)
+    table = np.array([bin(x).count("1") for x in range(256)], dtype=np.uint16)
+    moved = 0
+    for a in range(len(ok)):
+        d = table[np.bitwise_xor(packed[a + 1:], packed[a])].sum(1)
+        for b in np.nonzero(d <= max_dist)[0] + a + 1:
+            i, j = ok[a], ok[b]
+            if split_of[j] != split_of[i]:
+                split_of[j] = split_of[i]
+                moved += 1
+    print(f"  {len(recs)} foto: {moved} copie spostate nello split della prima", flush=True)
 
 
 def import_inatag(seed: int = 42, max_per_species: int = 1200) -> list[ManifestRow]:

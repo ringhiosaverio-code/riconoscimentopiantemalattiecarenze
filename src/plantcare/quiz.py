@@ -33,6 +33,11 @@ DEFICIENCY_NAMES = {
     "eccesso_di_azoto": "Eccesso di azoto",
     "carenza_di_calcio": "Carenza di calcio (marciume apicale)",
     "nessun_disturbo_nutrizionale": "Nessun disturbo nutrizionale",
+    "carenza_di_ferro": "Carenza di ferro",
+    "carenza_di_magnesio": "Carenza di magnesio",
+    "carenza_di_manganese": "Carenza di manganese",
+    "carenza_di_azoto": "Carenza di azoto",
+    "carenza_di_zinco": "Carenza di zinco",
 }
 SPECIAL_DISEASES = {"disturbo_nutrizionale": "Disturbo nutrizionale (non una malattia)"}
 MIN_IMAGES_PER_CLASS = 3

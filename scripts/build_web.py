@@ -19,6 +19,7 @@ import torch
 import yaml
 from PIL import Image
 
+from plantcare.causes import cause_of, load_causes
 from plantcare.kb import KnowledgeBase
 from plantcare.quiz import DEFICIENCY_NAMES, display_name
 from plantcare.taxonomy import load_taxonomy
@@ -74,6 +75,7 @@ def main() -> None:
     # --- classi dei lettori, nell'ordine delle uscite del modello ---
     ip_en = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_classes.yaml")["classes"].items()}
     ip_it = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_it.yaml")["names"].items()}
+    cause_names, cause_labels = load_causes()
     readers = {}
     for h in heads:
         classes = ck["readers"][h]["classes"]
@@ -87,6 +89,9 @@ def main() -> None:
                 item["name"] = display_name("disease", raw, kb, label_map, {})
                 tid = raw if raw in tax.diseases else (label_map.get("plantvillage") or {}).get(raw)
                 item["taxonomy_id"] = tid
+                item["cause"] = cause_of(raw, cause_labels, tax, label_map)
+                if item["cause"] is None:
+                    raise SystemExit(f"causa mancante per la classe {raw!r}: aggiungerla in configs/disease_causes.yaml")
                 if tid:
                     item["card"] = kb.disease_card(tid)
             elif h == "pest":
@@ -106,6 +111,8 @@ def main() -> None:
                               field={s: {"n": field.get(s, {}).get("n"), "accuracy": e[s]} for s in ("plantdoc", "inatag") if s in e},
                               ensemble=5)
     json.dump(readers, open(APP / "data" / "readers.json", "w", encoding="utf-8"), ensure_ascii=False)
+
+    json.dump(cause_names, open(APP / "data" / "causes.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     # --- organi, regole della botte, fonti ---
     organs = [{"id": k, "label": v["label"]} for k, v in tax.plant_organs.items()]

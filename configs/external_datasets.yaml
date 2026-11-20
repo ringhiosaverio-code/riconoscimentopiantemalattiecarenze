@@ -142,3 +142,44 @@ datasets:
     license: "Apache-2.0 (dataset); le singole foto iNaturalist hanno licenze Creative Commons dei loro autori"
     citation: "iNatAg (Project-AgML, UC Davis), derivato da iNaturalist"
     note: "Foto di piante intere e parti in condizioni reali, per il lettore della coltura."
+  # --- aggiunte per distinguere malattie simili del melo e i danni da insetti e acari ---
+  - name: agml_appleleaf9
+    repo: Project-AgML/appleleaf9_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: malus_domestica
+    license: "CC BY 4.0"
+    citation: "Yang Q., Duan S., Wang L. (2022) Efficient Identification of Apple Leaf Diseases in the Wild Using Convolutional Neural Networks. Agronomy 12, 2784. DOI 10.3390/agronomy12112784"
+    note: "Ticchiolatura, ruggine, alternaria, maculatura a occhio di rana, oidio, mosaico. Contiene anche foto PlantVillage: i duplicati vengono rimossi all'importazione."
+  - name: agml_citrusuat
+    repo: Project-AgML/citrusuat_disease_classification
+    files: ["data/*.parquet"]
+    use: disease, deficiency
+    crop: citrus_sinensis
+    license: "CC BY 4.0"
+    citation: "Gómez-Flores W., Garza-Saldaña J.J., Varela-Fuentes S.E. (2024) CitrusUAT: A dataset of orange Citrus sinensis leaves for abnormality detection using image analysis techniques. Data in Brief 52, 109908. DOI 10.1016/j.dib.2023.109908"
+    note: "Minatrice serpentina, cocciniglia rossa, acaro, macchia grassa, HLB e carenze di Fe, Mg, Mn, N, Zn."
+  - name: agml_plum
+    repo: Project-AgML/plum_leaf_fruit_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: prunus_domestica
+    license: "CC BY 4.0"
+    citation: "Nayeem R.A. et al. (2025) A comprehensive image dataset of Plum leaf and fruit for disease classification. Data in Brief 60, 111625. DOI 10.17632/w7sdx55m7z.1 (dati)"
+    note: "Solo la versione non aumentata; usate solo le classi con diagnosi chiara (fori da insetti, sano)."
+  - name: agml_pomegranate
+    repo: Project-AgML/pomegranate_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: punica_granatum
+    license: "CC BY 4.0"
+    citation: "Mohammed B.A. et al. (2025) Pomegranate disease detection and classification dataset for deep learning applications: A case study from Halabja city. Data in Brief, 112298. DOI 10.5281/zenodo.15856012 (dati)"
+    note: "Frutti: antracnosi (Colletotrichum), tignola del carrubo (Ectomyelois ceratoniae), scottature."
+  - name: agml_fig
+    repo: Project-AgML/fig_leaf_ficus_worm_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: ficus_carica
+    license: "CC BY 4.0"
+    citation: "Hafi S.J. et al. (2024) Image dataset of healthy and infected fig leaves with Ficus leaf worm. Data in Brief 53, 109958. DOI 10.17632/f7dk2yknff.2 (dati)"
+    note: "Foglie di fico sane e con danni della tignola delle foglie del fico."

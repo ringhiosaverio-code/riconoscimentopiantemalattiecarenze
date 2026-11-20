@@ -181,15 +181,38 @@ class Predictor:
                 "card": top["card"] if confident else None,
                 "candidates": candidates,
             }
+        cause = self._cause(probs_by_head.get("disease"))
+        referto = self._referto(heads)
+        referto["probable_cause"] = cause["answer"]
         return {
             "heads": heads,
+            "cause": cause,
             "readers": self.readers_status(),
             "organ": organ,
-            "referto": self._referto(heads),
+            "referto": referto,
             "warnings": self._warnings(heads),
             "disclaimer": DISCLAIMER,
             MODEL_NAME_KEY: self.version,
             "abstain_threshold": self.abstain_threshold,
+        }
+
+    def _cause(self, probs) -> dict[str, Any]:
+        """Causa probabile: somma delle probabilità delle classi con la stessa causa (configs/disease_causes.yaml)."""
+        from plantcare.causes import cause_of, load_causes
+        if probs is None:
+            return {"answer": None, "candidates": [], "insects_or_mites": None}
+        names, labels = load_causes()
+        tax = self.kb.tax if self.kb else None
+        sums: dict[str, float] = {}
+        for i, p in enumerate(probs.tolist()):
+            c = cause_of(self.idx_to_label["disease"][i], labels, tax, self.label_map) or "non_specificato"
+            sums[c] = sums.get(c, 0.0) + p
+        ranked = sorted(sums.items(), key=lambda x: -x[1])[: self.top_k]
+        best = ranked[0]
+        return {
+            "answer": names.get(best[0], best[0]) if best[1] >= self.abstain_threshold else UNDETERMINED,
+            "candidates": [{"cause": c, "name": names.get(c, c), "probability": round(p, 4)} for c, p in ranked],
+            "insects_or_mites": round(sums.get("insetto", 0.0) + sums.get("acaro", 0.0), 4),
         }
 
     @staticmethod

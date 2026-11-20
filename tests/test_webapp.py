@@ -65,3 +65,13 @@ def test_js_sprayer_matches_python():
         js = json.loads(subprocess.run(["node", "-e", script], capture_output=True, text=True, check=True).stdout)
         for key in ("products", "order", "area_ha", "copper_kg_ha", "warnings", "errors"):
             assert js[key] == py[key], key
+
+
+def test_every_disease_class_has_a_known_cause():
+    from plantcare.causes import load_causes
+    names, labels = load_causes()
+    assert set(labels.values()) <= set(names)
+    assert (APP / "data" / "causes.json").exists()
+    readers = json.load(open(APP / "data" / "readers.json", encoding="utf-8"))
+    with_cause = [c for c in readers["disease"]["classes"] if "cause" in c]
+    assert all(c["cause"] in names for c in with_cause)

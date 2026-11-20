@@ -60,3 +60,21 @@
 "agml_tom2024:stripe-d": "Striatura fogliare"
 "agml_tom2024:sunburn-d": "Scottatura solare"
 "agml_tom2024:virosis-d": "Virosi"
+
+# Melo (AppleLeaf9, Yang et al. 2022)
+"agml_appleleaf9:Alternaria leaf spot": "Alternariosi del melo (Alternaria mali)"
+"agml_appleleaf9:Brown spot": "Marssonina del melo (Diplocarpon coronariae)"
+"agml_appleleaf9:Grey spot": "Maculatura grigia del melo"
+"agml_appleleaf9:Mosaic": "Mosaico del melo (virus)"
+"agml_appleleaf9:Powdery mildew": "Oidio del melo (Podosphaera leucotricha)"
+# Arancio (CitrusUAT, Gómez-Flores et al. 2024)
+"agml_citrusuat:Citrus_leafminer": "Danno da minatrice serpentina degli agrumi (Phyllocnistis citrella)"
+"agml_citrusuat:Greasy_spot": "Macchia grassa degli agrumi"
+"agml_citrusuat:Red_scale": "Cocciniglia rossa e suoi esiti sulla foglia"
+"agml_citrusuat:Texas_mite": "Danno da acaro texano degli agrumi (Eutetranychus banksi)"
+# Susino, melograno, fico
+"agml_plum:Insect Hole": "Fori da insetti sulle foglie del susino"
+"agml_pomegranate:Colletotrichum spp": "Antracnosi del melograno (Colletotrichum)"
+"agml_pomegranate:Ectomyelois ceratoniae": "Danno da tignola del carrubo sul melograno (Ectomyelois ceratoniae)"
+"agml_pomegranate:Sunburn": "Scottatura solare del melograno"
+"agml_fig:infected": "Danno da larve defogliatrici del fico (Ficus leaf worm)"

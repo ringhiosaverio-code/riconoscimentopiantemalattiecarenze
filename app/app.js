@@ -14,7 +14,7 @@
   var DATA = {}, session = null, stream = null;
 
   function getJSON(name) { return fetch('app/data/' + name).then(function (r) { if (!r.ok) throw new Error(name); return r.json(); }); }
-  var ready = Promise.all(['readers.json', 'organs.json', 'mixing_rules.json', 'sources.json', 'quiz.json'].map(getJSON))
+  var ready = Promise.all(['readers.json', 'organs.json', 'mixing_rules.json', 'sources.json', 'quiz.json', 'causes.json'].map(getJSON))
     .then(function (a) {
       DATA.readers = a[0]; DATA.organs = a[1]; DATA.rules = a[2]; DATA.sources = a[3]; DATA.quiz = a[4];
       var sel = $('organ');
@@ -115,6 +115,23 @@
     });
   }
 
+  // Causa probabile: somma delle probabilità delle classi con la stessa causa (insetti, acari, funghi...).
+  // Più affidabile della singola classe: due danni da insetti simili non si tolgono probabilità a vicenda.
+  function causeBlock(probs) {
+    var R = DATA.readers.disease, names = DATA.causes || {}, sum = {};
+    if (!probs || !R.classes[0] || !('cause' in R.classes[0])) return { html: '', best: null };
+    probs.forEach(function (p, i) { var c = R.classes[i].cause; sum[c] = (sum[c] || 0) + p; });
+    var t = Object.keys(sum).map(function (c) { return [sum[c], c]; }).sort(function (a, b) { return b[0] - a[0]; }).slice(0, 3);
+    var ok = t[0][0] >= THRESHOLD, best = ok ? { id: t[0][1], name: names[t[0][1]] || t[0][1], p: t[0][0] } : null;
+    var h = '<div class="reader"><h3>Causa probabile dei sintomi: ' + esc(best ? best.name : 'non determinabile') + '</h3>';
+    t.forEach(function (x) {
+      h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(names[x[1]] || x[1]) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
+    });
+    var pests = (sum.insetto || 0) + (sum.acaro || 0);
+    if (pests >= 0.3) h += '<p class="warn">Sintomi compatibili con insetti o acari (' + pct(pests) + '). Cerca l\'insetto o l\'acaro sulla pagina inferiore delle foglie, nei germogli e nei frutti, con una lente: fotografalo da vicino e controlla il lettore degli insetti.</p>';
+    return { html: h + '</div>', best: best };
+  }
+
   // Lettore degli insetti: separato dagli altri, perché ha senso solo se la foto mostra un insetto.
   function pestBlock(probs) {
     var R = DATA.readers.pest;
@@ -147,6 +164,9 @@
       var field = R.field && (R.field.plantdoc || R.field.inatag);
       h += '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + (field ? '; su foto di campo: ' + pct(field.accuracy) : '') + '.</p></div>';
     });
+    var cz = causeBlock(res.disease);
+    answers.cause = cz.best;
+    h += cz.html;
     h += pestBlock(res.pest);
     h += referto(answers, organ);
     h += '<p><button type="button" class="secondary" id="go-tank">Prepara la botte</button></p>';
@@ -252,6 +272,7 @@
     if (a.plant) s += '<p><strong>Coltura:</strong> ' + esc(a.plant.name) + '</p>';
     var d = a.disease, card = d && d.card;
     if (d) s += '<p><strong>Malattia o danno:</strong> ' + esc(d.name) + (card && card.agent ? ' (<em>' + esc(card.agent) + '</em>)' : '') + '</p>';
+    if (a.cause && a.cause.id !== 'sano') s += '<p><strong>Causa probabile dei sintomi:</strong> ' + esc(a.cause.name) + ' (' + pct(a.cause.p) + ')</p>';
     if (a.deficiency) s += '<p><strong>Stato nutrizionale:</strong> ' + esc(a.deficiency.name) + '</p>';
     if (card) {
       var k = card.knowledge;

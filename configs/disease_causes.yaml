@@ -1,0 +1,90 @@
+# Causa di ogni classe del lettore delle malattie. L'app somma le probabilità delle classi con la
+# stessa causa: "sintomi causati da insetti" vale la somma di tutte le classi di danno da insetti,
+# così la causa è più affidabile della singola classe (due danni da insetti simili tra loro non si
+# tolgono probabilità a vicenda).
+# Per le classi della tassonomia la causa deriva da pathogen_type (insect_induced diviso tra
+# insetto e acaro qui sotto); le etichette dei dataset sono elencate tutte.
+causes:
+  fungo: "Fungo o oomicete"
+  batterio: "Batterio o fitoplasma"
+  virus: "Virus"
+  viroide: "Viroide"
+  insetto: "Insetti"
+  acaro: "Acari"
+  nematode: "Nematodi"
+  abiotico: "Causa abiotica (sole, gelo, siccità, fitotossicità)"
+  nutrizionale: "Disturbo nutrizionale"
+  sano: "Nessun sintomo"
+  non_specificato: "Causa non specificata dal dataset"
+
+labels:
+  # tassonomia
+  healthy: sano
+  disturbo_nutrizionale: nutrizionale
+  tomato_leafminer_damage: insetto
+  # PlantVillage
+  Apple___Black_rot: fungo
+  Apple___Cedar_apple_rust: fungo
+  Cherry_(including_sour)___Powdery_mildew: fungo
+  Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot: fungo
+  Grape___Black_rot: fungo
+  Grape___Leaf_blight_(Isariopsis_Leaf_Spot): fungo
+  Orange___Haunglongbing_(Citrus_greening): batterio
+  Strawberry___Leaf_scorch: fungo
+  Tomato___Leaf_Mold: fungo
+  Tomato___Septoria_leaf_spot: fungo
+  Tomato___Spider_mites Two-spotted_spider_mite: acaro
+  Tomato___Target_Spot: fungo
+  # AgML
+  agml_banana:xamthomonas: batterio
+  agml_chili:cercospora: fungo
+  agml_chili:mites_and_trips: acaro
+  agml_eggplant:Insect Pest Disease: insetto
+  agml_eggplant:Leaf Spot Disease: fungo
+  agml_eggplant:Mosaic Virus Disease: virus
+  agml_eggplant:White Mold Disease: fungo
+  agml_eggplant:Wilt Disease: non_specificato
+  agml_grape:Bacterial Leaf Spot: batterio
+  agml_lemon:Bacterial Blight: batterio
+  agml_lemon:Citrus Canker: batterio
+  agml_lemon:Curl Virus: virus
+  agml_lemon:Dry Leaf: abiotico
+  agml_lemon:Sooty Mould: fungo
+  agml_lemon:Spider Mites: acaro
+  agml_onion:Iris yellow virus: virus
+  agml_onion:Stemphylium leaf blight and collectrichum leaf blight: fungo
+  agml_onion:purple blotch: fungo
+  agml_potato:Bacteria: batterio
+  agml_potato:Fungi: fungo
+  agml_potato:Nematode: nematode
+  agml_potato:Pest: insetto
+  agml_potato:Virus: virus
+  agml_tom2024:abiotic-disease-d: abiotico
+  agml_tom2024:alternaria-d: fungo
+  agml_tom2024:alternaria-mite-d: non_specificato
+  agml_tom2024:bacterial-floundering-d: batterio
+  agml_tom2024:bulb-blight-d: non_specificato
+  agml_tom2024:caterpillar-p: insetto
+  agml_tom2024:curvulariosis-d: fungo
+  agml_tom2024:fusarium-d: fungo
+  agml_tom2024:helicoverpa-armigera-p: insetto
+  agml_tom2024:mite-d: acaro
+  agml_tom2024:spodoptera-frugiperda-a: insetto
+  agml_tom2024:spodoptera-frugiperda-p: insetto
+  agml_tom2024:stripe-d: non_specificato
+  agml_tom2024:sunburn-d: abiotico
+  agml_tom2024:virosis-d: virus
+  agml_appleleaf9:Alternaria leaf spot: fungo
+  agml_appleleaf9:Brown spot: fungo
+  agml_appleleaf9:Grey spot: fungo
+  agml_appleleaf9:Mosaic: virus
+  agml_appleleaf9:Powdery mildew: fungo
+  agml_citrusuat:Citrus_leafminer: insetto
+  agml_citrusuat:Greasy_spot: fungo
+  agml_citrusuat:Red_scale: insetto
+  agml_citrusuat:Texas_mite: acaro
+  agml_plum:Insect Hole: insetto
+  agml_pomegranate:Colletotrichum spp: fungo
+  agml_pomegranate:Ectomyelois ceratoniae: insetto
+  agml_pomegranate:Sunburn: abiotico
+  agml_fig:infected: insetto
