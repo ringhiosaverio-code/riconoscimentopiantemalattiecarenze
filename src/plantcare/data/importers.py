@@ -110,6 +110,13 @@ AGML_DISEASE = {
     ("agml_appleleaf9", "Scab"): "apple_scab",
     ("agml_appleleaf9", "Rust"): "Apple___Cedar_apple_rust",
     ("agml_appleleaf9", "Frogeye leaf spot"): "Apple___Black_rot",
+    # "pepper_disease_pest_classification" contiene foglie di MELO con le classi di ATLDSD
+    # (verificato sulle foto): stesse etichette di AppleLeaf9, la ruggine è la ruggine del melo
+    ("agml_pepperfield", "Alternaria_Boltch"): "agml_appleleaf9:Alternaria leaf spot",
+    ("agml_pepperfield", "Brown_Spot"): "agml_appleleaf9:Brown spot",
+    ("agml_pepperfield", "Grey_spot"): "agml_appleleaf9:Grey spot",
+    ("agml_pepperfield", "Mosaic"): "agml_appleleaf9:Mosaic",
+    ("agml_pepperfield", "Rust"): "Apple___Cedar_apple_rust",
     # agrumi: HLB come in PlantVillage; cocciniglia rossa e suoi esiti (macchie gialle) in una classe
     ("agml_citrusuat", "HLB"): "Orange___Haunglongbing_(Citrus_greening)",
     ("agml_citrusuat", "Red_scale_sequelae"): "agml_citrusuat:Red_scale",
@@ -153,7 +160,11 @@ CROP_IN_LABEL = {"agml_ccmt"}
 SPLIT_BLOCK = {"agml_pepperfield": 50}
 PER_CLASS_CAP = {"agml_pepperfield": 1500}
 # Classi senza una diagnosi univoca (es. "foglia morta", "frutto non sano"): non usate.
-AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit")}
+AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit"),
+             # classi ATLDSD di AppleLeaf9: le stesse foto (e scatti vicini) sono in agml_pepperfield,
+             # che ne ha di più e uno split per blocchi; tenerle in entrambe porterebbe copie nel test
+             ("agml_appleleaf9", "Alternaria leaf spot"), ("agml_appleleaf9", "Brown spot"),
+             ("agml_appleleaf9", "Grey spot"), ("agml_appleleaf9", "Mosaic")}
 HEALTHY_WORDS = ("healthy", "health", "sano", "normal", "fresh")
 TOM2024_CROPS = {"Tomato": "solanum_lycopersicum", "Onion": "allium_cepa_tropea", "Maize": "zea_mays"}
 
@@ -303,7 +314,7 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     files = sorted(src.rglob("*.parquet"))
     if not files:
         # file originali rimossi per spazio: si riusano le righe già importate (le foto sono in data/external/images)
-        return _rows_from_manifest(name)
+        return _rows_from_manifest(name, crop)
     names = _label_names(repo)
     schema = pq.ParquetFile(files[0]).schema_arrow.names
     crop_feature = "plant_type" if "plant_type" in schema else ("crop" if "crop" in schema else None)
@@ -515,13 +526,31 @@ def import_plantwild(seed: int = 42, max_dist: int = 24) -> list[ManifestRow]:
     return rows
 
 
-def _rows_from_manifest(source: str) -> list[ManifestRow]:
+def _rows_from_manifest(source: str, crop: str | None = None) -> list[ManifestRow]:
+    """Righe già importate, per quando i file originali sono stati rimossi per spazio.
+
+    Si riapplicano AGML_SKIP e AGML_DISEASE alle etichette grezze ("<fonte>:<classe>") e, per i
+    dataset di una sola coltura, la coltura del registro: così una correzione vale anche senza i file.
+    """
     man = DATA / "processed" / "manifest_v2.csv"
     if not man.exists():
         return []
     with open(man, newline="", encoding="utf-8") as fh:
         rows = [r for r in csv.DictReader(fh) if r["source"] == source and (DATA / r["path"]).exists()]
-    return [ManifestRow(**{k: r.get(k, "") for k in ManifestRow.__dataclass_fields__}) for r in rows]
+    single_crop = len({r["plant"] for r in rows}) == 1
+    if crop == "capsicum_annuum_peperoncino":
+        crop = "capsicum_annuum"
+    out = []
+    for r in rows:
+        if r["disease"].startswith(source + ":"):
+            raw = r["disease"][len(source) + 1:]
+            if (source, raw) in AGML_SKIP:
+                continue
+            r["disease"] = AGML_DISEASE.get((source, raw)) or r["disease"]
+        if crop and single_crop:
+            r["plant"] = crop
+        out.append(ManifestRow(**{k: r.get(k, "") for k in ManifestRow.__dataclass_fields__}))
+    return out
 
 
 def _dhash(img_bytes_or_path, size: int = 16) -> int:

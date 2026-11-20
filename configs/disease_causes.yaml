@@ -134,8 +134,3 @@ labels:
   "agml_ccmt:solanum_lycopersicum:leaf blight": fungo
   "agml_ccmt:solanum_lycopersicum:leaf curl": virus
   "agml_ccmt:solanum_lycopersicum:verticulium wilt": fungo
-  "agml_pepperfield:Alternaria_Boltch": fungo
-  "agml_pepperfield:Brown_Spot": fungo
-  "agml_pepperfield:Grey_spot": fungo
-  "agml_pepperfield:Mosaic": virus
-  "agml_pepperfield:Rust": fungo

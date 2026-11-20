@@ -235,7 +235,7 @@ datasets:
     repo: Project-AgML/pepper_disease_pest_classification
     files: ["data/*.parquet"]
     use: disease
-    crop: capsicum_annuum
+    crop: malus_domestica
     license: "CC BY 4.0"
     citation: "Wang X., Liu J., Chen Q. (2025) An advanced deep learning method for pepper diseases and pests detection. Plant Methods 21. Dati: Mendeley DOI 10.17632/tg3z7xxkdb.1"
-    note: "Foto di campo da postazione fissa: importato un campione per classe (scatti molto simili tra loro)."
+    note: "Nonostante il nome, le foto sono foglie di MELO in campo con le classi di ATLDSD (alternaria, maculatura bruna, maculatura grigia, mosaico, ruggine): verificato sulle immagini e con 3.082 copie quasi identiche in AppleLeaf9. Importate come melo con le etichette di AppleLeaf9; le classi ATLDSD di AppleLeaf9 sono escluse per non avere copie tra addestramento e test. Campione di 1.500 foto per classe, split per blocchi di 50 scatti consecutivi."
