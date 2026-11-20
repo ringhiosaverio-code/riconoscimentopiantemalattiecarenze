@@ -291,7 +291,10 @@ def build_app_data(readers: dict, crops_of: dict | None = None, anno: int = 2026
             if per:
                 classi[f"{head}|{c['label']}"] = per
     coad = _load_yaml(DIFESA / "gowan_coadiuvanti.yaml") if (DIFESA / "gowan_coadiuvanti.yaml").exists() else {}
-    return {"coadiuvanti": coad,
+    used = {u["prodotto"] for u in usi}
+    info = {p["prodotto"]: {k: p.get(k) for k in ("compatibilita", "etichetta_validita", "etichetta") if p.get(k)}
+            for p in gw.get("prodotti", []) if p["prodotto"] in used or p["prodotto"] in ("MAGO",)}
+    return {"coadiuvanti": coad, "prodotti_info": info,
             "fonti": {"disciplinare": {"titolo": disc["fonte"], "url": disc["url"], "anno": disc["anno"]},
                       "disciplinare_prec": ({"titolo": old["fonte"], "url": old["url"], "anno": old["anno"]} if old else None),
                       "gowan": {k: gw.get(k) for k in ("fonte", "consultato", "avvertenza")}},

@@ -18,7 +18,7 @@ from plantcare.data.pipeline import read_manifest
 from plantcare.metrics import expected_calibration_error, macro_f1
 
 ROOT = Path(__file__).resolve().parents[1]
-FIELD = {"plantdoc": 3.0, "inatag": 3.0, "plantwild": 3.0, "inat_calabria": 2.0}
+FIELD = {"plantdoc": 3.0, "inatag": 3.0, "plantwild": 3.0, "inat_calabria": 2.0, "fieldvitis": 3.0}
 
 
 def load():

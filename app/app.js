@@ -247,7 +247,10 @@
           var g = byP[name], u = g.p, dose = [u.dose_ha, u.dose_hl].filter(Boolean).join(' · ') || 'vedi etichetta';
           var x = '<div class="prod"><p><strong><a href="' + esc(u.pagina) + '" target="_blank" rel="noopener">' + esc(name) + '</a></strong> — ' + esc(u.composizione || '') +
             '<br>Dose: ' + esc(dose) + '; intervallo di sicurezza: ' + esc(u.intervallo_sicurezza || '-') + '</p>';
-          x += '<details><summary>Usi registrati, epoche e note (' + g.rows.length + ')</summary>';
+          var pi = (D.prodotti_info || {})[name] || {};
+          x += '<details><summary>Usi registrati, epoche, note e miscele (' + g.rows.length + ')</summary>';
+          if (pi.compatibilita) x += '<p><strong>Miscele, dall\'etichetta:</strong> ' + esc(pi.compatibilita) + '</p>';
+          if (pi.etichetta) x += '<p class="muted"><a href="' + esc(pi.etichetta) + '" target="_blank" rel="noopener">Etichetta</a>' + (pi.etichetta_validita ? ': ' + esc(pi.etichetta_validita) : '') + '</p>';
           g.rows.forEach(function (r) {
             x += '<p class="muted"><strong>' + esc(r.coltura) + (r.ambito ? ', ' + esc(r.ambito) : '') + '</strong> — ' + esc(r.avversita) + '. Dose: ' +
               esc([r.dose_ha, r.dose_hl].filter(Boolean).join(' · ') || 'vedi etichetta') + '; intervallo: ' + esc(r.intervallo_sicurezza || '-') + '. ' + esc(r.note || '') + '</p>';
@@ -268,7 +271,9 @@
     if (C && C.prodotti && C.prodotti.length) {
       h += '<details><summary>Coadiuvanti, corroboranti e pulizia della botte (catalogo Gowan)</summary>';
       C.prodotti.forEach(function (x) {
-        h += '<p><strong><a href="' + esc(x.pagina) + '" target="_blank" rel="noopener">' + esc(x.nome) + '</a></strong> — ' + esc(x.tipo) + '. ' + esc(x.composizione) + '. ' + esc(x.uso) + '</p>';
+        var mi = (D.prodotti_info || {})[x.nome] || {};
+        h += '<p><strong><a href="' + esc(x.pagina) + '" target="_blank" rel="noopener">' + esc(x.nome) + '</a></strong> — ' + esc(x.tipo) + '. ' + esc(x.composizione) + '. ' + esc(x.uso) +
+          (mi.compatibilita ? ' <em>Dall\'etichetta:</em> ' + esc(mi.compatibilita) : '') + '</p>';
       });
       h += '<p class="muted">Fonte: ' + esc(C.fonte) + '. Per ogni miscela prevale la sezione compatibilità dell\'etichetta dei prodotti usati.</p></details>';
     }

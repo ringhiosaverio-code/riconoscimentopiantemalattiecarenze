@@ -246,3 +246,11 @@ datasets:
     license: "CC0, CC BY o CC BY-NC (per foto, autore salvato): uso non commerciale e accademico"
     citation: "iNaturalist (www.inaturalist.org), osservazioni 'research grade'; specie delle norme di difesa integrata della Regione Calabria 2026 (configs/quiz_calabria.yaml)"
     note: "Scaricate con scripts/import_inat_train.py, al massimo 200 foto per specie e 5 per autore; split per autore (10% test, 10% validazione). Le foto restano fuori dal repository."
+
+  # --- vite in campo, mal dell'esca ---
+  - name: fieldvitis
+    use: disease
+    crop: vitis_vinifera
+    license: "CC BY 4.0 (record Zenodo); raccoglie foto di ESCA-dataset, PlantDoc e Grape Disease"
+    citation: "FieldVitis, Zenodo record 17307846 (https://zenodo.org/records/17307846)"
+    note: "Foglie di vite in campo: mal dell'esca (200), sane, Isariopsis, black rot. Escluse 20 copie di foto di PlantDoc (il test di PlantDoc resta pulito). Usato solo per l'addestramento, non nel quiz: le licenze delle fonti originali non sono tutte chiare."

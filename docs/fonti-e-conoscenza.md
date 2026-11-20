@@ -47,7 +47,7 @@ Le fonti sono in `configs/sources.yaml`. L'API le espone su `/api/sources`.
 
 ## Cosa non fa il sistema
 
-- Sostanze attive, limiti d'uso e criteri di intervento vengono dal Disciplinare di produzione integrata della Regione Calabria (2026, confrontato con il 2023 per le sostanze uscite dall'elenco); dosi, intervalli di sicurezza ed epoche dei prodotti Gowan dalle pagine prodotto del produttore. Niente è scritto a mano; l'etichetta autorizzata prevale e la decisione resta del tecnico.
+- Sostanze attive, limiti d'uso e criteri di intervento vengono dal Disciplinare di produzione integrata della Regione Calabria (2026, confrontato con il 2023 per le sostanze uscite dall'elenco); dosi, intervalli di sicurezza ed epoche dei prodotti Gowan dalle pagine prodotto del produttore; il paragrafo sulle miscele (compatibilità) e la data di validità dalle etichette dei prodotti, scaricate dal sito Gowan (`scripts/import_gowan.py --etichette`; se l'estrazione dal PDF non è affidabile il paragrafo si omette). Niente è scritto a mano; l'etichetta autorizzata prevale e la decisione resta del tecnico.
 - Non stabilisce se un'azienda è obbligata a un intervento di lotta: lo stabilisce la norma regionale o nazionale.
 
 ## Copertura del disciplinare 2023 (letta nel testo)

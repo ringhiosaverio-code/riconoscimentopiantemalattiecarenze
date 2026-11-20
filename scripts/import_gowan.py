@@ -65,15 +65,31 @@ def parse_page(path):
             "etichetta": label.group(1) if label else None, "usi": uses}
 
 
+STOP = (r"(?=FITOTOSSICIT|ATTENZIONE|Etichetta autorizzata|INFORMAZIONI PER IL MEDICO|PREVENZIONE|CONSERVARE|"
+        r"DA NON APPLICARE|RISCHI DI NOCIVIT|Gestione delle resistenze|Periodo di sicurezza|$)")
+
+
 def compat_from_label(pdf):
-    """Paragrafo dell'etichetta su compatibilità e miscele (testo dell'etichetta, non riassunto)."""
+    """Paragrafo dell'etichetta su compatibilità e miscele, e data di validità dell'etichetta (testo letterale).
+    Prima il titolo in maiuscolo (COMPATIBILITÀ, MISCIBILITÀ), poi 'Compatibilità' come titolo, infine la
+    frase intera che contiene la parola."""
     try:
-        t = subprocess.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True, timeout=60).stdout
+        t = subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True, timeout=60).stdout
     except Exception:
-        return None
-    t = re.sub(r"[ \t]+", " ", t)
-    m = re.search(r"(?is)(COMPATIBILIT[AÀ]'?.{0,900}?)(?:\n\s*\n|ATTENZIONE|FITOTOSSICIT)", t)
-    return re.sub(r"\s+", " ", m.group(1)).strip() if m else None
+        return None, None
+    t = re.sub(r"\s+", " ", t)
+    m = (re.search(r"((?:COMPATIBILIT|MISCIBILIT)(?:[AÀ]'?|À)\s.{10,700}?)" + STOP, t)
+         or re.search(r"((?:Compatibilità|Miscibilità)\s*:?\s+[A-ZÈ–-].{10,700}?)" + STOP, t))
+    text = m.group(1).strip() if m else None
+    if not text:
+        sm = re.search(r"([^.]{0,300}compatibilit[aà][^.]{0,300}\.)", t, re.I)
+        text = sm.group(1).strip() if sm else None
+    if text and (re.match(r"(?i)compatibilit[aà]\s+periodo di sicurezza", text)
+                 or re.search(r"Marchio registrato|Etichetta autorizzata|^\[", text)
+                 or not re.search(r"(?i)compatib|miscel|miscib", text[:60])):
+        text = None  # estrazione non affidabile (colonne mescolate nel PDF): meglio nulla
+    v = re.search(r"(Etichetta autorizzata con [Dd]ecreto [Dd]irigenziale del [^,.]{4,30}(?:,[^.]{0,160}?con validità dal [0-9/]{8,10})?)", t)
+    return text, (v.group(1).strip() if v else None)
 
 
 def main():
@@ -87,7 +103,7 @@ def main():
         p = parse_page(f)
         p["pagina"] = f"https://gowanitalia.it/agrofarmaco/{f.stem}/"
         if args.etichette and (Path(args.etichette) / f"{f.stem}.pdf").exists():
-            p["compatibilita"] = compat_from_label(Path(args.etichette) / f"{f.stem}.pdf")
+            p["compatibilita"], p["etichetta_validita"] = compat_from_label(Path(args.etichette) / f"{f.stem}.pdf")
         prods.append(p)
     notes = {}  # le note (spesso uguali per molte colture) si salvano una volta sola
     for p in prods:

@@ -741,3 +741,63 @@ def append_inat_calabria() -> int:
         w.writerows(rows)
         w.writerows({k: r.get(k, "") for k in MANIFEST_COLUMNS} for r in new)
     return len(new)
+
+
+FIELDVITIS = {"Esca": "grapevine_esca", "Healthy": "healthy", "Black_rot": "Grape___Black_rot",
+              "Leaf_blight": "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)"}
+
+
+def import_fieldvitis(seed: int = 42, max_dist: int = 24) -> list[ManifestRow]:
+    """FieldVitis (Zenodo 17307846, CC BY 4.0): foglie di vite in campo, con il mal dell'esca. Unisce foto
+    di ESCA-dataset, PlantDoc e Grape Disease: le copie di PlantDoc si escludono (test di PlantDoc pulito),
+    le copie interne vanno nello stesso split."""
+    z_path = EXT / "fieldvitis" / "fieldvitis.zip"
+    if not z_path.exists():
+        return _rows_from_manifest("fieldvitis")
+    table = np.array([bin(x).count("1") for x in range(256)], dtype=np.uint16)
+    pd_hash = _plantdoc_hashes()
+    recs, n_pd = [], 0
+    with zipfile.ZipFile(z_path) as zf:
+        for m in sorted(zf.namelist()):
+            cls = m.split("/")[-2] if "/" in m else ""
+            if cls not in FIELDVITIS or not m.lower().endswith((".jpg", ".jpeg", ".png")):
+                continue
+            data = zf.read(m)
+            try:
+                h = np.packbits(np.array([int(b) for b in f"{_dhash(data):0256b}"], dtype=np.uint8))
+            except Exception:
+                continue
+            if len(pd_hash) and table[np.bitwise_xor(pd_hash, h)].sum(1).min() <= max_dist:
+                n_pd += 1
+                continue
+            recs.append({"image": {"bytes": data}, "cls": cls})
+    by = defaultdict(list)
+    for i, r in enumerate(recs):
+        by[r["cls"]].append(i)
+    split_of = {}
+    for cls, idxs in by.items():
+        for j, s in zip(idxs, _split_random(len(idxs), seed + zlib.crc32(cls.encode()) % 1000)):
+            split_of[j] = s
+    _same_split_for_duplicates(recs, split_of)
+    rows = []
+    for i, r in enumerate(recs):
+        out = IMG / "fieldvitis" / split_of[i] / f"{i:05d}.jpg"
+        if out.exists() or _save(r["image"]["bytes"], out):
+            rows.append(ManifestRow(path=_rel(out), source="fieldvitis", split=split_of[i], plant="vitis_vinifera",
+                                    disease=FIELDVITIS[r["cls"]], organ="leaf"))
+    print(f"  fieldvitis: {len(rows)} foto, {n_pd} copie di PlantDoc escluse", flush=True)
+    return rows
+
+
+def append_source(name: str, rows: list[ManifestRow]) -> int:
+    """Sostituisce nel manifest le righe di una fonte senza rifare l'importazione di tutte le altre."""
+    from dataclasses import asdict
+    from plantcare.data.pipeline import MANIFEST_COLUMNS
+    path = DATA / "processed" / "manifest_v2.csv"
+    keep = [r for r in csv.DictReader(open(path, encoding="utf-8")) if r["source"] != name]
+    with open(path, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=MANIFEST_COLUMNS)
+        w.writeheader()
+        w.writerows(keep)
+        w.writerows({k: asdict(r).get(k, "") for k in MANIFEST_COLUMNS} for r in rows)
+    return len(rows)
