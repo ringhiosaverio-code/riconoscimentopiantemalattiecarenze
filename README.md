@@ -78,7 +78,7 @@ Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete
 ## App nel browser (GitHub Pages)
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
-- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, 45 MB, accuratezza uguale al modello pieno sulle foto di test);
+- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, 66 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di 5 lettori, vedi docs/miglioramento.md);
 - quiz con 320 foto da PlantDoc e Project-AgML (licenze CC BY o MIT, con attribuzione);
 - botte: stesso calcolatore della versione Python, verificato dai test;
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;

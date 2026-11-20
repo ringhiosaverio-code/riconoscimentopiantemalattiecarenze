@@ -33,7 +33,30 @@ Oggi gli estrattori (DINOv2, EfficientNet-B0) sono congelati e si addestrano sol
 
 ## 4. Miglioramenti già misurabili senza nuovi dati
 
-Provati sulle caratteristiche in cache (`scripts/improve_readers.py`): insieme di più lettori e pesatura delle foto di campo. I risultati sono nella sezione seguente.
+Provati sulle caratteristiche in cache (`scripts/improve_readers.py`), sullo stesso test:
+
+| Lettore | Variante | Test | Campo PlantDoc | Campo iNat | Errore di calibrazione |
+|---|---|---|---|---|---|
+| Coltura | un lettore | 98,5% | 88,9% | 79,3% | 17% |
+| Coltura | foto di campo pesate ×3 | 98,4% | 88,5% | 77,9% | 17% |
+| Coltura | **insieme di 5, calibrato** | 98,5% | **90,0%** | **79,7%** | **0,3%** |
+| Malattia | un lettore | 96,1% | 76,3% | – | 20% |
+| Malattia | foto di campo pesate ×3 | 96,2% | 77,6% | – | 21% |
+| Malattia | **insieme di 5, calibrato** | 96,2% | **78,1%** | – | **0,6%** |
+| Carenze | un lettore | 99,3% | – | – | 30% |
+| Carenze | **insieme di 5, calibrato** | 99,3% | – | – | **0,4%** |
+
+L'errore di calibrazione dei singoli lettori qui è senza temperatura; quello pubblicato prima era già calibrato (sotto l'1%).
+
+L'insieme rispetta le regole qui sotto ed è nell'app pubblicata. Verifica sul modello web quantizzato, con la stessa preparazione della foto del browser: PlantDoc coltura 91,1% (prima 90,2%), malattia 78,0% (prima 76,3%), PlantVillage malattia 98,7% (prima 98,3%). Costo: il modello passa da 45 a 66 MB.
+
+Ricostruzione:
+
+```bash
+PYTHONPATH=src python scripts/improve_readers.py
+PYTHONPATH=src python scripts/export_web_model.py --checkpoint models/readers_.../readers.pt --out /tmp/web/plantcare.onnx --ensemble-dir models
+PYTHONPATH=src python scripts/build_web.py --model /tmp/web/plantcare.onnx --ort-dist <onnxruntime-web/dist> --improve-results models/improve_results.json
+```
 
 ## Regole per accettare un nuovo modello
 

@@ -52,6 +52,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
     ap.add_argument("--ort-dist", required=True)
+    ap.add_argument("--improve-results", default=None,
+                    help="models/improve_results.json: metriche dell'insieme di lettori, se il modello lo usa")
     args = ap.parse_args()
 
     tax = load_taxonomy()
@@ -60,6 +62,7 @@ def main() -> None:
     label_map = load_yaml(ROOT / "configs" / "label_maps.yaml")
     ck = torch.load(CKPT / "readers.pt", map_location="cpu", weights_only=False)
     report = json.load(open(CKPT / "report.json", encoding="utf-8"))
+    improved = json.load(open(args.improve_results, encoding="utf-8")) if args.improve_results else None
 
     (APP / "data").mkdir(parents=True, exist_ok=True)
     (APP / "model").mkdir(parents=True, exist_ok=True)
@@ -88,6 +91,11 @@ def main() -> None:
         field = {s: v for s, v in t["by_source"].items() if s in ("plantdoc", "inatag")}
         readers[h] = {"classes": items, "test_accuracy": t["accuracy"], "test_macro_f1": t["macro_f1"],
                       "calibration_error": t["ece"], "field": field}
+        if improved and h in improved:
+            e = improved[h]["insieme"]
+            readers[h].update(test_accuracy=e["acc"], test_macro_f1=e["f1"], calibration_error=e["ece"],
+                              field={s: {"n": field.get(s, {}).get("n"), "accuracy": e[s]} for s in ("plantdoc", "inatag") if s in e},
+                              ensemble=5)
     json.dump(readers, open(APP / "data" / "readers.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     # --- organi, regole della botte, fonti ---
