@@ -47,6 +47,11 @@ table{width:100%;border-collapse:collapse}
 td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 td.n,th.n{text-align:right;white-space:nowrap}
 a{color:var(--accent)}
+.pick{position:relative;margin:8px auto 4px;width:100%;touch-action:none;user-select:none}
+.pick img{width:100%;display:block;border-radius:10px}
+.pick .sq{position:absolute;border:3px solid #fff;outline:2px solid #000a;border-radius:4px;box-shadow:0 0 0 9999px #0006;cursor:move;touch-action:none}
+.pick{overflow:hidden;border-radius:10px}
+input[type=range]{padding:0;border:0;background:transparent}
 .progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0}
 .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
 </style>
@@ -87,6 +92,7 @@ a{color:var(--accent)}
 <ul>
 <li>Da vicino la parte colpita, con luce naturale e senza flash.</li>
 <li>Lesione a fuoco e al centro dell'immagine: viene analizzato il quadrato centrale della foto.</li>
+<li>Con più foglie, sfondo o terreno: dopo lo scatto sposta il quadrato sulla foglia colpita, rimpiccioliscilo e premi "Analizza la zona scelta". Sulle foto di campo di PlantDoc inquadrare la foglia porta la malattia giusta dal 79% all'82%.</li>
 <li>Una foto per organo: foglia, frutto, fusto.</li>
 </ul>
 </section>

@@ -65,13 +65,14 @@
     });
   }
 
-  // quadrato centrale ridimensionato a 224 px, normalizzato; secondo elemento del batch: immagine specchiata
-  function toTensor(source, w, h) {
+  // quadrato scelto (di base quello centrale) ridimensionato a 224 px, normalizzato;
+  // secondo elemento del batch: immagine specchiata
+  function toTensor(source, w, h, sq) {
     var c = $('canvas'); c.width = SIZE; c.height = SIZE;
     var ctx = c.getContext('2d', { willReadFrequently: true });
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-    var s = Math.min(w, h);
-    ctx.drawImage(source, (w - s) / 2, (h - s) / 2, s, s, 0, 0, SIZE, SIZE);
+    var s = sq ? sq.s : Math.min(w, h), x0 = sq ? sq.x : (w - s) / 2, y0 = sq ? sq.y : (h - s) / 2;
+    ctx.drawImage(source, x0, y0, s, s, 0, 0, SIZE, SIZE);
     var px = ctx.getImageData(0, 0, SIZE, SIZE).data, n = SIZE * SIZE;
     var data = new Float32Array(2 * 3 * n);
     for (var y = 0; y < SIZE; y++) {
@@ -94,12 +95,12 @@
     return c.toDataURL('image/jpeg', 0.88);
   }
 
-  function analyze(source, w, h) {
+  function analyze(source, w, h, sq) {
     lastPhoto = keepPhoto(source, w, h);
     $('out').innerHTML = '<div class="card">Analisi in corso…</div>';
     ready.then(loadModel).then(function (s) {
       var t0 = performance.now();
-      return s.run({ image: toTensor(source, w, h) }).then(function (outs) {
+      return s.run({ image: toTensor(source, w, h, sq) }).then(function (outs) {
         var res = {};
         HEADS.concat(['pest']).forEach(function (hd) {
           if (!outs[hd] || !DATA.readers[hd]) return;
@@ -317,16 +318,65 @@
     stream = null; $('video').hidden = true; $('cam-shot').disabled = true; $('cam-stop').disabled = true; $('cam-status').textContent = '';
   });
   $('cam-shot').addEventListener('click', function () {
-    var v = $('video'); analyze(v, v.videoWidth, v.videoHeight);
+    var v = $('video'), w = v.videoWidth, h = v.videoHeight, c = document.createElement('canvas');
+    if (!w || !h) return;
+    c.width = w; c.height = h; c.getContext('2d').drawImage(v, 0, 0, w, h);
+    showPicker(c, w, h, c.toDataURL('image/jpeg', 0.9));
+    analyze(c, w, h);
   });
   $('file').addEventListener('change', function () {
     var f = $('file').files[0]; if (!f) return;
-    var url = URL.createObjectURL(f);
-    $('preview').innerHTML = '<img class="preview" alt="Foto scelta" src="' + url + '">';
-    var img = new Image();
-    img.onload = function () { analyze(img, img.naturalWidth, img.naturalHeight); };
+    var url = URL.createObjectURL(f), img = new Image();
+    img.onload = function () {
+      showPicker(img, img.naturalWidth, img.naturalHeight, url);
+      analyze(img, img.naturalWidth, img.naturalHeight);
+    };
     img.src = url;
   });
+
+  // ------------------------------------------------------------------ zona da analizzare
+  // Con più foglie, sfondo o terreno nella foto il lettore sbaglia di più: l'utente sposta il
+  // quadrato sulla parte colpita (trascinandolo) e lo rimpicciolisce con il cursore.
+  var pick = null;
+  function placeSquare() {
+    var q = $('pick-sq'); if (!q || !pick) return;
+    q.style.left = (pick.x / pick.w * 100) + '%'; q.style.top = (pick.y / pick.h * 100) + '%';
+    q.style.width = (pick.s / pick.w * 100) + '%'; q.style.height = (pick.s / pick.h * 100) + '%';
+  }
+  function clampSquare() {
+    pick.x = Math.min(Math.max(pick.x, 0), pick.w - pick.s);
+    pick.y = Math.min(Math.max(pick.y, 0), pick.h - pick.s);
+  }
+  function showPicker(source, w, h, url) {
+    var s = Math.min(w, h);
+    pick = { source: source, w: w, h: h, s: s, x: (w - s) / 2, y: (h - s) / 2 };
+    $('preview').innerHTML = '<div class="pick" id="pick" style="max-width:' + Math.round(400 * w / h) + 'px">' +
+      '<img alt="Foto scelta" src="' + url + '"><div class="sq" id="pick-sq" role="presentation"></div></div>' +
+      '<label class="muted" for="pick-size">Viene analizzata la zona nel quadrato. Con più foglie o sfondo, trascina il quadrato sulla parte colpita e rimpiccioliscilo:</label>' +
+      '<input id="pick-size" type="range" min="15" max="100" value="100" aria-label="Dimensione del quadrato">' +
+      '<div class="row"><button type="button" id="pick-go">Analizza la zona scelta</button></div>';
+    placeSquare();
+    var sq = $('pick-sq'), box = $('pick'), drag = null;
+    sq.addEventListener('pointerdown', function (e) {
+      drag = { x: e.clientX, y: e.clientY, px: pick.x, py: pick.y }; sq.setPointerCapture(e.pointerId); e.preventDefault();
+    });
+    sq.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var k = pick.w / box.clientWidth;  // pixel dello schermo -> pixel della foto
+      pick.x = drag.px + (e.clientX - drag.x) * k; pick.y = drag.py + (e.clientY - drag.y) * k;
+      clampSquare(); placeSquare();
+    });
+    sq.addEventListener('pointerup', function () { drag = null; });
+    sq.addEventListener('pointercancel', function () { drag = null; });
+    $('pick-size').addEventListener('input', function () {
+      var cx = pick.x + pick.s / 2, cy = pick.y + pick.s / 2;
+      pick.s = Math.min(w, h) * $('pick-size').value / 100;
+      pick.x = cx - pick.s / 2; pick.y = cy - pick.s / 2; clampSquare(); placeSquare();
+    });
+    $('pick-go').addEventListener('click', function () {
+      analyze(pick.source, pick.w, pick.h, { x: pick.x, y: pick.y, s: pick.s });
+    });
+  }
 
   // ------------------------------------------------------------------ quiz
   var qCur = null, score = { ok: 0, tot: 0 };
