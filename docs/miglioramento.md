@@ -58,6 +58,22 @@ PYTHONPATH=src python scripts/export_web_model.py --checkpoint models/readers_..
 PYTHONPATH=src python scripts/build_web.py --model /tmp/web/plantcare.onnx --ort-dist <onnxruntime-web/dist> --improve-results models/improve_results.json
 ```
 
+## 5. Ramo riaddestrato per le malattie (ultimi blocchi di DINOv2, su CPU)
+
+`scripts/finetune_disease.py` riaddestra gli ultimi blocchi dell'estrattore solo per il lettore delle malattie (token in cache su disco, aumenti di dati, token oscurati al 25%, foto di campo pesate ×3) e fonde il risultato con l'insieme di 5 lettori (peso scelto sulla validazione). Nell'app è un ramo separato: coltura, carenze e insetti usano l'estrattore originale.
+
+Prima versione (blocchi 10-11, 5 epoche, stessi dati di prima), sullo stesso test:
+
+| Malattia | Test | Macro-F1 | Campo PlantDoc |
+|---|---|---|---|
+| Insieme di 5 lettori | 96,2% | 0,906 | 78,0% |
+| Ramo riaddestrato | 95,5% | 0,905 | 79,8% |
+| **Fusione (pubblicata)** | **96,5%** | **0,917** | **80,0%** |
+
+Modello web quantizzato, stessa preparazione della foto del browser: PlantDoc malattia 80,7% (prima 78,0%), coltura invariata.
+
+In corso: seconda versione con i nuovi dataset (AppleLeaf9, CitrusUAT, agrumi frutti e foglie, susino, melograno, fico, patata in campo, ortaggi del Bangladesh, frutti di melanzana) e 3 blocchi riaddestrati (`scripts/riaddestra_tutto.sh`).
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:

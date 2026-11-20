@@ -145,6 +145,9 @@ def main() -> None:
     ap.add_argument("--quiz-only", action="store_true", help="ricostruisce solo le foto e i dati del quiz")
     ap.add_argument("--with-pest", action="store_true",
                     help="include il lettore degli insetti (IP102: solo uso accademico, confermato dall'utente)")
+    ap.add_argument("--ckpt-dir", default=str(CKPT), help="cartella con readers.pt e report.json")
+    ap.add_argument("--disease-ft-results", default=None,
+                    help="models/finetune_disease.json: metriche della fusione con il ramo riaddestrato")
     ap.add_argument("--improve-results", default=None,
                     help="models/improve_results.json: metriche dell'insieme di lettori, se il modello lo usa")
     args = ap.parse_args()
@@ -154,12 +157,13 @@ def main() -> None:
     kb = KnowledgeBase(tax, knowledge=load_yaml(ROOT / "configs" / "knowledge_base.yaml"),
                        sources=load_yaml(ROOT / "configs" / "sources.yaml"))
     label_map = load_yaml(ROOT / "configs" / "label_maps.yaml")
-    ck = torch.load(CKPT / "readers.pt", map_location="cpu", weights_only=False)
+    ckpt_dir = Path(args.ckpt_dir)
+    ck = torch.load(ckpt_dir / "readers.pt", map_location="cpu", weights_only=False)
     quiz_heads = HEADS + ["pest"]
     if args.quiz_only:
         build_quiz(ck, quiz_heads, class_names(ck, kb, tax, label_map, quiz_heads))
         return
-    report = json.load(open(CKPT / "report.json", encoding="utf-8"))
+    report = json.load(open(ckpt_dir / "report.json", encoding="utf-8"))
     improved = json.load(open(args.improve_results, encoding="utf-8")) if args.improve_results else None
 
     (APP / "data").mkdir(parents=True, exist_ok=True)
@@ -206,6 +210,11 @@ def main() -> None:
             readers[h].update(test_accuracy=e["acc"], test_macro_f1=e["f1"], calibration_error=e["ece"],
                               field={s: {"n": field.get(s, {}).get("n"), "accuracy": e[s]} for s in ("plantdoc", "inatag") if s in e},
                               ensemble=5)
+        if h == "disease" and args.disease_ft_results:
+            e = json.load(open(args.disease_ft_results, encoding="utf-8"))["fusione"]
+            readers[h].update(test_accuracy=e["acc"], test_macro_f1=e["f1"], calibration_error=e["ece"],
+                              field={"plantdoc": {"n": field.get("plantdoc", {}).get("n"), "accuracy": e["plantdoc"]}},
+                              finetuned_branch=True)
     json.dump(readers, open(APP / "data" / "readers.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     json.dump(cause_names, open(APP / "data" / "causes.json", "w", encoding="utf-8"), ensure_ascii=False)
@@ -232,7 +241,7 @@ def main() -> None:
     if lic.exists():
         shutil.copy(lic, APP / "ort" / "LICENSE")
     size = sum(p.stat().st_size for p in APP.rglob("*") if p.is_file()) / 1e6
-    print(f"app/ pronta: {len(quiz)} foto del quiz, {size:.1f} MB")
+    print(f"app/ pronta: {size:.1f} MB")
 
 
 if __name__ == "__main__":
