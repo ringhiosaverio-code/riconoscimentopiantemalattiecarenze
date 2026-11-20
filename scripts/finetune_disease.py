@@ -115,11 +115,11 @@ def cache_tokens(name, paths, tf, vit, seed=0):
 
 
 class DiseaseBranch(nn.Module):
-    """Blocchi 10-11 riaddestrati + norma + lettore su [CLS, media dei token, EfficientNet]."""
+    """Ultimi blocchi riaddestrati + norma + lettore su [CLS, media dei token, EfficientNet]."""
 
-    def __init__(self, vit, n_classes, eff_dim=1280):
+    def __init__(self, vit, n_classes, eff_dim=1280, split_at=None):
         super().__init__()
-        self.blocks = copy.deepcopy(vit.blocks[SPLIT_AT:])
+        self.blocks = copy.deepcopy(vit.blocks[split_at if split_at is not None else SPLIT_AT:])
         self.norm = copy.deepcopy(vit.norm)
         self.reader = rd.Reader(384 * 2 + eff_dim, n_classes, hidden=1024)
 
@@ -155,10 +155,14 @@ def metrics(p, y, src):
 
 
 def main():
+    global SPLIT_AT, TOK_DIR
     ap = argparse.ArgumentParser()
     ap.add_argument("--epochs", type=int, default=5)
     ap.add_argument("--only-cache", action="store_true")
+    ap.add_argument("--split-at", type=int, default=SPLIT_AT, help="primo blocco riaddestrato (12 blocchi in tutto)")
     args = ap.parse_args()
+    SPLIT_AT = args.split_at
+    TOK_DIR = TOK_DIR / f"blocco{SPLIT_AT}"
     torch.set_num_threads(4)
 
     rows = read_manifest(ROOT / "data/processed/manifest_v2.csv")
@@ -166,7 +170,6 @@ def main():
     ci = {c: i for i, c in enumerate(classes)}
     idx = select(rows, set(classes))
     if os.environ.get("FT_SMOKE"):  # prova rapida del codice
-        global TOK_DIR
         TOK_DIR = Path(os.environ["FT_SMOKE"])
         rs = random.Random(1)
         idx = {k: sorted(rs.sample(v, 300)) for k, v in idx.items()}
@@ -195,7 +198,7 @@ def main():
     src = {k: [rows[i]["source"] for i in v] for k, v in idx.items()}
 
     torch.manual_seed(0)
-    model = DiseaseBranch(vit, len(classes))
+    model = DiseaseBranch(vit, len(classes), split_at=SPLIT_AT)
     counts = torch.bincount(y["train"], minlength=len(classes)).float().clamp(min=1)
     cw = (counts.sum() / counts).sqrt()
     cw = cw / cw.mean()

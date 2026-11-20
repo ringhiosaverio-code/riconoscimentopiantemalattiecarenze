@@ -56,7 +56,7 @@ if args.disease_ft:
     ft = torch.load(args.disease_ft, map_location="cpu", weights_only=False)
     if list(ft["classes"]) != list(ck["readers"]["disease"]["classes"]):
         raise SystemExit("disease_ft: classi diverse da quelle del checkpoint")
-    branch = DiseaseBranch(net.backbones[0], len(ft["classes"]))
+    branch = DiseaseBranch(net.backbones[0], len(ft["classes"]), split_at=ft["split_at"])
     branch.load_state_dict(ft["state"])
     branch.eval()
     split_at, ft_w = ft["split_at"], ft["fusion_weight"]

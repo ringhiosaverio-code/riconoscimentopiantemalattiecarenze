@@ -273,7 +273,8 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     src = EXT / name
     files = sorted(src.rglob("*.parquet"))
     if not files:
-        return []
+        # file originali rimossi per spazio: si riusano le righe già importate (le foto sono in data/external/images)
+        return _rows_from_manifest(name)
     names = _label_names(repo)
     schema = pq.ParquetFile(files[0]).schema_arrow.names
     has_crop = "crop_type" in schema
@@ -316,6 +317,15 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
             rows.append(ManifestRow(path=_rel(out), source=name, split=split_of[i], plant=plant, disease=dis,
                                     deficiency=deficiency, organ=organ))
     return rows
+
+
+def _rows_from_manifest(source: str) -> list[ManifestRow]:
+    man = DATA / "processed" / "manifest_v2.csv"
+    if not man.exists():
+        return []
+    with open(man, newline="", encoding="utf-8") as fh:
+        rows = [r for r in csv.DictReader(fh) if r["source"] == source and (DATA / r["path"]).exists()]
+    return [ManifestRow(**{k: r.get(k, "") for k in ManifestRow.__dataclass_fields__}) for r in rows]
 
 
 def _dhash(img_bytes_or_path, size: int = 16) -> int:
