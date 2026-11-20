@@ -52,10 +52,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
     ap.add_argument("--ort-dist", required=True)
+    ap.add_argument("--with-pest", action="store_true",
+                    help="include il lettore degli insetti (IP102: solo uso accademico, confermato dall'utente)")
     ap.add_argument("--improve-results", default=None,
                     help="models/improve_results.json: metriche dell'insieme di lettori, se il modello lo usa")
     args = ap.parse_args()
 
+    heads = HEADS + (["pest"] if args.with_pest else [])
     tax = load_taxonomy()
     kb = KnowledgeBase(tax, knowledge=load_yaml(ROOT / "configs" / "knowledge_base.yaml"),
                        sources=load_yaml(ROOT / "configs" / "sources.yaml"))
@@ -69,8 +72,10 @@ def main() -> None:
     (APP / "ort").mkdir(parents=True, exist_ok=True)
 
     # --- classi dei lettori, nell'ordine delle uscite del modello ---
+    ip_en = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_classes.yaml")["classes"].items()}
+    ip_it = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_it.yaml")["names"].items()}
     readers = {}
-    for h in HEADS:
+    for h in heads:
         classes = ck["readers"][h]["classes"]
         items = []
         for raw in classes:
@@ -84,6 +89,10 @@ def main() -> None:
                 item["taxonomy_id"] = tid
                 if tid:
                     item["card"] = kb.disease_card(tid)
+            elif h == "pest":
+                k = int(raw.split("_")[-1])
+                en = ip_en.get(k, raw)
+                item["name"] = ip_it.get(k) or en[:1].upper() + en[1:]
             else:
                 item["name"] = DEFICIENCY_NAMES.get(raw, raw)
             items.append(item)

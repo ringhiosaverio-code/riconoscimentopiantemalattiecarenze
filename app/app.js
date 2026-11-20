@@ -101,7 +101,8 @@
       var t0 = performance.now();
       return s.run({ image: toTensor(source, w, h) }).then(function (outs) {
         var res = {};
-        HEADS.forEach(function (hd) {
+        HEADS.concat(['pest']).forEach(function (hd) {
+          if (!outs[hd] || !DATA.readers[hd]) return;
           var o = outs[hd].data, k = o.length / 2, probs = [];
           for (var i = 0; i < k; i++) probs.push((o[i] + o[k + i]) / 2);
           res[hd] = probs;
@@ -112,6 +113,19 @@
       $('prog').hidden = true;
       $('out').innerHTML = '<div class="card warn">Analisi non riuscita: ' + esc(e.message || e) + '. Controlla la connessione e riprova.</div>';
     });
+  }
+
+  // Lettore degli insetti: separato dagli altri, perché ha senso solo se la foto mostra un insetto.
+  function pestBlock(probs) {
+    var R = DATA.readers.pest;
+    if (!R || !probs) return '';
+    var t = top(probs, 3), ok = t[0][0] >= THRESHOLD;
+    var h = '<div class="reader"><h3>Lettore di insetti e acari: ' + esc(ok ? R.classes[t[0][1]].name : 'non determinabile') + '</h3>' +
+      '<p class="muted">Vale solo se la foto mostra un insetto o un acaro, non i suoi danni.</p>';
+    t.forEach(function (x) {
+      h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(R.classes[x[1]].name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
+    });
+    return h + '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + '. Addestrato su IP102 (102 insetti dannosi, soprattutto di riso, frumento, mais, erba medica, vite, agrumi e mango), concesso per uso accademico: mancano molte specie mediterranee, come la mosca delle olive.</p></div>';
   }
 
   function top(probs, k) {
@@ -133,12 +147,12 @@
       var field = R.field && (R.field.plantdoc || R.field.inatag);
       h += '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + (field ? '; su foto di campo: ' + pct(field.accuracy) : '') + '.</p></div>';
     });
-    h += '<div class="reader"><h3>Lettore di insetti e acari</h3><p class="muted">Non incluso nella versione pubblica: il dataset IP102 su cui è addestrato è concesso solo per uso accademico.</p></div>';
+    h += pestBlock(res.pest);
     h += referto(answers, organ);
     h += '<p><button type="button" class="secondary" id="go-tank">Prepara la botte</button></p>';
     var unsure = HEADS.some(function (hd) { return !answers[hd]; });
     lastPred = {};
-    HEADS.forEach(function (hd) { lastPred[hd] = top(res[hd], 3).map(function (x) { return { label: DATA.readers[hd].classes[x[1]].label, p: Math.round(x[0] * 1e4) / 1e4 }; }); });
+    HEADS.concat(res.pest ? ['pest'] : []).forEach(function (hd) { lastPred[hd] = top(res[hd], 3).map(function (x) { return { label: DATA.readers[hd].classes[x[1]].label, p: Math.round(x[0] * 1e4) / 1e4 }; }); });
     h += contribForm(unsure, answers);
     h += '<p class="muted">Analisi in ' + secs.toFixed(1) + ' s sul dispositivo. Strumento di supporto alla decisione: per virus, viroidi, batteri e nematodi serve la conferma di laboratorio.</p></section>';
     $('out').innerHTML = h;
@@ -433,7 +447,7 @@
       '<h2>Come funziona</h2>' +
       '<p>La rete neurale (estrattori DINOv2 ed EfficientNet-B0 con lettori calibrati) gira nel browser con ONNX Runtime Web. La foto non lascia il dispositivo.</p>' +
       '<table><tr><th>Lettore</th><th class="n">Test</th><th class="n">Foto di campo</th></tr>' +
-      row('plant', 'Coltura') + row('disease', 'Malattia') + row('deficiency', 'Carenze') + '</table>' +
+      row('plant', 'Coltura') + row('disease', 'Malattia') + row('deficiency', 'Carenze') + (r.pest ? row('pest', 'Insetti (IP102)') : '') + '</table>' +
       '<p class="muted">Il valore sul test include foto di laboratorio ed è ottimistico; quello su foto di campo (PlantDoc) è più vicino all\'uso reale. Le carenze hanno pochi esempi: indicazione preliminare.</p>' +
       '<h2>Fonti dei dati</h2><ul>' +
       '<li>PlantVillage (Hughes e Salathé, 2015)</li><li>PlantDoc (Singh et al., 2020), CC BY 4.0</li>' +

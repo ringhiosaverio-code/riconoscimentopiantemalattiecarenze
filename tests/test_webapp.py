@@ -25,9 +25,18 @@ def test_reader_classes_match_model_outputs():
     readers = json.load(open(APP / "data" / "readers.json", encoding="utf-8"))
     sess = ort.InferenceSession(str(APP / "model" / "plantcare.onnx"))
     outputs = {o.name: o.shape[1] for o in sess.get_outputs()}
-    assert set(outputs) == {"plant", "disease", "deficiency"}  # niente lettore IP102 nella versione pubblica
+    # il lettore degli insetti (IP102) c'è solo con uso accademico confermato
+    assert {"plant", "disease", "deficiency"} <= set(outputs) <= {"plant", "disease", "deficiency", "pest"}
+    assert set(outputs) == set(readers)
     for head, n in outputs.items():
         assert len(readers[head]["classes"]) == n
+
+
+def test_ip102_italian_names_refer_to_existing_classes():
+    import yaml
+    en = yaml.safe_load(open(ROOT / "configs" / "ip102_classes.yaml", encoding="utf-8"))["classes"]
+    it = yaml.safe_load(open(ROOT / "configs" / "ip102_it.yaml", encoding="utf-8"))["names"]
+    assert set(it) <= set(en)
 
 
 def test_quiz_uses_only_republishable_sources():
