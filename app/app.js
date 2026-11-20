@@ -236,16 +236,42 @@
         h += '<p class="muted">Fonte: <a href="' + esc(fd.url) + '" target="_blank" rel="noopener">' + esc(fd.titolo) + '</a>, pag. ' + r.pagina + '. Il raggruppamento in biologici, naturali e di sintesi è dell\'app.</p></div>';
       });
       if (ent.u.length) {
-        h += '<div class="dif"><h4>Prodotti Gowan registrati per questa avversità (' + esc(plantName(k)) + ')</h4><div class="tw"><table><tr><th>Prodotto</th><th>Sostanza attiva</th><th class="n">Dose</th><th class="n">Interv. sicurezza</th></tr>';
+        // un prodotto per riga (dose e intervallo del primo uso), i dettagli per coltura si aprono a richiesta
+        var byP = {}, order = [];
         ent.u.forEach(function (i) {
-          var u = D.usi[i], dose = [u.dose_ha, u.dose_hl].filter(Boolean).join(' · ') || 'vedi etichetta';
-          h += '<tr><td><a href="' + esc(u.pagina) + '" target="_blank" rel="noopener">' + esc(u.prodotto) + '</a><br><span class="muted">' + esc(u.coltura) + (u.ambito ? ', ' + esc(u.ambito) : '') + '</span></td><td>' + esc(u.composizione || '') +
-            '</td><td class="n">' + esc(dose) + '</td><td class="n">' + esc(u.intervallo_sicurezza || '-') + '</td></tr>';
-          if (u.note) h += '<tr><td colspan="4" class="muted">' + esc(u.note) + '</td></tr>';
+          var u = D.usi[i];
+          if (!byP[u.prodotto]) { byP[u.prodotto] = { p: u, rows: [] }; order.push(u.prodotto); }
+          byP[u.prodotto].rows.push(u);
         });
-        h += '</table></div><p class="muted">' + esc(g.fonte) + ', consultato il ' + esc(g.consultato) + '. ' + esc(g.avvertenza) + ' Per prodotti di altre aziende consulta la banca dati dei prodotti fitosanitari del Ministero della Salute.</p></div>';
+        var prodHtml = function (name) {
+          var g = byP[name], u = g.p, dose = [u.dose_ha, u.dose_hl].filter(Boolean).join(' · ') || 'vedi etichetta';
+          var x = '<div class="prod"><p><strong><a href="' + esc(u.pagina) + '" target="_blank" rel="noopener">' + esc(name) + '</a></strong> — ' + esc(u.composizione || '') +
+            '<br>Dose: ' + esc(dose) + '; intervallo di sicurezza: ' + esc(u.intervallo_sicurezza || '-') + '</p>';
+          x += '<details><summary>Usi registrati, epoche e note (' + g.rows.length + ')</summary>';
+          g.rows.forEach(function (r) {
+            x += '<p class="muted"><strong>' + esc(r.coltura) + (r.ambito ? ', ' + esc(r.ambito) : '') + '</strong> — ' + esc(r.avversita) + '. Dose: ' +
+              esc([r.dose_ha, r.dose_hl].filter(Boolean).join(' · ') || 'vedi etichetta') + '; intervallo: ' + esc(r.intervallo_sicurezza || '-') + '. ' + esc(r.note || '') + '</p>';
+          });
+          return x + '</details></div>';
+        };
+        h += '<div class="dif"><h4>Prodotti Gowan registrati per questa avversità (' + esc(plantName(k)) + '): ' + order.length + '</h4>';
+        order.slice(0, 5).forEach(function (n) { h += prodHtml(n); });
+        if (order.length > 5) {
+          h += '<details><summary>Altri ' + (order.length - 5) + ' prodotti</summary>';
+          order.slice(5).forEach(function (n) { h += prodHtml(n); });
+          h += '</details>';
+        }
+        h += '<p class="muted">' + esc(g.fonte) + ', consultato il ' + esc(g.consultato) + '. ' + esc(g.avvertenza) + ' Per prodotti di altre aziende consulta la banca dati dei prodotti fitosanitari del Ministero della Salute.</p></div>';
       }
     });
+    var C = D.coadiuvanti;
+    if (C && C.prodotti && C.prodotti.length) {
+      h += '<details><summary>Coadiuvanti, corroboranti e pulizia della botte (catalogo Gowan)</summary>';
+      C.prodotti.forEach(function (x) {
+        h += '<p><strong><a href="' + esc(x.pagina) + '" target="_blank" rel="noopener">' + esc(x.nome) + '</a></strong> — ' + esc(x.tipo) + '. ' + esc(x.composizione) + '. ' + esc(x.uso) + '</p>';
+      });
+      h += '<p class="muted">Fonte: ' + esc(C.fonte) + '. Per ogni miscela prevale la sezione compatibilità dell\'etichetta dei prodotti usati.</p></details>';
+    }
     h += '<p class="muted">Le miscele ammesse sono quelle indicate in etichetta (sezione compatibilità). Per l\'ordine di immissione nella botte e le incompatibilità note usa la scheda <a href="#" id="go-tank2">Botte</a>.</p>';
     return h + '</details>';
   }

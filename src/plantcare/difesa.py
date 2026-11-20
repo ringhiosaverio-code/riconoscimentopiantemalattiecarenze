@@ -223,8 +223,13 @@ NATURALI = ("rame", "rameic", "zolfo", "olio minerale", "olio paraffinico", "oli
             "terpeni", "sale potassico", "proteine idrolizzate", "aceto")
 
 
+STRAIN = re.compile(r"^(ceppo\s+)?[A-Z]{1,6}[ -]?[A-Z]?[0-9]{1,6}[A-Z]?$")  # sigle di ceppi: MBI600, M1, QST 713, D747
+
+
 def tipo_sostanza(nome: str) -> str:
     n = nome.lower()
+    if STRAIN.match(nome.strip()) or n.startswith("ceppo"):
+        return "biologico"
     if any(k in n for k in BIOLOGICI):
         return "biologico"
     if any(k in n for k in NATURALI):
@@ -277,13 +282,17 @@ def build_app_data(readers: dict, crops_of: dict | None = None, anno: int = 2026
             per = {}
             for plant in (plants or ["*"]):
                 secs, gcrops = CROPS.get(plant, ([], [])) if plant != "*" else (sorted({r["coltura"] for r in disc["righe"]}), [])
-                rows = [add_row(r) for r in disc["righe"] if r["coltura"] in secs and _match(keys, set(r["chiavi"]))]
+                cand = [r for r in disc["righe"] if r["coltura"] in secs and _match(keys, set(r["chiavi"]))]
+                exact = [r for r in cand if keys & set(r["chiavi"])]  # stessa specie
+                rows = [add_row(r) for r in (exact or cand)]  # le righe che citano solo il genere, se manca la specie
                 uses = [add_use(u) for u in gowan_uses(keys, gcrops, gw, syn)] if gcrops else []
                 if rows or uses:
                     per[plant] = {"r": rows, "u": uses}
             if per:
                 classi[f"{head}|{c['label']}"] = per
-    return {"fonti": {"disciplinare": {"titolo": disc["fonte"], "url": disc["url"], "anno": disc["anno"]},
+    coad = _load_yaml(DIFESA / "gowan_coadiuvanti.yaml") if (DIFESA / "gowan_coadiuvanti.yaml").exists() else {}
+    return {"coadiuvanti": coad,
+            "fonti": {"disciplinare": {"titolo": disc["fonte"], "url": disc["url"], "anno": disc["anno"]},
                       "disciplinare_prec": ({"titolo": old["fonte"], "url": old["url"], "anno": old["anno"]} if old else None),
                       "gowan": {k: gw.get(k) for k in ("fonte", "consultato", "avvertenza")}},
             "righe": righe, "usi": usi, "classi": classi, "rame": copper}
