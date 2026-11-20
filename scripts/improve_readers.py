@@ -83,7 +83,7 @@ def report(name, p, hd):
     return out
 
 
-def main(heads):
+def main(heads, only_ensemble=False):
     rows, feats = load()
     dim = feats.shape[1]
     results = {}
@@ -91,10 +91,12 @@ def main(heads):
         hd = rd.prepare_head(rows, feats, head)
         print(f"== {head}: {len(hd.classes)} classi", flush=True)
         res = {}
-        base = [fit(hd, dim, 0, {})]
-        res["base"] = report("base", probs(base, hd.X["test"]), hd)
+        if not only_ensemble:
+            base = [fit(hd, dim, 0, {})]
+            res["base"] = report("base", probs(base, hd.X["test"]), hd)
         field = [fit(hd, dim, 0, FIELD)]
-        res["campo"] = report("campo", probs(field, hd.X["test"]), hd)
+        if not only_ensemble:
+            res["campo"] = report("campo", probs(field, hd.X["test"]), hd)
         ens = field + [fit(hd, dim, s, FIELD) for s in (1, 2, 3, 4)]
         pv = probs(ens, hd.X["val"]); t = calibrate(pv, hd.y["val"])
         pt = F.softmax(probs(ens, hd.X["test"]).clamp_min(1e-9).log() / t, 1)
@@ -102,8 +104,12 @@ def main(heads):
         results[head] = res
         torch.save({"models": [m.state_dict() for m in ens], "temperature": t, "classes": hd.classes},
                    ROOT / "models" / f"ensemble_{head}.pt")
-    json.dump(results, open(ROOT / "models" / "improve_results.json", "w"), indent=2)
+    out = ROOT / "models" / "improve_results.json"
+    old = json.load(open(out)) if out.exists() else {}
+    old.update(results)
+    json.dump(old, open(out, "w"), indent=2)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:] or ["plant", "disease", "deficiency"])
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    main(args or ["plant", "disease", "deficiency"], only_ensemble="--solo-insieme" in sys.argv)
