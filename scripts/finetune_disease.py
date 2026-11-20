@@ -241,7 +241,18 @@ def main():
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=[3e-5, 1e-3], total_steps=steps, pct_start=0.1)
     best, best_state = -1, None
     log = []
-    for ep in range(args.epochs):
+    # ripresa dopo un'interruzione (riavvio della macchina): stato salvato alla fine di ogni epoca
+    ckpt = ROOT / f"models/{HEAD}_ft_ripresa.pt"
+    sig = {"epochs": args.epochs, "split_at": SPLIT_AT, "n_train": len(y["train"]), "classes": len(classes)}
+    start = 0
+    if ckpt.exists():
+        c = torch.load(ckpt, weights_only=False)
+        if c.get("sig") == sig:
+            model.load_state_dict(c["model"]); opt.load_state_dict(c["opt"]); sched.load_state_dict(c["sched"])
+            best, best_state, log, start = c["best"], c["best_state"], c["log"], c["epoch"]
+            torch.set_rng_state(c["rng"]); random.setstate(c["py_rng"])
+            print(f"ripresa dall'epoca {start + 1}", flush=True)
+    for ep in range(start, args.epochs):
         model.train()
         perm = torch.randperm(len(y["train"]))
         t0 = time.time()
@@ -265,6 +276,11 @@ def main():
         print(f"epoca {ep + 1}: val {mv}", flush=True)
         if score > best:
             best, best_state = score, {k: v.clone() for k, v in model.state_dict().items()}
+        tmp = ckpt.with_suffix(".tmp")
+        torch.save({"sig": sig, "epoch": ep + 1, "model": model.state_dict(), "opt": opt.state_dict(),
+                    "sched": sched.state_dict(), "best": best, "best_state": best_state, "log": log,
+                    "rng": torch.get_rng_state(), "py_rng": random.getstate()}, tmp)
+        tmp.replace(ckpt)
     model.load_state_dict(best_state)
 
     lv = predict(model, toks["val"], eff["val"])
@@ -318,6 +334,7 @@ def main():
     torch.save({"state": model.state_dict(), "classes": classes, "temperature": temp, "split_at": SPLIT_AT,
                 "fusion_weight": best_w, "backbone": DINO, "head": HEAD}, ROOT / f"models/{HEAD}_ft.pt")
     json.dump(res, open(ROOT / f"models/finetune_{HEAD}.json", "w"), indent=2)
+    ckpt.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

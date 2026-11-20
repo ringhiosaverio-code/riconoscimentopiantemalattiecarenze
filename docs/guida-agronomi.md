@@ -66,7 +66,7 @@ Dopo ogni risultato l'agronomo può indicare **sì** o **no**, con un commento f
 - Il sistema riconosce sintomi visivi, non la causa biologica certa.
 - Le colture di priorità 2 (tropicali presenti in Calabria) hanno pochi dati: le risposte sono meno affidabili.
 - Le carenze nutrizionali non sono ancora riconosciute dal modello: la tassonomia le descrive, ma servono dati dedicati (vedi `docs/dataset.md`).
-- PlantCare non indica prodotti fitosanitari, dosi o tempi di intervento: sono competenza del tecnico e del quadro normativo vigente.
+- Per la malattia riconosciuta PlantCare riporta le sostanze ammesse dal Disciplinare della Regione Calabria e gli usi registrati dei prodotti Gowan (dose, intervallo di sicurezza, note), citando la fonte. Verifica sempre l'etichetta autorizzata e il quadro normativo vigente: la decisione è del tecnico.
 - Le prestazioni sul campo possono essere più basse di quelle di laboratorio: vedi `docs/protocollo-validazione.md`.
 
 ## Cosa fare con le schede

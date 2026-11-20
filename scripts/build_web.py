@@ -259,6 +259,10 @@ def main() -> None:
                                            | {"url": f"https://gd.eppo.int/taxon/{o['eppo']}/categorization"}
                                            for o in lab["organismi_regolamentati"]]},
               open(APP / "data" / "lab.json", "w", encoding="utf-8"), ensure_ascii=False)
+    # difesa: Disciplinare Calabria (sostanze ammesse, limiti, sostanze uscite dall'elenco) e usi Gowan
+    from plantcare import difesa as df
+    json.dump(df.build_app_data(readers, {k: sorted(v) for k, v in crops_of.items()}),
+              open(APP / "data" / "difesa.json", "w", encoding="utf-8"), ensure_ascii=False)
     if args.hypotheses:
         hyp = json.load(open(args.hypotheses, encoding="utf-8"))
         if "disease" in hyp:

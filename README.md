@@ -75,7 +75,7 @@ La scheda **Botte** aiuta a preparare la miscela per un trattamento:
 - **Controlli**: segnala se la dose supera quella massima di etichetta inserita. Per i rameici calcola i kg di rame metallo per ettaro e li confronta con i limiti del disciplinare calabrese (28 kg/ha in 7 anni, media consigliata 4 kg/ha all'anno).
 - **Miscibilità**: ordine di caricamento per tipo di formulazione, incompatibilità documentate (zolfo con olio minerale e con prodotti alcalini, polisolfuro con olio), avvisi di temperatura, prova in barattolo.
 
-Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete neurale**: le dosi devono essere esatte e derivare dall'etichetta autorizzata, che prevale su qualunque calcolo. Il sistema non suggerisce quale prodotto usare né a che dose.
+Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete neurale**: le dosi devono essere esatte e derivare dall'etichetta autorizzata, che prevale su qualunque calcolo. La botte non sceglie i prodotti al posto tuo. Il referto mostra, per la malattia riconosciuta, le sostanze ammesse dal Disciplinare di difesa integrata della Regione Calabria (con i limiti d'uso e le sostanze uscite dall'elenco) e gli usi registrati dei prodotti Gowan Italia con dose e intervallo di sicurezza come pubblicati dal produttore: prevale sempre l'etichetta autorizzata.
 
 ## App nel browser (GitHub Pages)
 

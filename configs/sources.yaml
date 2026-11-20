@@ -3,7 +3,8 @@
 #   testo_letto        = estratto il testo del documento e controllato il passaggio citato
 #   riassunto_verificato = metadati e riassunto dell'articolo confermati, testo completo non letto
 #   solo_metadati      = esistenza confermata, contenuto non letto (non usare per indicazioni tecniche)
-# Le sostanze attive e le dosi dei documenti non sono riportate nel sistema.
+# Le sostanze attive e le dosi non sono scritte a mano: vengono dal Disciplinare della Regione Calabria
+# (configs/difesa) e dagli usi registrati pubblicati dal produttore; l'etichetta autorizzata prevale.
 
 sources:
   - id: disc_calabria_2023

@@ -1,0 +1,106 @@
+# Agente (nome scientifico) delle classi del lettore delle malattie che non lo hanno già nel nome
+# italiano o nella scheda della tassonomia. Serve a collegare la diagnosi alle norme di difesa
+# (Disciplinare Calabria) e agli usi registrati dei prodotti. Solo agenti certi per la classe.
+agenti:
+  apple_scab: [Venturia inaequalis]
+  Apple___Black_rot: [Botryosphaeria obtusa, Diplodia seriata]
+  Apple___Cedar_apple_rust: [Gymnosporangium juniperi-virginianae, Gymnosporangium yamadae]
+  apple_brown_rot: [Monilinia fructigena, Monilinia laxa]
+  "Cherry_(including_sour)___Powdery_mildew": [Podosphaera clandestina]
+  cherry_leaf_spot: [Blumeriella jaapii, Cylindrosporium padi]
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": [Cercospora zeae-maydis]
+  maize_common_rust: [Puccinia sorghi]
+  maize_northern_leaf_blight: [Exserohilum turcicum]
+  Grape___Black_rot: [Phyllosticta ampelicida]
+  "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": [Pseudocercospora vitis]
+  grapevine_downy_mildew: [Plasmopara viticola]
+  powdery_mildew_grapevine: [Erysiphe necator]
+  grapevine_esca: [Phaeomoniella chlamydospora, Phaeoacremonium minimum, Fomitiporia mediterranea]
+  Strawberry___Leaf_scorch: [Diplocarpon earlianum]
+  Tomato___Leaf_Mold: [Passalora fulva]
+  Tomato___Septoria_leaf_spot: [Septoria lycopersici]
+  "Tomato___Spider_mites Two-spotted_spider_mite": [Tetranychus urticae]
+  Tomato___Target_Spot: [Corynespora cassiicola]
+  tomato_early_blight: [Alternaria solani]
+  tomato_late_blight: [Phytophthora infestans]
+  tomato_leafminer_damage: [Phthorimaea absoluta]
+  peach_leaf_curl: [Taphrina deformans]
+  peach_bacterial_spot: [Xanthomonas arboricola]
+  peach_plum_pox: [Plum pox virus]
+  pepper_bacterial_spot: [Xanthomonas vesicatoria, Xanthomonas campestris]
+  pepper_powdery_mildew: [Leveillula taurica]
+  cucurbit_downy_mildew: [Pseudoperonospora cubensis]
+  zucchini_powdery_mildew: [Podosphaera xanthii, Golovinomyces cichoracearum]
+  lettuce_downy_mildew: [Bremia lactucae]
+  broccoli_alternaria: [Alternaria brassicicola]
+  broccoli_black_rot: [Xanthomonas campestris]
+  garlic_rust: [Puccinia allii]
+  eggplant_verticillium: [Verticillium dahliae]
+  wheat_leaf_rust: [Puccinia triticina]
+  wheat_powdery_mildew: [Blumeria graminis]
+  wheat_septoria: [Zymoseptoria tritici]
+  tomato_yellow_leaf_curl: [Tomato yellow leaf curl virus]
+  tomato_spotted_wilt: [Tomato spotted wilt virus]
+  tomato_mosaic_virus: [Tomato mosaic virus]
+  "agml_citrusuat:Red_scale": [Aonidiella aurantii]
+  "agml_citrusuat:Citrus_leafminer": [Phyllocnistis citrella]
+  "agml_lemon:Spider Mites": [Tetranychus urticae, Panonychus citri]
+  "agml_onion:purple blotch": [Alternaria porri]
+  "agml_onion:Stemphylium leaf blight and collectrichum leaf blight": [Stemphylium vesicarium]
+  "agml_tom2024:helicoverpa-armigera-p": [Helicoverpa armigera]
+  "agml_tom2024:alternaria-d": [Alternaria solani, Alternaria alternata]
+  "agml_tom2024:mite-d": [Tetranychus urticae]
+  "agml_ccmt:solanum_lycopersicum:verticulium wilt": [Verticillium dahliae]
+  "plantwild:peach rust": [Tranzschelia discolor]
+  "plantwild:plum rust": [Tranzschelia pruni]
+  "plantwild:peach scab": [Venturia carpophila]
+  "plantwild:plum pocket disease": [Taphrina pruni]
+  "plantwild:wheat stem rust": [Puccinia graminis]
+  "plantwild:wheat stripe rust": [Puccinia striiformis]
+  "plantwild:wheat head scab": [Fusarium graminearum]
+  "plantwild:wheat loose smut": [Ustilago tritici]
+  "plantwild:corn smut": [Ustilago maydis]
+  "plantwild:strawberry anthracnose": [Colletotrichum acutatum]
+  "plantwild:broccoli ring spot": [Mycosphaerella brassicicola]
+  "plantwild:eggplant phytophthora blight": [Phytophthora capsici]
+  "plantwild:grapevine leafroll disease": [Grapevine leafroll-associated virus]
+
+# Sinonimi e nomi vecchi usati nei documenti -> nome di riferimento (minuscolo, genere specie).
+sinonimi:
+  uncinula necator: erysiphe necator
+  oidium tuckeri: erysiphe necator
+  guignardia bidwellii: phyllosticta ampelicida
+  guignardia bidwelli: phyllosticta ampelicida
+  venturia oleagina: venturia oleaginea
+  spilocaea oleaginea: venturia oleaginea
+  fusicladium oleagineum: venturia oleaginea
+  palpita unionalis: palpita vitrealis
+  tuta absoluta: phthorimaea absoluta
+  heliothis armigera: helicoverpa armigera
+  heliotis armigera: helicoverpa armigera
+  aphis citricola: aphis spiraecola
+  grapholita molesta: cydia molesta
+  monilia fructigena: monilinia fructigena
+  monilia laxa: monilinia laxa
+  botryotinia fuckeliana: botrytis cinerea
+  sclerotinia fuckeliana: botrytis cinerea
+  phoma tracheiphila: plenodomus tracheiphilus
+  sphaerotheca pannosa: podosphaera pannosa
+  cladosporium fulvum: passalora fulva
+  fulvia fulva: passalora fulva
+  cladosporium carpophilum: venturia carpophila
+  erysiphe graminis: blumeria graminis
+  puccinia recondita: puccinia triticina
+  septoria tritici: zymoseptoria tritici
+  phaeoacremonium aleophilum: phaeoacremonium minimum
+  cylindrosporium padi: blumeriella jaapii
+  sphaerotheca fuliginea: podosphaera xanthii
+  erysiphe cichoracearum: golovinomyces cichoracearum
+  tranzschelia pruni-spinosae: tranzschelia pruni
+  plasmopara viticola: plasmopara viticola
+  # sigle dei virus usate nel Disciplinare
+  tylcv: tomato yellow leaf curl virus
+  tswv: tomato spotted wilt virus
+  tomv: tomato mosaic virus
+  sharka: plum pox virus
+  cladosporium fulvia: passalora fulva

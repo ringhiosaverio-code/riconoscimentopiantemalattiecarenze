@@ -1,0 +1,94 @@
+# Foto per il quiz da iNaturalist (osservazioni "research grade", licenze CC0, CC BY, CC BY-NC con
+# attribuzione dell'autore): colture, insetti e malattie presenti nelle norme di difesa integrata
+# della Regione Calabria 2026 (configs/difesa/disciplinare_calabria_2026.json).
+# taxon: nome usato da iNaturalist; nome: nome italiano mostrato nel quiz; gruppo: coltura a cui
+# appartiene la domanda (le risposte sbagliate si scelgono nello stesso gruppo).
+# coltura_plant: etichetta del lettore della coltura, se esiste. Le colture sono quelle del
+# Disciplinare o del lettore della coltura (fico d'India); bergamotto e cedro rientrano negli agrumi.
+
+colture:
+  - {taxon: "Olea europaea", nome: "Olivo", coltura_plant: olea_europaea}
+  - {taxon: "Citrus limon", nome: "Limone", coltura_plant: citrus_limon}
+  - {taxon: "Citrus sinensis", nome: "Arancio dolce", coltura_plant: citrus_sinensis}
+  - {taxon: "Citrus reticulata", nome: "Mandarino e clementino", coltura_plant: citrus_reticulata}
+  - {taxon: "Citrus bergamia", nome: "Bergamotto"}
+  - {taxon: "Citrus medica", nome: "Cedro"}
+  - {taxon: "Ficus carica", nome: "Fico"}
+  - {taxon: "Opuntia ficus-indica", nome: "Fico d'India", coltura_plant: opuntia_ficus_indica}
+  - {taxon: "Prunus dulcis", nome: "Mandorlo"}
+  - {taxon: "Corylus avellana", nome: "Nocciolo", coltura_plant: corylus_avellana}
+  - {taxon: "Punica granatum", nome: "Melograno"}
+  - {taxon: "Actinidia deliciosa", nome: "Actinidia (kiwi)", coltura_plant: actinidia_chinensis}
+  - {taxon: "Pyrus communis", nome: "Pero", coltura_plant: pyrus_communis}
+  - {taxon: "Malus domestica", nome: "Melo", coltura_plant: malus_domestica}
+  - {taxon: "Prunus persica", nome: "Pesco", coltura_plant: prunus_persica}
+  - {taxon: "Prunus armeniaca", nome: "Albicocco"}
+  - {taxon: "Prunus avium", nome: "Ciliegio", coltura_plant: prunus_avium}
+  - {taxon: "Prunus domestica", nome: "Susino"}
+  - {taxon: "Vitis vinifera", nome: "Vite", coltura_plant: vitis_vinifera}
+  - {taxon: "Cynara cardunculus", nome: "Carciofo", coltura_plant: cynara_cardunculus}
+  - {taxon: "Vicia faba", nome: "Fava"}
+  - {taxon: "Foeniculum vulgare", nome: "Finocchio"}
+
+parassiti:  # insetti e acari
+  - {taxon: "Bactrocera oleae", nome: "Mosca delle olive", gruppo: olivo}
+  - {taxon: "Prays oleae", nome: "Tignola dell'olivo", gruppo: olivo}
+  - {taxon: "Saissetia oleae", nome: "Cocciniglia mezzo grano di pepe", gruppo: olivo}
+  - {taxon: "Euphyllura olivina", nome: "Cotonello dell'olivo", gruppo: olivo}
+  - {taxon: "Palpita vitrealis", nome: "Margaronia", gruppo: olivo}
+  - {taxon: "Zeuzera pyrina", nome: "Rodilegno giallo", gruppo: olivo}
+  - {taxon: "Ceratitis capitata", nome: "Mosca mediterranea della frutta", gruppo: agrumi}
+  - {taxon: "Phyllocnistis citrella", nome: "Minatrice serpentina degli agrumi", gruppo: agrumi}
+  - {taxon: "Aleurothrixus floccosus", nome: "Aleurodide fioccoso degli agrumi", gruppo: agrumi}
+  - {taxon: "Aleurocanthus spiniferus", nome: "Aleurodide spinoso degli agrumi", gruppo: agrumi}
+  - {taxon: "Planococcus citri", nome: "Cotonello degli agrumi", gruppo: agrumi}
+  - {taxon: "Aonidiella aurantii", nome: "Cocciniglia rossa forte", gruppo: agrumi}
+  - {taxon: "Ceroplastes rusci", nome: "Cocciniglia del fico (Ceroplastes rusci)", gruppo: agrumi}
+  - {taxon: "Ceroplastes sinensis", nome: "Cocciniglia cerosa (Ceroplastes sinensis)", gruppo: agrumi}
+  - {taxon: "Coccus hesperidum", nome: "Cocciniglia mollo", gruppo: agrumi}
+  - {taxon: "Toxoptera aurantii", nome: "Afide nero degli agrumi", gruppo: agrumi}
+  - {taxon: "Aphis spiraecola", nome: "Afide verde degli agrumi", gruppo: agrumi}
+  - {taxon: "Panonychus citri", nome: "Ragnetto rosso degli agrumi", gruppo: agrumi}
+  - {taxon: "Lobesia botrana", nome: "Tignoletta della vite", gruppo: vite}
+  - {taxon: "Scaphoideus titanus", nome: "Cicalina della flavescenza dorata", gruppo: vite}
+  - {taxon: "Empoasca vitis", nome: "Cicalina verde della vite", gruppo: vite}
+  - {taxon: "Cryptoblabes gnidiella", nome: "Tignola rigata", gruppo: vite}
+  - {taxon: "Drosophila suzukii", nome: "Moscerino dei piccoli frutti", gruppo: vite}
+  - {taxon: "Metcalfa pruinosa", nome: "Metcalfa", gruppo: vite}
+  - {taxon: "Philaenus spumarius", nome: "Sputacchina (vettore di Xylella)", gruppo: olivo}
+  - {taxon: "Phthorimaea absoluta", nome: "Tignola del pomodoro (Tuta absoluta)", gruppo: pomodoro}
+  - {taxon: "Helicoverpa armigera", nome: "Nottua del pomodoro", gruppo: pomodoro}
+  - {taxon: "Bemisia tabaci", nome: "Mosca bianca del tabacco", gruppo: pomodoro}
+  - {taxon: "Trialeurodes vaporariorum", nome: "Mosca bianca delle serre", gruppo: pomodoro}
+  - {taxon: "Frankliniella occidentalis", nome: "Tripide occidentale dei fiori", gruppo: pomodoro}
+  - {taxon: "Leptinotarsa decemlineata", nome: "Dorifora della patata", gruppo: pomodoro}
+  - {taxon: "Myzus persicae", nome: "Afide verde del pesco", gruppo: pesco}
+  - {taxon: "Spodoptera littoralis", nome: "Nottua mediterranea (Spodoptera littoralis)", gruppo: pomodoro}
+  - {taxon: "Ostrinia nubilalis", nome: "Piralide del mais", gruppo: pomodoro}
+  - {taxon: "Tetranychus urticae", nome: "Ragnetto rosso comune", gruppo: pomodoro}
+  - {taxon: "Cydia pomonella", nome: "Carpocapsa", gruppo: melo}
+  - {taxon: "Grapholita molesta", nome: "Tignola orientale del pesco", gruppo: pesco}
+  - {taxon: "Anarsia lineatella", nome: "Anarsia", gruppo: pesco}
+  - {taxon: "Halyomorpha halys", nome: "Cimice asiatica", gruppo: pesco}
+  - {taxon: "Capnodis tenebrionis", nome: "Capnode", gruppo: pesco}
+  - {taxon: "Rhagoletis cerasi", nome: "Mosca delle ciliegie", gruppo: pesco}
+  - {taxon: "Cacopsylla pyri", nome: "Psilla del pero", gruppo: melo}
+  - {taxon: "Dysaphis plantaginea", nome: "Afide grigio del melo", gruppo: melo}
+  - {taxon: "Eriosoma lanigerum", nome: "Afide lanigero del melo", gruppo: melo}
+
+malattie:
+  - {taxon: "Venturia oleaginea", nome: "Occhio di pavone dell'olivo", gruppo: olivo, causa: fungo}
+  - {taxon: "Pseudomonas savastanoi", nome: "Rogna dell'olivo", gruppo: olivo, causa: batterio}
+  - {taxon: "Plasmopara viticola", nome: "Peronospora della vite", gruppo: vite, causa: fungo}
+  - {taxon: "Erysiphe necator", nome: "Oidio della vite", gruppo: vite, causa: fungo}
+  - {taxon: "Botrytis cinerea", nome: "Muffa grigia", gruppo: vite, causa: fungo}
+  - {taxon: "Phyllosticta ampelicida", nome: "Marciume nero della vite (black rot)", gruppo: vite, causa: fungo}
+  - {taxon: "Phytophthora infestans", nome: "Peronospora del pomodoro e della patata", gruppo: pomodoro, causa: fungo}
+  - {taxon: "Leveillula taurica", nome: "Oidio delle solanacee", gruppo: pomodoro, causa: fungo}
+  - {taxon: "Taphrina deformans", nome: "Bolla del pesco", gruppo: pesco, causa: fungo}
+  - {taxon: "Monilinia fructigena", nome: "Monilia (marciume bruno)", gruppo: pesco, causa: fungo}
+  - {taxon: "Tranzschelia pruni-spinosae", nome: "Ruggine del susino", gruppo: pesco, causa: fungo}
+  - {taxon: "Venturia inaequalis", nome: "Ticchiolatura del melo", gruppo: melo, causa: fungo}
+  - {taxon: "Podosphaera leucotricha", nome: "Oidio del melo", gruppo: melo, causa: fungo}
+  - {taxon: "Erwinia amylovora", nome: "Colpo di fuoco batterico", gruppo: melo, causa: batterio}
+  - {taxon: "Venturia pyrina", nome: "Ticchiolatura del pero", gruppo: melo, causa: fungo}

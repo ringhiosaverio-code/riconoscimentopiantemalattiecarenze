@@ -35,7 +35,7 @@ foto → [controllo qualità] → [rilevamento ROI, opzionale] → backbone cond
 - Per virus e viroidi: avvertenza obbligatoria e suggerimento di analisi di laboratorio.
 - Per insetti: segnalare quando la specie non è determinabile e mostrare il livello tassonomico raggiunto.
 - Per carenze: mostrare sempre le cause alternative (virosi, stress idrico, parassiti) e la classe "non determinabile".
-- Non dare raccomandazioni di prodotti fitosanitari né dosi: fuori scopo e di competenza di un tecnico abilitato.
+- Difesa solo da fonti verificate, mai scritta a mano: sostanze e limiti dal Disciplinare della Regione Calabria (`configs/difesa/disciplinare_calabria_<anno>.json`), dosi e intervalli di sicurezza dagli usi registrati pubblicati dal produttore (`configs/difesa/gowan_italia.json`). L'etichetta autorizzata prevale; la scelta resta del tecnico.
 
 ## Divisione dei dati
 

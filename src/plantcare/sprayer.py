@@ -2,7 +2,7 @@
 
 È un calcolatore deterministico, non una rete neurale: una dose deve essere esatta e ricondotta
 all'etichetta del prodotto registrato, che prevale sempre. Le dosi le inserisce l'utente
-dall'etichetta; il sistema non suggerisce prodotti né dosi.
+dall'etichetta; la botte non suggerisce prodotti né dosi.
 
 Unità di dose supportate:
     per ettolitro : "g/hl", "ml/hl"

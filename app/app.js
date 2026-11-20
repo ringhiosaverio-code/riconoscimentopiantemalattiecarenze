@@ -30,6 +30,7 @@
   // facoltativi: senza questi file l'app mostra solo le probabilità
   getJSON('hypotheses.json').then(function (d) { DATA.hyp = d; }).catch(function () { DATA.hyp = null; });
   getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
+  getJSON('difesa.json').then(function (d) { DATA.difesa = d; }).catch(function () { DATA.difesa = null; });
 
   // ------------------------------------------------------------------ schede
   function showTab(name) {
@@ -195,6 +196,52 @@
     return out;
   }
 
+  // ------------------------------------------------------------------ difesa (fonti verificate)
+  // Disciplinare di produzione integrata della Regione Calabria (avversità, criteri, sostanze ammesse e
+  // limiti) e usi registrati dei prodotti Gowan Italia (dose, intervallo di sicurezza, note): niente è
+  // scritto a mano, tutto viene dai documenti; l'etichetta autorizzata prevale.
+  function difesaBlock(head, label, crop, plantGuess) {
+    var D = DATA.difesa, e = D && D.classi[head + '|' + label];
+    if (!e) return '';
+    var keys = Object.keys(e), pick = crop && e[crop] ? [crop] : (plantGuess && e[plantGuess] ? [plantGuess] : keys);
+    var plantName = function (k) {
+      if (k === '*') return 'tutte le colture';
+      var c = DATA.readers.plant.classes.filter(function (x) { return x.label === k; })[0];
+      return c ? c.name : k;
+    };
+    var fd = D.fonti.disciplinare, fp = D.fonti.disciplinare_prec, g = D.fonti.gowan;
+    var h = '<details class="reader" open><summary><strong>Difesa: cosa prevedono le norme e i prodotti</strong></summary>';
+    pick.forEach(function (k) {
+      var ent = e[k];
+      ent.r.forEach(function (i) {
+        var r = D.righe[i], by = { biologico: [], naturale: [], sintesi: [] };
+        r.sostanze.forEach(function (x) { by[x.t].push(esc(x.s) + (x.n && x.n.length ? ' <span class="muted">(' + esc(x.n.join(', ')) + ')</span>' : '')); });
+        h += '<div class="dif"><h4>' + esc(r.coltura.charAt(0) + r.coltura.slice(1).toLowerCase()) + ': ' + esc(r.avversita) + '</h4>';
+        if (r.criteri) h += '<details><summary>Criteri di intervento</summary><p>' + esc(r.criteri) + '</p></details>';
+        if (by.biologico.length) h += '<p><strong>Mezzi biologici e ausiliari:</strong> ' + by.biologico.join(', ') + '</p>';
+        if (by.naturale.length) h += '<p><strong>Mezzi di origine naturale o minerale:</strong> ' + by.naturale.join(', ') + '</p>';
+        if (by.sintesi.length) h += '<p><strong>Sostanze attive di sintesi:</strong> ' + by.sintesi.join(', ') + '</p>';
+        if (!r.sostanze.length) h += '<p class="muted">Nessuna sostanza indicata dal Disciplinare per questa avversità: valgono i criteri di intervento.</p>';
+        if (r.note) h += '<p class="muted"><strong>Limitazioni d\'uso e note:</strong> ' + esc(r.note) + '</p>';
+        if (r.rimosse && r.rimosse.length && fp) h += '<p class="warn"><strong>Non più nell\'elenco ' + fd.anno + ' (c\'erano nel ' + fp.anno + '):</strong> ' + esc(r.rimosse.join(', ')) + '. Prima di usare scorte di magazzino verifica l\'autorizzazione del prodotto.</p>';
+        if (r.sostanze.some(function (x) { return /rame/i.test(x.s); }) && D.rame[r.coltura]) h += '<p class="muted">' + esc(D.rame[r.coltura]) + '</p>';
+        h += '<p class="muted">Fonte: <a href="' + esc(fd.url) + '" target="_blank" rel="noopener">' + esc(fd.titolo) + '</a>, pag. ' + r.pagina + '. Il raggruppamento in biologici, naturali e di sintesi è dell\'app.</p></div>';
+      });
+      if (ent.u.length) {
+        h += '<div class="dif"><h4>Prodotti Gowan registrati per questa avversità (' + esc(plantName(k)) + ')</h4><div class="tw"><table><tr><th>Prodotto</th><th>Sostanza attiva</th><th class="n">Dose</th><th class="n">Interv. sicurezza</th></tr>';
+        ent.u.forEach(function (i) {
+          var u = D.usi[i], dose = [u.dose_ha, u.dose_hl].filter(Boolean).join(' · ') || 'vedi etichetta';
+          h += '<tr><td><a href="' + esc(u.pagina) + '" target="_blank" rel="noopener">' + esc(u.prodotto) + '</a><br><span class="muted">' + esc(u.coltura) + (u.ambito ? ', ' + esc(u.ambito) : '') + '</span></td><td>' + esc(u.composizione || '') +
+            '</td><td class="n">' + esc(dose) + '</td><td class="n">' + esc(u.intervallo_sicurezza || '-') + '</td></tr>';
+          if (u.note) h += '<tr><td colspan="4" class="muted">' + esc(u.note) + '</td></tr>';
+        });
+        h += '</table></div><p class="muted">' + esc(g.fonte) + ', consultato il ' + esc(g.consultato) + '. ' + esc(g.avvertenza) + ' Per prodotti di altre aziende consulta la banca dati dei prodotti fitosanitari del Ministero della Salute.</p></div>';
+      }
+    });
+    h += '<p class="muted">Le miscele ammesse sono quelle indicate in etichetta (sezione compatibilità). Per l\'ordine di immissione nella botte e le incompatibilità note usa la scheda <a href="#" id="go-tank2">Botte</a>.</p>';
+    return h + '</details>';
+  }
+
   // Causa probabile: somma delle probabilità delle classi con la stessa causa (insetti, acari, funghi...).
   // Più affidabile della singola classe: due danni da insetti simili non si tolgono probabilità a vicenda.
   function causeBlock(probs) {
@@ -231,6 +278,7 @@
       '<p class="muted">Vale solo se la foto mostra un insetto o un acaro, non i suoi danni.</p>';
     var c0 = R.classes[t[0][1]];
     if (ok && c0.reg != null && DATA.lab) h += regNote(DATA.lab.organismi_regolamentati[c0.reg], t[0][0], 'Se la foto mostra davvero questo insetto: ');
+    if (ok) h += difesaBlock('pest', c0.label, $('crop').value || null, null);
     t.forEach(function (x) {
       h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(R.classes[x[1]].name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
     });
@@ -279,6 +327,8 @@
     // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
     var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
     h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
+    var td = top(res.disease, 1)[0], dc = DATA.readers.disease.classes[td[1]];
+    if (td[0] >= THRESHOLD && dc.cause !== 'sano') h += difesaBlock('disease', dc.label, crop, answers.plant && answers.plant.label);
     h += referto(answers, organ);
     h += '<p><button type="button" class="secondary" id="go-tank">Prepara la botte</button></p>';
     var unsure = HEADS.some(function (hd) { return !answers[hd]; });
@@ -289,6 +339,7 @@
     $('out').innerHTML = h;
     $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
     $('go-tank').addEventListener('click', function () { showTab('tank'); });
+    if ($('go-tank2')) $('go-tank2').addEventListener('click', function (ev) { ev.preventDefault(); showTab('tank'); });
     wireContrib();
   }
 
