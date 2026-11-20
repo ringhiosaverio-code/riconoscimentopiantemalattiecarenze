@@ -102,6 +102,7 @@ def cmd_import_external(args: argparse.Namespace) -> int:
     for name, e in reg.items():
         if name.startswith("agml_"):
             steps.append((name, lambda e=e: im.import_agml(e["name"], e["repo"], e["crop"])))
+    steps.append(("contributi", im.contribution_rows))
     for name, fn in steps:
         if args.only and name not in args.only:
             continue
@@ -112,6 +113,21 @@ def cmd_import_external(args: argparse.Namespace) -> int:
     write_manifest(rows, out)
     print(f"Manifest unificato: {out} ({len(rows)} righe)")
     print(json.dumps(summarize(rows), ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_import_contributions(args: argparse.Namespace) -> int:
+    """Aggiunge i contributi esportati dall'app (file .json) ai dati di addestramento."""
+    from plantcare.data.importers import import_contributions
+    files = []
+    for p in args.paths:
+        p = Path(p)
+        files += sorted(p.glob("*.json")) if p.is_dir() else [p]
+    new, skipped, warnings = import_contributions(files)
+    for w in warnings:
+        print("Attenzione:", w)
+    print(f"Contributi nuovi: {new}; già presenti: {skipped}.")
+    print("Poi: plantcare import-external && plantcare train-readers (si calcolano solo le foto nuove).")
     return 0
 
 
@@ -185,6 +201,10 @@ def main(argv: list[str] | None = None) -> int:
     ie = sub.add_parser("import-external")
     ie.add_argument("--only", nargs="*", default=None)
     ie.set_defaults(func=cmd_import_external)
+
+    ic = sub.add_parser("import-contributi")
+    ic.add_argument("paths", nargs="+", help="file .json esportati dall'app o cartelle che li contengono")
+    ic.set_defaults(func=cmd_import_contributions)
 
     trd = sub.add_parser("train-readers")
     trd.add_argument("--backbone", nargs="+", default=["vit_small_patch14_dinov2.lvd142m", "efficientnet_b0"])

@@ -13,6 +13,7 @@ relativi a data/ (la radice comune).
 from __future__ import annotations
 
 import io
+import csv
 import json
 import random
 import zipfile
@@ -294,3 +295,82 @@ def import_inatag(seed: int = 42, max_per_species: int = 1200) -> list[ManifestR
                 if out.exists() or _save(zf.read(m), out):
                     rows.append(ManifestRow(path=_rel(out), source="inatag", split=split, plant=plant))
     return rows
+
+
+# ---------------------------------------------------------------------------
+# Contributi dall'app (foto di campo etichettate da agronomi)
+# ---------------------------------------------------------------------------
+CONTRIB_CSV = DATA / "processed" / "contributi.csv"
+CONTRIB_SCHEMA = "plantcare-contributi/1"
+
+
+def _contrib_split(item_id: str) -> str:
+    """Split stabile per contributo: 30% test di campo, 10% validazione, 60% addestramento."""
+    h = zlib.crc32(item_id.encode()) % 100
+    return "test" if h < 30 else ("val" if h < 40 else "train")
+
+
+def import_contributions(files: list[Path]) -> tuple[int, int, list[str]]:
+    """Legge i file esportati dall'app e aggiunge le foto a data/external/images/contributi/.
+
+    Restituisce (nuovi, già presenti, avvisi). Le righe vanno in data/processed/contributi.csv,
+    che import-external aggiunge al manifest unificato.
+    """
+    import base64
+    from plantcare.data.pipeline import MANIFEST_COLUMNS
+
+    existing = set()
+    if CONTRIB_CSV.exists():
+        with open(CONTRIB_CSV, newline="", encoding="utf-8") as fh:
+            existing = {r["id"] for r in csv.DictReader(fh)}
+    cols = ["id", "date", "province", "organ", "diagnosis_source", "note"] + MANIFEST_COLUMNS
+    new_rows, skipped, warnings = [], 0, []
+    for f in files:
+        payload = json.loads(Path(f).read_text(encoding="utf-8"))
+        if payload.get("schema") != CONTRIB_SCHEMA:
+            warnings.append(f"{f}: schema non riconosciuto ({payload.get('schema')})")
+            continue
+        for it in payload.get("items", []):
+            iid = str(it.get("id", ""))
+            if not iid or not it.get("photo", "").startswith("data:image/jpeg;base64,"):
+                warnings.append(f"{f}: contributo senza id o senza foto JPEG, ignorato")
+                continue
+            if iid in existing:
+                skipped += 1
+                continue
+            c = it.get("correct", {})
+            disease = c.get("disease", "")
+            if disease.startswith("altro:"):
+                disease = ""  # malattia non in elenco: resta nelle note, non è un'etichetta di addestramento
+            if not (c.get("plant") or disease or c.get("deficiency")):
+                warnings.append(f"{f}: contributo {iid} senza nessuna etichetta, ignorato")
+                continue
+            split = _contrib_split(iid)
+            out = IMG / "contributi" / f"{iid}.jpg"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            raw = base64.b64decode(it["photo"].split(",", 1)[1])
+            if not _save(raw, out):
+                warnings.append(f"{f}: foto del contributo {iid} non leggibile")
+                continue
+            new_rows.append({"id": iid, "date": it.get("date", ""), "province": it.get("province", ""),
+                             "organ": it.get("organ", ""), "diagnosis_source": it.get("diagnosis_source", ""),
+                             "note": it.get("note", "")[:300], "path": _rel(out), "source": "contributi", "split": split,
+                             "plant": c.get("plant", ""), "disease": disease, "pest": "", "deficiency": c.get("deficiency", "")})
+            existing.add(iid)
+    if new_rows:
+        write_header = not CONTRIB_CSV.exists()
+        CONTRIB_CSV.parent.mkdir(parents=True, exist_ok=True)
+        with open(CONTRIB_CSV, "a", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=cols)
+            if write_header:
+                w.writeheader()
+            w.writerows(new_rows)
+    return len(new_rows), skipped, warnings
+
+
+def contribution_rows() -> list[ManifestRow]:
+    if not CONTRIB_CSV.exists():
+        return []
+    with open(CONTRIB_CSV, newline="", encoding="utf-8") as fh:
+        return [ManifestRow(path=r["path"], source="contributi", split=r["split"], plant=r["plant"],
+                            disease=r["disease"], deficiency=r["deficiency"]) for r in csv.DictReader(fh)]

@@ -20,6 +20,7 @@
       var sel = $('organ');
       DATA.organs.forEach(function (o) { var op = document.createElement('option'); op.value = o.id; op.textContent = o.label; sel.appendChild(op); });
       renderInfo();
+      wireInfo();
     })
     .catch(function () { $('model-status').textContent = "Errore nel caricamento dei dati dell'app: ricarica la pagina."; });
 
@@ -85,7 +86,16 @@
     return new ort.Tensor('float32', data, [2, 3, SIZE, SIZE]);
   }
 
+  var lastPhoto = null, lastPred = null;
+  function keepPhoto(source, w, h) {
+    var k = Math.min(1, 1024 / Math.max(w, h)), c = document.createElement('canvas');
+    c.width = Math.round(w * k); c.height = Math.round(h * k);
+    c.getContext('2d').drawImage(source, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', 0.88);
+  }
+
   function analyze(source, w, h) {
+    lastPhoto = keepPhoto(source, w, h);
     $('out').innerHTML = '<div class="card">Analisi in corso…</div>';
     ready.then(loadModel).then(function (s) {
       var t0 = performance.now();
@@ -126,10 +136,101 @@
     h += '<div class="reader"><h3>Lettore di insetti e acari</h3><p class="muted">Non incluso nella versione pubblica: il dataset IP102 su cui è addestrato è concesso solo per uso accademico.</p></div>';
     h += referto(answers, organ);
     h += '<p><button type="button" class="secondary" id="go-tank">Prepara la botte</button></p>';
+    var unsure = HEADS.some(function (hd) { return !answers[hd]; });
+    lastPred = {};
+    HEADS.forEach(function (hd) { lastPred[hd] = top(res[hd], 3).map(function (x) { return { label: DATA.readers[hd].classes[x[1]].label, p: Math.round(x[0] * 1e4) / 1e4 }; }); });
+    h += contribForm(unsure, answers);
     h += '<p class="muted">Analisi in ' + secs.toFixed(1) + ' s sul dispositivo. Strumento di supporto alla decisione: per virus, viroidi, batteri e nematodi serve la conferma di laboratorio.</p></section>';
     $('out').innerHTML = h;
     $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
     $('go-tank').addEventListener('click', function () { showTab('tank'); });
+    wireContrib();
+  }
+
+  // ------------------------------------------------------------------ contributi per migliorare la rete
+  var PROVINCES = ['', 'Reggio Calabria', 'Catanzaro', 'Cosenza', 'Crotone', 'Vibo Valentia', 'Agrigento', 'Caltanissetta',
+    'Catania', 'Enna', 'Messina', 'Palermo', 'Ragusa', 'Siracusa', 'Trapani', 'Altra provincia'];
+  function selectOf(id, head, chosen) {
+    var o = '<option value="">Non so</option>';
+    DATA.readers[head].classes.slice().sort(function (a, b) { return a.name.localeCompare(b.name, 'it'); }).forEach(function (c) {
+      o += '<option value="' + esc(c.label) + '"' + (chosen && chosen.label === c.label ? ' selected' : '') + '>' + esc(c.name) + '</option>';
+    });
+    if (head === 'disease') o += '<option value="altro:non_in_elenco">Altro, non in elenco (scrivilo nelle note)</option>';
+    return '<select id="' + id + '">' + o + '</select>';
+  }
+  function contribForm(unsure, answers) {
+    var organ = $('organ').value;
+    var org = '<option value="">Non indicato</option>' + DATA.organs.map(function (o) { return '<option value="' + esc(o.id) + '"' + (o.id === organ ? ' selected' : '') + '>' + esc(o.label) + '</option>'; }).join('');
+    return '<details class="reader" id="cb"' + (unsure ? ' open' : '') + '><summary><strong>' +
+      (unsure ? 'Risposta incerta: aiuta a migliorare la rete' : 'Il risultato è sbagliato? Aiuta a migliorare la rete') + '</strong></summary>' +
+      '<p class="muted">Indica la risposta corretta. La foto resta nel telefono finché non invii i contributi dalla scheda Info.</p>' +
+      '<label>Coltura' + selectOf('cb-plant', 'plant', answers.plant) + '</label>' +
+      '<label>Malattia o danno' + selectOf('cb-disease', 'disease', answers.disease) + '</label>' +
+      '<label>Stato nutrizionale' + selectOf('cb-def', 'deficiency', answers.deficiency) + '</label>' +
+      '<div class="row"><label>Organo<select id="cb-organ">' + org + '</select></label>' +
+      '<label>Provincia<select id="cb-prov">' + PROVINCES.map(function (p) { return '<option>' + esc(p) + '</option>'; }).join('') + '</select></label></div>' +
+      '<label>Diagnosi confermata da<select id="cb-src"><option value="visual_only">Solo osservazione</option><option value="expert">Agronomo o tecnico</option><option value="lab">Analisi di laboratorio</option></select></label>' +
+      '<label>Note <span class="muted">(senza dati personali)</span><textarea id="cb-note" rows="2" maxlength="300"></textarea></label>' +
+      '<label style="display:flex;gap:8px;align-items:flex-start;margin-top:8px"><input type="checkbox" id="cb-ok" style="width:auto;margin-top:4px"> <span class="muted">Ho il consenso del titolare del campo, la foto non contiene persone, targhe o dati personali, e accetto che sia usata per addestrare la rete.</span></label>' +
+      '<p><button type="button" id="cb-save">Salva contributo</button></p><p class="muted" id="cb-status"></p></details>';
+  }
+  function wireContrib() {
+    $('cb-save').addEventListener('click', function () {
+      if (!$('cb-ok').checked) { $('cb-status').textContent = 'Serve il consenso per salvare il contributo.'; return; }
+      if (!lastPhoto) { $('cb-status').textContent = 'Nessuna foto da salvare.'; return; }
+      var item = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), date: new Date().toISOString().slice(0, 10),
+        photo: lastPhoto, predicted: lastPred,
+        correct: { plant: $('cb-plant').value, disease: $('cb-disease').value, deficiency: $('cb-def').value },
+        organ: $('cb-organ').value, province: $('cb-prov').value, diagnosis_source: $('cb-src').value, note: $('cb-note').value.trim() };
+      dbPut(item).then(function () {
+        $('cb-status').textContent = 'Contributo salvato. Invialo dalla scheda Info quando vuoi.'; $('cb-save').disabled = true; refreshCount();
+      }).catch(function () { $('cb-status').textContent = 'Salvataggio non riuscito: memoria del browser non disponibile.'; });
+    });
+  }
+  // archivio locale (IndexedDB)
+  function db() {
+    return new Promise(function (ok, ko) {
+      var r = indexedDB.open('plantcare', 1);
+      r.onupgradeneeded = function () { r.result.createObjectStore('contributi', { keyPath: 'id' }); };
+      r.onsuccess = function () { ok(r.result); }; r.onerror = function () { ko(r.error); };
+    });
+  }
+  function dbTx(mode, fn) {
+    return db().then(function (d) {
+      return new Promise(function (ok, ko) {
+        var tx = d.transaction('contributi', mode), st = tx.objectStore('contributi'), out = fn(st);
+        tx.oncomplete = function () { ok(out && out.result !== undefined ? out.result : out); }; tx.onerror = function () { ko(tx.error); };
+      });
+    });
+  }
+  function dbPut(item) { return dbTx('readwrite', function (st) { return st.put(item); }); }
+  function dbAll() { return dbTx('readonly', function (st) { return st.getAll(); }); }
+  function dbClear() { return dbTx('readwrite', function (st) { return st.clear(); }); }
+  function refreshCount() {
+    return dbAll().then(function (all) { var el = $('cb-count'); if (el) el.textContent = String(all.length); return all; }).catch(function () { return []; });
+  }
+  function exportContrib() {
+    refreshCount().then(function (all) {
+      if (!all.length) { $('cb-export-status').textContent = 'Nessun contributo da inviare.'; return; }
+      var payload = { schema: 'plantcare-contributi/1', app_model: 'readers_dinov2+efficientnet_b0', created: new Date().toISOString(), items: all };
+      var name = 'plantcare-contributi-' + new Date().toISOString().slice(0, 10) + '.json';
+      var file = new File([JSON.stringify(payload)], name, { type: 'application/json' });
+      var done = function () { $('cb-export-status').textContent = all.length + ' contributi pronti. Dopo l\'invio puoi svuotare l\'elenco.'; $('cb-clear').hidden = false; };
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'Contributi PlantCare' }).then(done).catch(function () {});
+      } else {
+        var a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = name; document.body.appendChild(a); a.click(); a.remove(); done();
+      }
+    });
+  }
+
+  function wireInfo() {
+    $('cb-export').addEventListener('click', exportContrib);
+    $('cb-clear').addEventListener('click', function () {
+      if (!confirm('Svuotare l\'elenco dei contributi già inviati?')) return;
+      dbClear().then(function () { $('cb-clear').hidden = true; $('cb-export-status').textContent = 'Elenco svuotato.'; refreshCount(); });
+    });
+    refreshCount();
   }
 
   function referto(a, organ) {
@@ -324,7 +425,12 @@
       return '<tr><td>' + label + '</td><td class="n">' + pct(r[hd].test_accuracy) + '</td><td class="n">' +
         (f.plantdoc ? pct(f.plantdoc.accuracy) : (f.inatag ? pct(f.inatag.accuracy) : '–')) + '</td></tr>';
     };
-    $('info').innerHTML = '<h2>Come funziona</h2>' +
+    $('info').innerHTML = '<h2>Contributi per migliorare la rete</h2>' +
+      '<p>Contributi salvati in questo telefono: <strong id="cb-count">0</strong>.</p>' +
+      '<p class="muted">Inviali al responsabile del progetto (mail, WhatsApp, Drive): servono a riaddestrare la rete sulle foto reali dei campi calabresi e siciliani.</p>' +
+      '<div class="row"><button type="button" id="cb-export">Invia contributi</button><button type="button" class="secondary" id="cb-clear" hidden>Svuota elenco</button></div>' +
+      '<p class="muted" id="cb-export-status"></p>' +
+      '<h2>Come funziona</h2>' +
       '<p>La rete neurale (estrattori DINOv2 ed EfficientNet-B0 con lettori calibrati) gira nel browser con ONNX Runtime Web. La foto non lascia il dispositivo.</p>' +
       '<table><tr><th>Lettore</th><th class="n">Test</th><th class="n">Foto di campo</th></tr>' +
       row('plant', 'Coltura') + row('disease', 'Malattia') + row('deficiency', 'Carenze') + '</table>' +
