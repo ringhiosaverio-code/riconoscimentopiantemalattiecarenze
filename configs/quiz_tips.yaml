@@ -1,0 +1,72 @@
+# Suggerimenti del quiz: come distinguere i casi che si confondono più spesso.
+# Descrizioni dei sintomi tipici (manualistica di patologia vegetale); non sostituiscono la diagnosi.
+
+# Coppie di malattie simili: la spiegazione compare se si sceglie una al posto dell'altra.
+pairs:
+  - labels: [apple_scab, Apple___Cedar_apple_rust]
+    tip: >-
+      Ticchiolatura: macchie vellutate verde-oliva, poi brune, senza colori vivaci; sui frutti croste scure.
+      Ruggine: macchie giallo-arancio brillanti con puntini neri al centro sulla pagina superiore e, sotto,
+      piccole strutture a ciuffo (ecidi).
+  - labels: [apple_scab, Apple___Black_rot]
+    tip: >-
+      Ticchiolatura: macchie vellutate verde-oliva dai bordi sfumati. Marciume nero (fase fogliare,
+      "occhio di rana"): macchie rotonde con centro marrone chiaro e bordo viola-scuro netto.
+  - labels: [tomato_early_blight, tomato_late_blight]
+    tip: >-
+      Alternariosi: macchie brune piccole con anelli concentrici "a bersaglio" e alone giallo, prima sulle
+      foglie basse. Peronospora: macchie grandi e irregolari dall'aspetto bagnato, che si allargano in fretta,
+      con muffa biancastra sulla pagina inferiore quando c'è umidità.
+  - labels: [tomato_early_blight, Tomato___Septoria_leaf_spot]
+    tip: >-
+      Septoriosi: tante macchie piccole (pochi millimetri) con centro grigio chiaro e puntini neri.
+      Alternariosi: macchie più grandi, brune, con anelli concentrici.
+  - labels: [maize_northern_leaf_blight, "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot"]
+    tip: >-
+      Elmintosporiosi: lesioni lunghe (alcuni centimetri) ellittiche "a sigaro", grigio-verdi.
+      Cercosporiosi: lesioni strette e rettangolari, delimitate dalle nervature, grigio-brunastre.
+  - labels: [tomato_mosaic_virus, tomato_yellow_leaf_curl]
+    tip: >-
+      Mosaico: chiazze verde chiaro e verde scuro alternate, foglie deformate o filiformi.
+      Accartocciamento giallo (TYLCV): foglie piccole, arricciate verso l'alto, margini gialli, pianta nana;
+      è trasmesso dalla mosca bianca.
+  - labels: [tomato_mosaic_virus, healthy]
+    tip: >-
+      Il mosaico si vede come alternanza di zone verde chiaro e verde scuro sulla stessa foglia, spesso con
+      bollosità o deformazione: guarda le foglie giovani in controluce.
+  - labels: [powdery_mildew_grapevine, grapevine_downy_mildew]
+    tip: >-
+      Oidio: patina biancastra polverulenta su entrambe le pagine, odore di muffa. Peronospora: macchie
+      giallo-oleose sulla pagina superiore e muffa bianca solo sotto, in corrispondenza delle macchie.
+
+# Differenza tra danni da insetti o acari e malattie, mostrata quando la causa sbagliata è diversa.
+cause_tips:
+  insetto: >-
+    Danni da insetti: fori, rosure, gallerie (mine), foglie accartocciate con larve dentro, escrementi,
+    melata appiccicosa o fumaggine, insetti visibili. Le malattie danno invece macchie, muffe o marciumi.
+  acaro: >-
+    Danni da acari: fitta punteggiatura chiara o bronzatura delle foglie, a volte sottili ragnatele;
+    gli acari si vedono con una lente sulla pagina inferiore.
+  fungo: >-
+    Funghi: macchie con bordi definiti, spesso con anelli, puntini neri (fruttificazioni), muffe o polveri.
+  batterio: >-
+    Batteri: macchie piccole e angolose, dall'aspetto bagnato, spesso con alone giallo; a volte essudati.
+  virus: >-
+    Virus: mosaici, ingiallimenti, deformazioni e nanismo, senza muffe né lesioni con fruttificazioni.
+  abiotico: >-
+    Cause abiotiche (sole, freddo, siccità, prodotti): danni uniformi sulle parti più esposte, senza
+    lesioni che si allargano né presenza di organismi.
+  nutrizionale: >-
+    Carenze: ingiallimenti regolari e simmetrici, su foglie vecchie o giovani a seconda dell'elemento.
+
+# Carenze: sintomo tipico, mostrato quando si sbaglia una carenza.
+deficiencies:
+  carenza_di_azoto: "Azoto: ingiallimento uniforme, prima sulle foglie vecchie; crescita stentata."
+  eccesso_di_azoto: "Eccesso di azoto: vegetazione rigogliosa verde molto scuro, tessuti teneri e più sensibili a malattie e afidi."
+  carenza_di_calcio: "Calcio: marciume apicale, una macchia scura e infossata all'apice del frutto (pomodoro, peperone)."
+  carenza_di_ferro: "Ferro: foglie giovani gialle con le nervature che restano verdi (clorosi ferrica)."
+  carenza_di_magnesio: "Magnesio: clorosi tra le nervature delle foglie vecchie; negli agrumi resta verde una V rovesciata alla base."
+  carenza_di_manganese: "Manganese: clorosi fine tra le nervature, con le nervature verdi bordate, sulle foglie giovani."
+  carenza_di_zinco: "Zinco: foglie piccole e strette, con chiazze gialle tra le nervature (maculatura)."
+  sintomi_di_carenza: "Sintomi di carenza non attribuiti dagli autori a un nutriente preciso: serve l'analisi fogliare."
+  nessun_disturbo_nutrizionale: "Nessun disturbo nutrizionale: colore e dimensione delle foglie regolari."

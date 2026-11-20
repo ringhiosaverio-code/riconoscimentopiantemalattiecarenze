@@ -14,9 +14,9 @@
   var DATA = {}, session = null, stream = null;
 
   function getJSON(name) { return fetch('app/data/' + name).then(function (r) { if (!r.ok) throw new Error(name); return r.json(); }); }
-  var ready = Promise.all(['readers.json', 'organs.json', 'mixing_rules.json', 'sources.json', 'quiz.json', 'causes.json'].map(getJSON))
+  var ready = Promise.all(['readers.json', 'organs.json', 'mixing_rules.json', 'sources.json', 'quiz.json', 'causes.json', 'quiz_tips.json'].map(getJSON))
     .then(function (a) {
-      DATA.readers = a[0]; DATA.organs = a[1]; DATA.rules = a[2]; DATA.sources = a[3]; DATA.quiz = a[4];
+      DATA.readers = a[0]; DATA.organs = a[1]; DATA.rules = a[2]; DATA.sources = a[3]; DATA.quiz = a[4]; DATA.causes = a[5]; DATA.quizTips = a[6];
       var sel = $('organ');
       DATA.organs.forEach(function (o) { var op = document.createElement('option'); op.value = o.id; op.textContent = o.label; sel.appendChild(op); });
       renderInfo();
@@ -335,7 +335,8 @@
     return c ? c.name : label;
   }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-  $('q-new').addEventListener('click', function () {
+  $('q-new').addEventListener('click', nextQuestion);
+  function nextQuestion() {
     ready.then(function () {
       var cat = $('q-cat').value;
       var pool = DATA.quiz.filter(function (q) { return cat === 'any' || q.head === cat; });
@@ -366,8 +367,58 @@
         box.appendChild(b);
       });
       $('q-box').hidden = false;
+      $('q-text').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  });
+  }
+  function classOf(head, label) {
+    return DATA.readers[head].classes.filter(function (x) { return x.label === label; })[0] || { label: label, name: label };
+  }
+  function symptomsOf(c) {
+    var card = c.card;
+    return card ? (card.symptoms || (card.knowledge && card.knowledge.cause) || '') : '';
+  }
+  // Perché la risposta scelta è sbagliata: differenza specifica se nota, altrimenti sintomi e causa a confronto.
+  function explainWrong(head, label, choice) {
+    var T = DATA.quizTips || {}, good = classOf(head, label), bad = classOf(head, choice), h = '<p><strong>Perché no:</strong> ';
+    if (head === 'plant') {
+      h += 'la foto mostra ' + esc(good.name) + (good.family ? ' (famiglia ' + esc(good.family) + ')' : '') + ', non ' + esc(bad.name) +
+        (bad.family ? ' (famiglia ' + esc(bad.family) + ')' : '') + '.';
+      if (good.family && bad.family && good.family === bad.family) h += ' Sono della stessa famiglia: guarda la forma e il margine della foglia, la nervatura e il portamento.';
+      return h + '</p>';
+    }
+    if (head === 'deficiency') {
+      var d = T.deficiencies || {};
+      h += 'hai scelto ' + esc(bad.name) + ', ma è ' + esc(good.name) + '.</p>';
+      if (d[label]) h += '<p class="muted">' + esc(d[label]) + '</p>';
+      if (d[choice]) h += '<p class="muted">Invece: ' + esc(d[choice]) + '</p>';
+      return h;
+    }
+    h += 'hai scelto ' + esc(bad.name) + ', ma è ' + esc(good.name) + '.</p>';
+    var pair = (T.pairs || []).filter(function (p) { return p.labels.indexOf(label) >= 0 && p.labels.indexOf(choice) >= 0; })[0];
+    if (pair) h += '<p><strong>Come distinguerle:</strong> ' + esc(pair.tip) + '</p>';
+    var cn = DATA.causes || {};
+    if (bad.cause === 'sano') {
+      h += '<p><strong>La pianta non è sana.</strong> ' + esc((T.cause_tips || {})[good.cause] || 'Guarda macchie, ingiallimenti, deformazioni e appassimenti.') + '</p>';
+    } else if (good.cause === 'sano') {
+      h += '<p><strong>La pianta è sana:</strong> non ci sono macchie, muffe, fori, ingiallimenti o deformazioni. Piccole differenze di colore o riflessi della luce non sono sintomi.</p>';
+    } else if (good.cause && bad.cause && good.cause !== bad.cause && good.cause !== 'non_specificato' && bad.cause !== 'non_specificato') {
+      h += '<p><strong>La causa è diversa:</strong> ' + esc(cn[good.cause] || good.cause) + ', non ' + esc(cn[bad.cause] || bad.cause) + '.</p>';
+      var ct = (T.cause_tips || {})[good.cause];
+      if (ct) h += '<p class="muted">' + esc(ct) + '</p>';
+    } else if (good.cause && good.cause !== 'non_specificato') {
+      h += '<p><strong>Causa:</strong> ' + esc(cn[good.cause] || good.cause) + '.</p>';
+      var ct2 = (T.cause_tips || {})[good.cause];
+      if (ct2) h += '<p class="muted">' + esc(ct2) + '</p>';
+    }
+    var start = h;
+    if (!pair) {
+      var sg = symptomsOf(good), sb = symptomsOf(bad);
+      if (sg) h += '<p class="muted">' + esc(good.name) + ': ' + esc(sg) + '</p>';
+      if (sb) h += '<p class="muted">' + esc(bad.name) + ': ' + esc(sb) + '</p>';
+    }
+    if (h.indexOf('<p', h.indexOf('</p>')) < 0) h += '<p class="muted">Gli autori del dataset hanno classificato questa foto come ' + esc(good.name) + '. Guarda di nuovo la foto: forma, colore e distribuzione dei sintomi sono quelli tipici di questa classe.</p>';
+    return h;
+  }
   function answer(choice) {
     if (!qCur) return;
     var q = qCur; qCur = null;
@@ -391,7 +442,10 @@
     } else if (q.item.head === 'deficiency') {
       h += '<p class="muted">Etichetta degli autori del dataset; la conferma richiede l\'analisi fogliare.</p>';
     }
+    if (!right) h += explainWrong(q.item.head, q.item.label, choice);
+    h += '<p><button type="button" id="q-next">Domanda successiva &rarr;</button></p>';
     $('q-exp').innerHTML = h + '</div>';
+    $('q-next').addEventListener('click', nextQuestion);
   }
 
   // ------------------------------------------------------------------ botte

@@ -85,6 +85,8 @@ def main() -> None:
             if h == "plant":
                 item["name"] = display_name("plant", raw, kb, label_map, {})
                 item["taxonomy_id"] = raw if raw in tax.plants else None
+                if raw in tax.plants and tax.plants[raw].get("family"):
+                    item["family"] = tax.plants[raw]["family"]
             elif h == "disease":
                 item["name"] = display_name("disease", raw, kb, label_map, {})
                 tid = raw if raw in tax.diseases else (label_map.get("plantvillage") or {}).get(raw)
@@ -113,6 +115,8 @@ def main() -> None:
     json.dump(readers, open(APP / "data" / "readers.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     json.dump(cause_names, open(APP / "data" / "causes.json", "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump(load_yaml(ROOT / "configs" / "quiz_tips.yaml"), open(APP / "data" / "quiz_tips.json", "w", encoding="utf-8"),
+              ensure_ascii=False)
 
     # --- organi, regole della botte, fonti ---
     organs = [{"id": k, "label": v["label"]} for k, v in tax.plant_organs.items()]

@@ -399,7 +399,7 @@ diseases:
       inflorescence: "Spighette sbiancate, picchettatura rosata alla base della spiga"
       fruit: "Cariossidi raggrinzite e rosate nelle spighe di mais"
   - id: maize_northern_leaf_blight
-    common: "Brusone settentrionale del mais"
+    common: "Elmintosporiosi del mais"
     pathogen_type: fungal
     agent: "Exserohilum turcicum"
     hosts: [zea_mays]

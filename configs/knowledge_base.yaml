@@ -393,7 +393,7 @@ diseases:
       sources:
       - disc_calabria_2023
   maize_northern_leaf_blight:
-    cause: 'Exserohilum turcicum (brusone settentrionale): lesioni fusiformi sulle foglie.'
+    cause: 'Exserohilum turcicum (elmintosporiosi, northern leaf blight): lesioni fusiformi sulle foglie.'
     management:
     - text: 'Il disciplinare calabrese 2023 non tratta questa malattia per il mais: da completare con il tecnico.'
       sources:
