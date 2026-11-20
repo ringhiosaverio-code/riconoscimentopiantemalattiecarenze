@@ -130,6 +130,8 @@ AGML_DISEASE = {
     # patata (Laizer et al.): stesse classi di PlantVillage
     ("agml_potatoblight", "earlyblt"): "tomato_early_blight",
     ("agml_potatoblight", "lateblt"): "tomato_late_blight",
+    # CCMT (Mensah et al. 2023): solo le classi con corrispondenza certa
+    ("agml_ccmt", "septoria leaf spot", "solanum_lycopersicum"): "Tomato___Septoria_leaf_spot",
 }
 # Parte della pianta fotografata: dichiarata dal dataset (plant_part) o descritta nella sua scheda.
 PLANT_PART = {0: "fruit", 1: "leaf"}  # citrus_fruit_leaf: 0 = fruit, 1 = leaf
@@ -137,13 +139,19 @@ AGML_ORGAN = {
     "agml_lemon": "leaf", "agml_grape": "leaf", "agml_banana": "leaf", "agml_onion": "leaf", "agml_chili": "leaf",
     "agml_potato": "leaf", "agml_cauliflower": "leaf", "agml_appleleaf9": "leaf", "agml_citrusuat": "leaf",
     "agml_fig": "leaf", "agml_tuta": "leaf", "agml_pomegranate": "fruit", "agml_brinjalfruit": "fruit",
-    "agml_vegleaf": "leaf", "agml_potatoblight": "leaf",
+    "agml_vegleaf": "leaf", "agml_potatoblight": "leaf", "agml_ccmt": "leaf", "agml_pepperfield": "leaf",
     ("agml_plum", "Healthy Fruit"): "fruit", ("agml_plum", "Healthy Leaf"): "leaf", ("agml_plum", "Insect Hole"): "leaf",
     ("agml_tom2024", "blossom-end-rot-d"): "fruit",
 }
 # Colture del dataset di ortaggi del Bangladesh (plant_type); le zucche asiatiche non sono in tassonomia.
 PLANT_TYPE_CROPS = {"Tomato": "solanum_lycopersicum", "Eggplant": "solanum_melongena", "Cucumber": "cucumis_sativus",
-                    "Cauliflower": "brassica_oleracea_italica"}
+                    "Cauliflower": "brassica_oleracea_italica", "tomato": "solanum_lycopersicum",
+                    "Maize": "zea_mays", "maize": "zea_mays"}
+# Dataset con le stesse etichette su colture diverse (es. "leaf blight" su mais e pomodoro): coltura nell'etichetta.
+CROP_IN_LABEL = {"agml_ccmt"}
+# Dataset con scatti in sequenza: split per blocchi di record consecutivi e tetto di foto per classe.
+SPLIT_BLOCK = {"agml_pepperfield": 50}
+PER_CLASS_CAP = {"agml_pepperfield": 1500}
 # Classi senza una diagnosi univoca (es. "foglia morta", "frutto non sano"): non usate.
 AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit")}
 HEALTHY_WORDS = ("healthy", "health", "sano", "normal", "fresh")
@@ -298,18 +306,29 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
         return _rows_from_manifest(name)
     names = _label_names(repo)
     schema = pq.ParquetFile(files[0]).schema_arrow.names
-    plant_types = _label_names(repo, feature="plant_type") if "plant_type" in schema else None
+    crop_feature = "plant_type" if "plant_type" in schema else ("crop" if "crop" in schema else None)
+    plant_types = _label_names(repo, feature=crop_feature) if crop_feature else None
     has_part = "plant_part" in schema
     has_crop = "crop_type" in schema
     recs = list(_parquet_rows(files, ["image", "label"] + (["crop_type"] if has_crop else [])
-                              + (["plant_part"] if has_part else []) + (["plant_type"] if plant_types else [])))
+                              + (["plant_part"] if has_part else []) + ([crop_feature] if crop_feature else [])))
     # split stratificato per classe
     by_label = defaultdict(list)
     for i, r in enumerate(recs):
         by_label[r["label"]].append(i)
     split_of = {}
+    cap = PER_CLASS_CAP.get(name)
     for lab, idxs in by_label.items():
-        for j, s in zip(idxs, _split_random(len(idxs), seed + zlib.crc32(str(lab).encode()) % 1000)):
+        lab_seed = seed + zlib.crc32(str(lab).encode()) % 1000
+        if name in SPLIT_BLOCK:
+            blocks = sorted({j // SPLIT_BLOCK[name] for j in idxs})
+            bsplit = dict(zip(blocks, _split_random(len(blocks), lab_seed)))
+            if cap and len(idxs) > cap:
+                idxs = sorted(random.Random(lab_seed).sample(idxs, cap))
+            for j in idxs:
+                split_of[j] = bsplit[j // SPLIT_BLOCK[name]]
+            continue
+        for j, s in zip(idxs, _split_random(len(idxs), lab_seed)):
             split_of[j] = s
     dup = set()
     if name == "agml_appleleaf9":
@@ -318,11 +337,12 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     rows = []
     for i, r in enumerate(recs):
         lab = names[r["label"]] if names and r["label"] < len(names) else f"label_{r['label']}"
-        if (name, lab) in AGML_SKIP or i in dup:
+        if (name, lab) in AGML_SKIP or i in dup or i not in split_of:
             continue
         row_crop = TOM2024_CROPS.get(r.get("crop_type"), crop) if has_crop else crop
-        if plant_types:  # coltura indicata per foto (indice nei nomi di plant_type)
-            row_crop = PLANT_TYPE_CROPS.get(plant_types[r["plant_type"]])
+        if crop_feature:  # coltura indicata per foto (indice nei nomi, oppure testo)
+            v = r[crop_feature]
+            row_crop = PLANT_TYPE_CROPS.get(plant_types[v] if plant_types and isinstance(v, int) else v)
             if row_crop is None:
                 continue
         deficiency = ""
@@ -332,7 +352,8 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
         elif lab.lower().startswith(HEALTHY_WORDS):
             dis = "healthy"
         else:
-            dis = AGML_DISEASE.get((name, lab, row_crop)) or AGML_DISEASE.get((name, lab)) or f"{name}:{lab}"
+            raw = f"{name}:{row_crop}:{lab}" if name in CROP_IN_LABEL else f"{name}:{lab}"
+            dis = AGML_DISEASE.get((name, lab, row_crop)) or AGML_DISEASE.get((name, lab)) or raw
         if not deficiency and name in DEFICIENCY_SOURCES:
             deficiency = NO_NUTRITIONAL_DISORDER
         plant = "capsicum_annuum" if row_crop == "capsicum_annuum_peperoncino" else row_crop  # stessa specie
@@ -388,6 +409,109 @@ def import_potatoblight(crop: str, seed: int = 42, per_class: int = 2500, block:
                 if out.exists() or _save(zf.read(m), out):
                     rows.append(ManifestRow(path=_rel(out), source="agml_potatoblight", split=split, plant=crop,
                                             disease=dis, organ="leaf"))
+    return rows
+
+
+# PlantWild v2 (Wei et al. 2024): classe -> (coltura, malattia). Coltura vuota quando la specie non è certa
+# (cavolo, zucca, frumento tenero o duro, agrumi). Colture fuori tassonomia escluse.
+_PW_CROPS = {"apple": "malus_domestica", "banana": "musa_spp", "bell pepper": "capsicum_annuum",
+             "broccoli": "brassica_oleracea_italica", "cauliflower": "brassica_oleracea_italica", "cabbage": "",
+             "cherry": "prunus_avium", "citrus": "", "corn": "zea_mays", "cucumber": "cucumis_sativus",
+             "eggplant": "solanum_melongena", "garlic": "allium_sativum", "grape": "vitis_vinifera",
+             "grapevine": "vitis_vinifera", "lettuce": "lactuca_sativa", "peach": "prunus_persica",
+             "plum": "prunus_domestica", "potato": "solanum_tuberosum", "squash": "", "strawberry": "fragaria_ananassa",
+             "tomato": "solanum_lycopersicum", "wheat": "", "zucchini": "cucurbita_pepo"}
+_PW_DISEASE = {
+    "apple black rot": "Apple___Black_rot", "apple mosaic virus": "agml_appleleaf9:Mosaic",
+    "apple rust": "Apple___Cedar_apple_rust", "apple scab": "apple_scab",
+    "banana black leaf streak": "banana_black_sigatoka", "banana panama disease": "banana_panama_disease",
+    "bell pepper bacterial spot": "pepper_bacterial_spot", "bell pepper frogeye leaf spot": "agml_chili:cercospora",
+    "bell pepper powdery mildew": "pepper_powdery_mildew",
+    "broccoli alternaria leaf spot": "broccoli_alternaria", "cabbage alternaria leaf spot": "broccoli_alternaria",
+    "cauliflower alternaria leaf spot": "broccoli_alternaria", "cabbage black rot": "broccoli_black_rot",
+    "broccoli downy mildew": "agml_vegleaf:Downy mildew", "cabbage downy mildew": "agml_vegleaf:Downy mildew",
+    "cherry leaf spot": "cherry_leaf_spot", "cherry powdery mildew": "Cherry_(including_sour)___Powdery_mildew",
+    "citrus canker": "agml_lemon:Citrus Canker", "citrus greening disease": "Orange___Haunglongbing_(Citrus_greening)",
+    "corn gray leaf spot": "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+    "corn northern leaf blight": "maize_northern_leaf_blight", "corn rust": "maize_common_rust",
+    "cucumber angular leaf spot": "cucumber_angular_leaf_spot", "cucumber powdery mildew": "zucchini_powdery_mildew",
+    "squash powdery mildew": "zucchini_powdery_mildew", "zucchini powdery mildew": "zucchini_powdery_mildew",
+    "zucchini downy mildew": "cucurbit_downy_mildew",
+    "eggplant cercospora leaf spot": "agml_vegleaf:Eggplant Cercopora leaf spot",
+    "eggplant phomopsis fruit rot": "eggplant_phomopsis_blight", "garlic rust": "garlic_rust",
+    "grape black rot": "Grape___Black_rot", "grape downy mildew": "grapevine_downy_mildew",
+    "lettuce downy mildew": "lettuce_downy_mildew", "peach brown rot": "apple_brown_rot",
+    "plum brown rot": "apple_brown_rot", "peach leaf curl": "peach_leaf_curl", "plum pox virus": "peach_plum_pox",
+    "plum bacterial spot": "peach_bacterial_spot", "potato early blight": "tomato_early_blight",
+    "potato late blight": "tomato_late_blight", "strawberry leaf scorch": "Strawberry___Leaf_scorch",
+    "tomato bacterial leaf spot": "pepper_bacterial_spot", "tomato early blight": "tomato_early_blight",
+    "tomato late blight": "tomato_late_blight", "tomato leaf mold": "Tomato___Leaf_Mold",
+    "tomato mosaic virus": "tomato_mosaic_virus", "tomato septoria leaf spot": "Tomato___Septoria_leaf_spot",
+    "tomato yellow leaf curl virus": "tomato_yellow_leaf_curl", "wheat leaf rust": "wheat_leaf_rust",
+    "wheat septoria blotch": "wheat_septoria", "wheat powdery mildew": "wheat_powdery_mildew",
+}
+_PW_DEFICIENCY = {"bell pepper blossom end rot": "carenza_di_calcio"}
+_PW_FRUIT = {"bell pepper blossom end rot", "eggplant phomopsis fruit rot", "peach brown rot", "plum brown rot",
+             "plum pocket disease", "peach scab", "wheat head scab", "wheat loose smut", "corn smut",
+             "banana cigar end rot", "carrot cavity spot"}
+
+
+def _plantdoc_hashes() -> np.ndarray:
+    """dhash di tutte le foto intere di PlantDoc, per escludere le copie presenti in altri dataset web."""
+    out = []
+    for f in sorted((EXT / "plantdoc").rglob("*.parquet")):
+        for r in pq.read_table(f, columns=["image"]).to_pylist():
+            try:
+                out.append([int(b) for b in f"{_dhash(r['image']['bytes']):0256b}"])
+            except Exception:
+                pass
+    return np.packbits(np.array(out, dtype=np.uint8), axis=1) if out else np.zeros((0, 32), np.uint8)
+
+
+def import_plantwild(seed: int = 42, max_dist: int = 24) -> list[ManifestRow]:
+    """PlantWild v2: foto di malattie 'in natura' (CC BY-NC-ND: uso non commerciale, solo addestramento)."""
+    z_path = EXT / "plantwild" / "plantwild_v2.zip"
+    if not z_path.exists():
+        return _rows_from_manifest("plantwild")
+    table = np.array([bin(x).count("1") for x in range(256)], dtype=np.uint16)
+    pd_hash = _plantdoc_hashes()
+    recs, n_pd = [], 0
+    with zipfile.ZipFile(z_path) as zf:
+        for m in sorted(zf.namelist()):
+            parts = m.split("/")
+            if len(parts) != 3 or "__MACOSX" in m or not m.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+                continue
+            cls = parts[1]
+            crop_key = next((k for k in sorted(_PW_CROPS, key=len, reverse=True) if cls.startswith(k + " ")), None)
+            if crop_key is None:
+                continue
+            data = zf.read(m)
+            try:
+                h = np.packbits(np.array([int(b) for b in f"{_dhash(data):0256b}"], dtype=np.uint8))
+            except Exception:
+                continue
+            if len(pd_hash) and table[np.bitwise_xor(pd_hash, h)].sum(1).min() <= max_dist:
+                n_pd += 1
+                continue
+            recs.append({"image": {"bytes": data}, "cls": cls, "crop": _PW_CROPS[crop_key]})
+    by_cls = defaultdict(list)
+    for i, r in enumerate(recs):
+        by_cls[r["cls"]].append(i)
+    split_of = {}
+    for cls, idxs in by_cls.items():
+        for j, sp in zip(idxs, _split_random(len(idxs), seed + zlib.crc32(cls.encode()) % 1000)):
+            split_of[j] = sp
+    _same_split_for_duplicates(recs, split_of)
+    rows = []
+    for i, r in enumerate(recs):
+        cls = r["cls"]
+        deficiency = _PW_DEFICIENCY.get(cls, "")
+        dis = "disturbo_nutrizionale" if deficiency else _PW_DISEASE.get(cls, f"plantwild:{cls}")
+        out = IMG / "plantwild" / split_of[i] / f"{i:06d}.jpg"
+        if out.exists() or _save(r["image"]["bytes"], out):
+            rows.append(ManifestRow(path=_rel(out), source="plantwild", split=split_of[i], plant=r["crop"], disease=dis,
+                                    deficiency=deficiency, organ="fruit" if cls in _PW_FRUIT else ""))
+    print(f"  plantwild: {n_pd} copie di PlantDoc escluse", flush=True)
     return rows
 
 

@@ -102,6 +102,7 @@ def cmd_import_external(args: argparse.Namespace) -> int:
     for name, e in reg.items():
         if name.startswith("agml_"):
             steps.append((name, lambda e=e: im.import_agml(e["name"], e["repo"], e["crop"])))
+    steps.append(("plantwild", im.import_plantwild))
     steps.append(("contributi", im.contribution_rows))
     for name, fn in steps:
         if args.only and name not in args.only:

@@ -215,3 +215,27 @@ datasets:
     license: "CC BY 4.0"
     citation: "Hasan M. et al. (2024) Comprehensive smartphone image dataset for plant leaf disease detection and freshness assessment from Bangladesh vegetable fields. Data in Brief. Dati: Mendeley DOI 10.17632/n67gctmjyj.3"
     note: "Foglie di pomodoro, melanzana, cetriolo e cavolfiore in campo (zucca amara e zucca da vino escluse: non in tassonomia)."
+  # --- foto di campo per le malattie ---
+  - name: plantwild
+    repo: uqtwei2/PlantWild
+    files: ["plantwild_v2.zip"]
+    use: disease
+    license: "CC BY-NC-ND 4.0: solo uso non commerciale (progetto accademico); usato solo per l'addestramento, non ripubblicato nel quiz"
+    citation: "Wei T., Chen Z., Huang Z., Yu X. (2024) Benchmarking In-the-wild Multimodal Disease Recognition and A Versatile Baseline. ACM Multimedia 2024 (PlantWild v2, revisione di esperti)"
+    note: "Foto di malattie 'in natura' (più foglie, sfondo e luce variabili). Le copie delle foto di PlantDoc vengono escluse."
+  - name: agml_ccmt
+    repo: Project-AgML/crop_pest_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: solanum_lycopersicum
+    license: "CC BY 4.0"
+    citation: "Mensah P.K. et al. (2023) CCMT: Dataset for crop pest and disease detection. Data in Brief 49, 109306"
+    note: "Foto di campo (Ghana) di pomodoro e mais, anche con danni da insetti; anacardio e manioca esclusi (non in tassonomia)."
+  - name: agml_pepperfield
+    repo: Project-AgML/pepper_disease_pest_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: capsicum_annuum
+    license: "CC BY 4.0"
+    citation: "Wang X., Liu J., Chen Q. (2025) An advanced deep learning method for pepper diseases and pests detection. Plant Methods 21. Dati: Mendeley DOI 10.17632/tg3z7xxkdb.1"
+    note: "Foto di campo da postazione fissa: importato un campione per classe (scatti molto simili tra loro)."

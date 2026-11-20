@@ -21,6 +21,7 @@ import copy
 import json
 import random
 import time
+from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -41,8 +42,11 @@ DINO = "vit_small_patch14_dinov2.lvd142m"
 EFF = "efficientnet_b0"
 SPLIT_AT = 10
 TOK_DIR = ROOT / "data" / "processed" / "ft_tokens"
-FIELD_W = {"plantdoc": 3.0}
+FIELD_W = {"plantdoc": 3.0, "plantwild": 3.0}
+FIELD_SOURCES = ("plantdoc", "plantwild")  # foto di campo: misurate a parte e usate per scegliere il modello
 PV_TRAIN, PV_VAL = 8000, 2000
+TRAIN_CAP = {"pest": 300}  # foto di train per classe (IP102 è molto numeroso: tokens su disco)
+HEAD = "disease"
 MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
 
@@ -51,8 +55,14 @@ def select(rows, classes):
     rng = random.Random(0)
     idx = {"train": [], "val": [], "test": []}
     for i, r in enumerate(rows):
-        if r.get("disease") in classes:
+        if r.get(HEAD) in classes:
             idx[r["split"]].append(i)
+    cap = TRAIN_CAP.get(HEAD)
+    if cap:
+        by = defaultdict(list)
+        for i in idx["train"]:
+            by[rows[i][HEAD]].append(i)
+        idx["train"] = sorted(j for v in by.values() for j in (rng.sample(v, cap) if len(v) > cap else v))
     for split, n in (("train", PV_TRAIN), ("val", PV_VAL)):
         pv = [i for i in idx[split] if rows[i]["source"] == "plantvillage"]
         keep = set(rng.sample(pv, min(n, len(pv))))
@@ -61,7 +71,7 @@ def select(rows, classes):
 
 
 def idx_pd(rows, split):
-    return [i for i, r in enumerate(rows) if r["split"] == split and r["source"] == "plantdoc" and r.get("disease")]
+    return [i for i, r in enumerate(rows) if r["split"] == split and r["source"] == "plantdoc" and r.get(HEAD)]
 
 
 class Imgs(Dataset):
@@ -149,24 +159,34 @@ def metrics(p, y, src):
     pred = p.argmax(1)
     out = {"acc": float((pred == y).float().mean()), "f1": macro_f1(y.numpy(), pred.numpy()),
            "ece": expected_calibration_error(p.numpy(), y.numpy())}
-    m = torch.tensor([s == "plantdoc" for s in src])
-    out["plantdoc"] = float((pred[m] == y[m]).float().mean())
+    for fs in FIELD_SOURCES:
+        m = torch.tensor([s == fs for s in src])
+        if m.any():
+            out[fs] = float((pred[m] == y[m]).float().mean())
     return out
 
 
+def score_of(m):
+    """Punteggio per scegliere epoca e fusione: media tra test complessivo e foto di campo."""
+    vals = [m["acc"]] + [m[fs] for fs in FIELD_SOURCES if fs in m]
+    return sum(vals) / len(vals)
+
+
 def main():
-    global SPLIT_AT, TOK_DIR
+    global SPLIT_AT, TOK_DIR, HEAD
     ap = argparse.ArgumentParser()
+    ap.add_argument("--head", default="disease", choices=["disease", "pest"])
     ap.add_argument("--epochs", type=int, default=5)
     ap.add_argument("--only-cache", action="store_true")
     ap.add_argument("--split-at", type=int, default=SPLIT_AT, help="primo blocco riaddestrato (12 blocchi in tutto)")
     args = ap.parse_args()
     SPLIT_AT = args.split_at
-    TOK_DIR = TOK_DIR / f"blocco{SPLIT_AT}"
+    HEAD = args.head
+    TOK_DIR = TOK_DIR / f"{HEAD}_blocco{SPLIT_AT}"
     torch.set_num_threads(4)
 
     rows = read_manifest(ROOT / "data/processed/manifest_v2.csv")
-    classes = torch.load(ROOT / "models/ensemble_disease.pt", weights_only=False)["classes"]
+    classes = torch.load(ROOT / f"models/ensemble_{HEAD}.pt", weights_only=False)["classes"]
     ci = {c: i for i, c in enumerate(classes)}
     idx = select(rows, set(classes))
     if os.environ.get("FT_SMOKE"):  # prova rapida del codice
@@ -194,7 +214,7 @@ def main():
     all_paths = [ROOT / "data" / r["path"] for r in rows]
     eff_all = rd.extract_features(all_paths, EFF, ROOT / f"data/processed/features_{EFF}_224")
     eff = {k: torch.from_numpy(eff_all[v].astype(np.float32)) for k, v in idx.items()}
-    y = {k: torch.tensor([ci[rows[i]["disease"]] for i in v]) for k, v in idx.items()}
+    y = {k: torch.tensor([ci[rows[i][HEAD]] for i in v]) for k, v in idx.items()}
     src = {k: [rows[i]["source"] for i in v] for k, v in idx.items()}
 
     torch.manual_seed(0)
@@ -230,7 +250,7 @@ def main():
                       f"({time.time() - t0:.0f}s)", flush=True)
         pv = predict(model, toks["val"], eff["val"]).softmax(1)
         mv = metrics(pv, y["val"], src["val"])
-        score = (mv["acc"] + mv["plantdoc"]) / 2
+        score = score_of(mv)
         log.append({"epoch": ep + 1, **mv})
         print(f"epoca {ep + 1}: val {mv}", flush=True)
         if score > best:
@@ -257,7 +277,7 @@ def main():
     dino_all = rd.extract_features(all_paths, DINO, ROOT / f"data/processed/features_{DINO}_224")
     Xt = torch.from_numpy(np.concatenate([dino_all[idx["test"]], eff_all[idx["test"]]], 1).astype(np.float32))
     Xv = torch.from_numpy(np.concatenate([dino_all[idx["val"]], eff_all[idx["val"]]], 1).astype(np.float32))
-    e = torch.load(ROOT / "models/ensemble_disease.pt", weights_only=False)
+    e = torch.load(ROOT / f"models/ensemble_{HEAD}.pt", weights_only=False)
     ms = []
     for st in e["models"]:
         m = rd.Reader(dim, len(classes), hidden=1024)
@@ -275,7 +295,7 @@ def main():
     for w in (0.0, 0.25, 0.5, 0.75, 1.0):
         q = (w * pv_ft.clamp_min(1e-9).log() + (1 - w) * pv_ens.clamp_min(1e-9).log()).softmax(1)
         mv = metrics(q, y["val"], src["val"])
-        s = (mv["acc"] + mv["plantdoc"]) / 2
+        s = score_of(mv)
         if s > best_s:
             best_w, best_s = w, s
     p_mix = (best_w * p_ft.clamp_min(1e-9).log() + (1 - best_w) * p_ens.clamp_min(1e-9).log()).softmax(1)
@@ -286,8 +306,8 @@ def main():
     for k in ("insieme_attuale", "riaddestrato", "fusione"):
         print(f"  {k:16s} " + " ".join(f"{a}={b:.4f}" for a, b in res[k].items()), flush=True)
     torch.save({"state": model.state_dict(), "classes": classes, "temperature": temp, "split_at": SPLIT_AT,
-                "fusion_weight": best_w, "backbone": DINO}, ROOT / "models/disease_ft.pt")
-    json.dump(res, open(ROOT / "models/finetune_disease.json", "w"), indent=2)
+                "fusion_weight": best_w, "backbone": DINO, "head": HEAD}, ROOT / f"models/{HEAD}_ft.pt")
+    json.dump(res, open(ROOT / f"models/finetune_{HEAD}.json", "w"), indent=2)
 
 
 if __name__ == "__main__":

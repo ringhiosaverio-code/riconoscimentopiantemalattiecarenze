@@ -22,6 +22,7 @@ ap.add_argument("--with-pest", action="store_true")
 ap.add_argument("--ensemble-dir", default=None, help="cartella con ensemble_<lettore>.pt")
 ap.add_argument("--disease-ft", default=None,
                 help="models/disease_ft.pt (scripts/finetune_disease.py): ramo con gli ultimi blocchi riaddestrati")
+ap.add_argument("--pest-ft", default=None, help="models/pest_ft.pt: ramo riaddestrato per gli insetti")
 args = ap.parse_args()
 
 net, ck = load_readers(Path(args.checkpoint))
@@ -48,19 +49,21 @@ for h in heads:
     print(f"{h}: insieme di {len(members)} lettori, T={e['temperature']:.3f}")
 
 
-branch, ft_w = None, 0.0
-if args.disease_ft:
-    import sys
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from finetune_disease import DiseaseBranch
-    ft = torch.load(args.disease_ft, map_location="cpu", weights_only=False)
-    if list(ft["classes"]) != list(ck["readers"]["disease"]["classes"]):
-        raise SystemExit("disease_ft: classi diverse da quelle del checkpoint")
-    branch = DiseaseBranch(net.backbones[0], len(ft["classes"]), split_at=ft["split_at"])
-    branch.load_state_dict(ft["state"])
-    branch.eval()
-    split_at, ft_w = ft["split_at"], ft["fusion_weight"]
-    print(f"disease: ramo riaddestrato dal blocco {split_at}, peso nella fusione {ft_w}")
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from finetune_disease import DiseaseBranch  # noqa: E402
+
+branches, ft_w, split_of = nn.ModuleDict(), {}, {}
+for h, f in (("disease", args.disease_ft), ("pest", args.pest_ft)):
+    if not f or h not in heads:
+        continue
+    ft = torch.load(f, map_location="cpu", weights_only=False)
+    if list(ft["classes"]) != list(ck["readers"][h]["classes"]):
+        raise SystemExit(f"{h}: classi del ramo riaddestrato diverse da quelle del checkpoint")
+    b = DiseaseBranch(net.backbones[0], len(ft["classes"]), split_at=ft["split_at"])
+    b.load_state_dict(ft["state"])
+    branches[h], ft_w[h], split_of[h] = b.eval(), ft["fusion_weight"], ft["split_at"]
+    print(f"{h}: ramo riaddestrato dal blocco {ft['split_at']}, peso nella fusione {ft['fusion_weight']}")
 
 
 class Web(nn.Module):
@@ -69,23 +72,18 @@ class Web(nn.Module):
         self.backbones = net.backbones
         self.heads = net.heads
         self.ens_heads = ensembles
-        self.ft_branch = branch
-
-    def features(self, x):
-        if self.ft_branch is None:
-            return torch.cat([b(x) for b in self.backbones], dim=1), None, None
-        vit, eff = self.backbones[0], self.backbones[1]
-        t = vit.norm_pre(vit._pos_embed(vit.patch_embed(x)))
-        for b in vit.blocks[:split_at]:
-            t = b(t)
-        h = t
-        for b in vit.blocks[split_at:]:
-            h = b(h)
-        fe = eff(x)
-        return torch.cat([vit.norm(h)[:, 0], fe], dim=1), t, fe
+        self.ft_branches = branches
 
     def forward(self, x):
-        f, tok, fe = self.features(x)
+        vit, eff = self.backbones[0], self.backbones[1]
+        t = vit.norm_pre(vit._pos_embed(vit.patch_embed(x)))
+        tok_at = {}
+        for i, b in enumerate(vit.blocks):
+            if i in split_of.values():
+                tok_at[i] = t
+            t = b(t)
+        fe = eff(x)
+        f = torch.cat([vit.norm(t)[:, 0], fe], dim=1)
         outs = []
         for h in heads:
             if h in self.ens_heads:
@@ -93,9 +91,10 @@ class Web(nn.Module):
                 p = torch.softmax(p.clamp_min(1e-9).log() / temps[h], dim=1)
             else:
                 p = torch.softmax(self.heads[h](f), dim=1)
-            if h == "disease" and self.ft_branch is not None:
-                pf = torch.softmax(self.ft_branch(tok, fe), dim=1)
-                p = torch.softmax(ft_w * pf.clamp_min(1e-9).log() + (1 - ft_w) * p.clamp_min(1e-9).log(), dim=1)
+            if h in self.ft_branches:
+                pf = torch.softmax(self.ft_branches[h](tok_at[split_of[h]], fe), dim=1)
+                w = ft_w[h]
+                p = torch.softmax(w * pf.clamp_min(1e-9).log() + (1 - w) * p.clamp_min(1e-9).log(), dim=1)
             outs.append(p)
         return tuple(outs)
 
