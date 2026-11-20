@@ -113,6 +113,17 @@ AGML_DISEASE = {
     # agrumi: HLB come in PlantVillage; cocciniglia rossa e suoi esiti (macchie gialle) in una classe
     ("agml_citrusuat", "HLB"): "Orange___Haunglongbing_(Citrus_greening)",
     ("agml_citrusuat", "Red_scale_sequelae"): "agml_citrusuat:Red_scale",
+    ("agml_citrusfruit", "greening"): "Orange___Haunglongbing_(Citrus_greening)",
+    ("agml_citrusfruit", "canker"): "agml_lemon:Citrus Canker",
+}
+# Parte della pianta fotografata: dichiarata dal dataset (plant_part) o descritta nella sua scheda.
+PLANT_PART = {0: "fruit", 1: "leaf"}  # citrus_fruit_leaf: 0 = fruit, 1 = leaf
+AGML_ORGAN = {
+    "agml_lemon": "leaf", "agml_grape": "leaf", "agml_banana": "leaf", "agml_onion": "leaf", "agml_chili": "leaf",
+    "agml_potato": "leaf", "agml_cauliflower": "leaf", "agml_appleleaf9": "leaf", "agml_citrusuat": "leaf",
+    "agml_fig": "leaf", "agml_tuta": "leaf", "agml_pomegranate": "fruit",
+    ("agml_plum", "Healthy Fruit"): "fruit", ("agml_plum", "Healthy Leaf"): "leaf", ("agml_plum", "Insect Hole"): "leaf",
+    ("agml_tom2024", "blossom-end-rot-d"): "fruit",
 }
 # Classi senza una diagnosi univoca (es. "foglia morta", "frutto non sano"): non usate.
 AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit")}
@@ -212,7 +223,8 @@ def import_plantvillage(leaf_map_path: Path) -> list[ManifestRow]:
     for r in rows:
         crop = pv_crop.get(r.plant) or PV_CROPS_FALLBACK.get(r.plant, f"altro:{r.plant}")
         dis = pv_dis.get(r.disease) or r.disease
-        out.append(ManifestRow(path=_rel(root / r.path), source="plantvillage", split=r.split, plant=crop, disease=dis))
+        out.append(ManifestRow(path=_rel(root / r.path), source="plantvillage", split=r.split, plant=crop, disease=dis,
+                               organ="leaf"))
     return out
 
 
@@ -251,7 +263,8 @@ def import_plantdoc(seed: int = 42) -> list[ManifestRow]:
                 x, y, w, h = bbox  # formato COCO [x, y, larghezza, altezza]
                 out = IMG / "plantdoc" / split / f"{rec['image_id']}_{k}.jpg"
                 if out.exists() or _save(rec["image"]["bytes"], out, (x, y, x + w, y + h)):
-                    rows.append(ManifestRow(path=_rel(out), source="plantdoc", split=split, plant=plant, disease=dis))
+                    rows.append(ManifestRow(path=_rel(out), source="plantdoc", split=split, plant=plant, disease=dis,
+                                           organ="leaf"))
     return rows
 
 
@@ -262,8 +275,11 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
     if not files:
         return []
     names = _label_names(repo)
-    has_crop = "crop_type" in pq.ParquetFile(files[0]).schema_arrow.names
-    recs = list(_parquet_rows(files, ["image", "label"] + (["crop_type"] if has_crop else [])))
+    schema = pq.ParquetFile(files[0]).schema_arrow.names
+    has_crop = "crop_type" in schema
+    has_part = "plant_part" in schema
+    recs = list(_parquet_rows(files, ["image", "label"] + (["crop_type"] if has_crop else [])
+                              + (["plant_part"] if has_part else [])))
     # split stratificato per classe
     by_label = defaultdict(list)
     for i, r in enumerate(recs):
@@ -295,8 +311,10 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
         plant = "capsicum_annuum" if row_crop == "capsicum_annuum_peperoncino" else row_crop  # stessa specie
         out = IMG / name / split_of[i] / f"{i:06d}.jpg"
         if out.exists() or _save(r["image"]["bytes"], out):
+            part = PLANT_PART.get(r.get("plant_part")) if has_part else None
+            organ = part or AGML_ORGAN.get((name, lab)) or AGML_ORGAN.get(name, "")
             rows.append(ManifestRow(path=_rel(out), source=name, split=split_of[i], plant=plant, disease=dis,
-                                    deficiency=deficiency))
+                                    deficiency=deficiency, organ=organ))
     return rows
 
 
@@ -452,4 +470,5 @@ def contribution_rows() -> list[ManifestRow]:
         return []
     with open(CONTRIB_CSV, newline="", encoding="utf-8") as fh:
         return [ManifestRow(path=r["path"], source="contributi", split=r["split"], plant=r["plant"],
-                            disease=r["disease"], deficiency=r["deficiency"]) for r in csv.DictReader(fh)]
+                            disease=r["disease"], deficiency=r["deficiency"], organ=r.get("organ", ""))
+                for r in csv.DictReader(fh)]

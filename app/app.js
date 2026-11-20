@@ -334,13 +334,24 @@
     var c = DATA.readers[head].classes.filter(function (x) { return x.label === label; })[0];
     return c ? c.name : label;
   }
+  var SEEN_KEY = 'plantcare-quiz-viste';
+  function quizSeen() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '{}') || {}; } catch (e) { return {}; } }
+  function quizSeenSave(o) { try { localStorage.setItem(SEEN_KEY, JSON.stringify(o)); } catch (e) { /* senza memoria si va avanti lo stesso */ } }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   $('q-new').addEventListener('click', nextQuestion);
   function nextQuestion() {
     ready.then(function () {
       var cat = $('q-cat').value;
-      var pool = DATA.quiz.filter(function (q) { return cat === 'any' || q.head === cat; });
-      var item = pool[Math.floor(Math.random() * pool.length)];
+      var pool = DATA.quiz.filter(function (q) {
+        if (cat === 'organ') return q.organ && q.organ !== 'leaf';
+        return cat === 'any' || q.head === cat;
+      });
+      if (!pool.length) { $('q-text').textContent = 'Nessuna foto per questa categoria.'; $('q-box').hidden = false; return; }
+      // foto non ancora viste per prime; quando sono finite si ricomincia
+      var seen = quizSeen(), fresh = pool.filter(function (q) { return !seen[q.img]; });
+      if (!fresh.length) { pool.forEach(function (q) { delete seen[q.img]; }); fresh = pool; }
+      var item = fresh[Math.floor(Math.random() * fresh.length)];
+      seen[item.img] = 1; quizSeenSave(seen);
       var labels = {};
       DATA.quiz.forEach(function (q) { if (q.head === item.head) labels[q.label] = q.plant; });
       var others = Object.keys(labels).filter(function (l) { return l !== item.label; });
@@ -356,7 +367,8 @@
       if (opts.length < 4) { $('q-text').textContent = 'Classi insufficienti: scegli un\'altra categoria.'; return; }
       qCur = { item: item, opts: shuffle(opts) };
       var questions = { plant: 'Quale coltura è?', disease: 'Quale malattia o danno si vede?', deficiency: 'Che disturbo nutrizionale si vede?' };
-      $('q-text').textContent = questions[item.head];
+      var organ = item.organ && DATA.organs.filter(function (o) { return o.id === item.organ; })[0];
+      $('q-text').textContent = questions[item.head] + (organ ? ' (parte della pianta: ' + organ.label.toLowerCase() + ')' : '');
       $('q-img').src = 'app/quiz/' + item.img;
       $('q-credit').textContent = 'Foto: ' + item.credit;
       $('q-exp').innerHTML = '';

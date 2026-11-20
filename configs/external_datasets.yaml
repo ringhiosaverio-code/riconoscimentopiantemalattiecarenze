@@ -183,3 +183,11 @@ datasets:
     license: "CC BY 4.0"
     citation: "Hafi S.J. et al. (2024) Image dataset of healthy and infected fig leaves with Ficus leaf worm. Data in Brief 53, 109958. DOI 10.17632/f7dk2yknff.2 (dati)"
     note: "Foglie di fico sane e con danni della tignola delle foglie del fico."
+  - name: agml_citrusfruit
+    repo: Project-AgML/citrus_fruit_leaf_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: citrus_sinensis
+    license: "CC BY 4.0"
+    citation: "Rauf H.T. et al. (2019) A citrus fruits and leaves dataset for detection and classification of citrus diseases through machine learning. Data in Brief 26, 104340. DOI 10.1016/j.dib.2019.104340"
+    note: "Frutti e foglie di agrumi: macchia nera, cancro batterico, greening, melanosi, ticchiolatura (parte della pianta indicata nel dataset)."

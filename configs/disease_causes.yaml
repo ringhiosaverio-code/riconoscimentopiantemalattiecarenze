@@ -88,3 +88,6 @@ labels:
   agml_pomegranate:Ectomyelois ceratoniae: insetto
   agml_pomegranate:Sunburn: abiotico
   agml_fig:infected: insetto
+  agml_citrusfruit:black_spot: fungo
+  agml_citrusfruit:melanose: fungo
+  agml_citrusfruit:scab: fungo

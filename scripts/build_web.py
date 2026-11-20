@@ -40,8 +40,15 @@ QUIZ_SOURCES = {  # solo fonti con licenza che consente la ripubblicazione con a
     "agml_tuta": "Project-AgML, Tuta absoluta (Shehu et al. 2025), MIT",
     "agml_potato": "Project-AgML, potato leaf disease, CC BY 4.0",
     "agml_cauliflower": "Project-AgML, cauliflower leaf disease, CC BY 4.0",
+    "agml_appleleaf9": "AppleLeaf9 (Yang et al. 2022), via Project-AgML, CC BY 4.0",
+    "agml_citrusuat": "CitrusUAT (Gómez-Flores et al. 2024), via Project-AgML, CC BY 4.0",
+    "agml_citrusfruit": "Citrus fruits and leaves (Rauf et al. 2019), via Project-AgML, CC BY 4.0",
+    "agml_plum": "Plum leaf and fruit (Nayeem et al. 2025), via Project-AgML, CC BY 4.0",
+    "agml_pomegranate": "Pomegranate disease (Mohammed et al. 2025), via Project-AgML, CC BY 4.0",
+    "agml_fig": "Fig leaves (Hafi et al. 2024), via Project-AgML, CC BY 4.0",
 }
-QUIZ_PER_CLASS = 4
+QUIZ_PER_CLASS = 24  # foto per classe, da tutti gli split e alternando le fonti
+QUIZ_SIDE = 288
 
 
 def load_yaml(p: Path) -> dict:
@@ -49,10 +56,53 @@ def load_yaml(p: Path) -> dict:
         return yaml.safe_load(fh)
 
 
+def build_quiz(ck, heads) -> None:
+    """Foto del quiz: solo fonti ripubblicabili, fino a QUIZ_PER_CLASS per classe, fonti alternate."""
+    qdir = APP / "quiz"
+    if qdir.exists():
+        shutil.rmtree(qdir)
+    qdir.mkdir(parents=True)
+    rows = [r for r in csv.DictReader(open(ROOT / "data" / "processed" / "manifest_v2.csv", encoding="utf-8"))
+            if r["source"] in QUIZ_SOURCES]
+    rng = random.Random(42)
+    by_class = defaultdict(lambda: defaultdict(list))
+    for r in rows:
+        for h in heads:
+            if r[h] and r[h] in ck["readers"][h]["classes"]:
+                by_class[(h, r[h])][r["source"]].append(r)
+    quiz, n = [], 0
+    for (h, lab), by_src in sorted(by_class.items()):
+        for rs in by_src.values():
+            rng.shuffle(rs)
+        # prima le foto non di foglia (frutti, fusti...), poi a turno tra le fonti
+        queues = sorted(by_src.values(), key=lambda rs: -sum(r.get("organ") not in ("", "leaf") for r in rs))
+        picked = []
+        while len(picked) < QUIZ_PER_CLASS and any(queues):
+            for q in queues:
+                if q and len(picked) < QUIZ_PER_CLASS:
+                    picked.append(q.pop())
+        for r in picked:
+            name = f"q{n:05d}.jpg"
+            try:
+                with Image.open(ROOT / "data" / r["path"]) as im:
+                    im = im.convert("RGB")
+                    im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
+                    im.save(qdir / name, quality=75)
+            except OSError:
+                continue
+            quiz.append({"img": name, "head": h, "label": lab, "plant": r["plant"], "organ": r.get("organ", ""),
+                         "credit": QUIZ_SOURCES[r["source"]]})
+            n += 1
+    json.dump(quiz, open(APP / "data" / "quiz.json", "w", encoding="utf-8"), ensure_ascii=False)
+    size = sum(p.stat().st_size for p in qdir.iterdir()) / 1e6
+    print(f"quiz: {len(quiz)} foto, {size:.1f} MB")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", required=True)
-    ap.add_argument("--ort-dist", required=True)
+    ap.add_argument("--model", default=None)
+    ap.add_argument("--ort-dist", default=None)
+    ap.add_argument("--quiz-only", action="store_true", help="ricostruisce solo le foto e i dati del quiz")
     ap.add_argument("--with-pest", action="store_true",
                     help="include il lettore degli insetti (IP102: solo uso accademico, confermato dall'utente)")
     ap.add_argument("--improve-results", default=None,
@@ -65,6 +115,9 @@ def main() -> None:
                        sources=load_yaml(ROOT / "configs" / "sources.yaml"))
     label_map = load_yaml(ROOT / "configs" / "label_maps.yaml")
     ck = torch.load(CKPT / "readers.pt", map_location="cpu", weights_only=False)
+    if args.quiz_only:
+        build_quiz(ck, heads=HEADS)
+        return
     report = json.load(open(CKPT / "report.json", encoding="utf-8"))
     improved = json.load(open(args.improve_results, encoding="utf-8")) if args.improve_results else None
 
@@ -127,31 +180,7 @@ def main() -> None:
                for s in load_yaml(ROOT / "configs" / "sources.yaml")["sources"]},
               open(APP / "data" / "sources.json", "w", encoding="utf-8"), ensure_ascii=False)
 
-    # --- quiz: foto di test, solo da fonti ripubblicabili ---
-    qdir = APP / "quiz"
-    if qdir.exists():
-        shutil.rmtree(qdir)
-    qdir.mkdir(parents=True)
-    rows = [r for r in csv.DictReader(open(ROOT / "data" / "processed" / "manifest_v2.csv", encoding="utf-8"))
-            if r["split"] == "test" and r["source"] in QUIZ_SOURCES]
-    rng = random.Random(42)
-    by_class = defaultdict(list)
-    for r in rows:
-        for h in HEADS:
-            if r[h] and r[h] in ck["readers"][h]["classes"]:
-                by_class[(h, r[h])].append(r)
-    quiz = []
-    n = 0
-    for (h, lab), rs in sorted(by_class.items()):
-        for r in rng.sample(rs, min(QUIZ_PER_CLASS, len(rs))):
-            name = f"q{n:05d}.jpg"
-            with Image.open(ROOT / "data" / r["path"]) as im:
-                im = im.convert("RGB")
-                im.thumbnail((320, 320))
-                im.save(qdir / name, quality=80)
-            quiz.append({"img": name, "head": h, "label": lab, "plant": r["plant"], "credit": QUIZ_SOURCES[r["source"]]})
-            n += 1
-    json.dump(quiz, open(APP / "data" / "quiz.json", "w", encoding="utf-8"), ensure_ascii=False)
+    build_quiz(ck, heads=HEADS)
 
     # --- modello e motore ---
     shutil.copy(args.model, APP / "model" / "plantcare.onnx")

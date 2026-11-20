@@ -21,7 +21,7 @@ from pathlib import Path
 from PIL import Image, UnidentifiedImageError
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-MANIFEST_COLUMNS = ["path", "source", "split", "plant", "disease", "pest", "deficiency"]
+MANIFEST_COLUMNS = ["path", "source", "split", "plant", "disease", "pest", "deficiency", "organ"]
 SPLITS = ("train", "val", "test")
 
 
@@ -34,6 +34,7 @@ class ManifestRow:
     disease: str = ""
     pest: str = ""
     deficiency: str = ""
+    organ: str = ""  # parte della pianta (configs/taxonomy.yaml plant_organs), se nota
 
     def as_dict(self) -> dict[str, str]:
         return asdict(self)
