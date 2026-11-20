@@ -41,7 +41,10 @@ def test_ip102_italian_names_refer_to_existing_classes():
 
 def test_quiz_uses_only_republishable_sources():
     quiz = json.load(open(APP / "data" / "quiz.json", encoding="utf-8"))
-    assert quiz and all(("PlantDoc" in q["credit"]) or ("Project-AgML" in q["credit"]) for q in quiz)
+    # fonti CC BY / MIT; IP102 solo con l'avviso di uso accademico
+    assert quiz and all(("PlantDoc" in q["credit"]) or ("Project-AgML" in q["credit"])
+                        or ("IP102" in q["credit"] and "uso accademico" in q["credit"]) for q in quiz)
+    assert all(q.get("name") for q in quiz)
     assert all((APP / "quiz" / q["img"]).exists() for q in quiz)
 
 

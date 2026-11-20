@@ -82,3 +82,12 @@
 "agml_citrusfruit:black_spot": "Macchia nera degli agrumi (Phyllosticta citricarpa, organismo da quarantena UE)"
 "agml_citrusfruit:melanose": "Melanosi degli agrumi (Diaporthe citri)"
 "agml_citrusfruit:scab": "Ticchiolatura degli agrumi (Elsinoë fawcettii)"
+# Ortaggi del Bangladesh (Hasan et al. 2024) e frutti di melanzana (BrinjalFruitX)
+"agml_vegleaf:Downy mildew": "Peronospora del cavolfiore"
+"agml_vegleaf:Anthracnose lesions": "Antracnosi del cetriolo"
+"agml_vegleaf:Tomato leaf curl virus": "Accartocciamento fogliare del pomodoro (begomovirus)"
+"agml_vegleaf:Eggplant Cercopora leaf spot": "Cercosporiosi della melanzana"
+"agml_vegleaf:Eggplant begomovirus": "Virosi della melanzana (begomovirus)"
+"agml_brinjalfruit:Brinjal Fruit Creaking": "Spaccature dei frutti di melanzana"
+"agml_brinjalfruit:Shoot and Fruit Borer": "Danno da piralide dei germogli e dei frutti della melanzana (Leucinodes orbonalis)"
+"agml_brinjalfruit:Wet Rot": "Marciume molle dei frutti di melanzana"

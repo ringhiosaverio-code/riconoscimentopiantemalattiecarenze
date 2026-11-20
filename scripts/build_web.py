@@ -47,7 +47,13 @@ QUIZ_SOURCES = {  # solo fonti con licenza che consente la ripubblicazione con a
     "agml_pomegranate": "Pomegranate disease (Mohammed et al. 2025), via Project-AgML, CC BY 4.0",
     "agml_fig": "Fig leaves (Hafi et al. 2024), via Project-AgML, CC BY 4.0",
 }
-QUIZ_PER_CLASS = 24  # foto per classe, da tutti gli split e alternando le fonti
+QUIZ_PER_CLASS = 30  # foto per classe, da tutti gli split e alternando le fonti
+QUIZ_PER_PEST = 20
+# IP102 (Wu et al. 2019): concesso solo per uso accademico; incluso su conferma dell'uso accademico del progetto
+QUIZ_SOURCES_ACADEMIC = {"ip102": "IP102 (Wu et al. 2019, CVPR): solo per uso accademico"}
+# gruppi di colture di IP102 (indici 1-based delle classi), come nell'articolo originale
+IP102_GROUPS = [(1, 14, "riso"), (15, 27, "mais"), (28, 36, "frumento"), (37, 44, "barbabietola"),
+                (45, 57, "erba medica"), (58, 73, "vite"), (74, 92, "agrumi"), (93, 102, "mango")]
 QUIZ_SIDE = 288
 
 
@@ -56,46 +62,80 @@ def load_yaml(p: Path) -> dict:
         return yaml.safe_load(fh)
 
 
-def build_quiz(ck, heads) -> None:
-    """Foto del quiz: solo fonti ripubblicabili, fino a QUIZ_PER_CLASS per classe, fonti alternate."""
+def ip102_group(label: str) -> str:
+    k = int(label.split("_")[-1])
+    return next(g for a, b, g in IP102_GROUPS if a <= k <= b)
+
+
+def build_quiz(ck, heads, names: dict) -> None:
+    """Foto del quiz: fonti ripubblicabili (e IP102 per uso accademico), fonti alternate, nomi stabili."""
+    import zlib
     qdir = APP / "quiz"
-    if qdir.exists():
-        shutil.rmtree(qdir)
-    qdir.mkdir(parents=True)
+    qdir.mkdir(parents=True, exist_ok=True)
+    sources = {**QUIZ_SOURCES, **QUIZ_SOURCES_ACADEMIC}
     rows = [r for r in csv.DictReader(open(ROOT / "data" / "processed" / "manifest_v2.csv", encoding="utf-8"))
-            if r["source"] in QUIZ_SOURCES]
+            if r["source"] in sources]
     rng = random.Random(42)
     by_class = defaultdict(lambda: defaultdict(list))
     for r in rows:
         for h in heads:
-            if r[h] and r[h] in ck["readers"][h]["classes"]:
+            if r.get(h) and h in ck["readers"] and r[h] in ck["readers"][h]["classes"]:
                 by_class[(h, r[h])][r["source"]].append(r)
-    quiz, n = [], 0
+    quiz, keep = [], set()
     for (h, lab), by_src in sorted(by_class.items()):
         for rs in by_src.values():
+            rs.sort(key=lambda r: r["path"])
             rng.shuffle(rs)
         # prima le foto non di foglia (frutti, fusti...), poi a turno tra le fonti
         queues = sorted(by_src.values(), key=lambda rs: -sum(r.get("organ") not in ("", "leaf") for r in rs))
+        limit = QUIZ_PER_PEST if h == "pest" else QUIZ_PER_CLASS
         picked = []
-        while len(picked) < QUIZ_PER_CLASS and any(queues):
+        while len(picked) < limit and any(queues):
             for q in queues:
-                if q and len(picked) < QUIZ_PER_CLASS:
+                if q and len(picked) < limit:
                     picked.append(q.pop())
         for r in picked:
-            name = f"q{n:05d}.jpg"
-            try:
-                with Image.open(ROOT / "data" / r["path"]) as im:
-                    im = im.convert("RGB")
-                    im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
-                    im.save(qdir / name, quality=75)
-            except OSError:
-                continue
-            quiz.append({"img": name, "head": h, "label": lab, "plant": r["plant"], "organ": r.get("organ", ""),
-                         "credit": QUIZ_SOURCES[r["source"]]})
-            n += 1
+            name = f"q{zlib.crc32(r['path'].encode()):08x}.jpg"
+            if not (qdir / name).exists():
+                try:
+                    with Image.open(ROOT / "data" / r["path"]) as im:
+                        im = im.convert("RGB")
+                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
+                        im.save(qdir / name, quality=75)
+                except OSError:
+                    continue
+            keep.add(name)
+            item = {"img": name, "head": h, "label": lab, "name": names[h].get(lab, lab),
+                    "plant": ip102_group(lab) if h == "pest" else r["plant"], "organ": r.get("organ", ""),
+                    "credit": sources[r["source"]]}
+            quiz.append(item)
+    for f in qdir.iterdir():
+        if f.name not in keep:
+            f.unlink()
     json.dump(quiz, open(APP / "data" / "quiz.json", "w", encoding="utf-8"), ensure_ascii=False)
     size = sum(p.stat().st_size for p in qdir.iterdir()) / 1e6
     print(f"quiz: {len(quiz)} foto, {size:.1f} MB")
+
+
+def class_names(ck, kb, tax, label_map, heads) -> dict:
+    ip_en = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_classes.yaml")["classes"].items()}
+    ip_it = {int(k): str(v) for k, v in load_yaml(ROOT / "configs" / "ip102_it.yaml")["names"].items()}
+    out = {}
+    for h in heads:
+        if h not in ck["readers"]:
+            continue
+        d = {}
+        for raw in ck["readers"][h]["classes"]:
+            if h == "pest":
+                k = int(raw.split("_")[-1])
+                en = ip_en.get(k, raw)
+                d[raw] = ip_it.get(k) or en[:1].upper() + en[1:]
+            elif h == "deficiency":
+                d[raw] = DEFICIENCY_NAMES.get(raw, raw)
+            else:
+                d[raw] = display_name(h, raw, kb, label_map, {})
+        out[h] = d
+    return out
 
 
 def main() -> None:
@@ -115,8 +155,9 @@ def main() -> None:
                        sources=load_yaml(ROOT / "configs" / "sources.yaml"))
     label_map = load_yaml(ROOT / "configs" / "label_maps.yaml")
     ck = torch.load(CKPT / "readers.pt", map_location="cpu", weights_only=False)
+    quiz_heads = HEADS + ["pest"]
     if args.quiz_only:
-        build_quiz(ck, heads=HEADS)
+        build_quiz(ck, quiz_heads, class_names(ck, kb, tax, label_map, quiz_heads))
         return
     report = json.load(open(CKPT / "report.json", encoding="utf-8"))
     improved = json.load(open(args.improve_results, encoding="utf-8")) if args.improve_results else None
@@ -180,7 +221,7 @@ def main() -> None:
                for s in load_yaml(ROOT / "configs" / "sources.yaml")["sources"]},
               open(APP / "data" / "sources.json", "w", encoding="utf-8"), ensure_ascii=False)
 
-    build_quiz(ck, heads=HEADS)
+    build_quiz(ck, quiz_heads, class_names(ck, kb, tax, label_map, quiz_heads))
 
     # --- modello e motore ---
     shutil.copy(args.model, APP / "model" / "plantcare.onnx")

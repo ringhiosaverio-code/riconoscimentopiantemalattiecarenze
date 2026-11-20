@@ -191,3 +191,27 @@ datasets:
     license: "CC BY 4.0"
     citation: "Rauf H.T. et al. (2019) A citrus fruits and leaves dataset for detection and classification of citrus diseases through machine learning. Data in Brief 26, 104340. DOI 10.1016/j.dib.2019.104340"
     note: "Frutti e foglie di agrumi: macchia nera, cancro batterico, greening, melanosi, ticchiolatura (parte della pianta indicata nel dataset)."
+  - name: agml_potatoblight
+    repo: Project-AgML/potato_leaf_blight_classification
+    files: ["potato_leaf_blight.zip"]
+    use: disease
+    crop: solanum_tuberosum
+    license: "CC BY 4.0"
+    citation: "Laizer H., Mduma N. et al. (2025) Irish potato imagery dataset for detection of early and late blight diseases. Data in Brief. Dati: Zenodo DOI 10.5281/zenodo.8286529"
+    note: "Foto di campo (Tanzania) di alternariosi e peronospora della patata; importato un campione per classe."
+  - name: agml_brinjalfruit
+    repo: Project-AgML/BrinjalFruitX_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: solanum_melongena
+    license: "CC BY 4.0"
+    citation: "Bitto A.K., Hasan M.Z., Bijoy M.H.I. et al. (2026) BrinjalFruitX: A Field-Collected Image Dataset for Machine Learning and Deep Learning-Based Disease Identification in Brinjal Fruits. Data in Brief. Dati: Mendeley DOI 10.17632/ngc58fsxgd.1"
+    note: "Frutti di melanzana: Phomopsis, marciume molle, spaccature, piralide dei germogli e dei frutti."
+  - name: agml_vegleaf
+    repo: Project-AgML/plant_leaf_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: solanum_lycopersicum
+    license: "CC BY 4.0"
+    citation: "Hasan M. et al. (2024) Comprehensive smartphone image dataset for plant leaf disease detection and freshness assessment from Bangladesh vegetable fields. Data in Brief. Dati: Mendeley DOI 10.17632/n67gctmjyj.3"
+    note: "Foglie di pomodoro, melanzana, cetriolo e cavolfiore in campo (zucca amara e zucca da vino escluse: non in tassonomia)."

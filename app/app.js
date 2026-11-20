@@ -331,8 +331,7 @@
   // ------------------------------------------------------------------ quiz
   var qCur = null, score = { ok: 0, tot: 0 };
   function nameOf(head, label) {
-    var c = DATA.readers[head].classes.filter(function (x) { return x.label === label; })[0];
-    return c ? c.name : label;
+    return classOf(head, label).name;
   }
   var SEEN_KEY = 'plantcare-quiz-viste';
   function quizSeen() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '{}') || {}; } catch (e) { return {}; } }
@@ -355,7 +354,7 @@
       var labels = {};
       DATA.quiz.forEach(function (q) { if (q.head === item.head) labels[q.label] = q.plant; });
       var others = Object.keys(labels).filter(function (l) { return l !== item.label; });
-      if (item.head === 'disease') {
+      if (item.head === 'disease' || item.head === 'pest') {
         var same = others.filter(function (l) { return labels[l] === item.plant; });
         if (same.length >= 3) others = same;
       }
@@ -366,7 +365,7 @@
       });
       if (opts.length < 4) { $('q-text').textContent = 'Classi insufficienti: scegli un\'altra categoria.'; return; }
       qCur = { item: item, opts: shuffle(opts) };
-      var questions = { plant: 'Quale coltura è?', disease: 'Quale malattia o danno si vede?', deficiency: 'Che disturbo nutrizionale si vede?' };
+      var questions = { plant: 'Quale coltura è?', disease: 'Quale malattia o danno si vede?', deficiency: 'Che disturbo nutrizionale si vede?', pest: 'Quale insetto o acaro è?' };
       var organ = item.organ && DATA.organs.filter(function (o) { return o.id === item.organ; })[0];
       $('q-text').textContent = questions[item.head] + (organ ? ' (parte della pianta: ' + organ.label.toLowerCase() + ')' : '');
       $('q-img').src = 'app/quiz/' + item.img;
@@ -382,8 +381,12 @@
       $('q-text').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+  // classe del lettore se presente, altrimenti dati della foto del quiz (es. insetti IP102)
   function classOf(head, label) {
-    return DATA.readers[head].classes.filter(function (x) { return x.label === label; })[0] || { label: label, name: label };
+    var R = DATA.readers[head], c = R && R.classes.filter(function (x) { return x.label === label; })[0];
+    if (c) return c;
+    var q = DATA.quiz.filter(function (x) { return x.head === head && x.label === label; })[0];
+    return q ? { label: label, name: q.name || label, group: q.plant } : { label: label, name: label };
   }
   function symptomsOf(c) {
     var card = c.card;
@@ -397,6 +400,12 @@
         (bad.family ? ' (famiglia ' + esc(bad.family) + ')' : '') + '.';
       if (good.family && bad.family && good.family === bad.family) h += ' Sono della stessa famiglia: guarda la forma e il margine della foglia, la nervatura e il portamento.';
       return h + '</p>';
+    }
+    if (head === 'pest') {
+      h += 'hai scelto ' + esc(bad.name) + ', ma è ' + esc(good.name) + '.</p>';
+      if (good.group && bad.group && good.group !== bad.group) h += '<p class="muted">' + esc(good.name) + ' è un fitofago tipico di ' + esc(good.group) + '; ' + esc(bad.name) + ' invece di ' + esc(bad.group) + '.</p>';
+      else if (good.group) h += '<p class="muted">Sono entrambi fitofagi di ' + esc(good.group) + ': confronta forma del corpo, colore, ali, antenne e zampe, e lo stadio (larva, ninfa o adulto).</p>';
+      return h;
     }
     if (head === 'deficiency') {
       var d = T.deficiencies || {};

@@ -115,16 +115,35 @@ AGML_DISEASE = {
     ("agml_citrusuat", "Red_scale_sequelae"): "agml_citrusuat:Red_scale",
     ("agml_citrusfruit", "greening"): "Orange___Haunglongbing_(Citrus_greening)",
     ("agml_citrusfruit", "canker"): "agml_lemon:Citrus Canker",
+    # ortaggi del Bangladesh (Hasan et al. 2024): etichette con la coltura
+    ("agml_vegleaf", "Tomato Bacterial spot"): "pepper_bacterial_spot",  # come PlantVillage (Xanthomonas spp.)
+    ("agml_vegleaf", "Tomato spotted wilt"): "tomato_spotted_wilt",
+    ("agml_vegleaf", "Tomato Fresh leaf"): "healthy",
+    ("agml_vegleaf", "Eggplant verticillium wilt"): "eggplant_verticillium",
+    ("agml_vegleaf", "Eggplant fresh leaf"): "healthy",
+    ("agml_vegleaf", "Downy mildew", "cucumis_sativus"): "cucurbit_downy_mildew",
+    ("agml_vegleaf", "Downey mildew", "cucumis_sativus"): "cucurbit_downy_mildew",
+    ("agml_vegleaf", "Black Rot", "brassica_oleracea_italica"): "broccoli_black_rot",
+    # frutti di melanzana (BrinjalFruitX)
+    ("agml_brinjalfruit", "Phomopsis Bright"): "eggplant_phomopsis_blight",
+    ("agml_brinjalfruit", "Healty Brinjal"): "healthy",
+    # patata (Laizer et al.): stesse classi di PlantVillage
+    ("agml_potatoblight", "earlyblt"): "tomato_early_blight",
+    ("agml_potatoblight", "lateblt"): "tomato_late_blight",
 }
 # Parte della pianta fotografata: dichiarata dal dataset (plant_part) o descritta nella sua scheda.
 PLANT_PART = {0: "fruit", 1: "leaf"}  # citrus_fruit_leaf: 0 = fruit, 1 = leaf
 AGML_ORGAN = {
     "agml_lemon": "leaf", "agml_grape": "leaf", "agml_banana": "leaf", "agml_onion": "leaf", "agml_chili": "leaf",
     "agml_potato": "leaf", "agml_cauliflower": "leaf", "agml_appleleaf9": "leaf", "agml_citrusuat": "leaf",
-    "agml_fig": "leaf", "agml_tuta": "leaf", "agml_pomegranate": "fruit",
+    "agml_fig": "leaf", "agml_tuta": "leaf", "agml_pomegranate": "fruit", "agml_brinjalfruit": "fruit",
+    "agml_vegleaf": "leaf", "agml_potatoblight": "leaf",
     ("agml_plum", "Healthy Fruit"): "fruit", ("agml_plum", "Healthy Leaf"): "leaf", ("agml_plum", "Insect Hole"): "leaf",
     ("agml_tom2024", "blossom-end-rot-d"): "fruit",
 }
+# Colture del dataset di ortaggi del Bangladesh (plant_type); le zucche asiatiche non sono in tassonomia.
+PLANT_TYPE_CROPS = {"Tomato": "solanum_lycopersicum", "Eggplant": "solanum_melongena", "Cucumber": "cucumis_sativus",
+                    "Cauliflower": "brassica_oleracea_italica"}
 # Classi senza una diagnosi univoca (es. "foglia morta", "frutto non sano"): non usate.
 AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit")}
 HEALTHY_WORDS = ("healthy", "health", "sano", "normal", "fresh")
@@ -181,7 +200,7 @@ def _rel(p: Path) -> str:
     return p.relative_to(DATA).as_posix()
 
 
-def _label_names(repo: str, config: str = "raw") -> list[str] | None:
+def _label_names(repo: str, config: str = "raw", feature: str = "label") -> list[str] | None:
     """Nomi delle classi dalla scheda del dataset su Hugging Face (cardData).
 
     Se la scheda descrive più configurazioni (es. raw e augmented) usa quella richiesta.
@@ -195,7 +214,7 @@ def _label_names(repo: str, config: str = "raw") -> list[str] | None:
     infos = info if isinstance(info, list) else [info]
     chosen = next((i for i in infos if i.get("config_name") == config), infos[0])
     for f in chosen.get("features", []):
-        if f.get("name") != "label":
+        if f.get("name") != feature:
             continue
         cl = f.get("dtype", {})
         if isinstance(cl, dict) and "class_label" in cl:
@@ -271,16 +290,19 @@ def import_plantdoc(seed: int = 42) -> list[ManifestRow]:
 def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[ManifestRow]:
     """Dataset AgML di classificazione: una sola partizione 'train' divisa 80/10/10 (casuale)."""
     src = EXT / name
+    if name == "agml_potatoblight":
+        return import_potatoblight(crop, seed=seed)
     files = sorted(src.rglob("*.parquet"))
     if not files:
         # file originali rimossi per spazio: si riusano le righe già importate (le foto sono in data/external/images)
         return _rows_from_manifest(name)
     names = _label_names(repo)
     schema = pq.ParquetFile(files[0]).schema_arrow.names
-    has_crop = "crop_type" in schema
+    plant_types = _label_names(repo, feature="plant_type") if "plant_type" in schema else None
     has_part = "plant_part" in schema
+    has_crop = "crop_type" in schema
     recs = list(_parquet_rows(files, ["image", "label"] + (["crop_type"] if has_crop else [])
-                              + (["plant_part"] if has_part else [])))
+                              + (["plant_part"] if has_part else []) + (["plant_type"] if plant_types else [])))
     # split stratificato per classe
     by_label = defaultdict(list)
     for i, r in enumerate(recs):
@@ -299,6 +321,10 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
         if (name, lab) in AGML_SKIP or i in dup:
             continue
         row_crop = TOM2024_CROPS.get(r.get("crop_type"), crop) if has_crop else crop
+        if plant_types:  # coltura indicata per foto (indice nei nomi di plant_type)
+            row_crop = PLANT_TYPE_CROPS.get(plant_types[r["plant_type"]])
+            if row_crop is None:
+                continue
         deficiency = ""
         if (name, lab) in DEFICIENCY:
             deficiency = DEFICIENCY[(name, lab)]
@@ -316,6 +342,52 @@ def import_agml(name: str, repo: str, crop: str, seed: int = 42) -> list[Manifes
             organ = part or AGML_ORGAN.get((name, lab)) or AGML_ORGAN.get(name, "")
             rows.append(ManifestRow(path=_rel(out), source=name, split=split_of[i], plant=plant, disease=dis,
                                     deficiency=deficiency, organ=organ))
+    return rows
+
+
+def import_potatoblight(crop: str, seed: int = 42, per_class: int = 2500, block: int = 50) -> list[ManifestRow]:
+    """Patata (Laizer et al.): zip con una cartella per classe; campione di `per_class` foto per classe.
+
+    Le foto con numeri vicini sono scatti in sequenza della stessa pianta: lo split è fatto per
+    blocchi di `block` numeri consecutivi, così la stessa pianta non finisce in train e in test.
+    """
+    import re
+    z_path = EXT / "agml_potatoblight" / "potato_leaf_blight.zip"
+    if not z_path.exists():
+        # zip rimosso per spazio: righe dalle foto già salvate (<split>/<classe>/<n>.jpg)
+        rows = []
+        for f in sorted((IMG / "agml_potatoblight").glob("*/*/*.jpg")):
+            split, lab = f.parent.parent.name, f.parent.name
+            dis = "healthy" if lab == "healthy" else AGML_DISEASE.get(("agml_potatoblight", lab), f"agml_potatoblight:{lab}")
+            rows.append(ManifestRow(path=_rel(f), source="agml_potatoblight", split=split, plant=crop, disease=dis,
+                                    organ="leaf"))
+        return rows
+    rng = random.Random(seed)
+    rows = []
+    with zipfile.ZipFile(z_path) as zf:
+        by_class = defaultdict(list)
+        for m in zf.namelist():
+            parts = m.split("/")
+            if parts[0] == "images" and len(parts) == 3 and m.lower().endswith((".jpg", ".jpeg", ".png")):
+                by_class[parts[1]].append(m)
+        for lab, members in sorted(by_class.items()):
+            groups = defaultdict(list)
+            for m in members:
+                num = re.findall(r"\d+", m.rsplit("/", 1)[-1])
+                groups[int(num[-1]) // block if num else 0].append(m)
+            keys = sorted(groups)
+            rng.shuffle(keys)
+            split_of_group = dict(zip(keys, _split_random(len(keys), seed + zlib.crc32(lab.encode()) % 1000)))
+            members = sorted(members)
+            rng.shuffle(members)
+            for k, m in enumerate(members[:per_class]):
+                num = re.findall(r"\d+", m.rsplit("/", 1)[-1])
+                split = split_of_group[int(num[-1]) // block if num else 0]
+                dis = "healthy" if lab == "healthy" else AGML_DISEASE.get(("agml_potatoblight", lab), f"agml_potatoblight:{lab}")
+                out = IMG / "agml_potatoblight" / split / lab / f"{k:05d}.jpg"
+                if out.exists() or _save(zf.read(m), out):
+                    rows.append(ManifestRow(path=_rel(out), source="agml_potatoblight", split=split, plant=crop,
+                                            disease=dis, organ="leaf"))
     return rows
 
 

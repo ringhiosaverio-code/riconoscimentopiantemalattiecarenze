@@ -62,9 +62,11 @@ La scheda **Quiz** dell'app mostra una foto a caso e quattro risposte, una sola 
 - Le foto vengono dai dataset scientifici usati per l'addestramento, con l'etichetta dei loro autori.
 - Le risposte sbagliate sono scelte tra le classi della stessa categoria; per le malattie, quando possibile, tra quelle della stessa coltura.
 - La risposta corretta resta sul server fino alla risposta, e l'immagine viene servita senza esporre il percorso del file.
-- Dopo la risposta compare la spiegazione dalla scheda: agente, sintomi, organi colpiti, avviso di laboratorio.
+- Dopo la risposta compare la spiegazione dalla scheda: agente, sintomi, organi colpiti, avviso di laboratorio. Se la risposta è sbagliata, l'app spiega perché: come distinguere le malattie simili (`configs/quiz_tips.yaml`), causa diversa, sintomi a confronto.
 
-Il quiz è attivo quando sul server ci sono le immagini e il manifest (`data/processed/manifest_v2.csv`, oppure `PLANTCARE_QUIZ_MANIFEST` e `PLANTCARE_QUIZ_DATA`). Non è disponibile una categoria sull'organo colpito, perché le immagini dei dataset non hanno quell'etichetta.
+Nell'app del browser il quiz ha circa 4.500 foto: fino a 30 per coltura, malattia o carenza (PlantDoc e dataset Project-AgML, CC BY 4.0) e 20 per ciascuno dei 102 insetti di IP102 (Wu et al. 2019, **solo per uso accademico**, indicato sotto ogni foto). Le foto già viste tornano solo dopo aver visto tutte le altre; la domanda indica la parte della pianta quando il dataset la dichiara (foglia, frutto), e c'è una categoria per frutti e altre parti. Per radici, tuberi e bulbi non sono stati trovati dataset ripubblicabili: servono le foto raccolte con l'app.
+
+Nella versione con server il quiz è attivo quando ci sono le immagini e il manifest (`data/processed/manifest_v2.csv`, oppure `PLANTCARE_QUIZ_MANIFEST` e `PLANTCARE_QUIZ_DATA`).
 
 ## Preparazione della botte
 
@@ -79,7 +81,7 @@ Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
 - lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, 66 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di 5 lettori, vedi docs/miglioramento.md);
-- quiz con 320 foto da PlantDoc e Project-AgML (licenze CC BY o MIT, con attribuzione);
+- quiz con circa 4.500 foto da PlantDoc, Project-AgML (CC BY o MIT, con attribuzione) e IP102 (solo uso accademico);
 - botte: stesso calcolatore della versione Python, verificato dai test;
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;
 - contributi: l'agronomo corregge il risultato, la foto resta nel telefono e si esporta come file JSON da importare con `plantcare import-contributi`. Il piano per migliorare la rete è in [docs/miglioramento.md](docs/miglioramento.md).

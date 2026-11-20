@@ -91,3 +91,11 @@ labels:
   agml_citrusfruit:black_spot: fungo
   agml_citrusfruit:melanose: fungo
   agml_citrusfruit:scab: fungo
+  agml_vegleaf:Downy mildew: fungo
+  agml_vegleaf:Anthracnose lesions: fungo
+  agml_vegleaf:Tomato leaf curl virus: virus
+  agml_vegleaf:Eggplant Cercopora leaf spot: fungo
+  agml_vegleaf:Eggplant begomovirus: virus
+  agml_brinjalfruit:Brinjal Fruit Creaking: abiotico
+  agml_brinjalfruit:Shoot and Fruit Borer: insetto
+  agml_brinjalfruit:Wet Rot: fungo
