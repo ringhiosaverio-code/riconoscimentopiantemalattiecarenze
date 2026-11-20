@@ -45,7 +45,8 @@ TOK_DIR = ROOT / "data" / "processed" / "ft_tokens"
 FIELD_W = {"plantdoc": 3.0, "plantwild": 3.0}
 FIELD_SOURCES = ("plantdoc", "plantwild")  # foto di campo: misurate a parte e usate per scegliere il modello
 PV_TRAIN, PV_VAL = 8000, 2000
-TRAIN_CAP = {"pest": 300}  # foto di train per classe (IP102 è molto numeroso: tokens su disco)
+TRAIN_CAP = {"pest": 300}
+SOURCE_CAP = {"train": 330, "val": 100}  # foto di train per classe (IP102 è molto numeroso: tokens su disco)
 HEAD = "disease"
 MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
@@ -57,6 +58,15 @@ def select(rows, classes):
     for i, r in enumerate(rows):
         if r.get(HEAD) in classes:
             idx[r["split"]].append(i)
+    # tetto per (fonte, classe) fuori dalle foto di campo: i token su disco restano entro ~25 GB
+    for split, n in (("train", SOURCE_CAP["train"]), ("val", SOURCE_CAP["val"])):
+        if HEAD != "disease":
+            break
+        by = defaultdict(list)
+        for i in idx[split]:
+            by[(rows[i]["source"], rows[i][HEAD])].append(i)
+        idx[split] = sorted(j for (src, _), v in by.items()
+                            for j in (v if src in FIELD_SOURCES or len(v) <= n else rng.sample(v, n)))
     cap = TRAIN_CAP.get(HEAD)
     if cap:
         by = defaultdict(list)
