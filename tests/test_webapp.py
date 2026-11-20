@@ -41,9 +41,13 @@ def test_ip102_italian_names_refer_to_existing_classes():
 
 def test_quiz_uses_only_republishable_sources():
     quiz = json.load(open(APP / "data" / "quiz.json", encoding="utf-8"))
-    # fonti CC BY / MIT; IP102 solo con l'avviso di uso accademico
+    # fonti CC BY / MIT; IP102 solo con l'avviso di uso accademico; iNaturalist con autore, licenza
+    # (CC0, CC BY, CC BY-NC) e link all'osservazione
+    def inat_ok(q):
+        return ("iNaturalist" in q["credit"] and q.get("obs", "").startswith("https://www.inaturalist.org/observations/")
+                and any(t in q["credit"] for t in ("(CC BY)", "(CC BY-NC)", "CC0", "no rights reserved")))
     assert quiz and all(("PlantDoc" in q["credit"]) or ("Project-AgML" in q["credit"])
-                        or ("IP102" in q["credit"] and "uso accademico" in q["credit"]) for q in quiz)
+                        or ("IP102" in q["credit"] and "uso accademico" in q["credit"]) or inat_ok(q) for q in quiz)
     assert all(q.get("name") for q in quiz)
     assert all((APP / "quiz" / q["img"]).exists() for q in quiz)
 

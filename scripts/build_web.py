@@ -49,6 +49,7 @@ QUIZ_SOURCES = {  # solo fonti con licenza che consente la ripubblicazione con a
 }
 QUIZ_PER_CLASS = 30  # foto per classe, da tutti gli split e alternando le fonti
 QUIZ_PER_PEST = 20
+QUIZ_PER_PEST_OTHER = 6  # insetti di IP102 non citati nelle norme di difesa della Calabria: poche foto
 # IP102 (Wu et al. 2019): concesso solo per uso accademico; incluso su conferma dell'uso accademico del progetto
 QUIZ_SOURCES_ACADEMIC = {"ip102": "IP102 (Wu et al. 2019, CVPR): solo per uso accademico"}
 # gruppi di colture di IP102 (indici 1-based delle classi), come nell'articolo originale
@@ -84,6 +85,13 @@ def build_quiz(ck, heads, names: dict) -> None:
         for h in heads:
             if r.get(h) and h in ck["readers"] and r[h] in ck["readers"][h]["classes"]:
                 by_class[(h, r[h])][r["source"]].append(r)
+    # Calabria in primo piano: classi collegate al Disciplinare di difesa della Regione Calabria e colture
+    # che vi compaiono (app/data/difesa.json, scritto prima del quiz)
+    from plantcare import difesa as df
+    dif_path = APP / "data" / "difesa.json"
+    dif = json.load(open(dif_path, encoding="utf-8")) if dif_path.exists() else {"classi": {}}
+    cal_classes = {tuple(k.split("|", 1)) for k, per in dif["classi"].items() if any(v["r"] for v in per.values())}
+    cal_plants = {p for p, (secs, _) in df.CROPS.items() if secs}
     quiz, keep = [], set()
     for (h, lab), by_src in sorted(by_class.items()):
         for rs in by_src.values():
@@ -91,7 +99,8 @@ def build_quiz(ck, heads, names: dict) -> None:
             rng.shuffle(rs)
         # prima le foto non di foglia (frutti, fusti...), poi a turno tra le fonti
         queues = sorted(by_src.values(), key=lambda rs: -sum(r.get("organ") not in ("", "leaf") for r in rs))
-        limit = QUIZ_PER_PEST if h == "pest" else QUIZ_PER_CLASS
+        cal = (h, lab) in cal_classes or (h == "plant" and lab in cal_plants)
+        limit = (QUIZ_PER_PEST if cal else QUIZ_PER_PEST_OTHER) if h == "pest" else QUIZ_PER_CLASS
         picked = []
         while len(picked) < limit and any(queues):
             for q in queues:
@@ -111,7 +120,43 @@ def build_quiz(ck, heads, names: dict) -> None:
             item = {"img": name, "head": h, "label": lab, "name": names[h].get(lab, lab),
                     "plant": ip102_group(lab) if h == "pest" else r["plant"], "organ": r.get("organ", ""),
                     "credit": sources[r["source"]]}
+            if cal or (h in ("disease", "deficiency") and r["plant"] in cal_plants):  # coltura calabrese
+                item["cal"] = 1
             quiz.append(item)
+    # foto di iNaturalist (licenze CC0, CC BY, CC BY-NC, autore citato): colture, insetti e malattie
+    # della Calabria (configs/quiz_calabria.yaml, scripts/import_inat_quiz.py)
+    man_path = ROOT / "data" / "external" / "inat_quiz" / "manifest.json"
+    man = json.load(open(man_path, encoding="utf-8")) if man_path.exists() else {}
+    plant_names = names.get("plant", {})
+    disc = df.load_disciplinare(2026) if man else {"righe": []}
+    syn = df._syn()
+    for slug, e in sorted(man.items()):
+        t = e.get("taxon_inat") or {}
+        if e["head"] == "plant" and e.get("coltura_plant"):
+            lab, nm = e["coltura_plant"], plant_names.get(e["coltura_plant"], e["nome"])
+        else:
+            lab, nm = f"inat:{slug}", e["nome"]
+        summary = {k: t.get(k) for k in ("name", "ordine", "famiglia", "classe", "regno") if t.get(k)}
+        if e.get("causa"):
+            summary["causa"] = e["causa"]
+        if e["head"] != "plant":  # dove compare nelle norme di difesa della Calabria
+            keys = df.keys_in(f"({t.get('name', '')}) ({e['taxon']})", syn)
+            hits = [f"{r['coltura'].capitalize()}: {r['avversita']}" for r in disc["righe"] if keys and df._match(keys, set(r["chiavi"]))]
+            summary["disciplinare"] = list(dict.fromkeys(hits))[:5]
+        for ph in e["foto"]:
+            name = f"q{zlib.crc32(ph['path'].encode()):08x}.jpg"
+            if not (qdir / name).exists():
+                try:
+                    with Image.open(ROOT / "data" / ph["path"]) as im:
+                        im = im.convert("RGB")
+                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
+                        im.save(qdir / name, quality=75)
+                except OSError:
+                    continue
+            keep.add(name)
+            quiz.append({"img": name, "head": e["head"], "label": lab, "name": nm,
+                         "plant": e.get("gruppo") or lab, "organ": "", "cal": 1, "sum": summary,
+                         "credit": f"{ph['attribution']}, iNaturalist", "obs": ph["osservazione"]})
     for f in qdir.iterdir():
         if f.name not in keep:
             f.unlink()

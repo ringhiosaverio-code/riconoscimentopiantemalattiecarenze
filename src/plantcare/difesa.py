@@ -64,7 +64,7 @@ ITALIAN_GENUS = {
     "aleurodidi", "aleirode", "cicalina", "cicaline", "eriofide", "acaro", "acari", "nematodi", "elateridi", "dorifora",
     "carpocapsa", "cidia", "rodilegno", "cotonello", "margaronia", "fleotribo", "oziorrinco", "cecidomia", "tracheomicosi",
     "fusariosi", "botrite", "stemfiliosi", "corineo", "nerume", "sharka", "colpo", "litocollete", "cemiostoma", "orgia",
-    "eulia", "psilla", "capnode", "metcalfa", "lebbra", "rogna", "occhio", "piombatura", "carie", "escoriosi", "black",
+    "eulia", "psilla", "capnode", "lebbra", "rogna", "occhio", "piombatura", "carie", "escoriosi", "black",
     "seccume", "disseccamento", "disseccamenti", "gommosi", "moria", "cancrena", "vaiolatura", "scopazzi", "giallumi",
     "flavescenza", "legno", "deperimento", "pianta", "piante", "foglie", "frutti", "prodotti", "interventi", "insetti",
     "virus", "fitoplasmi", "limacce", "lumache", "forficula", "miridi", "cicadellidi", "dittero", "lepidotteri",

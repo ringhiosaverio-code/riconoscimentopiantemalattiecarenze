@@ -64,7 +64,12 @@ La scheda **Quiz** dell'app mostra una foto a caso e quattro risposte, una sola 
 - La risposta corretta resta sul server fino alla risposta, e l'immagine viene servita senza esporre il percorso del file.
 - Dopo la risposta compare la spiegazione dalla scheda: agente, sintomi, organi colpiti, avviso di laboratorio. Se la risposta è sbagliata, l'app spiega perché: come distinguere le malattie simili (`configs/quiz_tips.yaml`), causa diversa, sintomi a confronto.
 
-Nell'app del browser il quiz ha circa 4.500 foto: fino a 30 per coltura, malattia o carenza (PlantDoc e dataset Project-AgML, CC BY 4.0) e 20 per ciascuno dei 102 insetti di IP102 (Wu et al. 2019, **solo per uso accademico**, indicato sotto ogni foto). Le foto già viste tornano solo dopo aver visto tutte le altre; la domanda indica la parte della pianta quando il dataset la dichiara (foglia, frutto), e c'è una categoria per frutti e altre parti. Per radici, tuberi e bulbi non sono stati trovati dataset ripubblicabili: servono le foto raccolte con l'app.
+Nell'app del browser il quiz ha circa 5.200 foto, con **la Calabria in primo piano**: 8 domande su 10 riguardano colture, insetti e malattie presenti nelle norme di difesa integrata della Regione Calabria (Disciplinare 2026), e c'è la categoria "Solo Calabria". Le fonti:
+- fino a 30 foto per coltura, malattia o carenza da PlantDoc e dai dataset Project-AgML (CC BY 4.0);
+- circa 1.900 foto da iNaturalist (osservazioni con identificazione confermata dalla comunità, licenze CC0, CC BY o CC BY-NC, autore e link all'osservazione sotto ogni foto) di olivo, agrumi, vite e altre arboree, e di 44 insetti e 15 malattie citati nel Disciplinare, come mosca delle olive, cocciniglie degli agrumi, occhio di pavone e rogna dell'olivo (`configs/quiz_calabria.yaml`, `scripts/import_inat_quiz.py`);
+- per gli insetti di IP102 (Wu et al. 2019, **solo per uso accademico**, indicato sotto ogni foto) 20 foto per quelli citati nel Disciplinare e 6 per gli altri.
+
+Le risposte sbagliate tornano più spesso (4 domande su 10 sono di ripasso) finché non si risponde giusto. Dopo ogni domanda su malattie e insetti c'è una scheda in sintesi: nome scientifico, ordine e famiglia, causa, colture, se serve il laboratorio, se è regolamentato, dove compare nelle norme di difesa della Calabria. Le foto già viste tornano solo dopo aver visto tutte le altre. Per radici, tuberi e bulbi non sono stati trovati dataset ripubblicabili: servono le foto raccolte con l'app.
 
 Nella versione con server il quiz è attivo quando ci sono le immagini e il manifest (`data/processed/manifest_v2.csv`, oppure `PLANTCARE_QUIZ_MANIFEST` e `PLANTCARE_QUIZ_DATA`).
 
@@ -81,7 +86,7 @@ Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
 - lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, 66 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di 5 lettori, vedi docs/miglioramento.md);
-- quiz con circa 4.500 foto da PlantDoc, Project-AgML (CC BY o MIT, con attribuzione) e IP102 (solo uso accademico);
+- quiz con circa 5.200 foto da PlantDoc, Project-AgML (CC BY o MIT), iNaturalist (CC0, CC BY, CC BY-NC, con autore) e IP102 (solo uso accademico), Calabria in primo piano;
 - botte: stesso calcolatore della versione Python, verificato dai test;
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;
 - contributi: l'agronomo corregge il risultato, la foto resta nel telefono e si esporta come file JSON da importare con `plantcare import-contributi`. Il piano per migliorare la rete è in [docs/miglioramento.md](docs/miglioramento.md).

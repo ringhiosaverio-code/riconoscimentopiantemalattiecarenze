@@ -4,14 +4,13 @@
 # taxon: nome usato da iNaturalist; nome: nome italiano mostrato nel quiz; gruppo: coltura a cui
 # appartiene la domanda (le risposte sbagliate si scelgono nello stesso gruppo).
 # coltura_plant: etichetta del lettore della coltura, se esiste. Le colture sono quelle del
-# Disciplinare o del lettore della coltura (fico d'India); bergamotto e cedro rientrano negli agrumi.
+# Disciplinare o del lettore della coltura (fico d'India); il cedro rientra negli agrumi. Arancio dolce e
+# bergamotto mancano: iNaturalist li unisce ad altri agrumi (Citrus × aurantium, Citrus × limon).
 
 colture:
   - {taxon: "Olea europaea", nome: "Olivo", coltura_plant: olea_europaea}
   - {taxon: "Citrus limon", nome: "Limone", coltura_plant: citrus_limon}
-  - {taxon: "Citrus sinensis", nome: "Arancio dolce", coltura_plant: citrus_sinensis}
   - {taxon: "Citrus reticulata", nome: "Mandarino e clementino", coltura_plant: citrus_reticulata}
-  - {taxon: "Citrus bergamia", nome: "Bergamotto"}
   - {taxon: "Citrus medica", nome: "Cedro"}
   - {taxon: "Ficus carica", nome: "Fico"}
   - {taxon: "Opuntia ficus-indica", nome: "Fico d'India", coltura_plant: opuntia_ficus_indica}

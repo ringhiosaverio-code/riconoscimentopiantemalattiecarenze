@@ -39,8 +39,15 @@ def slug(s):
 
 
 def taxon_info(name):
-    res = json.loads(get(f"{API}/taxa", {"q": name, "per_page": 5}))["results"]
-    exact = [t for t in res if t["name"].lower() == name.lower()] or res
+    """Taxon di iNaturalist con lo stesso nome (il segno degli ibridi '×' non conta), oppure di cui il
+    nome cercato è sinonimo, ma solo se è una specie o un rango inferiore: un sinonimo che porta a un
+    ibrido o a un genere (es. Citrus bergamia -> Citrus × limon) vuol dire foto di altro, e si scarta."""
+    norm = lambda x: re.sub(r"\s+", " ", x.replace("×", " ")).strip().lower()
+    res = json.loads(get(f"{API}/taxa", {"q": name, "per_page": 30}))["results"]
+    exact = [t for t in res if norm(t["name"]) == norm(name)]
+    if not exact:
+        exact = [t for t in res if norm(t.get("matched_term") or "") == norm(name)
+                 and t["rank"] in ("species", "subspecies", "variety", "form")]
     if not exact:
         return None
     t = json.loads(get(f"{API}/taxa/{exact[0]['id']}"))["results"][0]

@@ -549,18 +549,39 @@
   function quizSeenSave(o) { try { localStorage.setItem(SEEN_KEY, JSON.stringify(o)); } catch (e) { /* senza memoria si va avanti lo stesso */ } }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   $('q-new').addEventListener('click', nextQuestion);
+  // argomenti sbagliati: tornano più spesso finché non si risponde giusto (memoria nel telefono)
+  var ERR_KEY = 'plantcare-quiz-errori';
+  function quizErrors() { try { return JSON.parse(localStorage.getItem(ERR_KEY) || '{}') || {}; } catch (e) { return {}; } }
+  function quizErrorsSave(o) { try { localStorage.setItem(ERR_KEY, JSON.stringify(o)); } catch (e) { /* senza memoria si va avanti */ } }
+  function pickWeighted(list, w) {
+    var tot = list.reduce(function (a, x) { return a + w(x); }, 0), r = Math.random() * tot;
+    for (var i = 0; i < list.length; i++) { r -= w(list[i]); if (r <= 0) return list[i]; }
+    return list[list.length - 1];
+  }
   function nextQuestion() {
     ready.then(function () {
       var cat = $('q-cat').value;
       var pool = DATA.quiz.filter(function (q) {
         if (cat === 'organ') return q.organ && q.organ !== 'leaf';
+        if (cat === 'cal') return q.cal;
         return cat === 'any' || q.head === cat;
       });
       if (!pool.length) { $('q-text').textContent = 'Nessuna foto per questa categoria.'; $('q-box').hidden = false; return; }
       // foto non ancora viste per prime; quando sono finite si ricomincia
       var seen = quizSeen(), fresh = pool.filter(function (q) { return !seen[q.img]; });
       if (!fresh.length) { pool.forEach(function (q) { delete seen[q.img]; }); fresh = pool; }
-      var item = fresh[Math.floor(Math.random() * fresh.length)];
+      // 4 domande su 10 di ripasso se ci sono errori; delle altre, 8 su 10 su colture e avversità calabresi
+      var errs = quizErrors(), review = false, item = null;
+      var wrong = pool.filter(function (q) { return errs[q.head + '|' + q.label]; });
+      if (wrong.length && Math.random() < 0.4) {
+        var wf = wrong.filter(function (q) { return !seen[q.img]; });
+        item = pickWeighted(wf.length ? wf : wrong, function (q) { return errs[q.head + '|' + q.label]; });
+        review = true;
+      } else {
+        var cal = fresh.filter(function (q) { return q.cal; });
+        var src = cal.length && Math.random() < 0.8 ? cal : fresh;
+        item = src[Math.floor(Math.random() * src.length)];
+      }
       seen[item.img] = 1; quizSeenSave(seen);
       var labels = {};
       DATA.quiz.forEach(function (q) { if (q.head === item.head) labels[q.label] = q.plant; });
@@ -578,9 +599,9 @@
       qCur = { item: item, opts: shuffle(opts) };
       var questions = { plant: 'Quale coltura è?', disease: 'Quale malattia o danno si vede?', deficiency: 'Che disturbo nutrizionale si vede?', pest: 'Quale insetto o acaro è?' };
       var organ = item.organ && DATA.organs.filter(function (o) { return o.id === item.organ; })[0];
-      $('q-text').textContent = questions[item.head] + (organ ? ' (parte della pianta: ' + organ.label.toLowerCase() + ')' : '');
+      $('q-text').textContent = (review ? 'Ripasso, l\'ultima volta qui hai sbagliato. ' : '') + questions[item.head] + (organ ? ' (parte della pianta: ' + organ.label.toLowerCase() + ')' : '');
       $('q-img').src = 'app/quiz/' + item.img;
-      $('q-credit').textContent = 'Foto: ' + item.credit;
+      $('q-credit').innerHTML = 'Foto: ' + esc(item.credit) + (item.obs ? ' (<a href="' + esc(item.obs) + '" target="_blank" rel="noopener">osservazione</a>)' : '');
       $('q-exp').innerHTML = '';
       var box = $('q-opts'); box.innerHTML = '';
       qCur.opts.forEach(function (l) {
@@ -591,6 +612,32 @@
       $('q-box').hidden = false;
       $('q-text').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  }
+  // Scheda in sintesi dopo la risposta (malattie e insetti): cos'è, gruppo, colture, causa, se serve il
+  // laboratorio, se è regolamentato, dove compare nelle norme di difesa della Calabria. Solo dati con fonte.
+  function quizSummary(item) {
+    var c = classOf(item.head, item.label), s = item.sum || {}, lines = [], cn = DATA.causes || {};
+    var kindOf = function (cl) { return cl === 'Insecta' ? 'insetto' : cl === 'Arachnida' ? 'acaro' : null; };
+    if (s.name) lines.push('<em>' + esc(s.name) + '</em>' + (s.ordine ? ', ordine ' + esc(s.ordine) : '') + (s.famiglia ? ', famiglia ' + esc(s.famiglia) : '') +
+      (kindOf(s.classe) ? ' (' + kindOf(s.classe) + ')' : '') + '.');
+    var cause = s.causa || c.cause;
+    if (cause && cn[cause] && cause !== 'non_specificato') lines.push('Causa: ' + esc(cn[cause]).toLowerCase() + '.');
+    if (c.card && c.card.agent) lines.push('Agente: <em>' + esc(c.card.agent) + '</em>.');
+    if (c.crops && c.crops.length) {
+      var pn = c.crops.map(function (k) { var p = DATA.readers.plant.classes.filter(function (x) { return x.label === k; })[0]; return p ? p.name : null; }).filter(Boolean);
+      if (pn.length) lines.push('Colture su cui l\'abbiamo in foto: ' + esc(pn.slice(0, 6).join(', ')) + '.');
+    }
+    if (c.group && item.head === 'pest' && !s.name) lines.push('Insetto dannoso di ' + esc(c.group) + ' nel dataset IP102.');
+    if (c.card && c.card.organs && c.card.organs.length) lines.push('Organi colpiti: ' + esc(c.card.organs.map(function (o) { return o.label; }).join(', ')) + '.');
+    var A = DATA.lab && DATA.lab.analisi_per_causa[cause];
+    if (A && A.quando === 'sempre') lines.push('Conferma: ' + esc(A.testo));
+    if (c.reg != null && DATA.lab) { var o = DATA.lab.organismi_regolamentati[c.reg]; lines.push('<strong>' + esc(o.ue) + '</strong> (EPPO: ' + esc(o.lista_eppo) + ').'); }
+    var disc = s.disciplinare || [];
+    var D = DATA.difesa, e = D && D.classi[item.head + '|' + item.label];
+    if (!disc.length && e) Object.keys(e).forEach(function (k) { e[k].r.forEach(function (i) { var r = D.righe[i]; disc.push(r.coltura.charAt(0) + r.coltura.slice(1).toLowerCase() + ': ' + r.avversita); }); });
+    if (disc.length) lines.push('Nelle norme di difesa integrata della Regione Calabria: ' + esc(disc.filter(function (x, i) { return disc.indexOf(x) === i; }).slice(0, 4).join('; ')) + '.');
+    else if (!item.cal) lines.push('Non compare nelle norme di difesa della Calabria.');
+    return lines.length ? '<div class="hyp"><p><strong>In sintesi:</strong></p><p class="muted">' + lines.join('<br>') + '</p></div>' : '';
   }
   // classe del lettore se presente, altrimenti dati della foto del quiz (es. insetti IP102)
   function classOf(head, label) {
@@ -660,21 +707,23 @@
       if (q.opts[i] === q.item.label) b.classList.add('ok'); else if (q.opts[i] === choice) b.classList.add('ko');
     });
     score.tot++; if (right) score.ok++;
+    var errs = quizErrors(), ek = q.item.head + '|' + q.item.label;
+    if (right) { if (errs[ek]) { errs[ek]--; if (errs[ek] <= 0) delete errs[ek]; } } else { errs[ek] = Math.min(5, (errs[ek] || 0) + 2); }
+    quizErrorsSave(errs);
     $('q-score').textContent = 'Punteggio: ' + score.ok + ' su ' + score.tot;
     var h = '<div class="reader"><p><strong>' + (right ? 'Corretto!' : 'Sbagliato.') + '</strong> Risposta: ' + esc(nameOf(q.item.head, q.item.label)) + '</p>';
     if (q.item.head === 'disease') {
       var c = DATA.readers.disease.classes.filter(function (x) { return x.label === q.item.label; })[0];
       var card = c && c.card;
-      if (card) {
-        if (card.agent) h += '<p class="muted">Agente: <em>' + esc(card.agent) + '</em></p>';
-        h += '<p class="muted">' + esc((card.knowledge && card.knowledge.cause) || card.symptoms) + '</p>';
-        if (card.organs && card.organs.length) h += '<p class="muted">Organi colpiti: ' + esc(card.organs.map(function (o) { return o.label; }).join(', ')) + '</p>';
-        if (card.lab_note) h += '<div class="warn lab">' + esc(card.lab_note) + '</div>';
-      }
+      if (card) h += '<p class="muted">' + esc((card.knowledge && card.knowledge.cause) || card.symptoms) + '</p>';
     } else if (q.item.head === 'deficiency') {
       h += '<p class="muted">Etichetta degli autori del dataset; la conferma richiede l\'analisi fogliare.</p>';
     }
+    var qc = classOf(q.item.head, q.item.label);
+    if ((q.item.head === 'disease' && qc.cause !== 'sano') || q.item.head === 'pest') h += quizSummary(q.item);
     if (!right) h += explainWrong(q.item.head, q.item.label, choice);
+    var nErr = Object.keys(quizErrors()).length;
+    if (nErr) h += '<p class="muted">Argomenti da ripassare: ' + nErr + '. Torneranno più spesso finché non rispondi giusto.</p>';
     h += '<p><button type="button" id="q-next">Domanda successiva &rarr;</button></p>';
     $('q-exp').innerHTML = h + '</div>';
     $('q-next').addEventListener('click', nextQuestion);
