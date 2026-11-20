@@ -3,6 +3,8 @@
 - parte dal checkpoint dei lettori (DINOv2 + EfficientNet-B0);
 - esclude il lettore degli insetti (IP102: solo uso accademico) salvo --with-pest;
 - uscite: probabilità calibrate per lettore (softmax dei logit divisi per la temperatura);
+- con --ensemble-dir usa, per i lettori che lo hanno, l'insieme di 5 lettori calibrato
+  (models/ensemble_<lettore>.pt, da scripts/improve_readers.py) al posto del lettore singolo;
 - quantizzazione dinamica a 8 bit per canale dei pesi delle MatMul (onnxruntime), lettori esclusi.
 """
 import argparse
@@ -17,20 +19,50 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--checkpoint", required=True)
 ap.add_argument("--out", required=True)
 ap.add_argument("--with-pest", action="store_true")
+ap.add_argument("--ensemble-dir", default=None, help="cartella con ensemble_<lettore>.pt")
 args = ap.parse_args()
 
 net, ck = load_readers(Path(args.checkpoint))
 heads = [h for h in ("plant", "disease", "deficiency", "pest") if h in net.heads and (h != "pest" or args.with_pest)]
 
 
+from plantcare.readers import Reader
+
+dim = sum(b.num_features for b in net.backbones)
+ensembles, temps = nn.ModuleDict(), {}
+for h in heads:
+    f = Path(args.ensemble_dir) / f"ensemble_{h}.pt" if args.ensemble_dir else None
+    if not f or not f.exists():
+        continue
+    e = torch.load(f, map_location="cpu", weights_only=False)
+    if list(e["classes"]) != list(ck["readers"][h]["classes"]):
+        raise SystemExit(f"{h}: classi dell'insieme diverse da quelle del checkpoint")
+    members = nn.ModuleList()
+    for st in e["models"]:
+        r = Reader(dim, len(e["classes"]), hidden=1024)
+        r.load_state_dict(st)
+        members.append(r.eval())
+    ensembles[h], temps[h] = members, e["temperature"]
+    print(f"{h}: insieme di {len(members)} lettori, T={e['temperature']:.3f}")
+
+
 class Web(nn.Module):
     def __init__(self):
         super().__init__()
-        self.net = net
+        self.backbones = net.backbones
+        self.heads = net.heads
+        self.ens_heads = ensembles
 
     def forward(self, x):
-        out = self.net(x)
-        return tuple(torch.softmax(out[h], dim=1) for h in heads)
+        f = torch.cat([b(x) for b in self.backbones], dim=1)
+        outs = []
+        for h in heads:
+            if h in self.ens_heads:
+                p = torch.stack([torch.softmax(m(f), dim=1) for m in self.ens_heads[h]]).mean(0)
+                outs.append(torch.softmax(p.clamp_min(1e-9).log() / temps[h], dim=1))
+            else:
+                outs.append(torch.softmax(self.heads[h](f), dim=1))
+        return tuple(outs)
 
 
 m = Web().eval()
