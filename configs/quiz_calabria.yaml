@@ -91,6 +91,9 @@ malattie:
   - {taxon: "Podosphaera leucotricha", nome: "Oidio del melo", gruppo: melo, causa: fungo}
   - {taxon: "Erwinia amylovora", nome: "Colpo di fuoco batterico", gruppo: melo, causa: batterio}
   - {taxon: "Venturia pyrina", nome: "Ticchiolatura del pero", gruppo: melo, causa: fungo}
+  - {taxon: "Wilsonomyces carpophilus", nome: "Corineo delle drupacee", gruppo: pesco, causa: fungo}
+  - {taxon: "Podosphaera pannosa", nome: "Mal bianco del pesco (e della rosa)", gruppo: pesco, causa: fungo}
+  - {taxon: "Uromyces viciae-fabae", nome: "Ruggine della fava", gruppo: fava, causa: fungo}
 
 # Foto iNaturalist per il lettore delle malattie (scripts/import_inat_train.py --malattie): classe nuova
 # ("inat:<specie>") o classe già esistente da rafforzare. coltura: solo se l'ospite è certo (la rogna è
@@ -103,3 +106,12 @@ addestramento_malattie:
   - {taxon: "Taphrina deformans", classe: peach_leaf_curl, coltura: ""}
   - {taxon: "Plasmopara viticola", classe: grapevine_downy_mildew, coltura: vitis_vinifera}
   - {taxon: "Phytophthora infestans", classe: tomato_late_blight, coltura: ""}
+  # altre colture del Disciplinare (giro del 21/11)
+  - {taxon: "Wilsonomyces carpophilus", classe: "inat:wilsonomyces_carpophilus", coltura: ""}
+  - {taxon: "Podosphaera pannosa", classe: "inat:podosphaera_pannosa", coltura: ""}
+  - {taxon: "Uromyces viciae-fabae", classe: "inat:uromyces_viciae_fabae", coltura: ""}
+  - {taxon: "Blumeriella jaapii", classe: cherry_leaf_spot, coltura: prunus_avium}
+  - {taxon: "Podosphaera xanthii", classe: zucchini_powdery_mildew, coltura: ""}
+  - {taxon: "Puccinia allii", classe: garlic_rust, coltura: ""}
+  - {taxon: "Bremia lactucae", classe: lettuce_downy_mildew, coltura: ""}
+  - {taxon: "Monilinia laxa", classe: apple_brown_rot, coltura: ""}
