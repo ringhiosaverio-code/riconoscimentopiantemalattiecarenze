@@ -134,3 +134,8 @@ labels:
   "agml_ccmt:solanum_lycopersicum:leaf blight": fungo
   "agml_ccmt:solanum_lycopersicum:leaf curl": virus
   "agml_ccmt:solanum_lycopersicum:verticulium wilt": fungo
+  # malattie della Calabria con foto iNaturalist (configs/quiz_calabria.yaml)
+  "inat:venturia_oleaginea": fungo
+  "inat:pseudomonas_savastanoi": batterio
+  "inat:erwinia_amylovora": batterio
+  "inat:botrytis_cinerea": fungo

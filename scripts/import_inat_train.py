@@ -56,12 +56,15 @@ def observations(taxon_id, n, per_user=5):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-taxon", type=int, default=200)
+    ap.add_argument("--malattie", action="store_true", help="foto per il lettore delle malattie (addestramento_malattie)")
     args = ap.parse_args()
     cfg = yaml.safe_load(open(ROOT / "configs" / "quiz_calabria.yaml", encoding="utf-8"))
     OUT.mkdir(parents=True, exist_ok=True)
     man_path = OUT / "manifest.json"
     man = json.load(open(man_path, encoding="utf-8")) if man_path.exists() else {}
-    for e in cfg["parassiti"]:
+    entries = ([{**e, "tipo": "malattia"} for e in cfg.get("addestramento_malattie", [])] if args.malattie
+               else [{**e, "tipo": "insetto"} for e in cfg["parassiti"]])
+    for e in entries:
         key = slug(e["taxon"])
         if key in man and man[key].get("completo"):
             continue

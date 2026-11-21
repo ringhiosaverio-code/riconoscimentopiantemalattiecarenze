@@ -77,7 +77,7 @@ parassiti:  # insetti e acari
 
 malattie:
   - {taxon: "Venturia oleaginea", nome: "Occhio di pavone dell'olivo", gruppo: olivo, causa: fungo}
-  - {taxon: "Pseudomonas savastanoi", nome: "Rogna dell'olivo", gruppo: olivo, causa: batterio}
+  - {taxon: "Pseudomonas savastanoi", nome: "Rogna (Pseudomonas savastanoi, su olivo e oleandro)", gruppo: olivo, causa: batterio}
   - {taxon: "Plasmopara viticola", nome: "Peronospora della vite", gruppo: vite, causa: fungo}
   - {taxon: "Erysiphe necator", nome: "Oidio della vite", gruppo: vite, causa: fungo}
   - {taxon: "Botrytis cinerea", nome: "Muffa grigia", gruppo: vite, causa: fungo}
@@ -91,3 +91,15 @@ malattie:
   - {taxon: "Podosphaera leucotricha", nome: "Oidio del melo", gruppo: melo, causa: fungo}
   - {taxon: "Erwinia amylovora", nome: "Colpo di fuoco batterico", gruppo: melo, causa: batterio}
   - {taxon: "Venturia pyrina", nome: "Ticchiolatura del pero", gruppo: melo, causa: fungo}
+
+# Foto iNaturalist per il lettore delle malattie (scripts/import_inat_train.py --malattie): classe nuova
+# ("inat:<specie>") o classe già esistente da rafforzare. coltura: solo se l'ospite è certo (la rogna è
+# anche su oleandro, la bolla anche su mandorlo, la peronospora su pomodoro e patata).
+addestramento_malattie:
+  - {taxon: "Venturia oleaginea", classe: "inat:venturia_oleaginea", coltura: olea_europaea}
+  - {taxon: "Pseudomonas savastanoi", classe: "inat:pseudomonas_savastanoi", coltura: ""}
+  - {taxon: "Erwinia amylovora", classe: "inat:erwinia_amylovora", coltura: ""}
+  - {taxon: "Botrytis cinerea", classe: "inat:botrytis_cinerea", coltura: ""}
+  - {taxon: "Taphrina deformans", classe: peach_leaf_curl, coltura: ""}
+  - {taxon: "Plasmopara viticola", classe: grapevine_downy_mildew, coltura: vitis_vinifera}
+  - {taxon: "Phytophthora infestans", classe: tomato_late_blight, coltura: ""}

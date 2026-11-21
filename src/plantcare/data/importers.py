@@ -718,13 +718,18 @@ def import_inat_calabria(seed: int = 42) -> list[ManifestRow]:
         return []
     rows = []
     for key, e in sorted(json.load(open(man, encoding="utf-8")).items()):
+        disease = e.get("tipo") == "malattia"
         for p in e.get("foto", []):
             if not (DATA / p["path"]).exists():
                 continue
             h = zlib.crc32(f"{seed}:{p['user']}".encode()) % 100
             split = "test" if h < 10 else ("val" if h < 20 else "train")
-            rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant="", disease="",
-                                    pest=f"inat:{key}", deficiency="", organ=""))
+            if disease:  # malattia: classe nuova o esistente, coltura solo se l'ospite è certo
+                rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant=e.get("coltura") or "",
+                                        disease=e["classe"], pest="", deficiency="", organ=""))
+            else:
+                rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant="", disease="",
+                                        pest=f"inat:{key}", deficiency="", organ=""))
     return rows
 
 

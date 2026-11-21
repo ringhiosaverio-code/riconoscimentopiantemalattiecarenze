@@ -134,6 +134,12 @@ organismi_regolamentati:
     tipo: quarantena
     lista_eppo: "A2"
     classi: {pest: ["ip102_090"]}
+  - eppo: ERWIAM
+    organismo: "Erwinia amylovora (colpo di fuoco batterico delle pomacee)"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV) e da quarantena in zone protette (Allegato III)"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {disease: ["inat:erwinia_amylovora"]}
   - eppo: VITEVI
     organismo: "Viteus vitifoliae (Daktulosphaira vitifoliae, fillossera della vite)"
     ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV) e da quarantena in zone protette (Allegato III)"
