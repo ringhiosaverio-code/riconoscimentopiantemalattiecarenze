@@ -163,6 +163,26 @@ def build_quiz(ck, heads, names: dict) -> None:
             quiz.append({"img": name, "head": e["head"], "label": lab, "name": nm,
                          "plant": e.get("gruppo") or lab, "organ": "", "cal": 1, "sum": summary,
                          "credit": f"{ph['attribution']}, iNaturalist", "obs": ph["osservazione"]})
+    # foto dell'EPPO Global Database (uso didattico, autore citato) per malattie senza foto aperte altrove
+    ep_path = ROOT / "data" / "external" / "eppo_quiz" / "manifest.json"
+    for code, e in sorted((json.load(open(ep_path, encoding="utf-8")) if ep_path.exists() else {}).items()):
+        keys = df.keys_in(f"({e['sci']})", syn) if man else set()
+        hits = [f"{r['coltura'].capitalize()}: {r['avversita']}" for r in disc["righe"] if keys and df._match(keys, set(r["chiavi"]))]
+        summary = {"name": e["sci"], "causa": e["causa"], "disciplinare": list(dict.fromkeys(hits))[:5]}
+        for ph in e["foto"]:
+            name = f"q{zlib.crc32(ph['path'].encode()):08x}.jpg"
+            if not (qdir / name).exists():
+                try:
+                    with Image.open(ROOT / "data" / ph["path"]) as im:
+                        im = im.convert("RGB")
+                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
+                        im.save(qdir / name, quality=75)
+                except OSError:
+                    continue
+            keep.add(name)
+            quiz.append({"img": name, "head": "disease", "label": f"eppo:{code}", "name": e["nome"], "plant": e["gruppo"],
+                         "organ": "", "cal": 1, "sum": summary, "obs": ph["pagina"],
+                         "credit": f"Courtesy: {ph['autore']}, EPPO Global Database (uso didattico)"})
     for f in qdir.iterdir():
         if f.name not in keep:
             f.unlink()

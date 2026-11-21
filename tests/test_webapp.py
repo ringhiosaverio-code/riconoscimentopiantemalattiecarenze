@@ -47,7 +47,9 @@ def test_quiz_uses_only_republishable_sources():
         return ("iNaturalist" in q["credit"] and q.get("obs", "").startswith("https://www.inaturalist.org/observations/")
                 and any(t in q["credit"] for t in ("(CC BY)", "(CC BY-NC)", "CC0", "no rights reserved")))
     assert quiz and all(("PlantDoc" in q["credit"]) or ("Project-AgML" in q["credit"])
-                        or ("IP102" in q["credit"] and "uso accademico" in q["credit"]) or inat_ok(q) for q in quiz)
+                        or ("IP102" in q["credit"] and "uso accademico" in q["credit"]) or inat_ok(q)
+                        or ("EPPO Global Database (uso didattico)" in q["credit"] and q.get("obs", "").startswith("https://gd.eppo.int/"))
+                        for q in quiz)
     assert all(q.get("name") for q in quiz)
     assert all((APP / "quiz" / q["img"]).exists() for q in quiz)
 
