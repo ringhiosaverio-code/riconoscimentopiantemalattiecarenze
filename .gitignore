@@ -8,6 +8,8 @@ __pycache__/
 # Dati e pesi (grandi, non versionati: vedi docs/dataset.md)
 data/raw/
 data/processed/
+# file dei contributi esportati dall'app (foto e provincia): restano fuori dal repository
+data/contributi_in/
 models/*.pt
 models/*.onnx
 runs/
