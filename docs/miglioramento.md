@@ -119,6 +119,37 @@ riaddestrato), ma sulle foto di campo indipendenti (PlantWild) sale di 34 punti 
 le malattie e gli insetti della Calabria. Il ramo riaddestrato si riaggiunge quando l'addestramento
 lungo può completarsi.
 
+## 8. Nuove fonti di foto (25 novembre 2026, sera)
+
+Fonti cercate e scelte in `docs/ricerca-ia.md` (sezione 10). Due versioni addestrate e valutate come
+il browser (modello quantizzato) sulle stesse foto di prova:
+
+- **A**: tutte le fonti nuove, comprese 15.000 foto di arancio, cetriolo e anguria (Bangladesh, sfondi
+  semplici);
+- **B**: senza arancio, cetriolo e anguria; con le malattie da iNaturalist (fino a 600 foto per specie),
+  DiaMOS, virus della vite e foto da letteratura.
+
+| Foto di prova | Lettore | Pubblicato | A | **B (pubblicato ora)** |
+|---|---|---|---|---|
+| PlantDoc | malattia | 76,9% | 74,5% | **77,4%** |
+| PlantDoc | coltura | 90,7% | 90,7% | 90,5% |
+| PlantWild | malattia | 83,6% | 83,8% | 83,5% |
+| PlantWild | coltura | 91,7% | 91,7% | 91,8% |
+| iNatAg | coltura | 80,4% | 79,3% | 80,4% |
+| FieldVitis (vite, mal dell'esca) | malattia | 96,1% | 98,0% | 98,0% |
+| Virus della vite (accartocciamento) | malattia | 63,6% | 97,4% | 96,1% |
+| DiaMOS (pero in Sardegna) | coltura | 42,6% | 100% | 100% |
+| DiaMOS | malattia | non prevista | 84,4% | 85,2% |
+| Malattie calabresi (iNaturalist, anche le classi nuove) | malattia | 84,5% (solo classi note) | 86,9% | 87,2% |
+| Insetti calabresi (iNaturalist) | insetti | 84,7% | 84,7% | 84,7% |
+
+A peggiora la malattia su PlantDoc di 2,4 punti: le foto di arancio, cetriolo e anguria (quasi tutte
+giuste al 99-100%, quindi troppo facili) spostano il lettore verso foto da laboratorio. B rispetta le
+regole qui sotto (malattia su PlantDoc migliore, coltura con una foto su 451 di differenza) e aggiunge
+le classi: ruggine del pero, Xylella fastidiosa, cancro batterico da Pseudomonas syringae, antracnosi e
+lebbra (Colletotrichum), nebbia rossa del susino, Sclerotinia, mal secco degli agrumi, limacina e
+maculature del pero. Il mal secco ha solo 21 foto: va letto come ipotesi da confermare in laboratorio.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:

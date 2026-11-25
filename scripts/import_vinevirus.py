@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPO = "Project-AgML/vine_virus_photo_dataset"
 OUT = ROOT / "data" / "external" / "vinevirus"
 IMG = ROOT / "data" / "external" / "images" / "vinevirus"
-KEEP = {0: ("leafroll", 600), 1: ("no_virus", 400)}  # etichetta del dataset: (nome, foto al massimo)
+KEEP = {0: ("leafroll", 600), 1: ("no_virus", 180)}  # etichetta del dataset: (nome, foto al massimo)
 
 
 def main():
@@ -42,7 +42,7 @@ def main():
         json.dump(state, open(state_p, "w"))
     tot = {lab: sum(v.count(lab) for v in state["etichette"].values()) for lab in KEEP}
     rnd = random.Random(42)
-    for sh in shards:
+    for sh in sorted(shards, key=lambda x: -max(state["etichette"][x].count(1), 0) if count["leafroll"] >= 600 else 0):
         if sh in state["pezzi"]:
             continue
         if all(count[n] >= cap for n, cap in KEEP.values()):
@@ -56,6 +56,7 @@ def main():
         idx = [i for i, lab in enumerate(rows) if lab in KEEP]
         rnd.shuffle(idx)
         per_shard = {KEEP[lab][0]: math.ceil(KEEP[lab][1] * rows.count(lab) / max(1, tot[lab])) for lab in KEEP}
+        per_shard["no_virus"] = 60  # viti senza virus: 3 pezzi bastano (pochi GB da scaricare)
         chosen, taken = [], {n: 0 for n in per_shard}
         for i in idx:
             n = KEEP[rows[i]][0]

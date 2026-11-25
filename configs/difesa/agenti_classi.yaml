@@ -66,7 +66,11 @@ agenti:
   "plantwild:grapevine leafroll disease": [Grapevine leafroll-associated virus]
 
 # Sinonimi e nomi vecchi usati nei documenti -> nome di riferimento (minuscolo, genere specie).
+  # classi nuove del 25/11
+  "inat:colletotrichum": [Colletotrichum gloeosporioides, Colletotrichum acutatum]
+  "plantwild:peach scab": [Venturia carpophila]
 sinonimi:
+  venturia carpophila: cladosporium carpophilum
   uncinula necator: erysiphe necator
   oidium tuckeri: erysiphe necator
   guignardia bidwellii: phyllosticta ampelicida

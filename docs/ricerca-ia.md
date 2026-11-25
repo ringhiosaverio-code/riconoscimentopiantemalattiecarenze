@@ -128,9 +128,9 @@ Criterio: foto di campo, licenza che permetta l'addestramento a fini di ricerca,
 |---|---|---|---|
 | iNaturalist, osservazioni "research grade" | ruggine del pero, Xylella fastidiosa, Pseudomonas syringae, Colletotrichum (antracnosi e lebbra), nebbia rossa del susino, Sclerotinia, bozzacchioni, ticchiolatura e ruggine del pesco, peronospora delle cucurbitacee, fumaggine; fino a 600 foto per specie | CC0, CC BY, CC BY-NC | importate; split per autore |
 | PlantSeg (Wei et al. 2024, arXiv 2409.04038) | 11.458 foto dal web, 115 malattie | CC BY-NC-ND | quasi tutte copie di PlantWild (distanza dHash mediana 0): 13 foto nuove |
-| Foglie di arancio dolce (Emon et al. 2024, Data in Brief 55) | cancro batterico, HLB, cotonello, aleurodide spinoso, oidio, impallinatura | CC BY 4.0 | importate |
-| Cetriolo (Sultana et al. 2023, Data in Brief 49) | antracnosi, peronospora, cancro gommoso, marciumi del frutto | CC BY 4.0 | 500 foto per classe |
-| Anguria (Project-AgML) | antracnosi, peronospora, mosaico | CC BY 4.0 | solo foto originali |
+| Foglie di arancio dolce (Emon et al. 2024, Data in Brief 55) | cancro batterico, HLB, cotonello, aleurodide spinoso, oidio, impallinatura | CC BY 4.0 | importate, ma escluse dal modello pubblicato: peggiorano le foto di campo (miglioramento.md, sezione 8) |
+| Cetriolo (Sultana et al. 2023, Data in Brief 49) | antracnosi, peronospora, cancro gommoso, marciumi del frutto | CC BY 4.0 | importate, escluse come l'arancio |
+| Anguria (Project-AgML) | antracnosi, peronospora, mosaico | CC BY 4.0 | importate, escluse come l'arancio |
 | DiaMOS Plant (Fenu e Malloci 2021, Agronomy 11) | pero in campo in Sardegna: limacina, maculature | CC BY 4.0 | zip di 13 GB letto a pezzi, 1.144 foglie |
 | Vine Virus Photo Dataset (MacDonald et al. 2025, Plant Disease) | accartocciamento fogliare (GLRaV-3) con stato virale verificato in laboratorio | CC BY 4.0 | fino a 600 + 400 foto |
 | EPPO Global Database | mal secco, cancro batterico dell'actinidia, rogna dell'olivo | solo uso didattico | 34 foto, solo addestramento |
