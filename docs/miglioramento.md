@@ -92,6 +92,33 @@ Indicare la coltura nell'app ("Che coltura è?") restringe le malattie a quelle 
 
 **Quando serve il laboratorio.** `configs/lab_requirements.yaml` indica, per causa, l'analisi di conferma secondo i protocolli diagnostici EPPO (serie PM 7, letti nel testo): virus (ELISA, RT-PCR), viroidi (RT-PCR: non producono proteine), batteri e fitoplasmi (isolamento, PCR), nematodi (estrazione e microscopio), carenze (analisi fogliare: l'HLB somiglia alle carenze di zinco, rame e manganese), acari, cocciniglie e tripidi (microscopio su vetrino). Se le ipotesi al 99% contengono cause diverse, l'app scrive che dalla foto non si distinguono. Per 19 organismi presenti nei lettori riporta la categoria UE ed EPPO letta sulla scheda EPPO Global Database (11 da quarantena UE, 4 RNQP, 4 solo liste EPPO). Il lettore degli insetti risponde anche se nella foto non c'è un insetto: per questo resta chiuso, salvo quando i sintomi indicano insetti o acari, e i suoi avvisi sono condizionati ("se la foto mostra davvero questo insetto").
 
+## 7. Modello del 25 novembre 2026 (pubblicato)
+
+Combinazioni di 5 lettori addestrate con i dati nuovi: PlantWild, CCMT, FieldVitis (vite in campo, mal
+dell'esca), foglie di melo ATLDSD, 44 insetti e acari della Calabria e malattie calabresi da iNaturalist
+(occhio di pavone, rogna, colpo di fuoco, muffa grigia, corineo, mal bianco del pesco, ruggine della
+fava). Il ramo riaddestrato non è incluso: su questa macchina, che si riavvia spesso, non riesce a
+finire. Modello web quantizzato, stessa preparazione della foto del browser:
+
+| Foto di prova | Lettore | Prima (v1) | Ora |
+|---|---|---|---|
+| PlantWild (campo, "in natura") | malattia | 49,5% | **83,6%** |
+| PlantWild | coltura | 71,6% | **91,7%** |
+| PlantDoc (campo) | malattia | **80,7%** | 76,9% |
+| PlantDoc | coltura | 91,1% | 90,7% |
+| iNatAg | coltura | 79,7% | **80,4%** |
+| FieldVitis (vite in campo) | malattia | 21,6% | **96,1%** |
+| Malattie calabresi (iNaturalist) | malattia | 20,0% | **87,7%** |
+| Insetti calabresi (iNaturalist) | insetti | non previsti | **82,9%** |
+| IP102 (25 per classe) | insetti | 66,7% | **68,2%** |
+| PlantVillage | malattia | 98,0% | 98,5% |
+| Contributo di Reggio Calabria (olivo) | coltura | sbagliata | **giusta** |
+
+Eccezione alla regola 1 qui sotto: su PlantDoc la malattia scende di 3,8 punti (manca il ramo
+riaddestrato), ma sulle foto di campo indipendenti (PlantWild) sale di 34 punti e il lettore riconosce
+le malattie e gli insetti della Calabria. Il ramo riaddestrato si riaggiunge quando l'addestramento
+lungo può completarsi.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:
