@@ -57,7 +57,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-taxon", type=int, default=200)
     ap.add_argument("--malattie", action="store_true", help="foto per il lettore delle malattie (addestramento_malattie)")
+    ap.add_argument("--rifai", default="", help="chiavi (separate da virgole) da riscaricare con il nuovo --per-taxon")
     args = ap.parse_args()
+    rifai = {k for k in args.rifai.split(",") if k}
     cfg = yaml.safe_load(open(ROOT / "configs" / "quiz_calabria.yaml", encoding="utf-8"))
     OUT.mkdir(parents=True, exist_ok=True)
     man_path = OUT / "manifest.json"
@@ -66,7 +68,7 @@ def main():
                else [{**e, "tipo": "insetto"} for e in cfg["parassiti"]])
     for e in entries:
         key = slug(e["taxon"])
-        if key in man and man[key].get("completo"):
+        if key in man and man[key].get("completo") and key not in rifai:
             continue
         try:
             info = taxon_info(e["taxon"])

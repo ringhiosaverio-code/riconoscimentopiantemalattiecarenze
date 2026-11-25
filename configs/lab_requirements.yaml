@@ -140,6 +140,20 @@ organismi_regolamentati:
     tipo: rnqp
     lista_eppo: "A2"
     classi: {disease: ["inat:erwinia_amylovora"]}
+  - eppo: XYLEFA
+    organismo: "Xylella fastidiosa (disseccamento rapido dell'olivo e di altre piante)"
+    ue: "Organismo da quarantena UE, Reg. (UE) 2019/2072 Allegato II B, con misure d'emergenza UE"
+    tipo: quarantena
+    lista_eppo: "A2"
+    classi: {disease: ["inat:xylella_fastidiosa"]}
+    analisi: "Campioni di rametti e foglie analizzati in laboratorio ufficiale: test sierologici (ELISA) o molecolari (PCR real-time); si considera rilevata con almeno due test positivi basati su principi diversi (PM 7/24)."
+    fonti: [eppo_pm7_024]
+  - eppo: DEUTTR
+    organismo: "Plenodomus tracheiphilus (mal secco degli agrumi)"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Reg. (UE) 2019/2072 Allegato IV)"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {disease: ["lit:plenodomus_tracheiphilus"]}
   - eppo: VITEVI
     organismo: "Viteus vitifoliae (Daktulosphaira vitifoliae, fillossera della vite)"
     ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV) e da quarantena in zone protette (Allegato III)"

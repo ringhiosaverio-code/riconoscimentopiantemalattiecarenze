@@ -165,6 +165,13 @@ sources:
 
   # Protocolli diagnostici EPPO (serie PM 7): passaggi letti nel PDF il 2026-11-20 e usati in
   # configs/lab_requirements.yaml per dire quando serve il laboratorio.
+  - id: eppo_pm7_024
+    title: "PM 7/24 Xylella fastidiosa - protocollo diagnostico"
+    issuer: "EPPO"
+    type: internazionale
+    url: "https://gd.eppo.int/download/standard/148/pm7-024-5-en_rev.pdf"
+    status: testo_letto
+    note: "PM 7/24 (5): test di screening ELISA, DTBIA, IF, PCR convenzionale e real-time, LAMP; X. fastidiosa si considera rilevata con almeno due test positivi basati su principi biologici diversi (o su parti diverse del genoma). Categoria letta sulla scheda EPPO il 2026-11-25: quarantena UE, Allegato II B; EPPO A2."
   - id: eppo_pm7_032
     title: "PM 7/32 (2) Plum pox virus - protocollo diagnostico"
     issuer: "EPPO"

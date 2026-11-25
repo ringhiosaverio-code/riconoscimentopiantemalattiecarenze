@@ -16,6 +16,7 @@ import io
 import csv
 import json
 import random
+import re
 import zipfile
 import zlib
 from collections import defaultdict
@@ -121,6 +122,12 @@ AGML_DISEASE = {
     ("agml_citrusuat", "HLB"): "Orange___Haunglongbing_(Citrus_greening)",
     ("agml_citrusuat", "Red_scale_sequelae"): "agml_citrusuat:Red_scale",
     ("agml_citrusfruit", "greening"): "Orange___Haunglongbing_(Citrus_greening)",
+    # foglie di arancio dolce (Bangladesh): "yellow dragon" è un altro nome dell'HLB
+    ("agml_orange", "citrus_greening"): "Orange___Haunglongbing_(Citrus_greening)",
+    ("agml_orange", "yellow_dragon"): "Orange___Haunglongbing_(Citrus_greening)",
+    ("agml_orange", "citrus_canker"): "agml_lemon:Citrus Canker",
+    ("agml_cucumber", "Downy_Mildew"): "cucurbit_downy_mildew",
+    ("agml_watermelon", "Downy_Mildew"): "cucurbit_downy_mildew",
     ("agml_citrusfruit", "canker"): "agml_lemon:Citrus Canker",
     # ortaggi del Bangladesh (Hasan et al. 2024): etichette con la coltura
     ("agml_vegleaf", "Tomato Bacterial spot"): "pepper_bacterial_spot",  # come PlantVillage (Xanthomonas spp.)
@@ -149,6 +156,8 @@ AGML_ORGAN = {
     "agml_vegleaf": "leaf", "agml_potatoblight": "leaf", "agml_ccmt": "leaf", "agml_pepperfield": "leaf",
     ("agml_plum", "Healthy Fruit"): "fruit", ("agml_plum", "Healthy Leaf"): "leaf", ("agml_plum", "Insect Hole"): "leaf",
     ("agml_tom2024", "blossom-end-rot-d"): "fruit",
+    "agml_orange": "leaf", "agml_cucumber": "leaf", ("agml_cucumber", "Fresh_Cucumber"): "fruit",
+    ("agml_cucumber", "Belly_Rot"): "fruit", ("agml_cucumber", "Pythium_Fruit_Rot"): "fruit",
 }
 # Colture del dataset di ortaggi del Bangladesh (plant_type); le zucche asiatiche non sono in tassonomia.
 PLANT_TYPE_CROPS = {"Tomato": "solanum_lycopersicum", "Eggplant": "solanum_melongena", "Cucumber": "cucumis_sativus",
@@ -158,7 +167,7 @@ PLANT_TYPE_CROPS = {"Tomato": "solanum_lycopersicum", "Eggplant": "solanum_melon
 CROP_IN_LABEL = {"agml_ccmt"}
 # Dataset con scatti in sequenza: split per blocchi di record consecutivi e tetto di foto per classe.
 SPLIT_BLOCK = {"agml_pepperfield": 50}
-PER_CLASS_CAP = {"agml_pepperfield": 1500}
+PER_CLASS_CAP = {"agml_pepperfield": 1500, "agml_cucumber": 500}
 # Classi senza una diagnosi univoca (es. "foglia morta", "frutto non sano"): non usate.
 AGML_SKIP = {("agml_plum", "Dead Leaf"), ("agml_plum", "Yellow"), ("agml_plum", "Unhealthy Fruit"),
              # classi ATLDSD di AppleLeaf9: le stesse foto (e scatti vicini) sono in agml_pepperfield,
@@ -794,15 +803,117 @@ def import_fieldvitis(seed: int = 42, max_dist: int = 24) -> list[ManifestRow]:
     return rows
 
 
+def _hash_bits(data) -> np.ndarray | None:
+    try:
+        return np.packbits(np.array([int(b) for b in f"{_dhash(data):0256b}"], dtype=np.uint8))
+    except Exception:
+        return None
+
+
+def import_plantseg(max_dist: int = 24) -> list[ManifestRow]:
+    """PlantSeg (Wei et al. 2024, CC BY-NC-ND: uso non commerciale, solo addestramento): foto di malattie
+    raccolte sul web, dagli stessi autori di PlantWild e con gli stessi nomi delle classi. Si escludono le
+    copie di foto di PlantDoc e di PlantWild (le loro prove restano pulite); si tiene lo split originale."""
+    files = sorted((EXT / "plantseg").glob("*.parquet"))
+    if not files:
+        return _rows_from_manifest("plantseg")
+    table = np.array([bin(x).count("1") for x in range(256)], dtype=np.uint16)
+    ref = [_plantdoc_hashes()]
+    pw = [h for f in sorted((IMG / "plantwild").rglob("*.jpg")) if (h := _hash_bits(f)) is not None]
+    if pw:
+        ref.append(np.stack(pw))
+    ref = np.concatenate([r for r in ref if len(r)]) if any(len(r) for r in ref) else np.zeros((0, 32), np.uint8)
+    split_map = {"train": "train", "validation": "val", "test": "test"}
+    rows, n_dup, seen, n_seen = [], 0, np.zeros((20000, 32), np.uint8), 0
+    for f in files:
+        for k, r in enumerate(_parquet_rows([f], ["image", "plant", "disease", "split"])):
+            cls = r["disease"].strip()
+            crop_key = next((c for c in sorted(_PW_CROPS, key=len, reverse=True) if cls.startswith(c + " ")), None)
+            if crop_key is None:
+                continue
+            data = r["image"]["bytes"]
+            h = _hash_bits(data)
+            if h is None:
+                continue
+            if len(ref) and table[np.bitwise_xor(ref, h)].sum(1).min() <= max_dist:
+                n_dup += 1
+                continue
+            if n_seen and table[np.bitwise_xor(seen[:n_seen], h)].sum(1).min() <= max_dist:
+                n_dup += 1  # copia interna: si tiene solo la prima
+                continue
+            seen[n_seen] = h
+            n_seen += 1
+            split = split_map.get(r["split"], "train")
+            deficiency = _PW_DEFICIENCY.get(cls, "")
+            dis = "disturbo_nutrizionale" if deficiency else _PW_DISEASE.get(cls, f"plantwild:{cls}")
+            out = IMG / "plantseg" / split / f"{f.stem[-14:-9]}_{k:05d}.jpg"
+            if out.exists() or _save(data, out):
+                rows.append(ManifestRow(path=_rel(out), source="plantseg", split=split, plant=_PW_CROPS[crop_key],
+                                        disease=dis, deficiency=deficiency,
+                                        organ="fruit" if cls in _PW_FRUIT else ""))
+    print(f"  plantseg: {len(rows)} foto, {n_dup} copie di PlantDoc/PlantWild o interne escluse", flush=True)
+    return rows
+
+
+def import_letteratura() -> list[ManifestRow]:
+    """Foto di sintomi da pubblicazioni e banche dati didattiche (configs/foto_letteratura.yaml): poche
+    foto per malattie senza altre fonti aperte (mal secco degli agrumi), tutte nell'addestramento."""
+    cfg = yaml.safe_load(open(ROOT / "configs" / "foto_letteratura.yaml", encoding="utf-8"))
+    return [ManifestRow(path=f["path"], source="letteratura", split="train", plant=f.get("coltura") or "",
+                        disease=f["classe"], organ=f.get("organo", ""))
+            for f in cfg["foto"] if (DATA / f["path"]).exists()]
+
+
+DIAMOS = {"healthy": "healthy", "slug": "diamos:pear_slug", "spot": "diamos:pear_leaf_spot"}
+
+
+def import_diamos(seed: int = 42, block: int = 20) -> list[ManifestRow]:
+    """DiaMOS Plant (Zenodo 5557313, CC BY 4.0): foglie di pero in campo in Sardegna (scripts/import_diamos.py).
+    Gli scatti sono numerati in sequenza: split per blocchi di 20 numeri consecutivi (foglie vicine nello
+    stesso split)."""
+    rows = []
+    for cls, dis in DIAMOS.items():
+        for f in sorted((IMG / "diamos" / cls).glob("*.jpg")):
+            num = int(re.sub(r"\D", "", f.stem) or 0)
+            h = zlib.crc32(f"{seed}:{cls}:{num // block}".encode()) % 100
+            split = "test" if h < 10 else ("val" if h < 20 else "train")
+            rows.append(ManifestRow(path=_rel(f), source="diamos", split=split, plant="pyrus_communis", disease=dis,
+                                    organ="leaf"))
+    return rows
+
+
+def import_vinevirus(seed: int = 42) -> list[ManifestRow]:
+    """Vine Virus Photo Dataset (CC BY 4.0, scripts/import_vinevirus.py): viti in vigneto con lo stato virale
+    verificato in laboratorio; accartocciamento fogliare (GLRaV-3) e viti senza virus. Split casuale."""
+    man = EXT / "vinevirus" / "stato.json"
+    if not man.exists():
+        return []
+    cls = {"leafroll": "plantwild:grapevine leafroll disease", "no_virus": "healthy"}
+    rows = []
+    for f in json.load(open(man, encoding="utf-8"))["foto"]:
+        if not (DATA / f["path"]).exists():
+            continue
+        h = zlib.crc32(f"{seed}:{f['path']}".encode()) % 100
+        split = "test" if h < 10 else ("val" if h < 20 else "train")
+        rows.append(ManifestRow(path=f["path"], source="vinevirus", split=split, plant="vitis_vinifera",
+                                disease=cls[f["classe"]], organ=""))
+    return rows
+
+
 def append_source(name: str, rows: list[ManifestRow]) -> int:
     """Sostituisce nel manifest le righe di una fonte senza rifare l'importazione di tutte le altre."""
     from dataclasses import asdict
     from plantcare.data.pipeline import MANIFEST_COLUMNS
+    import fcntl
     path = DATA / "processed" / "manifest_v2.csv"
-    keep = [r for r in csv.DictReader(open(path, encoding="utf-8")) if r["source"] != name]
-    with open(path, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=MANIFEST_COLUMNS)
-        w.writeheader()
-        w.writerows(keep)
-        w.writerows({k: asdict(r).get(k, "") for k in MANIFEST_COLUMNS} for r in rows)
+    with open(path.with_suffix(".lock"), "w") as lock:  # più importazioni in parallelo
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        keep = [r for r in csv.DictReader(open(path, encoding="utf-8")) if r["source"] != name]
+        tmp = path.with_suffix(".tmp")
+        with open(tmp, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=MANIFEST_COLUMNS)
+            w.writeheader()
+            w.writerows(keep)
+            w.writerows({k: asdict(r).get(k, "") for k in MANIFEST_COLUMNS} for r in rows)
+        tmp.replace(path)
     return len(rows)

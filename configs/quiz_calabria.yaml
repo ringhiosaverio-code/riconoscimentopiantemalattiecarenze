@@ -115,3 +115,15 @@ addestramento_malattie:
   - {taxon: "Puccinia allii", classe: garlic_rust, coltura: ""}
   - {taxon: "Bremia lactucae", classe: lettuce_downy_mildew, coltura: ""}
   - {taxon: "Monilinia laxa", classe: apple_brown_rot, coltura: ""}
+  # giro del 25/11: altre malattie delle colture calabresi con abbastanza foto di campo
+  - {taxon: "Gymnosporangium sabinae", classe: "inat:gymnosporangium_sabinae", coltura: ""}
+  - {taxon: "Xylella fastidiosa", classe: "inat:xylella_fastidiosa", coltura: ""}
+  - {taxon: "Pseudomonas syringae", classe: "inat:pseudomonas_syringae", coltura: ""}
+  - {taxon: "Colletotrichum", classe: "inat:colletotrichum", coltura: ""}
+  - {taxon: "Polystigma rubrum", classe: "inat:polystigma_rubrum", coltura: ""}
+  - {taxon: "Sclerotinia sclerotiorum", classe: "inat:sclerotinia_sclerotiorum", coltura: ""}
+  - {taxon: "Taphrina pruni", classe: "plantwild:plum pocket disease", coltura: ""}
+  - {taxon: "Venturia carpophila", classe: "plantwild:peach scab", coltura: ""}
+  - {taxon: "Tranzschelia discolor", classe: "plantwild:peach rust", coltura: ""}
+  - {taxon: "Pseudoperonospora cubensis", classe: cucurbit_downy_mildew, coltura: ""}
+  - {taxon: "Capnodium", classe: "agml_lemon:Sooty Mould", coltura: ""}

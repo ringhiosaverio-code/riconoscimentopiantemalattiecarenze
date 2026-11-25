@@ -240,6 +240,61 @@ datasets:
     citation: "Wang X., Liu J., Chen Q. (2025) An advanced deep learning method for pepper diseases and pests detection. Plant Methods 21. Dati: Mendeley DOI 10.17632/tg3z7xxkdb.1"
     note: "Nonostante il nome, le foto sono foglie di MELO in campo con le classi di ATLDSD (alternaria, maculatura bruna, maculatura grigia, mosaico, ruggine): verificato sulle immagini e con 3.082 copie quasi identiche in AppleLeaf9. Importate come melo con le etichette di AppleLeaf9; le classi ATLDSD di AppleLeaf9 sono escluse per non avere copie tra addestramento e test. Campione di 1.500 foto per classe, split per blocchi di 50 scatti consecutivi."
 
+  # --- giro del 25/11: agrumi e cucurbitacee ---
+  - name: agml_orange
+    repo: Project-AgML/orange_leaf_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: citrus_sinensis
+    license: "CC BY 4.0 (Data in Brief, dati su Mendeley Data)"
+    citation: "Emon Y.R., Ahad M.T., Rabbany G. (2024) Multi-format open-source sweet orange leaf dataset for disease detection, classification, and analysis. Data in Brief 55, 110713"
+    note: "Foglie di arancio dolce: cancro batterico, HLB (anche 'yellow dragon'), cotonello, aleurodide spinoso, disseccamento, oidio, impallinatura, foglie danneggiate o gialle."
+  - name: agml_cucumber
+    repo: Project-AgML/cucumber_disease_classification
+    files: ["data/*.parquet"]
+    use: disease
+    crop: cucumis_sativus
+    license: "CC BY 4.0 (Data in Brief, dati su Mendeley Data)"
+    citation: "Sultana N., Shorif S.B., Akter M., Uddin M.S. (2023) A dataset for successful recognition of cucumber diseases. Data in Brief 49, 109320"
+    note: "Foglie e frutti di cetriolo: antracnosi, avvizzimento batterico, marciumi del frutto, peronospora, cancro gommoso. Campione di 500 foto per classe."
+  - name: agml_watermelon
+    repo: Project-AgML/watermelon_disease_classification
+    files: ["raw/*.parquet"]
+    use: disease
+    crop: ""
+    license: "CC BY 4.0"
+    citation: "Watermelon disease classification (Project-AgML, Hugging Face), solo le foto originali (config 'raw')"
+    note: "Foglie di anguria: antracnosi, peronospora, mosaico; coltura non nel lettore delle colture (lasciata vuota)."
+
+  # --- foto di campo per le malattie dal web (PlantSeg) ---
+  - name: plantseg
+    repo: LFTTim/plantseg_disease_segmentation
+    files: ["data/*.parquet"]
+    use: disease
+    license: "CC BY-NC-ND 4.0: solo uso non commerciale (progetto accademico); usato solo per l'addestramento, non ripubblicato nel quiz"
+    citation: "Wei T., Chen Z., Yu X., Chapman S., Melloy P., Huang Z. (2024) PlantSeg: A Large-Scale In-the-wild Dataset for Plant Disease Segmentation. arXiv 2409.04038"
+    note: "11.458 foto di malattie raccolte sul web (115 classi, stessi nomi di PlantWild). Verificato il 25/11: per le colture del progetto quasi tutte sono copie di foto di PlantWild (distanza dHash mediana 0) e vengono escluse; restano 13 foto nuove. Split originale."
+
+  # --- pero in campo (Italia) e virus della vite ---
+  - name: diamos
+    use: disease
+    crop: pyrus_communis
+    license: "CC BY 4.0"
+    citation: "Fenu G., Malloci F.M. (2021) DiaMOS Plant: A Dataset for Diagnosis and Monitoring Plant Disease. Agronomy 11, 2107. Dati: Zenodo 5557313"
+    note: "Foglie di pero fotografate in campo in Sardegna: limacina del pero, maculature, foglie sane (accartocciamento escluso: causa non indicata). Zip di 13 GB letto a pezzi (scripts/import_diamos.py), campione di 500 + 600 + 44 foto ridotte a 512 px; split per blocchi di scatti consecutivi."
+  - name: vinevirus
+    repo: Project-AgML/vine_virus_photo_dataset
+    use: disease
+    crop: vitis_vinifera
+    license: "CC BY 4.0"
+    citation: "MacDonald S.L. et al. (2025) Leveraging Artificial Intelligence to Develop a Decision Support Tool for Visual Symptom Assessment of Grapevine Leafroll and Red Blotch Diseases. Plant Disease"
+    note: "Viti in vigneto (California) con lo stato virale verificato in laboratorio: accartocciamento fogliare (GLRaV-3, unito alla classe di PlantWild) e viti senza virus; red blotch escluso. Scaricato un pezzo alla volta (scripts/import_vinevirus.py), al massimo 600 + 400 foto."
+  - name: letteratura
+    use: disease
+    license: "Foto protette da diritto d'autore o 'solo uso didattico' (EPPO): solo addestramento per ricerca (art. 70-ter L. 633/1941), mai ripubblicate"
+    citation: "configs/foto_letteratura.yaml (fonte per foto)"
+    note: "Poche foto di sintomi scelte a vista da PDF e dall'EPPO Global Database per malattie senza altre fonti aperte: mal secco degli agrumi (classe nuova), cancro batterico dell'actinidia, rogna e lebbra dell'olivo. Tutte nell'addestramento: nessuna prova indipendente."
+
   # --- insetti e acari della Calabria (lettore degli insetti) ---
   - name: inat_calabria
     use: pest

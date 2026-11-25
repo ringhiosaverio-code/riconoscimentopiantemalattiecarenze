@@ -142,3 +142,12 @@ labels:
   "inat:wilsonomyces_carpophilus": fungo
   "inat:podosphaera_pannosa": fungo
   "inat:uromyces_viciae_fabae": fungo
+  "inat:gymnosporangium_sabinae": fungo
+  "inat:xylella_fastidiosa": batterio
+  "inat:pseudomonas_syringae": batterio
+  "inat:colletotrichum": fungo
+  "inat:polystigma_rubrum": fungo
+  "inat:sclerotinia_sclerotiorum": fungo
+  "lit:plenodomus_tracheiphilus": fungo
+  "diamos:pear_slug": insetto
+  "diamos:pear_leaf_spot": fungo

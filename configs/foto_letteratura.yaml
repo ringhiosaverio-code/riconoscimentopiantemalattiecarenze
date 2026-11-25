@@ -1,0 +1,56 @@
+# Foto di sintomi da pubblicazioni e banche dati didattiche, solo per l'addestramento (eccezione per
+# l'estrazione di testo e dati a fini di ricerca, art. 70-ter L. 633/1941; EPPO: "solo per scopi didattici").
+# Non si ripubblicano nel quiz né altrove. Scelte a vista: solo sintomi (niente grafici, colture in
+# piastra o microscopio). Troppo poche per una prova indipendente: tutte nell'addestramento.
+fonti:
+  malsecco_sicilia: "Mal secco degli agrumi, presentazione divulgativa (Sicilia), PDF raccolto il 2026-11-23"
+  riolo_unirc: "Riolo M. (2020) tesi di dottorato, Università Mediterranea di Reggio Calabria: Colletotrichum e Phytophthora su olivo e agrumi"
+  eppo: "EPPO Global Database, foto (uso didattico), autore indicato nel manifest"
+foto:
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-003-004.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-003-005.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-004-006.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-005-007.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-006-008.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-006-009.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-007-010.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-007-011.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-008-012.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-008-013.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-008-014.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_malsecco_sicilia/x-009-016.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
+  - {path: "external/pdf_figure/img_riolo_unirc/x-031-006.jpg", classe: "inat:colletotrichum", coltura: olea_europaea, organo: fruit, fonte: riolo_unirc}
+  - {path: "external/images/eppo_quiz/DEUTTR/14801.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/14803.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/14802.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/516.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/515.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/517.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/514.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/DEUTTR/513.jpg", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19892.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19889.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19893.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19891.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19894.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19898.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19895.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19896.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19897.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19899.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19902.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19903.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19904.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/19905.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/17961.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/8382.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/8384.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/8383.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/1398.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/1397.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/1399.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMAK/1396.jpg", classe: "inat:pseudomonas_syringae", coltura: "actinidia_chinensis", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMSA/8462.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMSA/8464.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMSA/8463.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
+  - {path: "external/images/eppo_quiz/PSDMSA/8461.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
