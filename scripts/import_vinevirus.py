@@ -9,6 +9,8 @@ Uso: python scripts/import_vinevirus.py
 """
 import io
 import json
+import math
+import sys
 import random
 import urllib.request
 from pathlib import Path
@@ -30,18 +32,30 @@ def main():
     tree = json.load(urllib.request.urlopen(f"https://huggingface.co/api/datasets/{REPO}/tree/main/data", timeout=60))
     shards = sorted(x["path"] for x in tree if x["path"].endswith(".parquet"))
     count = {v[0]: sum(1 for f in state["foto"] if f["classe"] == v[0]) for v in KEEP.values()}
+    # le etichette di ogni pezzo si leggono a distanza (solo la colonna "label"): i pezzi sono ordinati per
+    # classe, quindi la quota di ogni pezzo è proporzionale alle sue foto della classe
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from import_diamos import HttpFile
+    if "etichette" not in state:
+        state["etichette"] = {sh: pq.ParquetFile(HttpFile(f"https://huggingface.co/datasets/{REPO}/resolve/main/{sh}"))
+                              .read(columns=["label"]).column("label").to_pylist() for sh in shards}
+        json.dump(state, open(state_p, "w"))
+    tot = {lab: sum(v.count(lab) for v in state["etichette"].values()) for lab in KEEP}
     rnd = random.Random(42)
     for sh in shards:
         if sh in state["pezzi"]:
             continue
         if all(count[n] >= cap for n, cap in KEEP.values()):
             break
+        if not any(lab in KEEP for lab in state["etichette"][sh]):
+            state["pezzi"].append(sh)
+            continue
         tmp = OUT / "pezzo.parquet"
         urllib.request.urlretrieve(f"https://huggingface.co/datasets/{REPO}/resolve/main/{sh}", tmp)
         rows = pq.read_table(tmp, columns=["label"]).column("label").to_pylist()
         idx = [i for i, lab in enumerate(rows) if lab in KEEP]
         rnd.shuffle(idx)
-        per_shard = {n: max(1, cap // 12) for n, cap in KEEP.values()}
+        per_shard = {KEEP[lab][0]: math.ceil(KEEP[lab][1] * rows.count(lab) / max(1, tot[lab])) for lab in KEEP}
         chosen, taken = [], {n: 0 for n in per_shard}
         for i in idx:
             n = KEEP[rows[i]][0]

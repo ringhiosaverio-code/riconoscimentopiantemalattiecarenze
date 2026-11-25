@@ -119,6 +119,30 @@ chlamydospora, Phaeoacremonium spp.), mostra la difesa del Disciplinare della Re
 Per insegnarla alla rete servono foto di sezioni di legno e di viti giovani con diagnosi di laboratorio,
 inviate con "Aiuta a migliorare".
 
+## 10. Fonti di foto cercate il 25 novembre 2026 (uso accademico)
+
+Ricerca su Zenodo, Hugging Face (Project-AgML), iNaturalist, EPPO Global Database e PDF universitari.
+Criterio: foto di campo, licenza che permetta l'addestramento a fini di ricerca, colture della Calabria.
+
+| Fonte | Cosa aggiunge | Licenza | Esito |
+|---|---|---|---|
+| iNaturalist, osservazioni "research grade" | ruggine del pero, Xylella fastidiosa, Pseudomonas syringae, Colletotrichum (antracnosi e lebbra), nebbia rossa del susino, Sclerotinia, bozzacchioni, ticchiolatura e ruggine del pesco, peronospora delle cucurbitacee, fumaggine; fino a 600 foto per specie | CC0, CC BY, CC BY-NC | importate; split per autore |
+| PlantSeg (Wei et al. 2024, arXiv 2409.04038) | 11.458 foto dal web, 115 malattie | CC BY-NC-ND | quasi tutte copie di PlantWild (distanza dHash mediana 0): 13 foto nuove |
+| Foglie di arancio dolce (Emon et al. 2024, Data in Brief 55) | cancro batterico, HLB, cotonello, aleurodide spinoso, oidio, impallinatura | CC BY 4.0 | importate |
+| Cetriolo (Sultana et al. 2023, Data in Brief 49) | antracnosi, peronospora, cancro gommoso, marciumi del frutto | CC BY 4.0 | 500 foto per classe |
+| Anguria (Project-AgML) | antracnosi, peronospora, mosaico | CC BY 4.0 | solo foto originali |
+| DiaMOS Plant (Fenu e Malloci 2021, Agronomy 11) | pero in campo in Sardegna: limacina, maculature | CC BY 4.0 | zip di 13 GB letto a pezzi, 1.144 foglie |
+| Vine Virus Photo Dataset (MacDonald et al. 2025, Plant Disease) | accartocciamento fogliare (GLRaV-3) con stato virale verificato in laboratorio | CC BY 4.0 | fino a 600 + 400 foto |
+| EPPO Global Database | mal secco, cancro batterico dell'actinidia, rogna dell'olivo | solo uso didattico | 34 foto, solo addestramento |
+| PDF (mal secco, Sicilia; tesi UNIRC su Colletotrichum e Phytophthora) | 12 foto di sintomi del mal secco, 1 di lebbra su olive | diritto d'autore | solo addestramento (art. 70-ter L. 633/1941) |
+| Foglie di mandorlo (Zenodo 19560931) | 65 foto originali, classi senza nome della malattia | CC BY 4.0 | scartato |
+| Verticillium dell'olivo da drone (Zenodo 8144164) | immagini aeree | CC BY 4.0 | scartato: non sono foto da telefono |
+
+Il mal secco degli agrumi resta la malattia calabrese con meno foto aperte: 21 in tutto (1 su
+iNaturalist). Per migliorarlo servono foto di campo dei servizi fitosanitari o dell'università, con il
+loro permesso. Lo stesso vale per verticilliosi (29 foto su iNaturalist), gommosi, Phytophthora capsici e
+peronospora della cipolla (meno di 15 ciascuna).
+
 ## Prossimi passi in ordine di impatto atteso
 
 1. Rilevatore automatico delle foglie (due fasi) addestrato sui riquadri di PlantDoc.

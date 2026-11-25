@@ -106,22 +106,36 @@ def main():
         by.setdefault(n.split("/")[-2], []).append(n)
     leaves = [n for k, v in by.items() for n in sorted(random.Random(42).sample(v, min(len(v), CAP[k])))]
     print(len(leaves), "foto di foglie,", len(labels), "etichette", flush=True)
-    for i, n in enumerate(leaves):
-        if n in done:
-            continue
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    local, lock = threading.local(), threading.Lock()
+
+    def one(n):  # ogni thread ha il suo zip remoto
+        if not hasattr(local, "zf"):
+            local.zf = zipfile.ZipFile(HttpFile(URL))
         f = IMG / n.split("/")[-2] / (Path(n).stem + ".jpg")
         try:
-            with Image.open(io.BytesIO(zf.read(n))) as im:
+            with Image.open(io.BytesIO(local.zf.read(n))) as im:
                 im = im.convert("RGB")
                 im.thumbnail((512, 512))
                 f.parent.mkdir(parents=True, exist_ok=True)
                 im.save(f, quality=90)
-            done[n] = str(f.relative_to(ROOT / "data"))
         except Exception as ex:
             print("errore", n, ex, flush=True)
-        if i % 50 == 0:
-            json.dump(done, open(OUT / "estratte.json", "w"))
-            print(f"  {i}/{len(leaves)}", flush=True)
+            return
+        with lock:
+            done[n] = str(f.relative_to(ROOT / "data"))
+            if len(done) % 50 == 0:
+                json.dump(done, open(OUT / "estratte.json", "w"))
+                print(f"  {len(done)}/{len(leaves)}", flush=True)
+
+    todo = [n for n in leaves if n not in done and not (IMG / n.split("/")[-2] / (Path(n).stem + ".jpg")).exists()]
+    for n in leaves:
+        f = IMG / n.split("/")[-2] / (Path(n).stem + ".jpg")
+        if n not in done and f.exists():
+            done[n] = str(f.relative_to(ROOT / "data"))
+    with ThreadPoolExecutor(4) as pool:
+        list(pool.map(one, todo))
     json.dump(done, open(OUT / "estratte.json", "w"))
     print("FATTO", len(done))
 
