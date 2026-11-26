@@ -140,7 +140,7 @@ Per la malattia riconosciuta, il referto mostra:
 - se richiesto, rilegge pagine ed etichette Gowan;
 - ricostruisce i dati di difesa dell'app.
 
-Il flusso `.github/workflows/aggiorna-norme.yml` lo esegue ogni settimana. Se qualcosa cambia apre una pull request
+Il flusso `.github/workflows/aggiorna-norme.yml` lo esegue ogni giorno (le etichette Gowan il lunedì). Se qualcosa cambia apre una pull request
 con il riepilogo, che una persona controlla prima di pubblicare.
 
 ## App nel browser (GitHub Pages)

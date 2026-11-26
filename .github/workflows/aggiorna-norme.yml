@@ -1,13 +1,13 @@
-# Controllo settimanale delle norme di difesa usate dall'app: nuovo Disciplinare della Calabria (sito ARSAC),
-# stato delle sostanze attive nella banca dati UE dei pesticidi, etichette e usi registrati Gowan.
+# Controllo giornaliero delle norme di difesa usate dall'app: nuovo Disciplinare della Calabria (sito ARSAC) e
+# stato delle sostanze attive nella banca dati UE dei pesticidi; il lunedì anche etichette e usi registrati Gowan.
 # Se qualcosa cambia apre (o aggiorna) una pull request con il riepilogo delle novità: una persona la controlla
 # sul PDF ufficiale e sulla banca dati UE prima di unirla. Nessuna modifica va in produzione senza revisione.
-# Nota: GitHub esegue i flussi programmati solo dal ramo principale del repository.
+# Nota: GitHub esegue i flussi programmati solo dal ramo predefinito del repository.
 name: Aggiorna norme di difesa
 
 on:
   schedule:
-    - cron: "17 5 * * 1"   # ogni lunedì alle 5:17 UTC
+    - cron: "17 5 * * *"   # ogni giorno alle 5:17 UTC
   workflow_dispatch:
     inputs:
       gowan:
@@ -46,7 +46,8 @@ jobs:
           PYTHONPATH: src
         run: |
           OPZ="--disciplinare --ue --app"
-          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.gowan }}" = "true" ]; then OPZ="$OPZ --gowan"; fi
+          # etichette Gowan: il lunedì (circa 100 pagine, una richiesta ogni 2 secondi) o su richiesta
+          if { [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%u)" = "1" ]; } || [ "${{ inputs.gowan }}" = "true" ]; then OPZ="$OPZ --gowan"; fi
           python scripts/aggiorna_norme.py $OPZ --riepilogo "$RUNNER_TEMP/riepilogo.md" --esito "$GITHUB_OUTPUT"
 
       - name: Verifica dei dati (test)

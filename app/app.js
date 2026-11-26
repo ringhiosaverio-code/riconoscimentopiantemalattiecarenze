@@ -1199,7 +1199,7 @@
       '<li>Dataset Project-AgML (UC Davis), CC BY 4.0 / MIT</li><li>iNatAg (Project-AgML), da iNaturalist</li></ul>' +
       '<p class="muted">Conoscenze agronomiche: disciplinare di produzione integrata della Regione Calabria (2023), bollettini ARSAC, schede EPPO, EFSA, Università Mediterranea di Reggio Calabria, Università di Bari. Elenco completo e livello di verifica nel repository.</p>' +
       '<h2>Norme e aggiornamenti</h2><p class="muted" id="info-norme">' + esc(normeText()) + '</p>' +
-      '<p class="muted">Ogni settimana un controllo automatico cerca un nuovo Disciplinare della Calabria sul sito ARSAC, lo stato delle sostanze attive nella banca dati UE e le etichette Gowan; le novità diventano una proposta di aggiornamento che una persona controlla prima della pubblicazione.</p>' +
+      '<p class="muted">Ogni giorno un controllo automatico cerca un nuovo Disciplinare della Calabria sul sito ARSAC e lo stato delle sostanze attive nella banca dati UE, ogni settimana le etichette Gowan; le novità diventano una proposta di aggiornamento che una persona controlla prima della pubblicazione.</p>' +
       '<h2>Avvertenze</h2><p class="muted">Strumento di supporto alla decisione, non una diagnosi. Per virus, viroidi, batteri e nematodi serve la conferma di laboratorio. Dosi e compatibilità dei prodotti sono quelle dell\'etichetta autorizzata.</p>' +
       '<p class="muted">Motore: ONNX Runtime Web 1.20.1 (licenza MIT). Codice: <a href="https://github.com/ringhiosaverio-code/riconoscimentopiantemalattiecarenze" target="_blank" rel="noopener">repository</a>, licenza Apache-2.0.</p>';
   }

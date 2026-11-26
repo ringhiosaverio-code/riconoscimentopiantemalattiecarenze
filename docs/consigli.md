@@ -117,13 +117,13 @@ indicato (`label_max_ha` in `src/plantcare/sprayer.py` e `app/sprayer.js`).
 Con `--app` ricostruisce `app/data/difesa.json` e `app/data/catalogo.json` senza il modello e senza il dataset.
 La copia delle colture per classe è in `configs/difesa/colture_per_classe.json`.
 
-Il flusso `.github/workflows/aggiorna-norme.yml` lo esegue ogni lunedì (e a mano). Se le norme sono cambiate:
+Il flusso `.github/workflows/aggiorna-norme.yml` lo esegue ogni giorno, con le etichette Gowan il lunedì, e a mano. Se le norme sono cambiate:
 - esegue i test;
 - apre una pull request con il riepilogo delle novità.
 
 Una persona la controlla sul PDF ufficiale e sulla banca dati UE prima di unirla: nessuna norma entra nell'app senza
-revisione. GitHub esegue i flussi programmati solo dal ramo principale: il controllo settimanale parte quando il file
-del flusso arriva su quel ramo.
+revisione. GitHub esegue i flussi programmati solo dal ramo predefinito del repository (qui `claude/gracious-noether-kz4in8`,
+lo stesso pubblicato con GitHub Pages): il controllo è attivo.
 
 ```bash
 PYTHONPATH=src python scripts/aggiorna_norme.py                 # Disciplinare, banca dati UE, dati dell'app
