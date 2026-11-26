@@ -29,6 +29,7 @@ from plantcare.data.pannelli import pannelli  # noqa: E402
 from plantcare.data.testo_classi import classi_da_testo, SINONIMI  # noqa: E402
 
 API = "https://www.ebi.ac.uk/europepmc/webservices/rest"
+PMC_OAI = "https://pmc.ncbi.nlm.nih.gov/api/oai/v1/mh/"
 OUT = ROOT / "data" / "external" / "europepmc"
 IMG = ROOT / "data" / "external" / "images" / "europepmc"
 HEAD = {"User-Agent": "PlantCare/1.0 (progetto accademico)"}
@@ -72,24 +73,42 @@ def testo(e):
 
 
 def figure(pmcid):
+    """Didascalie e nomi delle figure dal servizio OAI di PubMed Central (testo JATS dell'articolo)."""
+    url = f"{PMC_OAI}?verb=GetRecord&identifier=oai:pubmedcentral.nih.gov:{pmcid[3:]}&metadataPrefix=pmc"
     try:
-        root = ET.fromstring(get(f"{API}/{pmcid}/fullTextXML"))
+        root = ET.fromstring(get(url))
     except Exception:
         return []
-    lic = testo(root.find(".//license")) or ""
-    lic_url = next((v for e in root.iter("license") for k, v in e.attrib.items() if k.endswith("href")), "")
-    title = testo(root.find(".//article-title"))
+    def find(tag):
+        return [e for e in root.iter() if e.tag.split("}")[-1] == tag]
+    doi = next((testo(e) for e in find("article-id") if e.attrib.get("pub-id-type") == "doi"), "")
+    lic = next((v for e in find("license") for k, v in e.attrib.items() if k.endswith("href")), "")
+    title = testo(next(iter(find("article-title")), None))
     out = []
-    for fig in root.iter("fig"):
-        cap = testo(fig.find("caption"))
-        g = fig.find(".//graphic")
-        if g is None:
-            continue
-        href = next((v for k, v in g.attrib.items() if k.endswith("href")), None)
+    for fig in find("fig"):
+        cap = testo(next((c for c in fig.iter() if c.tag.split("}")[-1] == "caption"), None))
+        g = next((c for c in fig.iter() if c.tag.split("}")[-1] == "graphic"), None)
+        href = next((v for k, v in (g.attrib.items() if g is not None else []) if k.endswith("href")), None)
         if href:
-            out.append({"pmcid": pmcid, "didascalia": cap[:1500], "href": href, "licenza": (lic_url or lic)[:200],
+            out.append({"pmcid": pmcid, "doi": doi, "didascalia": cap[:1500], "href": href, "licenza": lic[:200],
                         "articolo": title[:300]})
     return out
+
+
+def url_immagine(f):
+    """Indirizzo della figura sul sito dell'editore (MDPI, Springer Nature/BMC, Frontiers)."""
+    doi, stem = f["doi"], re.sub(r"\.(jpe?g|png|gif|tif)$", "", f["href"])
+    if doi.startswith("10.3390/"):
+        base = re.sub(r"-g\d+[a-z]?$", "", stem)
+        return f"https://mdpi-res.com/{base.split('-')[0]}/{base}/article_deploy/html/images/{stem}.png"
+    if doi.startswith(("10.1038/", "10.1007/", "10.1186/")):
+        return (f"https://media.springernature.com/lw685/springer-static/image/art%3A{urllib.parse.quote(doi, safe='')}"
+                f"/MediaObjects/{stem}.png")
+    if doi.startswith("10.3389/"):
+        m = re.match(r"(.+-(\d+))-g\d+$", stem)
+        if m:
+            return f"https://www.frontiersin.org/files/Articles/{m.group(2)}/{m.group(1)}-HTML/image_m/{stem}.jpg"
+    return None
 
 
 def scarica(f):
@@ -97,24 +116,29 @@ def scarica(f):
     if len(lab) != 1:
         return []
     head, cls = next(iter(lab))
-    base = f"https://europepmc.org/articles/{f['pmcid']}/bin/{f['href']}"
-    data = None
-    for u in ([base] if re.search(r"\.(jpe?g|png|gif)$", base, re.I) else [base + ".jpg", base + ".png", base]):
-        try:
-            data = get(u, tries=2)
-            if data[:4] in (b"\xff\xd8\xff\xe0", b"\xff\xd8\xff\xe1", b"\x89PNG") or data[:3] == b"\xff\xd8\xff":
-                break
-            data = None
-        except Exception:
-            data = None
-    if not data:
+    slug = f"{f['pmcid']}_{re.sub(r'[^A-Za-z0-9]+', '_', f['href'])[-40:]}"
+    fatti = sorted(IMG.glob(f"{slug}_*.jpg"))
+    if fatti:  # già scaricata in un giro precedente
+        return [{**f, "path": str(p.relative_to(ROOT / "data")), "testa": head, "classe": cls,
+                 "pannello": int(p.stem.rsplit("_", 1)[1])} for p in fatti]
+    u = url_immagine(f)
+    if not u:
+        return []
+    try:
+        data = get(u, tries=2)
+    except Exception:
+        return []
+    if not (data[:3] == b"\xff\xd8\xff" or data[:4] == b"\x89PNG"):
         return []
     res = []
     try:
         with Image.open(io.BytesIO(data)) as im:
+            if im.size[0] * im.size[1] > 40_000_000:  # figure enormi: si saltano (memoria)
+                return []
+            im.draft("RGB", (2400, 2400))
             for k, p in enumerate(pannelli(im.convert("RGB"))):
                 p.thumbnail((800, 800))
-                dest = IMG / f"{f['pmcid']}_{re.sub(r'[^A-Za-z0-9]+', '_', f['href'])[-40:]}_{k}.jpg"
+                dest = IMG / f"{slug}_{k}.jpg"
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 p.save(dest, quality=90)
                 res.append({**f, "path": str(dest.relative_to(ROOT / "data")), "testa": head, "classe": cls,
@@ -148,7 +172,7 @@ def main():
             figs = [f for fs in pool.map(figure, sorted(arts)) for f in fs]
         json.dump(figs, open(fig_p, "w"), ensure_ascii=False)
     print(len(figs), "figure", flush=True)
-    with ThreadPoolExecutor(4) as pool:
+    with ThreadPoolExecutor(2) as pool:
         cand = [c for cs in pool.map(scarica, figs) for c in cs]
     from plantcare.data.filtro_foto import punteggi
     for c, (p, l) in zip(cand, punteggi([ROOT / "data" / c["path"] for c in cand])):

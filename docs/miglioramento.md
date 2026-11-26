@@ -180,6 +180,33 @@ guadagna 8 foto su 844 e migliorano molto le malattie e gli insetti di Calabria 
 priorità del progetto. L'errore di calibrazione degli insetti sale al 3,3% (regola: sotto il 3%): le
 ipotesi calibrate (insiemi conformi) restano corrette perché le soglie sono ricalcolate su questo modello.
 
+## 10. Foto da ARSAC, riviste, tesi ed Europe PMC; prova "esperti del Sud" (26 novembre 2026)
+
+390 foto verificate a vista (`docs/ricerca-ia.md`, sezione 12): ARSAC 65, Phytopathologia Mediterranea
+120 (dopo i doppioni), UNIRC 11, Europe PMC 203. Un quarto dei documenti è tenuto da parte come prova
+nuova, **"esperti del Sud"** (83 foto: mal dell'esca, muffa grigia, Xylella, rogna dell'olivo, cancro
+del castagno, tignoletta della vite, tignola del pomodoro e altre), che nessun modello ha visto.
+
+Versione G pubblicata: lettore delle malattie riaddestrato con le foto verificate (peso 2), lettori di
+coltura e insetti uguali alla versione D. Stessa preparazione della foto del browser:
+
+| Foto di prova | Lettore | D (prima) | **G** |
+|---|---|---|---|
+| Esperti del Sud | malattia | 34,9% | **44,4%** |
+| Esperti del Sud | insetti | 45,0% | 45,0% |
+| PlantDoc | malattia | 76,9% | **77,4%** |
+| PlantDoc | coltura | 90,5% | 90,5% |
+| PlantWild | malattia | 84,4% | 83,6% |
+| iNatAg | coltura | 80,4% | 80,4% |
+| Malattie calabresi (iNaturalist) | malattia | 88,4% | 87,8% |
+| Insetti calabresi (iNaturalist) | insetti | 87,7% | 87,7% |
+| FieldVitis | malattia | 96,1% | **98,0%** |
+| Virus della vite | malattia | 90,9% | **94,8%** |
+| Observation.org | malattia | 89,4% | **90,4%** |
+
+La prova "esperti del Sud" mostra quanto resta da fare: foto da bollettini e articoli (legno, cancri,
+essudati, tubercoli) sono ancora molto più difficili delle foto di campo delle raccolte aperte.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:

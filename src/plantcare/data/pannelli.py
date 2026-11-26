@@ -26,7 +26,7 @@ def _gutters(profile_std, profile_mean, min_gap):
 
 
 def _split(a, axis, min_gap):
-    g = a.mean(axis=2)
+    g = a.mean(axis=2, dtype=np.float32)
     prof_std = g.std(axis=1 - axis) if axis == 0 else g.std(axis=0)
     prof_mean = g.mean(axis=1 - axis) if axis == 0 else g.mean(axis=0)
     cuts = _gutters(prof_std, prof_mean, min_gap)
@@ -42,7 +42,11 @@ def _split(a, axis, min_gap):
 
 def pannelli(im: Image.Image, min_side: int = 160, min_gap: int = 3, depth: int = 3) -> list[Image.Image]:
     """Pannelli della figura (la figura intera se non ci sono separazioni)."""
-    a = np.asarray(im.convert("RGB"), dtype=np.float32)
+    im = im.convert("RGB")
+    if max(im.size) > 2400:  # figure molto grandi: si riducono prima (memoria)
+        im = im.copy()
+        im.thumbnail((2400, 2400))
+    a = np.asarray(im, dtype=np.uint8)
 
     def rec(x0, y0, x1, y1, d):
         sub = a[y0:y1, x0:x1]

@@ -962,11 +962,19 @@ def import_verificate() -> list[ManifestRow]:
     """Foto da bollettini, PDF, tesi e articoli verificate a vista una per una
     (data/external/verificate/*.json, una lista per fonte). Split per documento: un quarto dei documenti
     va nel test, come prova "esperti del Sud" (foto dello stesso documento sempre nello stesso split)."""
-    out = []
+    out, hashes = [], []
+    table = np.array([bin(x).count("1") for x in range(256)], dtype=np.uint16)
     for f in sorted((EXT / "verificate").glob("*.json")):
         for x in json.load(open(f, encoding="utf-8")):
             if not (DATA / x["path"]).exists():
                 continue
+            h = _hash_bits(DATA / x["path"])
+            if h is None:
+                continue
+            # la stessa foto in due documenti (tesi e articolo, bollettini ripetuti): si tiene la prima
+            if hashes and table[np.bitwise_xor(np.stack(hashes), h)].sum(1).min() <= 24:
+                continue
+            hashes.append(h)
             pest = x["testa"] == "pest"
             doc = x.get("documento") or x["path"]
             split = "test" if zlib.crc32(f"42:{doc}".encode()) % 100 < 25 else "train"

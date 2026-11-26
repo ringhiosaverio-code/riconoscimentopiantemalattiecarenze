@@ -185,9 +185,20 @@ Metodo comune per PDF e figure (`scripts/estrai_pdf.py`, `scripts/europepmc_figu
 | UNIRC, IRIS (24.964 record, 429 pertinenti, 229 PDF aperti: tesi di dottorato e articoli) | figure con didascalia | 18 | 11 |
 | IRIS di Palermo, Bari, Napoli, Basilicata (1.321 PDF elencati) | molti riservati (rimandano al login); i server Cineca rispondono "troppe richieste" anche a un PDF ogni 3 secondi | | raccolta fermata per rispetto del limite |
 | IRIS di Catania | il server rifiuta la connessione sicura del proxy (errore TLS) | | non raggiungibile |
-| Europe PMC (al posto di Google Scholar) | 4.074 articoli aperti sulle specie del progetto | vedi sotto | vedi sotto |
+| Europe PMC (al posto di Google Scholar): 4.074 articoli aperti sulle specie del progetto, 24.335 figure; didascalie dal servizio OAI di PubMed Central, immagini dai siti degli editori (MDPI, Springer Nature/BMC, Frontiers) | 5.296 figure con una sola classe in didascalia, 9.895 pannelli | 653 | 203 (12 rietichettate: coltura sbagliata o insetto nel lettore sbagliato) |
 | forum.giardinaggio.it | robots.txt assente; 3.200 titoli letti, 33 con una sola classe; dopo 160 pagine il sito chiude le connessioni | | fermato: nessuna foto usata |
+| PubMed Central (pagine degli articoli) | il sito mostra un controllo anti-robot (reCAPTCHA): non aggirato | | si usa il servizio OAI ufficiale |
 | forum.agraria.org | pagina di verifica anti-robot | | non usato |
+
+In tutto **399 foto verificate** (390 dopo aver tolto le copie della stessa foto in due documenti):
+307 per l'addestramento e 83 per una prova nuova, **"esperti del Sud"**, con un quarto dei documenti
+tenuto da parte (foto dello stesso documento sempre nella stessa parte).
+
+**Perché non basta l'accordo con il modello.** Sulle 185 foto verificate a mano (etichetta giusta) il
+modello pubblicato mette la classe giusta al primo posto solo nel 26% dei casi e tra le prime cinque nel
+50%: legno con il mal dell'esca, essudati di Psa, cancri, tubercoli di rogna sono sintomi che le foto di
+campo usate finora quasi non contengono. Filtrare le candidate tenendo solo quelle su cui il modello è
+d'accordo scarterebbe proprio le foto più utili: per questo la verifica è stata fatta a vista.
 
 **Google Scholar e Google Lens** non hanno un'interfaccia per programmi e le condizioni di Google
 vietano la raccolta automatica: al loro posto Europe PMC (testo completo e figure degli articoli aperti,
