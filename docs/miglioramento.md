@@ -207,6 +207,33 @@ coltura e insetti uguali alla versione D. Stessa preparazione della foto del bro
 La prova "esperti del Sud" mostra quanto resta da fare: foto da bollettini e articoli (legno, cancri,
 essudati, tubercoli) sono ancora molto più difficili delle foto di campo delle raccolte aperte.
 
+## 11. Giro H: insetti e malattie del Sud da iNaturalist e Bugwood (26 novembre 2026)
+
+Nuove foto di campo per l'addestramento:
+- fino a 200 foto per specie da iNaturalist, osservazioni "research grade" con licenza aperta;
+- foto di Bugwood per 20 insetti e acari del Sud aggiunti al quiz: fleotribo, oziorrinco e cecidomia
+  dell'olivo, cinipide, balanino e tortrice del castagno, punteruolo rosso, cocciniglie, aleurodide e afidi
+  degli agrumi, cimice verde e altri;
+- antracnosi della vite, alternariosi e cancro del castagno tra le malattie.
+
+Il lettore degli insetti passa da 145 a 163 classi: 18 specie nuove riconoscibili, mentre per l'antracnosi
+della vite le 4 foto di iNaturalist non bastano a farne una classe.
+
+| Foto di prova | Lettore | G | H (riaddestrato) | Insieme G+H | **Pubblicato** |
+|---|---|---|---|---|---|
+| PlantDoc | malattia | 77,4% | 76,7% | 76,5% | **77,4%** (G) |
+| Malattie calabresi (iNaturalist) | malattia | 88,9% | 90,3% | 89,6% | 88,9% |
+| Bugwood | malattia | 75,4% | 82,9% | 83,4% | 75,4% |
+| Insetti calabresi, specie già note | insetti | 85,5% | 86,1% | – | **86,1%** |
+| Insetti calabresi, con le 18 specie nuove | insetti | – | 83,8% | – | **83,8%** |
+| IP102 | insetti | 67,4% | 67,6% | – | **67,6%** |
+| Observation.org | insetti | 94,9% | 94,1% | – | 94,1% |
+
+Il lettore delle malattie riaddestrato migliora sulle foto del Sud, ma perde punti su PlantDoc. Per la
+regola 1 qui sotto resta quello di G. È pubblicato solo il nuovo lettore degli insetti: riconosce le 18
+specie nuove (77% di risposte giuste sulle loro foto di prova) e migliora sulle specie già note, salvo un
+calo minimo su Observation.org (4 foto su 505).
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:
