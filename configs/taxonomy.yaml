@@ -142,7 +142,7 @@ diseases:
       leaf: "Accartocciamento verso l'alto e ingiallimento dei margini, nanismo; trasmesso dalla mosca bianca"
       flower: "Caduta dei fiori giovani"
   - id: tomato_leafminer_damage
-    common: "Danno da Tuta absoluta"
+    common: "Danno da tignola del pomodoro (Tuta absoluta)"
     pathogen_type: insect_induced
     agent: "Tuta absoluta"
     hosts: [solanum_lycopersicum]
