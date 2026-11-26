@@ -63,3 +63,11 @@ foto:
   - {path: "external/images/arsac/13414.jpg", classe: "powdery_mildew_grapevine", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
   - {path: "external/images/arsac/22778.jpg", classe: "inat:euphyllura_olivina", testa: pest, coltura: "olea_europaea", fonte: arsac}
   - {path: "external/images/arsac/22777.jpg", classe: "inat:euphyllura_olivina", testa: pest, coltura: "olea_europaea", fonte: arsac}
+  - {path: "external/images/arsac_web/46522.jpg", classe: "inat:aleurocanthus_spiniferus", testa: pest, coltura: "", fonte: arsac}
+  - {path: "external/images/arsac_web/35718.jpg", classe: "inat:halyomorpha_halys", testa: pest, coltura: "", fonte: arsac}
+  - {path: "external/images/arsac_web/35473.jpg", classe: "grapevine_downy_mildew", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac_web/35468.jpg", classe: "grapevine_downy_mildew", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac_web/35467.jpg", classe: "grapevine_downy_mildew", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac_web/14172.jpg", classe: "inat:zeuzera_pyrina", testa: pest, coltura: "", fonte: arsac}
+  - {path: "external/images/arsac_web/14171.jpg", classe: "inat:zeuzera_pyrina", testa: pest, coltura: "", fonte: arsac}
+  - {path: "external/images/arsac_web/14168.jpg", classe: "inat:zeuzera_pyrina", testa: pest, coltura: "", fonte: arsac}

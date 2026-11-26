@@ -20,7 +20,7 @@ from plantcare.metrics import expected_calibration_error, macro_f1
 ROOT = Path(__file__).resolve().parents[1]
 FIELD = {"plantdoc": 3.0, "inatag": 3.0, "plantwild": 3.0, "inat_calabria": 2.0, "fieldvitis": 3.0, "diamos": 2.0,
          "bugwood": 1.0, "observation": 1.0, "emiliaromagna": 1.0,
-         "vinevirus": 2.0, "letteratura": 3.0}
+         "vinevirus": 2.0, "letteratura": 3.0, "verificate": 2.0}
 
 
 def load():

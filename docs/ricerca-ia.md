@@ -163,6 +163,39 @@ Molti forum, inoltre, escludono nel regolamento la raccolta automatica dei conte
 privati la strada giusta è quella già prevista dall'app: i contributi con consenso, senza dati personali,
 con la diagnosi confermata da un esperto.
 
+## 12. ARSAC, Servizio fitosanitario, università, riviste, forum (26 novembre 2026)
+
+Metodo comune per PDF e figure (`scripts/estrai_pdf.py`, `scripts/europepmc_figure.py`):
+1. immagini di ogni pagina convertite in RGB (in PNG: le immagini CMYK estratte "grezze" uscivano in
+   negativo) e figure composte divise in pannelli (`src/plantcare/data/pannelli.py`);
+2. etichetta dalla didascalia degli autori o, per i bollettini, dal testo della pagina, solo se nomina
+   **una sola** classe (`src/plantcare/data/testo_classi.py`: nomi scientifici anche abbreviati,
+   sinonimi come *Spilocaea oleaginea* e *Phoma tracheiphila*, nomi italiani legati alla coltura) e se la
+   coltura citata è quella della classe (una foglia di vite non diventa "marciume nero del melo");
+3. filtro CLIP "foto di campo" (`src/plantcare/data/filtro_foto.py`): via grafici, alberi
+   filogenetici, piastre, microscopio, locandine, schermate;
+4. **verifica a vista di ogni foto** (`scripts/foglio_contatti.py`): si tengono solo quelle in cui il
+   sintomo o l'insetto si vede. Le foto tenute sono in `data/external/verificate/`.
+
+| Fonte | Materiale letto | Candidate | Tenute dopo la verifica |
+|---|---|---|---|
+| ARSAC (sito: 4.706 immagini, 1.547 articoli) | foto con didascalia o testo vicino | 36 | 8 (in `configs/foto_letteratura.yaml`) |
+| ARSAC (628 PDF tecnici: bollettini, vademecum, schede di monitoraggio degli organismi da quarantena del Servizio fitosanitario regionale) | immagini dei PDF | 340 | 65 |
+| Phytopathologia Mediterranea (1.234 articoli, 636 su malattie delle colture; CC BY) | figure con didascalia | 258 | 120 |
+| UNIRC, IRIS (24.964 record, 429 pertinenti, 229 PDF aperti: tesi di dottorato e articoli) | figure con didascalia | 18 | 11 |
+| IRIS di Palermo, Bari, Napoli, Basilicata (1.321 PDF elencati) | molti riservati (rimandano al login); i server Cineca rispondono "troppe richieste" anche a un PDF ogni 3 secondi | | raccolta fermata per rispetto del limite |
+| IRIS di Catania | il server rifiuta la connessione sicura del proxy (errore TLS) | | non raggiungibile |
+| Europe PMC (al posto di Google Scholar) | 4.074 articoli aperti sulle specie del progetto | vedi sotto | vedi sotto |
+| forum.giardinaggio.it | robots.txt assente; 3.200 titoli letti, 33 con una sola classe; dopo 160 pagine il sito chiude le connessioni | | fermato: nessuna foto usata |
+| forum.agraria.org | pagina di verifica anti-robot | | non usato |
+
+**Google Scholar e Google Lens** non hanno un'interfaccia per programmi e le condizioni di Google
+vietano la raccolta automatica: al loro posto Europe PMC (testo completo e figure degli articoli aperti,
+con la licenza di ciascuno) e gli archivi OAI-PMH delle università e delle riviste.
+
+**Lezioni e dispense**: quelle sulle piattaforme di Ateneo richiedono le credenziali; si sono usate solo
+tesi, articoli e PDF pubblici.
+
 ## Prossimi passi in ordine di impatto atteso
 
 1. Rilevatore automatico delle foglie (due fasi) addestrato sui riquadri di PlantDoc.

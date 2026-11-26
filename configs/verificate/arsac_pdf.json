@@ -1,0 +1,587 @@
+[
+ {
+  "path": "external/images/arsac_pdf/arsac607_038_5747.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/4-Difesa-olivo.pdf",
+  "pagina": 38
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac6615_007_011.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2018/06/Bollettino-vitivinicolo-n.-4-uv.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10358_003_3861.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/06/3_Bollettino-viticolo-fitosanitario.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10358_003_3862.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/06/3_Bollettino-viticolo-fitosanitario.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10418_004_014.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/07/Bollettino-viticolo-ARSAC-n-5-.pdf",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10418_004_015.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/07/Bollettino-viticolo-ARSAC-n-5-.pdf",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10418_004_016.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/07/Bollettino-viticolo-ARSAC-n-5-.pdf",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10487_005_020.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/08/ARSAC-bollettino-viticolo-n-10.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac35525_001_001.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2023/06/Peronospora-vite-nota-ARSAC-2023_www.arsacweb.it_.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac46970_001_000.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2025/07/Peronospora-vite-nota-ARSAC-2023_REV-UV_Giugno-2025.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac46970_001_002.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2025/07/Peronospora-vite-nota-ARSAC-2023_REV-UV_Giugno-2025.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10439_008_026.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/07/ARSAC-bollettino-viticolo-n-7-.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10439_008_027.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/07/ARSAC-bollettino-viticolo-n-7-.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac22018_014_111.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2021/05/Arsac_principali-avversita-della-vite-nel-territorio-del-crotonese.pdf",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac22018_014_113.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2021/05/Arsac_principali-avversita-della-vite-nel-territorio-del-crotonese.pdf",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac46528_001_001.jpg",
+  "testa": "pest",
+  "classe": "inat:aleurocanthus_spiniferus",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2025/06/Opuscolo-pieghevole-Aleurocanhus-s.-25.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14596_005_006.jpg",
+  "testa": "pest",
+  "classe": "inat:aleurothrixus_floccosus",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/08/20_08_11-Area2-Bollettino-arsac.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac607_027_4081.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/4-Difesa-olivo.pdf",
+  "pagina": 27
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14356_002_005.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/07/20_07_14-Area8-Bollettino-arsac.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14552_003_003.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/08/20_08_04-Area-5-Bollettino-arsac.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14552_003_004.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/08/20_08_04-Area-5-Bollettino-arsac.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14870_002_006.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/09/20_09_15-Area-4-Bollettino-arsac.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14912_003_008.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/09/20_09_22-Area1-Bollettino-arsac.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac19242_003_003.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2021/02/LA-DIFESA-DELL_ACTINIDIA-Malattie-fungine-riscontrate-nella-Piana-di-Gioia-Tauro-Arsac.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14239_004_003.jpg",
+  "testa": "pest",
+  "classe": "inat:ceratitis_capitata",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/06/20_06_23_Area4-Bollettino__arsac.pdf",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14294_003_002.jpg",
+  "testa": "pest",
+  "classe": "inat:ceratitis_capitata",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/07/20_06_30_Area4-Bollettino.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14721_005_011.jpg",
+  "testa": "pest",
+  "classe": "inat:ceratitis_capitata",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/09/20_09_08-Area-4-Bollettino-arsac.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14870_001_000.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/09/20_09_15-Area-4-Bollettino-arsac.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac607_010_1858.jpg",
+  "testa": "pest",
+  "classe": "inat:euphyllura_olivina",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/4-Difesa-olivo.pdf",
+  "pagina": 10
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10358_005_3864.jpg",
+  "testa": "pest",
+  "classe": "inat:lobesia_botrana",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/06/3_Bollettino-viticolo-fitosanitario.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2353_006_009.jpg",
+  "testa": "pest",
+  "classe": "inat:metcalfa_pruinosa",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/ARSAC_opuscolo-METCALFA-PRUINOSA.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2353_006_010.jpg",
+  "testa": "pest",
+  "classe": "inat:metcalfa_pruinosa",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/ARSAC_opuscolo-METCALFA-PRUINOSA.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2353_006_011.jpg",
+  "testa": "pest",
+  "classe": "inat:metcalfa_pruinosa",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/ARSAC_opuscolo-METCALFA-PRUINOSA.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2353_014_024.jpg",
+  "testa": "pest",
+  "classe": "inat:metcalfa_pruinosa",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/ARSAC_opuscolo-METCALFA-PRUINOSA.pdf",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2353_033_049.jpg",
+  "testa": "pest",
+  "classe": "inat:metcalfa_pruinosa",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/ARSAC_opuscolo-METCALFA-PRUINOSA.pdf",
+  "pagina": 33
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2353_034_051.jpg",
+  "testa": "pest",
+  "classe": "inat:metcalfa_pruinosa",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/ARSAC_opuscolo-METCALFA-PRUINOSA.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14512_003_008.jpg",
+  "testa": "pest",
+  "classe": "inat:palpita_vitrealis",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/07/20_07_28-Area8-Bollettino-arsac.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_001_028.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_008_1242.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_009_1244.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_009_1245.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_010_1525.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 10
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_011_1527.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 11
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_013_1813.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 13
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac614_013_1814.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_absoluta",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/11-Nuova-tignola-del-pomodoro.pdf",
+  "pagina": 13
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2343_001_009.jpg",
+  "testa": "pest",
+  "classe": "inat:phyllocnistis_citrella",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/10/bollettino-18.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac607_042_6303.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/4-Difesa-olivo.pdf",
+  "pagina": 42
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2158_074_141.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/Lactinidia-e-la-sua-coltivazione-in-calabria.pdf",
+  "pagina": 74
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2147_001_000.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/Nota-Divulgativa-cancro-batterico-dellactinidia.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2159_005_007.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2159_005_008.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2159_006_013.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2159_007_017.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2159_007_018.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac2159_008_020.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "actinidia_chinensis",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2016/07/OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac607_007_1303.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/4-Difesa-olivo.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac607_023_3525.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/4-Difesa-olivo.pdf",
+  "pagina": 23
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14593_002_002.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/08/20_08_11-Area-4-Bollettino-arsac.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac13105_002_000.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/04/Bollettino-Area-2-_21_4_20.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac602_010_1860.jpg",
+  "testa": "pest",
+  "classe": "ip102_080",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/1-gestione-agrumeto.pdf",
+  "pagina": 10
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac602_010_1861.jpg",
+  "testa": "pest",
+  "classe": "ip102_080",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2015/11/1-gestione-agrumeto.pdf",
+  "pagina": 10
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac4042_003_023.jpg",
+  "testa": "disease",
+  "classe": "lit:plenodomus_tracheiphilus",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2017/06/bollettino-11.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac4042_003_024.jpg",
+  "testa": "disease",
+  "classe": "lit:plenodomus_tracheiphilus",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2017/06/bollettino-11.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac10257_009_3392.jpg",
+  "testa": "disease",
+  "classe": "powdery_mildew_grapevine",
+  "coltura": "vitis_vinifera",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2019/06/ARSAC_bollettino-viticolo-analitico-n-1.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/arsac_pdf/arsac14721_005_012.jpg",
+  "testa": "pest",
+  "classe": "inat:phyllocnistis_citrella",
+  "coltura": "",
+  "fonte": "arsac_pdf",
+  "documento": "https://www.arsacweb.it/wp-content/uploads/2020/09/20_09_08-Area-4-Bollettino-arsac.pdf",
+  "pagina": 5
+ }
+]

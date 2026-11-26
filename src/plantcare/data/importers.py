@@ -958,6 +958,23 @@ def import_vinevirus(seed: int = 42) -> list[ManifestRow]:
     return rows
 
 
+def import_verificate() -> list[ManifestRow]:
+    """Foto da bollettini, PDF, tesi e articoli verificate a vista una per una
+    (data/external/verificate/*.json, una lista per fonte). Split per documento: un quarto dei documenti
+    va nel test, come prova "esperti del Sud" (foto dello stesso documento sempre nello stesso split)."""
+    out = []
+    for f in sorted((EXT / "verificate").glob("*.json")):
+        for x in json.load(open(f, encoding="utf-8")):
+            if not (DATA / x["path"]).exists():
+                continue
+            pest = x["testa"] == "pest"
+            doc = x.get("documento") or x["path"]
+            split = "test" if zlib.crc32(f"42:{doc}".encode()) % 100 < 25 else "train"
+            out.append(ManifestRow(path=x["path"], source="verificate", split=split, plant=x.get("coltura") or "",
+                                   disease="" if pest else x["classe"], pest=x["classe"] if pest else "", organ=""))
+    return out
+
+
 def append_source(name: str, rows: list[ManifestRow]) -> int:
     """Sostituisce nel manifest le righe di una fonte senza rifare l'importazione di tutte le altre."""
     from dataclasses import asdict

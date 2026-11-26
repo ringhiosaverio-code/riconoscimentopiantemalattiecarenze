@@ -1,0 +1,1082 @@
+[
+ {
+  "path": "external/images/phytomed_pdf/phytomed_593_005_000_0.jpg",
+  "testa": "disease",
+  "classe": "apple_scab",
+  "coltura": "malus_domestica",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15739/14523",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_614_006_002_0.jpg",
+  "testa": "disease",
+  "classe": "bw:cryphonectria_parasitica",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/16789/15797",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_422_003_000_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5774/5772",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_422_003_001_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5774/5772",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_422_005_004_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5774/5772",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_235_002_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5388/5386",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_235_003_002_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5388/5386",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_235_003_003_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5388/5386",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_235_003_005_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_downy_mildew",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5388/5386",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_478_003_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/11110/11938",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_478_003_002_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/11110/11938",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_507_005_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12171/12328",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_507_005_000_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12171/12328",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_507_005_000_2.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12171/12328",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_507_005_000_3.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12171/12328",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_524_006_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/13021/12331",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_0_005_004_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4777/4775",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_5_006_003_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4783/4781",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_12_004_149_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4791/4789",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_15_002_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4796/4794",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_15_002_000_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4796/4794",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_23_005_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4807/4805",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_23_005_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4807/4805",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_25_003_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4809/4807",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_25_003_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4809/4807",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_2.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_3.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_4.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_5.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_007_046_8.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_008_050_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_008_051_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_71_008_052_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/4932/4930",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_116_003_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5056/5054",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_152_005_004_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5185/5183",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_152_005_005_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5185/5183",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_190_003_011_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5262/5260",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_190_003_012_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5262/5260",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_190_003_013_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5262/5260",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_190_003_014_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5262/5260",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_190_003_015_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5262/5260",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_005_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_005_000_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_005_000_2.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_005_000_3.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_006_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_006_002_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_268_006_003_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5453/5451",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_330_002_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5593/5591",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_330_002_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5593/5591",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_330_002_002_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5593/5591",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_330_002_003_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5593/5591",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_330_013_070_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5593/5591",
+  "pagina": 13
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_345_005_002_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5620/5618",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_345_005_003_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5620/5618",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_345_006_004_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5620/5618",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_345_007_005_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5620/5618",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_345_008_006_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5620/5618",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_345_011_011_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5620/5618",
+  "pagina": 11
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_003_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_003_000_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_003_000_2.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_003_000_3.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_003_000_4.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_003_000_5.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_2.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_3.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_4.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_6.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_004_001_9.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_008_002_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_008_002_1.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_346_008_002_2.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5621/5619",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_373_002_000_0.jpg",
+  "testa": "disease",
+  "classe": "grapevine_esca",
+  "coltura": "vitis_vinifera",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5666/5664",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_452_014_008_0.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/10619/10614",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_452_014_008_1.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/10619/10614",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_452_014_008_2.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/10619/10614",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_452_014_008_3.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/10619/10614",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_1.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_2.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_3.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_4.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_5.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_6.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_7.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_8.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_513_007_000_9.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/12377/12445",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_561_008_001_1.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/14544/13518",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_561_008_001_2.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/14544/13518",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_561_008_001_4.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/14544/13518",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_607_007_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/16571/15496",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_607_007_000_1.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/16571/15496",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_607_007_000_2.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/16571/15496",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_607_007_000_3.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/16571/15496",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_207_002_001_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5292/5290",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_207_002_002_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5292/5290",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_285_002_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5497/5495",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_285_002_000_1.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5497/5495",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_285_002_000_2.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5497/5495",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_454_007_004_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/10623/10618",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_587_003_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15569/14271",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_587_003_000_2.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15569/14271",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_597_002_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15891/14527",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_321_004_001_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5574/5572",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_321_005_003_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5574/5572",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_321_005_005_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5574/5572",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_321_007_008_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5574/5572",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_331_002_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5594/5592",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_366_004_000_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5655/5653",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_366_004_000_1.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5655/5653",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_366_004_000_2.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5655/5653",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_367_004_001_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/5657/5655",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_574_011_000_5.jpg",
+  "testa": "disease",
+  "classe": "plantwild:strawberry anthracnose",
+  "coltura": "fragaria_ananassa",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15094/13996",
+  "pagina": 11
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_574_015_003_5.jpg",
+  "testa": "disease",
+  "classe": "plantwild:strawberry anthracnose",
+  "coltura": "fragaria_ananassa",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15094/13996",
+  "pagina": 15
+ },
+ {
+  "path": "external/images/phytomed_pdf/phytomed_574_016_004_5.jpg",
+  "testa": "disease",
+  "classe": "plantwild:strawberry anthracnose",
+  "coltura": "fragaria_ananassa",
+  "fonte": "phytopathologia_mediterranea",
+  "documento": "https://oajournals.fupress.net/index.php/pm/article/download/15094/13996",
+  "pagina": 16
+ }
+]

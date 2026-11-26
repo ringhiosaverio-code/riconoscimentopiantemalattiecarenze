@@ -1,0 +1,101 @@
+[
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_10_0_002_000_0.jpg",
+  "testa": "pest",
+  "classe": "inat:ceratitis_capitata",
+  "coltura": "",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/8d7549a7-693c-4eb0-bb3f-c6a357f9ce29/2023Giuntietal_EntomolGen_medflybiology.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_10_0_002_000_1.jpg",
+  "testa": "pest",
+  "classe": "inat:ceratitis_capitata",
+  "coltura": "",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/8d7549a7-693c-4eb0-bb3f-c6a357f9ce29/2023Giuntietal_EntomolGen_medflybiology.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_25_0_001_001_0.jpg",
+  "testa": "disease",
+  "classe": "inat:sclerotinia_sclerotiorum",
+  "coltura": "",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/dd239282-5bfe-48ed-85d1-6451f24ad75e/New_Disease_Reports___2024___Aci___First_report_of_Sclerotinia_sclerotiorum_causing_rots_at_the_shoot_base_of_Actinidia.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_25_0_002_003_0.jpg",
+  "testa": "disease",
+  "classe": "inat:sclerotinia_sclerotiorum",
+  "coltura": "",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/dd239282-5bfe-48ed-85d1-6451f24ad75e/New_Disease_Reports___2024___Aci___First_report_of_Sclerotinia_sclerotiorum_causing_rots_at_the_shoot_base_of_Actinidia.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_25_0_002_003_1.jpg",
+  "testa": "disease",
+  "classe": "inat:sclerotinia_sclerotiorum",
+  "coltura": "",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/dd239282-5bfe-48ed-85d1-6451f24ad75e/New_Disease_Reports___2024___Aci___First_report_of_Sclerotinia_sclerotiorum_causing_rots_at_the_shoot_base_of_Actinidia.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_30_0_002_001_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/2a1feaba-0462-4554-afa4-c3bc8502e63a/2023%20-%20Buonaurio%20et%20al.%20Frontieres%20in%20Plant%20Sciences.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_30_0_002_001_1.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/2a1feaba-0462-4554-afa4-c3bc8502e63a/2023%20-%20Buonaurio%20et%20al.%20Frontieres%20in%20Plant%20Sciences.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_30_0_002_001_2.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/2a1feaba-0462-4554-afa4-c3bc8502e63a/2023%20-%20Buonaurio%20et%20al.%20Frontieres%20in%20Plant%20Sciences.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_30_0_002_001_3.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/2a1feaba-0462-4554-afa4-c3bc8502e63a/2023%20-%20Buonaurio%20et%20al.%20Frontieres%20in%20Plant%20Sciences.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_30_0_002_001_4.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/2a1feaba-0462-4554-afa4-c3bc8502e63a/2023%20-%20Buonaurio%20et%20al.%20Frontieres%20in%20Plant%20Sciences.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/iris_unirc_pdf/unirc_30_0_002_001_5.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "olea_europaea",
+  "fonte": "unirc_iris",
+  "documento": "https://iris.unirc.it/retrieve/2a1feaba-0462-4554-afa4-c3bc8502e63a/2023%20-%20Buonaurio%20et%20al.%20Frontieres%20in%20Plant%20Sciences.pdf",
+  "pagina": 2
+ }
+]
