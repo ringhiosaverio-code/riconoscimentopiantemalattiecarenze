@@ -10,6 +10,9 @@ prodotti:
     uso: "Coadiuvante per trattamenti fungicidi e insetticidi; antideriva; abbatte la schiuma nella preparazione. Secondo il produttore è impiegabile in miscela con tutti i fungicidi e insetticidi in commercio e in agricoltura biologica con i prodotti ammessi."
     pagina: "https://gowanitalia.it/agrofarmaco/mago/"
     scheda: "https://gowanitalia.it/wp-content/uploads/2026/03/DIFESA-OLIVO-Scheda-Colturale-2026.pdf"
+    dose: "50-150 ml/hl, massimo 1,5 l/ha (etichetta: «alla dose di mL 50-150/hL (massimo 1.5 L/ha)»)"
+    dose_hl: [50, 150]
+    max_ha: 1500
   - nome: "ANTISCHIUMA PLUS"
     tipo: "Antischiuma per soluzioni"
     composizione: "Antischiuma siliconico in emulsione acquosa 33%"
@@ -19,6 +22,7 @@ prodotti:
     tipo: "Corroborante, potenziatore delle difese delle piante"
     composizione: "Zeolite cubana 100% (polvere di roccia)"
     uso: "Miscibile con i concimi e con i prodotti per la difesa; sulle colture sensibili provare prima su alcune piante. Su olivo 2-4 kg/ha (scheda di difesa olivo 2026)."
+    dose: "olivo 2-4 kg/ha (scheda di difesa olivo 2026)"
     pagina: "https://gowanitalia.it/agrofarmaco/zeolite-gowan/"
     scheda: "https://gowanitalia.it/wp-content/uploads/2026/03/DIFESA-OLIVO-Scheda-Colturale-2026.pdf"
   - nome: "CLEANER GOWAN"

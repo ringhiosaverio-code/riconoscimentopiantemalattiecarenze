@@ -1,0 +1,194 @@
+# Regole della sezione Consigli: come l'app mette in ordine i prodotti Gowan registrati per una coltura e
+# un'avversità, come un tecnico che applica la difesa integrata. Sono regole scritte e verificabili (non una
+# rete neurale): ogni criterio cita la sua fonte (configs/sources.yaml) e ogni prodotto proposto mostra i
+# motivi della sua posizione. Le dosi vengono solo dalle registrazioni e dalle etichette.
+#
+# 1. Esclusioni (il prodotto non si propone e compare tra gli "esclusi" con il motivo):
+#    - nessun uso registrato sulla coltura per l'avversità, o uso solo in serra quando si tratta in pieno campo;
+#    - fase della coltura fuori dagli stadi BBCH scritti nella nota d'uso, o dopo il limite scritto al posto
+#      dell'intervallo di sicurezza (IF inizio fioritura, FF fine fioritura, TB solo trattamenti al bruno);
+#    - intervallo di sicurezza più lungo dei giorni che mancano alla raccolta;
+#    - produzione biologica richiesta e prodotto non segnato BIO da Gowan;
+#    - Disciplinare richiesto e sostanza attiva non ammessa dal Disciplinare per quella coltura e avversità;
+#    - in fioritura, prodotti la cui etichetta vieta il trattamento in fioritura (api e impollinatori);
+#    - sostanza attiva non più approvata nell'UE (banca dati UE dei pesticidi).
+# 2. Punteggio (in ordine decrescente; a parità vale l'intervallo di sicurezza più breve).
+
+fonti:
+  difesa_integrata: [disc_calabria_2026_08, dir_2009_128_ce]
+  resistenze: [disc_calabria_2026_08]
+  programmi: [gowan_programmi]
+  disciplinare: [disc_calabria_2026_08]
+  ue: [eu_pesticides_db]
+
+# Criteri del Disciplinare Calabria 2026 ("Criteri adottati nella scelta dei prodotti fitosanitari"):
+# «devono essere privilegiati, ogniqualvolta possibile, i metodi non chimici di difesa fitosanitaria, così come
+# prescritto dalla direttiva 2009/128/CE»; «minimizzare i rischi per la salute dell'uomo e per l'ambiente
+# selezionando i fitofarmaci che risultano a minor impatto»; «enfatizzare l'attività degli organismi utili,
+# ricorrendo ai fitofarmaci più selettivi»; resistenze gestite con «le indicazioni del FRAC, dell'IRAC e
+# dell'HRAC» (Allegato 4, classificazione dei meccanismi d'azione). Il tipo di azione viene dalle etichette.
+punteggi:
+  programma_fase:
+    peso: 3
+    testo: "Gowan lo posiziona in questa fase nel suo programma di difesa per questa coltura"
+    fonti: [gowan_programmi]
+  programma_altra_fase:
+    peso: 0.5
+    testo: "Nel programma Gowan per questa avversità, ma in un'altra fase"
+    fonti: [gowan_programmi]
+  situazione_adatta:
+    peso: 2
+    testo: "Tipo di azione (dall'etichetta) adatto alla situazione"
+    fonti: []
+  situazione_parziale:
+    peso: 1
+    testo: "Tipo di azione (dall'etichetta) utile nella situazione"
+    fonti: []
+  basso_impatto:
+    peso: 1
+    testo: "Mezzo biologico o ammesso in agricoltura biologica: il Disciplinare chiede di privilegiare i metodi non chimici e i prodotti a minor impatto"
+    fonti: [disc_calabria_2026_08, dir_2009_128_ce]
+  selettivo:
+    peso: 1
+    testo: "Insetticida selettivo: il Disciplinare chiede di ricorrere ai fitofarmaci più selettivi, per non danneggiare gli organismi utili"
+    fonti: [disc_calabria_2026_08]
+  stesso_gruppo:
+    peso: -3
+    testo: "Stesso gruppo di resistenza (FRAC/IRAC) dell'ultimo trattamento: alterna con un gruppo diverso"
+    fonti: [disc_calabria_2026_08]
+  candidata_sostituzione:
+    peso: -0.5
+    testo: "Sostanza candidata alla sostituzione (banca dati UE; il Disciplinare ne limita l'uso): preferire alternative a minor rischio quando sono efficaci"
+    fonti: [eu_pesticides_db, disc_calabria_2026_08]
+  non_nel_disciplinare:
+    peso: -4
+    testo: "Sostanza attiva non elencata dal Disciplinare della Calabria per questa coltura e avversità"
+    fonti: [disc_calabria_2026_08]
+  api_avviso:
+    peso: -1
+    testo: "Pericoloso per le api: in fioritura evitarlo o seguire le prescrizioni dell'etichetta"
+    fonti: []
+
+# Gruppi esclusi dalla regola dell'alternanza: multisito (M, rischio BASSO) e mezzi biologici (BM, resistenza non
+# nota), secondo l'Allegato 4 del Disciplinare Calabria 2026.
+gruppi_basso_rischio: ["FRAC M", "FRAC BM"]
+
+# Situazioni proposte all'utente. azioni_*: parole chiave dell'azione (configs/difesa/gowan_caratteristiche.yaml)
+# che danno il punteggio situazione_adatta o situazione_parziale. dose: dove scegliere la dose nell'intervallo
+# dell'etichetta (min, media, max), come indicano le etichette ("dose più elevata in caso di forte pressione").
+situazioni:
+  malattia:
+    - id: prevenzione
+      nome: "Prevenzione: condizioni favorevoli alla malattia, nessun sintomo"
+      azioni_adatte: [preventiva, copertura, multisito, elicitore, antagonista]
+      azioni_parziali: [sistemica, locosistemica, citotropica, penetrante]
+      dose: min
+      consiglio: >-
+        Trattare prima della pioggia infettante o allo scadere della protezione del trattamento precedente;
+        i prodotti di copertura vanno distribuiti in modo uniforme e rinnovati dopo piogge dilavanti.
+    - id: primi_sintomi
+      nome: "Primi sintomi: poche macchie o lesioni appena comparse"
+      azioni_adatte: [curativa, citotropica, eradicante, bloccante, translaminare]
+      azioni_parziali: [sistemica, locosistemica, penetrante]
+      dose: media
+      consiglio: >-
+        Contro un'infezione già in corso i soli prodotti di copertura non bastano: servono prodotti che entrano
+        nei tessuti, associati se possibile a un partner di copertura; togliere gli organi molto colpiti.
+    - id: attacco
+      nome: "Attacco in corso: sintomi diffusi, condizioni ancora favorevoli"
+      azioni_adatte: [curativa, eradicante, bloccante]
+      azioni_parziali: [citotropica, sistemica, translaminare, locosistemica]
+      dose: max
+      consiglio: >-
+        Usare la dose più alta dell'etichetta e accorciare l'intervallo entro i limiti indicati; valutare con un
+        tecnico se il danno giustifica ancora il trattamento.
+  insetto:
+    - id: prevenzione
+      nome: "Monitoraggio: prime catture nelle trappole, soglia non ancora raggiunta"
+      azioni_adatte: [ovicida, selettivo]
+      azioni_parziali: [larvicida]
+      dose: min
+      consiglio: >-
+        Il Disciplinare chiede di trattare solo al superamento della soglia di intervento: continuare il
+        monitoraggio; i mezzi biologici e selettivi vanno posizionati all'inizio delle schiusure.
+    - id: primi_sintomi
+      nome: "Prime uova, larve giovani o prime forme mobili"
+      azioni_adatte: [ovicida, larvicida, ingestione, selettivo]
+      azioni_parziali: [contatto, translaminare]
+      dose: media
+      consiglio: >-
+        È il momento migliore per i prodotti biologici e ovo-larvicidi: il Disciplinare ricorda che il Bacillus
+        thuringiensis «agisce per ingestione ed esplica la massima attività se applicato quando le larve sono nei
+        primi stadi di sviluppo» (Allegato 3).
+    - id: attacco
+      nome: "Infestazione in corso: soglia superata, adulti e forme mobili numerose"
+      azioni_adatte: [abbattente, adulticida]
+      azioni_parziali: [contatto, ingestione, larvicida, persistente]
+      dose: max
+      consiglio: >-
+        Servono prodotti ad azione abbattente sugli stadi presenti; rispettare il limite di trattamenti e
+        alternare i gruppi di resistenza.
+
+# Gruppi di colture per le fasi generiche e per le dosi dei nutrizionali (espressioni sul nome della coltura).
+gruppi_colture:
+  frutta: "pesco|albicocco|ciliegio|susino|mandorlo|melo|^pero$|cotogno|nespolo|pomacee|nashi|vite|olivo|agrumi|arancio|limone|mandarino|clementino|pompelmo|bergamotto|cedro|chinotto|limetta|pomelo|tangerino|kumquat|mapo|actinidia|nocciolo|noce|castagno|melograno|fico|lampone|mirtillo|ribes|rovo|uva spina|pistacchio|loti|avocado|annona|azzeruolo|sambuco|rosa canina|pino da pinoli"
+  cereali: "frumento|orzo|avena|segale|triticale|farro|mais|riso|sorgo|miglio|loglio"
+  industriali: "barbabietola|tabacco|girasole|colza|soia|cotone|lino|ravizzone|erba medica|oleaginose|arachide|prati|senape"
+  ornamentali: "ornamentali|floreali|rosa \\(|crisantemo|garofano|gerbera|geranio|gladiolo|ciclamino|forestali|cipresso|pioppo|tappeti erbosi"
+  orticole: "."
+
+fasi_generiche:
+  frutta:
+    - {id: riposo, nome: "Riposo vegetativo (inverno, trattamenti al bruno)", bbch: [0, 0]}
+    - {id: ripresa, nome: "Ripresa vegetativa: rottura gemme e prime foglie", bbch: [1, 19]}
+    - {id: prefioritura, nome: "Pre-fioritura (bottoni fiorali)", bbch: [51, 59]}
+    - {id: fioritura, nome: "Fioritura", bbch: [60, 69]}
+    - {id: allegagione, nome: "Allegagione, caduta petali", bbch: [69, 72]}
+    - {id: accrescimento, nome: "Accrescimento dei frutti", bbch: [72, 79]}
+    - {id: maturazione, nome: "Invaiatura e maturazione", bbch: [81, 89]}
+    - {id: caduta_foglie, nome: "Dopo la raccolta, caduta delle foglie", bbch: [91, 97]}
+  orticole:
+    - {id: terreno, nome: "Prima del trapianto o della semina (terreno)", bbch: [0, 9]}
+    - {id: trapianto, nome: "Trapianto o emergenza, prime foglie", bbch: [10, 13]}
+    - {id: vegetativa, nome: "Sviluppo vegetativo", bbch: [14, 49]}
+    - {id: fioritura, nome: "Fioritura", bbch: [51, 69]}
+    - {id: accrescimento, nome: "Allegagione e sviluppo dei frutti", bbch: [70, 79]}
+    - {id: maturazione, nome: "Maturazione e raccolta", bbch: [81, 89]}
+  cereali:
+    - {id: emergenza, nome: "Semina ed emergenza", bbch: [0, 13]}
+    - {id: accestimento, nome: "Accestimento", bbch: [21, 29]}
+    - {id: levata, nome: "Levata", bbch: [30, 39]}
+    - {id: spigatura, nome: "Botticella e spigatura", bbch: [41, 59]}
+    - {id: fioritura, nome: "Fioritura", bbch: [60, 69]}
+    - {id: maturazione, nome: "Maturazione", bbch: [71, 89]}
+  industriali:
+    - {id: emergenza, nome: "Semina ed emergenza", bbch: [0, 13]}
+    - {id: vegetativa, nome: "Sviluppo vegetativo", bbch: [14, 49]}
+    - {id: fioritura, nome: "Fioritura", bbch: [51, 69]}
+    - {id: maturazione, nome: "Maturazione", bbch: [70, 89]}
+  ornamentali:
+    - {id: vegetativa, nome: "Vegetazione", bbch: [10, 49]}
+    - {id: fioritura, nome: "Fioritura", bbch: [51, 69]}
+    - {id: dopo_fioritura, nome: "Dopo la fioritura", bbch: [70, 89]}
+    - {id: riposo, nome: "Riposo vegetativo", bbch: [0, 0]}
+
+# epoche delle schede colturali Gowan -> fasi generiche corrispondenti
+epoche_fasi:
+  riposo: [riposo, caduta_foglie]
+  caduta_foglie: [caduta_foglie]
+  prefioritura: [ripresa, prefioritura]
+  terreno: [riposo, ripresa, terreno]
+  vegetazione: [ripresa, prefioritura, fioritura, allegagione, accrescimento, maturazione, vegetativa, trapianto]
+
+# fasi in fioritura (per le avvertenze delle api) e limiti scritti al posto dell'intervallo di sicurezza
+fioritura_bbch: [60, 69]
+limiti_fase:
+  IF: {fino_bbch: 59, testo: "sospendere i trattamenti a inizio fioritura"}
+  FF: {fino_bbch: 69, testo: "sospendere i trattamenti a fine fioritura"}
+  TB: {solo_riposo: true, testo: "solo trattamenti al bruno (autunno-inverno)"}
+  ET: {testo: "per l'asparago: trattare dopo la raccolta dei turioni"}
+
+avvertenza: >-
+  Questi consigli applicano regole scritte ai dati del produttore, del Disciplinare e della banca dati UE:
+  non sostituiscono l'etichetta, che prevale sempre, né il tecnico abilitato alla consulenza. L'uso
+  professionale dei prodotti fitosanitari richiede il certificato di abilitazione (D.Lgs. 150/2012).

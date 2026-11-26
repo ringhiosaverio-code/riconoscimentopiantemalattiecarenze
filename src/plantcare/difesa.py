@@ -93,7 +93,8 @@ def keys_in(text: str, syn: dict | None = None) -> set[str]:
         if g.lower() in ITALIAN_GENUS or s in ITALIAN_SPECIES:
             continue
         if s in ("spp", "sp"):
-            out.add(f"{g.lower()} *")
+            k = f"{g.lower()} *"
+            out.add(syn.get(k, k))
             continue
         if s in NOT_SPECIES:
             continue
@@ -116,9 +117,38 @@ def _match(a: set[str], b: set[str]) -> bool:
     return any(x.split()[0] in gb for x in a) or any(x.split()[0] in ga for x in b)
 
 
-def load_disciplinare(anno: int) -> dict:
-    p = DIFESA / f"disciplinare_calabria_{anno}.json"
-    d = json.load(open(p, encoding="utf-8"))
+def disciplinari() -> list[Path]:
+    """File dei Disciplinari della Calabria (configs/difesa/disciplinare_calabria_*.json), dal più vecchio al più
+    recente per anno e data di pubblicazione: l'ultimo è quello in vigore, gli altri servono per i confronti."""
+    files = []
+    for p in DIFESA.glob("disciplinare_calabria_*.json"):
+        d = json.load(open(p, encoding="utf-8"))
+        files.append(((d["anno"], d.get("pubblicato") or ""), p))
+    return [p for _, p in sorted(files)]
+
+
+def etichetta_versione(d: dict) -> str:
+    """Nome breve della versione del Disciplinare: anno, con il mese di pubblicazione se è noto ('agosto 2026')."""
+    mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre",
+            "novembre", "dicembre"]
+    pub = d.get("pubblicato") or ""
+    if re.match(r"\d{4}-\d{2}", pub) and int(pub[:4]) == int(d["anno"]):
+        return f"{mesi[int(pub[5:7]) - 1]} {d['anno']}"
+    return str(d["anno"])
+
+
+def load_disciplinare(anno: int | None = None, path: Path | None = None) -> dict:
+    """Disciplinare letto, con i nomi scientifici di ogni avversità. Senza argomenti: quello in vigore (il più
+    recente); con anno: la versione più recente di quell'anno."""
+    if path is None:
+        files = disciplinari()
+        if anno is not None:
+            files = [f for f in files if json.load(open(f, encoding="utf-8"))["anno"] == anno]
+        if not files:
+            raise FileNotFoundError(f"nessun Disciplinare della Calabria in {DIFESA}")
+        path = files[-1]
+    d = json.load(open(path, encoding="utf-8"))
+    d["file"] = path.name
     syn = _syn()
     rows = []
     for r in d["righe"]:
@@ -237,23 +267,119 @@ def tipo_sostanza(nome: str) -> str:
     return "sintesi"
 
 
-def build_app_data(readers: dict, crops_of: dict | None = None, anno: int = 2026, anno_prec: int = 2023) -> dict:
-    """Dati di difesa per l'app (app/data/difesa.json), per le classi dei lettori di malattie e insetti."""
+def _scheletro(s: str) -> str:
+    """Forma semplificata di un nome di sostanza, per confrontare nomi italiani e inglesi
+    (tebuconazolo/tebuconazole, deltametrina/deltamethrin, exitiazox/hexythiazox)."""
+    import unicodedata
+    s = unicodedata.normalize("NFKD", (s or "").lower()).encode("ascii", "ignore").decode()
+    s = re.sub(r"\(.*?\)", " ", s)
+    s = re.sub(r"[^a-z]", "", s)
+    for a, b in (("th", "t"), ("ph", "f"), ("ch", "c"), ("qu", "c"), ("y", "i"), ("k", "c"), ("x", "s"), ("z", "s"), ("h", "")):
+        s = s.replace(a, b)
+    return s[:-1] if len(s) > 4 and s[-1] in "aeiou" else s
+
+
+_UE_INDEX: dict = {}
+
+
+def stato_ue(nome: str, ue: dict | None = None) -> dict | None:
+    """Stato nella banca dati UE dei pesticidi di una sostanza scritta in italiano (Disciplinare o etichetta):
+    {"nome": nome UE, "stato": "Approved" | "Not approved" | "Pending", "scadenza": ...}. Per i microrganismi con
+    più ceppi vale il ceppo approvato, se c'è. None se il nome non si riconosce con sicurezza."""
+    import difflib
+    ue = ue if ue is not None else load_ue()
+    sost = ue.get("sostanze") or {}
+    if not sost:
+        return None
+    key = id(sost)
+    if _UE_INDEX.get("key") != key:
+        idx = {}
+        for n in sost:
+            idx.setdefault(_scheletro(n), []).append(n)
+        reg = _load_yaml(DIFESA / "sostanze.yaml") if (DIFESA / "sostanze.yaml").exists() else {}
+        _UE_INDEX.update({"key": key, "idx": idx, "skel": sorted(idx), "reg": reg.get("sostanze") or {},
+                          "manuali": {k.lower(): v for k, v in (reg.get("nomi_ue_disciplinare") or {}).items()}})
+    I = _UE_INDEX
+    low = re.sub(r"\(\s*\d*\s*\)?$", "", (nome or "").lower())
+    low = re.sub(r"\b(esca|pure|puro|pura|con:|spp\.?|sp\.)", " ", low)
+    low = re.sub(r"\s+", " ", low.replace("(", " ").replace(")", " ")).strip(" .*:")
+    parts = [x.strip() for x in re.split(r"\s*\+\s*", low) if x.strip()]
+    out = []
+    for part in parts:
+        names = None
+        if part in I["manuali"]:
+            if I["manuali"][part] is None:
+                return None
+            names = [I["manuali"][part]]
+        if names is None:
+            for v in I["reg"].values():
+                if re.search(v["disciplinare"], part):
+                    names = [v["ue"]]
+                    break
+        if names is None:
+            sk = _scheletro(part)
+            if len(sk) < 5:
+                return None
+            if sk in I["idx"]:
+                names = I["idx"][sk]
+            else:
+                pref = [n for s2, ns in I["idx"].items() if s2.startswith(sk) and len(sk) >= 10 for n in ns]
+                if pref:  # specie di microrganismo: tutti i ceppi
+                    names = pref
+                else:
+                    close = difflib.get_close_matches(sk, I["skel"], n=1, cutoff=0.9)
+                    if close and close[0][:3] == sk[:3]:
+                        # nome scritto in modo un po' diverso: si accetta solo una sostanza approvata, perché
+                        # un abbinamento incerto non deve far credere revocata una sostanza (fenexamid/fentrazamide)
+                        names = [n for n in I["idx"][close[0]] if (sost.get(n) or {}).get("stato") == "Approved"]
+        if not names:
+            return None
+        ents = [dict(sost[n], nome=n) for n in names if n in sost]
+        if not ents:
+            return None
+        ok = [e for e in ents if e.get("stato") == "Approved"]
+        out.append(ok[0] if ok else ents[0])
+    bad = [e for e in out if e.get("stato") == "Not approved"]
+    return bad[0] if bad else (out[0] if out else None)
+
+
+def load_ue() -> dict:
+    p = DIFESA / "sostanze_ue.json"
+    return json.load(open(p, encoding="utf-8")) if p.exists() else {"sostanze": {}}
+
+
+def build_app_data(readers: dict, crops_of: dict | None = None) -> dict:
+    """Dati di difesa per l'app (app/data/difesa.json), per le classi dei lettori di malattie e insetti.
+    Disciplinare in vigore = il più recente; per ogni sostanza uscita dall'elenco si indica l'ultima versione
+    precedente che la conteneva; le sostanze non più approvate nell'UE sono segnalate."""
     syn = _syn()
-    disc, old = load_disciplinare(anno), None
-    if (DIFESA / f"disciplinare_calabria_{anno_prec}.json").exists():
-        old = load_disciplinare(anno_prec)
+    files = disciplinari()
+    disc = load_disciplinare(path=files[-1])
+    prev = [load_disciplinare(path=f) for f in reversed(files[:-1])]  # dalla più recente alla più vecchia
+    ue = load_ue()
     gw = load_gowan()
     righe, usi, classi = [], [], {}
     row_idx, use_idx = {}, {}
+
+    def sost(x):
+        out = {"s": x["sostanza"], "n": x["note"], "t": tipo_sostanza(x["sostanza"])}
+        st = stato_ue(x["sostanza"], ue)
+        if st and st.get("stato") == "Not approved":
+            out["ue"] = {"nome": st["nome"], "stato": st["stato"], "scadenza": st.get("scadenza")}
+        return out
 
     def add_row(r):
         k = (r["coltura"], r["avversita"], r["pagina"])
         if k not in row_idx:
             row_idx[k] = len(righe)
-            rem = removed_since(old, disc, r["coltura"], r) if old else []
+            rem, seen = [], set()
+            for old in prev:
+                for x in removed_since(old, disc, r["coltura"], r):
+                    if x.lower() not in seen:
+                        seen.add(x.lower())
+                        rem.append({"s": x, "v": etichetta_versione(old)})
             righe.append({"coltura": r["coltura"], "avversita": r["avversita"], "criteri": r["criteri"],
-                          "sostanze": [{"s": s["sostanza"], "n": s["note"], "t": tipo_sostanza(s["sostanza"])} for s in r["sostanze"]],
+                          "sostanze": [sost(x) for x in r["sostanze"]],
                           "note": r["note"], "pagina": r["pagina"], "rimosse": rem})
         return row_idx[k]
 
@@ -265,7 +391,7 @@ def build_app_data(readers: dict, crops_of: dict | None = None, anno: int = 2026
         return use_idx[k]
 
     copper = {}
-    for r in json.load(open(DIFESA / f"disciplinare_calabria_{anno}.json", encoding="utf-8"))["righe"]:
+    for r in json.load(open(files[-1], encoding="utf-8"))["righe"]:
         if r["avversita"].startswith("(***)") and r["coltura"] not in copper:
             copper[r["coltura"]] = (r["avversita"] + " " + r["note"]).strip()
     for head in ("disease", "pest"):
@@ -294,8 +420,10 @@ def build_app_data(readers: dict, crops_of: dict | None = None, anno: int = 2026
     used = {u["prodotto"] for u in usi}
     info = {p["prodotto"]: {k: p.get(k) for k in ("compatibilita", "etichetta_validita", "etichetta") if p.get(k)}
             for p in gw.get("prodotti", []) if p["prodotto"] in used or p["prodotto"] in ("MAGO",)}
+    fonte = lambda d: {"titolo": d["fonte"], "url": d["url"], "anno": d["anno"], "versione": etichetta_versione(d),
+                       "pubblicato": d.get("pubblicato")}
     return {"coadiuvanti": coad, "prodotti_info": info,
-            "fonti": {"disciplinare": {"titolo": disc["fonte"], "url": disc["url"], "anno": disc["anno"]},
-                      "disciplinare_prec": ({"titolo": old["fonte"], "url": old["url"], "anno": old["anno"]} if old else None),
-                      "gowan": {k: gw.get(k) for k in ("fonte", "consultato", "avvertenza")}},
+            "fonti": {"disciplinare": fonte(disc), "disciplinare_prec": [fonte(d) for d in prev],
+                      "gowan": {k: gw.get(k) for k in ("fonte", "consultato", "avvertenza")},
+                      "ue": {k: ue.get(k) for k in ("fonte", "url", "scaricato") if ue.get(k)}},
             "righe": righe, "usi": usi, "classi": classi, "rame": copper}

@@ -1,0 +1,270 @@
+# Programmi di difesa di Gowan Italia per coltura: "posizionamento ideale" dei prodotti nelle fasi della
+# coltura (depliant vite, pomodoro, lattuga, fragola) ed epoca/tipologia dei trattamenti (schede
+# colturali di pesco, susino, ciliegio, actinidia, olivo, zucchino, patata, nocciolo).
+# Trascritti a vista dai PDF del produttore (2025-2026); servono a mettere in ordine i prodotti per la
+# fase scelta. Dosi e limiti restano quelli dell'etichetta (configs/difesa/gowan_italia.json), che prevale.
+# fasi: in ordine; "da"/"a" sono i numeri delle fasi (1 = prima), estremi compresi.
+# bbch: intervallo indicativo della fase sulla scala BBCH (Meier U., BBCH Monograph, JKI 2018), per
+# confrontare la fase scelta con gli stadi BBCH scritti in etichetta.
+# avversita: parole chiave per riconoscere l'avversità negli usi registrati (minuscole, espressioni regolari).
+# nel_catalogo: false = prodotto del depliant assente dagli usi registrati scaricati (non viene proposto).
+
+fonte: "Gowan Italia, depliant e schede colturali di difesa 2025-2026 (gowanitalia.it)"
+
+bio_gowan:  # prodotti con il marchio "BIO - prodotto consentito in agricoltura biologica" nelle schede Gowan
+  - AIRONE LIQUIDO
+  - AIRONE PIÙ
+  - GRIFON 280 LIQUIDO
+  - GRIFON PIÙ
+  - CUPRORAM 35 WG NC
+  - CUPRORAM 35 WG BLU
+  - IPERION
+  - ASSORAM ELITE 20 WDG
+  - BASIRAM ELITE
+  - HATTRICK 30 WG
+  - REMEDIER
+  - ASTREL WDG
+  - IBISCO
+  - IBISCO VIT
+  - POLYVERSUM
+  - MAGO
+  - ZEOLITE GOWAN
+
+avversita:  # parole chiave delle avversità dei programmi
+  peronospora: "peronospor|plasmopara|phytophthora infestans|bremia|pseudoperonospora"
+  oidio: "oidio|mal bianco|erysiphe|uncinula|podosphaera|leveillula|sphaerotheca|golovinomyces"
+  botrite: "botrit|botrytis|muffa grigia"
+  marciumi_tellurici: "marciume radicale|marciumi radicali|marciume del colletto|colletto|pythium|rhizoctonia|fusarium|armillaria|sclerotinia"
+  esca: "esca|phaeomoniella|phaeoacremonium|fomitiporia|petri"
+  tignole: "tignol|lobesia|eupoecilia|tortric|eulia|cydia|anarsia|prays"
+  cicaline: "cicalin|scaphoideus|empoasca|jacobiasca"
+  lepidotteri: "lepidotter|nottu|tignol|piralid|spodoptera|helicoverpa|tuta|phthorimaea|mamestra|autographa|ifantria"
+  mosca_bianca: "mosca bianca|aleurod|bemisia|trialeurodes"
+  acari: "acar|ragnetto|tetranych|panonych|eriofid"
+  tripidi: "tripid|thrips|frankliniella"
+  nottue_afidi_cimici: "nottu|afid|cimic|halyomorpha|nezara"
+  afidi: "afid|aphis|myzus"
+  corineo: "corineo|vaiolatura|coryneum|stigmina|wilsonomyces"
+  moniliosi: "monili"
+  bolla: "bolla|taphrina"
+  batteriosi: "batteri|pseudomonas|xanthomonas|cancro batterico"
+  cicloconio: "cicloconio|occhio di pavone|spilocaea|venturia oleagin|fusicladium"
+  rogna: "rogna"
+  fumaggine: "fumaggin"
+  mosca_olivo: "mosca (delle olive|dell'olivo)|bactrocera|dacus"
+  cocciniglie: "coccinigli|saissetia"
+  alternaria: "alternari"
+  ruggine: "ruggin"
+  dorifora: "dorifora|leptinotarsa"
+  mosca_frutta: "mosca della frutta|mosca delle ciliegie|ceratitis|rhagoletis|drosophila"
+
+programmi:
+  vite:
+    titolo: "Difesa vite 2026: principali soluzioni, posizionamento ideale"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/02/Dep-DIFESA-VITE-2026-web.pdf"
+    colture_gowan: ["Vite per uva da vino", "Vite per uva da tavola", "Vite"]
+    fasi:
+      - {nome: "Pianto", bbch: [0, 1]}
+      - {nome: "Germogliamento", bbch: [5, 9]}
+      - {nome: "Foglie distese", bbch: [11, 19]}
+      - {nome: "Grappoli visibili", bbch: [53, 53]}
+      - {nome: "Grappoli separati", bbch: [55, 55]}
+      - {nome: "Pre-fioritura", bbch: [57, 59]}
+      - {nome: "Fioritura", bbch: [60, 67]}
+      - {nome: "Fine fioritura", bbch: [68, 69]}
+      - {nome: "Allegagione", bbch: [71, 71]}
+      - {nome: "Accrescimento acini", bbch: [73, 75]}
+      - {nome: "Chiusura grappolo", bbch: [77, 79]}
+      - {nome: "Invaiatura", bbch: [81, 83]}
+      - {nome: "Pre-raccolta", bbch: [85, 89]}
+    voci:
+      - {avversita: peronospora, prodotto: "ZOXIUM 240 SC", da: 3, a: 11, nota: "con un partner (es. Cuneb, Kasko Met)"}
+      - {avversita: peronospora, prodotto: "REBOOT", da: 4, a: 8}
+      - {avversita: peronospora, prodotto: "ELECTIS R FLOW", da: 9, a: 12}
+      - {avversita: peronospora, prodotto: "FANTIC F NC WG", da: 3, a: 6}
+      - {avversita: peronospora, prodotto: "FANTIC F NC WG", da: 8, a: 10}
+      - {avversita: peronospora, prodotto: "KASKO MET", da: 4, a: 10}
+      - {avversita: peronospora, prodotto: "GENKOTSU", da: 3, a: 5}
+      - {avversita: peronospora, prodotto: "GENKOTSU", da: 10, a: 12}
+      - {avversita: peronospora, prodotto: "AIRONE LIQUIDO", da: 2, a: 13, nota: "linea Airone; al germogliamento attività collaterale contro escoriosi"}
+      - {avversita: peronospora, prodotto: "AIRONE PIÙ", da: 2, a: 13, nota: "linea Airone"}
+      - {avversita: oidio, prodotto: "IBISCO VIT", da: 4, a: 13}
+      - {avversita: oidio, prodotto: "DOMARK 125 PLUS", da: 4, a: 11}
+      - {avversita: oidio, prodotto: "PRONTO", da: 3, a: 5}
+      - {avversita: oidio, prodotto: "PRONTO", da: 9, a: 11}
+      - {avversita: botrite, prodotto: "REMEDIER", da: 7, a: 13, nota: "efficace anche contro il marciume acido"}
+      - {avversita: botrite, prodotto: "FANTIC F NC WG", da: 6, a: 11, nota: "antiperonosporico con attività collaterale contro la botrite"}
+      - {avversita: botrite, prodotto: "ZOXIUM 240 SC", da: 6, a: 11, nota: "con un partner; attività collaterale contro la botrite"}
+      - {avversita: esca, prodotto: "REMEDIER", da: 1, a: 1, nota: "mal dell'esca: al pianto (protezione delle ferite di potatura)"}
+      - {avversita: tignole, prodotto: "ASTREL WDG", da: 5, a: 12}
+      - {avversita: tignole, prodotto: "GLORIAL 25 EC", da: 9, a: 12, nota: "tignole e cicaline, compreso lo scafoideo"}
+      - {avversita: cicaline, prodotto: "GLORIAL 25 EC", da: 9, a: 12, nota: "tignole e cicaline, compreso lo scafoideo"}
+    complementi:
+      - {prodotto: "MAGO", da: 2, a: 13, nota: "coadiuvante miscelabile con fungicidi e insetticidi"}
+
+  pomodoro:
+    titolo: "Linea pomodoro 2026: difesa e nutrizione, posizionamento ideale"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/03/Dep-LINEA-POMODORO-2026.pdf"
+    colture_gowan: ["Pomodoro"]
+    fasi:
+      - {nome: "Pre-trapianto", bbch: [0, 9]}
+      - {nome: "Trapianto", bbch: [10, 13]}
+      - {nome: "Sviluppo vegetativo", bbch: [14, 59]}
+      - {nome: "Fioritura", bbch: [60, 69]}
+      - {nome: "Allegagione", bbch: [70, 71]}
+      - {nome: "Accrescimento frutti", bbch: [72, 79]}
+      - {nome: "Maturazione", bbch: [81, 89]}
+    voci:
+      - {avversita: peronospora, prodotto: "ZOXIUM 240 SC", da: 4, a: 7, nota: "con un partner (es. Kasko Met)"}
+      - {avversita: peronospora, prodotto: "REBOOT", da: 3, a: 5}
+      - {avversita: peronospora, prodotto: "CIMOTER RAME WG", da: 3, a: 7, nel_catalogo: false}
+      - {avversita: peronospora, prodotto: "AIRONE LIQUIDO", da: 2, a: 7, nota: "linea Airone"}
+      - {avversita: peronospora, prodotto: "AIRONE PIÙ", da: 2, a: 7, nota: "linea Airone"}
+      - {avversita: oidio, prodotto: "IBISCO", da: 2, a: 7, nota: "oppure Antene S"}
+      - {avversita: oidio, prodotto: "ANTENE S", da: 2, a: 7, nel_catalogo: false}
+      - {avversita: oidio, prodotto: "DOMARK 125 PLUS", da: 3, a: 7, nota: "in stretta alternanza con Nabucco"}
+      - {avversita: oidio, prodotto: "NABUCCO", da: 3, a: 7, nota: "in stretta alternanza con Domark 125 Plus"}
+      - {avversita: marciumi_tellurici, prodotto: "REMEDIER", da: 1, a: 2, nota: "in fertirrigazione"}
+      - {avversita: marciumi_tellurici, prodotto: "POLYVERSUM", da: 3, a: 7, nota: "anche in trattamenti fogliari contro la botrite"}
+      - {avversita: botrite, prodotto: "POLYVERSUM", da: 3, a: 7, nota: "in trattamenti fogliari"}
+      - {avversita: mosca_bianca, prodotto: "FITOPYR 2EC PRO", da: 2, a: 7, nel_catalogo: false}
+      - {avversita: lepidotteri, prodotto: "ASTREL WDG", da: 2, a: 7}
+      - {avversita: acari, prodotto: "SANMITE 10 SC", da: 5, a: 7}
+      - {avversita: tripidi, prodotto: "DICARZOL 50 SP", da: 4, a: 6}
+      - {avversita: nottue_afidi_cimici, prodotto: "GLORIAL 25 EC", da: 3, a: 7}
+    complementi:
+      - {prodotto: "TAMARACK", da: 3, a: 7, nota: "biostimolazione"}
+      - {prodotto: "MAGO", da: 3, a: 7, nota: "efficienza dei trattamenti"}
+
+  lattuga:
+    titolo: "Linea lattuga 2026: difesa e nutrizione, posizionamento ideale"
+    url: "https://gowanitalia.it/?ID_mat=299386"
+    colture_gowan: ["Lattuga"]
+    fasi:
+      - {nome: "Pre-trapianto o pre-semina", bbch: [0, 9]}
+      - {nome: "Emergenza", bbch: [10, 12]}
+      - {nome: "Foglie a rosetta", bbch: [13, 19]}
+      - {nome: "Formazione cespo", bbch: [41, 45]}
+      - {nome: "Sviluppo cespo", bbch: [46, 48]}
+      - {nome: "Raccolta", bbch: [49, 49]}
+    voci:
+      - {avversita: peronospora, prodotto: "CIMOTER RAME WG", da: 3, a: 5, nel_catalogo: false}
+      - {avversita: peronospora, prodotto: "SARMOX 45 DG", da: 4, a: 5, nota: "oppure Kasko Met"}
+      - {avversita: peronospora, prodotto: "KASKO MET", da: 4, a: 5, nota: "oppure Sarmox 45 DG"}
+      - {avversita: peronospora, prodotto: "AIRONE LIQUIDO", da: 2, a: 6, nota: "linea Airone"}
+      - {avversita: peronospora, prodotto: "AIRONE PIÙ", da: 2, a: 6, nota: "linea Airone"}
+      - {avversita: peronospora, prodotto: "IBISCO", da: 3, a: 6}
+      - {avversita: marciumi_tellurici, prodotto: "REMEDIER", da: 1, a: 1, nota: "in fertirrigazione"}
+      - {avversita: marciumi_tellurici, prodotto: "POLYVERSUM", da: 2, a: 6, nota: "anche in trattamenti fogliari contro botrite e sclerotinia"}
+      - {avversita: botrite, prodotto: "POLYVERSUM", da: 2, a: 6, nota: "in trattamenti fogliari"}
+      - {avversita: lepidotteri, prodotto: "ASTREL WDG", da: 2, a: 6}
+      - {avversita: afidi, prodotto: "FITOPYR 2EC PRO", da: 2, a: 6, nel_catalogo: false}
+      - {avversita: tripidi, prodotto: "DICARZOL 50 SP", da: 2, a: 4}
+      - {avversita: nottue_afidi_cimici, prodotto: "GLORIAL 25 EC", da: 2, a: 5}
+    complementi:
+      - {prodotto: "TAMARACK", da: 2, a: 6, nota: "biostimolazione"}
+      - {prodotto: "MAGO", da: 2, a: 6, nota: "efficienza dei trattamenti"}
+
+  fragola:
+    titolo: "Linea fragola 2026: difesa e nutrizione, posizionamento ideale"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/09/LINEA-FRAGOLA-Depliant-2026.pdf"
+    colture_gowan: ["Fragola"]
+    fasi:
+      - {nome: "Pre-trapianto", bbch: [0, 9]}
+      - {nome: "Trapianto", bbch: [10, 13]}
+      - {nome: "Sviluppo vegetativo", bbch: [14, 59]}
+      - {nome: "Fioritura", bbch: [60, 69]}
+      - {nome: "Accrescimento frutti", bbch: [71, 79]}
+      - {nome: "Maturazione e raccolta", bbch: [81, 89]}
+    voci:
+      - {avversita: marciumi_tellurici, prodotto: "REMEDIER", da: 1, a: 2, nota: "anche in fertirrigazione"}
+      - {avversita: botrite, prodotto: "POLYVERSUM", da: 3, a: 6, nota: "anche in fertirrigazione"}
+      - {avversita: marciumi_tellurici, prodotto: "POLYVERSUM", da: 3, a: 6, nota: "anche in fertirrigazione"}
+      - {avversita: oidio, prodotto: "IBISCO", da: 3, a: 6}
+      - {avversita: batteriosi, prodotto: "AIRONE LIQUIDO", da: 3, a: 5}
+      - {avversita: batteriosi, prodotto: "AIRONE PIÙ", da: 3, a: 5}
+      - {avversita: marciumi_tellurici, prodotto: "KASKO MET", da: 3, a: 5, nota: "marciume del colletto, in serra"}
+      - {avversita: afidi, prodotto: "GLORIAL 25 EC", da: 2, a: 3}
+      - {avversita: afidi, prodotto: "GLORIAL 25 EC", da: 5, a: 6}
+      - {avversita: lepidotteri, prodotto: "ASTREL WDG", da: 3, a: 6}
+    complementi:
+      - {prodotto: "TAMARACK", da: 2, a: 6, nota: "biostimolazione"}
+      - {prodotto: "MAGO", da: 2, a: 6, nota: "efficienza dei trattamenti"}
+
+  # schede colturali con epoca/tipologia del trattamento (senza grafico per fasi)
+  pesco:
+    titolo: "Difesa pesco 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/03/DIFESA-PESCO-Scheda-Colturale-2026.pdf"
+    colture_gowan: ["Pesco-nettarine-percoche"]
+    epoche:
+      - {prodotti: ["AIRONE LIQUIDO", "GRIFON 280 LIQUIDO"], avversita: "corineo|monili|bolla", epoca: "trattamenti invernali", tipo_epoca: riposo}
+      - {prodotti: ["AIRONE LIQUIDO", "GRIFON 280 LIQUIDO"], avversita: "batteri|xanthomonas|pseudomonas", epoca: "caduta foglie", tipo_epoca: caduta_foglie}
+      - {prodotti: ["AIRONE PIÙ", "GRIFON PIÙ", "IPERION"], avversita: "bolla|corineo|monili", epoca: "caduta foglie", tipo_epoca: caduta_foglie}
+      - {prodotti: ["AIRONE PIÙ", "GRIFON PIÙ", "IPERION"], avversita: "batteri|xanthomonas|pseudomonas|bolla|monili", epoca: "pre-fioritura (fino a inizio fioritura / bottoni fiorali)", tipo_epoca: prefioritura}
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: ".", epoca: "autunno-invernali", tipo_epoca: riposo}
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: "colletto", epoca: "al colletto", tipo_epoca: terreno}
+      - {prodotti: ["REMEDIER"], avversita: "armillaria|marciume radicale", epoca: "al terreno", tipo_epoca: terreno}
+      - {prodotti: ["REMEDIER"], avversita: "cancri|deperimento", epoca: "parte aerea", tipo_epoca: vegetazione}
+  susino:
+    titolo: "Difesa susino 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/03/DIFESA-SUSINO-Scheda-Colturale-2026.pdf"
+    colture_gowan: ["Susino"]
+    epoche:
+      - {prodotti: ["AIRONE LIQUIDO", "GRIFON 280 LIQUIDO"], avversita: "corineo|monili", epoca: "trattamenti invernali", tipo_epoca: riposo}
+      - {prodotti: ["AIRONE PIÙ", "GRIFON PIÙ", "IPERION"], avversita: "bolla|corineo|monili", epoca: "caduta foglie", tipo_epoca: caduta_foglie}
+      - {prodotti: ["AIRONE PIÙ", "GRIFON PIÙ", "IPERION"], avversita: "batteri|bolla|monili", epoca: "pre-fioritura", tipo_epoca: prefioritura}
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: ".", epoca: "autunno-invernali", tipo_epoca: riposo}
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: "colletto", epoca: "al colletto", tipo_epoca: terreno}
+      - {prodotti: ["REMEDIER"], avversita: "armillaria|marciume radicale", epoca: "al terreno", tipo_epoca: terreno}
+  ciliegio:
+    titolo: "Difesa ciliegio 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/03/DIFESA-CILIEGIO-Scheda-Colturale-2026.pdf"
+    colture_gowan: ["Ciliegio dolce e acido"]
+    epoche:
+      - {prodotti: ["AIRONE LIQUIDO", "GRIFON 280 LIQUIDO"], avversita: "monili|bolla|colletto", epoca: "trattamenti invernali", tipo_epoca: riposo}
+      - {prodotti: ["AIRONE LIQUIDO", "GRIFON 280 LIQUIDO"], avversita: "batteri", epoca: "caduta foglie", tipo_epoca: caduta_foglie}
+      - {prodotti: ["AIRONE PIÙ", "GRIFON PIÙ", "IPERION"], avversita: "bolla|corineo|monili", epoca: "caduta foglie", tipo_epoca: caduta_foglie}
+      - {prodotti: ["AIRONE PIÙ", "GRIFON PIÙ", "IPERION"], avversita: "batteri|bolla|monili", epoca: "pre-fioritura", tipo_epoca: prefioritura}
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: ".", epoca: "autunno-invernali", tipo_epoca: riposo}
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: "colletto", epoca: "al colletto", tipo_epoca: terreno}
+      - {prodotti: ["REMEDIER"], avversita: "armillaria|marciume radicale", epoca: "al terreno", tipo_epoca: terreno}
+    complementi_testo: "Premio: specialità nutrizionale per il calibro dei frutti e contro il cracking (scheda ciliegio 2026)."
+  actinidia:
+    titolo: "Difesa actinidia 2025: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2025/02/Scheda-Colturale-DIFESA-ACTINIDIA-2025.pdf"
+    colture_gowan: ["Actinidia"]
+    epoche:
+      - {prodotti: ["ASSORAM ELITE 20 WDG", "BASIRAM ELITE", "CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU", "HATTRICK 30 WG"], avversita: "alternari|batteri|cancro", epoca: "al bruno", tipo_epoca: riposo}
+      - {prodotti: ["ASSORAM ELITE 20 WDG", "BASIRAM ELITE", "CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU", "HATTRICK 30 WG"], avversita: "colletto", epoca: "al colletto", tipo_epoca: terreno}
+      - {prodotti: ["REMEDIER"], avversita: "muffa grigia|botrit", epoca: "parte aerea", tipo_epoca: vegetazione}
+      - {prodotti: ["REMEDIER"], avversita: "armillaria", epoca: "al terreno", tipo_epoca: terreno}
+      - {prodotti: ["ASTREL WDG", "FORZA"], avversita: ".", epoca: "fogliari", tipo_epoca: vegetazione}
+    complementi_testo: "Tamarack (biostimolante) e Sprinfer New (ferro, per prevenire o curare la clorosi ferrica) nella scheda actinidia 2025."
+  olivo:
+    titolo: "Difesa olivo 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/03/DIFESA-OLIVO-Scheda-Colturale-2026.pdf"
+    colture_gowan: ["Olivo"]
+    epoche:
+      - {prodotti: ["REMEDIER"], avversita: "armillaria", epoca: "trattamenti al terreno", tipo_epoca: terreno}
+    complementi_testo: "Zeolite Gowan (corroborante, 2-4 kg/ha) e Tamarack (biostimolante) nella scheda olivo 2026."
+  zucchino:
+    titolo: "Difesa zucchino 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/04/DIFESA-ZUCCHINO-Scheda-Colturale-2026.pdf"
+    colture_gowan: ["Zucchino"]
+    epoche:
+      - {prodotti: ["POLYVERSUM", "REMEDIER"], avversita: "marciume radicale|marciumi radicali|colletto", epoca: "trattamenti al terreno", tipo_epoca: terreno}
+  patata:
+    titolo: "Difesa patata 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/04/DIFESA-PATATA-Scheda-Colturale-2026.pdf"
+    colture_gowan: ["Patata"]
+    epoche:
+      - {prodotti: ["REMEDIER"], avversita: "marciume radicale|marciumi radicali|colletto", epoca: "trattamenti al terreno", tipo_epoca: terreno}
+  nocciolo:
+    titolo: "Linea nocciolo 2026: principali soluzioni"
+    url: "https://gowanitalia.it/wp-content/uploads/2026/09/LINEA-NOCCIOLO-Depliant-2026.pdf"
+    colture_gowan: ["Nocciolo"]
+    epoche:
+      - {prodotti: ["CUPRORAM 35 WG NC", "CUPRORAM 35 WG BLU"], avversita: "stacco|necrosi|cancro", epoca: "trattamenti autunno-invernali", tipo_epoca: riposo}
+      - {prodotti: ["REMEDIER"], avversita: "armillaria", epoca: "2 trattamenti al terreno all'impianto, poi 2 di mantenimento all'anno (inizio primavera e inizio autunno), 2,5 kg/ha", tipo_epoca: terreno}
+      - {prodotti: ["REMEDIER"], avversita: "gleosporiosi|necrosi grigia", epoca: "fogliari dalla prefioritura (BBCH 51-53) alla maturazione dei frutti (BBCH 89-91), 1 kg/ha, massimo 3 trattamenti", tipo_epoca: vegetazione}
+    complementi_testo: "Zeolite Gowan (corroborante, potenziatore delle difese delle piante) nel depliant nocciolo 2026."

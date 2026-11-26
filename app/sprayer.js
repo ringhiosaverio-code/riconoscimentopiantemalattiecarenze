@@ -49,6 +49,16 @@
           p.label_max + ' ' + p.unit + '). Non preparare la botte con questa dose.');
         row.over_label = true;
       }
+      var mh = p.label_max_ha;
+      if (mh && perHa != null && PER_HA[mh.unit] && PER_HA[mh.unit][0] === base) {
+        var maxAmount = mh.value * PER_HA[mh.unit][1];
+        if (perHa > maxAmount * 1.0001) {
+          var f = fmt(perHa, base);
+          res.errors.push(p.name + ': con ' + waterLHa + " l/ha di acqua si distribuiscono " + f.value + ' ' + f.unit + '/ha, più della dose massima di etichetta (' +
+            mh.value + ' ' + mh.unit + "). Riduci la dose per ettolitro o il volume d'acqua.");
+          row.over_label = true;
+        }
+      }
       if (row.category === 'rame' && p.copper_g_per_unit && perHa != null) copperGHa += perHa / 1000 * p.copper_g_per_unit;
       res.products.push(row);
     });

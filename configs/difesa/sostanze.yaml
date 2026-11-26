@@ -1,0 +1,247 @@
+# Sostanze attive dei prodotti Gowan: come riconoscerle nella composizione del prodotto e nelle tabelle del
+# Disciplinare della Calabria, nome nella banca dati UE dei pesticidi (EU Pesticides Database) e gruppo di
+# resistenza (FRAC/IRAC). Le espressioni regolari si applicano al testo in minuscolo.
+# ue: nome esatto nella banca dati UE (substance_name); lo stato (approvata, scadenza, candidata alla
+#   sostituzione) si aggiorna con scripts/aggiorna_norme.py e finisce in configs/difesa/sostanze_ue.json.
+# tipo: biologico (microrganismi), naturale (origine minerale o naturale), sintesi.
+# gruppo e rischio: codice FRAC o IRAC e rischio di resistenza dall'Allegato 4 del Disciplinare Calabria 2026
+#   ("Classificazione MoA", FRAC e IRAC modificate), usati quando l'etichetta non scrive il codice.
+sostanze:
+  rame:
+    nome: "rame (composti del rame)"
+    composizione: "\\brame\\b"
+    disciplinare: "rame|rameic|poltiglia|ossicloruro|idrossido di rame|solfato (tribasico )?di rame"
+    ue: "Copper compounds"
+    tipo: naturale
+    rischio: "BASSO"
+    gruppo: "FRAC M01"
+  zoxamide:
+    nome: zoxamide
+    composizione: "zoxamide"
+    disciplinare: "zoxamide"
+    ue: "Zoxamide"
+    tipo: sintesi
+    rischio: "BASSO-MEDIO"
+    gruppo: "FRAC 22"
+  cimoxanil:
+    nome: cimoxanil
+    composizione: "cimoxanil|cymoxanil"
+    disciplinare: "cimoxanil|cymoxanil"
+    ue: "Cymoxanil"
+    tipo: sintesi
+    rischio: "BASSO-MEDIO"
+    gruppo: "FRAC 27"
+  tetraconazolo:
+    nome: tetraconazolo
+    composizione: "tetraconazol"
+    disciplinare: "tetraconazol"
+    ue: "Tetraconazole"
+    tipo: sintesi
+    rischio: "MEDIO"
+    gruppo: "FRAC 3"
+  penconazolo:
+    nome: penconazolo
+    composizione: "penconazol"
+    disciplinare: "penconazol"
+    ue: "Penconazole"
+    tipo: sintesi
+    rischio: "MEDIO"
+    gruppo: "FRAC 3"
+  tebuconazolo:
+    nome: tebuconazolo
+    composizione: "tebuconazol"
+    disciplinare: "tebuconazol"
+    ue: "Tebuconazole"
+    tipo: sintesi
+    rischio: "MEDIO"
+    gruppo: "FRAC 3"
+  spiroxamina:
+    nome: spiroxamina
+    composizione: "spiroxamin"
+    disciplinare: "spiroxamin"
+    ue: "Spiroxamine"
+    tipo: sintesi
+    rischio: "BASSO-MEDIO"
+    gruppo: "FRAC 5"
+  metrafenone:
+    nome: metrafenone
+    composizione: "metrafenone"
+    disciplinare: "metrafenone"
+    ue: "Metrafenone"
+    tipo: sintesi
+    rischio: "MEDIO"
+    gruppo: "FRAC 50"
+  amisulbrom:
+    nome: amisulbrom
+    composizione: "amisulbrom"
+    disciplinare: "amisulbrom"
+    ue: "Amisulbrom"
+    tipo: sintesi
+    rischio: "presumibilmente MEDIO-ALTO"
+    gruppo: "FRAC 21"
+  metalaxil:
+    nome: metalaxil
+    composizione: "metalax[iy]l(?!\\s*[-–]?\\s*m\\b)"
+    disciplinare: "metalax[iy]l(?!\\s*[-–]?\\s*m\\b)"
+    ue: "Metalaxyl"
+    tipo: sintesi
+    rischio: "ALTO"
+    gruppo: "FRAC 4"
+  benalaxil_m:
+    nome: benalaxil-M
+    composizione: "benalax[iy]l\\s*[-–]?\\s*m\\b"
+    disciplinare: "benalax[iy]l\\s*[-–]?\\s*m\\b"
+    ue: "Benalaxyl-M"
+    tipo: sintesi
+    rischio: "ALTO"
+    gruppo: "FRAC 4"
+  folpet:
+    nome: folpet
+    composizione: "folpet"
+    disciplinare: "folpet"
+    ue: "Folpet"
+    tipo: sintesi
+    rischio: "BASSO"
+    gruppo: "FRAC M04"
+  fosfonato_potassio:
+    nome: fosfonato di potassio
+    composizione: "fosfonato di potassio"
+    disciplinare: "fosfonat[oi] di (k\\b|potassio)|potassio fosfonat"
+    ue: "Potassium phosphonates (formerly potassium phosphite)"
+    tipo: sintesi
+    rischio: "BASSO"
+    gruppo: "FRAC P 07"
+  cos_oga:
+    nome: COS-OGA
+    composizione: "cos \\(chito|chito-oligosaccaridi"
+    disciplinare: "cos[\\s-]*oga"
+    ue: "COS-OGA"
+    tipo: naturale
+  pythium_oligandrum:
+    nome: Pythium oligandrum ceppo M1
+    composizione: "pythium oligandrum"
+    disciplinare: "pythium oligandrum"
+    ue: "Pythium oligandrum strain M1"
+    tipo: biologico
+  trichoderma_gamsii:
+    nome: Trichoderma gamsii ICC 080
+    composizione: "trichoderma gamsii"
+    disciplinare: "trichoderma"
+    ue: "Trichoderma gamsii (formerly T. viride) strain ICC080"
+    tipo: biologico
+    rischio: "non nota"
+    gruppo: "FRAC BM02"
+  trichoderma_asperellum:
+    nome: Trichoderma asperellum (ex T. harzianum) ICC 012
+    composizione: "trichoderma (harzianum|asperellum)"
+    disciplinare: "trichoderma"
+    ue: "Trichoderma asperellum (formerly T. harzianum) strain ICC012"
+    tipo: biologico
+    rischio: "non nota"
+    gruppo: "FRAC BM02"
+  bt_kurstaki:
+    nome: Bacillus thuringiensis kurstaki ABTS-351
+    composizione: "bacillus thuringiensis"
+    disciplinare: "bacillus thuringiensis|thuringiensis"
+    ue: "Bacillus thuringiensis subsp. Kurstaki strain ABTS-351"
+    tipo: biologico
+    gruppo: "IRAC 11A"
+  deltametrina:
+    nome: deltametrina
+    composizione: "deltametrin"
+    disciplinare: "deltametrin"
+    ue: "Deltamethrin"
+    tipo: sintesi
+    gruppo: "IRAC 3A"
+  lambda_cialotrina:
+    nome: lambda-cialotrina
+    composizione: "lambda[\\s-]*cialotrin"
+    disciplinare: "lambda[\\s-]*cialotrin"
+    ue: "lambda-Cyhalothrin"
+    tipo: sintesi
+    gruppo: "IRAC 3A"
+  cipermetrina:
+    nome: cipermetrina
+    composizione: "(?<![a-z-])cipermetrin"
+    disciplinare: "(?<![a-z-])cipermetrin"
+    ue: "Cypermethrin"
+    tipo: sintesi
+    gruppo: "IRAC 3A"
+  formetanato:
+    nome: formetanato
+    composizione: "formetanat"
+    disciplinare: "formetanat"
+    ue: "Formetanate"
+    tipo: sintesi
+    gruppo: "IRAC 1A"
+  fenazaquin:
+    nome: fenazaquin
+    composizione: "fenazaquin"
+    disciplinare: "fenazaquin"
+    ue: "Fenazaquin"
+    tipo: sintesi
+    gruppo: "IRAC 21A"
+  pyridaben:
+    nome: pyridaben
+    composizione: "pyridaben|piridaben"
+    disciplinare: "pyridaben|piridaben"
+    ue: "Pyridaben"
+    tipo: sintesi
+    gruppo: "IRAC 21A"
+  exitiazox:
+    nome: exitiazox
+    composizione: "exitiazox|hexythiazox"
+    disciplinare: "exitiazox|hexythiazox"
+    ue: "Hexythiazox"
+    tipo: sintesi
+    gruppo: "IRAC 10A"
+  triallate:
+    nome: triallate
+    composizione: "tri-?allat"
+    disciplinare: "tri-?allat"
+    ue: "Tri-allate"
+    tipo: sintesi
+  halosulfuron:
+    nome: halosulfuron metile
+    composizione: "halosulfuron"
+    disciplinare: "halosulfuron"
+    ue: "Halosulfuron-methyl"
+    tipo: sintesi
+  aclonifen:
+    nome: aclonifen
+    composizione: "aclonifen"
+    disciplinare: "aclonifen"
+    ue: "Aclonifen"
+    tipo: sintesi
+
+# Nomi del Disciplinare che il confronto automatico con la banca dati UE non può risolvere da solo
+# (nome italiano molto diverso da quello inglese, o voce generica). null = non confrontare.
+nomi_ue_disciplinare:
+  "prodotti rameici": "Copper compounds"
+  "zolfo": "Sulphur"
+  "olio minerale": null
+  "olio minerale paraffinico": null
+  "olio essenziale di arancio dolce": "Orange oil"
+  "fosfonato di k": "Potassium phosphonates (formerly potassium phosphite)"
+  "fosfonato di potassio": "Potassium phosphonates (formerly potassium phosphite)"
+  "fosfonato di disodio": "Disodium phosphonate"
+  "fosetil al": "Fosetyl"
+  "fosetil-al": "Fosetyl"
+  "bicarbonato di potassio": "Potassium hydrogen carbonate"
+  "polisolfuro di calcio": "Lime sulphur (calcium polysulphid)"
+  "cos-oga": "COS-OGA"
+  "laminarina": "Laminarin"
+  "spinosad": "Spinosad"
+  "piretrine": "Pyrethrins"
+  "azadiractina": "Azadirachtin (Margosa extract)"
+  "caolino": null
+  "baculovirus": null
+  "piretrine pure": "Pyrethrins"
+  "bicarbonato di k": "Potassium hydrogen carbonate"
+  "idrogeno carbonato di potassio": "Potassium hydrogen carbonate"
+  "polisolfuro di ca": "Lime sulphur (calcium polysulphid)"
+  "olio bianco": null
+  "zolfo proteinato": "Sulphur"
+  "confusione sessuale": null
+  "feromoni": null
+  "trappole": null

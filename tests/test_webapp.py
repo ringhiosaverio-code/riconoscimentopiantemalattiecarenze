@@ -14,7 +14,7 @@ pytestmark = pytest.mark.skipif(not (APP / "data" / "readers.json").exists(), re
 
 def test_index_loads_app_scripts_and_hides_hidden_elements():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
-    for src in ("app/ort/ort.wasm.min.js", "app/sprayer.js", "app/app.js"):
+    for src in ("app/ort/ort.wasm.min.js", "app/sprayer.js", "app/consigli.js", "app/app.js"):
         assert src in html and (ROOT / src).exists()
     assert "[hidden]{display:none!important}" in html
     assert "onclick=" not in html

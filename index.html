@@ -29,8 +29,8 @@ label{display:block}
 video,img.preview{width:100%;max-height:360px;object-fit:cover;border-radius:10px;background:#000;display:block;margin-top:8px}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .row>*{flex:1}
-.tabs{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:var(--bg);padding:8px 0}
-.tabs button{padding:10px 4px;font-size:.92rem}
+.tabs{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:var(--bg);padding:8px 0}
+.tabs button{padding:10px 2px;font-size:.86rem}
 .tabs button[aria-selected="false"]{background:transparent;color:var(--accent);border:1px solid var(--accent)}
 .reader{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
 .cand{display:grid;grid-template-columns:1fr 64px;gap:6px;align-items:center;margin:4px 0}
@@ -63,6 +63,21 @@ input[type=range]{padding:0;border:0;background:transparent}
 .prod p{margin:2px 0}
 .dif details summary{cursor:pointer;color:var(--accent);font-size:.92rem}
 .tw table{font-size:.88rem;min-width:520px}
+.steps{margin:8px 0;padding-left:1.4em}
+.steps li{margin:10px 0}
+.check{display:flex;gap:8px;align-items:flex-start;margin:8px 0}
+.check input{width:auto;margin-top:4px}
+.num{display:inline-flex;align-items:center;justify-content:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:var(--accent-fg);font-size:.85rem;margin-right:6px}
+.pick-card{border:2px solid var(--accent);border-radius:12px;padding:12px;margin:10px 0}
+.alt-card{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+.big{font-size:1.25rem;font-weight:700}
+.badge{display:inline-block;border-radius:6px;padding:0 6px;font-size:.8rem;font-weight:600;border:1px solid var(--accent);color:var(--accent);margin-left:4px}
+.why{margin:4px 0;padding:0;list-style:none}
+.why li{margin:2px 0}
+.dose-box{background:var(--bg);border-radius:10px;padding:10px;margin:8px 0}
+.dose-box p{margin:2px 0}
+details>summary{cursor:pointer;color:var(--accent)}
+.prep li{margin:6px 0}
 .progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0}
 .progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
 </style>
@@ -74,6 +89,7 @@ input[type=range]{padding:0;border:0;background:transparent}
 
 <nav class="tabs" role="tablist">
 <button type="button" role="tab" id="t-reader" aria-selected="true">Lettore</button>
+<button type="button" role="tab" id="t-consigli" aria-selected="false">Consigli</button>
 <button type="button" role="tab" id="t-quiz" aria-selected="false">Quiz</button>
 <button type="button" role="tab" id="t-tank" aria-selected="false">Botte</button>
 <button type="button" role="tab" id="t-info" aria-selected="false">Info</button>
@@ -112,6 +128,41 @@ input[type=range]{padding:0;border:0;background:transparent}
 <div id="out" aria-live="polite"></div>
 </div>
 
+<div id="tab-consigli" hidden>
+<section class="card">
+<h2>Consigli di difesa</h2>
+<p class="muted">Scegli coltura, avversità, fase e situazione: l'app mette in ordine i prodotti Gowan registrati, come farebbe un tecnico della difesa integrata, e prepara la ricetta con dosi per ettolitro e per ettaro, coadiuvante e, se vuoi, nutrizione. Le regole e le fonti sono scritte in ogni consiglio.</p>
+<p class="muted" id="cs-status">Caricamento del catalogo Gowan…</p>
+<ol class="steps">
+<li><label for="cs-crop"><strong>Coltura</strong></label><select id="cs-crop" disabled></select></li>
+<li><label for="cs-adv"><strong>Malattia o parassita</strong></label><select id="cs-adv" disabled></select></li>
+<li><label for="cs-phase"><strong>Fase della coltura</strong></label><select id="cs-phase" disabled></select></li>
+<li><label for="cs-sit"><strong>Situazione in campo</strong></label><select id="cs-sit" disabled></select></li>
+</ol>
+<details>
+<summary>Altre condizioni (facoltative)</summary>
+<div class="row">
+<label>Coltivazione<select id="cs-amb"><option value="campo">Pieno campo</option><option value="serra">Serra o coltura protetta</option></select></label>
+<label>Giorni alla raccolta<input id="cs-days" type="number" min="0" step="1" inputmode="numeric"></label>
+</div>
+<label class="check"><input type="checkbox" id="cs-disc" checked> <span>Rispetta il Disciplinare di produzione integrata della Calabria (dove tratta la coltura)</span></label>
+<label class="check"><input type="checkbox" id="cs-bio"> <span>Produzione biologica: solo prodotti consentiti in agricoltura biologica</span></label>
+<label for="cs-last">Ultimo prodotto usato contro questa avversità <span class="muted">per alternare i gruppi di resistenza</span></label>
+<select id="cs-last"><option value="">Nessuno o non so</option></select>
+<label for="cs-goal" style="margin-top:8px">Nutrizione e biostimolanti</label>
+<select id="cs-goal"><option value="">Proposte per la fase</option><option value="stress">Dopo uno stress (caldo, freddo, siccità, grandine)</option><option value="ripresa">Ripresa vegetativa</option><option value="allegagione">Allegagione</option><option value="accrescimento">Pezzatura dei frutti</option><option value="cracking">Spaccatura dei frutti (cracking)</option><option value="carenza_ferro">Carenza di ferro (clorosi ferrica)</option></select>
+</details>
+<h3 style="margin-top:12px">Superficie da trattare</h3>
+<div class="row">
+<label>Ettari<input id="cs-ha" type="number" min="0" step="any" inputmode="decimal"></label>
+<label>Acqua per ettaro (l/ha)<input id="cs-water" type="number" min="1" step="1" inputmode="decimal"></label>
+<label>Botte (litri) <span class="muted">facolt.</span><input id="cs-tank" type="number" min="1" step="1" inputmode="decimal"></label>
+</div>
+<div class="row"><button type="button" id="cs-go" disabled>Prepara la ricetta</button></div>
+</section>
+<div id="cs-out" aria-live="polite"></div>
+</div>
+
 <div id="tab-quiz" hidden>
 <section class="card">
 <h2>Quiz: riconosci dalla foto</h2>
@@ -133,16 +184,28 @@ input[type=range]{padding:0;border:0;background:transparent}
 <div id="tab-tank" hidden>
 <section class="card">
 <h2>Prepara la botte</h2>
+<p class="muted">Tre passi: i dati della botte, i prodotti (dal catalogo Gowan, oppure scritti a mano dall'etichetta), il calcolo. L'app dice quanto prodotto mettere, in che ordine e con quali attenzioni.</p>
 <div class="warn" id="tk-legal"></div>
-<label>Volume della botte (litri)<input id="tk-vol" type="number" min="1" step="1" inputmode="decimal"></label>
-<label style="margin-top:8px">Acqua per ettaro (l/ha) <span class="muted">per dosi a ettaro e rame</span><input id="tk-wha" type="number" min="1" step="1" inputmode="decimal"></label>
+<h3><span class="num">1</span>La botte</h3>
 <div class="row">
-<label>Temperatura (°C) <span class="muted">facolt.</span><input id="tk-temp" type="number" step="1" inputmode="decimal"></label>
-<label>Rame già dato (kg/ha) <span class="muted">facolt.</span><input id="tk-cu" type="number" min="0" step="0.1" inputmode="decimal"></label>
+<label>Capienza della botte (litri)<input id="tk-vol" type="number" min="1" step="1" inputmode="decimal"></label>
+<label>Acqua per ettaro (l/ha) <span class="muted">quanta ne distribuisci su un ettaro</span><input id="tk-wha" type="number" min="1" step="1" inputmode="decimal"></label>
 </div>
-<h3 style="margin-top:12px">Prodotti (dati dalla loro etichetta)</h3>
+<label for="tk-crop" style="margin-top:8px">Coltura da trattare <span class="muted">facoltativa: serve a proporre le dosi registrate</span></label>
+<select id="tk-crop"><option value="">Non indicata</option></select>
+<details style="margin-top:8px">
+<summary>Altri dati (facoltativi)</summary>
+<div class="row">
+<label>Temperatura prevista (°C)<input id="tk-temp" type="number" step="1" inputmode="decimal"></label>
+<label>Rame già distribuito quest'anno (kg/ha)<input id="tk-cu" type="number" min="0" step="0.1" inputmode="decimal"></label>
+</div>
+</details>
+<h3 style="margin-top:12px"><span class="num">2</span>I prodotti</h3>
+<p class="muted">Ettolitro (hl) = 100 litri d'acqua. Le dosi a ettaro si convertono con l'acqua per ettaro indicata sopra.</p>
 <div id="tk-rows"></div>
-<div class="row"><button type="button" class="secondary" id="tk-add">Aggiungi prodotto</button><button type="button" id="tk-calc">Calcola</button></div>
+<div class="row"><button type="button" class="secondary" id="tk-add">Aggiungi prodotto</button></div>
+<h3 style="margin-top:12px"><span class="num">3</span>Il calcolo</h3>
+<div class="row"><button type="button" id="tk-calc">Calcola le quantità</button></div>
 </section>
 <div id="tk-out" aria-live="polite"></div>
 </div>
@@ -153,6 +216,7 @@ input[type=range]{padding:0;border:0;background:transparent}
 </main>
 <script src="app/ort/ort.wasm.min.js"></script>
 <script src="app/sprayer.js"></script>
+<script src="app/consigli.js"></script>
 <script src="app/app.js"></script>
 </body>
 </html>

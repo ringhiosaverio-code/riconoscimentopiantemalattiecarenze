@@ -1,0 +1,347 @@
+# Caratteristiche dei prodotti Gowan lette nelle etichette (o, dove manca l'etichetta, nella pagina prodotto):
+# gruppo di resistenza (FRAC per i fungicidi, IRAC per insetticidi e acaricidi), tipo di azione e avvertenze
+# per le api. Ogni voce riporta la frase letterale da cui viene ("citazioni"): tests/test_consigli.py
+# (test_citazioni_delle_etichette, con PLANTCARE_ETICHETTE=<cartella>) controlla che ogni frase sia nel testo scaricato.
+# codici_fonte: etichetta = codice scritto in etichetta; pagina = pagina prodotto Gowan;
+#   disciplinare = Allegato 4 del Disciplinare Calabria 2026 (classificazione FRAC e IRAC dei meccanismi d'azione),
+#   quando l'etichetta non scrive il codice.
+# azione: parole chiave usate per ordinare i prodotti (preventiva, curativa, eradicante, bloccante, sistemica,
+#   locosistemica, citotropica, translaminare, penetrante, contatto, copertura, elicitore, antagonista,
+#   ingestione, abbattente, persistente, ovicida, larvicida, adulticida, selettivo).
+
+prodotti:
+  AIRONE LIQUIDO:
+    tipo: "Anticrittogamico rameico"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "intervenire preventivamente alla dose di 2.0-3.0 L/ha"
+    dose: "In caso di trattamenti successivi a prodotti sistemici o citotropici impiegare la dose inferiore."
+  GRIFON 280 LIQUIDO:
+    tipo: "Anticrittogamico rameico"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "intervenire preventivamente alla dose di 2.0-3.0 L/ha"
+    dose: "In caso di trattamenti successivi a prodotti sistemici o citotropici impiegare la dose inferiore."
+  AIRONE PIÙ:
+    tipo: "Anticrittogamico rameico"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "In agricoltura biologica le applicazioni possono essere proseguite dopo la fioritura"
+    dose: "In caso di trattamenti successivi a prodotti sistemici o citotropici impiegare la dose inferiore"
+  GRIFON PIÙ:
+    tipo: "Anticrittogamico rameico"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "In agricoltura biologica le applicazioni possono essere proseguite dopo la fioritura"
+    dose: "In caso di trattamenti successivi a prodotti sistemici o citotropici impiegare la dose inferiore"
+  ASSORAM ELITE 20 WDG:
+    tipo: "Fungicida rameico (idrossido di rame)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "Trattamenti cadenzati a 7-8 giorni in funzione preventiva."
+    dose: "Utilizzare la dose più elevata in caso di forte pressione"
+  BASIRAM ELITE:
+    tipo: "Fungicida rameico (solfato tribasico di rame)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+  BUSSOLA WG BLU:
+    tipo: "Fungicida rameico (solfato di rame neutralizzato)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+  BUSSOLA WG NC:
+    tipo: "Fungicida rameico (solfato di rame neutralizzato)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+  CUPRORAM 35 WG NC:
+    tipo: "Fungicida rameico (ossicloruro di rame)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "Trattamenti cadenzati a 7-8 giorni in funzione preventiva."
+    dose: "Utilizzare la dose più elevata in caso di forte pressione"
+  CUPRORAM 35 WG BLU:
+    tipo: "Fungicida rameico (ossicloruro di rame)"
+    codici: ["FRAC M01"]
+    codici_fonte: pagina
+    azione: [contatto, preventiva, multisito]
+    citazioni: []
+    nota: "Stessa composizione di Cuproram 35 WG NC; gruppo M1 dalla pagina prodotto."
+  HATTRICK 30 WG:
+    tipo: "Fungicida rameico polivalente (solfato tribasico di rame)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "Trattamenti cadenzati a 7-8 giorni in funzione preventiva."
+  IPERION:
+    tipo: "Fungicida rameico (ossicloruro di rame)"
+    codici: ["FRAC M01"]
+    codici_fonte: etichetta
+    azione: [contatto, preventiva, multisito]
+    citazioni:
+      - "Gruppo FRAC: M01 Fungicida multisito con attività di contatto"
+      - "Peronospora: intervenire preventivamente alla dose di 2.0 kg/ha"
+  ELECTIS R FLOW:
+    tipo: "Fungicida antiperonosporico (zoxamide + rame)"
+    codici: ["FRAC 22", "FRAC M01"]
+    codici_fonte: etichetta
+    azione: [preventiva, copertura, contatto]
+    citazioni:
+      - "Zoxamide – Codice FRAC 22"
+      - "Codice FRAC M01"
+      - "È un prodotto ad azione preventiva di copertura."
+  ZOXIUM 240 SC:
+    tipo: "Fungicida antiperonosporico (zoxamide)"
+    codici: ["FRAC 22"]
+    codici_fonte: etichetta
+    azione: [preventiva]
+    citazioni:
+      - "Zoxamide – Codice FRAC 22"
+      - "Fungicida ad azione preventiva"
+  REBOOT:
+    tipo: "Fungicida antiperonosporico (cimoxanil + zoxamide)"
+    codici: ["FRAC 22", "FRAC 27"]
+    codici_fonte: etichetta
+    azione: [citotropica, translaminare, contatto, preventiva]
+    citazioni:
+      - "Zoxamide:Gruppo FRAC 22 Cymoxanil: Gruppo FRAC 27"
+      - "Cimoxanil, fungicida ad azione citotropica, translaminare"
+  SARMOX 45 DG:
+    tipo: "Fungicida antiperonosporico (cimoxanil)"
+    codici: ["FRAC 27"]
+    codici_fonte: disciplinare
+    azione: [citotropica, translaminare, curativa]
+    citazioni:
+      - "fungicida ad azione citotropica translaminare"
+      - "(citotropicità, curatività)"
+    dose: "è sempre consigliabile usarlo in miscela con prodotto di contatto"
+    nota: "Codice FRAC 27 del cimoxanil scritto nell'etichetta di Reboot (Gowan)."
+  FANTIC F NC WG:
+    tipo: "Fungicida antiperonosporico (benalaxil-M + folpet)"
+    codici: ["FRAC 4", "FRAC M04"]
+    codici_fonte: etichetta
+    azione: [locosistemica, citotropica, copertura, preventiva]
+    citazioni:
+      - "Benalaxyl-M: Gruppo FRAC 4 Folpet: Gruppo FRAC M04"
+      - "DOTATO DI AZIONE LOCO-SISTEMICA E DI COPERTURA"
+  KASKO MET:
+    tipo: "Fungicida sistemico antiperonosporico (metalaxil)"
+    codici: ["FRAC 4"]
+    codici_fonte: etichetta
+    azione: [sistemica, preventiva]
+    citazioni:
+      - "CODICE 4 (FRAC)"
+      - "KASKO MET è un fungicida sistemico ad azione preventiva"
+  GENKOTSU:
+    tipo: "Fungicida antiperonosporico (amisulbrom)"
+    codici: ["FRAC 21"]
+    codici_fonte: disciplinare
+    azione: [penetrante, contatto, preventiva]
+    citazioni:
+      - "fungicida ad attività penetrante e di contatto"
+      - "Possiede una limitata attività curativa ma una notevole efficacia preventiva."
+  CUNEB:
+    tipo: "Fungicida sistemico e di contatto (fosfonato di potassio)"
+    codici: ["FRAC P 07"]
+    codici_fonte: etichetta
+    azione: [sistemica, contatto]
+    citazioni:
+      - "Meccanismo d’azione: FRAC P 07"
+      - "Fungicida sistemico e di contatto"
+  GALILEO:
+    tipo: "Fungicida sistemico (tetraconazolo)"
+    codici: ["FRAC 3"]
+    codici_fonte: etichetta
+    azione: [sistemica, preventiva, curativa]
+    citazioni:
+      - "Tetraconazolo – Codice FRAC: 3"
+      - "trattamenti di tipo sia preventivo che curativo"
+  DOMARK 125 PLUS:
+    tipo: "Fungicida sistemico (tetraconazolo)"
+    codici: ["FRAC 3"]
+    codici_fonte: pagina
+    azione: [sistemica, preventiva]
+    citazioni:
+      - "Fungicida sistemico ad ampio spettro.Tetraconazolo - Codice FRAC: 3."
+      - "Eseguire il trattamento in via preventiva quando si presentano le condizioni favorevoli alle infezioni"
+  SCUDEX:
+    tipo: "Fungicida sistemico (penconazolo)"
+    codici: ["FRAC 3"]
+    codici_fonte: etichetta
+    azione: [sistemica, preventiva, curativa, bloccante]
+    citazioni:
+      - "MECCANISMO D’AZIONE: FRAC 3"
+      - "Fungicida sistemico con azione preventiva, curativa e bloccante"
+  VIVER ELITE WG:
+    tipo: "Fungicida sistemico (tebuconazolo)"
+    codici: ["FRAC 3"]
+    codici_fonte: disciplinare
+    azione: [sistemica, preventiva, curativa, eradicante]
+    citazioni:
+      - "FUNGICIDA SISTEMICO IN MICROGRANULI IDRODISPERSIBILI AD AZIONE PREVENTIVA, CURATIVA ED ERADICANTE"
+  PRONTO:
+    tipo: "Fungicida sistemico per la vite (spiroxamina)"
+    codici: ["FRAC 5"]
+    codici_fonte: disciplinare
+    azione: [sistemica, preventiva]
+    citazioni:
+      - "FUNGICIDA SISTEMICO PER LA VITE"
+      - "calendario preventivo a turno fisso con un intervallo di 10 - 14 giorni tra i trattamenti"
+  NABUCCO:
+    tipo: "Fungicida antioidico (metrafenone)"
+    codici: ["FRAC 50"]
+    codici_fonte: pagina
+    azione: [preventiva]
+    citazioni:
+      - "Meccanismo d'azione: gruppo 50 (FRAC)"
+      - "Il prodotto va applicato preventivamente."
+  IBISCO:
+    tipo: "Elicitore delle difese delle piante (COS-OGA)"
+    codici: []
+    azione: [elicitore, preventiva]
+    citazioni:
+      - "ELICITORE DELLE DIFESE DELLE PIANTE"
+      - "Ibisco deve essere impiegato in modo preventivo prima della comparsa della malattia"
+  IBISCO VIT:
+    tipo: "Elicitore delle difese delle piante (COS-OGA)"
+    codici: []
+    azione: [elicitore, preventiva]
+    citazioni:
+      - "VIT deve essere impiegato in modo preventivo prima della comparsa della malattia"
+  REMEDIER:
+    tipo: "Fungicida biologico (Trichoderma)"
+    codici: ["FRAC BM02"]
+    codici_fonte: etichetta
+    azione: [antagonista, preventiva]
+    citazioni:
+      - "Gruppo FRAC: BM02"
+      - "ad azione antagonistica per la prevenzione di diverse malattie fungine"
+  POLYVERSUM:
+    tipo: "Fungicida biologico (Pythium oligandrum)"
+    codici: []
+    azione: [antagonista, elicitore, preventiva]
+    citazioni:
+      - "micoparassita oomicete"
+      - "Impiegare il prodotto in modalità preventiva nei periodi di maggiore sensibilità alla malattia."
+  ASTREL WDG:
+    tipo: "Insetticida biologico (Bacillus thuringiensis kurstaki)"
+    codici: ["IRAC 11A"]
+    codici_fonte: disciplinare
+    azione: [ingestione, larvicida, selettivo]
+    momento: prime_larve
+    citazioni:
+      - "ASTREL WDG agisce per ingestione sulle larve dei Lepidotteri."
+      - "Effettuare il trattamento alla comparsa delle prime larve"
+  BOTTO 50 EC:
+    tipo: "Insetticida piretroide (cipermetrina)"
+    codici: ["IRAC 3A"]
+    codici_fonte: disciplinare
+    azione: [contatto, ingestione]
+    citazioni:
+      - "agisce per contatto e ingestione"
+    api: "Tossico per le api. Non usare il prodotto durante la fioritura"
+    api_fioritura: escludi
+  FORZA:
+    tipo: "Insetticida piretroide (lambda-cialotrina)"
+    codici: ["IRAC 3A"]
+    codici_fonte: disciplinare
+    azione: [contatto, ingestione, abbattente, persistente]
+    citazioni:
+      - "agisce essenzialmente per contatto e secondariamente per ingestione"
+      - "FORZA unisce un rapido potere abbattente ad una persistente capacità protettiva."
+    api: "Nocivo per gli insetti utili. Non trattare in fioritura."
+    api_fioritura: escludi
+  DOROTRIN 25 EC:
+    tipo: "Insetticida piretroide (deltametrina)"
+    codici: ["IRAC 3A"]
+    codici_fonte: etichetta
+    azione: [contatto, ingestione, abbattente]
+    citazioni:
+      - "IRAC 3A"
+      - "Dotato di una rapida azione abbattente"
+    api: "Al fine di proteggere le api e altri insetti impollinatori, non utilizzare il prodotto durante la fioritura"
+    api_fioritura: escludi
+  GLORIAL 25 EC:
+    tipo: "Insetticida piretroide (deltametrina)"
+    codici: ["IRAC 3A"]
+    codici_fonte: etichetta
+    azione: [contatto, ingestione, abbattente]
+    citazioni:
+      - "IRAC 3A"
+      - "Dotato di una rapida azione abbattente"
+    api: "Al fine di proteggere le api e altri insetti impollinatori, non utilizzare il prodotto durante la fioritura"
+    api_fioritura: escludi
+  DICARZOL 50 SP:
+    tipo: "Insetticida-acaricida (formetanato)"
+    codici: ["IRAC 1A"]
+    codici_fonte: etichetta
+    azione: [contatto, ingestione, abbattente]
+    citazioni:
+      - "Codice IRAC: 1A"
+      - "Il prodotto agisce per contatto e ingestione esercitando un’azione rapida e duratura."
+    api: "Tossico per le api. Evitare i trattamenti durante il periodo dell’impollinazione"
+    api_fioritura: sera
+    api_sera: "proteggere le api trattare esclusivamente nelle ore serali quando le api non sono in attività"
+  MAGISTER ULTRA:
+    tipo: "Acaricida-insetticida (fenazaquin)"
+    codici: ["IRAC 21A"]
+    codici_fonte: etichetta
+    azione: [contatto, larvicida, adulticida]
+    citazioni:
+      - "gruppo 21 (IRAC)"
+      - "rapida azione di contatto con efficace azione larvicida e adulticida"
+    api: "Pericoloso per le api. Non utilizzare in presenza di api"
+    api_fioritura: escludi
+  SANMITE 10 SC:
+    tipo: "Acaricida-insetticida (pyridaben)"
+    codici: ["IRAC 21A"]
+    codici_fonte: etichetta
+    azione: [contatto, larvicida, adulticida, abbattente]
+    citazioni:
+      - "gruppo 21 A (IRAC)"
+      - "mostrando elevata attività abbattente nei confronti di larve e adulti"
+    api: "Pericoloso per le api."
+    api_fioritura: avviso
+  TENOR SC:
+    tipo: "Acaricida ovo-larvicida (exitiazox)"
+    codici: ["IRAC 10A"]
+    codici_fonte: etichetta
+    azione: [ovicida, larvicida, translaminare, contatto, selettivo]
+    momento: uova
+    citazioni:
+      - "IRAC: 10A"
+      - "acaricida ovo-larvicida"
+      - "agisce per contatto sulle uova e sulle larve"
+  MAGO:
+    tipo: "Coadiuvante (bagnante, adesivante, antischiuma, antideriva)"
+    codici: []
+    azione: [coadiuvante]
+    citazioni:
+      - "MAGO favorisce una migliore copertura delle colture trattate"

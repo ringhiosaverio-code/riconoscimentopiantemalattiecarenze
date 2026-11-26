@@ -332,6 +332,11 @@ async function sendFb(verdict){
 </script></body></html>"""
 
 
+class TankMaxHaIn(BaseModel):
+    value: float = Field(gt=0)
+    unit: Literal["g/ha", "kg/ha", "ml/ha", "l/ha"]
+
+
 class TankProductIn(BaseModel):
     name: str = Field(min_length=1, max_length=120)
     dose: float = Field(gt=0)
@@ -340,6 +345,7 @@ class TankProductIn(BaseModel):
     category: str = Field(default="altro", max_length=32)
     label_max: float | None = Field(default=None, gt=0)
     copper_g_per_unit: float | None = Field(default=None, gt=0, le=1000)
+    label_max_ha: TankMaxHaIn | None = None
 
 
 class TankIn(BaseModel):

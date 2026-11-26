@@ -43,6 +43,7 @@ class Product:
     category: str = "altro"
     label_max: float | None = None          # dose massima in etichetta, stessa unità di `unit`
     copper_g_per_unit: float | None = None  # g di rame metallo per kg o per L di prodotto
+    label_max_ha: dict | None = None        # dose massima a ettaro in etichetta: {"value": 4, "unit": "l/ha"}
 
 
 @dataclass
@@ -117,6 +118,14 @@ def compute_tank(tank_l: float, products: list[Product], water_l_ha: float | Non
             res.errors.append(f"{p.name}: la dose {p.dose} {p.unit} supera la dose massima di etichetta "
                               f"({p.label_max} {p.unit}). Non preparare la botte con questa dose.")
             row["over_label"] = True
+        mh = p.label_max_ha
+        if mh and per_ha_amount is not None and mh.get("unit") in PER_HA and PER_HA[mh["unit"]][0] == base:
+            max_amount = mh["value"] * PER_HA[mh["unit"]][1]
+            if per_ha_amount > max_amount * 1.0001:
+                res.errors.append(f"{p.name}: con {water_l_ha:g} l/ha di acqua si distribuiscono {_fmt(per_ha_amount, base)['value']} "
+                                  f"{_fmt(per_ha_amount, base)['unit']}/ha, più della dose massima di etichetta "
+                                  f"({mh['value']:g} {mh['unit']}). Riduci la dose per ettolitro o il volume d'acqua.")
+                row["over_label"] = True
         if p.category == "rame" and p.copper_g_per_unit and per_ha_amount is not None:
             copper_g_ha += per_ha_amount / 1000.0 * p.copper_g_per_unit  # kg (o L) di prodotto × g Cu/unità
         res.products.append(row)

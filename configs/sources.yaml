@@ -292,3 +292,48 @@ sources:
     url: "https://ucanr.edu/sites/default/files/2021-01/343528.pdf"
     status: riassunto_verificato
     note: "Malattia di Petri: viti di 1-5 anni, germogliamento tardivo, internodi corti, clorosi internervale, deperimento; nel legno striature brune e necrosi."
+  - id: disc_calabria_2026_08
+    title: "Disciplinari di produzione integrata 2026 - Difesa e controllo infestanti, Regione Calabria (Allegato B, versione aggiornata pubblicata da ARSAC il 25/08/2026)"
+    issuer: "Regione Calabria, Servizio fitosanitario regionale (documento pubblicato da ARSAC)"
+    type: regionale_calabria
+    url: "https://www.arsacweb.it/wp-content/uploads/2026/08/Allegato-B-Disciplinari-AGGIORNATI-parte-difesa-e-diserbo_2026.pdf"
+    date: "2026-08-25"
+    status: testo_letto
+    note: "Versione in vigore nell'app. Criteri di scelta dei prodotti (metodi non chimici, minor impatto, prodotti selettivi, gestione delle resistenze secondo FRAC e IRAC); Allegato 3 sul Bacillus thuringiensis; Allegato 4 con la classificazione FRAC e IRAC dei meccanismi d'azione e il rischio di resistenza."
+  - id: dir_2009_128_ce
+    title: "Direttiva 2009/128/CE sull'uso sostenibile dei pesticidi (Allegato III: principi generali di difesa integrata)"
+    issuer: "Parlamento europeo e Consiglio dell'Unione europea"
+    type: europeo
+    url: "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32009L0128"
+    status: solo_metadati
+    note: "Citata dal Disciplinare Calabria 2026 (criteri di scelta dei prodotti); il testo della direttiva non è stato letto da qui."
+  - id: gowan_programmi
+    title: "Gowan Italia: depliant e schede colturali di difesa 2025-2026 (vite, pomodoro, lattuga, fragola, pesco, susino, ciliegio, actinidia, olivo, zucchino, patata, nocciolo)"
+    issuer: "Gowan Italia"
+    type: produttore
+    url: "https://gowanitalia.it/"
+    status: testo_letto
+    note: "Posizionamento dei prodotti per fase e per epoca; trascritto in configs/difesa/gowan_programmi.yaml con il link di ogni documento."
+  - id: eu_pesticides_db
+    title: "EU Pesticides Database: sostanze attive (stato di approvazione, scadenza, candidate alla sostituzione)"
+    issuer: "Commissione europea, DG SANTE"
+    type: europeo
+    url: "https://ec.europa.eu/food/plant/pesticides/eu-pesticides-database/start/screen/active-substances"
+    status: testo_letto
+    note: "Scaricata con l'interfaccia pubblica (scripts/aggiorna_norme.py) in configs/difesa/sostanze_ue.json."
+  - id: microorganisms_2021_oidio_vite
+    title: "Grapevine Powdery Mildew: Fungicides for Its Management and Advances in Molecular Detection of Markers Associated with Resistance (Microorganisms 9:1541, 2021)"
+    issuer: "MDPI Microorganisms"
+    type: internazionale
+    doi: "10.3390/microorganisms9071541"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8307186/"
+    status: testo_letto
+    note: "Tabella dei fungicidi antioidici con i codici FRAC: DMI (penconazolo, tebuconazolo, tetraconazolo) gruppo 3, spiroxamina gruppo 5, zolfo M02. Conferma l'Allegato 4 del Disciplinare."
+  - id: microorganisms_2021_peronospora
+    title: "Fungicide Resistance Evolution and Detection in Plant Pathogens: Plasmopara viticola as a Case Study (Microorganisms 9:119, 2021)"
+    issuer: "MDPI Microorganisms"
+    type: internazionale
+    doi: "10.3390/microorganisms9010119"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7825580/"
+    status: testo_letto
+    note: "Tabella 1: amisulbrom e cyazofamid nello stesso gruppo QiI (inibitori del sito Qi del complesso III); zoxamide tra le benzamidi."

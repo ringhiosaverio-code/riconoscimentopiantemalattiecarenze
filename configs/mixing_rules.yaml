@@ -61,12 +61,12 @@ temperature:
   - {category: polisolfuro, max_c: 30, text: "Polisolfuro: non usare sopra i 30 °C né con previsione di gelate.", sources: [er_manuale_polisolfuro]}
   - {category: olio_minerale, max_c: 30, text: "Olio minerale: rischio di fitotossicità con temperature elevate e umidità alta prolungata.", sources: [er_manuale_oli]}
 
-# Rame (disciplinare Regione Calabria 2023)
+# Rame (Disciplinare Regione Calabria 2026, aggiornamento di agosto: riga "(***) Prodotti rameici")
 copper:
   limit_7y_kg_ha: 28
   avg_year_kg_ha: 4
   text: "Rame: non superare 28 kg/ha in 7 anni; si raccomanda di non superare in media 4 kg di rame per ettaro all'anno."
-  sources: [disc_calabria_2023]
+  sources: [disc_calabria_2026_08]
 
 # Procedura generale di preparazione
 procedure:

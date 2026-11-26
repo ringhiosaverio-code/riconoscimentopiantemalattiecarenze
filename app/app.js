@@ -32,6 +32,22 @@
   getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
   getJSON('difesa.json').then(function (d) { DATA.difesa = d; }).catch(function () { DATA.difesa = null; });
   getJSON('note_legno.json').then(function (d) { DATA.noteLegno = d; }).catch(function () { DATA.noteLegno = []; });
+  // catalogo Gowan per Consigli e Botte (usi registrati, etichette, programmi, Disciplinare, stato UE)
+  var CS = null;
+  var catReady = getJSON('catalogo.json').then(function (d) { DATA.cat = d; CS = Consigli.prepara(d); showNorme(); return d; });
+  catReady.catch(function () { DATA.cat = null; });
+  var opt = function (v, t) { return '<option value="' + esc(v) + '">' + esc(t) + '</option>'; };
+  var num = function (v) { return v === '' || v == null ? null : Number(v); };
+  var fmtN = function (x) { return String(x).replace('.', ','); };
+  var fmtQ = function (q) { return q ? fmtN(q.valore) + ' ' + q.unita : '–'; };
+  function normeText() {
+    var f = DATA.cat && DATA.cat.fonti;
+    if (!f) return '';
+    var d = function (iso) { return iso ? iso.split('-').reverse().join('/') : 'n.d.'; };
+    return 'Norme in uso: Disciplinare Calabria ' + (f.disciplinare.versione || f.disciplinare.anno) + '; stato UE delle sostanze attive del ' +
+      d(f.ue && f.ue.scaricato) + '; etichette Gowan del ' + d(f.gowan && f.gowan.consultato) + (f.norme && f.norme.controllato ? '; ultimo controllo automatico ' + d(f.norme.controllato) : '') + '.';
+  }
+  function showNorme() { if ($('info-norme')) $('info-norme').textContent = normeText(); }
   // avviso quando coltura e organo indicano una malattia del legno (la foto della foglia non basta)
   function woodNote(crop, organ) {
     return (DATA.noteLegno || []).filter(function (n) { return n.colture.indexOf(crop) >= 0 && n.organi.indexOf(organ) >= 0; })
@@ -41,15 +57,17 @@
   }
 
   // ------------------------------------------------------------------ schede
+  var TABS = ['reader', 'consigli', 'quiz', 'tank', 'info'];
   function showTab(name) {
-    ['reader', 'quiz', 'tank', 'info'].forEach(function (t) {
+    TABS.forEach(function (t) {
       $('tab-' + t).hidden = t !== name;
       $('t-' + t).setAttribute('aria-selected', String(t === name));
     });
-    if (name === 'tank' && !$('tk-rows').children.length) ready.then(initTank);
+    if (name === 'tank') ready.then(initTank);
+    if (name === 'consigli') catReady.then(initConsigli, function () { $('cs-status').textContent = 'Catalogo non disponibile: ricarica la pagina.'; });
     window.scrollTo(0, 0);
   }
-  ['reader', 'quiz', 'tank', 'info'].forEach(function (t) { $('t-' + t).addEventListener('click', function () { showTab(t); }); });
+  TABS.forEach(function (t) { $('t-' + t).addEventListener('click', function () { showTab(t); }); });
 
   // ------------------------------------------------------------------ modello
   function loadModel() {
@@ -208,6 +226,24 @@
   // Disciplinare di produzione integrata della Regione Calabria (avversità, criteri, sostanze ammesse e
   // limiti) e usi registrati dei prodotti Gowan Italia (dose, intervallo di sicurezza, note): niente è
   // scritto a mano, tutto viene dai documenti; l'etichetta autorizzata prevale.
+  // ordine dei prodotti per la classe del lettore (motore di Consigli, situazione "primi sintomi", fase non nota)
+  function rankFor(head, label, plant) {
+    if (!CS || plant === '*') return null;
+    var hits = (DATA.cat.classi[head + '|' + label] || []).filter(function (x) { return x.plant === plant; });
+    if (!hits.length) return null;
+    var size = function (x) { return (Consigli.avversita(CS, x.c).filter(function (e) { return e.id === x.id; })[0] || { u: [] }).u.length; };
+    hits.sort(function (a, b) { return size(b) - size(a); });
+    try {
+      var r = Consigli.ordina(CS, { coltura: hits[0].c, avversita: hits[0].id, fase: null, situazione: 'primi_sintomi', disciplinare: false, ambito: null });
+      return { nomi: r.scelti.map(function (x) { return x.prodotto; }), hit: hits[0] };
+    } catch (e) { return null; }
+  }
+  function wireConsLinks(root) {
+    Array.prototype.forEach.call((root || document).querySelectorAll('.go-cons'), function (a) {
+      a.addEventListener('click', function (ev) { ev.preventDefault(); openConsigli(a.getAttribute('data-c'), a.getAttribute('data-a')); });
+    });
+  }
+
   function difesaBlock(head, label, crop, plantGuess) {
     var D = DATA.difesa, e = D && D.classi[head + '|' + label];
     if (!e) return '';
@@ -217,13 +253,16 @@
       var c = DATA.readers.plant.classes.filter(function (x) { return x.label === k; })[0];
       return c ? c.name : k;
     };
-    var fd = D.fonti.disciplinare, fp = D.fonti.disciplinare_prec, g = D.fonti.gowan;
+    var fd = D.fonti.disciplinare, g = D.fonti.gowan;
     var h = '<details class="reader" open><summary><strong>Difesa: cosa prevedono le norme e i prodotti</strong></summary>';
     pick.forEach(function (k) {
       var ent = e[k];
       ent.r.forEach(function (i) {
         var r = D.righe[i], by = { biologico: [], naturale: [], sintesi: [] };
-        r.sostanze.forEach(function (x) { by[x.t].push(esc(x.s) + (x.n && x.n.length ? ' <span class="muted">(' + esc(x.n.join(', ')) + ')</span>' : '')); });
+        r.sostanze.forEach(function (x) {
+          by[x.t].push(esc(x.s) + (x.n && x.n.length ? ' <span class="muted">(' + esc(x.n.join(', ')) + ')</span>' : '') +
+            (x.ue ? ' <strong>⚠ non approvata nell\'UE' + (x.ue.scadenza ? ' (scadenza ' + esc(x.ue.scadenza) + ')' : '') + '</strong>' : ''));
+        });
         h += '<div class="dif"><h4>' + esc(r.coltura.charAt(0) + r.coltura.slice(1).toLowerCase()) + ': ' + esc(r.avversita) + '</h4>';
         if (r.criteri) h += '<details><summary>Criteri di intervento</summary><p>' + esc(r.criteri) + '</p></details>';
         if (by.biologico.length) h += '<p><strong>Mezzi biologici e ausiliari:</strong> ' + by.biologico.join(', ') + '</p>';
@@ -231,9 +270,11 @@
         if (by.sintesi.length) h += '<p><strong>Sostanze attive di sintesi:</strong> ' + by.sintesi.join(', ') + '</p>';
         if (!r.sostanze.length) h += '<p class="muted">Nessuna sostanza indicata dal Disciplinare per questa avversità: valgono i criteri di intervento.</p>';
         if (r.note) h += '<p class="muted"><strong>Limitazioni d\'uso e note:</strong> ' + esc(r.note) + '</p>';
-        if (r.rimosse && r.rimosse.length && fp) h += '<p class="warn"><strong>Non più nell\'elenco ' + fd.anno + ' (c\'erano nel ' + fp.anno + '):</strong> ' + esc(r.rimosse.join(', ')) + '. Prima di usare scorte di magazzino verifica l\'autorizzazione del prodotto.</p>';
+        if (r.sostanze.some(function (x) { return x.ue; })) h += '<p class="warn">Secondo la banca dati UE dei pesticidi alcune sostanze di questo elenco non sono più approvate: non usare prodotti che le contengono, salvo i periodi di smaltimento delle scorte fissati dal Ministero.</p>';
+        if (r.rimosse && r.rimosse.length) h += '<p class="warn"><strong>Non più nell\'elenco del Disciplinare ' + esc(fd.versione || fd.anno) + ':</strong> ' +
+          esc(r.rimosse.map(function (x) { return typeof x === 'string' ? x : x.s + ' (c\'era nella versione di ' + x.v + ')'; }).join(', ')) + '. Prima di usare scorte di magazzino verifica l\'autorizzazione del prodotto.</p>';
         if (r.sostanze.some(function (x) { return /rame/i.test(x.s); }) && D.rame[r.coltura]) h += '<p class="muted">' + esc(D.rame[r.coltura]) + '</p>';
-        h += '<p class="muted">Fonte: <a href="' + esc(fd.url) + '" target="_blank" rel="noopener">' + esc(fd.titolo) + '</a>, pag. ' + r.pagina + '. Il raggruppamento in biologici, naturali e di sintesi è dell\'app.</p></div>';
+        h += '<p class="muted">Fonte: <a href="' + esc(fd.url) + '" target="_blank" rel="noopener">' + esc(fd.titolo) + '</a>, pag. ' + r.pagina + '. Il raggruppamento in biologici, naturali e di sintesi è dell\'app; lo stato UE delle sostanze è quello della banca dati dei pesticidi della Commissione europea.</p></div>';
       });
       if (ent.u.length) {
         // un prodotto per riga (dose e intervallo del primo uso), i dettagli per coltura si aprono a richiesta
@@ -257,7 +298,11 @@
           });
           return x + '</details></div>';
         };
+        var rk = rankFor(head, label, k);
+        if (rk) order.sort(function (a, b) { var ia = rk.nomi.indexOf(a), ib = rk.nomi.indexOf(b); return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib); });
         h += '<div class="dif"><h4>Prodotti Gowan registrati per questa avversità (' + esc(plantName(k)) + '): ' + order.length + '</h4>';
+        if (rk) h += '<p class="muted">In ordine di preferenza per i primi sintomi, con le regole della sezione Consigli (programma Gowan, tipo di azione, mezzi a basso impatto). Per fase della coltura, situazione, dosi e quantità: <a href="#" class="go-cons" data-c="' +
+          esc(rk.hit.c) + '" data-a="' + esc(rk.hit.id) + '">prepara la ricetta</a>.</p>';
         order.slice(0, 5).forEach(function (n) { h += prodHtml(n); });
         if (order.length > 5) {
           h += '<details><summary>Altri ' + (order.length - 5) + ' prodotti</summary>';
@@ -381,6 +426,7 @@
     $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
     $('go-tank').addEventListener('click', function () { showTab('tank'); });
     if ($('go-tank2')) $('go-tank2').addEventListener('click', function (ev) { ev.preventDefault(); showTab('tank'); });
+    wireConsLinks($('out'));
     wireContrib();
   }
 
@@ -770,60 +816,362 @@
     $('q-next').addEventListener('click', nextQuestion);
   }
 
-  // ------------------------------------------------------------------ botte
-  var opt = function (v, t) { return '<option value="' + esc(v) + '">' + esc(t) + '</option>'; };
-  function initTank() {
-    $('tk-legal').textContent = Sprayer.LEGAL_NOTE;
-    addRow();
+  // ------------------------------------------------------------------ consigli
+  var csInit = false, csPending = null;
+  function initConsigli() {
+    if (!CS) return;
+    if (!csInit) {
+      csInit = true;
+      var cat = DATA.cat, byName = function (a, b) { return a.nome.localeCompare(b.nome, 'it'); };
+      var cal = cat.colture.filter(function (c) { return c.sezioni.length; }).sort(byName);
+      var alt = cat.colture.filter(function (c) { return !c.sezioni.length; }).sort(byName);
+      $('cs-crop').innerHTML = '<option value="">Scegli la coltura</option>' +
+        '<optgroup label="Colture del Disciplinare della Calabria">' + cal.map(function (c) { return opt(c.nome, c.nome); }).join('') + '</optgroup>' +
+        '<optgroup label="Altre colture con prodotti Gowan registrati">' + alt.map(function (c) { return opt(c.nome, c.nome); }).join('') + '</optgroup>';
+      $('cs-crop').disabled = false;
+      $('cs-last').innerHTML = '<option value="">Nessuno o non so</option>' + cat.prodotti.filter(function (p) { return p.codici && p.codici.length; })
+        .map(function (p) { return opt(p.nome, p.nome + ' (' + p.codici.join(' + ') + ')'); }).join('');
+      $('cs-status').textContent = 'Catalogo Gowan: ' + cat.prodotti.length + ' prodotti e ' + cat.usi.length + ' usi registrati. ' + normeText();
+      $('cs-crop').addEventListener('change', function () { csCrop(); });
+      $('cs-adv').addEventListener('change', function () { csAdv(); });
+      ['cs-phase', 'cs-sit'].forEach(function (id) { $(id).addEventListener('change', csReady); });
+      $('cs-go').addEventListener('click', function () { csRun(null); });
+    }
+    if (csPending) { var p = csPending; csPending = null; $('cs-crop').value = p.c; csCrop(); $('cs-adv').value = p.a; csAdv(); }
   }
-  function addRow() {
-    if ($('tk-rows').children.length >= 8) return;
+  function openConsigli(crop, adv) { csPending = { c: crop, a: adv }; showTab('consigli'); }
+  function csCrop() {
+    var crop = $('cs-crop').value, adv = $('cs-adv'), ph = $('cs-phase');
+    $('cs-out').innerHTML = '';
+    if (!crop) { adv.disabled = ph.disabled = $('cs-sit').disabled = true; csReady(); return; }
+    var list = Consigli.avversita(CS, crop), c = CS.cat.colture[CS.colture[crop].i];
+    var grp = function (t) {
+      return list.filter(function (e) { return e.t === t; }).map(function (e) {
+        return opt(e.id, e.nome + (e.u.length ? '' : ' — nessun prodotto Gowan registrato'));
+      }).join('');
+    };
+    adv.innerHTML = '<option value="">Scegli la malattia o il parassita</option><optgroup label="Malattie (funghi, batteri, virus)">' + grp('malattia') +
+      '</optgroup><optgroup label="Insetti, acari e altri parassiti">' + grp('insetto') + '</optgroup>';
+    adv.disabled = false;
+    ph.innerHTML = '<option value="">Scegli la fase</option>' + Consigli.fasi(CS, crop).map(function (f) {
+      return opt(f.id, (f.n ? f.n + '. ' : '') + f.nome + (f.bbch ? ' (BBCH ' + f.bbch[0] + (f.bbch[1] !== f.bbch[0] ? '-' + f.bbch[1] : '') + ')' : ''));
+    }).join('');
+    ph.disabled = false;
+    $('cs-disc').disabled = !c.sezioni.length;
+    $('cs-disc').parentNode.title = c.sezioni.length ? '' : 'Il Disciplinare della Calabria non tratta questa coltura';
+    csAdv();
+  }
+  function csAdv() {
+    var crop = $('cs-crop').value, id = $('cs-adv').value, sit = $('cs-sit');
+    if (!crop || !id) { sit.disabled = true; sit.innerHTML = ''; csReady(); return; }
+    var e = Consigli.avversita(CS, crop).filter(function (x) { return x.id === id; })[0];
+    sit.innerHTML = Consigli.situazioni(CS, e.t).map(function (x) { return opt(x.id, x.nome); }).join('');
+    sit.disabled = false;
+    csReady();
+  }
+  function csReady() { $('cs-go').disabled = !($('cs-crop').value && $('cs-adv').value && $('cs-phase').value && $('cs-sit').value); }
+  function csQuery() {
+    return { coltura: $('cs-crop').value, avversita: $('cs-adv').value, fase: $('cs-phase').value, situazione: $('cs-sit').value,
+             ambito: $('cs-amb').value, giorni: num($('cs-days').value), bio: $('cs-bio').checked,
+             disciplinare: $('cs-disc').checked && !$('cs-disc').disabled, ultimo: $('cs-last').value || null, obiettivo: $('cs-goal').value || null };
+  }
+  function rangeTxt(r) { return r[0] === r[1] ? String(r[0]) : r[0] + '-' + r[1]; }
+  function bbchTxt(w) { return w.map(function (x) { return x[0] + '-' + (x[1] === 99 ? 'raccolta' : x[1]); }).join(' e '); }
+  var DOSE_MODO = { min: 'dose minima dell\'etichetta, per la prevenzione', media: 'dose intermedia dell\'etichetta', max: 'dose massima dell\'etichetta, per l\'attacco in corso' };
+  function ueTxt(p) {
+    return Object.keys(p.ue || {}).map(function (k) {
+      var e = p.ue[k];
+      return e.nome + ': ' + (e.stato === 'Approved' ? 'approvata' + (e.scadenza ? ' fino al ' + e.scadenza : '') : e.stato === 'Not approved' ? 'NON approvata' : 'in valutazione') +
+        (e.candidata_sostituzione ? ', candidata alla sostituzione' : '') + (e.basso_rischio ? ', a basso rischio' : '');
+    }).join('; ');
+  }
+  function srcLinksIds(ids) {
+    return (ids || []).filter(function (s) { return DATA.sources[s]; }).map(function (s) {
+      return '<a href="' + esc(DATA.sources[s].url) + '" target="_blank" rel="noopener">' + esc(DATA.sources[s].title) + '</a>';
+    }).join(' · ');
+  }
+  function productCard(rc, s, opz, main) {
+    var p = rc.prodotto, d = rc.dose;
+    var x = '<div class="' + (main ? 'pick-card' : 'alt-card') + '">';
+    x += '<p class="' + (main ? 'big' : '') + '">' + (main ? '1ª scelta: ' : '') + '<strong><a href="' + esc(p.pagina) + '" target="_blank" rel="noopener">' + esc(p.nome) + '</a></strong>' +
+      (p.bio ? '<span class="badge">BIO</span>' : '') + '</p>';
+    x += '<p class="muted">' + esc(p.tipo || '') + (p.composizione ? ' — ' + esc(p.composizione) : '') + (p.codici && p.codici.length ? ' · gruppo ' + esc(p.codici.join(' + ')) : '') + '</p>';
+    var pos = s.motivi.filter(function (m) { return m.peso > 0; }), neg = s.motivi.filter(function (m) { return m.peso < 0; });
+    if (pos.length || neg.length) x += '<ul class="why">' + pos.map(function (m) { return '<li>✓ ' + esc(m.testo) + '</li>'; }).join('') +
+      neg.map(function (m) { return '<li>⚠ ' + esc(m.testo) + '</li>'; }).join('') + '</ul>';
+    x += '<div class="dose-box"><p><strong>Dose:</strong> ' + [d.per_hl ? '<strong>' + esc(fmtQ(d.per_hl)) + '</strong> per ettolitro' : null,
+      d.per_ha ? '<strong>' + esc(fmtQ(d.per_ha)) + '</strong> per ettaro' : null].filter(Boolean).join(' · ') + '</p>';
+    x += '<p class="muted">' + esc(DOSE_MODO[d.modo] || '') + '. In etichetta: ' + esc([d.etichetta_hl, d.etichetta_ha].filter(Boolean).join(' · ').replace(/\./g, ',')) + '.</p>';
+    if (d.totale) x += '<p>Per ' + esc(fmtN(opz.ettari)) + ' ha servono <strong>' + esc(fmtQ(d.totale)) + '</strong> di prodotto.</p>';
+    if (d.botte) x += '<p>In una botte da ' + esc(opz.botte) + ' l: <strong>' + esc(fmtQ(d.botte)) + '</strong>' + (d.botte_ettari ? ' (una botte tratta ' + esc(fmtN(d.botte_ettari)) + ' ha)' : '') + '.</p>';
+    if (rc.acqua_etichetta) x += '<p class="muted">L\'etichetta indica ' + rangeTxt(rc.acqua_etichetta) + ' l/ha di acqua.</p>';
+    x += '</div>';
+    var t = [];
+    if (rc.n_max) t.push('al massimo ' + rc.n_max + ' trattamenti');
+    else if (rc.n_tipico) t.push(rangeTxt(rc.n_tipico) + ' trattamenti');
+    if (rc.intervallo) t.push('ogni ' + rangeTxt(rc.intervallo) + ' giorni');
+    if (rc.phi != null) t.push('intervallo di sicurezza ' + (rc.phi === 0 ? 'non necessario' : rc.phi + ' giorni'));
+    if (rc.phi_fase) t.push(rc.phi_fase);
+    if (rc.bbch) t.push('stadi BBCH ' + bbchTxt(rc.bbch));
+    if (t.length) x += '<p><strong>Dall\'etichetta:</strong> ' + esc(t.join('; ')) + '.</p>';
+    if (rc.dose_nota) x += '<p class="muted">Etichetta: «' + esc(rc.dose_nota) + '»</p>';
+    rc.disciplinare.forEach(function (dd) { if (dd.limiti.length) x += '<p><strong>Disciplinare:</strong> ' + esc(dd.sostanza) + ': ' + esc(dd.limiti.join('; ')) + '.</p>'; });
+    if (rc.rame_kg_ha != null) x += '<p>Rame metallo: <strong>' + esc(fmtN(rc.rame_kg_ha)) + ' kg/ha</strong> per trattamento. ' + esc(rc.rame_limite || '') + '</p>';
+    if (p.api) x += '<p class="muted">Api: «' + esc(p.api) + '» (etichetta)</p>';
+    var ue = ueTxt(p);
+    if (ue) x += '<p class="muted">Banca dati UE: ' + esc(ue) + '.</p>';
+    s.avvisi.concat(rc.avvisi).forEach(function (a) { x += '<div class="warn">' + esc(a) + '</div>'; });
+    x += '<details><summary>Uso registrato, nota d\'etichetta e miscele</summary><p><strong>Uso registrato:</strong> ' + esc(rc.registrato) + ' (' + esc(rc.uso.s === 'serra' ? 'in serra' : 'in pieno campo') + ').</p>' +
+      (rc.nota ? '<p class="muted">' + esc(rc.nota) + '</p>' : '') + (p.compatibilita ? '<p><strong>Miscele:</strong> ' + esc(p.compatibilita) + '</p>' : '') +
+      (p.etichetta ? '<p class="muted"><a href="' + esc(p.etichetta) + '" target="_blank" rel="noopener">Etichetta</a>' + (p.etichetta_validita ? ': ' + esc(p.etichetta_validita) : '') + '</p>' : '') + '</details>';
+    x += main ? '<div class="row"><button type="button" id="cs-tank-go">Porta nella botte</button></div>'
+              : '<p><button type="button" class="secondary cs-use" data-p="' + esc(p.nome) + '">Ricetta con questo prodotto</button></p>';
+    return x + '</div>';
+  }
+  function csRun(pick) {
+    var q = csQuery(), res;
+    try { res = Consigli.ordina(CS, q); } catch (e) { $('cs-out').innerHTML = '<div class="card warn">' + esc(e.message) + '</div>'; return; }
+    var cat = DATA.cat, opz = { ettari: num($('cs-ha').value), acqua: num($('cs-water').value), botte: num($('cs-tank').value) };
+    var h = '<section class="card"><h2>Ricetta: ' + esc(q.coltura) + ' — ' + esc(res.avversita.nome) + '</h2>';
+    h += '<p class="muted">' + [res.fase ? 'Fase: ' + res.fase.nome : null, 'Situazione: ' + res.situazione.nome, q.ambito === 'serra' ? 'in serra' : 'in pieno campo',
+      q.bio ? 'produzione biologica' : null, q.disciplinare && res.righe.length ? 'Disciplinare Calabria' : null,
+      q.giorni != null ? q.giorni + ' giorni alla raccolta' : null].filter(Boolean).map(esc).join(' · ') + '</p>';
+    res.righe.forEach(function (r) {
+      var crit = /^AVVERSIT/i.test(r.criteri || '') ? '' : r.criteri;  // intestazione della tabella letta come testo
+      if (crit || r.generale) h += '<div class="dif"><h4>Quando intervenire (Disciplinare Calabria, ' + esc(cat.fonti.disciplinare.versione) + ', ' +
+        esc(r.coltura.charAt(0) + r.coltura.slice(1).toLowerCase()) + ', pag. ' + r.pagina + ')</h4>' +
+        (crit ? '<p>' + esc(crit) + '</p>' : '') + (r.generale ? '<p class="muted"><strong>Note e limiti:</strong> ' + esc(r.generale) + '</p>' : '') + '</div>';
+    });
+    h += '<p>' + esc(res.situazione.consiglio) + '</p>';
+    var s0 = res.scelti.filter(function (x) { return x.prodotto === pick; })[0] || res.scelti[0], rc = null;
+    if (!s0) {
+      h += '<div class="warn">' + (res.avversita.u.length ? 'Con le condizioni scelte nessun prodotto Gowan registrato è utilizzabile: vedi i motivi qui sotto.'
+        : 'Nessun prodotto Gowan è registrato per questa avversità su questa coltura.') + '</div>';
+      res.righe.forEach(function (r) {
+        if (r.sostanze.length) h += '<p><strong>Il Disciplinare ammette:</strong> ' + esc(r.sostanze.map(function (x) { return x.s; }).join(', ')) + '.</p>';
+      });
+    } else {
+      rc = Consigli.ricetta(CS, q, s0, opz);
+      h += productCard(rc, s0, opz, true);
+      if (rc.coadiuvanti.length) {
+        h += '<h3>Da aggiungere nella botte</h3>';
+        rc.coadiuvanti.forEach(function (c) {
+          h += '<p><strong><a href="' + esc(c.pagina) + '" target="_blank" rel="noopener">' + esc(c.nome) + '</a></strong> — ' + esc(c.tipo) + '. Dose: ' + esc(c.dose || '') +
+            (c.per_ha ? '; con la tua acqua: <strong>' + esc(fmtQ(c.per_ha)) + '</strong> per ettaro' + (c.botte ? ', <strong>' + esc(fmtQ(c.botte)) + '</strong> nella botte' : '') : '') + '.</p>';
+        });
+      }
+      var alts = res.scelti.filter(function (x) { return x !== s0; });
+      if (alts.length) {
+        h += '<h3>In alternativa, in ordine di preferenza</h3>';
+        alts.slice(0, 3).forEach(function (a) { h += productCard(Consigli.ricetta(CS, q, a, opz), a, opz, false); });
+        if (alts.length > 3) {
+          h += '<details><summary>Altri prodotti utilizzabili (' + (alts.length - 3) + ')</summary>';
+          alts.slice(3).forEach(function (a) { h += productCard(Consigli.ricetta(CS, q, a, opz), a, opz, false); });
+          h += '</details>';
+        }
+      }
+      if (res.alternanza.length > 1) h += '<h3>Strategia contro le resistenze</h3><p>Alterna prodotti di gruppi diversi, per esempio: <strong>' + esc(res.alternanza.join(' → ')) +
+        '</strong>' + (rc.intervallo ? ', con l\'intervallo indicato in etichetta (' + rangeTxt(rc.intervallo) + ' giorni per ' + esc(s0.prodotto) + ')' : '') + '. I rameici e i biologici si possono ripetere nei limiti di etichetta.</p>';
+      if (rc.nutrizionali.length) {
+        h += '<h3>Nutrizione e biostimolanti (facoltativi)</h3>';
+        rc.nutrizionali.forEach(function (n) {
+          var u = n.uso, d = [u.fogliare ? 'fogliare ' + u.fogliare : null, u.fogliare_ha ? 'fogliare ' + u.fogliare_ha : null, u.radicale ? 'fertirrigazione ' + u.radicale : null].filter(Boolean).join(', ');
+          h += '<div class="alt-card"><p><strong><a href="' + esc(n.pagina) + '" target="_blank" rel="noopener">' + esc(n.nome) + '</a></strong> — ' + esc(n.tipo) + '</p><p>' + esc(n.scopo) + '</p>' +
+            '<p><strong>Dose:</strong> ' + esc(d) + '; ' + esc(u.epoca) + '.</p>' + (n.separato ? '<div class="warn">' + esc(n.separato) + '</div>' : '') +
+            (n.avvertenze.length ? '<p class="muted">' + esc(n.avvertenze.join(' ')) + '</p>' : '') + '</div>';
+        });
+        h += '<p class="muted">' + esc(cat.nutrizionali.avvertenza) + '</p>';
+      }
+    }
+    if (res.esclusi.length) {
+      h += '<details><summary>Prodotti registrati ma esclusi (' + res.esclusi.length + ')</summary><ul>' + res.esclusi.map(function (x) {
+        return '<li><strong>' + esc(x.prodotto) + '</strong>: ' + esc(x.motivo) + '</li>';
+      }).join('') + '</ul></details>';
+    }
+    var c = cat.colture[CS.colture[q.coltura].i], pr = c.programma && cat.programmi[c.programma], fd = cat.fonti.disciplinare;
+    h += '<p class="muted">Fonti: ' + [pr ? '<a href="' + esc(pr.url) + '" target="_blank" rel="noopener">' + esc(pr.titolo) + '</a>' : null,
+      res.righe.length ? '<a href="' + esc(fd.url) + '" target="_blank" rel="noopener">' + esc(fd.titolo) + '</a>' : null,
+      cat.fonti.ue && cat.fonti.ue.url ? '<a href="' + esc(cat.fonti.ue.url) + '" target="_blank" rel="noopener">EU Pesticides Database</a>' : null,
+      esc(cat.fonti.gowan.fonte) + ' (' + esc(cat.fonti.gowan.consultato) + ')', srcLinksIds(['dir_2009_128_ce', 'frac_code_list', 'irac_moa'])].filter(Boolean).join(' · ') + '</p>';
+    h += '<p class="muted">' + esc(cat.regole.avvertenza) + '</p></section>';
+    $('cs-out').innerHTML = h;
+    $('cs-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    Array.prototype.forEach.call(document.querySelectorAll('.cs-use'), function (b) { b.addEventListener('click', function () { csRun(b.getAttribute('data-p')); }); });
+    if (rc && $('cs-tank-go')) $('cs-tank-go').addEventListener('click', function () { fillTank(rc.botte, q.coltura, opz); });
+  }
+
+  // ------------------------------------------------------------------ botte
+  var UNITS = ['g/hl', 'ml/hl', 'kg/ha', 'l/ha', 'g/ha', 'ml/ha', '%'];
+  var tankInit = false;
+  function initTank() {
+    if (!tankInit) {
+      tankInit = true;
+      $('tk-legal').textContent = Sprayer.LEGAL_NOTE;
+      catReady.then(function () {
+        var sel = $('tk-crop');
+        DATA.cat.colture.slice().sort(function (a, b) { return a.nome.localeCompare(b.nome, 'it'); }).forEach(function (c) {
+          var o = document.createElement('option'); o.value = c.nome; o.textContent = c.nome; sel.appendChild(o);
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('.tk-row'), function (r) { fillPicker(r); });
+      }, function () {});
+      $('tk-crop').addEventListener('change', function () { Array.prototype.forEach.call(document.querySelectorAll('.tk-row'), refreshUses); });
+    }
+    if (!$('tk-rows').children.length) addRow();
+  }
+  function fillPicker(d) {
+    var sel = d.querySelector('.tk-pick'), cur = sel.value;
+    if (!DATA.cat || sel.querySelector('optgroup')) return;
+    var g = document.createElement('optgroup'); g.label = 'Catalogo Gowan';
+    DATA.cat.prodotti.slice().sort(function (a, b) { return a.nome.localeCompare(b.nome, 'it'); }).forEach(function (p) {
+      var o = document.createElement('option'); o.value = p.nome; o.textContent = p.nome + (p.tipo ? ' — ' + p.tipo : ''); g.appendChild(o);
+    });
+    sel.insertBefore(g, sel.querySelector('option[value="__altro"]'));
+    sel.value = cur;
+  }
+  function product(name) { return DATA.cat && CS && CS.prodotti[name] != null ? DATA.cat.prodotti[CS.prodotti[name]] : null; }
+  function coadiuvante(name) { return ((DATA.cat && DATA.cat.coadiuvanti) || []).filter(function (c) { return c.nome === name; })[0] || null; }
+  function addRow(pre) {
+    if ($('tk-rows').children.length >= 8) return null;
     var d = document.createElement('div'); d.className = 'reader tk-row';
-    d.innerHTML = '<label>Nome commerciale<input class="tk-name" maxlength="120"></label>' +
-      '<div class="row"><label>Dose<input class="tk-dose" type="number" min="0" step="any" inputmode="decimal"></label>' +
-      '<label>Unità<select class="tk-unit">' + ['g/hl', 'ml/hl', 'kg/ha', 'l/ha', 'g/ha', 'ml/ha', '%'].map(function (u) { return opt(u, u); }).join('') + '</select></label></div>' +
+    d.innerHTML = '<label>Prodotto<select class="tk-pick"><option value="">Scegli dal catalogo Gowan…</option><option value="__altro">Altro prodotto: scrivo i dati dell\'etichetta</option></select></label>' +
+      '<p class="muted tk-info"></p>' +
+      '<label class="tk-use-l" hidden>Uso registrato sulla coltura <span class="muted">(propone la dose)</span><select class="tk-use"></select></label>' +
+      '<div class="tk-manual" hidden><label>Nome commerciale<input class="tk-name" maxlength="120"></label>' +
       '<div class="row"><label>Formulazione<select class="tk-form">' + DATA.rules.formulation_order.order.map(function (f) { return opt(f.id, f.label); }).join('') + '</select></label>' +
       '<label>Tipo<select class="tk-cat">' + DATA.rules.categories.map(function (c) { return opt(c.id, c.label); }).join('') + '</select></label></div>' +
-      '<div class="row"><label>Dose max etichetta <span class="muted">(stessa unità)</span><input class="tk-max" type="number" min="0" step="any" inputmode="decimal"></label>' +
-      '<label>Rame g/kg o g/l <span class="muted">(rameici)</span><input class="tk-cug" type="number" min="0" step="any" inputmode="decimal"></label></div>' +
-      '<p><button type="button" class="secondary tk-del">Rimuovi</button></p>';
+      '<div class="row"><label>Dose massima in etichetta <span class="muted">(stessa unità)</span><input class="tk-max" type="number" min="0" step="any" inputmode="decimal"></label>' +
+      '<label>Rame g/kg o g/l <span class="muted">(rameici)</span><input class="tk-cug" type="number" min="0" step="any" inputmode="decimal"></label></div></div>' +
+      '<div class="row"><label>Dose<input class="tk-dose" type="number" min="0" step="any" inputmode="decimal"></label>' +
+      '<label>Unità<select class="tk-unit">' + UNITS.map(function (u) { return opt(u, u); }).join('') + '</select></label></div>' +
+      '<p class="muted tk-range"></p><p><button type="button" class="secondary tk-del">Rimuovi</button></p>';
     d.querySelector('.tk-form').value = 'OTHER';
     d.querySelector('.tk-del').addEventListener('click', function () { d.remove(); });
+    d.querySelector('.tk-pick').addEventListener('change', function () { pickProduct(d); });
+    d.querySelector('.tk-use').addEventListener('change', function () { applyUse(d); });
     $('tk-rows').appendChild(d);
+    fillPicker(d);
+    if (pre) {
+      if (product(pre.name) || coadiuvante(pre.name)) { d.querySelector('.tk-pick').value = pre.name; pickProduct(d, true); }
+      else { d.querySelector('.tk-pick').value = '__altro'; pickProduct(d, true); d.querySelector('.tk-name').value = pre.name; }
+      d.querySelector('.tk-dose').value = pre.dose;
+      d.querySelector('.tk-unit').value = pre.unit;
+      d.dataset.max = pre.label_max != null ? pre.label_max : '';
+      d.dataset.maxha = pre.label_max_ha ? JSON.stringify(pre.label_max_ha) : '';
+      d.dataset.form = pre.formulation || 'OTHER'; d.dataset.cat = pre.category || 'altro'; d.dataset.cug = pre.copper_g_per_unit || '';
+      if (pre.uso != null && d.querySelector('.tk-use option[value="' + pre.uso + '"]')) d.querySelector('.tk-use').value = String(pre.uso);
+      d.querySelector('.tk-range').textContent = pre.label_max != null ? 'Dose massima di etichetta: ' + fmtN(pre.label_max) + ' ' + pre.unit +
+        (pre.label_max_ha ? ' (al massimo ' + fmtN(pre.label_max_ha.value) + ' ' + pre.label_max_ha.unit + ')' : '') + '.' : '';
+    }
+    return d;
   }
-  $('tk-add').addEventListener('click', function () { ready.then(addRow); });
-  var num = function (v) { return v === '' ? null : Number(v); };
+  var FORM_LABEL = function (id) { var f = DATA.rules.formulation_order.order.filter(function (x) { return x.id === id; })[0]; return f ? f.label : id; };
+  function pickProduct(d, keep) {
+    var v = d.querySelector('.tk-pick').value, man = d.querySelector('.tk-manual'), info = d.querySelector('.tk-info');
+    d.dataset.max = d.dataset.maxha = d.dataset.cug = ''; d.dataset.form = 'OTHER'; d.dataset.cat = 'altro';
+    info.textContent = ''; d.querySelector('.tk-range').textContent = '';
+    man.hidden = v !== '__altro';
+    var p = product(v), c = coadiuvante(v);
+    if (p) {
+      d.dataset.form = p.form || 'OTHER'; d.dataset.cat = p.categoria || 'altro'; d.dataset.cug = p.rame_g || '';
+      info.textContent = [FORM_LABEL(p.form || 'OTHER'), p.tipo, p.rame_g ? 'rame ' + fmtN(p.rame_g) + (p.liquido ? ' g/l' : ' g/kg') : null, p.bio ? 'BIO' : null].filter(Boolean).join(' · ');
+    }
+    if ((v === 'MAGO' || (c && !p)) && c && c.dose_hl && !keep) {
+      d.dataset.form = 'ADJ'; d.querySelector('.tk-unit').value = 'ml/hl'; d.querySelector('.tk-dose').value = c.dose_hl[0];
+      d.dataset.max = c.dose_hl[1]; d.dataset.maxha = JSON.stringify({ value: c.max_ha / 1000, unit: 'l/ha' });
+      d.querySelector('.tk-range').textContent = 'Dose di etichetta: ' + c.dose + '.';
+    }
+    refreshUses(d);
+  }
+  function refreshUses(d) {
+    var p = product(d.querySelector('.tk-pick').value), crop = $('tk-crop').value, lab = d.querySelector('.tk-use-l'), sel = d.querySelector('.tk-use');
+    lab.hidden = true; sel.innerHTML = '';
+    if (!p) return;
+    if (!crop) { if (!d.querySelector('.tk-range').textContent) d.querySelector('.tk-range').textContent = 'Indica la coltura al passo 1 per vedere gli usi registrati e le dosi.'; return; }
+    var ci = CS.colture[crop] ? CS.colture[crop].i : -1, pi = CS.prodotti[p.nome], seen = {}, opts = [];
+    DATA.cat.usi.forEach(function (u, i) {
+      if (u.p !== pi || u.c !== ci) return;
+      var label = DATA.cat.testi[u.a] + (u.s === 'serra' ? ' (serra)' : '') + ' — ' + ([u.hl ? doseTxt(u.hl) : null, u.ha ? doseTxt(u.ha) : null].filter(Boolean).join(' · ') || 'dose: vedi etichetta');
+      if (seen[label]) return; seen[label] = 1;
+      opts.push(opt(i, label));
+    });
+    if (!opts.length) { d.querySelector('.tk-range').textContent = 'Nessun uso registrato di ' + p.nome + ' su ' + crop + ': controlla l\'etichetta.'; return; }
+    sel.innerHTML = '<option value="">Scegli l\'avversità</option>' + opts.join('');
+    lab.hidden = false;
+  }
+  function doseTxt(r) { return (r[3] ? 'max ' : '') + (r[0] === r[1] || r[3] ? fmtN(r[1]) : fmtN(r[0]) + '-' + fmtN(r[1])) + ' ' + r[2]; }
+  var TO_TANK = { 'g/hl': ['g/hl', 1], 'kg/hl': ['g/hl', 1000], 'ml/hl': ['ml/hl', 1], 'l/hl': ['ml/hl', 1000],
+                  'g/ha': ['g/ha', 1], 'kg/ha': ['kg/ha', 1], 'ml/ha': ['ml/ha', 1], 'l/ha': ['l/ha', 1] };
+  function applyUse(d) {
+    var i = d.querySelector('.tk-use').value;
+    if (i === '') return;
+    var u = DATA.cat.usi[Number(i)];
+    if (!u.hl && !u.ha) { d.querySelector('.tk-range').textContent = 'Per questo uso la dose non è sul sito Gowan: leggila nell\'etichetta e scrivila qui.'; return; }
+    // con la dose a ettaro in etichetta si propone quella: l'etichetta chiede di rispettarla con qualunque volume d'acqua
+    var r = u.ha || u.hl, t = TO_TANK[r[2]];
+    d.querySelector('.tk-unit').value = t[0];
+    d.querySelector('.tk-dose').value = Math.round((r[3] ? r[1] : r[0]) * t[1] * 1000) / 1000;
+    d.dataset.max = Math.round(r[1] * t[1] * 1000) / 1000;
+    d.dataset.maxha = '';
+    var x = ['Dose di etichetta: ' + [u.hl ? doseTxt(u.hl) : null, u.ha ? doseTxt(u.ha) : null].filter(Boolean).join(' · ')];
+    if (u.phi != null) x.push('intervallo di sicurezza ' + (u.phi === 0 ? 'non necessario' : u.phi + ' giorni'));
+    if (u.phi_fase) x.push((DATA.cat.regole.limiti_fase[u.phi_fase] || {}).testo || u.phi_fase);
+    if (u.n_max) x.push('al massimo ' + u.n_max + ' trattamenti');
+    d.querySelector('.tk-range').textContent = x.join('; ') + '. Proposta la dose minima' + (u.ha ? ' a ettaro' : '') + ': modificala entro i limiti.';
+  }
+  function fillTank(rows, crop, opz) {
+    ready.then(function () {
+      initTank();
+      $('tk-rows').innerHTML = '';
+      if (opz.botte) $('tk-vol').value = opz.botte;
+      if (opz.acqua) $('tk-wha').value = opz.acqua;
+      catReady.then(function () { $('tk-crop').value = crop || ''; rows.forEach(function (r) { addRow(r); }); }, function () { rows.forEach(function (r) { addRow(r); }); });
+      $('tk-out').innerHTML = '';
+      showTab('tank');
+    });
+  }
+  $('tk-add').addEventListener('click', function () { ready.then(function () { addRow(); }); });
   $('tk-calc').addEventListener('click', function () {
     var products = Array.prototype.map.call(document.querySelectorAll('.tk-row'), function (r) {
-      return { name: r.querySelector('.tk-name').value.trim() || 'Prodotto', dose: num(r.querySelector('.tk-dose').value),
-        unit: r.querySelector('.tk-unit').value, formulation: r.querySelector('.tk-form').value, category: r.querySelector('.tk-cat').value,
-        label_max: num(r.querySelector('.tk-max').value), copper_g_per_unit: num(r.querySelector('.tk-cug').value) };
+      var v = r.querySelector('.tk-pick').value, manual = v === '__altro' || v === '';
+      var maxha = r.dataset.maxha ? JSON.parse(r.dataset.maxha) : null;
+      return { name: manual ? (r.querySelector('.tk-name').value.trim() || 'Prodotto') : v, dose: num(r.querySelector('.tk-dose').value),
+        unit: r.querySelector('.tk-unit').value, formulation: manual ? r.querySelector('.tk-form').value : (r.dataset.form || 'OTHER'),
+        category: manual ? r.querySelector('.tk-cat').value : (r.dataset.cat || 'altro'),
+        label_max: manual ? num(r.querySelector('.tk-max').value) : num(r.dataset.max),
+        copper_g_per_unit: manual ? num(r.querySelector('.tk-cug').value) : num(r.dataset.cug), label_max_ha: manual ? null : maxha };
     });
-    var j;
+    var j, vol = num($('tk-vol').value);
     try {
-      j = Sprayer.computeTank(num($('tk-vol').value), products, num($('tk-wha').value), num($('tk-temp').value), num($('tk-cu').value), DATA.rules);
+      j = Sprayer.computeTank(vol, products, num($('tk-wha').value), num($('tk-temp').value), num($('tk-cu').value), DATA.rules);
     } catch (e) { $('tk-out').innerHTML = '<div class="card warn">' + esc(e.message) + '</div>'; return; }
     var h = '<section class="card"><h2>Risultato</h2>';
-    j.errors.forEach(function (e) { h += '<div class="warn">' + esc(e) + '</div>'; });
-    if (j.area_ha != null) h += '<p>Una botte copre <strong>' + esc(j.area_ha) + ' ha</strong> (' + Math.round(j.area_ha * 10000) + ' m²).</p>';
+    j.errors.forEach(function (e) { h += '<div class="warn lab">' + esc(e) + '</div>'; });
+    if (j.area_ha != null) h += '<p class="big">Una botte da ' + esc(vol) + ' l tratta ' + esc(fmtN(j.area_ha)) + ' ha <span class="muted">(' + Math.round(j.area_ha * 10000) + ' m²)</span></p>';
+    var left = j.products.slice();
+    var take = function (name) { for (var i = 0; i < left.length; i++) if (left[i].name === name) return left.splice(i, 1)[0]; return null; };
+    h += '<h3>Come preparare la botte</h3><ol class="prep"><li>Riempi la botte d\'acqua per circa metà e accendi l\'agitatore.</li>';
+    j.order.forEach(function (o) {
+      var p = take(o.name);
+      if (p) h += '<li>Aggiungi <strong>' + esc(fmtN(p.amount.value) + ' ' + p.amount.unit) + '</strong> di <strong>' + esc(o.name) + '</strong>' + (p.over_label ? ' ⚠' : '') +
+        ' <span class="muted">(' + esc(o.formulation) + ')</span> e aspetta che sia ben sciolto o disperso.</li>';
+    });
+    h += '<li>Completa con l\'acqua fino a ' + esc(vol) + ' litri, sempre con l\'agitatore acceso, e tratta subito.</li></ol>';
     h += '<table><tr><th>Prodotto</th><th class="n">Nella botte</th><th class="n">Per ettaro</th></tr>';
     j.products.forEach(function (p) {
-      h += '<tr><td>' + esc(p.name) + (p.over_label ? ' ⚠' : '') + '<br><span class="muted">' + esc(p.dose + ' ' + p.unit) + '</span></td><td class="n"><strong>' +
-        esc(p.amount.value + ' ' + p.amount.unit) + '</strong></td><td class="n">' + (p.per_ha ? esc(p.per_ha.value + ' ' + p.per_ha.unit) : '–') + '</td></tr>';
+      h += '<tr><td>' + esc(p.name) + (p.over_label ? ' ⚠' : '') + '<br><span class="muted">' + esc(fmtN(p.dose) + ' ' + p.unit) + '</span></td><td class="n"><strong>' +
+        esc(fmtN(p.amount.value) + ' ' + p.amount.unit) + '</strong></td><td class="n">' + (p.per_ha ? esc(fmtN(p.per_ha.value) + ' ' + p.per_ha.unit) : '–') + '</td></tr>';
     });
     h += '</table>';
-    if (j.copper_kg_ha != null) h += '<p>Rame metallo: <strong>' + esc(j.copper_kg_ha) + ' kg/ha</strong></p>';
-    h += '<h3>Ordine di caricamento</h3><ol>' + j.order.map(function (o) { return '<li>' + esc(o.name) + ' <span class="muted">(' + esc(o.formulation) + ')</span></li>'; }).join('') + '</ol>';
-    j.warnings.forEach(function (w) { h += '<div class="warn' + (w.level === 'incompatibile' ? ' lab' : '') + '">' + esc(w.text) + '</div>'; });
-    h += '<h3>Procedura</h3><ul>' + j.procedure.map(function (p) { return '<li>' + esc(p.text) + '</li>'; }).join('') + '</ul>';
+    if (j.copper_kg_ha != null) h += '<p>Rame metallo distribuito: <strong>' + esc(fmtN(j.copper_kg_ha)) + ' kg/ha</strong></p>';
+    if (j.warnings.length) h += '<h3>Attenzioni</h3>';
+    j.warnings.forEach(function (w) { h += '<div class="warn' + (w.level === 'incompatibile' ? ' lab' : '') + '">' + esc(w.text).replace(/(\d)\.(\d)/g, '$1,$2') + '</div>'; });
+    h += '<details><summary>Regole generali di preparazione</summary><ul>' + j.procedure.map(function (p) { return '<li>' + esc(p.text) + '</li>'; }).join('') + '</ul></details>';
     var ids = {};
     j.warnings.forEach(function (w) { w.sources.forEach(function (s) { ids[s] = 1; }); });
     j.order_sources.forEach(function (s) { ids[s] = 1; });
     j.procedure.forEach(function (p) { p.sources.forEach(function (s) { ids[s] = 1; }); });
-    var links = Object.keys(ids).filter(function (s) { return DATA.sources[s]; }).map(function (s) {
-      return '<a href="' + esc(DATA.sources[s].url) + '" target="_blank" rel="noopener">' + esc(DATA.sources[s].title) + '</a>';
-    });
-    if (links.length) h += '<p class="muted">Fonti: ' + links.join(' · ') + '</p>';
+    var links = srcLinksIds(Object.keys(ids));
+    if (links) h += '<p class="muted">Fonti: ' + links + '</p>';
     h += '<p class="muted">' + esc(j.legal_note) + '</p></section>';
     $('tk-out').innerHTML = h;
   });
@@ -850,6 +1198,8 @@
       '<li>PlantVillage (Hughes e Salathé, 2015)</li><li>PlantDoc (Singh et al., 2020), CC BY 4.0</li>' +
       '<li>Dataset Project-AgML (UC Davis), CC BY 4.0 / MIT</li><li>iNatAg (Project-AgML), da iNaturalist</li></ul>' +
       '<p class="muted">Conoscenze agronomiche: disciplinare di produzione integrata della Regione Calabria (2023), bollettini ARSAC, schede EPPO, EFSA, Università Mediterranea di Reggio Calabria, Università di Bari. Elenco completo e livello di verifica nel repository.</p>' +
+      '<h2>Norme e aggiornamenti</h2><p class="muted" id="info-norme">' + esc(normeText()) + '</p>' +
+      '<p class="muted">Ogni settimana un controllo automatico cerca un nuovo Disciplinare della Calabria sul sito ARSAC, lo stato delle sostanze attive nella banca dati UE e le etichette Gowan; le novità diventano una proposta di aggiornamento che una persona controlla prima della pubblicazione.</p>' +
       '<h2>Avvertenze</h2><p class="muted">Strumento di supporto alla decisione, non una diagnosi. Per virus, viroidi, batteri e nematodi serve la conferma di laboratorio. Dosi e compatibilità dei prodotti sono quelle dell\'etichetta autorizzata.</p>' +
       '<p class="muted">Motore: ONNX Runtime Web 1.20.1 (licenza MIT). Codice: <a href="https://github.com/ringhiosaverio-code/riconoscimentopiantemalattiecarenze" target="_blank" rel="noopener">repository</a>, licenza Apache-2.0.</p>';
   }

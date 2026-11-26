@@ -73,21 +73,82 @@ Le risposte sbagliate tornano più spesso (4 domande su 10 sono di ripasso) finc
 
 Nella versione con server il quiz è attivo quando ci sono le immagini e il manifest (`data/processed/manifest_v2.csv`, oppure `PLANTCARE_QUIZ_MANIFEST` e `PLANTCARE_QUIZ_DATA`).
 
+## Consigli di difesa
+
+La scheda **Consigli** prepara una ricetta come farebbe un tecnico della difesa integrata. Si scelgono:
+- coltura;
+- malattia o parassita;
+- fase della coltura;
+- situazione: prevenzione, primi sintomi o attacco in corso; per i parassiti, monitoraggio, forme giovani o infestazione.
+
+Si possono indicare anche:
+- giorni alla raccolta;
+- produzione biologica;
+- rispetto del Disciplinare;
+- ultimo prodotto usato.
+
+L'app mette in ordine i prodotti Gowan registrati e mostra perché. Le regole tengono conto di:
+- posizionamento per fase nei programmi Gowan;
+- tipo di azione scritto in etichetta;
+- preferenza per i mezzi biologici e selettivi;
+- alternanza dei gruppi FRAC e IRAC;
+- esclusioni per fioritura e api, intervallo di sicurezza, stadi BBCH, Disciplinare della Calabria e stato UE delle
+  sostanze.
+
+La ricetta contiene:
+- dose per ettolitro e per ettaro;
+- quantità per la superficie e per la botte;
+- numero massimo di trattamenti e intervallo;
+- limiti del Disciplinare;
+- rame metallo;
+- coadiuvante MAGO;
+- alternanza dei prodotti;
+- concimi e biostimolanti facoltativi.
+
+Sono **regole scritte con le loro fonti**, non una rete neurale (`configs/difesa/consigli_regole.yaml`, `app/consigli.js`).
+Dettagli in [docs/consigli.md](docs/consigli.md).
+
 ## Preparazione della botte
 
-La scheda **Botte** aiuta a preparare la miscela per un trattamento:
-- **Proporzioni**: dal volume della botte e dalla dose di etichetta (per ettolitro, per ettaro o in percentuale) calcola quanto prodotto mettere e quanta superficie copre la botte.
-- **Controlli**: segnala se la dose supera quella massima di etichetta inserita. Per i rameici calcola i kg di rame metallo per ettaro e li confronta con i limiti del disciplinare calabrese (28 kg/ha in 7 anni, media consigliata 4 kg/ha all'anno).
-- **Miscibilità**: ordine di caricamento per tipo di formulazione, incompatibilità documentate (zolfo con olio minerale e con prodotti alcalini, polisolfuro con olio), avvisi di temperatura, prova in barattolo.
+La scheda **Botte** aiuta a preparare la miscela in tre passi:
+1. la botte;
+2. i prodotti;
+3. il calcolo.
 
-Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete neurale**: le dosi devono essere esatte e derivare dall'etichetta autorizzata, che prevale su qualunque calcolo. La botte non sceglie i prodotti al posto tuo. Il referto mostra, per la malattia riconosciuta, le sostanze ammesse dal Disciplinare di difesa integrata della Regione Calabria (con i limiti d'uso e le sostanze uscite dall'elenco) e gli usi registrati dei prodotti Gowan Italia con dose e intervallo di sicurezza come pubblicati dal produttore: prevale sempre l'etichetta autorizzata.
+I prodotti si scelgono dal **catalogo Gowan**. Formulazione, tipo, contenuto di rame e, scelto l'uso registrato
+sulla coltura, dose e limiti di etichetta si compilano da soli. Per i prodotti di altre aziende si scrivono i dati
+dell'etichetta.
+- **Proporzioni**: dal volume della botte e dalla dose di etichetta (per ettolitro, per ettaro o in percentuale) calcola quanto prodotto mettere e quanta superficie copre la botte.
+- **Controlli**: segnala se la dose supera la massima di etichetta, per ettolitro o, con il volume d'acqua indicato, per ettaro. Per i rameici calcola i kg di rame metallo per ettaro e li confronta con i limiti del Disciplinare calabrese (28 kg/ha in 7 anni, media consigliata 4 kg/ha all'anno).
+- **Miscibilità**: istruzioni numerate per caricare la botte, nell'ordine per tipo di formulazione. Segnala le incompatibilità documentate (zolfo con olio minerale e con prodotti alcalini, polisolfuro con olio), gli avvisi di temperatura e la prova in barattolo.
+
+Le regole e le loro fonti sono in `configs/mixing_rules.yaml`. **Non è una rete neurale**: le dosi devono essere
+esatte e derivare dall'etichetta autorizzata, che prevale su qualunque calcolo.
+
+Per la malattia riconosciuta, il referto mostra:
+- le sostanze ammesse dal Disciplinare di difesa integrata della Regione Calabria;
+- i limiti d'uso;
+- le sostanze uscite dall'elenco;
+- quelle non più approvate nell'UE;
+- i prodotti Gowan registrati, in ordine di preferenza, con il collegamento alla ricetta.
+
+## Norme aggiornate in automatico
+
+`scripts/aggiorna_norme.py` fa questi controlli:
+- cerca sul sito ARSAC i nuovi Disciplinari della Calabria;
+- scarica lo stato delle sostanze attive dalla banca dati UE dei pesticidi;
+- se richiesto, rilegge pagine ed etichette Gowan;
+- ricostruisce i dati di difesa dell'app.
+
+Il flusso `.github/workflows/aggiorna-norme.yml` lo esegue ogni settimana. Se qualcosa cambia apre una pull request
+con il riepilogo, che una persona controlla prima di pubblicare.
 
 ## App nel browser (GitHub Pages)
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
 - lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, circa 76 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di 5 lettori, vedi docs/miglioramento.md);
 - quiz con circa 5.200 foto da PlantDoc, Project-AgML (CC BY o MIT), iNaturalist (CC0, CC BY, CC BY-NC, con autore) e IP102 (solo uso accademico), Calabria in primo piano;
-- botte: stesso calcolatore della versione Python, verificato dai test;
+- consigli di difesa con i prodotti Gowan e botte con il catalogo: regole e calcolatore verificati dai test (`tests/test_consigli.py`, `tests/test_sprayer.py`, `tests/test_webapp.py`);
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;
 - contributi: l'agronomo corregge il risultato, la foto resta nel telefono e si esporta come file JSON da importare con `plantcare import-contributi`. Il piano per migliorare la rete è in [docs/miglioramento.md](docs/miglioramento.md).
 
@@ -141,11 +202,15 @@ src/plantcare/
   predict.py             inferenza con astensione e avvertenze
   api.py                 interfaccia web e endpoint /predict
   kb.py                  schede per agronomi (malattie, insetti, colture, carenze)
+  difesa.py              Disciplinare della Calabria (versioni), stato UE delle sostanze, usi Gowan per il referto
+  consigli.py            catalogo Gowan per Consigli e Botte (app/data/catalogo.json)
+  sprayer.py             calcolatore della botte (gemello di app/sprayer.js)
   cli.py                 comando `plantcare`
 metadata/                 mappa dei gruppi foglia di PlantVillage (per lo split senza fuga di dati)
 Dockerfile                immagine per la pubblicazione (vedi docs/deploy.md)
 tests/                   test unitari e di integrazione (dati sintetici)
-docs/                    ricerca, dataset, architettura
+docs/                    ricerca, dataset, architettura, consigli di difesa (docs/consigli.md)
+.github/workflows/       controllo settimanale delle norme (aggiorna-norme.yml)
 ```
 
 ## Principi di progetto

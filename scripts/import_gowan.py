@@ -3,10 +3,10 @@
 Per ogni prodotto: numero e data di registrazione, composizione, formulazione, gruppo di resistenza
 (FRAC/IRAC), link all'etichetta e, per ogni coltura, avversità con dose a ettaro e a ettolitro,
 intervallo di sicurezza e note (epoca, numero di trattamenti). Dalle etichette (PDF) si prende il
-paragrafo sulla compatibilità nelle miscele. Le pagine si scaricano con scripts a parte o con
---scarica (una richiesta ogni 2 secondi).
+paragrafo sulla compatibilità nelle miscele. Le pagine si scaricano con --scarica (una richiesta ogni 2 secondi).
 
 Uso: python scripts/import_gowan.py <cartella_pagine_html> [--etichette <cartella_pdf>]
+     python scripts/import_gowan.py --scarica <cartella>   (scarica pagine ed etichette, poi le legge)
 """
 import argparse
 import html as H
@@ -92,29 +92,77 @@ def compat_from_label(pdf):
     return text, (v.group(1).strip() if v else None)
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("pagine")
-    ap.add_argument("--etichette", default=None, help="cartella con le etichette PDF (<slug>.pdf)")
-    ap.add_argument("--out", default=str(ROOT / "configs" / "difesa" / "gowan_italia.json"))
-    args = ap.parse_args()
+def importa(pagine, etichette=None, out=ROOT / "configs" / "difesa" / "gowan_italia.json") -> dict:
+    """Legge le pagine prodotto salvate (<slug>.html) e, se ci sono, le etichette (<slug>.pdf)."""
     prods = []
-    for f in sorted(Path(args.pagine).glob("*.html")):
+    for f in sorted(Path(pagine).glob("*.html")):
         p = parse_page(f)
         p["pagina"] = f"https://gowanitalia.it/agrofarmaco/{f.stem}/"
-        if args.etichette and (Path(args.etichette) / f"{f.stem}.pdf").exists():
-            p["compatibilita"], p["etichetta_validita"] = compat_from_label(Path(args.etichette) / f"{f.stem}.pdf")
+        if etichette and (Path(etichette) / f"{f.stem}.pdf").exists():
+            p["compatibilita"], p["etichetta_validita"] = compat_from_label(Path(etichette) / f"{f.stem}.pdf")
         prods.append(p)
     notes = {}  # le note (spesso uguali per molte colture) si salvano una volta sola
     for p in prods:
         for u in p["usi"]:
             if u.get("note"):
                 u["note"] = notes.setdefault(u["note"], len(notes))
-    json.dump({"fonte": "Gowan Italia, pagine prodotto e etichette (gowanitalia.it)", "consultato": str(date.today()),
-               "note_testi": list(notes),
-               "avvertenza": "Dosi e usi come riportati dal produttore; prevale l'etichetta autorizzata dal Ministero della Salute.",
-               "prodotti": prods}, open(args.out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-    print(len(prods), "prodotti,", sum(len(p["usi"]) for p in prods), "usi ->", args.out)
+    d = {"fonte": "Gowan Italia, pagine prodotto e etichette (gowanitalia.it)", "consultato": str(date.today()),
+         "note_testi": list(notes),
+         "avvertenza": "Dosi e usi come riportati dal produttore; prevale l'etichetta autorizzata dal Ministero della Salute.",
+         "prodotti": prods}
+    json.dump(d, open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    print(len(prods), "prodotti,", sum(len(p["usi"]) for p in prods), "usi ->", out)
+    return d
+
+
+def scarica(dest, pausa=2.0):
+    """Scarica dal sito Gowan Italia le pagine dei prodotti (dest/prod) e le etichette PDF (dest/etichette),
+    una richiesta ogni `pausa` secondi. Le etichette passano da una pagina che reindirizza al PDF."""
+    import time
+    import urllib.request
+    head = {"User-Agent": "PlantCare/1.0 (progetto accademico; aggiornamento norme)"}
+
+    def get(url):
+        time.sleep(pausa)
+        with urllib.request.urlopen(urllib.request.Request(url, headers=head), timeout=120) as r:
+            return r.read()
+
+    dest = Path(dest)
+    (dest / "prod").mkdir(parents=True, exist_ok=True)
+    (dest / "etichette").mkdir(parents=True, exist_ok=True)
+    elenco = get("https://gowanitalia.it/agrofarmaci/").decode("utf-8", "ignore")
+    slugs = sorted(set(re.findall(r"https://gowanitalia\.it/agrofarmaco/([a-z0-9-]+)/", elenco)))
+    if len(slugs) < 20:
+        raise SystemExit(f"elenco dei prodotti Gowan sospetto ({len(slugs)} prodotti): aggiornamento interrotto")
+    for slug in slugs:
+        page = get(f"https://gowanitalia.it/agrofarmaco/{slug}/")
+        (dest / "prod" / f"{slug}.html").write_bytes(page)
+        m = re.search(rb'href="(https://gowanitalia\.it/\?ID_mat=\d+)"[^>]*>\s*Etichetta', page)
+        if not m:
+            continue
+        try:
+            red = get(m.group(1).decode()).decode("utf-8", "ignore")
+            r = re.search(r'window\.location\.replace\("([^"]+)"\)', red)
+            pdf = get(r.group(1)) if r else b""
+            if pdf[:4] == b"%PDF":
+                (dest / "etichette" / f"{slug}.pdf").write_bytes(pdf)
+        except Exception as ex:  # un'etichetta non raggiungibile non blocca le altre
+            print("etichetta non scaricata:", slug, ex)
+    return dest / "prod", dest / "etichette"
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("pagine", nargs="?", default=None)
+    ap.add_argument("--etichette", default=None, help="cartella con le etichette PDF (<slug>.pdf)")
+    ap.add_argument("--scarica", default=None, help="cartella in cui scaricare pagine ed etichette dal sito Gowan")
+    ap.add_argument("--out", default=str(ROOT / "configs" / "difesa" / "gowan_italia.json"))
+    args = ap.parse_args()
+    if args.scarica:
+        args.pagine, args.etichette = scarica(args.scarica)
+    if not args.pagine:
+        raise SystemExit("indicare la cartella delle pagine o --scarica")
+    importa(args.pagine, args.etichette, args.out)
 
 
 if __name__ == "__main__":

@@ -134,7 +134,7 @@ def build_quiz(ck, heads, names: dict) -> None:
     man_path = ROOT / "data" / "external" / "inat_quiz" / "manifest.json"
     man = json.load(open(man_path, encoding="utf-8")) if man_path.exists() else {}
     plant_names = names.get("plant", {})
-    disc = df.load_disciplinare(2026) if man else {"righe": []}
+    disc = df.load_disciplinare() if man else {"righe": []}
     syn = df._syn()
     for slug, e in sorted(man.items()):
         t = e.get("taxon_inat") or {}
@@ -348,8 +348,16 @@ def main() -> None:
     json.dump(notes, open(APP / "data" / "note_legno.json", "w", encoding="utf-8"), ensure_ascii=False)
     # difesa: Disciplinare Calabria (sostanze ammesse, limiti, sostanze uscite dall'elenco) e usi Gowan
     from plantcare import difesa as df
-    json.dump(df.build_app_data(readers, {k: sorted(v) for k, v in crops_of.items()}),
+    from plantcare import consigli
+    crops_snapshot = {k: sorted(v) for k, v in sorted(crops_of.items())}
+    # copia per gli aggiornamenti automatici delle norme, che ricostruiscono i dati di difesa senza il dataset
+    json.dump(crops_snapshot, open(ROOT / "configs" / "difesa" / "colture_per_classe.json", "w", encoding="utf-8"),
+              ensure_ascii=False, indent=0)
+    json.dump(df.build_app_data(readers, crops_snapshot),
               open(APP / "data" / "difesa.json", "w", encoding="utf-8"), ensure_ascii=False)
+    # catalogo Gowan per la Botte e la sezione Consigli
+    json.dump(consigli.build(readers), open(APP / "data" / "catalogo.json", "w", encoding="utf-8"), ensure_ascii=False,
+              separators=(",", ":"))
     if args.hypotheses:
         hyp = json.load(open(args.hypotheses, encoding="utf-8"))
         if "disease" in hyp:

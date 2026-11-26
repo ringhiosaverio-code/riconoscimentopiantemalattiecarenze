@@ -86,6 +86,9 @@ sinonimi:
   palpita unionalis: palpita vitrealis
   tuta absoluta: phthorimaea absoluta
   heliothis armigera: helicoverpa armigera
+  # generi: vecchio nome della tignola della vite (Clysia ambiguella = Eupoecilia ambiguella)
+  clysia *: eupoecilia *
+  clysia ambiguella: eupoecilia ambiguella
   heliotis armigera: helicoverpa armigera
   aphis citricola: aphis spiraecola
   grapholita molesta: cydia molesta

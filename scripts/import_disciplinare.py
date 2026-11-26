@@ -6,6 +6,8 @@ Unicode: i codici "(cid:N)" corrispondono al carattere ASCII N.
 
 Uso:
   python scripts/import_disciplinare.py <pdf> <anno> <url> [--out configs/difesa/disciplinare_calabria_<anno>.json]
+      [--titolo T] [--pubblicato AAAA-MM-GG] [--aggiornamento]
+Lo usa anche scripts/aggiorna_norme.py, che trova da solo i nuovi Disciplinari pubblicati da ARSAC.
 """
 import argparse
 import json
@@ -58,14 +60,9 @@ def parse_substances(cell):
     return res
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("pdf")
-    ap.add_argument("anno")
-    ap.add_argument("url")
-    ap.add_argument("--out", default=None)
-    args = ap.parse_args()
-    pdf = pdfplumber.open(args.pdf)
+def leggi(pdf_path) -> list[dict]:
+    """Righe di difesa (coltura, avversità, criteri, sostanze, note, pagina) del PDF del Disciplinare."""
+    pdf = pdfplumber.open(pdf_path)
     rows, section = [], None
     for pno, page in enumerate(pdf.pages):
         text = dec(page.extract_text() or "")
@@ -101,11 +98,36 @@ def main():
     for r in rows:
         r["criteri"] = r["criteri"].strip()
         r["note"] = r["note"].strip()
-    out = Path(args.out or ROOT / "configs" / "difesa" / f"disciplinare_calabria_{args.anno}.json")
+    return rows
+
+
+def salva(rows, anno, url, out, titolo=None, pubblicato=None, aggiornamento=False):
+    out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    json.dump({"fonte": f"Disciplinari di produzione integrata {args.anno} - Difesa e controllo infestanti, "
-                        "Regione Calabria (Allegato A)", "url": args.url, "anno": int(args.anno), "righe": rows},
-              open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    d = {"fonte": titolo or f"Disciplinari di produzione integrata {anno} - Difesa e controllo infestanti, "
+                            "Regione Calabria (Allegato A)", "url": url, "anno": int(anno)}
+    if pubblicato:
+        d["pubblicato"] = pubblicato
+    if aggiornamento:
+        d["aggiornamento"] = True
+    d["righe"] = rows
+    json.dump(d, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("pdf")
+    ap.add_argument("anno")
+    ap.add_argument("url")
+    ap.add_argument("--out", default=None)
+    ap.add_argument("--titolo", default=None)
+    ap.add_argument("--pubblicato", default=None, help="data di pubblicazione (AAAA-MM-GG)")
+    ap.add_argument("--aggiornamento", action="store_true", help="versione aggiornata in corso d'anno")
+    args = ap.parse_args()
+    rows = leggi(args.pdf)
+    out = salva(rows, args.anno, args.url, args.out or ROOT / "configs" / "difesa" / f"disciplinare_calabria_{args.anno}.json",
+                args.titolo, args.pubblicato, args.aggiornamento)
     from collections import Counter
     print(f"{len(rows)} avversità in {len({r['coltura'] for r in rows})} colture -> {out}")
     print(Counter(r["coltura"] for r in rows).most_common(60))

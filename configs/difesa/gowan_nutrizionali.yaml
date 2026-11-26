@@ -1,0 +1,123 @@
+# Specialità nutrizionali e biostimolanti di Gowan Italia: dosi ed epoche dalle schede del catalogo
+# (trascritte a vista dai PDF del produttore, consultati il 2026-11-26).
+# colture: espressione regolare sul nome della coltura (minuscolo, come nelle registrazioni Gowan);
+#   "*" = tutte le colture del gruppo indicato in "gruppo".
+# fogliare / radicale: dose per trattamenti fogliari o per fertirrigazione (o al terreno).
+# fasi_bbch: intervallo BBCH indicativo dell'epoca scritta nella scheda, per proporre il prodotto solo nella
+#   fase giusta (Meier U., BBCH Monograph, JKI 2018). L'epoca resta quella del testo della scheda.
+# scopo: a cosa serve, con le parole della scheda.
+fonte: "Gowan Italia, schede catalogo dei prodotti nutrizionali (gowanitalia.it), consultate il 2026-11-26"
+avvertenza: >-
+  Concimi e biostimolanti sono un complemento facoltativo alla difesa. Il Disciplinare di produzione integrata
+  chiede che le concimazioni seguano un piano basato sulle analisi del terreno (e, dove serve, fogliari):
+  le dosi qui sotto sono quelle indicative del produttore, da adattare al piano di concimazione dell'azienda.
+
+prodotti:
+  - nome: TAMARACK
+    tipo: "Biostimolante ad azione specifica su pianta (epitelio animale idrolizzato fluido N-C 8,7-25)"
+    pagina: "https://gowanitalia.it/nutrizionale/tamarack/"
+    scheda: "https://gowanitalia.it/?ID_mat=489848"
+    composizione: "Azoto (N) organico 8,7%, carbonio (C) organico 25%; aminoacidi liberi e peptidi a catena corta"
+    biologico: "Impiegabile anche in Agricoltura Biologica (scheda Gowan)"
+    scopo: >-
+      Stimola i processi fisiologici, migliora assimilazione e metabolismo dell'azoto, favorisce accrescimento ed
+      emissione di nuovi germogli; accelera la ripresa vegetativa dopo stress (gelate, grandinate, errori di trattamento).
+    situazioni: [ripresa, stress, accrescimento]
+    non_miscelare: [olio_minerale]
+    avvertenze:
+      - "Miscibile con i più comuni agrofarmaci eccetto gli oli minerali."
+      - "Con i prodotti a base di rame può produrre fitotossicità, anche se applicato subito dopo: fa eccezione l'olivo (tranne il rame da poltiglie alcaline)."
+      - "Non impiegare su susino."
+    escludi_colture: "susino"
+    rame_solo_colture: "olivo"
+    usi:
+      - {colture: "pomodoro|melanzana|peperone|zucchino|cetriolo|melone|cocomero|zucca|lattuga|fragola|cavol|rucola|insalat|ortagg|basilico|sedano|finocchio|spinac|bietol|fagiol|pisello", ambito: serra, fogliare: "150-200 ml/hl", radicale: "3-5 l/ha", epoca: "a partire da 5 giorni dal trapianto, ogni 10-15 giorni", fasi_bbch: [12, 89]}
+      - {colture: "pomodoro|melanzana|peperone|zucchino|cetriolo|melone|cocomero|zucca|lattuga|cavol|rucola|insalat|ortagg|basilico|sedano|finocchio|spinac|bietol|fagiol|pisello|carota|cipolla|aglio|porro", ambito: campo, fogliare: "200-300 ml/hl", radicale: "4-6 l/ha", epoca: "a partire da 5 giorni dal trapianto, ogni 10-15 giorni", fasi_bbch: [12, 89]}
+      - {colture: "pesco|albicocco|ciliegio", fogliare: "200 ml/hl", radicale: "3-5 l/ha", epoca: "3 applicazioni a partire dalla piena ripresa vegetativa, ogni 20 giorni", fasi_bbch: [9, 79]}
+      - {colture: "vite|melo|^pero$", fogliare: "200-250 ml/hl", radicale: "3-5 l/ha", epoca: "3 applicazioni a partire dalla piena ripresa vegetativa, ogni 20 giorni", fasi_bbch: [9, 79]}
+      - {colture: "olivo", fogliare: "300-400 ml/hl", radicale: "1,5-3 l/ha", epoca: "2-3 applicazioni", fasi_bbch: [1, 79]}
+      - {colture: "agrumi|arancio|limone|mandarino|clementino|pompelmo|bergamotto|cedro|chinotto|limetta|pomelo|tangerino|kumquat|mapo", fogliare: "200-300 ml/hl", radicale: "3-5 l/ha", epoca: "2-4 applicazioni, in prefioritura e nelle prime fasi di sviluppo del frutto", fasi_bbch: [51, 74]}
+      - {colture: "fragola", fogliare: "200-250 ml/hl", radicale: "3-5 l/ha", epoca: "2-4 applicazioni ogni 10-15 giorni", fasi_bbch: [12, 89]}
+      - {colture: "actinidia|nocciolo|noce|castagno|melograno|fico|cotogno|nespolo|mandorlo|lampone|mirtillo|ribes|rovo|uva spina|pistacchio", fogliare: "200-300 ml/hl", radicale: "3-5 l/ha", epoca: "2 applicazioni, a partire dalla ripresa vegetativa, ogni 20 giorni", fasi_bbch: [9, 79]}
+      - {colture: "barbabietola|patata|tabacco", fogliare: "300 ml/hl", epoca: "1-2 applicazioni nelle prime fasi di sviluppo, in miscela con agrofarmaci", fasi_bbch: [10, 39]}
+      - {colture: "frumento|orzo|avena|segale|triticale|farro", fogliare_ha: "3-5 l/ha", epoca: "1-2 applicazioni da accestimento a spigatura, in miscela con agrofarmaci", fasi_bbch: [21, 59]}
+      - {colture: "riso", fogliare_ha: "3-5 l/ha", epoca: "1-2 applicazioni da inizio levata a inizio spigatura", fasi_bbch: [30, 51]}
+      - {colture: "mais", fogliare_ha: "3-5 l/ha", epoca: "1 applicazione nelle prime fasi di sviluppo, di solito con gli erbicidi di post-emergenza", fasi_bbch: [10, 19]}
+      - {colture: "soia|fagiolino|fagiolo|lenticchia|cece|fava|pisello", fogliare_ha: "1,5-2,5 l/ha", epoca: "2-3 applicazioni ogni 15 giorni, a partire dalla terza trifogliata", fasi_bbch: [13, 69]}
+      - {colture: "carciofo", fogliare: "200-300 ml/hl", epoca: "4 trattamenti ogni 20 giorni a partire dalla ripresa vegetativa", fasi_bbch: [1, 59]}
+    stress: "Piante stressate da gelate, grandinate o trattamenti sbagliati: 1-2 trattamenti a 7-8 giorni, entro 24-48 ore dall'evento, con la dose della coltura."
+
+  - nome: PREMIO
+    tipo: "Concime inorganico liquido NPK 9-8-8 in sospensione, con alcoli grassi di origine vegetale"
+    pagina: "https://gowanitalia.it/nutrizionale/premio/"
+    scheda: "https://gowanitalia.it/?ID_mat=489849"
+    composizione: "Azoto (N) ureico 9%, anidride fosforica (P2O5) 8%, ossido di potassio (K2O) 8%"
+    scopo: "Ingrossamento del frutto (calibro) e minore suscettibilità alla spaccatura dei frutti (cracking)."
+    situazioni: [accrescimento, cracking]
+    avvertenze:
+      - "Miscibile con la maggior parte degli agrofarmaci; con diserbanti che richiedono coadiuvanti consultare il personale tecnico."
+    usi:
+      - {colture: "ciliegio", fogliare: "200 ml/hl", epoca: "3 applicazioni a partire da scamiciatura, ogni 7-10 giorni", fasi_bbch: [71, 85]}
+      - {colture: "susino|albicocco", fogliare: "200 ml/hl", epoca: "3 applicazioni a partire da caduta petali, ogni 15 giorni", fasi_bbch: [67, 85]}
+      - {colture: "vite", fogliare: "200 ml/hl", epoca: "4 applicazioni a partire da grano di pepe, ogni 15-20 giorni", fasi_bbch: [73, 85]}
+      - {colture: "actinidia", fogliare: "200-400 ml/hl", epoca: "3 applicazioni a partire da caduta petali, ogni 7-10 giorni", fasi_bbch: [67, 79]}
+      - {colture: "^pero$|melo", fogliare: "150-200 ml/hl", epoca: "3 applicazioni a partire da frutto di 10-20 mm, ogni 20 giorni", fasi_bbch: [71, 85]}
+      - {colture: "olivo", fogliare: "200 ml/hl", epoca: "4 applicazioni: risveglio vegetativo, allegagione, ingrossamento della drupa, invaiatura", fasi_bbch: [1, 85]}
+      - {colture: "pesco", fogliare: "100-200 ml/hl", epoca: "3 applicazioni a partire da caduta petali, ogni 10-15 giorni (nettarina 100 ml/hl; tabacchiera o platicarpa 150-200 ml/hl)", fasi_bbch: [67, 85]}
+      - {colture: "agrumi|arancio|limone|mandarino|clementino|pompelmo|bergamotto|cedro|chinotto|limetta|pomelo|tangerino|kumquat|mapo", fogliare: "200 ml/hl", epoca: "3 applicazioni: fine fioritura, fine cascola, inizio invaiatura", fasi_bbch: [69, 85]}
+      - {colture: "melograno", fogliare: "150-200 ml/hl", epoca: "3 applicazioni a partire da frutto di 10-20 mm", fasi_bbch: [71, 85]}
+      - {colture: "patata", fogliare: "100 ml/hl (1 l/ha)", epoca: "2 applicazioni, a inizio fioritura e 20 giorni dopo", fasi_bbch: [60, 75]}
+      - {colture: "pomodoro", fogliare: "200 ml/hl", epoca: "3-4 applicazioni a partire da caduta petali del 1° palco, ogni 15 giorni", fasi_bbch: [69, 85]}
+      - {colture: "melone", fogliare: "100-200 ml/hl", epoca: "3 applicazioni a partire dai primi frutti di 20 mm, ogni 15 giorni", fasi_bbch: [71, 85]}
+      - {colture: "*", gruppi: [frutta, orticole], fogliare: "200 ml/hl", epoca: "3 applicazioni a partire da post allegagione, ogni 15 giorni", fasi_bbch: [71, 85]}
+
+  - nome: DINAMIC PRO
+    tipo: "Miscela di concimi organici azotati fluida, 100% vegetale, a base di glicinbetaina"
+    pagina: "https://gowanitalia.it/nutrizionale/dinamic-pro/"
+    scheda: "https://gowanitalia.it/?ID_mat=344318"
+    composizione: "Azoto (N) organico 5%, carbonio (C) organico 14%"
+    scopo: "Aiuta la pianta a superare gli stress abiotici: alte e basse temperature, siccità, ristagno idrico, salinità."
+    situazioni: [stress]
+    non_miscelare: [olio_minerale, alcalino]
+    avvertenze:
+      - "Miscibile con la maggior parte degli agrofarmaci, compresi rame e zolfo. Non miscelare con oli minerali, prodotti fortemente alcalini o fortemente acidi."
+    usi:
+      - {colture: "*", gruppi: [frutta], fogliare: "50-100 ml/hl", epoca: "2-4 trattamenti dalla prima fioritura, a 7-14 giorni", fasi_bbch: [60, 85]}
+      - {colture: "*", gruppi: [orticole], fogliare: "50-70 ml/hl", epoca: "4-5 trattamenti dalla pre-fioritura, a 7-10 giorni", fasi_bbch: [51, 85]}
+      - {colture: "frumento|orzo|avena|segale|triticale|farro|mais|riso", fogliare_ha: "0,5-1 l/ha", epoca: "1-2 trattamenti all'inizio della crescita, anche in miscela con agrofarmaci", fasi_bbch: [13, 32]}
+      - {colture: "barbabietola|patata|tabacco", fogliare_ha: "1,5-3 l/ha", epoca: "dalle prime 4-5 foglie; altri 2 trattamenti a 15 giorni", fasi_bbch: [14, 59]}
+      - {colture: "girasole", fogliare_ha: "1,5-3 l/ha", epoca: "dalle prime 4-6 foglie e all'emissione dell'infiorescenza", fasi_bbch: [14, 55]}
+
+  - nome: RIDOX STIM
+    tipo: "Attivatore della fisiologia vegetale a base di acidi carbossilici (AATC 2,5% + ATC 2,5%)"
+    pagina: "https://gowanitalia.it/nutrizionale/ridox-stim/"
+    scheda: "https://gowanitalia.it/wp-content/uploads/2024/01/scheda-catalogo-RIDOX-STIM.pdf"
+    composizione: "Acido N-acetiltiazolidin-4-carbossilico (AATC) 2,5%, acido tiazolidin carbossilico (ATC) 2,5%"
+    scopo: "Maggiore resistenza agli stress; migliora accrescimento vegetativo, allegagione e ingrossamento dei frutti."
+    situazioni: [stress, allegagione, accrescimento]
+    non_miscelare: [olio_minerale, alcalino]
+    avvertenze:
+      - "Compatibile con la maggior parte degli agrofarmaci. Non miscelare con oli minerali, prodotti fortemente alcalini o fortemente acidi."
+    usi:
+      - {colture: "albicocco|ciliegio|pesco|susino|mandorlo", fogliare: "50-100 ml/hl", epoca: "2-3 trattamenti da caduta petali, ogni 15-20 giorni", fasi_bbch: [67, 79]}
+      - {colture: "vite|melo|^pero$|cotogno|actinidia|olivo|agrumi|arancio|limone|mandarino|clementino|melograno|nocciolo|fico", fogliare: "50-100 ml/hl", epoca: "3-4 trattamenti dalla fioritura, ogni 8-10 giorni", fasi_bbch: [60, 79]}
+      - {colture: "patata", fogliare: "50-70 ml/hl", epoca: "2-3 interventi: piante alte 15 cm, inizio formazione dei tuberi, 15 giorni dopo (con stress 100 ml/hl, 1 l/ha)", fasi_bbch: [15, 49]}
+      - {colture: "*", gruppi: [orticole], ambito: campo, fogliare: "50-70 ml/hl", epoca: "4-5 trattamenti ogni 8-10 giorni da inizio fioritura a maturazione dei frutti (fino a 1 l/ha con piante sviluppate)", fasi_bbch: [60, 85]}
+      - {colture: "*", gruppi: [orticole], ambito: serra, fogliare: "50-100 ml/hl", radicale: "3-5 l/ha", epoca: "3-4 applicazioni dal trapianto in avanti", fasi_bbch: [12, 85]}
+      - {colture: "frumento|orzo|avena|segale|triticale|farro|mais|riso", fogliare_ha: "0,5-1 l/ha", epoca: "2-3 applicazioni tra accestimento/levata e spigatura", fasi_bbch: [21, 59]}
+
+  - nome: SPRINFER NEW
+    tipo: "Concime a base di microelementi: soluzione di ferro (Fe) solfato"
+    pagina: "https://gowanitalia.it/nutrizionale/sprinfer-new/"
+    scheda: "https://gowanitalia.it/?ID_mat=489850"
+    composizione: "Ferro (Fe) solubile in acqua 2,6%"
+    scopo: "Prevenire o curare le carenze di ferro (clorosi ferrica)."
+    situazioni: [carenza_ferro]
+    non_miscelare: [olio_minerale, alcalino]
+    avvertenze:
+      - "Miscibile con la maggior parte degli agrofarmaci, compresi rame e zolfo. Non miscelare con oli minerali, prodotti fortemente alcalini o fortemente acidi."
+      - "Preventivo: 2-4 applicazioni a 10-15 giorni dalle prime fasi vegetative. Curativo: 2-3 applicazioni a 7-10 giorni ai primi sintomi di clorosi ferrica."
+    usi:
+      - {colture: "*", gruppi: [frutta], fogliare_ha: "1-1,5 l/ha", radicale: "5-10 l/ha", epoca: "preventivo 2-4 applicazioni a 10-15 giorni dalle prime fasi vegetative; curativo 2-3 a 7-10 giorni ai primi sintomi (per le arboree anche una applicazione al suolo a fine stagione)", fasi_bbch: [9, 89]}
+      - {colture: "*", gruppi: [orticole], fogliare: "100-150 ml/hl", radicale: "1-2 l per 1000 m²", epoca: "preventivo 2-4 applicazioni a 10-15 giorni; curativo 2-3 a 7-10 giorni ai primi sintomi", fasi_bbch: [12, 89]}
+      - {colture: "*", gruppi: [ornamentali], fogliare: "100-150 ml/hl", radicale: "1-2 ml/m² o 1-2 ml per pianta", epoca: "preventivo 2-4 applicazioni a 10-15 giorni; curativo 2-3 a 7-10 giorni ai primi sintomi", fasi_bbch: [10, 89]}

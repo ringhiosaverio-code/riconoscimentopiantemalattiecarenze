@@ -55,7 +55,7 @@ def test_copper_balance_against_disciplinare_limit():
                        water_l_ha=1000, copper_already_kg_ha=3.6)
     assert res.copper_kg_ha == 0.6
     w = [x for x in res.warnings if "rame" in x["text"].lower()][0]
-    assert w["level"] == "attenzione" and "disc_calabria_2023" in w["sources"]
+    assert w["level"] == "attenzione" and "disc_calabria_2026_08" in w["sources"]
 
 
 def test_sulfur_and_mineral_oil_are_flagged():

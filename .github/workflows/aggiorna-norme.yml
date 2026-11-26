@@ -1,0 +1,74 @@
+# Controllo settimanale delle norme di difesa usate dall'app: nuovo Disciplinare della Calabria (sito ARSAC),
+# stato delle sostanze attive nella banca dati UE dei pesticidi, etichette e usi registrati Gowan.
+# Se qualcosa cambia apre (o aggiorna) una pull request con il riepilogo delle novità: una persona la controlla
+# sul PDF ufficiale e sulla banca dati UE prima di unirla. Nessuna modifica va in produzione senza revisione.
+# Nota: GitHub esegue i flussi programmati solo dal ramo principale del repository.
+name: Aggiorna norme di difesa
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"   # ogni lunedì alle 5:17 UTC
+  workflow_dispatch:
+    inputs:
+      gowan:
+        description: "Scarica anche pagine ed etichette Gowan (circa 100 richieste, una ogni 2 secondi)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: aggiorna-norme
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Strumenti per leggere i PDF
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          pip install pdfplumber pyyaml
+
+      - name: Controllo delle norme e ricostruzione dei dati dell'app
+        id: controllo
+        env:
+          PYTHONPATH: src
+        run: |
+          OPZ="--disciplinare --ue --app"
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.gowan }}" = "true" ]; then OPZ="$OPZ --gowan"; fi
+          python scripts/aggiorna_norme.py $OPZ --riepilogo "$RUNNER_TEMP/riepilogo.md" --esito "$GITHUB_OUTPUT"
+
+      - name: Verifica dei dati (test)
+        if: steps.controllo.outputs.cambiato == 'true'
+        env:
+          PYTHONPATH: src
+        run: |
+          pip install pytest numpy pillow scikit-learn
+          python -m pytest -q tests/test_difesa.py tests/test_consigli.py
+
+      - name: Proposta di aggiornamento
+        # solo se sono cambiate le norme (non per la sola data del controllo)
+        if: steps.controllo.outputs.cambiato == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: aggiornamento-norme
+          delete-branch: true
+          title: "Aggiornamento norme di difesa (Disciplinare, sostanze attive UE, etichette Gowan)"
+          body-path: ${{ runner.temp }}/riepilogo.md
+          commit-message: "Aggiornamento automatico delle norme di difesa"
+          labels: norme
+          add-paths: |
+            configs/difesa/*.json
+            app/data/difesa.json
+            app/data/catalogo.json
