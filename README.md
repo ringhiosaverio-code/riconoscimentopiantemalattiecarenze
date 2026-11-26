@@ -64,14 +64,14 @@ La scheda **Quiz** dell'app mostra una foto a caso e quattro risposte, una sola 
 - La risposta corretta resta sul server fino alla risposta, e l'immagine viene servita senza esporre il percorso del file.
 - Dopo la risposta compare la spiegazione dalla scheda: agente, sintomi, organi colpiti, avviso di laboratorio. Se la risposta è sbagliata, l'app spiega perché: come distinguere le malattie simili (`configs/quiz_tips.yaml`), causa diversa, sintomi a confronto.
 
-Nell'app del browser il quiz ha circa 5.900 foto, con **il Sud Italia e la Calabria in primo piano**. Escluse le domande di ripasso:
+Nell'app del browser il quiz ha circa 8.100 foto, con **il Sud Italia e la Calabria in primo piano**. Escluse le domande di ripasso:
 - 7 domande su 10 riguardano colture tipiche del Sud e della Calabria (olivo, agrumi, vite, pomodoro, peperone, melanzana, cipolla di Tropea, fico, fico d'India, melograno, kiwi, fragola), con le loro malattie e i loro insetti, e le specie scelte per la Calabria da iNaturalist ed EPPO;
 - 2 su 10 riguardano le altre colture e avversità del Disciplinare calabrese;
 - 1 su 10 riguarda il resto.
 
 In ogni gruppo si sceglie prima la specie e poi la foto, così compaiono tutte le specie e non solo quelle con più foto. C'è anche la categoria "Solo Sud Italia e Calabria". Le fonti:
 - fino a 30 foto per coltura, malattia o carenza da PlantDoc e dai dataset Project-AgML (CC BY 4.0);
-- circa 1.900 foto da iNaturalist (osservazioni con identificazione confermata dalla comunità, licenze CC0, CC BY o CC BY-NC, autore e link all'osservazione sotto ogni foto) di olivo, agrumi, vite e altre arboree, e di 44 insetti e 15 malattie citati nel Disciplinare, come mosca delle olive, cocciniglie degli agrumi, occhio di pavone e rogna dell'olivo (`configs/quiz_calabria.yaml`, `scripts/import_inat_quiz.py`);
+- circa 4.100 foto da iNaturalist, prima quelle scattate in Calabria e poi nel resto d'Italia (osservazioni con identificazione confermata dalla comunità, licenze CC0, CC BY o CC BY-NC, autore e link all'osservazione sotto ogni foto) di olivo, agrumi, vite e altre arboree, e di 44 insetti e 15 malattie citati nel Disciplinare, come mosca delle olive, cocciniglie degli agrumi, occhio di pavone e rogna dell'olivo (`configs/quiz_calabria.yaml`, `scripts/import_inat_quiz.py`);
 - per gli insetti di IP102 (Wu et al. 2019, **solo per uso accademico**, indicato sotto ogni foto) 20 foto per quelli citati nel Disciplinare e 6 per gli altri.
 
 Le risposte sbagliate tornano più spesso (4 domande su 10 sono di ripasso) finché non si risponde giusto. Dopo ogni domanda su malattie e insetti c'è una scheda in sintesi: nome scientifico, ordine e famiglia, causa, colture, se serve il laboratorio, se è regolamentato, dove compare nelle norme di difesa della Calabria. Le foto già viste tornano solo dopo aver visto tutte le altre. Per radici, tuberi e bulbi non sono stati trovati dataset ripubblicabili: servono le foto raccolte con l'app.
@@ -152,7 +152,7 @@ con il riepilogo, che una persona controlla prima di pubblicare.
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
 - lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, circa 76 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di 5 lettori, vedi docs/miglioramento.md);
-- quiz con circa 5.200 foto da PlantDoc, Project-AgML (CC BY o MIT), iNaturalist (CC0, CC BY, CC BY-NC, con autore) e IP102 (solo uso accademico), Sud Italia e Calabria in primo piano;
+- quiz con circa 8.100 foto da PlantDoc, Project-AgML (CC BY o MIT), iNaturalist (CC0, CC BY, CC BY-NC, con autore) e IP102 (solo uso accademico), Sud Italia e Calabria in primo piano;
 - consigli di difesa con i prodotti Gowan e botte con il catalogo: regole e calcolatore verificati dai test (`tests/test_consigli.py`, `tests/test_sprayer.py`, `tests/test_webapp.py`);
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;
 - contributi: l'agronomo corregge il risultato, la foto resta nel telefono e si esporta come file JSON da importare con `plantcare import-contributi`. Il piano per migliorare la rete è in [docs/miglioramento.md](docs/miglioramento.md).
