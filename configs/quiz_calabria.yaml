@@ -28,6 +28,14 @@ colture:
   - {taxon: "Cynara cardunculus", nome: "Carciofo", coltura_plant: cynara_cardunculus}
   - {taxon: "Vicia faba", nome: "Fava"}
   - {taxon: "Foeniculum vulgare", nome: "Finocchio"}
+  # colture del Sud aggiunte il 26/11/2026 (orticole del Disciplinare e castagno)
+  - {taxon: "Capsicum annuum", nome: "Peperone e peperoncino", coltura_plant: capsicum_annuum}
+  - {taxon: "Solanum melongena", nome: "Melanzana", coltura_plant: solanum_melongena}
+  - {taxon: "Solanum lycopersicum", nome: "Pomodoro", coltura_plant: solanum_lycopersicum}
+  - {taxon: "Citrullus lanatus", nome: "Cocomero (anguria)"}
+  - {taxon: "Cucurbita pepo", nome: "Zucchina", coltura_plant: cucurbita_pepo}
+  - {taxon: "Castanea sativa", nome: "Castagno"}
+  - {taxon: "Juglans regia", nome: "Noce"}
 
 parassiti:  # insetti e acari
   - {taxon: "Bactrocera oleae", nome: "Mosca delle olive", gruppo: olivo}
@@ -74,6 +82,27 @@ parassiti:  # insetti e acari
   - {taxon: "Cacopsylla pyri", nome: "Psilla del pero", gruppo: melo}
   - {taxon: "Dysaphis plantaginea", nome: "Afide grigio del melo", gruppo: melo}
   - {taxon: "Eriosoma lanigerum", nome: "Afide lanigero del melo", gruppo: melo}
+  # insetti e acari del Sud aggiunti il 26/11/2026
+  - {taxon: "Liothrips oleae", nome: "Tripide dell'olivo", gruppo: olivo}
+  - {taxon: "Dasineura oleae", nome: "Cecidomia delle foglie dell'olivo", gruppo: olivo}
+  - {taxon: "Phloeotribus scarabaeoides", nome: "Fleotribo dell'olivo", gruppo: olivo}
+  - {taxon: "Otiorhynchus cribricollis", nome: "Oziorrinco dell'olivo", gruppo: olivo}
+  - {taxon: "Icerya purchasi", nome: "Cocciniglia cotonosa australiana", gruppo: agrumi}
+  - {taxon: "Dialeurodes citri", nome: "Aleurodide degli agrumi", gruppo: agrumi}
+  - {taxon: "Lepidosaphes beckii", nome: "Cocciniglia a virgola degli agrumi", gruppo: agrumi}
+  - {taxon: "Planococcus ficus", nome: "Cocciniglia farinosa della vite", gruppo: vite}
+  - {taxon: "Jacobiasca lybica", nome: "Cicalina africana della vite", gruppo: vite}
+  - {taxon: "Eupoecilia ambiguella", nome: "Tignola della vite", gruppo: vite}
+  - {taxon: "Nezara viridula", nome: "Cimice verde", gruppo: pomodoro}
+  - {taxon: "Aphis gossypii", nome: "Afide del cotone", gruppo: pomodoro}
+  - {taxon: "Spodoptera exigua", nome: "Nottua piccola (Spodoptera exigua)", gruppo: pomodoro}
+  - {taxon: "Agrotis ipsilon", nome: "Nottua dei seminati", gruppo: pomodoro}
+  - {taxon: "Hyalopterus pruni", nome: "Afide farinoso del susino", gruppo: pesco}
+  - {taxon: "Pseudaulacaspis pentagona", nome: "Cocciniglia bianca del pesco (e del kiwi)", gruppo: pesco}
+  - {taxon: "Dryocosmus kuriphilus", nome: "Cinipide galligeno del castagno", gruppo: castagno}
+  - {taxon: "Curculio elephas", nome: "Balanino delle castagne", gruppo: castagno}
+  - {taxon: "Cydia splendana", nome: "Tortrice tardiva delle castagne", gruppo: castagno}
+  - {taxon: "Rhynchophorus ferrugineus", nome: "Punteruolo rosso delle palme", gruppo: palme}
 
 malattie:
   - {taxon: "Venturia oleaginea", nome: "Occhio di pavone dell'olivo", gruppo: olivo, causa: fungo}
@@ -94,6 +123,16 @@ malattie:
   - {taxon: "Wilsonomyces carpophilus", nome: "Corineo delle drupacee", gruppo: pesco, causa: fungo}
   - {taxon: "Podosphaera pannosa", nome: "Mal bianco del pesco (e della rosa)", gruppo: pesco, causa: fungo}
   - {taxon: "Uromyces viciae-fabae", nome: "Ruggine della fava", gruppo: fava, causa: fungo}
+  # malattie del Sud aggiunte il 26/11/2026
+  - {taxon: "Plenodomus tracheiphilus", nome: "Mal secco degli agrumi", gruppo: agrumi, causa: fungo}
+  - {taxon: "Xylella fastidiosa", nome: "Xylella (disseccamento rapido dell'olivo)", gruppo: olivo, causa: batterio}
+  - {taxon: "Cryphonectria parasitica", nome: "Cancro corticale del castagno", gruppo: castagno, causa: fungo}
+  - {taxon: "Alternaria solani", nome: "Alternariosi del pomodoro", gruppo: pomodoro, causa: fungo}
+  - {taxon: "Podosphaera xanthii", nome: "Oidio delle cucurbitacee", gruppo: pomodoro, causa: fungo}
+  - {taxon: "Bremia lactucae", nome: "Peronospora della lattuga", gruppo: pomodoro, causa: fungo}
+  - {taxon: "Puccinia allii", nome: "Ruggine dell'aglio e della cipolla", gruppo: cipolla, causa: fungo}
+  - {taxon: "Elsinoe ampelina", nome: "Antracnosi della vite", gruppo: vite, causa: fungo}
+  - {taxon: "Capnodium", nome: "Fumaggine", gruppo: agrumi, causa: fungo}
 
 # Foto iNaturalist per il lettore delle malattie (scripts/import_inat_train.py --malattie): classe nuova
 # ("inat:<specie>") o classe già esistente da rafforzare. coltura: solo se l'ospite è certo (la rogna è

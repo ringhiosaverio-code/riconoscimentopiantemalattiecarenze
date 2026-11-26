@@ -1,0 +1,17 @@
+# Risultati del modello pubblicato nell'app (versione G, 26/11/2026), misurati con la stessa preparazione
+# della foto del browser e il modello quantizzato (docs/miglioramento.md, sezione 10). Mostrati nella scheda Info.
+# Aggiornare dopo ogni nuovo modello pubblicato (scripts/build_web.py li copia in app/data/valutazione.json).
+modello: "G"
+data: "2026-11-26"
+prove:
+  - {lettore: plant, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.905}
+  - {lettore: plant, nome: "iNatAg (iNaturalist, foto di campo)", accuratezza: 0.804}
+  - {lettore: disease, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.774}
+  - {lettore: disease, nome: "PlantWild (foto di campo)", accuratezza: 0.836}
+  - {lettore: disease, nome: "Malattie calabresi (iNaturalist)", accuratezza: 0.878}
+  - {lettore: disease, nome: "Vite in campo (FieldVitis)", accuratezza: 0.980}
+  - {lettore: disease, nome: "Virus della vite", accuratezza: 0.948}
+  - {lettore: disease, nome: "Observation.org (Europa)", accuratezza: 0.904}
+  - {lettore: disease, nome: "Esperti del Sud (bollettini, riviste, tesi: foto mai viste)", accuratezza: 0.444}
+  - {lettore: pest, nome: "Insetti calabresi (iNaturalist)", accuratezza: 0.877}
+  - {lettore: pest, nome: "Esperti del Sud (foto mai viste)", accuratezza: 0.450}

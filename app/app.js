@@ -32,6 +32,7 @@
   getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
   getJSON('difesa.json').then(function (d) { DATA.difesa = d; }).catch(function () { DATA.difesa = null; });
   getJSON('note_legno.json').then(function (d) { DATA.noteLegno = d; }).catch(function () { DATA.noteLegno = []; });
+  getJSON('valutazione.json').then(function (d) { DATA.val = d; if ($('info-val')) $('info-val').innerHTML = valHtml(); }).catch(function () { DATA.val = null; });
   // catalogo Gowan per Consigli e Botte (usi registrati, etichette, programmi, Disciplinare, stato UE)
   var CS = null;
   var catReady = getJSON('catalogo.json').then(function (d) { DATA.cat = d; CS = Consigli.prepara(d); showNorme(); return d; });
@@ -1185,27 +1186,53 @@
   });
 
   // ------------------------------------------------------------------ info
+  // risultati del modello pubblicato sulle foto di campo (configs/valutazione_web.yaml)
+  function valHtml() {
+    var v = DATA.val, R = DATA.readers;
+    if (!v || !R) return '';
+    var names = { plant: 'Coltura', disease: 'Malattia', pest: 'Insetti e acari', deficiency: 'Carenze' };
+    var h = '<table><tr><th>Lettore e foto di prova</th><th class="n">Giuste</th></tr>';
+    ['plant', 'disease', 'pest', 'deficiency'].forEach(function (hd) {
+      if (!R[hd]) return;
+      h += '<tr><td colspan="2"><strong>' + names[hd] + '</strong> <span class="muted">(' + R[hd].classes.length + ' classi; prova mista con foto di laboratorio: ' + pct(R[hd].test_accuracy) + ')</span></td></tr>';
+      v.prove.filter(function (p) { return p.lettore === hd; }).forEach(function (p) {
+        h += '<tr><td>' + esc(p.nome) + '</td><td class="n">' + pct(p.accuratezza) + '</td></tr>';
+      });
+    });
+    return h + '</table><p class="muted">Modello ' + esc(v.modello) + ' del ' + esc(v.data.split('-').reverse().join('/')) + '. La prova mista include foto di laboratorio ed è ottimistica; ' +
+      'le foto di campo sono più vicine all\'uso reale. La prova "esperti del Sud" usa foto di bollettini, riviste e tesi (legno, cancri, essudati) che il modello non ha mai visto: ' +
+      'è la più difficile e mostra dove serve ancora lavoro. Le carenze hanno pochi esempi: indicazione preliminare. Quando il lettore non è sicuro mostra più ipotesi invece di una sola.</p>';
+  }
+  function quizHtml() {
+    var q = DATA.quiz || [];
+    if (!q.length) return '';
+    var cls = {}, sud = 0;
+    q.forEach(function (x) { cls[x.head + '|' + x.label] = 1; if (x.sud) sud++; });
+    return '<p>Quiz: <strong>' + q.length.toLocaleString('it-IT') + ' foto</strong> di ' + Object.keys(cls).length + ' colture, malattie, carenze e insetti; ' +
+      Math.round(sud / q.length * 100) + '% su colture tipiche del Sud Italia e della Calabria, che escono in 7 domande su 10.</p>';
+  }
+
   function renderInfo() {
-    var r = DATA.readers;
-    var row = function (hd, label) {
-      var f = r[hd].field || {};
-      return '<tr><td>' + label + '</td><td class="n">' + pct(r[hd].test_accuracy) + '</td><td class="n">' +
-        (f.plantdoc ? pct(f.plantdoc.accuracy) : (f.inatag ? pct(f.inatag.accuracy) : '–')) + '</td></tr>';
-    };
     $('info').innerHTML = '<h2>Contributi per migliorare la rete</h2>' +
       '<p>Contributi salvati in questo telefono: <strong id="cb-count">0</strong>.</p>' +
       '<p class="muted">Inviali al responsabile del progetto (mail, WhatsApp, Drive): servono a riaddestrare la rete sulle foto reali dei campi calabresi e siciliani.</p>' +
       '<div class="row"><button type="button" id="cb-export">Invia contributi</button><button type="button" class="secondary" id="cb-clear" hidden>Svuota elenco</button></div>' +
       '<p class="muted" id="cb-export-status"></p>' +
       '<h2>Come funziona</h2>' +
-      '<p>La rete neurale (estrattori DINOv2 ed EfficientNet-B0 con lettori calibrati) gira nel browser con ONNX Runtime Web. La foto non lascia il dispositivo.</p>' +
-      '<table><tr><th>Lettore</th><th class="n">Test</th><th class="n">Foto di campo</th></tr>' +
-      row('plant', 'Coltura') + row('disease', 'Malattia') + row('deficiency', 'Carenze') + (r.pest ? row('pest', 'Insetti (IP102)') : '') + '</table>' +
-      '<p class="muted">Il valore sul test include foto di laboratorio ed è ottimistico; quello su foto di campo (PlantDoc) è più vicino all\'uso reale. Le carenze hanno pochi esempi: indicazione preliminare.</p>' +
+      '<p><strong>Lettore.</strong> Una rete neurale riconosce coltura, malattia o danno, carenze e insetti. Usa due estrattori di immagini, DINOv2 ed EfficientNet-B0. Per ogni domanda decidono 5 lettori calibrati, e ne conta la media. ' +
+      'La rete gira nel browser con ONNX Runtime Web: la foto non lascia il dispositivo. È addestrata su raccolte scientifiche aperte e su foto di campo del Sud Italia, anche di ARSAC, riviste e tesi, verificate a vista una per una.</p>' +
+      '<div id="info-val">' + valHtml() + '</div>' +
+      '<p><strong>Consigli.</strong> Scegli coltura, avversità, fase e situazione: l\'app ordina i prodotti Gowan registrati come un tecnico della difesa integrata e prepara la ricetta. ' +
+      'Non è una rete neurale: sono regole scritte con le loro fonti, cioè etichette, programmi Gowan, Disciplinare della Calabria e banca dati UE. Ogni prodotto mostra il motivo della sua posizione.</p>' +
+      '<p><strong>Botte.</strong> Prodotti dal catalogo Gowan o scritti a mano: quantità per la botte e per ettaro, ordine di carico, incompatibilità, rame, limiti di etichetta.</p>' +
+      '<div id="info-quiz">' + quizHtml() + '</div>' +
       '<h2>Fonti dei dati</h2><ul>' +
-      '<li>PlantVillage (Hughes e Salathé, 2015)</li><li>PlantDoc (Singh et al., 2020), CC BY 4.0</li>' +
-      '<li>Dataset Project-AgML (UC Davis), CC BY 4.0 / MIT</li><li>iNatAg (Project-AgML), da iNaturalist</li></ul>' +
-      '<p class="muted">Conoscenze agronomiche: disciplinare di produzione integrata della Regione Calabria (2023), bollettini ARSAC, schede EPPO, EFSA, Università Mediterranea di Reggio Calabria, Università di Bari. Elenco completo e livello di verifica nel repository.</p>' +
+      '<li>PlantVillage (Hughes e Salathé, 2015); PlantDoc (Singh et al., 2020, CC BY 4.0); PlantWild; dataset Project-AgML (UC Davis, CC BY 4.0 / MIT) e iNatAg</li>' +
+      '<li>iNaturalist e Observation.org: foto con licenza aperta e autore citato, con le osservazioni della Calabria e dell\'Italia per prime</li>' +
+      '<li>Bugwood (Università della Georgia), DiaMOS, FieldVitis, virus della vite</li>' +
+      '<li>Solo per l\'addestramento, non ripubblicate: foto di ARSAC, Servizio fitosanitario, riviste, tesi UNIRC ed Europe PMC (art. 70-ter, legge sul diritto d\'autore)</li>' +
+      '<li>IP102 (Wu et al., 2019): solo uso accademico; EPPO Global Database: uso didattico</li></ul>' +
+      '<p class="muted">Conoscenze agronomiche: Disciplinare di produzione integrata della Regione Calabria 2026 (aggiornamento di agosto), bollettini ARSAC, schede EPPO, EFSA, banca dati UE dei pesticidi, etichette e programmi Gowan Italia, Università Mediterranea di Reggio Calabria e altre università del Sud. Elenco completo e livello di verifica nel repository.</p>' +
       '<h2>Norme e aggiornamenti</h2><p class="muted" id="info-norme">' + esc(normeText()) + '</p>' +
       '<p class="muted">Ogni giorno un controllo automatico cerca un nuovo Disciplinare della Calabria sul sito ARSAC e lo stato delle sostanze attive nella banca dati UE, ogni settimana le etichette Gowan; le novità diventano una proposta di aggiornamento che una persona controlla prima della pubblicazione.</p>' +
       '<h2>Avvertenze</h2><p class="muted">Strumento di supporto alla decisione, non una diagnosi. Per virus, viroidi, batteri e nematodi serve la conferma di laboratorio. Dosi e compatibilità dei prodotti sono quelle dell\'etichetta autorizzata.</p>' +

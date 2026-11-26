@@ -2,10 +2,11 @@
 
 Solo osservazioni "research grade" (identificazione confermata dalla comunità) con foto in licenza
 CC0, CC BY o CC BY-NC; per ogni foto si salvano autore, licenza e osservazione, mostrati nel quiz.
-Al massimo 3 foto per autore e una per osservazione, per variare le immagini. Per ogni organismo si
+Al massimo 3 foto per autore e una per osservazione, per variare le immagini; prima le foto
+scattate in Calabria, poi nel resto d'Italia, poi nel mondo. Per ogni organismo si
 salvano anche ordine e famiglia secondo la tassonomia di iNaturalist (per le schede in sintesi).
 
-Uso: python scripts/import_inat_quiz.py [--per-taxon 25]
+Uso: python scripts/import_inat_quiz.py [--per-taxon 40]
 """
 import argparse
 import json
@@ -57,31 +58,50 @@ def taxon_info(name):
             "nome_comune_en": t.get("preferred_common_name")}
 
 
-def photos_for(taxon_id, n):
-    params = {"taxon_id": taxon_id, "quality_grade": "research", "photo_license": ",".join(LICENSES),
-              "per_page": 100, "order_by": "votes", "photos": "true"}
-    obs = json.loads(get(f"{API}/observations", params))["results"]
-    out, per_user = [], Counter()
-    for o in obs:
-        user = (o.get("user") or {}).get("login", "")
-        if per_user[user] >= 3:
-            continue
-        ph = next((p for p in o.get("photos", []) if p.get("license_code") in LICENSES), None)
-        if not ph or not ph.get("url"):
-            continue
-        per_user[user] += 1
-        out.append({"photo_id": ph["id"], "url": ph["url"].replace("/square.", "/medium."),
-                    "license": ph["license_code"], "attribution": ph.get("attribution", ""),
-                    "osservazione": f"https://www.inaturalist.org/observations/{o['id']}",
-                    "data": o.get("observed_on"), "luogo": o.get("place_guess") or ""})
-        if len(out) >= n:
-            break
+# prima le foto scattate in Calabria, poi nel resto d'Italia, poi nel mondo (luoghi di iNaturalist)
+LUOGHI = ((9323, "Calabria"), (6973, "Italia"), (None, "mondo"))
+
+
+def photos_for(taxon_id, n, gia=()):
+    """Fino a n foto con licenza aperta: osservazioni della Calabria, poi dell'Italia, poi del resto del mondo.
+    Al massimo 3 foto per autore e una per osservazione; gia = foto già salvate (si contano anche loro)."""
+    out, per_user, seen_obs = [], Counter(), set()
+    for g in gia:
+        seen_obs.add(g["osservazione"])
+        per_user[g.get("autore", "")] += 1
+    for place, nome in LUOGHI:
+        for page in (1, 2):
+            if len(out) + len(gia) >= n:
+                return out
+            params = {"taxon_id": taxon_id, "quality_grade": "research", "photo_license": ",".join(LICENSES),
+                      "per_page": 100, "page": page, "order_by": "votes", "photos": "true"}
+            if place:
+                params["place_id"] = place
+            obs = json.loads(get(f"{API}/observations", params))["results"]
+            for o in obs:
+                url_obs = f"https://www.inaturalist.org/observations/{o['id']}"
+                user = (o.get("user") or {}).get("login", "")
+                if url_obs in seen_obs or per_user[user] >= 3:
+                    continue
+                ph = next((p for p in o.get("photos", []) if p.get("license_code") in LICENSES), None)
+                if not ph or not ph.get("url"):
+                    continue
+                seen_obs.add(url_obs)
+                per_user[user] += 1
+                out.append({"photo_id": ph["id"], "url": ph["url"].replace("/square.", "/medium."),
+                            "license": ph["license_code"], "attribution": ph.get("attribution", ""),
+                            "osservazione": url_obs, "autore": user, "zona": nome,
+                            "data": o.get("observed_on"), "luogo": o.get("place_guess") or ""})
+                if len(out) + len(gia) >= n:
+                    return out
+            if len(obs) < 100:
+                break
     return out
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--per-taxon", type=int, default=25)
+    ap.add_argument("--per-taxon", type=int, default=40)
     args = ap.parse_args()
     cfg = yaml.safe_load(open(ROOT / "configs" / "quiz_calabria.yaml", encoding="utf-8"))
     OUT.mkdir(parents=True, exist_ok=True)
@@ -90,19 +110,24 @@ def main():
     for kind, head in (("colture", "plant"), ("parassiti", "pest"), ("malattie", "disease")):
         for e in cfg[kind]:
             key = slug(e["taxon"])
-            if key in manifest and len(manifest[key]["foto"]) >= min(args.per_taxon, manifest[key].get("disponibili", 0) or args.per_taxon):
-                continue
+            prev = manifest.get(key)
+            if prev and (len(prev["foto"]) >= args.per_taxon or prev.get("richieste", 25) >= args.per_taxon):
+                continue  # già completo, o iNaturalist non ne ha di più
             try:
-                info = taxon_info(e["taxon"])
+                info = (prev or {}).get("taxon_inat") or taxon_info(e["taxon"])
                 if not info:
                     print("non trovato:", e["taxon"], flush=True)
                     continue
-                photos = photos_for(info["id"], args.per_taxon)
+                gia = (prev or {}).get("foto", [])
+                photos = gia + photos_for(info["id"], args.per_taxon, gia)
             except Exception as ex:  # rete: si riprova al prossimo avvio
                 print("errore", e["taxon"], ex, flush=True)
                 continue
             saved = []
             for p in photos:
+                if p.get("path"):  # già scaricata
+                    saved.append(p)
+                    continue
                 f = IMG / key / f"{p['photo_id']}.jpg"
                 if not f.exists():
                     try:
@@ -112,7 +137,8 @@ def main():
                         print("  foto non scaricata", p["photo_id"], ex, flush=True)
                         continue
                 saved.append({**p, "path": str(f.relative_to(ROOT / "data"))})
-            manifest[key] = {**e, "head": head, "taxon_inat": info, "foto": saved, "disponibili": len(photos)}
+            manifest[key] = {**e, "head": head, "taxon_inat": info, "foto": saved, "disponibili": len(photos),
+                             "richieste": args.per_taxon}
             json.dump(manifest, open(man_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             print(f"{head:7s} {e['taxon']:32s} {len(saved):3d} foto  ({info.get('ordine')}, {info.get('famiglia')})", flush=True)
     print("FATTO", sum(len(v["foto"]) for v in manifest.values()), "foto")

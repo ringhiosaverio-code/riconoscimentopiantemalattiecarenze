@@ -377,6 +377,9 @@ def main() -> None:
         json.dump(hyp, open(APP / "data" / "hypotheses.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     json.dump(cause_names, open(APP / "data" / "causes.json", "w", encoding="utf-8"), ensure_ascii=False)
+    # risultati del modello pubblicato sulle foto di campo, per la scheda Info
+    json.dump(load_yaml(ROOT / "configs" / "valutazione_web.yaml"), open(APP / "data" / "valutazione.json", "w", encoding="utf-8"),
+              ensure_ascii=False)
     json.dump(load_yaml(ROOT / "configs" / "quiz_tips.yaml"), open(APP / "data" / "quiz_tips.json", "w", encoding="utf-8"),
               ensure_ascii=False)
 
