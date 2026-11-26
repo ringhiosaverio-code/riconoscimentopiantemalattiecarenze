@@ -147,6 +147,7 @@ labels:
   "inat:pseudomonas_syringae": batterio
   "inat:colletotrichum": fungo
   "inat:polystigma_rubrum": fungo
+  "inat:elsinoe_ampelina": fungo
   "inat:sclerotinia_sclerotiorum": fungo
   "lit:plenodomus_tracheiphilus": fungo
   "diamos:pear_slug": insetto

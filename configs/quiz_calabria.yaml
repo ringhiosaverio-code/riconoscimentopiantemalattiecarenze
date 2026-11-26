@@ -166,3 +166,7 @@ addestramento_malattie:
   - {taxon: "Tranzschelia discolor", classe: "plantwild:peach rust", coltura: ""}
   - {taxon: "Pseudoperonospora cubensis", classe: cucurbit_downy_mildew, coltura: ""}
   - {taxon: "Capnodium", classe: "agml_lemon:Sooty Mould", coltura: ""}
+  # giro H (26/11/2026): malattie del Sud
+  - {taxon: "Elsinoe ampelina", classe: "inat:elsinoe_ampelina", coltura: vitis_vinifera}
+  - {taxon: "Alternaria solani", classe: tomato_early_blight, coltura: ""}
+  - {taxon: "Cryphonectria parasitica", classe: "bw:cryphonectria_parasitica", coltura: ""}
