@@ -77,6 +77,15 @@ def ip102_group(label: str) -> str:
     return next(g for a, b, g in IP102_GROUPS if a <= k <= b)
 
 
+# Colture tipiche del Sud Italia e della Calabria (e i gruppi di colture del quiz che le indicano): le domande
+# su queste colture, le loro malattie e i loro insetti hanno la precedenza nel quiz (campo "sud").
+SUD = {"olea_europaea", "olivo", "citrus_limon", "citrus_sinensis", "citrus_reticulata", "inat:citrus_medica", "agrumi",
+       "vitis_vinifera", "vite", "opuntia_ficus_indica", "allium_cepa_tropea", "cipolla", "ficus_carica", "inat:ficus_carica",
+       "punica_granatum", "inat:punica_granatum", "inat:prunus_dulcis", "solanum_lycopersicum", "pomodoro",
+       "capsicum_annuum", "solanum_melongena", "cynara_cardunculus", "actinidia_chinensis", "actinidia",
+       "fragaria_ananassa", "inat:foeniculum_vulgare", "inat:vicia_faba", "Calabria"}
+
+
 def build_quiz(ck, heads, names: dict) -> None:
     """Foto del quiz: fonti ripubblicabili (e IP102 per uso accademico), fonti alternate, nomi stabili."""
     import zlib
@@ -128,6 +137,9 @@ def build_quiz(ck, heads, names: dict) -> None:
                     "credit": sources[r["source"]]}
             if cal or (h in ("disease", "deficiency") and r["plant"] in cal_plants):  # coltura calabrese
                 item["cal"] = 1
+            if item["cal"] if "cal" in item else False:
+                if (lab if h == "plant" else item["plant"]) in SUD:  # coltura tipica del Sud e della Calabria
+                    item["sud"] = 1
             quiz.append(item)
     # foto di iNaturalist (licenze CC0, CC BY, CC BY-NC, autore citato): colture, insetti e malattie
     # della Calabria (configs/quiz_calabria.yaml, scripts/import_inat_quiz.py)
@@ -161,7 +173,7 @@ def build_quiz(ck, heads, names: dict) -> None:
                     continue
             keep.add(name)
             quiz.append({"img": name, "head": e["head"], "label": lab, "name": nm,
-                         "plant": e.get("gruppo") or lab, "organ": "", "cal": 1, "sum": summary,
+                         "plant": e.get("gruppo") or lab, "organ": "", "cal": 1, "sud": 1, "sum": summary,
                          "credit": f"{ph['attribution']}, iNaturalist", "obs": ph["osservazione"]})
     # foto dell'EPPO Global Database (uso didattico, autore citato) per malattie senza foto aperte altrove
     ep_path = ROOT / "data" / "external" / "eppo_quiz" / "manifest.json"
@@ -181,7 +193,7 @@ def build_quiz(ck, heads, names: dict) -> None:
                     continue
             keep.add(name)
             quiz.append({"img": name, "head": "disease", "label": f"eppo:{code}", "name": e["nome"], "plant": e["gruppo"],
-                         "organ": "", "cal": 1, "sum": summary, "obs": ph["pagina"],
+                         "organ": "", "cal": 1, "sud": 1, "sum": summary, "obs": ph["pagina"],
                          "credit": f"Courtesy: {ph['autore']}, EPPO Global Database (uso didattico)"})
     for f in qdir.iterdir():
         if f.name not in keep:

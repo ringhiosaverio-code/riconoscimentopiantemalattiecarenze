@@ -650,14 +650,16 @@
       var cat = $('q-cat').value;
       var pool = DATA.quiz.filter(function (q) {
         if (cat === 'organ') return q.organ && q.organ !== 'leaf';
-        if (cat === 'cal') return q.cal;
+        if (cat === 'cal') return q.cal || q.sud;
         return cat === 'any' || q.head === cat;
       });
       if (!pool.length) { $('q-text').textContent = 'Nessuna foto per questa categoria.'; $('q-box').hidden = false; return; }
       // foto non ancora viste per prime; quando sono finite si ricomincia
       var seen = quizSeen(), fresh = pool.filter(function (q) { return !seen[q.img]; });
       if (!fresh.length) { pool.forEach(function (q) { delete seen[q.img]; }); fresh = pool; }
-      // 4 domande su 10 di ripasso se ci sono errori; delle altre, 8 su 10 su colture e avversità calabresi
+      // 4 domande su 10 di ripasso se ci sono errori; delle altre, 7 su 10 su colture, malattie e insetti tipici del
+      // Sud e della Calabria, 2 su 10 su quelli del Disciplinare calabrese, 1 su 10 sul resto. Dentro ogni gruppo si
+      // sceglie prima la specie e poi la foto, così compaiono tutte le specie e non solo quelle con più foto.
       var errs = quizErrors(), review = false, item = null;
       var wrong = pool.filter(function (q) { return errs[q.head + '|' + q.label]; });
       if (wrong.length && Math.random() < 0.4) {
@@ -665,9 +667,15 @@
         item = pickWeighted(wf.length ? wf : wrong, function (q) { return errs[q.head + '|' + q.label]; });
         review = true;
       } else {
-        var cal = fresh.filter(function (q) { return q.cal; });
-        var src = cal.length && Math.random() < 0.8 ? cal : fresh;
-        item = src[Math.floor(Math.random() * src.length)];
+        var tiers = [fresh.filter(function (q) { return q.sud; }), fresh.filter(function (q) { return q.cal && !q.sud; }),
+                     fresh.filter(function (q) { return !q.cal && !q.sud; })];
+        var probs = [0.7, 0.2, 0.1], r = Math.random(), src = null;
+        for (var t = 0; t < 3; t++) { if (tiers[t].length && r < probs[t]) { src = tiers[t]; break; } r -= probs[t]; }
+        if (!src) src = tiers.filter(function (x) { return x.length; })[0];
+        var byClass = {};
+        src.forEach(function (q) { (byClass[q.head + '|' + q.label] = byClass[q.head + '|' + q.label] || []).push(q); });
+        var keys = Object.keys(byClass), list = byClass[keys[Math.floor(Math.random() * keys.length)]];
+        item = list[Math.floor(Math.random() * list.length)];
       }
       seen[item.img] = 1; quizSeenSave(seen);
       var labels = {};
