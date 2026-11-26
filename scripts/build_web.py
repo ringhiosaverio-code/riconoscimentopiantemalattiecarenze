@@ -195,6 +195,33 @@ def build_quiz(ck, heads, names: dict) -> None:
             quiz.append({"img": name, "head": "disease", "label": f"eppo:{code}", "name": e["nome"], "plant": e["gruppo"],
                          "organ": "", "cal": 1, "sud": 1, "sum": summary, "obs": ph["pagina"],
                          "credit": f"Courtesy: {ph['autore']}, EPPO Global Database (uso didattico)"})
+    # altre foto per le specie del Sud con poche foto su iNaturalist: Bugwood (CC BY-NC 3.0 US), EPPO (uso
+    # didattico), figure di articoli CC BY verificate a vista (scripts/import_quiz_extra.py)
+    ex_path = ROOT / "data" / "external" / "quiz_extra" / "manifest.json"
+    for lab, e in sorted((json.load(open(ex_path, encoding="utf-8")) if ex_path.exists() else {}).items()):
+        if lab.startswith("_"):
+            continue
+        keys = df.keys_in(f"({e['taxon']})", syn)
+        hits = [f"{r['coltura'].capitalize()}: {r['avversita']}" for r in disc["righe"] if keys and df._match(keys, set(r["chiavi"]))]
+        summary = {"name": e["taxon"], "disciplinare": list(dict.fromkeys(hits))[:5]}
+        if e.get("causa"):
+            summary["causa"] = e["causa"]
+        for ph in e["foto"]:
+            name = f"q{zlib.crc32(ph['path'].encode()):08x}.jpg"
+            if not (qdir / name).exists():
+                try:
+                    with Image.open(ROOT / "data" / ph["path"]) as im:
+                        im = im.convert("RGB")
+                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
+                        im.save(qdir / name, quality=75)
+                except OSError:
+                    continue
+            keep.add(name)
+            item = {"img": name, "head": e["head"], "label": lab, "name": e["nome"], "plant": e["gruppo"], "organ": "",
+                    "cal": 1, "sud": 1, "sum": summary, "credit": ph["credit"], "obs": ph["obs"]}
+            if ph.get("danno"):
+                item["danno"] = 1
+            quiz.append(item)
     for f in qdir.iterdir():
         if f.name not in keep:
             f.unlink()

@@ -695,7 +695,7 @@
       qCur = { item: item, opts: shuffle(opts) };
       var questions = { plant: 'Quale coltura è?', disease: 'Quale malattia o danno si vede?', deficiency: 'Che disturbo nutrizionale si vede?', pest: 'Quale insetto o acaro è?' };
       var organ = item.organ && DATA.organs.filter(function (o) { return o.id === item.organ; })[0];
-      $('q-text').textContent = (review ? 'Ripasso, l\'ultima volta qui hai sbagliato. ' : '') + questions[item.head] + (organ ? ' (parte della pianta: ' + organ.label.toLowerCase() + ')' : '');
+      $('q-text').textContent = (review ? 'Ripasso, l\'ultima volta qui hai sbagliato. ' : '') + (item.danno ? 'Di quale insetto o acaro è questo danno?' : questions[item.head]) + (organ ? ' (parte della pianta: ' + organ.label.toLowerCase() + ')' : '');
       $('q-img').src = 'app/quiz/' + item.img;
       $('q-credit').innerHTML = 'Foto: ' + esc(item.credit) + (item.obs ? ' (<a href="' + esc(item.obs) + '" target="_blank" rel="noopener">fonte</a>)' : '');
       $('q-exp').innerHTML = '';

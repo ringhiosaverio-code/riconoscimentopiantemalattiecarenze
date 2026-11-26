@@ -1,0 +1,983 @@
+{
+ "inat:liothrips_oleae": {
+  "label": "inat:liothrips_oleae",
+  "head": "pest",
+  "nome": "Tripide dell'olivo",
+  "gruppo": "olivo",
+  "taxon": "Liothrips oleae",
+  "foto": [
+   {
+    "id": "vono2020_a",
+    "credit": "Vono G., Bonsignore C.P., Gullo G. et al., Insects 11:887, 2020 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/insects11120887",
+    "fonte": "articolo",
+    "danno": 1,
+    "path": "external/images/quiz_extra/liothrips_oleae/vono2020_a.jpg"
+   },
+   {
+    "id": "vono2020_b",
+    "credit": "Vono G., Bonsignore C.P., Gullo G. et al., Insects 11:887, 2020 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/insects11120887",
+    "fonte": "articolo",
+    "danno": 1,
+    "path": "external/images/quiz_extra/liothrips_oleae/vono2020_b.jpg"
+   },
+   {
+    "id": "vono2020_c",
+    "credit": "Vono G., Bonsignore C.P., Gullo G. et al., Insects 11:887, 2020 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/insects11120887",
+    "fonte": "articolo",
+    "danno": 1,
+    "path": "external/images/quiz_extra/liothrips_oleae/vono2020_c.jpg"
+   }
+  ]
+ },
+ "inat:jacobiasca_lybica": {
+  "label": "inat:jacobiasca_lybica",
+  "head": "pest",
+  "nome": "Cicalina africana della vite",
+  "gruppo": "vite",
+  "taxon": "Jacobiasca lybica",
+  "foto": [
+   {
+    "id": "bw5636644",
+    "credit": "Paul Langlois, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5636644",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/jacobiasca_lybica/bw5636644.jpg"
+   },
+   {
+    "id": "bw5636645",
+    "credit": "Paul Langlois, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5636645",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/jacobiasca_lybica/bw5636645.jpg"
+   },
+   {
+    "id": "bw5636646",
+    "credit": "Paul Langlois, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5636646",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/jacobiasca_lybica/bw5636646.jpg"
+   },
+   {
+    "id": "bw5636647",
+    "credit": "Paul Langlois, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5636647",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/jacobiasca_lybica/bw5636647.jpg"
+   },
+   {
+    "id": "bw5636648",
+    "credit": "Paul Langlois, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5636648",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/jacobiasca_lybica/bw5636648.jpg"
+   }
+  ]
+ },
+ "inat:elsinoe_ampelina": {
+  "label": "inat:elsinoe_ampelina",
+  "head": "disease",
+  "nome": "Antracnosi della vite",
+  "gruppo": "vite",
+  "taxon": "Elsinoe ampelina",
+  "causa": "fungo",
+  "foto": [
+   {
+    "id": "bw1235039",
+    "credit": "Clemson University - USDA Cooperative Extension Slide Series, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1235039",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw1235039.jpg"
+   },
+   {
+    "id": "bw1235040",
+    "credit": "Clemson University - USDA Cooperative Extension Slide Series, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1235040",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw1235040.jpg"
+   },
+   {
+    "id": "bw5368601",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368601",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368601.jpg"
+   },
+   {
+    "id": "bw5368602",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368602",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368602.jpg"
+   },
+   {
+    "id": "bw5368605",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368605",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368605.jpg"
+   },
+   {
+    "id": "bw5368606",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368606",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368606.jpg"
+   },
+   {
+    "id": "bw5368607",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368607",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368607.jpg"
+   },
+   {
+    "id": "bw5368608",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368608",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368608.jpg"
+   },
+   {
+    "id": "bw5368756",
+    "credit": "Paul Bachi, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5368756",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/elsinoe_ampelina/bw5368756.jpg"
+   }
+  ]
+ },
+ "inat:capnodium": {
+  "label": "inat:capnodium",
+  "head": "disease",
+  "nome": "Fumaggine",
+  "gruppo": "agrumi",
+  "taxon": "Capnodium",
+  "causa": "fungo",
+  "foto": [
+   {
+    "id": "bw5619692",
+    "credit": "Kristen Wickert, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5619692",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/capnodium/bw5619692.jpg"
+   },
+   {
+    "id": "bw5619693",
+    "credit": "Kristen Wickert, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5619693",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/capnodium/bw5619693.jpg"
+   },
+   {
+    "id": "bw5619694",
+    "credit": "Kristen Wickert, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5619694",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/capnodium/bw5619694.jpg"
+   },
+   {
+    "id": "bw5619696",
+    "credit": "Kristen Wickert, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5619696",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/capnodium/bw5619696.jpg"
+   },
+   {
+    "id": "bw5503593",
+    "credit": "Bruce Watt, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5503593",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/capnodium/bw5503593.jpg"
+   },
+   {
+    "id": "bw5503594",
+    "credit": "Bruce Watt, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5503594",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/capnodium/bw5503594.jpg"
+   }
+  ]
+ },
+ "inat:cacopsylla_pyri": {
+  "label": "inat:cacopsylla_pyri",
+  "head": "pest",
+  "nome": "Psilla del pero",
+  "gruppo": "melo",
+  "taxon": "Cacopsylla pyri",
+  "eppo": "PSYLPI",
+  "foto": [
+   {
+    "id": "eppo2174",
+    "credit": "Courtesy: Ilya Mityushev., EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo2174.jpg"
+   },
+   {
+    "id": "eppo2175",
+    "credit": "Courtesy: Ilya Mityushev., EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo2175.jpg"
+   },
+   {
+    "id": "eppo2173",
+    "credit": "Courtesy: Ilya Mityushev., EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo2173.jpg"
+   },
+   {
+    "id": "eppo14983",
+    "credit": "Courtesy: Monika Riedle-Bauer. Federal College and Research Institute for Viticulture and Pomology, Klosterneuburg (AT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo14983.jpg"
+   },
+   {
+    "id": "eppo14980",
+    "credit": "Courtesy: Monika Riedle-Bauer. Federal College and Research Institute for Viticulture and Pomology, Klosterneuburg (AT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo14980.jpg"
+   },
+   {
+    "id": "eppo14985",
+    "credit": "Courtesy: Monika Riedle-Bauer. Federal College and Research Institute for Viticulture and Pomology, Klosterneuburg (AT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo14985.jpg"
+   },
+   {
+    "id": "eppo14984",
+    "credit": "Courtesy: Monika Riedle-Bauer. Federal College and Research Institute for Viticulture and Pomology, Klosterneuburg (AT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo14984.jpg"
+   },
+   {
+    "id": "eppo14981",
+    "credit": "Courtesy: Monika Riedle-Bauer. Federal College and Research Institute for Viticulture and Pomology, Klosterneuburg (AT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo14981.jpg"
+   },
+   {
+    "id": "eppo14982",
+    "credit": "Courtesy: Monika Riedle-Bauer. Federal College and Research Institute for Viticulture and Pomology, Klosterneuburg (AT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/PSYLPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/eppo14982.jpg"
+   },
+   {
+    "id": "kossmann2025_a",
+    "credit": "Koßmann, Gallinger, Rid-Moneta et al., Journal of Chemical Ecology 2025 (CC BY 4.0)",
+    "obs": "https://doi.org/10.1007/s10886-025-01642-x",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/cacopsylla_pyri/kossmann2025_a.jpg"
+   }
+  ]
+ },
+ "inat:panonychus_citri": {
+  "label": "inat:panonychus_citri",
+  "head": "pest",
+  "nome": "Ragnetto rosso degli agrumi",
+  "gruppo": "agrumi",
+  "taxon": "Panonychus citri",
+  "foto": [
+   {
+    "id": "bw5204069",
+    "credit": "Jim Baker, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5204069",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/panonychus_citri/bw5204069.jpg"
+   },
+   {
+    "id": "bw5204070",
+    "credit": "Jim Baker, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5204070",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/panonychus_citri/bw5204070.jpg"
+   }
+  ]
+ },
+ "inat:dialeurodes_citri": {
+  "label": "inat:dialeurodes_citri",
+  "head": "pest",
+  "nome": "Aleurodide degli agrumi",
+  "gruppo": "agrumi",
+  "taxon": "Dialeurodes citri",
+  "eppo": "DIALCI",
+  "foto": [
+   {
+    "id": "eppo14076",
+    "credit": "Courtesy: Jurabek Nodirjonovich Yakhyoyev (Institute of Zoology of the Academy of Sciences of the Republic of Uzbekistan), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/DIALCI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/dialeurodes_citri/eppo14076.jpg"
+   },
+   {
+    "id": "eppo14078",
+    "credit": "Courtesy: Jurabek Nodirjonovich Yakhyoyev (Institute of Zoology of the Academy of Sciences of the Republic of Uzbekistan), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/DIALCI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/dialeurodes_citri/eppo14078.jpg"
+   },
+   {
+    "id": "eppo14079",
+    "credit": "Courtesy: Jurabek Nodirjonovich Yakhyoyev (Institute of Zoology of the Academy of Sciences of the Republic of Uzbekistan), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/DIALCI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/dialeurodes_citri/eppo14079.jpg"
+   },
+   {
+    "id": "eppo14077",
+    "credit": "Courtesy: Jurabek Nodirjonovich Yakhyoyev (Institute of Zoology of the Academy of Sciences of the Republic of Uzbekistan), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/DIALCI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/dialeurodes_citri/eppo14077.jpg"
+   },
+   {
+    "id": "bw5194030",
+    "credit": "Florida Division of Plant Industry, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5194030",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5194030.jpg"
+   },
+   {
+    "id": "bw5194031",
+    "credit": "Florida Division of Plant Industry, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5194031",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5194031.jpg"
+   },
+   {
+    "id": "bw5194032",
+    "credit": "Florida Division of Plant Industry, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5194032",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5194032.jpg"
+   },
+   {
+    "id": "bw5194033",
+    "credit": "Florida Division of Plant Industry, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5194033",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5194033.jpg"
+   },
+   {
+    "id": "bw5194034",
+    "credit": "Florida Division of Plant Industry, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5194034",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5194034.jpg"
+   },
+   {
+    "id": "bw5194036",
+    "credit": "Jeffrey W. Lotz, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5194036",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5194036.jpg"
+   },
+   {
+    "id": "bw5433443",
+    "credit": "Charles Olsen, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5433443",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5433443.jpg"
+   },
+   {
+    "id": "bw5430550",
+    "credit": "Lyle Buss, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5430550",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5430550.jpg"
+   },
+   {
+    "id": "bw5430551",
+    "credit": "Lyle Buss, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5430551",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/dialeurodes_citri/bw5430551.jpg"
+   }
+  ]
+ },
+ "inat:venturia_pyrina": {
+  "label": "inat:venturia_pyrina",
+  "head": "disease",
+  "nome": "Ticchiolatura del pero",
+  "gruppo": "melo",
+  "taxon": "Venturia pyrina",
+  "causa": "fungo",
+  "eppo": "VENTPI",
+  "foto": [
+   {
+    "id": "eppo19770",
+    "credit": "Courtesy: Ebrahim Osdaghi, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo19770.jpg"
+   },
+   {
+    "id": "eppo19766",
+    "credit": "Courtesy: Ebrahim Osdaghi, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo19766.jpg"
+   },
+   {
+    "id": "eppo19769",
+    "credit": "Courtesy: Ebrahim Osdaghi, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo19769.jpg"
+   },
+   {
+    "id": "eppo19768",
+    "credit": "Courtesy: Ebrahim Osdaghi, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo19768.jpg"
+   },
+   {
+    "id": "eppo19767",
+    "credit": "Courtesy: Ebrahim Osdaghi, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo19767.jpg"
+   },
+   {
+    "id": "eppo19771",
+    "credit": "Courtesy: Ebrahim Osdaghi, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo19771.jpg"
+   },
+   {
+    "id": "eppo8361",
+    "credit": "Courtesy: Riccardo Bugiani (Plant Protection Service - Emilia-Romagna Region - IT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo8361.jpg"
+   },
+   {
+    "id": "eppo8362",
+    "credit": "Courtesy: Riccardo Bugiani (Plant Protection Service - Emilia-Romagna Region - IT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo8362.jpg"
+   },
+   {
+    "id": "eppo8360",
+    "credit": "Courtesy: Riccardo Bugiani (Plant Protection Service - Emilia-Romagna Region - IT), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo8360.jpg"
+   },
+   {
+    "id": "eppo20402",
+    "credit": "Courtesy: Kostas Anastasopoulos (Department of Agriculture, I.H.U), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/VENTPI/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/venturia_pyrina/eppo20402.jpg"
+   },
+   {
+    "id": "bw5537322",
+    "credit": "Cesar Calderon, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5537322",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/venturia_pyrina/bw5537322.jpg"
+   }
+  ]
+ },
+ "inat:alternaria_solani": {
+  "label": "inat:alternaria_solani",
+  "head": "disease",
+  "nome": "Alternariosi del pomodoro",
+  "gruppo": "pomodoro",
+  "taxon": "Alternaria solani",
+  "causa": "fungo",
+  "eppo": "ALTESO",
+  "foto": [
+   {
+    "id": "eppo16156",
+    "credit": "Courtesy: Thirunarayanan P - Banaras Hindu University (IN), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo16156.jpg"
+   },
+   {
+    "id": "eppo8657",
+    "credit": "Courtesy: Parthasarathy Seethapathy, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo8657.jpg"
+   },
+   {
+    "id": "eppo9215",
+    "credit": "Courtesy: Maria A. Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo9215.jpg"
+   },
+   {
+    "id": "eppo9617",
+    "credit": "Courtesy: Maria A. Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo9617.jpg"
+   },
+   {
+    "id": "eppo10725",
+    "credit": "Courtesy: Maria A. Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo10725.jpg"
+   },
+   {
+    "id": "eppo12000",
+    "credit": "Courtesy: Maria Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo12000.jpg"
+   },
+   {
+    "id": "eppo12001",
+    "credit": "Courtesy: Maria Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo12001.jpg"
+   },
+   {
+    "id": "eppo12002",
+    "credit": "Courtesy: Maria Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo12002.jpg"
+   },
+   {
+    "id": "eppo12027",
+    "credit": "Courtesy: Maria Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo12027.jpg"
+   },
+   {
+    "id": "eppo12028",
+    "credit": "Courtesy: Maria Kuznetsova (All-Russian Research Institute of Phytopathology), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo12028.jpg"
+   },
+   {
+    "id": "eppo13331",
+    "credit": "Courtesy: César Leonel Luna, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo13331.jpg"
+   },
+   {
+    "id": "eppo13330",
+    "credit": "Courtesy: César Leonel Luna, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo13330.jpg"
+   },
+   {
+    "id": "eppo13329",
+    "credit": "Courtesy: César Leonel Luna, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo13329.jpg"
+   },
+   {
+    "id": "eppo16154",
+    "credit": "Courtesy: Thirunarayanan P - Banaras Hindu University (IN), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo16154.jpg"
+   },
+   {
+    "id": "eppo16152",
+    "credit": "Courtesy: Thirunarayanan P - Banaras Hindu University (IN), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo16152.jpg"
+   },
+   {
+    "id": "eppo16153",
+    "credit": "Courtesy: Thirunarayanan P - Banaras Hindu University (IN), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo16153.jpg"
+   },
+   {
+    "id": "eppo16157",
+    "credit": "Courtesy: Thirunarayanan P - Banaras Hindu University (IN), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo16157.jpg"
+   },
+   {
+    "id": "eppo16155",
+    "credit": "Courtesy: Thirunarayanan P - Banaras Hindu University (IN), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo16155.jpg"
+   },
+   {
+    "id": "eppo17798",
+    "credit": "Courtesy: Jacquie van Der Waals, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo17798.jpg"
+   },
+   {
+    "id": "eppo17755",
+    "credit": "Courtesy: SASA, UK, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo17755.jpg"
+   },
+   {
+    "id": "eppo17754",
+    "credit": "Courtesy: SASA, UK, EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo17754.jpg"
+   },
+   {
+    "id": "eppo20124",
+    "credit": "Courtesy: Kostas Anastasopoulos (Department of Agriculture, I.H.U), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo20124.jpg"
+   },
+   {
+    "id": "eppo20125",
+    "credit": "Courtesy: Kostas Anastasopoulos (Department of Agriculture, I.H.U), EPPO Global Database (uso didattico)",
+    "obs": "https://gd.eppo.int/taxon/ALTESO/photos",
+    "fonte": "eppo",
+    "path": "external/images/quiz_extra/alternaria_solani/eppo20125.jpg"
+   },
+   {
+    "id": "bw1576391",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1576391",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1576391.jpg"
+   },
+   {
+    "id": "bw1576390",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1576390",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1576390.jpg"
+   },
+   {
+    "id": "bw1576389",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1576389",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1576389.jpg"
+   },
+   {
+    "id": "bw1573859",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573859",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573859.jpg"
+   },
+   {
+    "id": "bw1573858",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573858",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573858.jpg"
+   },
+   {
+    "id": "bw1573857",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573857",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573857.jpg"
+   },
+   {
+    "id": "bw1573856",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573856",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573856.jpg"
+   },
+   {
+    "id": "bw1573855",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573855",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573855.jpg"
+   },
+   {
+    "id": "bw1573854",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573854",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573854.jpg"
+   },
+   {
+    "id": "bw1573853",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573853",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573853.jpg"
+   },
+   {
+    "id": "bw1573852",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573852",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573852.jpg"
+   },
+   {
+    "id": "bw1573851",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573851",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573851.jpg"
+   },
+   {
+    "id": "bw1573850",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573850",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573850.jpg"
+   },
+   {
+    "id": "bw1573849",
+    "credit": "Gerald Holmes, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=1573849",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw1573849.jpg"
+   },
+   {
+    "id": "bw5505693",
+    "credit": "Bruce Watt, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5505693",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw5505693.jpg"
+   },
+   {
+    "id": "bw5505692",
+    "credit": "Bruce Watt, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5505692",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw5505692.jpg"
+   },
+   {
+    "id": "bw5505688",
+    "credit": "Bruce Watt, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5505688",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/alternaria_solani/bw5505688.jpg"
+   }
+  ]
+ },
+ "inat:phloeotribus_scarabaeoides": {
+  "label": "inat:phloeotribus_scarabaeoides",
+  "head": "pest",
+  "nome": "Fleotribo dell'olivo",
+  "gruppo": "olivo",
+  "taxon": "Phloeotribus scarabaeoides",
+  "foto": [
+   {
+    "id": "bw5205069",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205069",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205069.jpg"
+   },
+   {
+    "id": "bw5205070",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205070",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205070.jpg"
+   },
+   {
+    "id": "bw5205071",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205071",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205071.jpg"
+   },
+   {
+    "id": "bw5205072",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205072",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205072.jpg"
+   },
+   {
+    "id": "bw5205073",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205073",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205073.jpg"
+   },
+   {
+    "id": "bw5205074",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205074",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205074.jpg"
+   },
+   {
+    "id": "bw5205075",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205075",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205075.jpg"
+   },
+   {
+    "id": "bw5205076",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5205076",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5205076.jpg"
+   },
+   {
+    "id": "bw5326075",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5326075",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5326075.jpg"
+   },
+   {
+    "id": "bw5326077",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5326077",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5326077.jpg"
+   },
+   {
+    "id": "bw5326081",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5326081",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5326081.jpg"
+   },
+   {
+    "id": "bw5326082",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5326082",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5326082.jpg"
+   },
+   {
+    "id": "bw5326083",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5326083",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5326083.jpg"
+   },
+   {
+    "id": "bw5462837",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462837",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462837.jpg"
+   },
+   {
+    "id": "bw5462838",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462838",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462838.jpg"
+   },
+   {
+    "id": "bw5462839",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462839",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462839.jpg"
+   },
+   {
+    "id": "bw5462840",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462840",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462840.jpg"
+   },
+   {
+    "id": "bw5462841",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462841",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462841.jpg"
+   },
+   {
+    "id": "bw5462842",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462842",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462842.jpg"
+   },
+   {
+    "id": "bw5462843",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462843",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462843.jpg"
+   },
+   {
+    "id": "bw5462844",
+    "credit": "Pest and Diseases Image Library (PaDIL), Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=5462844",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/phloeotribus_scarabaeoides/bw5462844.jpg"
+   }
+  ]
+ },
+ "_scartate": [
+  "bw5503595",
+  "bw5503596",
+  "bw5503619",
+  "bw5503620",
+  "bw5503621",
+  "bw5619695",
+  "eppo516"
+ ],
+ "eppo:DEUTTR": {
+  "label": "eppo:DEUTTR",
+  "head": "disease",
+  "nome": "Mal secco degli agrumi (Plenodomus tracheiphilus)",
+  "gruppo": "agrumi",
+  "taxon": "Plenodomus tracheiphilus",
+  "causa": "fungo",
+  "foto": [
+   {
+    "id": "bw0176071",
+    "credit": "G. Perrotta, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=0176071",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/plenodomus_tracheiphilus/bw0176071.jpg"
+   },
+   {
+    "id": "bw0656044",
+    "credit": "G. Perrotta, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=0656044",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/plenodomus_tracheiphilus/bw0656044.jpg"
+   },
+   {
+    "id": "bw0660093",
+    "credit": "G. Perrotta, Bugwood.org (CC BY-NC 3.0 US)",
+    "obs": "https://www.ipmimages.org/browse/detail.cfm?imgnum=0660093",
+    "fonte": "bugwood",
+    "path": "external/images/quiz_extra/plenodomus_tracheiphilus/bw0660093.jpg"
+   }
+  ]
+ }
+}
