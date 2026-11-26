@@ -109,6 +109,9 @@ def cmd_import_external(args: argparse.Namespace) -> int:
     steps.append(("letteratura", im.import_letteratura))
     steps.append(("diamos", im.import_diamos))
     steps.append(("vinevirus", im.import_vinevirus))
+    steps.append(("bugwood", im.import_bugwood))
+    steps.append(("observation", im.import_observation))
+    steps.append(("emiliaromagna", im.import_emiliaromagna))
     steps.append(("contributi", im.contribution_rows))
     for name, fn in steps:
         if args.only and name not in args.only:

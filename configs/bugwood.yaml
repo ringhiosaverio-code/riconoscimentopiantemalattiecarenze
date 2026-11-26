@@ -1,0 +1,51 @@
+# Foto da Bugwood Images (Università della Georgia: ipmimages.org, forestryimages.org): soggetti
+# identificati da specialisti, foto citate con autore. Licenza: uso non commerciale con citazione
+# (CC BY-NC 3.0 US; alcune CC BY 3.0 US). Solo addestramento, mai nel quiz.
+# sci: nome del soggetto su Bugwood (anche con patovar); classe: etichetta del lettore (disease) o
+# "pest:inat:<specie>" per il lettore degli insetti; coltura: solo se l'ospite è certo.
+# Si tengono solo le foto di campo (sintomi, danni, stadi dell'insetto): niente colture in piastra,
+# microscopio o disegni (vedi SCARTA in scripts/import_bugwood.py).
+
+malattie:
+  - {sci: "Spilocaea oleaginea", classe: "inat:venturia_oleaginea", coltura: olea_europaea}
+  - {sci: "Pseudomonas savastanoi pv. savastanoi", classe: "inat:pseudomonas_savastanoi", coltura: ""}
+  - {sci: "Erwinia amylovora", classe: "inat:erwinia_amylovora", coltura: ""}
+  - {sci: "Botrytis cinerea", classe: "inat:botrytis_cinerea", coltura: ""}
+  - {sci: "Plenodomus tracheiphilus", classe: "lit:plenodomus_tracheiphilus", coltura: ""}
+  - {sci: "Phoma tracheiphila", classe: "lit:plenodomus_tracheiphilus", coltura: ""}
+  - {sci: "Xylella fastidiosa", classe: "inat:xylella_fastidiosa", coltura: ""}
+  - {sci: "Xylella fastidiosa ssp. pauca", classe: "inat:xylella_fastidiosa", coltura: ""}
+  - {sci: "Pseudomonas syringae pv. actinidiae", classe: "inat:pseudomonas_syringae", coltura: actinidia_chinensis}
+  - {sci: "Pseudomonas syringae pv. syringae", classe: "inat:pseudomonas_syringae", coltura: ""}
+  - {sci: "Colletotrichum acutatum", classe: "inat:colletotrichum", coltura: ""}
+  - {sci: "Colletotrichum gloeosporioides", classe: "inat:colletotrichum", coltura: ""}
+  - {sci: "Wilsonomyces carpophilus", classe: "inat:wilsonomyces_carpophilus", coltura: ""}
+  - {sci: "Taphrina deformans", classe: peach_leaf_curl, coltura: ""}
+  - {sci: "Taphrina pruni", classe: "plantwild:plum pocket disease", coltura: ""}
+  - {sci: "Plasmopara viticola", classe: grapevine_downy_mildew, coltura: vitis_vinifera}
+  - {sci: "Erysiphe necator", classe: powdery_mildew_grapevine, coltura: vitis_vinifera}
+  - {sci: "Phaeomoniella chlamydospora", classe: grapevine_esca, coltura: vitis_vinifera}
+  - {sci: "Grapevine leafroll-associated virus 3", classe: "plantwild:grapevine leafroll disease", coltura: vitis_vinifera}
+  - {sci: "Phytophthora infestans", classe: tomato_late_blight, coltura: ""}
+  - {sci: "Gymnosporangium sabinae", classe: "inat:gymnosporangium_sabinae", coltura: ""}
+  - {sci: "Polystigma rubrum", classe: "inat:polystigma_rubrum", coltura: ""}
+  - {sci: "Sclerotinia sclerotiorum", classe: "inat:sclerotinia_sclerotiorum", coltura: ""}
+  - {sci: "Cladosporium carpophilum", classe: "plantwild:peach scab", coltura: ""}
+  - {sci: "Venturia carpophila", classe: "plantwild:peach scab", coltura: ""}
+  - {sci: "Tranzschelia discolor", classe: "plantwild:peach rust", coltura: ""}
+  - {sci: "Pseudoperonospora cubensis", classe: cucurbit_downy_mildew, coltura: ""}
+  - {sci: "Podosphaera pannosa", classe: "inat:podosphaera_pannosa", coltura: ""}
+  - {sci: "Venturia inaequalis", classe: apple_scab, coltura: malus_domestica}
+  - {sci: "Blumeriella jaapii", classe: cherry_leaf_spot, coltura: ""}
+  - {sci: "Bremia lactucae", classe: lettuce_downy_mildew, coltura: lactuca_sativa}
+  - {sci: "Uromyces viciae-fabae", classe: "inat:uromyces_viciae_fabae", coltura: ""}
+  - {sci: "Monilinia laxa", classe: apple_brown_rot, coltura: ""}
+  - {sci: "Monilinia fructicola", classe: apple_brown_rot, coltura: ""}
+  - {sci: "Elsinoe fawcettii", classe: "agml_citrusfruit:scab", coltura: ""}
+  - {sci: "Diaporthe citri", classe: "agml_citrusfruit:melanose", coltura: ""}
+  # malattie del Sud con poche foto altrove: classi nuove se Bugwood ne ha abbastanza (almeno 40)
+  - {sci: "Verticillium dahliae", classe: "bw:verticillium_dahliae", coltura: "", nuova: true}
+  - {sci: "Phytophthora capsici", classe: "bw:phytophthora_capsici", coltura: "", nuova: true}
+  - {sci: "Peronospora destructor", classe: "bw:peronospora_destructor", coltura: "", nuova: true}
+  # gommosi degli agrumi (Phytophthora citrophthora, P. nicotianae su agrumi): solo 7 foto, classe non creata
+  - {sci: "Cryphonectria parasitica", classe: "bw:cryphonectria_parasitica", coltura: "", nuova: true}

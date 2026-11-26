@@ -54,6 +54,10 @@ agenti:
   "plantwild:peach rust": [Tranzschelia discolor]
   "plantwild:plum rust": [Tranzschelia pruni]
   "plantwild:peach scab": [Venturia carpophila]
+  "bw:peronospora_destructor": [Peronospora destructor]
+  "bw:phytophthora_capsici": [Phytophthora capsici]
+  "bw:verticillium_dahliae": [Verticillium dahliae]
+  "bw:cryphonectria_parasitica": [Cryphonectria parasitica]
   "plantwild:plum pocket disease": [Taphrina pruni]
   "plantwild:wheat stem rust": [Puccinia graminis]
   "plantwild:wheat stripe rust": [Puccinia striiformis]
@@ -70,6 +74,7 @@ agenti:
   "inat:colletotrichum": [Colletotrichum gloeosporioides, Colletotrichum acutatum]
   "plantwild:peach scab": [Venturia carpophila]
 sinonimi:
+  peronospora schleideni: peronospora destructor
   venturia carpophila: cladosporium carpophilum
   uncinula necator: erysiphe necator
   oidium tuckeri: erysiphe necator

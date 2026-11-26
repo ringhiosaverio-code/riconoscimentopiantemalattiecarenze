@@ -6,6 +6,7 @@ fonti:
   malsecco_sicilia: "Mal secco degli agrumi, presentazione divulgativa (Sicilia), PDF raccolto il 2026-11-23"
   riolo_unirc: "Riolo M. (2020) tesi di dottorato, Università Mediterranea di Reggio Calabria: Colletotrichum e Phytophthora su olivo e agrumi"
   eppo: "EPPO Global Database, foto (uso didattico), autore indicato nel manifest"
+  arsac: "ARSAC Calabria, foto dei bollettini e degli articoli divulgativi (www.arsacweb.it), scelte a vista il 2026-11-25"
 foto:
   - {path: "external/pdf_figure/img_malsecco_sicilia/x-003-004.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
   - {path: "external/pdf_figure/img_malsecco_sicilia/x-003-005.ppm", classe: "lit:plenodomus_tracheiphilus", coltura: "", fonte: malsecco_sicilia}
@@ -54,3 +55,11 @@ foto:
   - {path: "external/images/eppo_quiz/PSDMSA/8464.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
   - {path: "external/images/eppo_quiz/PSDMSA/8463.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
   - {path: "external/images/eppo_quiz/PSDMSA/8461.jpg", classe: "inat:pseudomonas_savastanoi", coltura: "olea_europaea", fonte: eppo}
+  - {path: "external/images/arsac/24316.jpg", classe: "inat:bactrocera_oleae", testa: pest, coltura: "olea_europaea", fonte: arsac}
+  - {path: "external/images/arsac/14629.jpg", classe: "inat:bactrocera_oleae", testa: pest, coltura: "olea_europaea", fonte: arsac}
+  - {path: "external/images/arsac/36163.jpg", classe: "grapevine_downy_mildew", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac/35870.jpg", classe: "grapevine_downy_mildew", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac/12893.png", classe: "grapevine_downy_mildew", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac/13414.jpg", classe: "powdery_mildew_grapevine", testa: disease, coltura: "vitis_vinifera", fonte: arsac}
+  - {path: "external/images/arsac/22778.jpg", classe: "inat:euphyllura_olivina", testa: pest, coltura: "olea_europaea", fonte: arsac}
+  - {path: "external/images/arsac/22777.jpg", classe: "inat:euphyllura_olivina", testa: pest, coltura: "olea_europaea", fonte: arsac}

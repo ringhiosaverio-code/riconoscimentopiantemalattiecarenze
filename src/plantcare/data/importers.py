@@ -859,9 +859,67 @@ def import_letteratura() -> list[ManifestRow]:
     """Foto di sintomi da pubblicazioni e banche dati didattiche (configs/foto_letteratura.yaml): poche
     foto per malattie senza altre fonti aperte (mal secco degli agrumi), tutte nell'addestramento."""
     cfg = yaml.safe_load(open(ROOT / "configs" / "foto_letteratura.yaml", encoding="utf-8"))
-    return [ManifestRow(path=f["path"], source="letteratura", split="train", plant=f.get("coltura") or "",
-                        disease=f["classe"], organ=f.get("organo", ""))
-            for f in cfg["foto"] if (DATA / f["path"]).exists()]
+    out = []
+    for f in cfg["foto"]:
+        if not (DATA / f["path"]).exists():
+            continue
+        pest = f.get("testa") == "pest"
+        out.append(ManifestRow(path=f["path"], source="letteratura", split="train", plant=f.get("coltura") or "",
+                               disease="" if pest else f["classe"], pest=f["classe"] if pest else "",
+                               organ=f.get("organo", "")))
+    return out
+
+
+def _split_by(key: str, seed: int = 42) -> str:
+    h = zlib.crc32(f"{seed}:{key}".encode()) % 100
+    return "test" if h < 10 else ("val" if h < 20 else "train")
+
+
+def _rows_from_targets(source: str, man_path: Path, author_key: str) -> list[ManifestRow]:
+    """Righe da un manifest {obiettivo: {classe, testa, coltura, foto: [...]}}; split per autore.
+    Le classi nuove (prefisso "bw:") si usano solo se hanno una causa in configs/disease_causes.yaml."""
+    if not man_path.exists():
+        return []
+    from plantcare.causes import load_causes
+    known = set(load_causes()[1])
+    rows = []
+    for e in json.load(open(man_path, encoding="utf-8")).values():
+        pest = e.get("testa") == "pest"
+        if e["classe"].startswith("bw:") and e["classe"] not in known:
+            continue
+        for p in e.get("foto", []):
+            if not (DATA / p["path"]).exists():
+                continue
+            rows.append(ManifestRow(path=p["path"], source=source, split=_split_by(p.get(author_key) or p["path"]),
+                                    plant=e.get("coltura") or "", disease="" if pest else e["classe"],
+                                    pest=e["classe"] if pest else "", organ=""))
+    return rows
+
+
+def import_bugwood() -> list[ManifestRow]:
+    """Bugwood Images (scripts/import_bugwood.py): soggetti identificati da specialisti; split per autore."""
+    return _rows_from_targets("bugwood", EXT / "bugwood" / "manifest.json", "autore")
+
+
+def import_observation() -> list[ManifestRow]:
+    """Observation.org via GBIF (scripts/import_observation.py): solo identificazioni approvate; split per autore."""
+    return _rows_from_targets("observation", EXT / "observation" / "manifest.json", "autore")
+
+
+def import_emiliaromagna() -> list[ManifestRow]:
+    """Schede del Servizio fitosanitario dell'Emilia-Romagna (scripts/import_emiliaromagna.py): tutte
+    nell'addestramento (poche foto per scheda, spesso dello stesso focolaio)."""
+    man = EXT / "emiliaromagna" / "manifest.json"
+    if not man.exists():
+        return []
+    out = []
+    for f in json.load(open(man, encoding="utf-8")):
+        if not (DATA / f["path"]).exists():
+            continue
+        pest = f["testa"] == "pest"
+        out.append(ManifestRow(path=f["path"], source="emiliaromagna", split="train", plant=f.get("coltura") or "",
+                               disease="" if pest else f["classe"], pest=f["classe"] if pest else "", organ=""))
+    return out
 
 
 DIAMOS = {"healthy": "healthy", "slug": "diamos:pear_slug", "spot": "diamos:pear_leaf_spot"}

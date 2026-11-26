@@ -151,3 +151,7 @@ labels:
   "lit:plenodomus_tracheiphilus": fungo
   "diamos:pear_slug": insetto
   "diamos:pear_leaf_spot": fungo
+  "bw:verticillium_dahliae": fungo
+  "bw:phytophthora_capsici": fungo
+  "bw:peronospora_destructor": fungo
+  "bw:cryphonectria_parasitica": fungo

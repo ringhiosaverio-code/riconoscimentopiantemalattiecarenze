@@ -143,6 +143,26 @@ iNaturalist). Per migliorarlo servono foto di campo dei servizi fitosanitari o d
 loro permesso. Lo stesso vale per verticilliosi (29 foto su iNaturalist), gommosi, Phytophthora capsici e
 peronospora della cipolla (meno di 15 ciascuna).
 
+## 11. Fonti italiane e del Sud, forum (25 novembre 2026, notte)
+
+Siti aperti nella rete dell'ambiente su richiesta: Bugwood, GBIF, Observation.org, Servizio fitosanitario
+dell'Emilia-Romagna, CREA, Regioni Campania e Sicilia, emergenzaxylella.it, UNIRC.
+
+| Fonte | Cosa aggiunge | Etichetta | Licenza e uso |
+|---|---|---|---|
+| Bugwood Images (Univ. Georgia: ipmimages.org) | 4.700 foto di 80 malattie e insetti: Phytophthora capsici (800), cancro del castagno (200), Xylella (112), peronospora della cipolla, verticilliosi, colpo di fuoco, Sclerotinia, mosca della frutta, dorifora, afidi... | specialisti | uso non commerciale con citazione; solo addestramento |
+| Observation.org (tramite GBIF) | fino a 300 foto per specie, prima dai paesi mediterranei (molte dalla Spagna), solo identificazioni "Approved" | revisori della piattaforma | CC BY-NC o BY-NC-ND; solo addestramento |
+| Servizio fitosanitario Emilia-Romagna, schede delle avversità | 291 foto: colpo di fuoco (150), sharka, aleurodide spinoso, cimice asiatica, Psa, Xylella, peronospora della cipolla | tecnici del servizio | diritto d'autore della Regione; solo addestramento (art. 70-ter) |
+| ARSAC Calabria (immagini dei bollettini e degli articoli) | 9 foto calabresi: mosca delle olive, peronospora e oidio della vite (Cirò, Bagnara), cotonello dell'olivo | tecnici ARSAC | diritto d'autore; solo addestramento |
+| CREA, Regioni Campania e Sicilia, emergenzaxylella.it, UNIRC | nessuna galleria di foto etichettate leggibile in automatico (pagine dinamiche o PDF divulgativi) | | non usate |
+
+**Forum (giardinaggio, coltivazione biologica, agraria) non usati.** Le foto dei forum sono di privati,
+con nome utente e a volte luoghi riconoscibili, e la diagnosi è una discussione, spesso senza conferma:
+un'etichetta sbagliata insegna al modello l'errore e peggiora proprio le malattie simili tra loro.
+Molti forum, inoltre, escludono nel regolamento la raccolta automatica dei contenuti. Per le foto di
+privati la strada giusta è quella già prevista dall'app: i contributi con consenso, senza dati personali,
+con la diagnosi confermata da un esperto.
+
 ## Prossimi passi in ordine di impatto atteso
 
 1. Rilevatore automatico delle foglie (due fasi) addestrato sui riquadri di PlantDoc.

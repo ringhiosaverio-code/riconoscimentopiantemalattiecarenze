@@ -154,6 +154,12 @@ organismi_regolamentati:
     tipo: rnqp
     lista_eppo: "A2"
     classi: {disease: ["lit:plenodomus_tracheiphilus"]}
+  - eppo: ENDOPA
+    organismo: "Cryphonectria parasitica (cancro della corteccia del castagno)"
+    ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV) e da quarantena in zone protette (Allegato III)"
+    tipo: rnqp
+    lista_eppo: "A2"
+    classi: {disease: ["bw:cryphonectria_parasitica"]}
   - eppo: VITEVI
     organismo: "Viteus vitifoliae (Daktulosphaira vitifoliae, fillossera della vite)"
     ue: "Organismo regolamentato non da quarantena (RNQP, Allegato IV) e da quarantena in zone protette (Allegato III)"

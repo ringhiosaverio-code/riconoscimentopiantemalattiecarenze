@@ -150,6 +150,36 @@ le classi: ruggine del pero, Xylella fastidiosa, cancro batterico da Pseudomonas
 lebbra (Colletotrichum), nebbia rossa del susino, Sclerotinia, mal secco degli agrumi, limacina e
 maculature del pero. Il mal secco ha solo 21 foto: va letto come ipotesi da confermare in laboratorio.
 
+## 9. Fonti del Sud Italia (26 novembre 2026)
+
+Nuove foto (`docs/ricerca-ia.md`, sezione 11): Bugwood (4.719), Observation.org tramite GBIF (7.231),
+Servizio fitosanitario dell'Emilia-Romagna (291), ARSAC Calabria (9). Classi nuove: marciume da
+Phytophthora capsici, cancro della corteccia del castagno, peronospora della cipolla, verticilliosi.
+
+Versioni provate (stesse foto di prova, modello quantizzato come nel browser):
+
+| Foto di prova | Lettore | B (prima) | C (fonti nuove, peso 2) | **D (pubblicato)** |
+|---|---|---|---|---|
+| PlantDoc | malattia | 77,4% | 76,7% | 76,9% |
+| PlantDoc | coltura | 90,5% | 90,0% | 90,5% |
+| PlantWild | malattia | 83,5% | 83,5% | **84,4%** |
+| iNatAg | coltura | 80,4% | 80,4% | 80,4% |
+| Malattie calabresi (iNaturalist) | malattia | 87,2% | 88,7% | 88,4% |
+| Insetti calabresi (iNaturalist) | insetti | 84,7% | 87,7% | **87,7%** |
+| Observation.org | malattia | 68,6% | 89,9% | **89,4%** |
+| Observation.org | insetti | 92,1% | 94,9% | **94,9%** |
+| Bugwood | insetti | 34,9% | 60,5% | **60,5%** |
+| IP102 (25 per classe) | insetti | 68,2% | 67,4% | 67,4% |
+| FieldVitis | malattia | 98,0% | 96,1% | 96,1% |
+| Virus della vite | malattia | 96,1% | 90,9% | 90,9% |
+
+D unisce i lettori migliori: coltura e carenze di B, insetti di C, malattie riaddestrate con le fonti
+nuove a peso normale (1,0 invece di 2,0). Eccezione alle regole qui sotto: su PlantDoc la malattia perde
+2 foto su 451 (0,5 punti), FieldVitis 1 foto su 51 e il virus della vite 4 su 77; in cambio PlantWild
+guadagna 8 foto su 844 e migliorano molto le malattie e gli insetti di Calabria e Mediterraneo, la
+priorità del progetto. L'errore di calibrazione degli insetti sale al 3,3% (regola: sotto il 3%): le
+ipotesi calibrate (insiemi conformi) restano corrette perché le soglie sono ricalcolate su questo modello.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:

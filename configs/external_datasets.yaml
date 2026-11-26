@@ -295,6 +295,23 @@ datasets:
     citation: "configs/foto_letteratura.yaml (fonte per foto)"
     note: "Poche foto di sintomi scelte a vista da PDF e dall'EPPO Global Database per malattie senza altre fonti aperte: mal secco degli agrumi (classe nuova), cancro batterico dell'actinidia, rogna e lebbra dell'olivo. Tutte nell'addestramento: nessuna prova indipendente."
 
+  # --- giro "Sud Italia" (25/11 notte) ---
+  - name: bugwood
+    use: disease, pest
+    license: "Bugwood Images: uso non commerciale con citazione (CC BY-NC 3.0 US; alcune CC BY 3.0 US). Solo addestramento"
+    citation: "Bugwood Images, Center for Invasive Species and Ecosystem Health, University of Georgia (www.ipmimages.org); autore per foto nel manifest"
+    note: "Soggetti di configs/bugwood.yaml e insetti di configs/quiz_calabria.yaml; solo foto di campo (niente piastre, microscopio, disegni); split per autore."
+  - name: observation
+    use: disease, pest
+    license: "CC BY-NC 4.0 o CC BY-NC-ND 4.0 (per foto). Solo addestramento"
+    citation: "Observation.org, Nature data from around the World, tramite GBIF (dataset 8a863029-f435-446a-821e-275f4f641165)"
+    note: "Solo identificazioni approvate, prima dai paesi mediterranei; al massimo 300 foto per specie e 10 per autore; split per autore."
+  - name: emiliaromagna
+    use: disease, pest
+    license: "Diritto d'autore della Regione Emilia-Romagna: solo addestramento per ricerca (art. 70-ter L. 633/1941)"
+    citation: "Regione Emilia-Romagna, Servizio fitosanitario, schede delle avversità (agricoltura.regione.emilia-romagna.it)"
+    note: "Foto delle schede che corrispondono a classi dei lettori (scripts/import_emiliaromagna.py); tutte nell'addestramento."
+
   # --- insetti e acari della Calabria (lettore degli insetti) ---
   - name: inat_calabria
     use: pest
