@@ -31,6 +31,7 @@
   getJSON('hypotheses.json').then(function (d) { DATA.hyp = d; }).catch(function () { DATA.hyp = null; });
   getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
   getJSON('difesa.json').then(function (d) { DATA.difesa = d; }).catch(function () { DATA.difesa = null; });
+  getJSON('danni_insetti.json').then(function (d) { DATA.danni = d; }).catch(function () { DATA.danni = {}; });
   getJSON('note_legno.json').then(function (d) { DATA.noteLegno = d; }).catch(function () { DATA.noteLegno = []; });
   getJSON('valutazione.json').then(function (d) { DATA.val = d; if ($('info-val')) $('info-val').innerHTML = valHtml(); }).catch(function () { DATA.val = null; });
   // catalogo Gowan per Consigli e Botte (usi registrati, etichette, programmi, Disciplinare, stato UE)
@@ -351,6 +352,60 @@
     return { html: h + '</div>', best: best, ids: ids, pests: pests };
   }
 
+  // Danni da insetti e acari, malattie trasmesse da vettori e fumaggine (configs/danni_insetti.yaml):
+  // dal sintomo riconosciuto all'insetto che lo causa, con la difesa contro l'insetto.
+  var LINK_TITLE = { danno: 'Danno causato da', vettore: 'Malattia trasmessa da', melata: 'Cresce sulla melata di' };
+  function pestIndex() {
+    var R = DATA.readers.pest, ix = {};
+    if (R) R.classes.forEach(function (c, i) { ix[c.label] = i; });
+    return ix;
+  }
+  function linkBlock(res, crop, plantGuess) {
+    var L = DATA.danni, R = DATA.readers.disease, P = DATA.readers.pest;
+    if (!L || !res.disease) return { html: '', open: false };
+    var ix = pestIndex(), seen = {}, h = '', first = true, open = false;
+    top(res.disease, 3).forEach(function (x) {
+      var c = R.classes[x[1]], e = L[c.label];
+      if (!e || x[0] < 0.15 || seen[c.label]) return;
+      seen[c.label] = 1;
+      // insetti collegati, ordinati per la probabilità del lettore degli insetti
+      var ins = e.insetti.filter(function (l) { return l in ix; }).map(function (l) {
+        return { label: l, name: P.classes[ix[l]].name, p: res.pest ? res.pest[ix[l]] : 0 };
+      }).sort(function (a, b) { return b.p - a.p; });
+      h += '<div class="reader"><h3>' + esc(c.name) + ' (' + pct(x[0]) + '): ' + esc(LINK_TITLE[e.tipo] || 'Collegato a') + '</h3>';
+      if (e.nota) h += '<p>' + esc(e.nota) + '</p>';
+      if (ins.length) {
+        h += '<ul>' + ins.map(function (i) {
+          return '<li>' + esc(i.name) + (res.pest ? ' <span class="muted">— lettore degli insetti: ' + pct(i.p) + '</span>' : '') + '</li>';
+        }).join('') + '</ul>';
+        if (e.tipo === 'danno' || e.tipo === 'vettore') open = true;
+        // difesa contro l'insetto più probabile, una sola volta (la prima malattia collegata)
+        if (first) {
+          var b = difesaBlock('pest', ins[0].label, crop, plantGuess);
+          if (b) h += '<p class="muted">Difesa contro ' + esc(ins[0].name) + (ins.length > 1 ? ' (il più probabile tra quelli elencati: per gli altri apri il lettore degli insetti o i Consigli)' : '') + ':</p>' + b;
+          first = false;
+        }
+      }
+      h += '</div>';
+    });
+    if (h) h = '<section><h3>Collegamento con insetti e acari</h3>' + h + '<p class="muted">Per confermare cerca l\'insetto o l\'acaro sulla pianta (pagina inferiore delle foglie, germogli, frutti) e fotografalo da vicino: il lettore degli insetti lo riconosce meglio dell\'insetto che dei suoi danni.</p></section>';
+    return { html: h, open: open };
+  }
+  // dal lettore degli insetti ai danni e alle malattie che quell'insetto causa o trasmette
+  function pestLinks(label) {
+    var L = DATA.danni || {}, R = DATA.readers.disease, by = { danno: [], vettore: [], melata: [] };
+    Object.keys(L).forEach(function (d) {
+      if (L[d].insetti.indexOf(label) < 0) return;
+      var c = R.classes.filter(function (x) { return x.label === d; })[0];
+      if (c && by[L[d].tipo].indexOf(c.name) < 0) by[L[d].tipo].push(c.name);
+    });
+    var s = '';
+    if (by.danno.length) s += '<p><strong>Danni tipici</strong> (riconosciuti dal lettore delle malattie): ' + esc(by.danno.join('; ')) + '.</p>';
+    if (by.vettore.length) s += '<p><strong>Trasmette:</strong> ' + esc(by.vettore.join('; ')) + '.</p>';
+    if (by.melata.length) s += '<p><strong>Con la melata favorisce:</strong> ' + esc(by.melata.join('; ')) + '.</p>';
+    return s;
+  }
+
   // Lettore degli insetti: separato dagli altri, perché ha senso solo se la foto mostra un insetto.
   function pestBlock(probs, open) {
     var R = DATA.readers.pest;
@@ -363,7 +418,7 @@
       '<p class="muted">Vale solo se la foto mostra un insetto o un acaro, non i suoi danni.</p>';
     var c0 = R.classes[t[0][1]];
     if (ok && c0.reg != null && DATA.lab) h += regNote(DATA.lab.organismi_regolamentati[c0.reg], t[0][0], 'Se la foto mostra davvero questo insetto: ');
-    if (ok) h += difesaBlock('pest', c0.label, $('crop').value || null, null);
+    if (ok) h += pestLinks(c0.label) + difesaBlock('pest', c0.label, $('crop').value || null, null);
     t.forEach(function (x) {
       h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(R.classes[x[1]].name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
     });
@@ -408,7 +463,9 @@
     var cz = causeBlock(res.disease);
     answers.cause = cz.best;
     h += cz.html;
-    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3);
+    var lk = linkBlock(res, crop, answers.plant && answers.plant.label);
+    h += lk.html;
+    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open);
     // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
     var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
     h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);

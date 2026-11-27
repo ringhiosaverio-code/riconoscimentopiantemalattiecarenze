@@ -410,6 +410,9 @@ def main() -> None:
               ensure_ascii=False)
     json.dump(load_yaml(ROOT / "configs" / "quiz_tips.yaml"), open(APP / "data" / "quiz_tips.json", "w", encoding="utf-8"),
               ensure_ascii=False)
+    # danni da insetti, malattie trasmesse da vettori e fumaggine: collegamento con il lettore degli insetti
+    json.dump(load_yaml(ROOT / "configs" / "danni_insetti.yaml")["collegamenti"],
+              open(APP / "data" / "danni_insetti.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     # --- organi, regole della botte, fonti ---
     organs = [{"id": k, "label": v["label"]} for k, v in tax.plant_organs.items()]

@@ -1,0 +1,71 @@
+# Collegamento tra classi del lettore delle malattie e insetti o acari (classi del lettore degli insetti).
+# tipo: danno   = il sintomo è il danno diretto dell'insetto o dell'acaro (mine, punture, erosioni, fori);
+#       vettore = la malattia (virus, batterio, fitoplasma) è trasmessa da questi insetti: la difesa
+#                 passa dal controllo del vettore;
+#       melata  = la fumaggine cresce sulla melata di insetti che succhiano la linfa.
+# L'app mostra gli insetti collegati, la probabilità che dà loro il lettore degli insetti e la difesa
+# dell'insetto più probabile per la coltura. Fonti: Disciplinare di difesa integrata della Calabria,
+# schede EPPO, bollettini ARSAC, dispense di patologia ed entomologia (configs/sources.yaml).
+collegamenti:
+  tomato_leafminer_damage:
+    {tipo: danno, insetti: ["inat:phthorimaea_absoluta"], nota: "Mine chiare nelle foglie e gallerie nei frutti: larve della tignola del pomodoro."}
+  agml_citrusuat:Citrus_leafminer:
+    {tipo: danno, insetti: ["inat:phyllocnistis_citrella"], nota: "Mine serpentine argentee sulle foglie giovani: larva della minatrice serpentina."}
+  agml_citrusuat:Red_scale:
+    {tipo: danno, insetti: ["inat:aonidiella_aurantii"], nota: "Scudetti rossastri e macchie gialle su foglie e frutti: cocciniglia rossa forte."}
+  agml_citrusuat:Texas_mite:
+    {tipo: danno, insetti: ["inat:panonychus_citri", "inat:tetranychus_urticae"], nota: "Foglie punteggiate e argentate: acari tetranichidi (acaro texano, ragnetto rosso degli agrumi)."}
+  agml_lemon:Spider Mites:
+    {tipo: danno, insetti: ["inat:panonychus_citri", "inat:tetranychus_urticae"], nota: "Punteggiature giallastre e ragnatele sottili sulla pagina inferiore: ragnetti."}
+  "Tomato___Spider_mites Two-spotted_spider_mite":
+    {tipo: danno, insetti: ["inat:tetranychus_urticae"], nota: "Foglie bronzate e punteggiate con ragnatele: ragnetto rosso."}
+  agml_tom2024:mite-d:
+    {tipo: danno, insetti: ["inat:tetranychus_urticae"], nota: "Bronzatura e punteggiature: acari."}
+  agml_tom2024:alternaria-mite-d:
+    {tipo: danno, insetti: ["inat:tetranychus_urticae"], nota: "Alternariosi insieme a danni da acari: vanno controllati entrambi."}
+  agml_chili:mites_and_trips:
+    {tipo: danno, insetti: ["inat:tetranychus_urticae", "inat:frankliniella_occidentalis"], nota: "Foglie deformate, argentate e punteggiate: acari e tripidi."}
+  agml_tom2024:helicoverpa-armigera-p:
+    {tipo: danno, insetti: ["inat:helicoverpa_armigera"], nota: "Fori profondi nei frutti e nelle bacche: larva della nottua gialla del pomodoro."}
+  agml_tom2024:caterpillar-p:
+    {tipo: danno, insetti: ["inat:helicoverpa_armigera", "inat:spodoptera_littoralis", "inat:spodoptera_exigua", "inat:phthorimaea_absoluta"], nota: "Erosioni e fori di bruchi: nottue o tignola."}
+  agml_tom2024:spodoptera-frugiperda-p:
+    {tipo: danno, insetti: ["inat:spodoptera_littoralis", "inat:spodoptera_exigua"], nota: "Erosioni fogliari di larve di nottue (Spodoptera)."}
+  agml_ccmt:zea_mays:fall armyworm:
+    {tipo: danno, insetti: ["inat:spodoptera_littoralis", "inat:spodoptera_exigua"], nota: "Erosioni di larve di nottue (Spodoptera)."}
+  agml_potato:Pest:
+    {tipo: danno, insetti: ["inat:leptinotarsa_decemlineata", "inat:phthorimaea_absoluta", "inat:agrotis_ipsilon"], nota: "Erosioni fogliari: dorifora, tignole o nottue."}
+  agml_eggplant:Insect Pest Disease:
+    {tipo: danno, insetti: ["inat:leptinotarsa_decemlineata", "inat:tetranychus_urticae", "inat:bemisia_tabaci", "inat:aphis_gossypii"], nota: "Danni da insetti sulla melanzana: dorifora, acari, aleurodidi o afidi."}
+  agml_plum:Insect Hole:
+    {tipo: danno, insetti: ["inat:anarsia_lineatella", "inat:grapholita_molesta", "inat:hyalopterus_pruni"], nota: "Fori e rosure sulle foglie delle drupacee."}
+  agml_pomegranate:Ectomyelois ceratoniae:
+    {tipo: danno, insetti: ["inat:cryptoblabes_gnidiella"], nota: "Larve nei frutti del melograno: tignola del carrubo e piralidi simili."}
+  # malattie trasmesse da insetti: la difesa comprende il controllo del vettore
+  tomato_yellow_leaf_curl:
+    {tipo: vettore, insetti: ["inat:bemisia_tabaci"], nota: "Il virus TYLCV è trasmesso dalla mosca bianca Bemisia tabaci: controllare il vettore, reti e piante sane."}
+  agml_vegleaf:Tomato leaf curl virus:
+    {tipo: vettore, insetti: ["inat:bemisia_tabaci"], nota: "Virus dell'accartocciamento fogliare trasmessi da Bemisia tabaci."}
+  agml_ccmt:solanum_lycopersicum:leaf curl:
+    {tipo: vettore, insetti: ["inat:bemisia_tabaci"], nota: "Accartocciamento virale trasmesso da Bemisia tabaci."}
+  agml_lemon:Curl Virus:
+    {tipo: vettore, insetti: ["inat:bemisia_tabaci", "inat:aphis_spiraecola", "inat:toxoptera_aurantii"], nota: "Virosi con foglie accartocciate: vettori afidi e aleurodidi."}
+  tomato_spotted_wilt:
+    {tipo: vettore, insetti: ["inat:frankliniella_occidentalis"], nota: "Il TSWV è trasmesso dai tripidi, soprattutto Frankliniella occidentalis."}
+  inat:xylella_fastidiosa:
+    {tipo: vettore, insetti: ["inat:philaenus_spumarius"], nota: "Xylella è trasmessa dalla sputacchina (Philaenus spumarius): lavorazioni del terreno in primavera contro le forme giovanili, obbligatorie nelle zone delimitate."}
+  plantwild:zucchini yellow mosaic virus:
+    {tipo: vettore, insetti: ["inat:aphis_gossypii", "inat:myzus_persicae"], nota: "ZYMV e gli altri mosaici delle cucurbitacee sono trasmessi dagli afidi in pochi secondi: gli insetticidi servono poco, contano reti, pacciamature riflettenti e piante sane."}
+  agml_eggplant:Mosaic Virus Disease:
+    {tipo: vettore, insetti: ["inat:aphis_gossypii", "inat:myzus_persicae"], nota: "Mosaici trasmessi da afidi."}
+  plantwild:lettuce mosaic virus:
+    {tipo: vettore, insetti: ["inat:myzus_persicae"], nota: "Il mosaico della lattuga è trasmesso da afidi e dal seme."}
+  agml_appleleaf9:Mosaic:
+    {tipo: vettore, insetti: ["inat:myzus_persicae", "inat:aphis_gossypii"], nota: "Mosaici: in molte colture trasmessi da afidi; sul melo soprattutto con l'innesto."}
+  "Orange___Haunglongbing_(Citrus_greening)":
+    {tipo: vettore, insetti: [], nota: "Il greening (HLB) è trasmesso dalle psille Diaphorina citri e Trioza erytreae, organismi da quarantena: segnalare subito al Servizio fitosanitario regionale."}
+  plantwild:grapevine leafroll disease:
+    {tipo: vettore, insetti: ["inat:planococcus_ficus", "inat:planococcus_citri"], nota: "L'accartocciamento fogliare della vite si diffonde con il materiale di propagazione e con le cocciniglie (Planococcus)."}
+  # fumaggine: conseguenza della melata
+  agml_lemon:Sooty Mould:
+    {tipo: melata, insetti: ["inat:aphis_spiraecola", "inat:toxoptera_aurantii", "inat:aleurothrixus_floccosus", "inat:dialeurodes_citri", "inat:saissetia_oleae", "inat:coccus_hesperidum", "inat:planococcus_citri", "inat:ceroplastes_sinensis", "inat:icerya_purchasi", "inat:euphyllura_olivina", "inat:metcalfa_pruinosa"], nota: "La fumaggine non attacca la pianta: cresce sulla melata di afidi, aleurodidi, cocciniglie, psille e metcalfa. Si cura eliminando l'insetto che produce la melata."}
