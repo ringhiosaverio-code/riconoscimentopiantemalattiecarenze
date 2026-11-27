@@ -1294,5 +1294,1193 @@
   "fonte": "dispense_utente",
   "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
   "pagina": 10
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09ab5def_005_007_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09ab5def-OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09ab5def_005_008_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09ab5def-OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09ab5def_006_013_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09ab5def-OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09ab5def_006_014_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09ab5def-OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09ab5def_007_017_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09ab5def-OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09ab5def_007_018_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09ab5def-OPUSCOLO-kiwi-Batteriosi-Comune-di-rosarno.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_009_028_0.jpg",
+  "testa": "disease",
+  "classe": "lit:plenodomus_tracheiphilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_009_029_0.jpg",
+  "testa": "disease",
+  "classe": "lit:plenodomus_tracheiphilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_052_248_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 52
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_052_249_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 52
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_052_250_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 52
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_053_253_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 53
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_053_254_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 53
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_053_255_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 53
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_054_258_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 54
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_054_259_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 54
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_055_262_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 55
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_055_263_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 55
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_055_264_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 55
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_056_267_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 56
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_056_268_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 56
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_056_269_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 56
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_057_272_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 57
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_057_273_0.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 57
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_2684592d_057_273_1.jpg",
+  "testa": "disease",
+  "classe": "citrus_anthracnose",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "2684592d-1_Ippolito_principali-malatie-degli-agrumi-04-12-2025.pdf",
+  "pagina": 57
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_3889d2d7_012_013_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "3889d2d7-iannotta-et-al-principali-patogeni-e-difesa_201804061101541_cgqolqkd1dgepglf1eza0zfwg.pdf",
+  "pagina": 12
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_3889d2d7_012_013_1.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "3889d2d7-iannotta-et-al-principali-patogeni-e-difesa_201804061101541_cgqolqkd1dgepglf1eza0zfwg.pdf",
+  "pagina": 12
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_3cd7dcd0_007_1303_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "3cd7dcd0-4-Difesa-olivo.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_3cd7dcd0_010_1858_0.jpg",
+  "testa": "pest",
+  "classe": "inat:euphyllura_olivina",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "3cd7dcd0-4-Difesa-olivo.pdf",
+  "pagina": 10
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_3cd7dcd0_035_5191_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "3cd7dcd0-4-Difesa-olivo.pdf",
+  "pagina": 35
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_3cd7dcd0_042_6303_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "3cd7dcd0-4-Difesa-olivo.pdf",
+  "pagina": 42
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_002_044_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_002_069_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_003_087_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_004_115_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_004_116_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 4
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_005_118_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 5
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_006_119_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 6
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_007_120_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 7
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_008_121_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_008_122_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_022_536_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_022_546_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_022_548_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_027_565_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 27
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_027_566_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 27
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_028_569_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 28
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_030_572_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 30
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_030_573_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 30
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_030_574_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 30
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_031_576_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_031_577_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_032_578_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 32
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_032_579_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 32
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_032_580_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 32
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_032_580_1.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 32
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_032_581_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 32
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_033_582_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 33
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_033_583_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 33
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_033_584_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 33
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_034_585_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_034_586_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_034_587_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_035_588_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 35
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_035_589_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 35
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_035_590_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 35
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_035_591_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 35
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_036_594_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 36
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_036_595_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 36
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_038_600_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 38
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_060_773_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 60
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_060_773_1.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 60
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_061_774_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 61
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_062_775_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 62
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_063_776_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 63
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_063_776_1.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 63
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_064_777_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 64
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_064_777_2.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 64
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_073_797_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 73
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5d5f5081_074_799_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5d5f5081-OLIVO_MALATTIE.pdf",
+  "pagina": 74
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_7f03b156_018_5028_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aonidiella_aurantii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "7f03b156-1-gestione-agrumeto.pdf",
+  "pagina": 18
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_7f03b156_028_10938_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aleurothrixus_floccosus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "7f03b156-1-gestione-agrumeto.pdf",
+  "pagina": 28
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_015_007_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 15
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_017_009_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_018_010_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 18
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_018_011_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 18
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_019_013_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 19
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_022_014_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_022_015_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_024_016_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 24
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_024_017_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 24
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_034_025_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_065_052_0.jpg",
+  "testa": "pest",
+  "classe": "inat:euphyllura_olivina",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 65
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_067_053_0.jpg",
+  "testa": "pest",
+  "classe": "inat:euphyllura_olivina",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 67
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_068_054_0.jpg",
+  "testa": "pest",
+  "classe": "inat:euphyllura_olivina",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_079_058_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 79
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_080_059_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 80
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_080_060_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 80
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_081_061_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 81
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_081_062_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 81
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_085_066_0.jpg",
+  "testa": "pest",
+  "classe": "inat:saissetia_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 85
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_100_071_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 100
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_101_072_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 101
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_103_073_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 103
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_104_074_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 104
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_105_075_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 105
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_106_076_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 106
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_107_077_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 107
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_110_079_0.jpg",
+  "testa": "pest",
+  "classe": "inat:palpita_vitrealis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 110
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_111_080_0.jpg",
+  "testa": "pest",
+  "classe": "inat:palpita_vitrealis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 111
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_112_081_0.jpg",
+  "testa": "pest",
+  "classe": "inat:palpita_vitrealis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 112
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_113_082_0.jpg",
+  "testa": "pest",
+  "classe": "inat:palpita_vitrealis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 113
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_120_085_0.jpg",
+  "testa": "pest",
+  "classe": "inat:zeuzera_pyrina",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 120
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_121_086_0.jpg",
+  "testa": "pest",
+  "classe": "inat:zeuzera_pyrina",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 121
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_139_095_0.jpg",
+  "testa": "pest",
+  "classe": "inat:phloeotribus_scarabaeoides",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 139
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_169_112_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 169
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_171_113_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 171
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_173_114_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 173
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_175_115_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 175
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_184_121_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 184
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_187_124_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 187
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_188_125_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 188
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_189_126_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 189
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_191_127_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 191
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_192_128_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 192
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_194_129_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 194
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_235_154_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 235
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_237_155_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 237
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_238_156_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 238
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_be0ca017_239_157_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "be0ca017-Difesa_integrata_olivo_0.pdf",
+  "pagina": 239
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb5e5763_003_005_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb5e5763-21_09_28-Area-3-arsac.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb5e5763_003_008_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bactrocera_oleae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb5e5763-21_09_28-Area-3-arsac.pdf",
+  "pagina": 3
  }
 ]
