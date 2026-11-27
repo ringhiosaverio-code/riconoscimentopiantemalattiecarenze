@@ -103,7 +103,9 @@ def mendeley(name, ds, mapping, cap, rnd):
             by_cls.setdefault(cls, []).append(f)
     out = []
     for cls, files in sorted(by_cls.items()):
-        files.sort(key=lambda f: f["id"]); rnd.shuffle(files)
+        files.sort(key=lambda f: f["id"]); random.Random(f"{name}:{cls}").shuffle(files)
+        # prima le foto già scaricate in un giro precedente: rilanciare lo script non riscarica nulla
+        files.sort(key=lambda f: not (IMG / name / f"{f['id']}.jpg").exists())
         n = 0
         for f in files:
             if n >= cap:
@@ -134,7 +136,7 @@ def from_zip(name, fname, doi, mapping, cap, rnd):
             by_cls.setdefault(mapping[max(keys, key=len)], []).append(i)
     out = []
     for cls, items in sorted(by_cls.items()):
-        items.sort(key=lambda i: i.filename); rnd.shuffle(items)
+        items.sort(key=lambda i: i.filename); random.Random(f"{name}:{cls}").shuffle(items)
         n = 0
         for i in items:
             if n >= cap:
