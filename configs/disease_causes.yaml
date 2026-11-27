@@ -156,3 +156,13 @@ labels:
   "bw:phytophthora_capsici": fungo
   "bw:peronospora_destructor": fungo
   "bw:cryphonectria_parasitica": fungo
+  # danni da insetti e acari (scripts/import_danni.py)
+  "danno:galle_cinipide_castagno": insetto
+  "danno:cotonosita_psilla_olivo": insetto
+  "danno:afide_lanigero": insetto
+  "danno:afidi": insetto
+  "danno:tripidi": insetto
+  "danno:carpocapsa_tortrici": insetto
+  "danno:cimici": insetto
+  "danno:piralide": insetto
+  "danno:erinosi_vite": acaro

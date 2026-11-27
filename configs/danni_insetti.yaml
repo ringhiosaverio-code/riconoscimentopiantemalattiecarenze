@@ -69,3 +69,22 @@ collegamenti:
   # fumaggine: conseguenza della melata
   agml_lemon:Sooty Mould:
     {tipo: melata, insetti: ["inat:aphis_spiraecola", "inat:toxoptera_aurantii", "inat:aleurothrixus_floccosus", "inat:dialeurodes_citri", "inat:saissetia_oleae", "inat:coccus_hesperidum", "inat:planococcus_citri", "inat:ceroplastes_sinensis", "inat:icerya_purchasi", "inat:euphyllura_olivina", "inat:metcalfa_pruinosa"], nota: "La fumaggine non attacca la pianta: cresce sulla melata di afidi, aleurodidi, cocciniglie, psille e metcalfa. Si cura eliminando l'insetto che produce la melata."}
+  # classi di danno aggiunte con scripts/import_danni.py
+  danno:galle_cinipide_castagno:
+    {tipo: danno, insetti: ["inat:dryocosmus_kuriphilus"], nota: "Galle verdi o rosate su gemme, foglie e germogli del castagno: cinipide galligeno. Difesa con il parassitoide Torymus sinensis, già diffuso in Calabria."}
+  danno:cotonosita_psilla_olivo:
+    {tipo: danno, insetti: ["inat:euphyllura_olivina"], nota: "Masse cerose bianche su germogli e mignole: forme giovanili della psilla dell'olivo."}
+  danno:afide_lanigero:
+    {tipo: danno, insetti: ["inat:eriosoma_lanigerum"], nota: "Colonie coperte di cera bianca e tumori su rami e radici del melo: afide lanigero."}
+  danno:afidi:
+    {tipo: danno, insetti: ["inat:aphis_gossypii", "inat:myzus_persicae", "inat:aphis_spiraecola", "inat:toxoptera_aurantii", "inat:hyalopterus_pruni", "inat:dysaphis_plantaginea"], nota: "Colonie sulla pagina inferiore e sui germogli, foglie accartocciate, melata e fumaggine: afidi. Molti trasmettono virus."}
+  danno:tripidi:
+    {tipo: danno, insetti: ["inat:frankliniella_occidentalis"], nota: "Argentature, puntini neri di escrementi e deformazioni su foglie, fiori e frutti: tripidi, vettori anche del TSWV."}
+  danno:carpocapsa_tortrici:
+    {tipo: danno, insetti: ["inat:cydia_pomonella", "inat:grapholita_molesta", "inat:anarsia_lineatella"], nota: "Fori con rosura nei frutti e gallerie verso il torsolo o il nocciolo: carpocapsa, cidia del pesco o anarsia."}
+  danno:cimici:
+    {tipo: danno, insetti: ["inat:nezara_viridula", "inat:halyomorpha_halys"], nota: "Punture con macchie chiare o suberose e deformazioni dei frutti: cimice verde o cimice asiatica."}
+  danno:piralide:
+    {tipo: danno, insetti: ["inat:ostrinia_nubilalis"], nota: "Fori e gallerie con rosura in fusti, pannocchie e bacche di peperone: piralide."}
+  danno:erinosi_vite:
+    {tipo: danno, insetti: [], nota: "Bollosità sulla pagina superiore e feltro biancastro poi rossiccio sotto: acaro eriofide Colomerus vitis. Di solito non serve trattare; lo zolfo usato contro l'oidio lo contiene."}

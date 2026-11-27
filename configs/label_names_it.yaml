@@ -148,3 +148,13 @@
 "bw:phytophthora_capsici": "Marciume del colletto e dei frutti (Phytophthora capsici)"
 "bw:peronospora_destructor": "Peronospora della cipolla (Peronospora destructor)"
 "bw:cryphonectria_parasitica": "Cancro della corteccia del castagno (Cryphonectria parasitica)"
+# danni da insetti e acari (scripts/import_danni.py)
+"danno:galle_cinipide_castagno": "Galle del cinipide del castagno (Dryocosmus kuriphilus)"
+"danno:cotonosita_psilla_olivo": "Cotonosità della psilla dell'olivo (Euphyllura olivina)"
+"danno:afide_lanigero": "Colonie lanose dell'afide lanigero del melo (Eriosoma lanigerum)"
+"danno:afidi": "Colonie di afidi e foglie accartocciate"
+"danno:tripidi": "Argentature e deformazioni da tripidi"
+"danno:carpocapsa_tortrici": "Fori e gallerie nei frutti da carpocapsa e tortrici"
+"danno:cimici": "Punture di cimici sui frutti (cimice verde, cimice asiatica)"
+"danno:piralide": "Gallerie della piralide del mais e del peperone (Ostrinia nubilalis)"
+"danno:erinosi_vite": "Erinosi della vite (acaro Colomerus vitis)"

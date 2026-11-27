@@ -13,7 +13,8 @@ def test_collegamenti_classi_esistenti():
     dis = {c["label"] for c in readers["disease"]["classes"]}
     pest = {c["label"] for c in readers["pest"]["classes"]}
     for d, e in links.items():
-        assert d in dis, d
+        # le classi "danno:..." entrano nel lettore con il modello che le addestra (scripts/import_danni.py)
+        assert d in dis or d.startswith("danno:"), d
         assert e["tipo"] in ("danno", "vettore", "melata"), d
         assert all(i in pest for i in e["insetti"]), d
         assert e.get("nota")

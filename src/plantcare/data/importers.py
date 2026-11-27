@@ -975,6 +975,23 @@ def import_aperti(seed: int = 42) -> list[ManifestRow]:
     return rows
 
 
+def import_danni(seed: int = 42) -> list[ManifestRow]:
+    """Danni da insetti e acari (scripts/import_danni.py): galle, cotonosità, colonie, mine, fori, erinosi.
+    Classi "danno:..." del lettore delle malattie. Split per foto: 10% test, 10% val."""
+    man = EXT / "danni" / "manifest.json"
+    if not man.exists():
+        return []
+    rows = []
+    for f in json.load(open(man, encoding="utf-8")):
+        if not (DATA / f["path"]).exists():
+            continue
+        h = zlib.crc32(f"{seed}:danni:{f['path']}".encode()) % 100
+        split = "test" if h < 10 else ("val" if h < 20 else "train")
+        rows.append(ManifestRow(path=f["path"], source="danni", split=split, plant=f.get("pianta", ""),
+                                disease=f["classe"], organ=""))
+    return rows
+
+
 def import_verificate() -> list[ManifestRow]:
     """Foto da bollettini, PDF, tesi e articoli verificate a vista una per una
     (data/external/verificate/*.json, una lista per fonte). Split per documento: un quarto dei documenti
