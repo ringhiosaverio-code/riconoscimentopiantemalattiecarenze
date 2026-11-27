@@ -56,7 +56,8 @@ MENDELEY_SETS = {
 ZIP_SETS = {
     "merlot_peronospora": ("downy_mildew_images.zip", "10.17632/yxf2yv5ymt", {".jpg": "grapevine_downy_mildew"}),  # le .png sono maschere
     "plasmopara_es_no": ("Plasmopara_Dataset.zip", "10.5281/zenodo.17368692",
-                         {"healthy": "healthy", "plasmopara": "grapevine_downy_mildew"}),
+                         {"plasmopara dataset/healthy/": "healthy",  # non le copie "Augmented Dataset"
+                          "plasmopara dataset/disease/": "grapevine_downy_mildew"}),
     "peperone_et": ("CPSFR_LEVETA_Leveillula_taurica.zip", "10.5281/zenodo.17087046", {"": "pepper_powdery_mildew"}),
     "peperone_et_x": ("CPSFR_XANTAV_Xanthomonas_campestris_pv._vesicatoria.zip", "10.5281/zenodo.17087046",
                       {"": "pepper_bacterial_spot"}),
