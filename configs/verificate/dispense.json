@@ -763,5 +763,536 @@
   "fonte": "dispense_utente",
   "documento": "46ca0935-patologia_micologia_.pdf",
   "pagina": 26
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09892939_003_014_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09892939-VIRUS_DELLE_ORTIVE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09892939_003_015_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09892939-VIRUS_DELLE_ORTIVE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_09892939_003_016_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "09892939-VIRUS_DELLE_ORTIVE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_0e3892b3_002_003_0.jpg",
+  "testa": "disease",
+  "classe": "Orange___Haunglongbing_(Citrus_greening)",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "0e3892b3-HUANGLONGBING_AGRUMI_Catara_2015_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_0e3892b3_002_004_0.jpg",
+  "testa": "disease",
+  "classe": "Orange___Haunglongbing_(Citrus_greening)",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "0e3892b3-HUANGLONGBING_AGRUMI_Catara_2015_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_0e3892b3_002_005_0.jpg",
+  "testa": "disease",
+  "classe": "Orange___Haunglongbing_(Citrus_greening)",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "0e3892b3-HUANGLONGBING_AGRUMI_Catara_2015_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_015_019_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 15
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_018_032_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 18
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_019_033_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 19
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_019_035_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 19
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_020_039_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 20
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_020_040_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 20
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_020_043_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 20
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_021_045_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 21
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_038_118_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 38
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_038_120_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 38
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_040_124_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bemisia_tabaci",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 40
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_040_126_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 40
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_041_127_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 41
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_042_129_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 42
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_042_130_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 42
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_042_132_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 42
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_044_139_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 44
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_045_140_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 45
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_045_142_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 45
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_047_148_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bemisia_tabaci",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 47
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_8f8404af_047_151_0.jpg",
+  "testa": "pest",
+  "classe": "inat:bemisia_tabaci",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "8f8404af-9_VIRUS_DA_QUARANTENA.pdf",
+  "pagina": 47
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_001_002_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_savastanoi",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_003_007_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_003_007_1.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_003_007_2.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_003_007_3.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_003_007_4.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_017_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_018_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_019_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_020_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_029_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_031_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_032_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_050_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_052_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_053_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_008_054_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_055_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_060_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_061_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_062_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_064_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_065_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_eb82bdaf_009_066_0.jpg",
+  "testa": "disease",
+  "classe": "inat:xylella_fastidiosa",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "eb82bdaf-MALATTIE_BATTERICHE.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_008_018_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_008_019_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_009_021_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_009_022_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_009_024_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_009_025_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_010_027_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 10
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_fd5b82e1_010_029_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_mosaic_virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "fd5b82e1-8_LOTTA_AI_VIRUS.pdf",
+  "pagina": 10
  }
 ]
