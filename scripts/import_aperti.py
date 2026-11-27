@@ -54,7 +54,7 @@ MENDELEY_SETS = {
 }
 # zip: sottostringa del percorso nel file -> classe
 ZIP_SETS = {
-    "merlot_peronospora": ("downy_mildew_images.zip", "10.17632/yxf2yv5ymt", {"": "grapevine_downy_mildew"}),
+    "merlot_peronospora": ("downy_mildew_images.zip", "10.17632/yxf2yv5ymt", {".jpg": "grapevine_downy_mildew"})  # le .png sono maschere,
     "plasmopara_es_no": ("Plasmopara_Dataset.zip", "10.5281/zenodo.17368692",
                          {"healthy": "healthy", "plasmopara": "grapevine_downy_mildew"}),
     "peperone_et": ("CPSFR_LEVETA_Leveillula_taurica.zip", "10.5281/zenodo.17087046", {"": "pepper_powdery_mildew"}),
@@ -117,7 +117,11 @@ def mendeley(name, ds, mapping, cap, rnd):
 
 
 def from_zip(name, fname, doi, mapping, cap, rnd):
-    z = zipfile.ZipFile(DL / fname)
+    try:
+        z = zipfile.ZipFile(DL / fname)
+    except zipfile.BadZipFile:  # scaricamento non finito
+        print(f"  {name}: {fname} incompleto", flush=True)
+        return []
     by_cls = {}
     for i in z.infolist():
         low = i.filename.lower()
