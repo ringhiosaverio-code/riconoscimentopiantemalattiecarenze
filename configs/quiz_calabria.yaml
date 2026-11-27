@@ -103,6 +103,75 @@ parassiti:  # insetti e acari
   - {taxon: "Curculio elephas", nome: "Balanino delle castagne", gruppo: castagno}
   - {taxon: "Cydia splendana", nome: "Tortrice tardiva delle castagne", gruppo: castagno}
   - {taxon: "Rhynchophorus ferrugineus", nome: "Punteruolo rosso delle palme", gruppo: palme}
+  # 27/11/2026: insetti, acari e molluschi del Disciplinare della Calabria ancora mancanti (orticole, fruttiferi,
+  # agrumi, olivo, vite) e organismi da quarantena che minacciano il Sud
+  - {taxon: "Liriomyza trifolii", nome: "Minatrice fogliare americana (Liriomyza trifolii)", gruppo: pomodoro}
+  - {taxon: "Liriomyza huidobrensis", nome: "Minatrice serpentina delle orticole (Liriomyza huidobrensis)", gruppo: pomodoro}
+  - {taxon: "Autographa gamma", nome: "Nottua gamma (Autographa gamma)", gruppo: pomodoro}
+  - {taxon: "Chrysodeixis chalcites", nome: "Nottua verde delle orticole (Chrysodeixis chalcites)", gruppo: pomodoro}
+  - {taxon: "Mamestra brassicae", nome: "Nottua del cavolo (Mamestra brassicae)", gruppo: cavolo}
+  - {taxon: "Pieris brassicae", nome: "Cavolaia (Pieris brassicae)", gruppo: cavolo}
+  - {taxon: "Plutella xylostella", nome: "Tignola delle crucifere (Plutella xylostella)", gruppo: cavolo}
+  - {taxon: "Delia radicum", nome: "Mosca del cavolo (Delia radicum)", gruppo: cavolo}
+  - {taxon: "Delia antiqua", nome: "Mosca della cipolla (Delia antiqua)", gruppo: cipolla}
+  - {taxon: "Phyllotreta", nome: "Altiche delle crucifere (Phyllotreta)", gruppo: cavolo}
+  - {taxon: "Athalia rosae", nome: "Tentredine delle crucifere (Athalia rosae)", gruppo: cavolo}
+  - {taxon: "Aculops lycopersici", nome: "Eriofide rugginoso del pomodoro (Aculops lycopersici)", gruppo: pomodoro}
+  - {taxon: "Aleyrodes proletella", nome: "Aleurodide del cavolo (Aleyrodes proletella)", gruppo: cavolo}
+  - {taxon: "Brevicoryne brassicae", nome: "Afide ceroso del cavolo (Brevicoryne brassicae)", gruppo: cavolo}
+  - {taxon: "Macrosiphum euphorbiae", nome: "Afide verde della patata (Macrosiphum euphorbiae)", gruppo: pomodoro}
+  - {taxon: "Aphis fabae", nome: "Afide nero della fava (Aphis fabae)", gruppo: fava}
+  - {taxon: "Acyrthosiphon pisum", nome: "Afide verde del pisello (Acyrthosiphon pisum)", gruppo: fava}
+  - {taxon: "Thrips tabaci", nome: "Tripide della cipolla e del tabacco (Thrips tabaci)", gruppo: cipolla}
+  - {taxon: "Agriotes", nome: "Elateridi o ferretti (Agriotes)", gruppo: pomodoro}
+  - {taxon: "Cornu aspersum", nome: "Chiocciola (Cornu aspersum)", gruppo: pomodoro}
+  - {taxon: "Deroceras reticulatum", nome: "Limaccia grigia (Deroceras reticulatum)", gruppo: pomodoro}
+  - {taxon: "Crioceris asparagi", nome: "Criocera dell'asparago (Crioceris asparagi)", gruppo: pomodoro}
+  - {taxon: "Udea ferrugalis", nome: "Piralide delle orticole (Udea ferrugalis)", gruppo: pomodoro}
+  - {taxon: "Agrotis segetum", nome: "Nottua delle messi (Agrotis segetum)", gruppo: pomodoro}
+  - {taxon: "Phthorimaea operculella", nome: "Tignola della patata (Phthorimaea operculella)", gruppo: pomodoro}
+  - {taxon: "Epitrix", nome: "Altiche della patata (Epitrix)", gruppo: pomodoro}
+  - {taxon: "Spodoptera frugiperda", nome: "Nottua americana del mais (Spodoptera frugiperda, da quarantena)", gruppo: pomodoro}
+  - {taxon: "Depressaria erinacella", nome: "Depressaria del carciofo (Depressaria erinacella)", gruppo: pomodoro}
+  - {taxon: "Panonychus ulmi", nome: "Ragnetto rosso dei fruttiferi (Panonychus ulmi)", gruppo: melo}
+  - {taxon: "Comstockaspis perniciosa", nome: "Cocciniglia di San José (Comstockaspis perniciosa)", gruppo: melo}
+  - {taxon: "Cossus cossus", nome: "Rodilegno rosso (Cossus cossus)", gruppo: melo}
+  - {taxon: "Leucoptera malifoliella", nome: "Cemiostoma (Leucoptera malifoliella)", gruppo: melo}
+  - {taxon: "Phyllonorycter blancardella", nome: "Litocollete del melo (Phyllonorycter blancardella)", gruppo: melo}
+  - {taxon: "Argyrotaenia ljungiana", nome: "Eulia (Argyrotaenia ljungiana)", gruppo: melo}
+  - {taxon: "Pandemis cerasana", nome: "Pandemis (Pandemis cerasana)", gruppo: melo}
+  - {taxon: "Archips podana", nome: "Ricamatrice dei fruttiferi (Archips podana)", gruppo: melo}
+  - {taxon: "Operophthera brumata", nome: "Falena invernale o cheimatobia (Operophthera brumata)", gruppo: melo}
+  - {taxon: "Grapholita funebrana", nome: "Cidia del susino (Grapholita funebrana)", gruppo: pesco}
+  - {taxon: "Hoplocampa flava", nome: "Tentredine del susino (Hoplocampa flava)", gruppo: pesco}
+  - {taxon: "Scolytus rugulosus", nome: "Piccolo scolitide dei fruttiferi (Scolytus rugulosus)", gruppo: pesco}
+  - {taxon: "Monosteira unicostata", nome: "Cimicetta del mandorlo (Monosteira unicostata)", gruppo: pesco}
+  - {taxon: "Eriophyes pyri", nome: "Eriofide vescicoloso del pero (Eriophyes pyri)", gruppo: melo}
+  - {taxon: "Asymmetrasca decedens", nome: "Cicalina verde degli agrumi e del pesco (Asymmetrasca decedens)", gruppo: agrumi}
+  - {taxon: "Forficula auricularia", nome: "Forficola (Forficula auricularia)", gruppo: pesco}
+  - {taxon: "Orgyia antiqua", nome: "Orgia (Orgyia antiqua)", gruppo: melo}
+  - {taxon: "Gonocerus acuteangulatus", nome: "Cimice del nocciolo (Gonocerus acuteangulatus)", gruppo: pesco}
+  - {taxon: "Palomena prasina", nome: "Cimice verde dei boschi (Palomena prasina)", gruppo: pesco}
+  - {taxon: "Brachycaudus helichrysi", nome: "Afide verde del susino (Brachycaudus helichrysi)", gruppo: pesco}
+  - {taxon: "Myzus cerasi", nome: "Afide nero del ciliegio (Myzus cerasi)", gruppo: pesco}
+  - {taxon: "Popillia japonica", nome: "Coleottero giapponese (Popillia japonica, da quarantena)", gruppo: vite}
+  - {taxon: "Aromia bungii", nome: "Cerambice dal collo rosso (Aromia bungii, da quarantena)", gruppo: pesco}
+  - {taxon: "Bactrocera dorsalis", nome: "Mosca orientale della frutta (Bactrocera dorsalis, da quarantena)", gruppo: pesco}
+  - {taxon: "Aspidiotus nerii", nome: "Cocciniglia bianca dell'oleandro (Aspidiotus nerii)", gruppo: agrumi}
+  - {taxon: "Parlatoria pergandii", nome: "Cocciniglia grigia degli agrumi (Parlatoria pergandii)", gruppo: agrumi}
+  - {taxon: "Chrysomphalus dictyospermi", nome: "Cocciniglia bianca rossa degli agrumi (Chrysomphalus dictyospermi)", gruppo: agrumi}
+  - {taxon: "Calocoris trivialis", nome: "Cimicetta verde degli agrumi (Calocoris trivialis)", gruppo: agrumi}
+  - {taxon: "Linepithema humile", nome: "Formica argentina (Linepithema humile)", gruppo: agrumi}
+  - {taxon: "Trioza erytreae", nome: "Psilla africana degli agrumi (Trioza erytreae, vettore del greening, da quarantena)", gruppo: agrumi}
+  - {taxon: "Diaphorina citri", nome: "Psilla asiatica degli agrumi (Diaphorina citri, vettore del greening, da quarantena)", gruppo: agrumi}
+  - {taxon: "Lichtensia viburni", nome: "Cocciniglia del viburno sull'olivo (Lichtensia viburni)", gruppo: olivo}
+  - {taxon: "Pollinia pollini", nome: "Cocciniglia dell'olivo (Pollinia pollini)", gruppo: olivo}
+  - {taxon: "Parlatoria oleae", nome: "Cocciniglia grigia dell'olivo (Parlatoria oleae)", gruppo: olivo}
+  - {taxon: "Hylesinus oleiperda", nome: "Ilesino dell'olivo (Hylesinus oleiperda)", gruppo: olivo}
+  - {taxon: "Calepitrimerus vitis", nome: "Acariosi della vite (Calepitrimerus vitis)", gruppo: vite}
+  - {taxon: "Colomerus vitis", nome: "Erinosi della vite (Colomerus vitis)", gruppo: vite}
+  - {taxon: "Drepanothrips reuteri", nome: "Tripide della vite (Drepanothrips reuteri)", gruppo: vite}
+  - {taxon: "Targionia vitis", nome: "Cocciniglia della vite (Targionia vitis)", gruppo: vite}
 
 malattie:
   - {taxon: "Venturia oleaginea", nome: "Occhio di pavone dell'olivo", gruppo: olivo, causa: fungo}
