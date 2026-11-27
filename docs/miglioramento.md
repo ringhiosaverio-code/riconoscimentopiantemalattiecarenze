@@ -234,6 +234,26 @@ regola 1 qui sotto resta quello di G. È pubblicato solo il nuovo lettore degli 
 specie nuove (77% di risposte giuste sulle loro foto di prova) e migliora sulle specie già note, salvo un
 calo minimo su Observation.org (4 foto su 505).
 
+## 12. Giro I: più peso a PlantDoc nel lettore delle malattie (27 novembre 2026)
+
+Il lettore delle malattie del giro H migliorava sulle foto del Sud ma perdeva su PlantDoc. Con le stesse
+foto ho riaddestrato 5 lettori con peso 6 a PlantDoc (prima 3) e 4 a PlantWild, e li ho uniti ai 5 lettori di
+G in un insieme di 10. Ho provato anche peso 10 e una scelta del lettore migliore basata in parte su PlantDoc:
+peggiorano altre prove, quindi le ho scartate.
+
+| Foto di prova (come nel browser) | G | **I (pubblicato)** |
+|---|---|---|
+| PlantDoc | 77,4% | **77,4%** |
+| PlantWild | 83,6% | **83,9%** |
+| Malattie calabresi (iNaturalist) | 88,9% | **89,3%** |
+| Bugwood | 75,4% | **83,4%** |
+| Vite in campo, virus della vite, DiaMOS | 98,0 / 94,8 / 85,2% | uguali |
+| Observation.org | 90,4% | 89,9% (1 foto su 188) |
+
+PlantDoc non peggiora e le altre prove di campo migliorano, quindi il modello si pubblica. Il costo è il
+modello un po' più grande: 85 MB invece di 76. Le foto inviate dall'app con "Invia contributi" e corrette
+da un agronomo hanno da ora peso 5 nell'addestramento, il più alto, perché sono le più vicine all'uso reale.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:
