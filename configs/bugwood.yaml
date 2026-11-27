@@ -7,6 +7,20 @@
 # microscopio o disegni (vedi SCARTA in scripts/import_bugwood.py).
 
 malattie:
+  # 27/11/2026: malattie di orticole e fruttiferi con poche foto aperte su iNaturalist
+  - {sci: "Colletotrichum lindemuthianum", classe: "bw:colletotrichum_lindemuthianum", coltura: ""}
+  - {sci: "Didymella bryoniae", classe: "bw:didymella_bryoniae", coltura: ""}
+  - {sci: "Stemphylium vesicarium", classe: "bw:stemphylium_vesicarium", coltura: ""}
+  - {sci: "Xanthomonas fragariae", classe: "bw:xanthomonas_fragariae", coltura: fragaria_ananassa}
+  - {sci: "Botrytis fabae", classe: "bw:botrytis_fabae", coltura: vicia_faba}
+  - {sci: "Puccinia asparagi", classe: "bw:puccinia_asparagi", coltura: ""}
+  - {sci: "Alternaria alternata", classe: "bw:alternaria_alternata", coltura: ""}
+  - {sci: "Phomopsis amygdali", classe: "bw:phomopsis_amygdali", coltura: ""}
+  - {sci: "Uromyces appendiculatus", classe: "inat:uromyces_appendiculatus", coltura: ""}
+  - {sci: "Cercospora beticola", classe: "inat:cercospora_beticola", coltura: ""}
+  - {sci: "Venturia pyrina", classe: "inat:venturia_pyrina", coltura: ""}
+  - {sci: "Albugo candida", classe: "inat:albugo_candida", coltura: ""}
+  - {sci: "Cucumber mosaic virus", classe: "inat:cucumovirus_cmv", coltura: ""}
   - {sci: "Spilocaea oleaginea", classe: "inat:venturia_oleaginea", coltura: olea_europaea}
   - {sci: "Pseudomonas savastanoi pv. savastanoi", classe: "inat:pseudomonas_savastanoi", coltura: ""}
   - {sci: "Erwinia amylovora", classe: "inat:erwinia_amylovora", coltura: ""}

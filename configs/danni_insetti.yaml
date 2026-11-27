@@ -88,3 +88,7 @@ collegamenti:
     {tipo: danno, insetti: ["inat:ostrinia_nubilalis"], nota: "Fori e gallerie con rosura in fusti, pannocchie e bacche di peperone: piralide."}
   danno:erinosi_vite:
     {tipo: danno, insetti: [], nota: "Bollosità sulla pagina superiore e feltro biancastro poi rossiccio sotto: acaro eriofide Colomerus vitis. Di solito non serve trattare; lo zolfo usato contro l'oidio lo contiene."}
+  inat:cucumovirus_cmv:
+    {tipo: vettore, insetti: ["inat:aphis_gossypii", "inat:myzus_persicae", "inat:aphis_fabae", "inat:macrosiphum_euphorbiae"], nota: "Il CMV è trasmesso da molte specie di afidi in modo non persistente: contano reti, pacciamature riflettenti, eliminazione delle infestanti e piante sane."}
+  inat:emaravirus_fici:
+    {tipo: vettore, insetti: [], nota: "Il mosaico del fico è trasmesso dall'acaro eriofide Aceria ficus e con le talee: usare materiale di propagazione sano."}

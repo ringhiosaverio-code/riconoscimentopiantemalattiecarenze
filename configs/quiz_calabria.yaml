@@ -202,6 +202,19 @@ malattie:
   - {taxon: "Puccinia allii", nome: "Ruggine dell'aglio e della cipolla", gruppo: cipolla, causa: fungo}
   - {taxon: "Elsinoe ampelina", nome: "Antracnosi della vite", gruppo: vite, causa: fungo}
   - {taxon: "Capnodium", nome: "Fumaggine", gruppo: agrumi, causa: fungo}
+  # 27/11/2026: malattie di orticole e fruttiferi del Disciplinare ancora mancanti
+  - {taxon: "Uromyces appendiculatus", nome: "Ruggine del fagiolo", gruppo: fava, causa: fungo}
+  - {taxon: "Erysiphe pisi", nome: "Oidio del pisello e delle leguminose", gruppo: fava, causa: fungo}
+  - {taxon: "Peronospora viciae", nome: "Peronospora della fava e del pisello", gruppo: fava, causa: fungo}
+  - {taxon: "Hyaloperonospora parasitica", nome: "Peronospora delle crucifere", gruppo: cavolo, causa: fungo}
+  - {taxon: "Erysiphe cruciferarum", nome: "Oidio delle crucifere", gruppo: cavolo, causa: fungo}
+  - {taxon: "Albugo candida", nome: "Ruggine bianca delle crucifere", gruppo: cavolo, causa: fungo}
+  - {taxon: "Cercospora beticola", nome: "Cercosporiosi della bietola", gruppo: pomodoro, causa: fungo}
+  - {taxon: "Ramularia grevilleana", nome: "Vaiolatura della fragola (Mycosphaerella fragariae)", gruppo: fragola, causa: fungo}
+  - {taxon: "Erysiphe corylacearum", nome: "Oidio del nocciolo", gruppo: nocciolo, causa: fungo}
+  - {taxon: "Cerotelium fici", nome: "Ruggine del fico", gruppo: fico, causa: fungo}
+  - {taxon: "Emaravirus fici", nome: "Mosaico del fico (virus FMV)", gruppo: fico, causa: virus}
+  - {taxon: "Cucumovirus cmv", nome: "Mosaico del cetriolo (virus CMV, molte orticole)", gruppo: pomodoro, causa: virus}
 
 # Foto iNaturalist per il lettore delle malattie (scripts/import_inat_train.py --malattie): classe nuova
 # ("inat:<specie>") o classe già esistente da rafforzare. coltura: solo se l'ospite è certo (la rogna è
@@ -239,3 +252,18 @@ addestramento_malattie:
   - {taxon: "Elsinoe ampelina", classe: "inat:elsinoe_ampelina", coltura: vitis_vinifera}
   - {taxon: "Alternaria solani", classe: tomato_early_blight, coltura: ""}
   - {taxon: "Cryphonectria parasitica", classe: "bw:cryphonectria_parasitica", coltura: ""}
+  # 27/11/2026: malattie di orticole e fruttiferi del Disciplinare ancora mancanti
+  - {taxon: "Uromyces appendiculatus", classe: "inat:uromyces_appendiculatus", coltura: ""}
+  - {taxon: "Erysiphe pisi", classe: "inat:erysiphe_pisi", coltura: ""}
+  - {taxon: "Peronospora viciae", classe: "inat:peronospora_viciae", coltura: ""}
+  - {taxon: "Hyaloperonospora parasitica", classe: "agml_vegleaf:Downy mildew", coltura: ""}
+  - {taxon: "Erysiphe cruciferarum", classe: "inat:erysiphe_cruciferarum", coltura: ""}
+  - {taxon: "Albugo candida", classe: "inat:albugo_candida", coltura: ""}
+  - {taxon: "Cercospora beticola", classe: "inat:cercospora_beticola", coltura: ""}
+  - {taxon: "Ramularia grevilleana", classe: "inat:ramularia_grevilleana", coltura: ""}
+  - {taxon: "Erysiphe corylacearum", classe: "inat:erysiphe_corylacearum", coltura: ""}
+  - {taxon: "Cerotelium fici", classe: "inat:cerotelium_fici", coltura: ""}
+  - {taxon: "Emaravirus fici", classe: "inat:emaravirus_fici", coltura: ""}
+  - {taxon: "Cucumovirus cmv", classe: "inat:cucumovirus_cmv", coltura: ""}
+  - {taxon: "Venturia pyrina", classe: "inat:venturia_pyrina", coltura: ""}
+  - {taxon: "Phyllactinia taurica", classe: pepper_powdery_mildew, coltura: ""}

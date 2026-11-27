@@ -166,3 +166,24 @@ labels:
   "danno:cimici": insetto
   "danno:piralide": insetto
   "danno:erinosi_vite": acaro
+  # malattie di orticole e fruttiferi aggiunte il 27/11/2026
+  "inat:uromyces_appendiculatus": fungo
+  "inat:erysiphe_pisi": fungo
+  "inat:peronospora_viciae": fungo
+  "inat:erysiphe_cruciferarum": fungo
+  "inat:albugo_candida": fungo
+  "inat:cercospora_beticola": fungo
+  "inat:ramularia_grevilleana": fungo
+  "inat:erysiphe_corylacearum": fungo
+  "inat:cerotelium_fici": fungo
+  "inat:emaravirus_fici": virus
+  "inat:cucumovirus_cmv": virus
+  "inat:venturia_pyrina": fungo
+  "bw:colletotrichum_lindemuthianum": fungo
+  "bw:didymella_bryoniae": fungo
+  "bw:stemphylium_vesicarium": fungo
+  "bw:xanthomonas_fragariae": batterio
+  "bw:botrytis_fabae": fungo
+  "bw:puccinia_asparagi": fungo
+  "bw:alternaria_alternata": fungo
+  "bw:phomopsis_amygdali": fungo
