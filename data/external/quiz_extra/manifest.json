@@ -979,5 +979,92 @@
     "path": "external/images/quiz_extra/plenodomus_tracheiphilus/bw0660093.jpg"
    }
   ]
+ },
+ "inat:colletotrichum": {
+  "label": "inat:colletotrichum",
+  "head": "disease",
+  "nome": "Lebbra dell'olivo (antracnosi, Colletotrichum)",
+  "gruppo": "olivo",
+  "taxon": "Colletotrichum",
+  "causa": "fungo",
+  "foto": [
+   {
+    "id": "moral2021_a",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_a.jpg"
+   },
+   {
+    "id": "moral2021_b",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_b.jpg"
+   },
+   {
+    "id": "moral2021_c",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_c.jpg"
+   },
+   {
+    "id": "moral2021_d",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_d.jpg"
+   },
+   {
+    "id": "moral2021_e",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_e.jpg"
+   },
+   {
+    "id": "moral2021_f",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_f.jpg"
+   },
+   {
+    "id": "moral2021_g",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_g.jpg"
+   },
+   {
+    "id": "moral2021_h",
+    "credit": "Moral J., Agustí-Brisach C., Raya M.C. et al., Journal of Fungi 7:741, 2021 (CC BY 4.0)",
+    "obs": "https://doi.org/10.3390/jof7090741",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/moral2021_h.jpg"
+   },
+   {
+    "id": "kolainis2020_a",
+    "credit": "Kolainis S., Koletti A., Lykogianni M. et al., PLoS ONE 15:e0233916, 2020 (CC BY 4.0)",
+    "obs": "https://doi.org/10.1371/journal.pone.0233916",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/kolainis2020_a.jpg"
+   },
+   {
+    "id": "kolainis2020_b",
+    "credit": "Kolainis S., Koletti A., Lykogianni M. et al., PLoS ONE 15:e0233916, 2020 (CC BY 4.0)",
+    "obs": "https://doi.org/10.1371/journal.pone.0233916",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/kolainis2020_b.jpg"
+   },
+   {
+    "id": "kolainis2020_c",
+    "credit": "Kolainis S., Koletti A., Lykogianni M. et al., PLoS ONE 15:e0233916, 2020 (CC BY 4.0)",
+    "obs": "https://doi.org/10.1371/journal.pone.0233916",
+    "fonte": "articolo",
+    "path": "external/images/quiz_extra/colletotrichum/kolainis2020_c.jpg"
+   }
+  ]
  }
 }

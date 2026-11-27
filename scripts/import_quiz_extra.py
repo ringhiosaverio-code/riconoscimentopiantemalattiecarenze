@@ -5,7 +5,8 @@ Fonti con uso consentito e autore citato sotto ogni foto:
   Creative Commons BY-NC 3.0 US salvo diversa indicazione sul sito;
 - EPPO Global Database: «All photos included on this page can only be used for educational purposes»;
 - figure di articoli ad accesso aperto con licenza CC BY 4.0, ritagliate a mano e verificate a vista
-  (tripide dell'olivo: Vono et al., Insects 2020, Università Mediterranea; psilla del pero: Koßmann et al. 2025).
+  (tripide dell'olivo: Vono et al., Insects 2020, Università Mediterranea; psilla del pero: Koßmann et al. 2025;
+  lebbra dell'olivo: Moral et al., J. Fungi 2021, e Kolainis et al., PLoS ONE 2020).
 Le foto vanno nella stessa classe del quiz delle foto di iNaturalist (etichetta "inat:<specie>"), così le
 domande su queste specie diventano più numerose e varie. Si tengono solo foto di campo (sintomi, adulti,
 forme giovanili, danni), non colture in piastra, microscopio o disegni.
@@ -51,6 +52,10 @@ TARGETS = [
      "taxon": "Alternaria solani", "causa": "fungo", "bugwood": ["Alternaria solani"], "eppo": "ALTESO", "eppo_tag": r"tag-symptoms"},
     {"label": "inat:phloeotribus_scarabaeoides", "head": "pest", "nome": "Fleotribo dell'olivo", "gruppo": "olivo",
      "taxon": "Phloeotribus scarabaeoides", "bugwood": ["Phloeotribus scarabaeoides"]},
+    # lebbra dell'olivo: nessuna foto aperta su iNaturalist, Bugwood o EPPO; solo figure di articoli CC BY
+    # (Moral et al., J. Fungi 2021; Kolainis et al., PLoS ONE 2020) ritagliate a mano
+    {"label": "inat:colletotrichum", "head": "disease", "nome": "Lebbra dell'olivo (antracnosi, Colletotrichum)",
+     "gruppo": "olivo", "taxon": "Colletotrichum", "causa": "fungo", "bugwood": []},
     # mal secco: le foto EPPO sono già nel quiz (scripts/import_eppo_quiz.py); qui si aggiungono quelle di Bugwood
     {"label": "eppo:DEUTTR", "head": "disease", "nome": "Mal secco degli agrumi (Plenodomus tracheiphilus)", "gruppo": "agrumi",
      "taxon": "Plenodomus tracheiphilus", "causa": "fungo", "bugwood": ["Plenodomus tracheiphilus"]},
