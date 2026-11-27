@@ -18,6 +18,7 @@
 "vitis_vinifera"
 ],
 "Orange___Haunglongbing_(Citrus_greening)": [
+"citrus_limon",
 "citrus_sinensis"
 ],
 "Strawberry___Leaf_scorch": [
@@ -96,15 +97,19 @@
 "capsicum_annuum"
 ],
 "agml_citrusfruit:black_spot": [
+"citrus_limon",
 "citrus_sinensis"
 ],
 "agml_citrusfruit:melanose": [
+"citrus_limon",
 "citrus_sinensis"
 ],
 "agml_citrusfruit:scab": [
+"citrus_limon",
 "citrus_sinensis"
 ],
 "agml_citrusuat:Citrus_leafminer": [
+"citrus_limon",
 "citrus_sinensis"
 ],
 "agml_citrusuat:Greasy_spot": [

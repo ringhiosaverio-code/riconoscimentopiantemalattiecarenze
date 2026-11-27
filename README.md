@@ -46,7 +46,7 @@ L'app usa la fotocamera del telefono o del computer (oppure una foto caricata) e
 | Lettore | Cosa riconosce | Dati di addestramento |
 |---|---|---|
 | Coltura | la specie coltivata | PlantVillage, PlantDoc, iNatAg (iNaturalist), dataset AgML per coltura |
-| Malattia | malattie e danni visibili | PlantVillage (laboratorio), PlantDoc, PlantWild e FieldVitis (campo), dataset AgML (vite, limone, pomodoro, melanzana, patata, cipolla, peperoncino, banano, cavolfiore, *Tuta absoluta*), iNaturalist (malattie della Calabria), DiaMOS (pero in campo), virus della vite, poche foto da letteratura ed EPPO per il mal secco degli agrumi |
+| Malattia | malattie e danni visibili | PlantVillage (laboratorio), PlantDoc, PlantWild e FieldVitis (campo), dataset AgML (vite, limone, pomodoro, melanzana, patata, cipolla, peperoncino, banano, cavolfiore, *Tuta absoluta*), iNaturalist (malattie della Calabria), DiaMOS (pero in campo), virus della vite, dataset aperti di campo CC BY (esca delle Marche, agrumi del Marocco, limone, peronospora, peperone), foto verificate a vista da bollettini, tesi e dispense del Sud (solo addestramento), poche foto da letteratura ed EPPO per il mal secco degli agrumi |
 | Insetti e acari | 102 specie di insetti dannosi | IP102 (uso accademico) |
 | Carenze | sintomi di carenza, carenza di calcio, eccesso di azoto | dataset AgML di limone, peperoncino e pomodoro (etichette degli autori; il nutriente è indicato solo per calcio e azoto) |
 
@@ -152,7 +152,7 @@ con il riepilogo, che una persona controlla prima di pubblicare.
 ## App nel browser (GitHub Pages)
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
-- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, circa 85 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di 5 lettori, vedi docs/miglioramento.md);
+- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, circa 100 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di più lettori, 18 per le malattie, vedi docs/miglioramento.md);
 - quiz con circa 8.250 foto da PlantDoc, Project-AgML (CC BY o MIT), iNaturalist (CC0, CC BY, CC BY-NC, con autore) e IP102 (solo uso accademico), Sud Italia e Calabria in primo piano;
 - consigli di difesa con i prodotti Gowan e botte con il catalogo: regole e calcolatore verificati dai test (`tests/test_consigli.py`, `tests/test_sprayer.py`, `tests/test_webapp.py`);
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;

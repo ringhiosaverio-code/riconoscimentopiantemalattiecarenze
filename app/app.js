@@ -1254,7 +1254,8 @@
       '<li>PlantVillage (Hughes e Salathé, 2015); PlantDoc (Singh et al., 2020, CC BY 4.0); PlantWild; dataset Project-AgML (UC Davis, CC BY 4.0 / MIT) e iNatAg</li>' +
       '<li>iNaturalist e Observation.org: foto con licenza aperta e autore citato, con le osservazioni della Calabria e dell\'Italia per prime</li>' +
       '<li>Bugwood (Università della Georgia), DiaMOS, FieldVitis, virus della vite</li>' +
-      '<li>Solo per l\'addestramento, non ripubblicate: foto di ARSAC, Servizio fitosanitario, riviste, tesi UNIRC ed Europe PMC (art. 70-ter, legge sul diritto d\'autore)</li>' +
+      '<li>Dataset aperti di campo (CC BY 4.0) da Mendeley Data e Zenodo: esca della vite (Università Politecnica delle Marche), agrumi di Fès, limone, peronospora della vite (Merlot; Spagna e Norvegia), peperone (progetto EU EWA-BELT)</li>' +
+      '<li>Solo per l\'addestramento, non ripubblicate: foto di ARSAC, Servizio fitosanitario, riviste, tesi UNIRC, Europe PMC e dispense universitarie, verificate a vista una per una (art. 70-ter, legge sul diritto d\'autore)</li>' +
       '<li>IP102 (Wu et al., 2019): solo uso accademico; EPPO Global Database: uso didattico</li></ul>' +
       '<p class="muted">Conoscenze agronomiche: Disciplinare di produzione integrata della Regione Calabria 2026 (aggiornamento di agosto), bollettini ARSAC, schede EPPO, EFSA, banca dati UE dei pesticidi, etichette e programmi Gowan Italia, Università Mediterranea di Reggio Calabria e altre università del Sud. Elenco completo e livello di verifica nel repository.</p>' +
       '<h2>Norme e aggiornamenti</h2><p class="muted" id="info-norme">' + esc(normeText()) + '</p>' +

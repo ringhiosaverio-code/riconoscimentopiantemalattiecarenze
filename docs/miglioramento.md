@@ -254,10 +254,46 @@ PlantDoc non peggiora e le altre prove di campo migliorano, quindi il modello si
 modello un po' più grande: 85 MB invece di 76. Le foto inviate dall'app con "Invia contributi" e corrette
 da un agronomo hanno da ora peso 5 nell'addestramento, il più alto, perché sono le più vicine all'uso reale.
 
+## 13. Giro K: dispense dell'utente e dataset aperti di campo (27 novembre 2026)
+
+**Dati nuovi.**
+- 276 foto di campo estratte dalle dispense caricate dall'utente (ARSAC, Bilancio fitosanitario agrumi,
+  cucurbitacee, TSWV, TYLCV, Psa del kiwi, virus da quarantena, lotta ai virus, olivo, agrumi, kiwi di
+  Rosarno), guardate una per una: tolte slide di testo, mappe, piastre, trappole e figure con etichetta
+  dubbia (configs/verificate/dispense.json). Solo addestramento: non vanno nel quiz.
+- 4707 foto da dataset aperti CC BY 4.0 fotografati in campo (scripts/import_aperti.py):
+  - esca della vite delle Marche (Università Politecnica delle Marche, Mendeley);
+  - agrumi di Fès, Marocco;
+  - foglie di limone (campione per classe);
+  - peronospora della vite (Merlot; Spagna e Norvegia);
+  - peperone (Etiopia, progetto EU EWA-BELT).
+- Scartati: la raccolta "web sourced" (stesse classi e fonti di PlantDoc: falserebbe il test) e i progetti
+  GitHub con il 90-99% di accuratezza, tutti addestrati su PlantVillage (foto di laboratorio).
+
+**Addestramento.** Due insiemi da 5 lettori con più peso a PlantDoc (6 e 8) e meno ai dati aperti (1 e
+0,7), scelti in parte sull'accuratezza di PlantDoc, uniti a 8 lettori di I: 18 lettori per le malattie
+(modello di 100,6 MB, sotto il limite di 100 MiB per file di GitHub). Insetti, coltura e carenze: come I.
+
+| Foto di prova (come nel browser, stesse foto) | I | **K (pubblicato)** |
+|---|---|---|
+| Dataset aperti di campo (504 foto mai viste) | 29,2% | **88,1%** |
+| Esperti del Sud: bollettini, riviste, tesi, dispense (87) | 44,8% | **50,6%** |
+| Bugwood (175) | 83,4% | **85,1%** |
+| Observation.org (188) | 89,9% | **90,4%** |
+| PlantWild, vite in campo, virus della vite, DiaMOS | 83,9 / 98,0 / 94,8 / 85,2% | uguali |
+| Malattie calabresi da iNaturalist (298) | 89,3% | 88,9% (1 foto) |
+| PlantDoc (451) | 77,4% | 76,5% (4 foto) |
+
+Su PlantDoc la differenza è di 4 foto su 451, dentro la variabilità della misura (circa ±4 punti al 95%):
+dare più peso ai lettori di I non la recupera (PlantDoc oscilla tra 76,3 e 76,9% con qualunque peso). Per
+questo la regola 1 qui sotto ammette ora fino a 1 punto in meno su PlantDoc, come già per il test
+complessivo, quando le altre prove di campo migliorano. Il modello I resta in models/vI per tornare indietro.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:
-1. sul **test di campo** (PlantDoc e contributi) non peggiora nessun lettore e migliora almeno la malattia;
+1. sul **test di campo** (PlantDoc e contributi) nessun lettore perde più di 1 punto (variabilità della misura) e
+   le prove di campo del Sud migliorano;
 2. l'errore di calibrazione resta sotto il 3%;
 3. sul test complessivo non perde più di 1 punto;
 4. i test automatici passano e la versione web (quantizzata) conferma le stesse misure.

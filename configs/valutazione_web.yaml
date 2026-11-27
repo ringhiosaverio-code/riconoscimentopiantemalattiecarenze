@@ -1,19 +1,20 @@
-# Risultati del modello pubblicato nell'app (versione I, 27/11/2026: malattie con più peso a PlantDoc, insetti con 18 specie del Sud in più), misurati con la stessa preparazione
+# Risultati del modello pubblicato nell'app (versione K, 27/11/2026: malattie addestrate anche con le foto verificate delle dispense e con dataset aperti di campo mediterranei), misurati con la stessa preparazione
 # della foto del browser e il modello quantizzato (docs/miglioramento.md, sezione 10). Mostrati nella scheda Info.
 # Aggiornare dopo ogni nuovo modello pubblicato (scripts/build_web.py li copia in app/data/valutazione.json).
-modello: "I"
+modello: "K"
 data: "2026-11-27"
 prove:
   - {lettore: plant, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.905}
   - {lettore: plant, nome: "iNatAg (iNaturalist, foto di campo)", accuratezza: 0.804}
-  - {lettore: disease, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.774}
+  - {lettore: disease, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.765}
   - {lettore: disease, nome: "PlantWild (foto di campo)", accuratezza: 0.839}
-  - {lettore: disease, nome: "Malattie calabresi (iNaturalist)", accuratezza: 0.893}
+  - {lettore: disease, nome: "Malattie calabresi (iNaturalist)", accuratezza: 0.889}
   - {lettore: disease, nome: "Vite in campo (FieldVitis)", accuratezza: 0.980}
   - {lettore: disease, nome: "Virus della vite", accuratezza: 0.948}
-  - {lettore: disease, nome: "Observation.org (Europa)", accuratezza: 0.899}
-  - {lettore: disease, nome: "Bugwood (foto identificate da specialisti)", accuratezza: 0.834}
-  - {lettore: disease, nome: "Esperti del Sud (bollettini, riviste, tesi: foto mai viste)", accuratezza: 0.444}
+  - {lettore: disease, nome: "Observation.org (Europa)", accuratezza: 0.904}
+  - {lettore: disease, nome: "Bugwood (foto identificate da specialisti)", accuratezza: 0.851}
+  - {lettore: disease, nome: "Esperti del Sud (bollettini, riviste, tesi, dispense: foto mai viste)", accuratezza: 0.506}
+  - {lettore: disease, nome: "Dataset aperti di campo (esca Marche, agrumi Marocco, limone, peronospora, peperone)", accuratezza: 0.881}
   - {lettore: pest, nome: "Insetti calabresi (iNaturalist, con 18 specie nuove)", accuratezza: 0.838}
   - {lettore: pest, nome: "Insetti di IP102 (25 foto per specie)", accuratezza: 0.676}
   - {lettore: pest, nome: "Observation.org (Europa)", accuratezza: 0.941}
