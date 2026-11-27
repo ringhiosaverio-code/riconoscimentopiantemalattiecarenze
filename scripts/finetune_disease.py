@@ -42,12 +42,15 @@ DINO = "vit_small_patch14_dinov2.lvd142m"
 EFF = "efficientnet_b0"
 SPLIT_AT = 10
 TOK_DIR = ROOT / "data" / "processed" / "ft_tokens"
-FIELD_W = {"plantdoc": 3.0, "plantwild": 3.0, "inat_calabria": 2.0, "fieldvitis": 3.0}
-# foto di campo: misurate a parte e usate per scegliere il modello (inat_calabria: insetti della Calabria)
-FIELD_SOURCES = ("plantdoc", "plantwild", "inat_calabria")
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from improve_readers import FIELD as FIELD_W  # stessi pesi delle foto di campo dei lettori  # noqa: E402
+# foto di campo: misurate a parte; le prime quattro scelgono epoca e fusione
+FIELD_SOURCES = ("plantdoc", "plantwild", "inat_calabria", "aperti", "verificate")
+SCORE_SOURCES = ("plantdoc", "plantwild", "inat_calabria", "aperti")
 PV_TRAIN, PV_VAL = 8000, 2000
 TRAIN_CAP = {"pest": 300}
-SOURCE_CAP = {"train": 330, "val": 100}  # foto di train per classe (IP102 è molto numeroso: tokens su disco)
+SOURCE_CAP = {"train": 330, "val": 70, "test": 60}  # foto di train per classe (IP102 è molto numeroso: tokens su disco)
 HEAD = "disease"
 MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
@@ -60,7 +63,7 @@ def select(rows, classes):
         if r.get(HEAD) in classes:
             idx[r["split"]].append(i)
     # tetto per (fonte, classe) fuori dalle foto di campo: i token su disco restano entro ~25 GB
-    for split, n in (("train", SOURCE_CAP["train"]), ("val", SOURCE_CAP["val"])):
+    for split, n in (("train", SOURCE_CAP["train"]), ("val", SOURCE_CAP["val"]), ("test", SOURCE_CAP["test"])):
         if HEAD != "disease":
             break
         by = defaultdict(list)
@@ -74,7 +77,7 @@ def select(rows, classes):
         for i in idx["train"]:
             by[rows[i][HEAD]].append(i)
         idx["train"] = sorted(j for v in by.values() for j in (rng.sample(v, cap) if len(v) > cap else v))
-    for split, n in (("train", PV_TRAIN), ("val", PV_VAL)):
+    for split, n in (("train", PV_TRAIN), ("val", PV_VAL), ("test", PV_VAL // 2)):
         pv = [i for i in idx[split] if rows[i]["source"] == "plantvillage"]
         keep = set(rng.sample(pv, min(n, len(pv))))
         idx[split] = [i for i in idx[split] if rows[i]["source"] != "plantvillage" or i in keep]
@@ -179,7 +182,7 @@ def metrics(p, y, src):
 
 def score_of(m):
     """Punteggio per scegliere epoca e fusione: media tra test complessivo e foto di campo."""
-    vals = [m["acc"]] + [m[fs] for fs in FIELD_SOURCES if fs in m]
+    vals = [m["acc"]] + [m[fs] for fs in SCORE_SOURCES if fs in m]
     return sum(vals) / len(vals)
 
 
@@ -190,10 +193,13 @@ def main():
     ap.add_argument("--epochs", type=int, default=5)
     ap.add_argument("--only-cache", action="store_true")
     ap.add_argument("--split-at", type=int, default=SPLIT_AT, help="primo blocco riaddestrato (12 blocchi in tutto)")
+    ap.add_argument("--train-cap", type=int, default=SOURCE_CAP["train"], help="foto di train per (fonte, classe)")
+    ap.add_argument("--una-vista", action="store_true", help="solo la foto intera, senza la vista aumentata (metà disco)")
     args = ap.parse_args()
     SPLIT_AT = args.split_at
     HEAD = args.head
     TOK_DIR = TOK_DIR / f"{HEAD}_blocco{SPLIT_AT}"
+    SOURCE_CAP["train"] = args.train_cap
     torch.set_num_threads(4)
 
     rows = read_manifest(ROOT / "data/processed/manifest_v2.csv")
@@ -218,7 +224,7 @@ def main():
     toks = {"train0": cache_tokens("train0", paths["train"], base_tf, vit),
             "val": cache_tokens("val", paths["val"], base_tf, vit),
             "test": cache_tokens("test", paths["test"], base_tf, vit),
-            "train1": cache_tokens("train1", paths["train"], aug_tf, vit, seed=1)}
+            "train1": None if args.una_vista else cache_tokens("train1", paths["train"], aug_tf, vit, seed=1)}
     if args.only_cache:
         return
 
@@ -244,7 +250,8 @@ def main():
     log = []
     # ripresa dopo un'interruzione (riavvio della macchina): stato salvato alla fine di ogni epoca
     ckpt = ROOT / f"models/{HEAD}_ft_ripresa.pt"
-    sig = {"epochs": args.epochs, "split_at": SPLIT_AT, "n_train": len(y["train"]), "classes": len(classes)}
+    sig = {"epochs": args.epochs, "split_at": SPLIT_AT, "n_train": len(y["train"]), "classes": len(classes),
+           "viste": 1 if args.una_vista else 2}
     start = 0
     if ckpt.exists():
         c = torch.load(ckpt, weights_only=False)
@@ -259,7 +266,7 @@ def main():
         t0 = time.time()
         for s in range(len(perm) // bs):
             b = perm[s * bs:(s + 1) * bs].sort().values.numpy()
-            view = toks["train1"] if random.random() < 0.5 else toks["train0"]
+            view = toks["train1"] if toks["train1"] is not None and random.random() < 0.5 else toks["train0"]
             t = drop_tokens(torch.from_numpy(np.asarray(view[b], dtype=np.float32)))
             loss = (F.cross_entropy(model(t, eff["train"][b]), y["train"][b], weight=cw,
                                     label_smoothing=0.1, reduction="none") * sw[b]).mean()
