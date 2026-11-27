@@ -22,6 +22,7 @@ h3{font-size:1rem;margin:4px 0}
 button{background:var(--accent);color:var(--accent-fg);border:0;border-radius:10px;padding:12px 16px;font-size:1rem;cursor:pointer;min-height:46px;font-weight:600}
 button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
 button:disabled{opacity:.5}
+label.btn{background:var(--accent);color:var(--accent-fg);border-radius:10px;padding:12px 16px;font-size:1rem;cursor:pointer;min-height:46px;font-weight:600;box-sizing:border-box}
 input,select,textarea{width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
 label{display:block}
 .warn{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:10px 12px;margin:8px 0}
@@ -102,10 +103,12 @@ details>summary{cursor:pointer;color:var(--accent)}
 <select id="organ"><option value="">Non indicato</option></select>
 <label for="crop" style="margin-top:8px"><strong>Che coltura è?</strong> <span class="muted">Se la indichi, le malattie si cercano solo tra quelle di questa coltura: meno errori e meno ipotesi.</span></label>
 <select id="crop"><option value="">Non indicata: la riconosce il lettore</option></select>
+<label class="btn" for="file-cam" style="display:block;text-align:center;margin-top:8px">📷 Scatta con la fotocamera del telefono</label>
+<input id="file-cam" type="file" accept="image/*" capture="environment" style="position:absolute;width:1px;height:1px;opacity:0">
 <video id="video" autoplay playsinline muted hidden></video>
 <canvas id="canvas" hidden></canvas>
 <div class="row">
-<button type="button" id="cam-start">Avvia fotocamera</button>
+<button type="button" class="secondary" id="cam-start">Anteprima nell’app</button>
 <button type="button" id="cam-shot" disabled>Scatta e analizza</button>
 </div>
 <div class="row"><button type="button" class="secondary" id="cam-stop" disabled>Spegni fotocamera</button></div>
@@ -215,8 +218,8 @@ details>summary{cursor:pointer;color:var(--accent)}
 </div>
 </main>
 <script src="app/ort/ort.wasm.min.js"></script>
-<script src="app/sprayer.js"></script>
-<script src="app/consigli.js"></script>
-<script src="app/app.js"></script>
+<script src="app/sprayer.js?v=20261127"></script>
+<script src="app/consigli.js?v=20261127"></script>
+<script src="app/app.js?v=20261127"></script>
 </body>
 </html>

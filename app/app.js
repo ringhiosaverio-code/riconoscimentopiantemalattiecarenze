@@ -555,12 +555,25 @@
   $('cam-start').addEventListener('click', function () {
     navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false })
       .then(function (st) {
-        stream = st; var v = $('video'); v.srcObject = st; v.hidden = false;
-        $('cam-shot').disabled = false; $('cam-stop').disabled = false;
-        $('cam-status').textContent = 'Inquadra la parte colpita al centro e premi "Scatta e analizza".';
+        stream = st; var v = $('video');
+        v.setAttribute('playsinline', ''); v.muted = true; v.srcObject = st; v.hidden = false;
+        $('cam-stop').disabled = false;
+        $('cam-status').textContent = 'Avvio della fotocamera…';
+        // su iPhone e su alcuni Android il video non parte da solo: senza immagini lo scatto resterebbe vuoto
+        var pronto = function () {
+          if (!v.videoWidth) return;
+          $('cam-shot').disabled = false;
+          $('cam-status').textContent = 'Inquadra la parte colpita al centro e premi "Scatta e analizza".';
+        };
+        v.onloadedmetadata = pronto; v.onplaying = pronto;
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+        setTimeout(function () {
+          if (stream === st && !v.videoWidth)
+            $('cam-status').textContent = 'La fotocamera non manda immagini: usa "Scatta con la fotocamera del telefono".';
+        }, 4000);
         ready.then(loadModel).catch(function () {});  // scarica il modello mentre si inquadra
       })
-      .catch(function () { $('cam-status').textContent = 'Fotocamera non disponibile o permesso negato: usa una foto dalla galleria.'; });
+      .catch(function () { $('cam-status').textContent = 'Fotocamera non disponibile o permesso negato: usa "Scatta con la fotocamera del telefono" o una foto dalla galleria.'; });
   });
   $('cam-stop').addEventListener('click', function () {
     if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
@@ -568,20 +581,31 @@
   });
   $('cam-shot').addEventListener('click', function () {
     var v = $('video'), w = v.videoWidth, h = v.videoHeight, c = document.createElement('canvas');
-    if (!w || !h) return;
+    if (!w || !h) {
+      $('cam-status').textContent = 'La fotocamera non è ancora pronta: attendi un secondo o usa "Scatta con la fotocamera del telefono".';
+      return;
+    }
     c.width = w; c.height = h; c.getContext('2d').drawImage(v, 0, 0, w, h);
+    // si spegne la fotocamera: la foto scattata resta sotto, con il quadrato da spostare
+    if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+    stream = null; v.hidden = true; $('cam-shot').disabled = true; $('cam-stop').disabled = true;
+    $('cam-status').textContent = 'Foto scattata: il risultato compare qui sotto.';
     showPicker(c, w, h, c.toDataURL('image/jpeg', 0.9));
     analyze(c, w, h);
   });
-  $('file').addEventListener('change', function () {
-    var f = $('file').files[0]; if (!f) return;
+  function fromFile(input) {
+    var f = input.files[0]; if (!f) return;
     var url = URL.createObjectURL(f), img = new Image();
     img.onload = function () {
       showPicker(img, img.naturalWidth, img.naturalHeight, url);
       analyze(img, img.naturalWidth, img.naturalHeight);
     };
+    img.onerror = function () { $('cam-status').textContent = 'Formato della foto non leggibile: prova a scattarla di nuovo o a sceglierla in JPEG.'; };
     img.src = url;
-  });
+    input.value = '';  // la stessa foto si può scegliere di nuovo
+  }
+  $('file').addEventListener('change', function () { fromFile($('file')); });
+  $('file-cam').addEventListener('change', function () { fromFile($('file-cam')); });
 
   // ------------------------------------------------------------------ zona da analizzare
   // Con più foglie, sfondo o terreno nella foto il lettore sbaglia di più: l'utente sposta il
