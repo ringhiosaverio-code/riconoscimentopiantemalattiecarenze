@@ -56,7 +56,26 @@ QUIZ_SOURCES_ACADEMIC = {"ip102": "IP102 (Wu et al. 2019, CVPR): solo per uso ac
 # gruppi di colture di IP102 (indici 1-based delle classi), come nell'articolo originale
 IP102_GROUPS = [(1, 14, "riso"), (15, 27, "mais"), (28, 36, "frumento"), (37, 44, "barbabietola"),
                 (45, 57, "erba medica"), (58, 73, "vite"), (74, 92, "agrumi"), (93, 102, "mango")]
-QUIZ_SIDE = 288
+QUIZ_SIDE = 720  # lato massimo: nitide anche sugli schermi dei telefoni (densità 2-3x)
+QUIZ_MIN_SIDE = 200  # foto più piccole: sgranate, si usano solo se la classe non ne ha abbastanza di più grandi
+
+
+def quiz_img(src: Path, qdir: Path, min_side: int = 0) -> str | None:
+    """Copia una foto nel quiz (WebP, lato massimo QUIZ_SIDE, mai ingrandita); None se illeggibile o troppo piccola."""
+    import zlib
+    name = f"q{zlib.crc32(str(src.relative_to(ROOT / 'data')).encode()):08x}.webp"
+    if (qdir / name).exists():
+        return name
+    try:
+        with Image.open(src) as im:
+            if min(im.size) < min_side:
+                return None
+            im = im.convert("RGB")
+            im.thumbnail((QUIZ_SIDE, QUIZ_SIDE), Image.LANCZOS)
+            im.save(qdir / name, "WEBP", quality=82, method=6)
+    except OSError:
+        return None
+    return name
 
 
 GENERIC_CLASSES = {"healthy", "disturbo_nutrizionale"}  # non legate a una coltura
@@ -116,21 +135,21 @@ def build_quiz(ck, heads, names: dict) -> None:
         queues = sorted(by_src.values(), key=lambda rs: -sum(r.get("organ") not in ("", "leaf") for r in rs))
         cal = (h, lab) in cal_classes or (h == "plant" and lab in cal_plants)
         limit = (QUIZ_PER_PEST if cal else QUIZ_PER_PEST_OTHER) if h == "pest" else QUIZ_PER_CLASS
-        picked = []
+        picked, small = [], []
         while len(picked) < limit and any(queues):
             for q in queues:
                 if q and len(picked) < limit:
-                    picked.append(q.pop())
-        for r in picked:
-            name = f"q{zlib.crc32(r['path'].encode()):08x}.jpg"
-            if not (qdir / name).exists():
-                try:
-                    with Image.open(ROOT / "data" / r["path"]) as im:
-                        im = im.convert("RGB")
-                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
-                        im.save(qdir / name, quality=75)
-                except OSError:
-                    continue
+                    r = q.pop()
+                    name = quiz_img(ROOT / "data" / r["path"], qdir, QUIZ_MIN_SIDE)
+                    if name:
+                        picked.append((r, name))
+                    else:
+                        small.append(r)
+        for r in small[:max(0, min(limit, 8) - len(picked))]:  # classi con sole foto piccole: almeno qualche domanda
+            name = quiz_img(ROOT / "data" / r["path"], qdir)
+            if name:
+                picked.append((r, name))
+        for r, name in picked:
             keep.add(name)
             item = {"img": name, "head": h, "label": lab, "name": names[h].get(lab, lab),
                     "plant": ip102_group(lab) if h == "pest" else r["plant"], "organ": r.get("organ", ""),
@@ -162,15 +181,9 @@ def build_quiz(ck, heads, names: dict) -> None:
             hits = [f"{r['coltura'].capitalize()}: {r['avversita']}" for r in disc["righe"] if keys and df._match(keys, set(r["chiavi"]))]
             summary["disciplinare"] = list(dict.fromkeys(hits))[:5]
         for ph in e["foto"]:
-            name = f"q{zlib.crc32(ph['path'].encode()):08x}.jpg"
-            if not (qdir / name).exists():
-                try:
-                    with Image.open(ROOT / "data" / ph["path"]) as im:
-                        im = im.convert("RGB")
-                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
-                        im.save(qdir / name, quality=75)
-                except OSError:
-                    continue
+            name = quiz_img(ROOT / "data" / ph["path"], qdir)
+            if not name:
+                continue
             keep.add(name)
             quiz.append({"img": name, "head": e["head"], "label": lab, "name": nm,
                          "plant": e.get("gruppo") or lab, "organ": "", "cal": 1, "sud": 1, "sum": summary,
@@ -182,15 +195,9 @@ def build_quiz(ck, heads, names: dict) -> None:
         hits = [f"{r['coltura'].capitalize()}: {r['avversita']}" for r in disc["righe"] if keys and df._match(keys, set(r["chiavi"]))]
         summary = {"name": e["sci"], "causa": e["causa"], "disciplinare": list(dict.fromkeys(hits))[:5]}
         for ph in e["foto"]:
-            name = f"q{zlib.crc32(ph['path'].encode()):08x}.jpg"
-            if not (qdir / name).exists():
-                try:
-                    with Image.open(ROOT / "data" / ph["path"]) as im:
-                        im = im.convert("RGB")
-                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
-                        im.save(qdir / name, quality=75)
-                except OSError:
-                    continue
+            name = quiz_img(ROOT / "data" / ph["path"], qdir)
+            if not name:
+                continue
             keep.add(name)
             quiz.append({"img": name, "head": "disease", "label": f"eppo:{code}", "name": e["nome"], "plant": e["gruppo"],
                          "organ": "", "cal": 1, "sud": 1, "sum": summary, "obs": ph["pagina"],
@@ -207,15 +214,9 @@ def build_quiz(ck, heads, names: dict) -> None:
         if e.get("causa"):
             summary["causa"] = e["causa"]
         for ph in e["foto"]:
-            name = f"q{zlib.crc32(ph['path'].encode()):08x}.jpg"
-            if not (qdir / name).exists():
-                try:
-                    with Image.open(ROOT / "data" / ph["path"]) as im:
-                        im = im.convert("RGB")
-                        im.thumbnail((QUIZ_SIDE, QUIZ_SIDE))
-                        im.save(qdir / name, quality=75)
-                except OSError:
-                    continue
+            name = quiz_img(ROOT / "data" / ph["path"], qdir)
+            if not name:
+                continue
             keep.add(name)
             item = {"img": name, "head": e["head"], "label": lab, "name": e["nome"], "plant": e["gruppo"], "organ": "",
                     "cal": 1, "sud": 1, "sum": summary, "credit": ph["credit"], "obs": ph["obs"]}
