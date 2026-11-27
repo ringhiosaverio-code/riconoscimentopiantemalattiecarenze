@@ -958,6 +958,23 @@ def import_vinevirus(seed: int = 42) -> list[ManifestRow]:
     return rows
 
 
+def import_aperti(seed: int = 42) -> list[ManifestRow]:
+    """Dataset aperti di foto di campo (CC BY 4.0, scripts/import_aperti.py): esca e peronospora della vite,
+    agrumi del Marocco, limone, peperone. Split per fonte e foto: 10% test, 10% val."""
+    man = EXT / "aperti" / "manifest.json"
+    if not man.exists():
+        return []
+    rows = []
+    for f in json.load(open(man, encoding="utf-8")):
+        if not (DATA / f["path"]).exists():
+            continue
+        h = zlib.crc32(f"{seed}:{f['path']}".encode()) % 100
+        split = "test" if h < 10 else ("val" if h < 20 else "train")
+        rows.append(ManifestRow(path=f["path"], source="aperti", split=split, plant=f.get("pianta", ""),
+                                disease=f["classe"], organ=""))
+    return rows
+
+
 def import_verificate() -> list[ManifestRow]:
     """Foto da bollettini, PDF, tesi e articoli verificate a vista una per una
     (data/external/verificate/*.json, una lista per fonte). Split per documento: un quarto dei documenti
