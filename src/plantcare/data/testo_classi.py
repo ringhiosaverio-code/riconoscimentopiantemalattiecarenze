@@ -38,10 +38,20 @@ SINONIMI = {
     "phaeoacremonium aleophilum": ("disease", "grapevine_esca"),
     "fomitiporia mediterranea": ("disease", "grapevine_esca"),
     "phaeomoniella chlamydospora": ("disease", "grapevine_esca"),
+    "podosphaera xanthii": ("disease", "zucchini_powdery_mildew"),
+    "podosphaera fusca": ("disease", "zucchini_powdery_mildew"),
+    "golovinomyces cichoracearum": ("disease", "zucchini_powdery_mildew"),
+    "erysiphe cichoracearum": ("disease", "zucchini_powdery_mildew"),
 }
 # nomi italiani: (espressione, classe, coltura richiesta nel testo o None)
 OLIVO, VITE, AGRUMI = r"oliv|olea", r"\bvit[ei]\b|vigne|vitis|grapevine", r"agrum|citrus|limon|lemon|aranc|orange|mandarin|clementin|bergamott|cedro"
 ITALIANI = [
+    # sigle dei virus e nomi delle dispense di patologia vegetale
+    (r"\bTYLCV\b|\bTYLCSV\b|accartocciamento giallo", ("disease", "tomato_yellow_leaf_curl"), r"pomodor|tomat"),
+    (r"\bTSWV\b|avvizzimento maculato", ("disease", "tomato_spotted_wilt"), None),
+    (r"\bPsa\b|cancro batterico dell'?\s*actinidia|cancro batterico del kiwi", ("disease", "inat:pseudomonas_syringae"), r"actinidi|kiwi"),
+    (r"piticchia batterica|picchiettatura batterica", ("disease", "inat:pseudomonas_syringae"), r"pomodor|tomat"),
+    (r"oidio|mal bianco", ("disease", "zucchini_powdery_mildew"), r"cucurbit|zucchin|zucca|cetriol|melone|cocomer|anguri"),
     (r"occhio di pavone|cicloconio", ("disease", "inat:venturia_oleaginea"), None),
     (r"rogna", ("disease", "inat:pseudomonas_savastanoi"), OLIVO),
     (r"mal secco", ("disease", "lit:plenodomus_tracheiphilus"), AGRUMI),

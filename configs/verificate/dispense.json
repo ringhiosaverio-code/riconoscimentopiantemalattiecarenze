@@ -1,0 +1,767 @@
+[
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_14_619_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aonidiella_aurantii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_14_805_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aonidiella_aurantii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 14
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_15_961_0.jpg",
+  "testa": "pest",
+  "classe": "inat:planococcus_citri",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 15
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_19_1293_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aphis_spiraecola",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 19
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_22_1459_0.jpg",
+  "testa": "pest",
+  "classe": "inat:tetranychus_urticae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_22_1461_0.jpg",
+  "testa": "pest",
+  "classe": "inat:tetranychus_urticae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_5f8105ad_23_1483_0.jpg",
+  "testa": "pest",
+  "classe": "inat:phyllocnistis_citrella",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "5f8105ad-Bilancio-Agrumi-Calabria-2020---2021.pdf",
+  "pagina": 23
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_29_030_0.jpg",
+  "testa": "pest",
+  "classe": "ip102_017",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 29
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_31_031_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aphis_gossypii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_31_032_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aphis_gossypii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_31_033_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aphis_gossypii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_31_034_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aphis_gossypii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_31_035_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aphis_gossypii",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 31
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_33_037_0.jpg",
+  "testa": "pest",
+  "classe": "inat:frankliniella_occidentalis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 33
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_34_039_0.jpg",
+  "testa": "pest",
+  "classe": "inat:frankliniella_occidentalis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_34_040_0.jpg",
+  "testa": "pest",
+  "classe": "inat:frankliniella_occidentalis",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 34
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_36_042_0.jpg",
+  "testa": "pest",
+  "classe": "inat:tetranychus_urticae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 36
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_36_043_0.jpg",
+  "testa": "pest",
+  "classe": "inat:tetranychus_urticae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 36
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_36_044_0.jpg",
+  "testa": "pest",
+  "classe": "inat:tetranychus_urticae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 36
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_44_055_0.jpg",
+  "testa": "disease",
+  "classe": "zucchini_powdery_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 44
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_44_056_0.jpg",
+  "testa": "disease",
+  "classe": "zucchini_powdery_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 44
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_44_057_0.jpg",
+  "testa": "disease",
+  "classe": "zucchini_powdery_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 44
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_44_058_0.jpg",
+  "testa": "disease",
+  "classe": "zucchini_powdery_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 44
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_45_059_0.jpg",
+  "testa": "disease",
+  "classe": "cucurbit_downy_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 45
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_45_060_0.jpg",
+  "testa": "disease",
+  "classe": "cucurbit_downy_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 45
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_45_061_0.jpg",
+  "testa": "disease",
+  "classe": "cucurbit_downy_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 45
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_45_062_0.jpg",
+  "testa": "disease",
+  "classe": "cucurbit_downy_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 45
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_55_079_0.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 55
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_55_080_0.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 55
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_60_087_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 60
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_60_088_0.jpg",
+  "testa": "disease",
+  "classe": "bw:verticillium_dahliae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 60
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_63_091_0.jpg",
+  "testa": "disease",
+  "classe": "cucumber_angular_leaf_spot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 63
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_63_092_0.jpg",
+  "testa": "disease",
+  "classe": "cucumber_angular_leaf_spot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 63
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_66_093_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 66
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_66_094_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 66
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_66_095_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 66
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_66_096_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 66
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_68_097_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_68_098_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_68_099_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_68_100_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_68_101_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_e652b391_68_102_0.jpg",
+  "testa": "disease",
+  "classe": "plantwild:zucchini yellow mosaic virus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "e652b391-3A_Le_avverista_delle_cucurbitacee.pdf",
+  "pagina": 68
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_40dff13f_1_001_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "40dff13f-Tomato_Spotted_Wilt_Virus_dispensa.pdf",
+  "pagina": 1
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_40dff13f_2_002_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "40dff13f-Tomato_Spotted_Wilt_Virus_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_40dff13f_2_003_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "40dff13f-Tomato_Spotted_Wilt_Virus_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_40dff13f_2_004_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_spotted_wilt",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "40dff13f-Tomato_Spotted_Wilt_Virus_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_1ef237ed_2_001_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "1ef237ed-Nuovi_casi_di_TYLCV_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_1ef237ed_2_002_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_yellow_leaf_curl",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "1ef237ed-Nuovi_casi_di_TYLCV_dispensa.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_8_011_1.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 8
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_9_013_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_9_014_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_11_018_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 11
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_12_020_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 12
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_12_021_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 12
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_12_022_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 12
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_13_023_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 13
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_15_029_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 15
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_16_030_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 16
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_17_032_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_17_033_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_21_041_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 21
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_22_042_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 22
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_23_043_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 23
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_24_045_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 24
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_c9110c5d_35_071_0.jpg",
+  "testa": "disease",
+  "classe": "inat:pseudomonas_syringae",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "c9110c5d-PSA_ACTINIDIA_varie.pdf",
+  "pagina": 35
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_002_001_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_002_002_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_002_003_0.jpg",
+  "testa": "disease",
+  "classe": "inat:venturia_oleaginea",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 2
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_003_004_0.jpg",
+  "testa": "disease",
+  "classe": "inat:wilsonomyces_carpophilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_003_005_0.jpg",
+  "testa": "disease",
+  "classe": "inat:wilsonomyces_carpophilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_003_006_0.jpg",
+  "testa": "disease",
+  "classe": "inat:wilsonomyces_carpophilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_003_007_0.jpg",
+  "testa": "disease",
+  "classe": "inat:wilsonomyces_carpophilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_003_008_0.jpg",
+  "testa": "disease",
+  "classe": "inat:wilsonomyces_carpophilus",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 3
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_009_013_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_009_014_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_009_015_0.jpg",
+  "testa": "disease",
+  "classe": "inat:colletotrichum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 9
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_011_017_0.jpg",
+  "testa": "disease",
+  "classe": "zucchini_powdery_mildew",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 11
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_017_027_0.jpg",
+  "testa": "disease",
+  "classe": "apple_brown_rot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_017_028_0.jpg",
+  "testa": "disease",
+  "classe": "apple_brown_rot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_017_032_0.jpg",
+  "testa": "disease",
+  "classe": "apple_brown_rot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_017_034_0.jpg",
+  "testa": "disease",
+  "classe": "apple_brown_rot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_017_035_0.jpg",
+  "testa": "disease",
+  "classe": "apple_brown_rot",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 17
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_026_053_0.jpg",
+  "testa": "disease",
+  "classe": "inat:sclerotinia_sclerotiorum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 26
+ },
+ {
+  "path": "external/images/dispense_pdf/disp_patologia_micologia_pdf_026_054_0.jpg",
+  "testa": "disease",
+  "classe": "inat:sclerotinia_sclerotiorum",
+  "coltura": "",
+  "fonte": "dispense_utente",
+  "documento": "46ca0935-patologia_micologia_.pdf",
+  "pagina": 26
+ }
+]
