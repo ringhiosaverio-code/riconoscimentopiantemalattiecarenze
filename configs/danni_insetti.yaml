@@ -8,7 +8,7 @@
 # schede EPPO, bollettini ARSAC, dispense di patologia ed entomologia (configs/sources.yaml).
 collegamenti:
   tomato_leafminer_damage:
-    {tipo: danno, insetti: ["inat:phthorimaea_absoluta"], nota: "Mine chiare nelle foglie e gallerie nei frutti: larve della tignola del pomodoro."}
+    {tipo: danno, insetti: ["inat:phthorimaea_absoluta", "inat:liriomyza_trifolii", "inat:liriomyza_huidobrensis"], nota: "Mine nelle foglie: larghe a chiazza, con gallerie anche nei frutti, sono della tignola del pomodoro; sottili e serpentine sono delle mosche minatrici Liriomyza."}
   agml_citrusuat:Citrus_leafminer:
     {tipo: danno, insetti: ["inat:phyllocnistis_citrella"], nota: "Mine serpentine argentee sulle foglie giovani: larva della minatrice serpentina."}
   agml_citrusuat:Red_scale:
@@ -63,7 +63,7 @@ collegamenti:
   agml_appleleaf9:Mosaic:
     {tipo: vettore, insetti: ["inat:myzus_persicae", "inat:aphis_gossypii"], nota: "Mosaici: in molte colture trasmessi da afidi; sul melo soprattutto con l'innesto."}
   "Orange___Haunglongbing_(Citrus_greening)":
-    {tipo: vettore, insetti: [], nota: "Il greening (HLB) è trasmesso dalle psille Diaphorina citri e Trioza erytreae, organismi da quarantena: segnalare subito al Servizio fitosanitario regionale."}
+    {tipo: vettore, insetti: ["inat:trioza_erytreae", "inat:diaphorina_citri"], nota: "Il greening (HLB) è trasmesso dalle psille Diaphorina citri e Trioza erytreae, organismi da quarantena: segnalare subito al Servizio fitosanitario regionale."}
   plantwild:grapevine leafroll disease:
     {tipo: vettore, insetti: ["inat:planococcus_ficus", "inat:planococcus_citri"], nota: "L'accartocciamento fogliare della vite si diffonde con il materiale di propagazione e con le cocciniglie (Planococcus)."}
   # fumaggine: conseguenza della melata
@@ -87,7 +87,7 @@ collegamenti:
   danno:piralide:
     {tipo: danno, insetti: ["inat:ostrinia_nubilalis"], nota: "Fori e gallerie con rosura in fusti, pannocchie e bacche di peperone: piralide."}
   danno:erinosi_vite:
-    {tipo: danno, insetti: [], nota: "Bollosità sulla pagina superiore e feltro biancastro poi rossiccio sotto: acaro eriofide Colomerus vitis. Di solito non serve trattare; lo zolfo usato contro l'oidio lo contiene."}
+    {tipo: danno, insetti: ["inat:colomerus_vitis"], nota: "Bollosità sulla pagina superiore e feltro biancastro poi rossiccio sotto: acaro eriofide Colomerus vitis. Di solito non serve trattare: lo zolfo usato contro l'oidio lo tiene già sotto controllo."}
   inat:cucumovirus_cmv:
     {tipo: vettore, insetti: ["inat:aphis_gossypii", "inat:myzus_persicae", "inat:aphis_fabae", "inat:macrosiphum_euphorbiae"], nota: "Il CMV è trasmesso da molte specie di afidi in modo non persistente: contano reti, pacciamature riflettenti, eliminazione delle infestanti e piante sane."}
   inat:emaravirus_fici:

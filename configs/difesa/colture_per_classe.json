@@ -281,6 +281,9 @@
 "broccoli_black_rot": [
 "brassica_oleracea_italica"
 ],
+"bw:xanthomonas_fragariae": [
+"fragaria_ananassa"
+],
 "cherry_leaf_spot": [
 "prunus_avium"
 ],
@@ -293,6 +296,18 @@
 "cucurbit_downy_mildew": [
 "cucumis_sativus",
 "cucurbita_pepo"
+],
+"danno:afide_lanigero": [
+"malus_domestica"
+],
+"danno:cotonosita_psilla_olivo": [
+"olea_europaea"
+],
+"danno:erinosi_vite": [
+"vitis_vinifera"
+],
+"danno:galle_cinipide_castagno": [
+"castanea_sativa"
 ],
 "diamos:pear_leaf_spot": [
 "pyrus_communis"

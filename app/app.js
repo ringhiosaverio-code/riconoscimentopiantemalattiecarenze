@@ -1300,7 +1300,7 @@
       '<div class="row"><button type="button" id="cb-export">Invia contributi</button><button type="button" class="secondary" id="cb-clear" hidden>Svuota elenco</button></div>' +
       '<p class="muted" id="cb-export-status"></p>' +
       '<h2>Come funziona</h2>' +
-      '<p><strong>Lettore.</strong> Una rete neurale riconosce coltura, malattia o danno, carenze e insetti. Usa due estrattori di immagini, DINOv2 ed EfficientNet-B0. Per ogni domanda decidono 5 lettori calibrati, e ne conta la media. ' +
+      '<p><strong>Lettore.</strong> Una rete neurale riconosce coltura, malattia o danno, carenze e insetti. Usa due estrattori di immagini, DINOv2 ed EfficientNet-B0. Per ogni domanda decidono più lettori calibrati (14 per malattie e danni, 10 per gli insetti, 5 per coltura e carenze), e ne conta la media. ' +
       'La rete gira nel browser con ONNX Runtime Web: la foto non lascia il dispositivo. È addestrata su raccolte scientifiche aperte e su foto di campo del Sud Italia, anche di ARSAC, riviste e tesi, verificate a vista una per una.</p>' +
       '<div id="info-val">' + valHtml() + '</div>' +
       '<p><strong>Consigli.</strong> Scegli coltura, avversità, fase e situazione: l\'app ordina i prodotti Gowan registrati come un tecnico della difesa integrata e prepara la ricetta. ' +

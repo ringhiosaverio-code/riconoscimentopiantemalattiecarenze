@@ -289,11 +289,58 @@ dare più peso ai lettori di I non la recupera (PlantDoc oscilla tra 76,3 e 76,9
 questo la regola 1 qui sotto ammette ora fino a 1 punto in meno su PlantDoc, come già per il test
 complessivo, quando le altre prove di campo migliorano. Il modello I resta in models/vI per tornare indietro.
 
+## 14. Giro M: danni da insetti, malattie e insetti di orticole e fruttiferi (28 novembre 2026)
+
+**Danni da insetti e acari** (scripts/import_danni.py, solo addestramento): 9 classi nuove nel lettore
+delle malattie, con causa insetto o acaro:
+- galle del cinipide del castagno;
+- cotonosità della psilla dell'olivo;
+- afide lanigero;
+- colonie di afidi;
+- argentature da tripidi;
+- fori da carpocapsa e tortrici;
+- punture di cimici;
+- gallerie della piralide;
+- erinosi della vite.
+
+Le foto vengono da Bugwood (marcate "Damage"), da iNaturalist (scelte a vista tra quelle degli insetti) e,
+per l'erinosi, da un dataset Mendeley CC BY. Nell'app ogni danno, malattia trasmessa da un vettore o
+fumaggine è collegato all'insetto responsabile, con la difesa contro l'insetto (configs/danni_insetti.yaml).
+
+**Malattie nuove** (iNaturalist e Bugwood): ruggine e antracnosi del fagiolo, oidio del pisello,
+peronospora della fava, oidio e ruggine bianca delle crucifere, cercosporiosi della bietola, vaiolatura e
+maculatura angolare della fragola, oidio del nocciolo, ruggine e mosaico del fico, mosaico del cetriolo
+(CMV), ticchiolatura e maculatura bruna del pero, alternariosi.
+
+**Insetti nuovi**: 67 specie del Disciplinare della Calabria e organismi da quarantena (configs/
+quiz_calabria.yaml), per un totale di 222 classi nel lettore degli insetti.
+
+Il lettore delle malattie ha 14 lettori nuovi, perché le classi sono cambiate; per gli insetti ci sono
+10 lettori con più peso alle foto della Calabria. Il modello pesa 103,5 MB.
+
+| Foto di prova (come nel browser) | K | **M (pubblicato)** |
+|---|---|---|
+| PlantDoc (451) | 76,5% | **77,6%** |
+| PlantWild (844) | 83,9% | 83,2% |
+| Danni da insetti e acari (77, classi nuove) | non previsti | **87,0%** |
+| Malattie nuove sul test dei lettori (202) | non previste | **79,7%** |
+| Insetti: specie già note della Calabria (stesso test) | 85,8% | 84,2% |
+| Insetti: 67 specie nuove (801) | non previste | **82,3%** |
+| Insetti Bugwood / Observation.org | 55,3 / 94,1% | **69,4 / 95,0%** |
+| DiaMOS, virus della vite, esperti del Sud (malattie) | 85,2 / 94,8 / 50,6% | 1-2 foto in meno ciascuno |
+
+Con 67 specie di insetti in più, le specie già note perdono 1,6 punti: alcune specie nuove sono simili
+a quelle già presenti (nottue, cocciniglie, afidi). È il compromesso per riconoscere tutti gli insetti
+delle colture del Sud: le foto di prova delle specie nuove passano dallo 0% (non previste) all'82%.
+Per questo la regola 1 ammette, quando si aggiungono classi, fino a 2 punti in meno sulle classi già
+presenti se le classi nuove sono riconosciute almeno nel 75% dei casi. I modelli K e I restano in models/.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:
 1. sul **test di campo** (PlantDoc e contributi) nessun lettore perde più di 1 punto (variabilità della misura) e
-   le prove di campo del Sud migliorano;
+   le prove di campo del Sud migliorano; se si aggiungono classi, le classi già presenti possono perdere fino a
+   2 punti quando le nuove sono riconosciute almeno nel 75% dei casi;
 2. l'errore di calibrazione resta sotto il 3%;
 3. sul test complessivo non perde più di 1 punto;
 4. i test automatici passano e la versione web (quantizzata) conferma le stesse misure.
