@@ -312,6 +312,7 @@ def main() -> None:
     # colture ospiti delle classi senza coltura nelle foto (iNaturalist, Bugwood, articoli): configs/ospiti_classi.yaml
     for raw, hosts in (load_yaml(ROOT / "configs" / "ospiti_classi.yaml").get("ospiti") or {}).items():
         crops_of[raw] |= set(hosts)
+    OSPITI_INSETTI = load_yaml(ROOT / "configs" / "ospiti_insetti.yaml").get("ospiti") or {}
     readers = {}
     for h in heads:
         classes = ck["readers"][h]["classes"]
@@ -336,6 +337,8 @@ def main() -> None:
                 item["crops"] = [] if raw in GENERIC_CLASSES else sorted(crops_of.get(raw, ()))
             elif h == "pest":
                 item["name"] = pest_name(raw, ip_en, ip_it)
+                if raw in OSPITI_INSETTI:  # piante ospiti degli insetti specializzati (configs/ospiti_insetti.yaml)
+                    item["ospiti"] = OSPITI_INSETTI[raw]
             else:
                 item["name"] = DEFICIENCY_NAMES.get(raw, raw)
             if (h, raw) in reg_of:

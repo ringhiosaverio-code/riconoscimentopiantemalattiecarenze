@@ -677,6 +677,32 @@
     return probs.map(function (p, i) { return [p, i]; }).sort(function (a, b) { return b[0] - a[0]; }).slice(0, k);
   }
 
+  // insetto legato a poche colture (configs/ospiti_insetti.yaml): se la coltura proposta o indicata non lo ospita,
+  // la coltura è probabilmente sbagliata (es. foglia di limone vista dal rovescio, controluce, scambiata per melo)
+  function coerenzaOspiti(ci, res, crop) {
+    if (!ci.ospiti || !ci.ospiti.length) return '';
+    var P = DATA.readers.plant.classes, tpl = top(res.plant, 1)[0], vista = crop || P[tpl[1]].label;
+    if (ci.ospiti.indexOf(vista) >= 0) return '';
+    var nomeDi = function (k) { var c = P.filter(function (x) { return x.label === k; })[0]; return c ? c.name : k.replace(/^altro:/, ''); };
+    var best = null;  // tra le piante ospiti, quella che il lettore della coltura ritiene più probabile
+    ci.ospiti.forEach(function (k) {
+      var i = P.findIndex(function (x) { return x.label === k; });
+      var pr = i >= 0 ? res.plant[i] : -1;
+      if (!best || pr > best[0]) best = [pr, k];
+    });
+    var nomi = ci.ospiti.map(nomeDi);
+    return '<p class="warn">Attenzione alla coltura: ' + esc(ci.name) + ' vive su ' + esc(nomi.join(', ')) + ', non su ' + esc(nomeDi(vista)) + '. ' +
+      (crop ? 'Controlla la coltura indicata o l\'insetto.' : 'La coltura è probabilmente ' + esc(nomeDi(best[1])) +
+      ' (il lettore della coltura sbaglia con foglie viste dal rovescio, controluce o coperte di insetti): indicala nel menu «Coltura» e ripeti l\'analisi.') + '</p>';
+  }
+  // specie che si confondono facilmente: come distinguerle a occhio (la difesa può essere simile)
+  var SIMILI = {
+    'inat:aleurothrixus_floccosus': 'Simile: <b>Dialeurodes citri</b> (aleurodide degli agrumi), con forme giovanili piatte, traslucide, verde-giallastre e senza cera; Aleurothrixus floccosus ha invece forme giovanili coperte da fiocchi di cera bianca cotonosa e molta melata.',
+    'inat:dialeurodes_citri': 'Simile: <b>Aleurothrixus floccosus</b> (aleurodide fioccoso), con forme giovanili coperte da fiocchi di cera bianca cotonosa; Dialeurodes citri ha forme giovanili piatte, traslucide e quasi senza cera.',
+    'inat:aleurocanthus_spiniferus': 'Simile ad altri aleurodidi degli agrumi, ma le forme giovanili sono nere, lucide, con spine e una frangia di cera bianca: è un organismo da quarantena, va segnalato al Servizio fitosanitario.'
+  };
+  function simili(ci) { return SIMILI[ci.label] ? '<p class="muted">' + SIMILI[ci.label] + '</p>' : ''; }
+
   function render(res, secs) {
     var organ = $('organ').value, h = '<section class="card"><h2>Risultato dei lettori</h2>';
     var answers = {}, crop = res.crop, dset = null;
@@ -718,7 +744,7 @@
       var ci = DATA.readers.pest.classes[tp[1]], td0 = top(res.disease, 1)[0];
       h += '<div class="reader"><h3>Insetto o acaro riconosciuto: ' + esc(ci.name) + ' (' + pct(tp[0]) + ')</h3>' +
         '<p class="warn">Se nella foto si vedono insetti, uova, forme giovanili o colonie (anche come puntini, cera bianca o melata lucida), la causa è questo parassita' +
-        (td0[0] < tp[0] ? ', non «' + esc(DATA.readers.disease.classes[td0[1]].name) + '» proposto dal lettore delle malattie' : '') + '. La difesa è qui sotto, nel lettore degli insetti.</p></div>';
+        (td0[0] < tp[0] ? ', non «' + esc(DATA.readers.disease.classes[td0[1]].name) + '» proposto dal lettore delle malattie' : '') + '. La difesa è qui sotto, nel lettore degli insetti.</p>' + coerenzaOspiti(ci, res, crop) + simili(ci) + '</div>';
     }
     h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open || insettoSicuro);
     if (res.pest) h += '<div class="reader"><p><button type="button" class="secondary" id="zone-pest">Cerca più insetti nella foto (analisi per zone)</button></p>' +
