@@ -23,6 +23,8 @@ ap.add_argument("--ensemble-dir", default=None, help="cartella con ensemble_<let
 ap.add_argument("--disease-ft", default=None,
                 help="models/disease_ft.pt (scripts/finetune_disease.py): ramo con gli ultimi blocchi riaddestrati")
 ap.add_argument("--pest-ft", default=None, help="models/pest_ft.pt: ramo riaddestrato per gli insetti")
+ap.add_argument("--bioclip", action="store_true",
+                help="aggiunge l'estrattore BioCLIP (ViT-B/16): i lettori con ingresso più largo ricevono anche le sue caratteristiche")
 args = ap.parse_args()
 
 net, ck = load_readers(Path(args.checkpoint))
@@ -42,7 +44,7 @@ for h in heads:
         raise SystemExit(f"{h}: classi dell'insieme diverse da quelle del checkpoint")
     members = nn.ModuleList()
     for st in e["models"]:
-        r = Reader(dim, len(e["classes"]), hidden=1024)
+        r = Reader(st["net.0.weight"].shape[0], len(e["classes"]), hidden=1024)
         r.load_state_dict(st)
         members.append(r.eval())
     ensembles[h], temps[h] = members, e["temperature"]
@@ -66,9 +68,19 @@ for h, f in (("disease", args.disease_ft), ("pest", args.pest_ft)):
     print(f"{h}: ramo riaddestrato dal blocco {ft['split_at']}, peso nella fusione {ft['fusion_weight']}")
 
 
+bioclip = None
+if args.bioclip:
+    import open_clip
+    bioclip = open_clip.create_model_and_transforms("hf-hub:imageomics/bioclip")[0].visual.eval()
+IMNET = (torch.tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1), torch.tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1))
+CLIPN = (torch.tensor([0.48145466, 0.4578275, 0.40821073]).view(1, 3, 1, 1),
+         torch.tensor([0.26862954, 0.26130258, 0.27577711]).view(1, 3, 1, 1))
+
+
 class Web(nn.Module):
     def __init__(self):
         super().__init__()
+        self.bioclip = bioclip
         self.backbones = net.backbones
         self.heads = net.heads
         self.ens_heads = ensembles
@@ -84,10 +96,18 @@ class Web(nn.Module):
             t = b(t)
         fe = eff(x)
         f = torch.cat([vit.norm(t)[:, 0], fe], dim=1)
+        fb = None
+        if self.bioclip is not None:
+            # stessa foto, normalizzata come vuole CLIP; caratteristiche unitarie x10 (come in addestramento)
+            xc = ((x * IMNET[1] + IMNET[0]) - CLIPN[0]) / CLIPN[1]
+            fb = self.bioclip(xc)
+            fb = fb / fb.norm(dim=1, keepdim=True) * 10
+            f_tutto = torch.cat([f, fb], dim=1)
         outs = []
         for h in heads:
             if h in self.ens_heads:
-                p = torch.stack([torch.softmax(m(f), dim=1) for m in self.ens_heads[h]]).mean(0)
+                p = torch.stack([torch.softmax(m(f_tutto if fb is not None and m.net[0].weight.shape[0] > f.shape[1] else f), dim=1)
+                                 for m in self.ens_heads[h]]).mean(0)
                 p = torch.softmax(p.clamp_min(1e-9).log() / temps[h], dim=1)
             else:
                 p = torch.softmax(self.heads[h](f), dim=1)

@@ -50,29 +50,39 @@ def sottoinsieme(rows):
     return sorted(keep)
 
 
+class _Imgs(torch.utils.data.Dataset):
+    def __init__(self, paths, pre):
+        self.paths, self.pre = paths, pre
+
+    def __len__(self):
+        return len(self.paths)
+
+    def __getitem__(self, i):
+        try:
+            return self.pre(Image.open(ROOT / "data" / self.paths[i]).convert("RGB"))
+        except Exception:
+            return torch.zeros(3, 224, 224)
+
+
 def bioclip_features(paths, cache):
     import open_clip
     cache.parent.mkdir(parents=True, exist_ok=True)
     done = dict(np.load(cache, allow_pickle=True)["d"].item()) if cache.exists() else {}
-    todo = [p for p in paths if p not in done]
+    todo = [p for p in dict.fromkeys(paths) if p not in done]
     if todo:
         model, _, pre = open_clip.create_model_and_transforms("hf-hub:imageomics/bioclip")
         model.eval()
         torch.set_num_threads(4)
-        for k in range(0, len(todo), 64):
-            batch = todo[k:k + 64]
-            ims = []
-            for p in batch:
-                try:
-                    ims.append(pre(Image.open(ROOT / "data" / p).convert("RGB")))
-                except Exception:
-                    ims.append(torch.zeros(3, 224, 224))
+        dl = torch.utils.data.DataLoader(_Imgs(todo, pre), batch_size=64, num_workers=2)
+        k = 0
+        for x in dl:
             with torch.no_grad():
-                f = model.encode_image(torch.stack(ims)).float().numpy()
-            done.update(zip(batch, f))
-            if (k // 64) % 20 == 0:
+                f = model.encode_image(x).float().numpy()
+            done.update(zip(todo[k:k + len(f)], f))
+            k += len(f)
+            if (k // 64) % 100 == 0:
                 np.savez(cache, d=np.array(done, dtype=object))
-                print(f"  bioclip {len(done)}/{len(paths)}", flush=True)
+                print(f"  bioclip {k}/{len(todo)} nuove", flush=True)
         np.savez(cache, d=np.array(done, dtype=object))
     return np.stack([done[p] for p in paths]).astype(np.float32)
 

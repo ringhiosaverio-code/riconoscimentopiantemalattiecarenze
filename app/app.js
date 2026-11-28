@@ -78,25 +78,38 @@
     ort.env.wasm.numThreads = 1;
     $('prog').hidden = false;
     $('model-status').textContent = 'Scaricamento del modello in corso…';
-    return fetch('app/model/plantcare.onnx').then(function (resp) {
-      if (!resp.ok) throw new Error('modello');
-      var total = Number(resp.headers.get('content-length')) || 45e6;
-      var reader = resp.body.getReader(), chunks = [], got = 0;
-      function pump() {
-        return reader.read().then(function (r) {
-          if (r.done) return;
-          chunks.push(r.value); got += r.value.length;
-          $('prog').firstElementChild.style.width = Math.min(100, got / total * 100).toFixed(0) + '%';
-          return pump();
-        });
-      }
-      return pump().then(function () {
+    // Il modello completo supera i 100 MB ammessi da GitHub per file: è diviso in parti
+    // (app/model/parti.json) che qui si scaricano in ordine e si rimettono insieme.
+    var chunks = [], got = 0, total = 45e6;
+    function scarica(url) {
+      return fetch(url).then(function (resp) {
+        if (!resp.ok) throw new Error('modello');
+        var reader = resp.body.getReader();
+        function pump() {
+          return reader.read().then(function (r) {
+            if (r.done) return;
+            chunks.push(r.value); got += r.value.length;
+            $('prog').firstElementChild.style.width = Math.min(100, got / total * 100).toFixed(0) + '%';
+            return pump();
+          });
+        }
+        return pump();
+      });
+    }
+    return fetch('app/model/parti.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+      .then(function (p) {
+        if (p && p.parti) {
+          total = p.byte;
+          return p.parti.reduce(function (pr, f) { return pr.then(function () { return scarica('app/model/' + f); }); }, Promise.resolve());
+        }
+        return scarica('app/model/plantcare.onnx');
+      }).then(function () {
         var buf = new Uint8Array(got), off = 0;
         chunks.forEach(function (c) { buf.set(c, off); off += c.length; });
+        chunks = [];
         $('model-status').textContent = 'Preparazione del modello…';
         return ort.InferenceSession.create(buf, { executionProviders: ['wasm'], graphOptimizationLevel: 'all' });
-      });
-    }).then(function (s) {
+      }).then(function (s) {
       session = s; $('prog').hidden = true; $('model-status').textContent = 'Modello pronto.'; return s;
     });
   }
