@@ -353,6 +353,53 @@
     });
   }
 
+  // Più parassiti nella stessa foto: la foto si divide in riquadri sovrapposti (circa il 60% del lato corto),
+  // ognuno passa dal lettore degli insetti; si riportano gli insetti sicuri (>= 60%) in almeno una zona.
+  function zoneDi(w, h) {
+    var s = Math.round(Math.min(w, h) * 0.6), out = [];
+    var nx = Math.max(1, Math.ceil((w - s) / (s * 0.7)) + 1), ny = Math.max(1, Math.ceil((h - s) / (s * 0.7)) + 1);
+    nx = Math.min(nx, 3); ny = Math.min(ny, 4);
+    for (var j = 0; j < ny; j++) for (var i = 0; i < nx; i++) {
+      var x = nx > 1 ? Math.round(i * (w - s) / (nx - 1)) : Math.round((w - s) / 2), y = ny > 1 ? Math.round(j * (h - s) / (ny - 1)) : Math.round((h - s) / 2);
+      var vert = ny === 1 ? '' : j === 0 ? 'in alto' : j === ny - 1 ? 'in basso' : 'al centro';
+      var oriz = nx === 1 ? '' : i === 0 ? 'a sinistra' : i === nx - 1 ? 'a destra' : 'al centro';
+      out.push({ x: x, y: y, s: s, nome: [vert, oriz].filter(Boolean).join(' ').replace('al centro al centro', 'al centro') || 'al centro' });
+    }
+    return out;
+  }
+  function zonePest(crop) {
+    if (!lastPhoto || !session) return;
+    var box = $('zone-out'); box.innerHTML = '<p class="muted">Analisi per zone in corso…</p>';
+    var img = new Image();
+    img.onload = function () {
+      var w = img.naturalWidth, h = img.naturalHeight, zone = zoneDi(w, h), R = DATA.readers.pest, trovati = {};
+      zone.reduce(function (pr, z) {
+        return pr.then(function () {
+          return session.run({ image: toTensor(img, w, h, z) }).then(function (outs) {
+            var o = outs.pest.data, k = o.length / 2, best = 0, bi = -1;
+            for (var i = 0; i < k; i++) { var p = (o[i] + o[k + i]) / 2; if (p > best) { best = p; bi = i; } }
+            if (best >= 0.6) {
+              var t = trovati[bi] || (trovati[bi] = { p: 0, zone: [] });
+              t.p = Math.max(t.p, best); t.zone.push(z.nome + ' ' + pct(best));
+            }
+          });
+        });
+      }, Promise.resolve()).then(function () {
+        var ids = Object.keys(trovati).sort(function (a, b) { return trovati[b].p - trovati[a].p; });
+        if (!ids.length) { box.innerHTML = '<p class="muted">Nessun insetto riconosciuto con sicurezza nelle zone della foto: fotografa più da vicino i parassiti (meglio una foto per tipo).</p>'; return; }
+        var hh = '<p><strong>' + (ids.length > 1 ? 'Parassiti trovati nella foto: ' + ids.length : 'Un solo parassita trovato nelle zone della foto') + '</strong></p>';
+        ids.forEach(function (i) {
+          var c = R.classes[+i];
+          hh += '<details><summary><strong>' + esc(c.name) + '</strong> — fino a ' + pct(trovati[i].p) + ' <span class="muted">(' + esc(trovati[i].zone.join('; ')) + ')</span></summary>' +
+            pestLinks(c.label) + difesaBlock('pest', c.label, crop || null, null) + '</details>';
+        });
+        hh += '<p class="muted">Su foto con parassiti molto simili tra loro o molto piccoli il risultato è meno sicuro: conferma con una foto ravvicinata per ciascuno.</p>';
+        box.innerHTML = hh;
+      }).catch(function (e) { box.innerHTML = '<p class="warn">Analisi per zone non riuscita: ' + esc(e.message || e) + '</p>'; });
+    };
+    img.src = lastPhoto;
+  }
+
   // Coltura indicata dall'utente: probabilità delle malattie ristrette a quelle viste su quella coltura
   // nell'addestramento (le classi senza coltura, come "pianta sana", restano), poi rinormalizzate.
   function cropMask(probs, crop) {
@@ -674,6 +721,8 @@
         (td0[0] < tp[0] ? ', non «' + esc(DATA.readers.disease.classes[td0[1]].name) + '» proposto dal lettore delle malattie' : '') + '. La difesa è qui sotto, nel lettore degli insetti.</p></div>';
     }
     h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open || insettoSicuro);
+    if (res.pest) h += '<div class="reader"><p><button type="button" class="secondary" id="zone-pest">Cerca più insetti nella foto (analisi per zone)</button></p>' +
+      '<p class="muted">Il lettore degli insetti dà una risposta per volta: con più parassiti nella stessa foto (es. aleurodidi e cocciniglie) l\'analisi per zone li cerca in ogni parte dell\'immagine.</p><div id="zone-out"></div></div>';
     // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
     var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
     h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
@@ -690,6 +739,7 @@
     h += '<p class="muted">Analisi in ' + secs.toFixed(1) + ' s sul dispositivo. Strumento di supporto alla decisione: per virus, viroidi, batteri e nematodi serve la conferma di laboratorio.</p></section>';
     $('out').innerHTML = h;
     $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if ($('zone-pest')) $('zone-pest').addEventListener('click', function () { zonePest(res.crop); });
     $('go-tank').addEventListener('click', function () { showTab('tank'); });
     if ($('go-tank2')) $('go-tank2').addEventListener('click', function (ev) { ev.preventDefault(); showTab('tank'); });
     wireConsLinks($('out'));
