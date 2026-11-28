@@ -173,6 +173,43 @@ parassiti:  # insetti e acari
   - {taxon: "Drepanothrips reuteri", nome: "Tripide della vite (Drepanothrips reuteri)", gruppo: vite}
   - {taxon: "Targionia vitis", nome: "Cocciniglia della vite (Targionia vitis)", gruppo: vite}
 
+  # insetti e acari UTILI (entomofagi: predatori e parassitoidi, 28/11/2026): servono perché il lettore non li
+  # scambi per parassiti (es. le larve cerose di Cryptolaemus sembrano cotonello). Nell'app: "utile, non trattare".
+  - {taxon: "Cryptolaemus montrouzieri", nome: "Criptolemo, coccinella predatrice del cotonello (larve cerose bianche)", gruppo: utili, utile: true}
+  - {taxon: "Rodolia cardinalis", nome: "Rodolia, coccinella predatrice dell'Icerya", gruppo: utili, utile: true}
+  - {taxon: "Coccinella septempunctata", nome: "Coccinella a sette punti (predatrice di afidi)", gruppo: utili, utile: true}
+  - {taxon: "Harmonia axyridis", nome: "Coccinella arlecchino (predatrice di afidi, adulti e larve)", gruppo: utili, utile: true}
+  - {taxon: "Adalia bipunctata", nome: "Coccinella a due punti (predatrice di afidi)", gruppo: utili, utile: true}
+  - {taxon: "Propylea quatuordecimpunctata", nome: "Coccinella a quattordici punti (predatrice di afidi)", gruppo: utili, utile: true}
+  - {taxon: "Hippodamia variegata", nome: "Coccinella variabile (predatrice di afidi)", gruppo: utili, utile: true}
+  - {taxon: "Chilocorus bipustulatus", nome: "Chilocoro, coccinella predatrice di cocciniglie", gruppo: utili, utile: true}
+  - {taxon: "Exochomus quadripustulatus", nome: "Esocomo, coccinella predatrice di cocciniglie e afidi", gruppo: utili, utile: true}
+  - {taxon: "Stethorus punctillum", nome: "Stetoro, piccola coccinella predatrice di acari", gruppo: utili, utile: true}
+  - {taxon: "Chrysoperla carnea", nome: "Crisopa (adulti verdi, larve predatrici di afidi e aleurodidi)", gruppo: utili, utile: true}
+  - {taxon: "Chrysopidae", nome: "Crisopidi (larve e uova su peduncolo)", gruppo: utili, utile: true}
+  - {taxon: "Episyrphus balteatus", nome: "Sirfide (larve predatrici di afidi)", gruppo: utili, utile: true}
+  - {taxon: "Sphaerophoria scripta", nome: "Sirfide Sphaerophoria (larve predatrici di afidi)", gruppo: utili, utile: true}
+  - {taxon: "Aphidoletes aphidimyza", nome: "Cecidomia afidofaga (larve arancioni tra gli afidi)", gruppo: utili, utile: true}
+  - {taxon: "Orius", nome: "Orius, antocoride predatore di tripidi", gruppo: utili, utile: true}
+  - {taxon: "Anthocoris nemorum", nome: "Antocoride predatore di psille e afidi", gruppo: utili, utile: true}
+  - {taxon: "Macrolophus pygmaeus", nome: "Macrolofo, miride predatore di aleurodidi e tuta", gruppo: utili, utile: true}
+  - {taxon: "Nesidiocoris tenuis", nome: "Nesidiocoris, miride predatore di aleurodidi e tuta", gruppo: utili, utile: true}
+  - {taxon: "Nabis", nome: "Nabide predatore", gruppo: utili, utile: true}
+  - {taxon: "Podisus maculiventris", nome: "Pentatomide predatore di larve", gruppo: utili, utile: true}
+  - {taxon: "Aphidius", nome: "Afidio, parassitoide degli afidi (mummie dorate)", gruppo: utili, utile: true}
+  - {taxon: "Lysiphlebus testaceipes", nome: "Lisiflebo, parassitoide degli afidi degli agrumi (mummie)", gruppo: utili, utile: true}
+  - {taxon: "Aphelinus mali", nome: "Afelino, parassitoide dell'afide lanigero (mummie nere)", gruppo: utili, utile: true}
+  - {taxon: "Encarsia formosa", nome: "Encarsia, parassitoide degli aleurodidi (pupari neri)", gruppo: utili, utile: true}
+  - {taxon: "Aphytis melinus", nome: "Afitide, parassitoide della cocciniglia rossa forte", gruppo: utili, utile: true}
+  - {taxon: "Anagyrus", nome: "Anagiro, parassitoide del cotonello", gruppo: utili, utile: true}
+  - {taxon: "Leptomastix dactylopii", nome: "Leptomastix, parassitoide del cotonello degli agrumi", gruppo: utili, utile: true}
+  - {taxon: "Psyttalia concolor", nome: "Psittalia, parassitoide della mosca delle olive", gruppo: utili, utile: true}
+  - {taxon: "Trichogramma", nome: "Tricogramma, parassitoide delle uova di lepidotteri", gruppo: utili, utile: true}
+  - {taxon: "Torymus sinensis", nome: "Torimo, parassitoide del cinipide del castagno", gruppo: utili, utile: true}
+  - {taxon: "Phytoseiulus persimilis", nome: "Fitoseiulo, acaro predatore del ragnetto rosso", gruppo: utili, utile: true}
+  - {taxon: "Phytoseiidae", nome: "Fitoseidi, acari predatori (Amblyseius, Neoseiulus, Typhlodromus)", gruppo: utili, utile: true}
+  - {taxon: "Feltiella acarisuga", nome: "Feltiella, cecidomia predatrice di acari", gruppo: utili, utile: true}
+
 malattie:
   - {taxon: "Venturia oleaginea", nome: "Occhio di pavone dell'olivo", gruppo: olivo, causa: fungo}
   - {taxon: "Pseudomonas savastanoi", nome: "Rogna (Pseudomonas savastanoi, su olivo e oleandro)", gruppo: olivo, causa: batterio}
