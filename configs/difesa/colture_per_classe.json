@@ -281,6 +281,50 @@
 "broccoli_black_rot": [
 "brassica_oleracea_italica"
 ],
+"bw:alternaria_alternata": [
+"actinidia_chinensis",
+"citrus_limon",
+"citrus_reticulata",
+"citrus_sinensis",
+"malus_domestica",
+"punica_granatum",
+"pyrus_communis",
+"solanum_lycopersicum"
+],
+"bw:colletotrichum_lindemuthianum": [
+"altro:leguminose"
+],
+"bw:cryphonectria_parasitica": [
+"altro:castagno"
+],
+"bw:peronospora_destructor": [
+"allium_cepa_tropea",
+"allium_sativum"
+],
+"bw:phytophthora_capsici": [
+"capsicum_annuum",
+"cucumis_sativus",
+"cucurbita_pepo",
+"solanum_lycopersicum",
+"solanum_melongena"
+],
+"bw:stemphylium_vesicarium": [
+"allium_cepa_tropea",
+"allium_sativum",
+"pyrus_communis"
+],
+"bw:verticillium_dahliae": [
+"capsicum_annuum",
+"cucurbita_pepo",
+"cynara_cardunculus",
+"fragaria_ananassa",
+"olea_europaea",
+"prunus_avium",
+"prunus_persica",
+"solanum_lycopersicum",
+"solanum_melongena",
+"solanum_tuberosum"
+],
 "bw:xanthomonas_fragariae": [
 "fragaria_ananassa"
 ],
@@ -300,6 +344,51 @@
 "danno:afide_lanigero": [
 "malus_domestica"
 ],
+"danno:afidi": [
+"actinidia_chinensis",
+"brassica_oleracea_italica",
+"capsicum_annuum",
+"citrus_limon",
+"citrus_reticulata",
+"citrus_sinensis",
+"corylus_avellana",
+"cucumis_sativus",
+"cucurbita_pepo",
+"cynara_cardunculus",
+"ficus_carica",
+"fragaria_ananassa",
+"lactuca_sativa",
+"malus_domestica",
+"olea_europaea",
+"prunus_avium",
+"prunus_domestica",
+"prunus_persica",
+"punica_granatum",
+"pyrus_communis",
+"solanum_lycopersicum",
+"solanum_melongena",
+"solanum_tuberosum"
+],
+"danno:carpocapsa_tortrici": [
+"malus_domestica",
+"prunus_avium",
+"prunus_domestica",
+"prunus_persica",
+"pyrus_communis"
+],
+"danno:cimici": [
+"actinidia_chinensis",
+"capsicum_annuum",
+"corylus_avellana",
+"malus_domestica",
+"olea_europaea",
+"prunus_avium",
+"prunus_domestica",
+"prunus_persica",
+"pyrus_communis",
+"solanum_lycopersicum",
+"solanum_melongena"
+],
 "danno:cotonosita_psilla_olivo": [
 "olea_europaea"
 ],
@@ -308,6 +397,28 @@
 ],
 "danno:galle_cinipide_castagno": [
 "castanea_sativa"
+],
+"danno:piralide": [
+"capsicum_annuum",
+"solanum_lycopersicum",
+"solanum_melongena",
+"zea_mays"
+],
+"danno:tripidi": [
+"allium_cepa_tropea",
+"allium_sativum",
+"capsicum_annuum",
+"citrus_limon",
+"citrus_reticulata",
+"citrus_sinensis",
+"cucumis_sativus",
+"cucurbita_pepo",
+"fragaria_ananassa",
+"lactuca_sativa",
+"prunus_persica",
+"solanum_lycopersicum",
+"solanum_melongena",
+"vitis_vinifera"
 ],
 "diamos:pear_leaf_spot": [
 "pyrus_communis"
@@ -361,11 +472,76 @@
 "vitis_vinifera",
 "zea_mays"
 ],
+"inat:albugo_candida": [
+"brassica_oleracea_italica"
+],
+"inat:botrytis_cinerea": [
+"actinidia_chinensis",
+"capsicum_annuum",
+"citrus_limon",
+"cucumis_sativus",
+"cucurbita_pepo",
+"cynara_cardunculus",
+"fragaria_ananassa",
+"lactuca_sativa",
+"malus_domestica",
+"prunus_avium",
+"prunus_domestica",
+"prunus_persica",
+"pyrus_communis",
+"solanum_lycopersicum",
+"solanum_melongena",
+"vitis_vinifera"
+],
+"inat:cercospora_beticola": [
+"altro:bietola"
+],
+"inat:cerotelium_fici": [
+"ficus_carica"
+],
 "inat:colletotrichum": [
 "olea_europaea"
 ],
+"inat:cucumovirus_cmv": [
+"capsicum_annuum",
+"cucumis_sativus",
+"cucurbita_pepo",
+"cynara_cardunculus",
+"lactuca_sativa",
+"solanum_lycopersicum",
+"solanum_melongena"
+],
 "inat:elsinoe_ampelina": [
 "vitis_vinifera"
+],
+"inat:emaravirus_fici": [
+"ficus_carica"
+],
+"inat:erwinia_amylovora": [
+"malus_domestica",
+"pyrus_communis"
+],
+"inat:erysiphe_corylacearum": [
+"corylus_avellana"
+],
+"inat:erysiphe_cruciferarum": [
+"brassica_oleracea_italica"
+],
+"inat:erysiphe_pisi": [
+"altro:leguminose"
+],
+"inat:gymnosporangium_sabinae": [
+"pyrus_communis"
+],
+"inat:peronospora_viciae": [
+"altro:leguminose"
+],
+"inat:podosphaera_pannosa": [
+"prunus_domestica",
+"prunus_persica"
+],
+"inat:polystigma_rubrum": [
+"prunus_domestica"
 ],
 "inat:pseudomonas_savastanoi": [
 "olea_europaea"
@@ -373,11 +549,55 @@
 "inat:pseudomonas_syringae": [
 "actinidia_chinensis"
 ],
+"inat:ramularia_grevilleana": [
+"fragaria_ananassa"
+],
+"inat:sclerotinia_sclerotiorum": [
+"actinidia_chinensis",
+"brassica_oleracea_italica",
+"capsicum_annuum",
+"cucumis_sativus",
+"cucurbita_pepo",
+"cynara_cardunculus",
+"lactuca_sativa",
+"solanum_lycopersicum",
+"solanum_melongena",
+"solanum_tuberosum"
+],
+"inat:uromyces_appendiculatus": [
+"altro:leguminose"
+],
+"inat:uromyces_viciae_fabae": [
+"altro:leguminose"
+],
 "inat:venturia_oleaginea": [
 "olea_europaea"
 ],
+"inat:venturia_pyrina": [
+"pyrus_communis"
+],
+"inat:wilsonomyces_carpophilus": [
+"prunus_avium",
+"prunus_domestica",
+"prunus_persica"
+],
+"inat:xylella_fastidiosa": [
+"citrus_limon",
+"citrus_reticulata",
+"citrus_sinensis",
+"olea_europaea",
+"prunus_avium",
+"prunus_domestica",
+"prunus_persica",
+"vitis_vinifera"
+],
 "lettuce_downy_mildew": [
 "lactuca_sativa"
+],
+"lit:plenodomus_tracheiphilus": [
+"citrus_limon",
+"citrus_reticulata",
+"citrus_sinensis"
 ],
 "maize_common_rust": [
 "zea_mays"
@@ -459,6 +679,26 @@
 "plantwild:strawberry anthracnose": [
 "fragaria_ananassa"
 ],
+"plantwild:wheat bacterial leaf streak (black chaff)": [
+"triticum_aestivum",
+"triticum_durum"
+],
+"plantwild:wheat head scab": [
+"triticum_aestivum",
+"triticum_durum"
+],
+"plantwild:wheat loose smut": [
+"triticum_aestivum",
+"triticum_durum"
+],
+"plantwild:wheat stem rust": [
+"triticum_aestivum",
+"triticum_durum"
+],
+"plantwild:wheat stripe rust": [
+"triticum_aestivum",
+"triticum_durum"
+],
 "plantwild:zucchini bacterial wilt": [
 "cucurbita_pepo"
 ],
@@ -487,6 +727,18 @@
 ],
 "tomato_yellow_leaf_curl": [
 "solanum_lycopersicum"
+],
+"wheat_leaf_rust": [
+"triticum_aestivum",
+"triticum_durum"
+],
+"wheat_powdery_mildew": [
+"triticum_aestivum",
+"triticum_durum"
+],
+"wheat_septoria": [
+"triticum_aestivum",
+"triticum_durum"
 ],
 "zucchini_powdery_mildew": [
 "cucumis_sativus",

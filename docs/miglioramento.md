@@ -335,6 +335,35 @@ delle colture del Sud: le foto di prova delle specie nuove passano dallo 0% (non
 Per questo la regola 1 ammette, quando si aggiungono classi, fino a 2 punti in meno sulle classi già
 presenti se le classi nuove sono riconosciute almeno nel 75% dei casi. I modelli K e I restano in models/.
 
+## 15. Giro N: BioCLIP per malattie e insetti, lettori distillati (28 novembre 2026)
+
+**BioCLIP** (ViT-B/16, licenza MIT, addestrato su milioni di foto di organismi dell'albero della vita) si
+affianca a DINOv2 ed EfficientNet per i lettori delle malattie e degli insetti: le caratteristiche passano
+da 1664 a 2176 (BioCLIP normalizzato ×10). Con 14 + 10 lettori il modello pesava 206 MB, troppo per il
+telefono: ogni lettore è stato quindi **distillato** in 2 "allievi" che imitano l'insieme (probabilità a
+temperatura 2, peso 0,7, stessi pesi delle foto di campo; scripts/distilla_lettori.py). Coltura e carenze
+restano sulle caratteristiche attuali, anch'esse distillate in 2 allievi. Il modello pesa **146 MB**
+(in 3 parti, resta in memoria dopo il primo scaricamento).
+
+| Foto di prova (come nel browser) | M | **N (pubblicato)** |
+|---|---|---|
+| Malattie: PlantDoc (451) | 77,6% | **79,4%** |
+| Malattie: PlantWild (844) | 83,2% | **84,4%** |
+| Malattie: Calabria iNaturalist (216) | 88,9% | **90,7%** |
+| Malattie: DiaMOS / virus della vite / Observation | 84,4 / 93,5 / 89,9% | **86,9 / 96,1 / 92,0%** |
+| Malattie: Bugwood (181) | **82,9%** | 77,9% |
+| Malattie: PlantVillage (laboratorio, 400) | **98,8%** | 94,3% |
+| Insetti: Calabria iNaturalist (484) | 85,7% | **88,6%** |
+| Insetti: Bugwood / Observation | 69,4 / 95,1% | **72,9 / 96,2%** |
+| Insetti: IP102 (25 per specie) | **67,5%** | 63,8% |
+| Coltura: PlantDoc / iNatAg | 90,5 / 80,4% | 90,0 / 78,6% |
+
+Sul test complessivo dei lettori: malattie 88,1 → 87,7%, insetti 74,6 → 74,8%; errore di calibrazione
+sotto il 3% per tutti (insetti 2,8%). Le foto di campo del Sud migliorano, PlantDoc non peggiora: il
+modello rispetta le regole. Peggiorano le foto di laboratorio (PlantVillage) e Bugwood malattie, che sono
+spesso primi piani su sfondo uniforme: BioCLIP dà più peso al contesto di campo. I modelli M e N completo
+restano in models/vM e models/vN.
+
 ## Regole per accettare un nuovo modello
 
 Un nuovo modello sostituisce quello pubblicato solo se:

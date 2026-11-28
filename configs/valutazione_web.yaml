@@ -1,23 +1,23 @@
-# Risultati del modello pubblicato nell'app (versione M, 28/11/2026: danni da insetti e acari, malattie e insetti di orticole e fruttiferi del Disciplinare della Calabria), misurati con la stessa preparazione
+# Risultati del modello pubblicato nell'app (versione N, 28/11/2026: BioCLIP affiancato all'estrattore per malattie e insetti, lettori distillati), misurati con la stessa preparazione
 # della foto del browser e il modello quantizzato (docs/miglioramento.md, sezione 10). Mostrati nella scheda Info.
 # Aggiornare dopo ogni nuovo modello pubblicato (scripts/build_web.py li copia in app/data/valutazione.json).
-modello: "M"
+modello: "N"
 data: "2026-11-28"
 prove:
-  - {lettore: plant, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.905}
-  - {lettore: plant, nome: "iNatAg (iNaturalist, foto di campo)", accuratezza: 0.804}
-  - {lettore: disease, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.776}
-  - {lettore: disease, nome: "PlantWild (foto di campo)", accuratezza: 0.832}
-  - {lettore: disease, nome: "Malattie calabresi (iNaturalist)", accuratezza: 0.889}
-  - {lettore: disease, nome: "Vite in campo (FieldVitis)", accuratezza: 0.980}
-  - {lettore: disease, nome: "Virus della vite", accuratezza: 0.935}
-  - {lettore: disease, nome: "Observation.org (Europa)", accuratezza: 0.899}
-  - {lettore: disease, nome: "Bugwood (foto identificate da specialisti)", accuratezza: 0.829}
-  - {lettore: disease, nome: "Esperti del Sud (bollettini, riviste, tesi, dispense: foto mai viste)", accuratezza: 0.483}
-  - {lettore: disease, nome: "Dataset aperti di campo (esca Marche, agrumi Marocco, limone, peronospora, peperone)", accuratezza: 0.889}
+  - {lettore: plant, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.900}
+  - {lettore: plant, nome: "iNatAg (iNaturalist, foto di campo)", accuratezza: 0.786}
+  - {lettore: disease, nome: "PlantDoc (foto di campo dal web)", accuratezza: 0.794}
+  - {lettore: disease, nome: "PlantWild (foto di campo)", accuratezza: 0.844}
+  - {lettore: disease, nome: "Malattie calabresi (iNaturalist)", accuratezza: 0.907}
+  - {lettore: disease, nome: "Vite in campo (FieldVitis)", accuratezza: 0.961}
+  - {lettore: disease, nome: "Virus della vite", accuratezza: 0.961}
+  - {lettore: disease, nome: "Observation.org (Europa)", accuratezza: 0.920}
+  - {lettore: disease, nome: "Bugwood (foto identificate da specialisti)", accuratezza: 0.779}
+  - {lettore: disease, nome: "Esperti del Sud (bollettini, riviste, tesi, dispense: foto mai viste)", accuratezza: 0.478}
+  - {lettore: disease, nome: "Dataset aperti di campo (esca Marche, agrumi Marocco, limone, peronospora, peperone)", accuratezza: 0.893}
   - {lettore: disease, nome: "Danni da insetti e acari (galle, mine, cotonosità, erinosi, colonie...)", accuratezza: 0.870}
-  - {lettore: pest, nome: "Insetti del Sud (iNaturalist, 131 specie con le 67 nuove)", accuratezza: 0.857}
-  - {lettore: pest, nome: "Insetti di IP102 (25 foto per specie)", accuratezza: 0.675}
-  - {lettore: pest, nome: "Observation.org (Europa)", accuratezza: 0.950}
-  - {lettore: pest, nome: "Bugwood (insetti identificati da specialisti)", accuratezza: 0.694}
-  - {lettore: pest, nome: "Esperti del Sud (foto mai viste)", accuratezza: 0.400}
+  - {lettore: pest, nome: "Insetti del Sud (iNaturalist, 131 specie con le 67 nuove)", accuratezza: 0.886}
+  - {lettore: pest, nome: "Insetti di IP102 (25 foto per specie)", accuratezza: 0.638}
+  - {lettore: pest, nome: "Observation.org (Europa)", accuratezza: 0.962}
+  - {lettore: pest, nome: "Bugwood (insetti identificati da specialisti)", accuratezza: 0.729}
+  - {lettore: pest, nome: "Esperti del Sud (foto mai viste)", accuratezza: 0.444}

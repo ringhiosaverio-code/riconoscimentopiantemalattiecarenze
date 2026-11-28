@@ -152,7 +152,7 @@ con il riepilogo, che una persona controlla prima di pubblicare.
 ## App nel browser (GitHub Pages)
 
 `index.html` e la cartella `app/` sono l'app statica pubblicata su GitHub Pages:
-- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, circa 104 MB, accuratezza uguale al modello pieno sulle foto di test; ogni lettore è la media calibrata di più lettori, 14 per le malattie e 10 per gli insetti, vedi docs/miglioramento.md);
+- lettori di coltura, malattia e carenze con ONNX Runtime Web (modello quantizzato a 8 bit per canale, circa 146 MB, accuratezza uguale al modello pieno sulle foto di test; malattie e insetti usano anche BioCLIP, e ogni lettore è la media calibrata di 2 lettori distillati da un insieme più grande, vedi docs/miglioramento.md);
 - quiz con circa 10.500 foto da PlantDoc, Project-AgML (CC BY o MIT), iNaturalist (CC0, CC BY, CC BY-NC, con autore) e IP102 (solo uso accademico), Sud Italia e Calabria in primo piano;
 - consigli di difesa con i prodotti Gowan e botte con il catalogo: regole e calcolatore verificati dai test (`tests/test_consigli.py`, `tests/test_sprayer.py`, `tests/test_webapp.py`);
 - il lettore degli insetti non è incluso, perché IP102 è concesso solo per uso accademico;
