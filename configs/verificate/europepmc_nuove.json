@@ -1,0 +1,776 @@
+[
+ {
+  "path": "external/images/europepmc_nuove/PMC10671571_insects_14_00848_g002_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "danno:cimici",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC10671571",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC10671571_insects_14_00848_g002_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "danno:cimici",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC10671571",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC10671571_insects_14_00848_g002_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "danno:cimici",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC10671571",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC10784483_41598_2024_51565_Fig5_HTML_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:pieris_brassicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC10784483",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC10926379_finsc_03_1175138_g001_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:popillia_japonica",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC10926379",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC10926379_finsc_03_1175138_g001_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:popillia_japonica",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC10926379",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC11855745_insects_16_00166_g001_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "tomato_leafminer_damage",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC11855745",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC11855745_insects_16_00166_g001_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "tomato_leafminer_damage",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC11855745",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12611019_ijms_26_10387_g004_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12611019",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12611019_ijms_26_10387_g004_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "inat:botrytis_cinerea",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12611019",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12611019_ijms_26_10387_g011_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "inat:uromyces_appendiculatus",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12611019",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12618463_41598_2025_23699_Fig1_HTML_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:plutella_xylostella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12618463",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12618463_41598_2025_23699_Fig1_HTML_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:plutella_xylostella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12618463",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12618463_41598_2025_23699_Fig1_HTML_jpg_3.jpg",
+  "testa": "pest",
+  "classe": "inat:plutella_xylostella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12618463",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653194_insects_16_01088_g001_jpg_2.jpg",
+  "testa": "pest",
+  "classe": "inat:myzus_persicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653194",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653194_insects_16_01088_g001_jpg_3.jpg",
+  "testa": "pest",
+  "classe": "inat:myzus_persicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653194",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653194_insects_16_01088_g003_jpg_3.jpg",
+  "testa": "pest",
+  "classe": "inat:myzus_persicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653194",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653194_insects_16_01088_g003_jpg_4.jpg",
+  "testa": "pest",
+  "classe": "inat:myzus_persicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653194",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653961_insects_16_01108_g003_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:drosophila_suzukii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653961_insects_16_01108_g003_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:drosophila_suzukii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653961_insects_16_01108_g003_jpg_2.jpg",
+  "testa": "pest",
+  "classe": "inat:drosophila_suzukii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12653961_insects_16_01108_g003_jpg_3.jpg",
+  "testa": "pest",
+  "classe": "inat:drosophila_suzukii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12653961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12841808_insects_17_00089_g001_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12841808",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12841808_insects_17_00089_g001_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12841808",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC12842720_jof_12_00079_g006_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "inat:erysiphe_corylacearum",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC12842720",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13021578_finsc_06_1763467_g001_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:prays_oleae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13021578",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13026226_insects_17_00303_g004_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:plutella_xylostella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13026226",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13026226_insects_17_00303_g004_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:plutella_xylostella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13026226",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13086748_359_2025_1788_Fig1_HTML_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:pieris_brassicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13086748",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13086748_359_2025_1788_Fig1_HTML_jpg_2.jpg",
+  "testa": "pest",
+  "classe": "inat:pieris_brassicae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13086748",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13169759_12870_2026_8667_Fig19_HTML_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "inat:wilsonomyces_carpophilus",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13169759",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13169759_12870_2026_8667_Fig22_HTML_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "inat:erwinia_amylovora",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13169759",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC13169759_12870_2026_8667_Fig28_HTML_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "apple_scab",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC13169759",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g001_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g001_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g001_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g001_jpg_5.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g008_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g008_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g008_jpg_2.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g008_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6213961_ijms_19_02914_g008_jpg_4.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6213961",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6412240_ijms_20_00902_g008_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6412240",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6412240_ijms_20_00902_g008_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6412240",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6412240_ijms_20_00902_g008_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6412240",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6412832_ijms_20_00855_g001_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:dryocosmus_kuriphilus",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6412832",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6412832_ijms_20_00855_g001_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:dryocosmus_kuriphilus",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6412832",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6412832_ijms_20_00855_g001_jpg_2.jpg",
+  "testa": "pest",
+  "classe": "inat:dryocosmus_kuriphilus",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6412832",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6523298_insects_10_00088_g001_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6523298",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC6523298_insects_10_00088_g001_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC6523298",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7074267_insects_11_00129_g007_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "danno:carpocapsa_tortrici",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7074267",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7965955_fpls_12_617405_g001_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "inat:albugo_candida",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7965955",
+  "licenza": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7965955_fpls_12_617405_g001_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "inat:albugo_candida",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7965955",
+  "licenza": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7965955_fpls_12_617405_g001_jpg_2.jpg",
+  "testa": "disease",
+  "classe": "inat:albugo_candida",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7965955",
+  "licenza": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7965955_fpls_12_617405_g001_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "inat:albugo_candida",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7965955",
+  "licenza": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7965955_fpls_12_617405_g001_jpg_4.jpg",
+  "testa": "disease",
+  "classe": "inat:albugo_candida",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7965955",
+  "licenza": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC7965955_fpls_12_617405_g001_jpg_5.jpg",
+  "testa": "disease",
+  "classe": "inat:albugo_candida",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC7965955",
+  "licenza": "http://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8303763_insects_12_00592_g001_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8303763",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8471441_molecules_26_05694_g005_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:liriomyza_huidobrensis",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8471441",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8471441_molecules_26_05694_g005_jpg_3.jpg",
+  "testa": "pest",
+  "classe": "inat:liriomyza_huidobrensis",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8471441",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8471441_molecules_26_05694_g005_jpg_4.jpg",
+  "testa": "pest",
+  "classe": "inat:liriomyza_huidobrensis",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8471441",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8471441_molecules_26_05694_g005_jpg_5.jpg",
+  "testa": "pest",
+  "classe": "inat:liriomyza_huidobrensis",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8471441",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8875448_insects_13_00217_g002_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8875448",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC8875448_insects_13_00217_g002_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:aromia_bungii",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC8875448",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9449730_fpls_13_951844_g002_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "bw:cryphonectria_parasitica",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9449730",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9449730_fpls_13_951844_g004_jpg_0.jpg",
+  "testa": "pest",
+  "classe": "inat:dryocosmus_kuriphilus",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9449730",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9480501_fpls_13_968811_g001_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9480501",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9480501_fpls_13_968811_g001_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9480501",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9480501_fpls_13_968811_g001_jpg_2.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9480501",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9480501_fpls_13_968811_g001_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "bw:didymella_bryoniae",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9480501",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9569905_ijms_23_12016_g001_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "inat:erysiphe_pisi",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9569905",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9569905_ijms_23_12016_g001_jpg_2.jpg",
+  "testa": "disease",
+  "classe": "inat:erysiphe_pisi",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9569905",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g004_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g004_jpg_4.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g004_jpg_5.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g004_jpg_6.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g004_jpg_7.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g006_jpg_0.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g006_jpg_1.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g006_jpg_2.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9697310_pathogens_11_01221_g006_jpg_3.jpg",
+  "testa": "disease",
+  "classe": "agml_appleleaf9:Alternaria leaf spot",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9697310",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9719551_41597_2022_1859_Fig1_HTML_jpg_1.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_operculella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9719551",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9719551_41597_2022_1859_Fig1_HTML_jpg_2.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_operculella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9719551",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9719551_41597_2022_1859_Fig1_HTML_jpg_3.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_operculella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9719551",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9719551_41597_2022_1859_Fig1_HTML_jpg_4.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_operculella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9719551",
+  "licenza": ""
+ },
+ {
+  "path": "external/images/europepmc_nuove/PMC9719551_41597_2022_1859_Fig1_HTML_jpg_5.jpg",
+  "testa": "pest",
+  "classe": "inat:phthorimaea_operculella",
+  "coltura": "",
+  "fonte": "europepmc",
+  "documento": "PMC9719551",
+  "licenza": ""
+ }
+]
