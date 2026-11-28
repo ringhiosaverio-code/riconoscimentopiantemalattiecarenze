@@ -23,6 +23,7 @@ from plantcare import readers as rd  # noqa: E402
 from plantcare.metrics import macro_f1  # noqa: E402
 
 OUT = ROOT / "models" / "vN_distillato"
+TESTE = []
 
 
 def carica(p, dim):
@@ -77,7 +78,10 @@ def per_fonte(pt, hd):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--allievi", type=int, default=2)
+    ap.add_argument("--teste", default="", help="es. plant,deficiency (vuoto = tutte)")
     args = ap.parse_args()
+    global TESTE
+    TESTE = [t for t in args.teste.split(",") if t]
     rows, feats = ir.load()
     idx = eb.selezione(rows)
     sub = [rows[i] for i in idx]
@@ -89,8 +93,13 @@ def main():
     res = {}
     for head, rws, X, src_ens in (("disease", sub, X_n, "models/vN/ensemble_disease.pt"), ("pest", sub, X_n, "models/vN/ensemble_pest.pt"),
                                    ("plant", rows, feats, "models/vM/ensemble_plant.pt"), ("deficiency", rows, feats, "models/vM/ensemble_deficiency.pt")):
-        hd = rd.prepare_head(rws, X, head)
+        if TESTE and head not in TESTE:
+            continue
         ck, ens = carica(ROOT / src_ens, X.shape[1])
+        if head in ("plant", "deficiency"):  # solo le classi del lettore pubblicato (dati nuovi con colture in più)
+            noti = set(ck["classes"])
+            rws = [dict(r, **{head: r[head] if r.get(head) in noti else ""}) for r in rws]
+        hd = rd.prepare_head(rws, X, head)
         assert list(ck["classes"]) == list(hd.classes), head
         with torch.no_grad():
             tp = F.softmax(ir.probs(ens, hd.X["train"]).clamp_min(1e-9).log() / 2.0, 1)
@@ -104,7 +113,9 @@ def main():
             print(f"   {k:16s} insieme={a[k]}  allievi={b.get(k)}", flush=True)
         res[head] = {"insieme": a, "allievi": b}
         torch.save({"models": [m.state_dict() for m in studs], "temperature": t, "classes": hd.classes}, OUT / f"ensemble_{head}.pt")
-    json.dump(res, open(OUT / "confronto.json", "w"), indent=1)
+    old = json.load(open(OUT / "confronto.json")) if (OUT / "confronto.json").exists() else {}
+    old.update(res)
+    json.dump(old, open(OUT / "confronto.json", "w"), indent=1)
 
 
 if __name__ == "__main__":
