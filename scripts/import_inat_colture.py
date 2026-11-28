@@ -28,7 +28,7 @@ IMG = ROOT / "data" / "external" / "images" / "inat_colture"
 COLTURE = {
     "actinidia_chinensis": "Actinidia chinensis", "allium_cepa_tropea": "Allium cepa", "allium_sativum": "Allium sativum",
     "annona_cherimola": "Annona cherimola", "brassica_oleracea_italica": "Brassica oleracea", "capsicum_annuum": "Capsicum annuum",
-    "citrus_limon": "Citrus limon", "citrus_reticulata": "Citrus reticulata", "citrus_sinensis": "Citrus sinensis",
+    "citrus_limon": "Citrus limon", "citrus_reticulata": "Citrus reticulata", "citrus_sinensis": 331122,
     "corylus_avellana": "Corylus avellana", "cucumis_sativus": "Cucumis sativus", "cucurbita_pepo": "Cucurbita pepo",
     "cynara_cardunculus": "Cynara cardunculus", "ficus_carica": "Ficus carica", "fragaria_ananassa": "Fragaria ananassa",
     "lactuca_sativa": "Lactuca sativa", "malus_domestica": "Malus domestica", "olea_europaea": "Olea europaea",
@@ -120,7 +120,9 @@ def main():
         if man.get(cls, {}).get("completo"):
             continue
         try:
-            info = taxon_info(taxon)
+            # numero = id del taxon di iNaturalist (es. 331122, Citrus × aurantium: su iNaturalist l'arancio dolce
+            # è riunito all'arancio amaro, perché il nome Citrus sinensis porta a un ibrido e verrebbe scartato)
+            info = {"id": taxon, "name": "Citrus × aurantium"} if isinstance(taxon, int) else taxon_info(taxon)
             if not info:
                 print("non trovato:", taxon, flush=True)
                 continue
