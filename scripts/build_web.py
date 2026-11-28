@@ -429,22 +429,21 @@ def main() -> None:
     build_quiz(ck, quiz_heads, class_names(ck, kb, tax, label_map, quiz_heads))
 
     # --- modello e motore ---
-    # GitHub non accetta file oltre i 100 MB: il modello più grande si divide in parti da 90 MB
-    # (app/model/parti.json), che l'app scarica in ordine e rimette insieme.
+    # Il modello si divide in parti (app/model/parti.json): GitHub non accetta file oltre i 100 MB e l'app le
+    # scarica in parallelo e le conserva nella memoria permanente del telefono, legate alla versione.
     mdir = APP / "model"
     for old in list(mdir.glob("plantcare.onnx.*")) + [mdir / "parti.json", mdir / "plantcare.onnx"]:
         old.unlink(missing_ok=True)
     data = Path(args.model).read_bytes()
-    PARTE = 90_000_000
-    if len(data) > PARTE:
-        parti = []
-        for k in range(0, len(data), PARTE):
-            name = f"plantcare.onnx.{k // PARTE}"
-            (mdir / name).write_bytes(data[k:k + PARTE])
-            parti.append(name)
-        json.dump({"parti": parti, "byte": len(data)}, open(mdir / "parti.json", "w"))
-    else:
-        shutil.copy(args.model, mdir / "plantcare.onnx")
+    import hashlib
+    PARTE = 50_000_000  # parti da 50 MB: sotto il limite di GitHub e scaricate in parallelo dall'app
+    parti = []
+    for k in range(0, len(data), PARTE):
+        name = f"plantcare.onnx.{k // PARTE}"
+        (mdir / name).write_bytes(data[k:k + PARTE])
+        parti.append(name)
+    # la versione cambia con il modello: l'app tiene in memoria solo quella attuale
+    json.dump({"parti": parti, "byte": len(data), "versione": hashlib.sha256(data).hexdigest()[:12]}, open(mdir / "parti.json", "w"))
     dist = Path(args.ort_dist)
     for f in ("ort.wasm.min.js", "ort-wasm-simd-threaded.wasm", "ort-wasm-simd-threaded.mjs"):
         shutil.copy(dist / f, APP / "ort" / f)

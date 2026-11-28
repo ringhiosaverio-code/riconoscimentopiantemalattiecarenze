@@ -35,7 +35,8 @@ def main():
     labels = {h: [c["label"] for c in readers[h]["classes"]] for h in ("disease", "pest") if h in readers}
     so = ort.SessionOptions()
     so.intra_op_num_threads = 4
-    sess = ort.InferenceSession(model, so)
+    from plantcare.modello_web import byte_modello
+    sess = ort.InferenceSession(byte_modello(model), so)
     names = [o.name for o in sess.get_outputs()]
     for i, c in enumerate(cand):
         if "rango" in c:

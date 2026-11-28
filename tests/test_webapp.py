@@ -23,7 +23,8 @@ def test_index_loads_app_scripts_and_hides_hidden_elements():
 def test_reader_classes_match_model_outputs():
     ort = pytest.importorskip("onnxruntime")
     readers = json.load(open(APP / "data" / "readers.json", encoding="utf-8"))
-    sess = ort.InferenceSession(str(APP / "model" / "plantcare.onnx"))
+    from plantcare.modello_web import byte_modello
+    sess = ort.InferenceSession(byte_modello(APP / "model"))
     outputs = {o.name: o.shape[1] for o in sess.get_outputs()}
     # il lettore degli insetti (IP102) c'è solo con uso accademico confermato
     assert {"plant", "disease", "deficiency"} <= set(outputs) <= {"plant", "disease", "deficiency", "pest"}

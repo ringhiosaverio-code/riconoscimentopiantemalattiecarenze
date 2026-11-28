@@ -52,7 +52,8 @@ def prep(path):
 def run_model(model, paths, heads):
     so = ort.SessionOptions()
     so.intra_op_num_threads = 4
-    sess = ort.InferenceSession(str(model), so)
+    from plantcare.modello_web import byte_modello
+    sess = ort.InferenceSession(byte_modello(model), so)
     names = [o.name for o in sess.get_outputs()]
     out = {h: [] for h in heads}
     for k, p in enumerate(paths):

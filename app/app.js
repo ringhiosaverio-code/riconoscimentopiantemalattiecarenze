@@ -222,47 +222,83 @@
   TABS.forEach(function (t) { $('t-' + t).addEventListener('click', function () { showTab(t); }); });
 
   // ------------------------------------------------------------------ modello
-  function loadModel() {
+  // Il modello si scarica una volta sola e resta nella memoria permanente dell'app (Cache Storage), legato
+  // alla sua versione (app/model/parti.json): le volte successive si apre subito, anche senza rete.
+  // Le parti (il modello completo supera i 100 MB ammessi da GitHub per file) si scaricano in parallelo.
+  var modelPromise = null, CACHE_MODELLO = 'plantcare-modello';
+  function loadModel(sottofondo) {
     if (session) return Promise.resolve(session);
+    if (modelPromise) { if (!sottofondo) $('prog').hidden = false; return modelPromise; }
     ort.env.wasm.wasmPaths = new URL('app/ort/', document.baseURI).href;  // URL assoluto: serve all'import() dinamico
     ort.env.wasm.numThreads = 1;
     $('prog').hidden = false;
     $('model-status').textContent = 'Scaricamento del modello in corso…';
-    // Il modello completo supera i 100 MB ammessi da GitHub per file: è diviso in parti
-    // (app/model/parti.json) che qui si scaricano in ordine e si rimettono insieme.
-    var chunks = [], got = 0, total = 45e6;
-    function scarica(url) {
-      return fetch(url).then(function (resp) {
-        if (!resp.ok) throw new Error('modello');
-        var reader = resp.body.getReader();
-        function pump() {
-          return reader.read().then(function (r) {
-            if (r.done) return;
-            chunks.push(r.value); got += r.value.length;
-            $('prog').firstElementChild.style.width = Math.min(100, got / total * 100).toFixed(0) + '%';
-            return pump();
+    var got = {}, total = 45e6;
+    function avanzamento() {
+      var g = Object.keys(got).reduce(function (a, k) { return a + got[k]; }, 0);
+      $('prog').firstElementChild.style.width = Math.min(100, g / total * 100).toFixed(0) + '%';
+      $('model-status').textContent = 'Scaricamento del modello: ' + Math.round(g / 1e6) + ' di ' + Math.round(total / 1e6) + ' MB (solo la prima volta)…';
+    }
+    function leggi(resp, k) {
+      var reader = resp.body.getReader(), chunks = [], n = 0;
+      function pump() {
+        return reader.read().then(function (r) {
+          if (r.done) {
+            var buf = new Uint8Array(n), off = 0;
+            chunks.forEach(function (c) { buf.set(c, off); off += c.length; });
+            return buf;
+          }
+          chunks.push(r.value); n += r.value.length; got[k] = n; avanzamento();
+          return pump();
+        });
+      }
+      return pump();
+    }
+    function parte(cache, url, k) {
+      var dallaCache = cache ? cache.match(url).catch(function () { return null; }) : Promise.resolve(null);
+      return dallaCache.then(function (hit) {
+        if (hit) return hit.arrayBuffer().then(function (ab) { got[k] = ab.byteLength; avanzamento(); return new Uint8Array(ab); });
+        return fetch(url).then(function (resp) {
+          if (!resp.ok) throw new Error('modello');
+          return leggi(resp, k).then(function (buf) {
+            if (cache) cache.put(url, new Response(buf, { headers: { 'Content-Type': 'application/octet-stream' } })).catch(function () {});
+            return buf;
           });
-        }
-        return pump();
+        });
       });
     }
-    return fetch('app/model/parti.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
-      .then(function (p) {
-        if (p && p.parti) {
-          total = p.byte;
-          return p.parti.reduce(function (pr, f) { return pr.then(function () { return scarica('app/model/' + f); }); }, Promise.resolve());
-        }
-        return scarica('app/model/plantcare.onnx');
-      }).then(function () {
-        var buf = new Uint8Array(got), off = 0;
-        chunks.forEach(function (c) { buf.set(c, off); off += c.length; });
-        chunks = [];
+    var apri = (typeof caches !== 'undefined') ? caches.open(CACHE_MODELLO).catch(function () { return null; }) : Promise.resolve(null);
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {});
+    modelPromise = Promise.all([fetch('app/model/parti.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }), apri])
+      .then(function (x) {
+        var p = x[0], cache = x[1];
+        var parti = p && p.parti ? p.parti : ['plantcare.onnx'], v = p && p.versione ? p.versione : 'senza-versione';
+        if (p && p.byte) total = p.byte;
+        var urls = parti.map(function (f) { return new URL('app/model/' + f + '?v=' + v, document.baseURI).href; });
+        // via le versioni vecchie del modello dalla memoria
+        if (cache) cache.keys().then(function (ks) { ks.forEach(function (rq) { if (urls.indexOf(rq.url) < 0) cache.delete(rq); }); }).catch(function () {});
+        return Promise.all(urls.map(function (u, i) { return parte(cache, u, i); }));
+      }).then(function (bufs) {
+        var n = bufs.reduce(function (a, b) { return a + b.length; }, 0), buf = new Uint8Array(n), off = 0;
+        bufs.forEach(function (b) { buf.set(b, off); off += b.length; });
         $('model-status').textContent = 'Preparazione del modello…';
         return ort.InferenceSession.create(buf, { executionProviders: ['wasm'], graphOptimizationLevel: 'all' });
       }).then(function (s) {
-      session = s; $('prog').hidden = true; $('model-status').textContent = 'Modello pronto.'; return s;
-    });
+        session = s; $('prog').hidden = true; $('model-status').textContent = 'Modello pronto: resta nel telefono e funziona anche senza rete.'; return s;
+      }, function (err) {
+        modelPromise = null; $('prog').hidden = true;
+        $('model-status').textContent = 'Scaricamento del modello non riuscito: controlla la connessione e riprova.';
+        throw err;
+      });
+    return modelPromise;
   }
+  // si comincia a scaricare appena l'app è aperta (non con "risparmio dati" attivo)
+  (function () {
+    var risparmio = navigator.connection && navigator.connection.saveData;
+    if (risparmio) return;
+    var via = function () { ready.then(function () { return loadModel(true); }).catch(function () {}); };
+    if (window.requestIdleCallback) window.requestIdleCallback(via, { timeout: 4000 }); else setTimeout(via, 1500);
+  })();
 
   // quadrato scelto (di base quello centrale) ridimensionato a 224 px, normalizzato;
   // secondo elemento del batch: immagine specchiata
@@ -297,7 +333,7 @@
   function analyze(source, w, h, sq) {
     lastPhoto = keepPhoto(source, w, h);
     $('out').innerHTML = '<div class="card">Analisi in corso…</div>';
-    ready.then(loadModel).then(function (s) {
+    ready.then(function () { return loadModel(false); }).then(function (s) {
       var t0 = performance.now();
       return s.run({ image: toTensor(source, w, h, sq) }).then(function (outs) {
         var res = {};
@@ -791,7 +827,7 @@
           if (stream === st && !v.videoWidth)
             $('cam-status').textContent = 'La fotocamera non manda immagini: usa "Scatta con la fotocamera del telefono".';
         }, 4000);
-        ready.then(loadModel).catch(function () {});  // scarica il modello mentre si inquadra
+        ready.then(function () { return loadModel(true); }).catch(function () {});  // scarica il modello mentre si inquadra
       })
       .catch(function () { $('cam-status').textContent = 'Fotocamera non disponibile o permesso negato: usa "Scatta con la fotocamera del telefono" o una foto dalla galleria.'; });
   });
