@@ -309,6 +309,9 @@ def main() -> None:
     for r in csv.DictReader(open(ROOT / "data" / "processed" / "manifest_v2.csv", encoding="utf-8")):
         if r["split"] == "train" and r.get("disease") and r.get("plant"):
             crops_of[r["disease"]].add(r["plant"])
+    # colture ospiti delle classi senza coltura nelle foto (iNaturalist, Bugwood, articoli): configs/ospiti_classi.yaml
+    for raw, hosts in (load_yaml(ROOT / "configs" / "ospiti_classi.yaml").get("ospiti") or {}).items():
+        crops_of[raw] |= set(hosts)
     readers = {}
     for h in heads:
         classes = ck["readers"][h]["classes"]

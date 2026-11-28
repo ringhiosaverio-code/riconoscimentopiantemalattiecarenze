@@ -664,7 +664,16 @@
     h += cz.html;
     var lk = linkBlock(res, crop, answers.plant && answers.plant.label);
     h += lk.html;
-    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open);
+    // insetto riconosciuto con sicurezza (colonie, uova, forme giovanili, adulti): lo si dice in chiaro, perché
+    // il lettore delle malattie non sa che cosa sia un insetto e cerca la malattia più simile (es. "mal bianco")
+    var tp = res.pest ? top(res.pest, 1)[0] : null, insettoSicuro = tp && tp[0] >= 0.8;
+    if (insettoSicuro) {
+      var ci = DATA.readers.pest.classes[tp[1]], td0 = top(res.disease, 1)[0];
+      h += '<div class="reader"><h3>Insetto o acaro riconosciuto: ' + esc(ci.name) + ' (' + pct(tp[0]) + ')</h3>' +
+        '<p class="warn">Se nella foto si vedono insetti, uova, forme giovanili o colonie (anche come puntini, cera bianca o melata lucida), la causa è questo parassita' +
+        (td0[0] < tp[0] ? ', non «' + esc(DATA.readers.disease.classes[td0[1]].name) + '» proposto dal lettore delle malattie' : '') + '. La difesa è qui sotto, nel lettore degli insetti.</p></div>';
+    }
+    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open || insettoSicuro);
     // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
     var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
     h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
