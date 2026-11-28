@@ -29,7 +29,8 @@ from plantcare import readers as rd  # noqa: E402
 
 CAMPO = {"plantdoc", "plantwild", "inat_calabria", "verificate", "aperti", "danni", "bugwood", "observation",
          "fieldvitis", "diamos", "vinevirus", "contributi", "inatag", "letteratura", "emiliaromagna"}
-CAP_ALTRE = 30  # foto per (fonte, classe) delle altre fonti
+CAP = {"train": 20, "val": 8}  # foto per (fonte, classe): le foto di test delle fonti di campo restano tutte
+TEST_ALTRE = 8
 
 
 def sottoinsieme(rows):
@@ -39,12 +40,13 @@ def sottoinsieme(rows):
     for i, r in enumerate(rows):
         if not (r.get("disease") or r.get("pest")):
             continue
-        if r["source"] in CAMPO:
+        if r["split"] == "test" and r["source"] in CAMPO:
             keep.append(i)
         else:
             by[(r["source"], r.get("disease") or r.get("pest"), r["split"])].append(i)
-    for v in by.values():
-        keep += v if len(v) <= CAP_ALTRE else rng.sample(v, CAP_ALTRE)
+    for (src, _, split), v in by.items():
+        n = CAP.get(split, TEST_ALTRE)
+        keep += v if len(v) <= n else rng.sample(v, n)
     return sorted(keep)
 
 
