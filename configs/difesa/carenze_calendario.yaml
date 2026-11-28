@@ -1,0 +1,46 @@
+# Schemi del calendario per le carenze nutrizionali riconosciute dal lettore (classi del lettore delle carenze).
+# Dose e intervalli solo da documenti: per il ferro dalla scheda Gowan di SPRINFER NEW; per le altre carenze
+# l'app dà solo i tempi indicativi di un intervento fogliare ripetuto, senza dose: la dose è quella
+# dell'etichetta del concime scelto e del piano di concimazione basato sulle analisi (Disciplinare di
+# produzione integrata). Le carenze si correggono prima di tutto con il piano di concimazione al terreno.
+carenza_di_ferro:
+  prodotto: "SPRINFER NEW (Gowan, ferro solfato 2,6%)"
+  forma: "Concime a base di ferro per via fogliare o radicale"
+  dose: "Fogliare: 1-1,5 l/ha sulle arboree, 100-150 ml/hl sulle orticole; radicale: 5-10 l/ha sulle arboree, 1-2 l per 1000 m² sulle orticole"
+  fonte: "Scheda Gowan SPRINFER NEW (gowanitalia.it)"
+  curativo: {n: 3, intervallo: 7}
+  preventivo: {n: 4, intervallo: 12}
+  avvisi:
+    - "Scheda Gowan: curativo 2-3 applicazioni a 7-10 giorni ai primi sintomi; preventivo 2-4 applicazioni a 10-15 giorni dalle prime fasi vegetative; per le arboree anche un'applicazione al suolo a fine stagione."
+    - "Non miscelare con oli minerali né con prodotti fortemente alcalini o acidi. La clorosi ferrica nei terreni calcarei si previene con portinnesti tolleranti e chelati al terreno."
+carenza_di_azoto:
+  forma: "Concime azotato (al terreno o in fertirrigazione; per via fogliare solo come integrazione)"
+  curativo: {n: 2, intervallo: 10}
+  avvisi:
+    - "Schema indicativo dell'app. L'azoto si distribuisce frazionato secondo il piano di concimazione del Disciplinare (dosi massime per coltura); evitare apporti tardivi vicino alla raccolta."
+carenza_di_magnesio:
+  forma: "Concime a base di magnesio per via fogliare (es. solfato di magnesio) e al terreno"
+  curativo: {n: 3, intervallo: 10}
+  avvisi:
+    - "Schema indicativo dell'app. Eccessi di potassio favoriscono la carenza di magnesio: controllare il rapporto K/Mg nelle analisi."
+carenza_di_calcio:
+  forma: "Concime a base di calcio per via fogliare (frutti in accrescimento) e gestione dell'irrigazione"
+  curativo: {n: 4, intervallo: 7}
+  avvisi:
+    - "Schema indicativo dell'app. Marciume apicale e butteratura dipendono spesso da irrigazione irregolare più che dal calcio nel terreno: regolare l'acqua."
+carenza_di_manganese:
+  forma: "Concime a base di manganese per via fogliare"
+  curativo: {n: 2, intervallo: 10}
+  avvisi:
+    - "Schema indicativo dell'app. Frequente nei terreni calcarei o molto areati."
+carenza_di_zinco:
+  forma: "Concime a base di zinco per via fogliare"
+  curativo: {n: 2, intervallo: 10}
+  avvisi:
+    - "Schema indicativo dell'app. Sulle arboree si interviene di solito alla ripresa vegetativa."
+eccesso_di_azoto:
+  nota: "Eccesso di azoto: nessun trattamento. Sospendere le concimazioni azotate, ridurre l'irrigazione dove possibile e controllare il piano di concimazione."
+  avvisi:
+    - "Le piante troppo concimate con azoto sono più sensibili ad afidi, oidio e muffa grigia."
+sintomi_di_carenza:
+  nota: "Sintomi di carenza generici: prima di trattare serve capire quale elemento manca, con l'analisi fogliare o del terreno."

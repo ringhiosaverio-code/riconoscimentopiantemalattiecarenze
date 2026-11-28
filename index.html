@@ -30,7 +30,10 @@ label{display:block}
 video,img.preview{width:100%;max-height:360px;object-fit:cover;border-radius:10px;background:#000;display:block;margin-top:8px}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .row>*{flex:1}
-.tabs{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:var(--bg);padding:8px 0}
+.tabs{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(6,1fr);gap:4px;background:var(--bg);padding:8px 0}
+@media (max-width:560px){.tabs{grid-template-columns:repeat(3,1fr)}}
+.tratt{padding-left:1.4em;margin:8px 0}.tratt li{border-bottom:1px solid var(--line);padding:6px 0}.tratt li p{margin:2px 0;overflow-wrap:anywhere}.t-head{font-size:1.02rem}
+@media print{.tabs,#tab-calendario>section,button{display:none!important}}
 .tabs button{padding:10px 2px;font-size:.86rem}
 .tabs button[aria-selected="false"]{background:transparent;color:var(--accent);border:1px solid var(--accent)}
 .reader{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
@@ -91,6 +94,7 @@ details>summary{cursor:pointer;color:var(--accent)}
 <nav class="tabs" role="tablist">
 <button type="button" role="tab" id="t-reader" aria-selected="true">Lettore</button>
 <button type="button" role="tab" id="t-consigli" aria-selected="false">Consigli</button>
+<button type="button" role="tab" id="t-calendario" aria-selected="false">Calendario</button>
 <button type="button" role="tab" id="t-quiz" aria-selected="false">Quiz</button>
 <button type="button" role="tab" id="t-tank" aria-selected="false">Botte</button>
 <button type="button" role="tab" id="t-info" aria-selected="false">Info</button>
@@ -166,6 +170,54 @@ details>summary{cursor:pointer;color:var(--accent)}
 <div id="cs-out" aria-live="polite"></div>
 </div>
 
+<div id="tab-calendario" hidden>
+<section class="card">
+<h2>Calendario dei trattamenti</h2>
+<p class="muted">Scegli coltura e problema: l'app prepara le date dei trattamenti come un tecnico della difesa integrata. Rispetta numero massimo di trattamenti e intervalli dell'etichetta, limiti del Disciplinare della Calabria, tempi di carenza prima della raccolta, fasi ammesse, alternanza dei gruppi di resistenza e rame massimo. L'etichetta prevale sempre.</p>
+<p class="muted" id="kl-status">Caricamento del catalogo…</p>
+<div class="row">
+<label>Per cosa<select id="kl-kind"><option value="difesa">Malattia o parassita</option><option value="carenza">Carenza nutrizionale</option></select></label>
+<label>Coltura<select id="kl-crop" disabled></select></label>
+</div>
+<div id="kl-difesa">
+<label for="kl-adv"><strong>Malattia o parassita</strong></label><select id="kl-adv" disabled></select>
+<div class="row">
+<label>Fase all'inizio<select id="kl-phase" disabled></select></label>
+<label>Situazione<select id="kl-sit" disabled></select></label>
+</div>
+<div class="row">
+<label>Coltivazione<select id="kl-amb"><option value="campo">Pieno campo</option><option value="serra">Serra o coltura protetta</option></select></label>
+<label>Pressione della malattia o del parassita<select id="kl-press"><option value="media">Media</option><option value="alta">Alta (annata piovosa, attacchi in zona): intervalli più stretti</option><option value="bassa">Bassa (annata asciutta): intervalli più larghi</option></select></label>
+</div>
+</div>
+<div id="kl-carenza" hidden>
+<div class="row">
+<label>Carenza<select id="kl-def"></select></label>
+<label>Intervento<select id="kl-mode"><option value="curativo">Curativo: ai primi sintomi</option><option value="preventivo">Preventivo</option></select></label>
+</div>
+</div>
+<div class="row">
+<label>Primo trattamento<input id="kl-start" type="date"></label>
+<label>Piena fioritura <span class="muted">facolt.</span><input id="kl-flower" type="date"></label>
+<label>Raccolta prevista<input id="kl-harvest" type="date"></label>
+</div>
+<details id="kl-more">
+<summary>Prodotti e altre condizioni (facoltative)</summary>
+<p class="muted">Lascia tutto senza segno per la scelta automatica, oppure segna i prodotti (principi attivi) che vuoi usare.</p>
+<div id="kl-prods"></div>
+<label class="check"><input type="checkbox" id="kl-disc" checked> <span>Rispetta il Disciplinare di produzione integrata della Calabria</span></label>
+<label class="check"><input type="checkbox" id="kl-bio"> <span>Produzione biologica</span></label>
+<div class="row">
+<label>Rame metallo massimo (kg/ha l'anno)<input id="kl-cu" type="number" min="0" step="0.1" value="4" inputmode="decimal"></label>
+<label>Ettari<input id="kl-ha" type="number" min="0" step="any" inputmode="decimal"></label>
+<label>Acqua per ettaro (l/ha)<input id="kl-water" type="number" min="1" step="1" inputmode="decimal"></label>
+</div>
+</details>
+<div class="row"><button type="button" id="kl-go" disabled>Prepara il calendario</button></div>
+</section>
+<div id="kl-out" aria-live="polite"></div>
+</div>
+
 <div id="tab-quiz" hidden>
 <section class="card">
 <h2>Quiz: riconosci dalla foto</h2>
@@ -220,6 +272,7 @@ details>summary{cursor:pointer;color:var(--accent)}
 <script src="app/ort/ort.wasm.min.js"></script>
 <script src="app/sprayer.js?v=20261128m"></script>
 <script src="app/consigli.js?v=20261128m"></script>
+<script src="app/calendario.js?v=20261128m"></script>
 <script src="app/app.js?v=20261128m"></script>
 </body>
 </html>

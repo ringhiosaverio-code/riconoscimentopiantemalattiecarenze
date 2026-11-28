@@ -31,6 +31,7 @@
   getJSON('hypotheses.json').then(function (d) { DATA.hyp = d; }).catch(function () { DATA.hyp = null; });
   getJSON('lab.json').then(function (d) { DATA.lab = d; }).catch(function () { DATA.lab = null; });
   getJSON('difesa.json').then(function (d) { DATA.difesa = d; }).catch(function () { DATA.difesa = null; });
+  getJSON('carenze.json').then(function (d) { DATA.carenze = d; }).catch(function () { DATA.carenze = {}; });
   getJSON('danni_insetti.json').then(function (d) { DATA.danni = d; }).catch(function () { DATA.danni = {}; });
   getJSON('note_legno.json').then(function (d) { DATA.noteLegno = d; }).catch(function () { DATA.noteLegno = []; });
   getJSON('valutazione.json').then(function (d) { DATA.val = d; if ($('info-val')) $('info-val').innerHTML = valHtml(); }).catch(function () { DATA.val = null; });
@@ -58,8 +59,156 @@
       }).join('');
   }
 
+  // ------------------------------------------------------------------ calendario dei trattamenti
+  var klInit = false, klPending = null, klLast = null;
+  function isoOggi(n) { var d = new Date(Date.now() + (n || 0) * 864e5); return d.toISOString().slice(0, 10); }
+  function dataIt(s) { if (!s) return ''; var p = s.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  function initCalendario() {
+    if (!CS) return;
+    if (!klInit) {
+      klInit = true;
+      var cat = DATA.cat, byName = function (a, b) { return a.nome.localeCompare(b.nome, 'it'); };
+      var cal = cat.colture.filter(function (c) { return c.sezioni.length; }).sort(byName);
+      var alt = cat.colture.filter(function (c) { return !c.sezioni.length; }).sort(byName);
+      $('kl-crop').innerHTML = '<option value="">Scegli la coltura</option>' +
+        '<optgroup label="Colture del Disciplinare della Calabria">' + cal.map(function (c) { return opt(c.nome, c.nome); }).join('') + '</optgroup>' +
+        '<optgroup label="Altre colture con prodotti Gowan registrati">' + alt.map(function (c) { return opt(c.nome, c.nome); }).join('') + '</optgroup>';
+      $('kl-crop').disabled = false;
+      var defs = (DATA.readers.deficiency || { classes: [] }).classes.filter(function (c) { return DATA.carenze && DATA.carenze[c.label]; });
+      $('kl-def').innerHTML = defs.map(function (c) { return opt(c.label, c.name); }).join('');
+      $('kl-start').value = isoOggi(0); $('kl-harvest').value = isoOggi(120);
+      $('kl-status').textContent = 'Prodotti Gowan registrati, Disciplinare della Calabria e schede dei concimi.';
+      $('kl-kind').addEventListener('change', klKind);
+      $('kl-crop').addEventListener('change', klCrop);
+      $('kl-adv').addEventListener('change', klAdv);
+      ['kl-phase', 'kl-sit', 'kl-start', 'kl-harvest', 'kl-def'].forEach(function (id) { $(id).addEventListener('change', klReady); });
+      $('kl-go').addEventListener('click', klRun);
+    }
+    if (klPending) {
+      var p = klPending; klPending = null;
+      $('kl-kind').value = 'difesa'; klKind(); $('kl-crop').value = p.c; klCrop();
+      if (p.a) { $('kl-adv').value = p.a; klAdv(); }
+      if (p.f) $('kl-phase').value = p.f;
+      klReady();
+    }
+  }
+  function openCalendario(crop, adv, fase) { klPending = { c: crop, a: adv, f: fase }; showTab('calendario'); }
+  function klKind() {
+    var dif = $('kl-kind').value === 'difesa';
+    $('kl-difesa').hidden = !dif; $('kl-carenza').hidden = dif; $('kl-more').hidden = !dif;
+    $('kl-out').innerHTML = ''; klReady();
+  }
+  function klCrop() {
+    var crop = $('kl-crop').value, adv = $('kl-adv'), ph = $('kl-phase');
+    $('kl-out').innerHTML = '';
+    if (!crop) { adv.disabled = ph.disabled = $('kl-sit').disabled = true; klReady(); return; }
+    var list = Consigli.avversita(CS, crop), c = CS.cat.colture[CS.colture[crop].i];
+    var grp = function (t) {
+      return list.filter(function (e) { return e.t === t; }).map(function (e) {
+        return opt(e.id, e.nome + (e.u.length ? '' : ' — solo sostanze del Disciplinare'));
+      }).join('');
+    };
+    adv.innerHTML = '<option value="">Scegli la malattia o il parassita</option><optgroup label="Malattie">' + grp('malattia') +
+      '</optgroup><optgroup label="Insetti, acari e altri parassiti">' + grp('insetto') + '</optgroup>';
+    adv.disabled = false;
+    ph.innerHTML = Consigli.fasi(CS, crop).map(function (f) {
+      return opt(f.id, (f.n ? f.n + '. ' : '') + f.nome + (f.bbch ? ' (BBCH ' + f.bbch[0] + (f.bbch[1] !== f.bbch[0] ? '-' + f.bbch[1] : '') + ')' : ''));
+    }).join('');
+    ph.disabled = false;
+    $('kl-disc').disabled = !c.sezioni.length;
+    klAdv();
+  }
+  function klAdv() {
+    var crop = $('kl-crop').value, id = $('kl-adv').value, sit = $('kl-sit');
+    $('kl-prods').innerHTML = '';
+    if (!crop || !id) { sit.disabled = true; sit.innerHTML = ''; klReady(); return; }
+    var e = Consigli.avversita(CS, crop).filter(function (x) { return x.id === id; })[0];
+    sit.innerHTML = Consigli.situazioni(CS, e.t).map(function (x) { return opt(x.id, x.nome); }).join('');
+    sit.disabled = false;
+    // prodotti registrati per l'avversità (principi attivi e gruppi di resistenza), da scegliere se si vuole
+    var seen = {}, rows = [];
+    e.u.forEach(function (i) {
+      var p = CS.cat.prodotti[CS.cat.usi[i].p];
+      if (seen[p.nome]) return; seen[p.nome] = 1;
+      rows.push('<label class="check"><input type="checkbox" class="kl-p" value="' + esc(p.nome) + '"> <span><strong>' + esc(p.nome) + '</strong> — ' +
+        esc((p.sostanze || []).map(function (x) { return x.nome; }).join(' + ')) + (p.codici && p.codici.length ? ' <span class="muted">(' + esc(p.codici.join(', ')) + ')</span>' : '') + '</span></label>');
+    });
+    $('kl-prods').innerHTML = rows.length ? rows.join('') : '<p class="muted">Nessun prodotto Gowan registrato: il calendario elencherà le sostanze ammesse dal Disciplinare.</p>';
+    klReady();
+  }
+  function klReady() {
+    var dif = $('kl-kind').value === 'difesa', ok = $('kl-start').value && $('kl-harvest').value;
+    $('kl-go').disabled = !(ok && (dif ? $('kl-crop').value && $('kl-adv').value && $('kl-phase').value : $('kl-def').value));
+  }
+  function klRun() {
+    var h;
+    if ($('kl-kind').value === 'carenza') {
+      var qc = { carenza: $('kl-def').value, coltura: $('kl-crop').value, inizio: $('kl-start').value, raccolta: $('kl-harvest').value, modo: $('kl-mode').value };
+      var rc = Calendario.pianoCarenza(DATA.carenze, qc);
+      var nome = $('kl-def').selectedOptions[0].textContent;
+      h = '<section class="card"><h2>Calendario: ' + esc(nome) + '</h2>';
+      if (rc.errore) h += '<p class="warn">' + esc(rc.errore) + '</p>';
+      if (rc.interventi.length) {
+        h += '<p><strong>' + esc(rc.forma || '') + '</strong>' + (rc.fonte ? ' <span class="muted">— ' + esc(rc.fonte) + '</span>' : '') + '</p>';
+        h += '<ol class="tratt">' + rc.interventi.map(function (x) {
+          return '<li><p class="t-head"><strong>' + dataIt(x.data) + '</strong>' + (x.dal_precedente ? ' <span class="muted">(+' + x.dal_precedente + ' giorni)</span>' : '') + '</p>' +
+            '<p><strong>' + esc(x.prodotto || '') + '</strong></p>' + (x.dose ? '<p class="muted">' + esc(x.dose) + '</p>' : '') + '</li>';
+        }).join('') + '</ol>';
+      }
+      h += (rc.avvisi || []).map(function (a) { return '<p class="muted">' + esc(a) + '</p>'; }).join('');
+      klLast = { titolo: nome, interventi: rc.interventi };
+    } else {
+      var q = { coltura: $('kl-crop').value, avversita: $('kl-adv').value, fase: $('kl-phase').value, situazione: $('kl-sit').value,
+                ambito: $('kl-amb').value, bio: $('kl-bio').checked, disciplinare: $('kl-disc').checked && !$('kl-disc').disabled,
+                inizio: $('kl-start').value, raccolta: $('kl-harvest').value, fioritura: $('kl-flower').value || null, pressione: $('kl-press').value,
+                rame_max: num($('kl-cu').value), ettari: num($('kl-ha').value), acqua: num($('kl-water').value),
+                prodotti: Array.prototype.slice.call(document.querySelectorAll('.kl-p:checked')).map(function (x) { return x.value; }) };
+      var r;
+      try { r = Calendario.piano(CS, q); } catch (err) { $('kl-out').innerHTML = '<div class="card warn">' + esc(err.message) + '</div>'; return; }
+      var titolo = q.coltura + ' — ' + (r.avversita || $('kl-adv').selectedOptions[0].textContent);
+      h = '<section class="card"><h2>Calendario: ' + esc(titolo) + '</h2>';
+      h += '<p class="muted">Dal ' + dataIt(q.inizio) + ' alla raccolta del ' + dataIt(q.raccolta) + (r.fioritura_stimata ? '; piena fioritura ' + (q.fioritura ? 'indicata' : 'stimata') + ' il ' + dataIt(r.fioritura_stimata) : '') +
+        '. Pressione ' + esc(q.pressione) + '.</p>';
+      if (r.errore) h += '<p class="warn">' + esc(r.errore) + '</p>';
+      if (r.interventi.length) {
+        h += '<ol class="tratt">' + r.interventi.map(function (x) {
+          var dose = [x.dose_ha ? Consigli.fmt(x.dose_ha) + '/ha' : '', x.dose_hl ? Consigli.fmt(x.dose_hl) + '/hl' : ''].filter(Boolean).join(' · ');
+          return '<li><p class="t-head"><strong>' + dataIt(x.data) + '</strong>' + (x.dal_precedente ? ' <span class="muted">(+' + x.dal_precedente + ' giorni)</span>' : '') +
+            ' · ' + esc(x.fase) + ' <span class="muted">BBCH ~' + x.bbch_stimato + '</span></p>' +
+            '<p><strong>' + esc(x.prodotto) + '</strong> <span class="muted">' + esc(x.sostanze.join(' + ')) + (x.gruppi.length ? ' · ' + esc(x.gruppi.join(', ')) : '') + '</span></p>' +
+            (dose ? '<p>Dose: ' + esc(dose) + (x.totale ? ' <span class="muted">(totale ' + esc(Consigli.fmt(x.totale)) + ')</span>' : '') + '</p>' : '') +
+            '<p class="muted">' + (x.uso_max ? x.uso_n + 'º trattamento su ' + x.uso_max + ' ammessi (' + esc(x.fonte_max || '') + ')' : x.uso_n + 'º trattamento con questo prodotto') +
+            (x.phi != null ? ' · carenza ' + x.phi + ' giorni: non oltre il ' + dataIt(x.ultimo_utile) : '') +
+            (x.limiti_comuni && x.limiti_comuni.length ? ' · ' + esc(x.limiti_comuni.join('; ')) : '') + '</p>' +
+            (x.alternanza ? '<p class="warn">' + esc(x.alternanza) + '</p>' : '') + '</li>';
+        }).join('') + '</ol>';
+      }
+      h += (r.avvisi || []).map(function (a) { return '<p class="muted">' + esc(a) + '</p>'; }).join('');
+      if (r.disciplinare && r.disciplinare.length) {
+        h += '<details' + (r.interventi.length ? '' : ' open') + '><summary><strong>Sostanze ammesse dal Disciplinare della Calabria</strong> (anche di altre aziende)</summary>' +
+          r.disciplinare.map(function (row) {
+            return '<p><strong>' + esc(row.avversita) + '</strong> <span class="muted">(' + esc(row.coltura) + ', pag. ' + row.pagina + ')</span></p>' +
+              (row.criteri ? '<p class="muted">' + esc(row.criteri) + '</p>' : '') + '<ul>' + row.sostanze.map(function (x) {
+                return '<li>' + esc(x.nome) + (x.limiti.length ? ' <span class="muted">— ' + esc(x.limiti.join('; ')) + '</span>' : '') + '</li>';
+              }).join('') + '</ul>';
+          }).join('') + '</details>';
+      }
+      klLast = { titolo: titolo, interventi: r.interventi };
+    }
+    if (klLast.interventi.length)
+      h += '<div class="row"><button type="button" id="kl-ics">Aggiungi al calendario del telefono</button><button type="button" class="secondary" id="kl-print">Stampa</button></div>';
+    h += '<p class="muted">Strumento di supporto: prima di ogni trattamento controlla l\'etichetta del prodotto, che prevale, e le condizioni in campo.</p></section>';
+    $('kl-out').innerHTML = h;
+    if ($('kl-ics')) $('kl-ics').addEventListener('click', function () {
+      var blob = new Blob([Calendario.ics(klLast.titolo, klLast.interventi)], { type: 'text/calendar' }), a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'trattamenti.ics'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    if ($('kl-print')) $('kl-print').addEventListener('click', function () { window.print(); });
+    $('kl-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // ------------------------------------------------------------------ schede
-  var TABS = ['reader', 'consigli', 'quiz', 'tank', 'info'];
+  var TABS = ['reader', 'consigli', 'calendario', 'quiz', 'tank', 'info'];
   function showTab(name) {
     TABS.forEach(function (t) {
       $('tab-' + t).hidden = t !== name;
@@ -67,6 +216,7 @@
     });
     if (name === 'tank') ready.then(initTank);
     if (name === 'consigli') catReady.then(initConsigli, function () { $('cs-status').textContent = 'Catalogo non disponibile: ricarica la pagina.'; });
+    if (name === 'calendario') catReady.then(initCalendario, function () { $('kl-status').textContent = 'Catalogo non disponibile: ricarica la pagina.'; });
     window.scrollTo(0, 0);
   }
   TABS.forEach(function (t) { $('t-' + t).addEventListener('click', function () { showTab(t); }); });
@@ -1097,7 +1247,9 @@
       cat.fonti.ue && cat.fonti.ue.url ? '<a href="' + esc(cat.fonti.ue.url) + '" target="_blank" rel="noopener">EU Pesticides Database</a>' : null,
       esc(cat.fonti.gowan.fonte) + ' (' + esc(cat.fonti.gowan.consultato) + ')', srcLinksIds(['dir_2009_128_ce', 'frac_code_list', 'irac_moa'])].filter(Boolean).join(' · ') + '</p>';
     h += '<p class="muted">' + esc(cat.regole.avvertenza) + '</p></section>';
+    h += '<p><button type="button" class="secondary" id="cs-cal">Prepara il calendario dei trattamenti</button></p>';
     $('cs-out').innerHTML = h;
+    if ($('cs-cal')) $('cs-cal').addEventListener('click', function () { openCalendario(q.coltura, q.avversita, q.fase); });
     $('cs-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
     Array.prototype.forEach.call(document.querySelectorAll('.cs-use'), function (b) { b.addEventListener('click', function () { csRun(b.getAttribute('data-p')); }); });
     if (rc && $('cs-tank-go')) $('cs-tank-go').addEventListener('click', function () { fillTank(rc.botte, q.coltura, opz); });
@@ -1317,6 +1469,7 @@
       'La rete gira nel browser con ONNX Runtime Web: la foto non lascia il dispositivo. È addestrata su raccolte scientifiche aperte e su foto di campo del Sud Italia, anche di ARSAC, riviste e tesi, verificate a vista una per una.</p>' +
       '<div id="info-val">' + valHtml() + '</div>' +
       '<p><strong>Consigli.</strong> Scegli coltura, avversità, fase e situazione: l\'app ordina i prodotti Gowan registrati come un tecnico della difesa integrata e prepara la ricetta. ' +
+      '<p><strong>Calendario.</strong> Da coltura, avversità (o carenza), fase di partenza e data di raccolta prepara le date dei trattamenti: rispetta numero massimo e intervalli dell\'etichetta, limiti del Disciplinare (anche quelli comuni a un gruppo di sostanze), carenze, fasi ammesse, alternanza FRAC/IRAC e rame massimo; si può aggiungere al calendario del telefono.</p>' +
       'Non è una rete neurale: sono regole scritte con le loro fonti, cioè etichette, programmi Gowan, Disciplinare della Calabria e banca dati UE. Ogni prodotto mostra il motivo della sua posizione.</p>' +
       '<p><strong>Botte.</strong> Prodotti dal catalogo Gowan o scritti a mano: quantità per la botte e per ettaro, ordine di carico, incompatibilità, rame, limiti di etichetta.</p>' +
       '<div id="info-quiz">' + quizHtml() + '</div>' +

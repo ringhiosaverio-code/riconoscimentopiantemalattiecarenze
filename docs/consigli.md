@@ -140,3 +140,27 @@ PYTHONPATH=src python scripts/aggiorna_norme.py --gowan --app   # anche etichett
   questo la nota intera è sempre leggibile.
 - L'etichetta autorizzata prevale sempre. La ricetta non sostituisce il tecnico abilitato, e l'uso professionale dei
   prodotti fitosanitari richiede il certificato di abilitazione (D.Lgs. 150/2012).
+
+## Calendario dei trattamenti (app/calendario.js)
+
+Dalla coltura, dall'avversità, dalla fase di partenza, dalla data del primo trattamento e da quella prevista
+di raccolta, il calendario prepara le date degli interventi come un tecnico della difesa integrata:
+
+- a ogni data stima la fase (BBCH) a tratti: dalla partenza alla piena fioritura (indicata dall'utente o posta
+  a un terzo della stagione), poi fino alla raccolta; i prodotti si ordinano con le regole dei Consigli per la
+  fase di quella data (programmi Gowan per fase, azione adatta alla situazione);
+- rispetta il numero massimo di trattamenti dell'etichetta e i limiti del Disciplinare della Calabria; i limiti
+  scritti per un gruppo di sostanze (es. "Max 3 interventi con IBE") sono contati insieme per tutti i prodotti;
+- il passo tra due trattamenti è l'intervallo dell'etichetta: il più stretto con pressione alta, il più largo con
+  pressione bassa (senza intervallo in etichetta: 7-14 giorni per le malattie, 10-21 per gli insetti);
+- nessun trattamento oltre l'intervallo di sicurezza prima della raccolta e oltre i limiti di fase dell'etichetta;
+- alterna i gruppi di resistenza FRAC/IRAC (i multisito si possono ripetere); se tra i prodotti Gowan non c'è
+  un'alternativa lo segnala e rimanda alle sostanze di altri gruppi ammesse dal Disciplinare;
+- il rame metallo non supera il massimo annuo scelto (di base 4 kg/ha, Regolamento UE 2018/1981);
+- per gli insetti le date sono un massimo: si tratta solo al superamento delle soglie del Disciplinare;
+- se non ci sono prodotti Gowan registrati, elenca le sostanze ammesse dal Disciplinare con i loro limiti.
+
+Per le carenze nutrizionali (configs/difesa/carenze_calendario.yaml) dosi ed epoche vengono solo da documenti:
+per il ferro dalla scheda Gowan di SPRINFER NEW; per le altre carenze solo i tempi indicativi, con la dose
+dell'etichetta del concime e del piano di concimazione. Il calendario si esporta in formato .ics (calendario
+del telefono) e si stampa. Test: tests/test_calendario.py.

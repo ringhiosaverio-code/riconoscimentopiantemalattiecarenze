@@ -410,6 +410,9 @@ def main() -> None:
               ensure_ascii=False)
     json.dump(load_yaml(ROOT / "configs" / "quiz_tips.yaml"), open(APP / "data" / "quiz_tips.json", "w", encoding="utf-8"),
               ensure_ascii=False)
+    # schemi del calendario per le carenze nutrizionali (app/calendario.js)
+    json.dump(load_yaml(ROOT / "configs" / "difesa" / "carenze_calendario.yaml"),
+              open(APP / "data" / "carenze.json", "w", encoding="utf-8"), ensure_ascii=False)
     # danni da insetti, malattie trasmesse da vettori e fumaggine: collegamento con il lettore degli insetti
     json.dump(load_yaml(ROOT / "configs" / "danni_insetti.yaml")["collegamenti"],
               open(APP / "data" / "danni_insetti.json", "w", encoding="utf-8"), ensure_ascii=False)
