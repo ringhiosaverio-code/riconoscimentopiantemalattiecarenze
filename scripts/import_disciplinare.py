@@ -60,6 +60,24 @@ def parse_substances(cell):
     return res
 
 
+def quattro_colonne(raw):
+    """Alcune pagine hanno tabelle a 6, 12 o più colonne con celle unite (None) o vuote: si riportano alle 4
+    colonne (avversità, criteri, sostanze, note). Con un multiplo di 4 colonne ogni gruppo è una colonna."""
+    if len(raw) % 4 == 0 and len(raw) >= 12:
+        k = len(raw) // 4
+        out = []
+        for i in range(4):
+            g = [c for c in raw[i * k:(i + 1) * k] if c is not None]
+            out.append(next((c for c in g if c.strip()), g[0] if g else ""))
+        return out
+    piene = [c for c in raw if c is not None]
+    if len(piene) > 4 and not any(c.strip() for c in piene[4:]):
+        piene = piene[:4]  # colonne in più vuote
+    if len(piene) != 4:
+        piene = [c for c in piene if c.strip()]
+    return piene if len(piene) == 4 else None
+
+
 def leggi(pdf_path) -> list[dict]:
     """Righe di difesa (coltura, avversità, criteri, sostanze, note, pagina) del PDF del Disciplinare."""
     pdf = pdfplumber.open(pdf_path)
@@ -77,9 +95,14 @@ def leggi(pdf_path) -> list[dict]:
             for raw in table:
                 if not raw or len(raw) < 4:
                     continue
-                cells = [dec(c) for c in raw[:4]]
-                if "AVVERSIT" in cells[0].upper() and "CRITERI" in cells[1].upper():
+                joined = " ".join(dec(c or "") for c in raw).upper()
+                if "AVVERSIT" in joined and "CRITERI" in joined:
                     continue  # intestazione
+                if len(raw) > 4:
+                    raw = quattro_colonne(raw)
+                    if raw is None:
+                        continue
+                cells = [dec(c) for c in raw[:4]]
                 adv = lines(cells[0])
                 adv = [a for a in adv if a.upper() not in GROUP_WORDS]
                 if not adv and rows and rows[-1]["coltura"] == section:  # riga che continua dalla pagina prima

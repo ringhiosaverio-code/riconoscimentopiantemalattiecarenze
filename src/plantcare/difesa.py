@@ -245,9 +245,12 @@ BIOLOGICI = ("bacillus", "trichoderma", "ampelomyces", "pythium oligandrum", "au
              "opius", "encarsia", "eretmocerus", "phytoseiulus", "amblyseius", "neoseiulus", "orius", "macrolophus",
              "chrysoperla", "anagyrus", "cryptolaemus", "aphytis", "leptomastix", "steinernema", "heterorhabditis",
              "feromon", "confusione", "disorientamento", "attract and kill", "trappol", "nucleopoliedrovirus",
-             "pseudomonas chlororaphis", "cerevisane", "candida", "clonostachys", "ausiliar", "lanci")
+             "pseudomonas chlororaphis", "cerevisane", "candida", "clonostachys", "ausiliar", "lanci",
+             "cales noacki", "amitus", "comperiella", "rodolia", "diglyphus", "dacnusa", "aphidius", "trichogramma",
+             "anthocoris", "metaphycus", "coccophagus", "chilocorus", "exochomus", "psyttalia", "citrostichus",
+             "semielacher", "ageniaspis", "cybocephalus", "adalia", "aphelinus", "praon", "hippodamia", "nesidiocoris")
 NATURALI = ("rame", "rameic", "zolfo", "olio minerale", "olio paraffinico", "olio essenziale", "olio di arancio",
-            "azadiractin", "piretr", "spinosad", "laminarin", "cos-oga", "eugenolo", "geraniolo", "timolo",
+            "azadiractin", "azadaractin", "piretr", "spinosad", "laminarin", "cos-oga", "eugenolo", "geraniolo", "timolo",
             "bicarbonato", "caolino", "zeolite", "silicato", "sali potassici", "acidi grassi", "polisolfuro",
             "lupinus", "fosfato ferrico", "ortofosfato", "estratto", "chitosano", "idrossido di calcio", "farina di",
             "terpeni", "sale potassico", "proteine idrolizzate", "aceto")
@@ -426,4 +429,5 @@ def build_app_data(readers: dict, crops_of: dict | None = None) -> dict:
             "fonti": {"disciplinare": fonte(disc), "disciplinare_prec": [fonte(d) for d in prev],
                       "gowan": {k: gw.get(k) for k in ("fonte", "consultato", "avvertenza")},
                       "ue": {k: ue.get(k) for k in ("fonte", "url", "scaricato") if ue.get(k)}},
-            "righe": righe, "usi": usi, "classi": classi, "rame": copper}
+            "righe": righe, "usi": usi, "classi": classi, "rame": copper,
+            "irac": (_load_yaml(DIFESA / "irac.yaml").get("gruppi") or {}) if (DIFESA / "irac.yaml").exists() else {}}

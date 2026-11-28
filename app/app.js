@@ -492,6 +492,59 @@
     });
   }
 
+  // Scheda "come intervenire", ordinata come la imposta un agronomo: monitoraggio e soglia, mezzi agronomici,
+  // lotta biologica, poi i mezzi a basso impatto e infine le sostanze di sintesi con il gruppo IRAC e il limite
+  // del Disciplinare (le note numerate della riga). Solo dati del Disciplinare e della classificazione IRAC:
+  // nessuna dose inventata, la dose è quella dell'etichetta del prodotto scelto.
+  function noteNumerate(note) {
+    var m = {}, re = /\(?\s*(\d+|\*+)\s*\)\s*([^()]*?)(?=\(?\s*(?:\d+|\*+)\s*\)|$)/g, x;
+    while ((x = re.exec(note || ''))) if (x[2].trim()) m[x[1]] = x[2].trim().replace(/[,;.\s]+$/, '');
+    return m;
+  }
+  function gruppoIrac(nome, irac) {
+    var n = nome.toLowerCase();
+    for (var k in irac) if (new RegExp(k).test(n)) return irac[k];
+    return null;
+  }
+  function comeIntervenire(r, irac, head) {
+    if (!r.sostanze.length && !r.criteri) return '';
+    var t = (r.criteri + ' ' + (r.note || '')).replace(/\s+/g, ' '), parti = {};
+    // sezioni del testo: "Interventi agronomici:", "Interventi biologici:", "Interventi chimici:", "Soglia:"
+    var re = /(Interventi agronomici|Interventi biologici|Interventi chimici|Mezzi fisici|Soglia|Monitoraggio)\s*:?/gi, pos = [], x;
+    while ((x = re.exec(t))) pos.push([x.index, x[1].toLowerCase(), x.index + x[0].length]);
+    pos.forEach(function (p, i) {
+      var txt = t.slice(p[2], i + 1 < pos.length ? pos[i + 1][0] : t.length).replace(/\(\d\)[^]*$/, '').trim();
+      if (txt) parti[p[1]] = (parti[p[1]] ? parti[p[1]] + ' ' : '') + txt;
+    });
+    var soglia = (t.match(/[^.]*(soglia|superamento|Intervenire (?:alla|al|in|con|solo|quando|alla comparsa))[^.]*\./i) || [])[0];
+    var nn = noteNumerate(r.note), passi = [];
+    var mon = parti.monitoraggio || '';
+    if (soglia || mon) passi.push('<strong>Controlla prima di trattare.</strong> ' + esc(((mon ? mon + ' ' : '') + (soglia && mon.indexOf(soglia.trim()) < 0 ? soglia.trim() : '')).replace(/^(Interventi chimici|Soglia)\s*:?\s*/i, '')));
+    if (parti['interventi agronomici']) passi.push('<strong>Mezzi agronomici:</strong> ' + esc(parti['interventi agronomici']));
+    if (parti['mezzi fisici']) passi.push('<strong>Mezzi fisici:</strong> ' + esc(parti['mezzi fisici']));
+    var bio = r.sostanze.filter(function (s) { return s.t === 'biologico'; });
+    if (parti['interventi biologici'] || bio.length) passi.push('<strong>Lotta biologica:</strong> ' + esc(parti['interventi biologici'] || '') +
+      (bio.length ? ' Ausiliari e mezzi biologici ammessi: ' + bio.map(function (s) { return esc(s.s); }).join(', ') + '.' : '') +
+      ' Se gli ausiliari sono presenti (parassitizzazione alta), rimanda il trattamento chimico.');
+    var riga = function (s) {
+      var g = gruppoIrac(s.s, irac), lim = (s.n || []).map(function (k) { return nn[k]; }).filter(Boolean);
+      return '<li><strong>' + esc(s.s) + '</strong>' + (g ? ' — ' + esc(g[0] === 'fisico' ? g[1] : g[0] + ', ' + g[1]) : '') +
+        (lim.length ? '<br><span class="muted">Limite del Disciplinare: ' + esc(lim.join('; ')) + '</span>' : '') +
+        (s.ue ? ' <strong>⚠ non approvata nell\'UE</strong>' : '') + '</li>';
+    };
+    var nat = r.sostanze.filter(function (s) { return s.t === 'naturale' && !s.ue; }), sin = r.sostanze.filter(function (s) { return s.t === 'sintesi' && !s.ue; });
+    if (nat.length) passi.push('<strong>Superata la soglia, prima scelta a basso impatto</strong> (rispetta gli ausiliari):<ul>' + nat.map(riga).join('') + '</ul>');
+    if (sin.length) {
+      var gr = {};
+      sin.forEach(function (s) { var g = gruppoIrac(s.s, irac); if (g && g[0] !== 'fisico') gr[g[0]] = 1; });
+      passi.push('<strong>Con infestazione forte, sostanze di sintesi</strong> (una per trattamento, ' +
+        (Object.keys(gr).length > 1 ? 'alternando i gruppi IRAC: ' + esc(Object.keys(gr).join(', ')) : 'senza ripetere lo stesso gruppo IRAC di seguito') + '):<ul>' + sin.map(riga).join('') + '</ul>');
+    }
+    if (r.sostanze.length) passi.push('<strong>Prodotto e dose:</strong> scegli un prodotto commerciale autorizzato sulla coltura con una di queste sostanze; dose, numero di trattamenti e intervallo di sicurezza sono quelli dell\'<strong>etichetta</strong>, che prevale sempre. Elenco ufficiale: <a href="https://www.fitosanitari.salute.gov.it/" target="_blank" rel="noopener">banca dati dei prodotti fitosanitari del Ministero della Salute</a>.' + (head === 'pest' ? ' Bagna bene anche la pagina inferiore delle foglie, dove vivono le forme giovanili di molti insetti.' : '') + '');
+    if (!passi.length) return '';
+    return '<div class="dif"><h4>Come intervenire, passo per passo</h4><ol class="passi">' + passi.map(function (p) { return '<li>' + p + '</li>'; }).join('') + '</ol></div>';
+  }
+
   function difesaBlock(head, label, crop, plantGuess) {
     var D = DATA.difesa, e = D && D.classi[head + '|' + label];
     if (!e) return '';
@@ -512,7 +565,8 @@
             (x.ue ? ' <strong>⚠ non approvata nell\'UE' + (x.ue.scadenza ? ' (scadenza ' + esc(x.ue.scadenza) + ')' : '') + '</strong>' : ''));
         });
         h += '<div class="dif"><h4>' + esc(r.coltura.charAt(0) + r.coltura.slice(1).toLowerCase()) + ': ' + esc(r.avversita) + '</h4>';
-        if (r.criteri) h += '<details><summary>Criteri di intervento</summary><p>' + esc(r.criteri) + '</p></details>';
+        h += comeIntervenire(r, D.irac || {}, head);
+        if (r.criteri) h += '<details><summary>Criteri di intervento (testo del Disciplinare)</summary><p>' + esc(r.criteri) + '</p></details>';
         if (by.biologico.length) h += '<p><strong>Mezzi biologici e ausiliari:</strong> ' + by.biologico.join(', ') + '</p>';
         if (by.naturale.length) h += '<p><strong>Mezzi di origine naturale o minerale:</strong> ' + by.naturale.join(', ') + '</p>';
         if (by.sintesi.length) h += '<p><strong>Sostanze attive di sintesi:</strong> ' + by.sintesi.join(', ') + '</p>';

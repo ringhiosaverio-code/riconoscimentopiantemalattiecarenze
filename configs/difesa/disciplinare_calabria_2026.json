@@ -10,9 +10,26 @@
    "scientifici": [
     "Botrytis cinerea"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi chimici: Si consiglia di intervenire solo con condizioni climatiche particolarmente favorevoli alla malattia",
+   "criteri": "Interventi chimici: Si consiglia di intervenire solo con condizioni climatiche particolarmente favorevoli alla malattia",
+   "sostanze": [
+    {
+     "sostanza": "Bacillus amyloliquefaciens",
+     "note": []
+    },
+    {
+     "sostanza": "Fludioxonil + Cipronidil",
+     "note": []
+    },
+    {
+     "sostanza": "Eugeniolo-geraniolo- timolo",
+     "note": []
+    },
+    {
+     "sostanza": "Tricoderma asperellum + Tricoderma gamsii",
+     "note": []
+    }
+   ],
+   "note": "(1) Max 2 interventi/anno",
    "pagina": 32
   },
   {
@@ -21,9 +38,9 @@
    "scientifici": [
     "Sclerotinia spp."
    ],
-   "criteri": "",
+   "criteri": "Interventi agronomici: controllo/sfoltimento della vegetazione della pianta affinché essa permetta una sufficiente illuminazione e un conseguente abbassamento dell’umidità nel sotto chioma",
    "sostanze": [],
-   "note": "Interventi agronomici: controllo/sfoltimento della vegetazione della pianta affinché essa permetta una sufficiente illuminazione e un conseguente abbassamento dell’umidità nel sotto chioma",
+   "note": "",
    "pagina": 32
   },
   {
@@ -32,9 +49,20 @@
    "scientifici": [
     "Phytophthora ssp."
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi Chimici: Intervenire solo sugli impianti colpiti",
+   "criteri": "Interventi Chimici: Intervenire solo sugli impianti colpiti",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "***"
+     ]
+    },
+    {
+     "sostanza": "Fosetyl Al",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 32
   },
   {
@@ -43,9 +71,20 @@
    "scientifici": [
     "Pseudomonas spp"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Disinfettare accuratamente i grossi tagli di potatura; - Asportare e distruggere i rami colpiti.",
+   "criteri": "Interventi agronomici: - Disinfettare accuratamente i grossi tagli di potatura; - Asportare e distruggere i rami colpiti.",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "***"
+     ]
+    },
+    {
+     "sostanza": "Laminarina",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 32
   },
   {
@@ -54,9 +93,56 @@
    "scientifici": [
     "Pseudaulacaspis pentagona"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "I campionamenti si eseguono da aprile a maggio sulla I generazione (su legno); da giugno a fine luglio sulla II generazione (legno e foglia) e da fine agosto ai primi di ottobre sulla III generazione (legno, foglie e frutti) per verificare la presenza e lo stato dell’infestazione. Interventi agronomici: - Razionalizzare concimazione azotata e potatura; - Spazzolature invernali dei tronchi se l’infestazione e localizzata.",
+   "criteri": "I campionamenti si eseguono da aprile a maggio sulla I generazione (su legno); da giugno a fine luglio sulla II generazione (legno e foglia) e da fine agosto ai primi di ottobre sulla III generazione (legno, foglie e frutti) per verificare la presenza e lo stato dell’infestazione. Interventi agronomici: - Razionalizzare concimazione azotata e potatura; - Spazzolature invernali dei tronchi se l’infestazione e localizzata.",
+   "sostanze": [
+    {
+     "sostanza": "Antagonisti naturali",
+     "note": []
+    },
+    {
+     "sostanza": "Parassitoidi:",
+     "note": []
+    },
+    {
+     "sostanza": "Encarsia berlesei",
+     "note": []
+    },
+    {
+     "sostanza": "Aphitis proclia",
+     "note": []
+    },
+    {
+     "sostanza": "Predatori:",
+     "note": []
+    },
+    {
+     "sostanza": "Lindorus lophante;",
+     "note": []
+    },
+    {
+     "sostanza": "Chalocorus bipustulatus;",
+     "note": []
+    },
+    {
+     "sostanza": "Exocomus quadripustulatus.",
+     "note": []
+    },
+    {
+     "sostanza": "Olio Bianco",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Maltodestrina",
+     "note": []
+    }
+   ],
+   "note": "(1) Fino a gemma ingrossata",
    "pagina": 32
   },
   {
@@ -65,17 +151,37 @@
    "scientifici": [
     "Argyrotaenia spp"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Soglia d’intervento: Trattare al superamento della soglia di 50 adulti per trappola, catturati dall’inizio del II e III volo, oppure su segnalazione di bollettini, determinati sulla base di monitoraggi interaziendali per comprensori omogenei o di limitata dimensione.",
+   "criteri": "Soglia d’intervento: Trattare al superamento della soglia di 50 adulti per trappola, catturati dall’inizio del II e III volo, oppure su segnalazione di bollettini, determinati sulla base di monitoraggi interaziendali per comprensori omogenei o di limitata dimensione.",
+   "sostanze": [
+    {
+     "sostanza": "Bacillus thuringiensis",
+     "note": []
+    },
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Emamectina benzoato",
+     "note": []
+    }
+   ],
+   "note": "Trappole aziendali o reti di monitoraggio (1) Al massimo 1 intervento l’anno, indipendentemente dall’avversità",
    "pagina": 32
   },
   {
    "coltura": "ACTINIDIA",
    "avversita": "Cicaline Empoasca vitis",
    "scientifici": [],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
+   "criteri": "",
+   "sostanze": [
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    }
+   ],
    "note": "",
    "pagina": 32
   },
@@ -85,9 +191,24 @@
    "scientifici": [
     "Metcalfa pruinosa"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "criteri": "Interventi Chimici: Intervenire solo in caso d’infestazioni in atto.",
+   "sostanze": [
+    {
+     "sostanza": "Etefenprox",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    }
+   ],
+   "note": "(1) Al massimo 1 intervento l’anno, indipendentemente dall’avversità",
    "pagina": 33
   },
   {
@@ -96,9 +217,28 @@
    "scientifici": [
     "Pseudomonas Syringe pv. Actinidie"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "criteri": "Interventi Agronomici - impiegare esclusivamente materiale di propagazione prodotto da aziende vivaistiche autorizzate ai sensi dell’art. 19 del D.Lgs 214/2005; - effettuare concimazioni equilibrate; - effettuare una potatura che consenta un buon arieggiamento della chioma; - effettuare la disinfezione degli attrezzi da taglio con sali di ammonio quaternari (benzalconio cloruro); - disinfettare le superfici di taglio e ricoprirle con mastici protettivi; - monitorare frequentemente gli impianti; - tagliare ed eliminare le parti infette a una distanza di almeno 60 cm al disotto dell’area colpita. - evitare irrigazioni sovra chioma. Interventi chimici - dopo la raccolta fino a fine inverno.",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": []
+    },
+    {
+     "sostanza": "Bacillus amyloliquefaciens",
+     "note": []
+    },
+    {
+     "sostanza": "Laminarina",
+     "note": []
+    },
+    {
+     "sostanza": "Forchlorfenuron",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "Dalla ripresa vegetativa in poi il rame può dare fenomeni di fitotossicità soprattutto su kiwi giallo. (1) Max 1 intervento/anno indipendentemente dalle indicazioni d’uso",
    "pagina": 33
   },
   {
@@ -106,8 +246,23 @@
    "avversita": "Cimice Asiatica",
    "scientifici": [],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "sostanze": [
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    }
+   ],
+   "note": "1) Massimo 1 intervento all’anno indipendentemente dall’avversità",
    "pagina": 33
   },
   {
@@ -117,29 +272,13 @@
     "Ceratitis capitata"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 33
-  },
-  {
-   "coltura": "ACTINIDIA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 33
-  },
-  {
-   "coltura": "ACTINIDIA",
-   "avversita": "(**) Max 3 intervenri anno fra",
-   "scientifici": [],
-   "criteri": "",
    "sostanze": [
     {
-     "sostanza": "piretrine e piretroidi",
+     "sostanza": "Sistema Attract and Kill con deltametrina",
+     "note": []
+    },
+    {
+     "sostanza": "Beauveria bassiana",
      "note": []
     }
    ],
@@ -152,9 +291,42 @@
    "scientifici": [
     "Aonidiella auranttii"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Ridurre le potature, - Ridurre la presenza di polvere sulla chioma, - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 15% di frutti infestati nel periodo luglio - settembre, con uno o più individui vivi non parassitizzati/frutto. Si consiglia di collocare trappole al feromone gialle o bianche in ragione di due per appezzamento omogeneo. Superata la soglia, intervenire 2-4 settimane dopo il picco delle catture dei maschi sulle trappole. Intervenire sulle formiche (vedi avversità). Interventi biologici: Lanci di Aphytis melinus in quantità totale variabile da 50.000 a 200.000 individui/ha, non superando comunque un massimo per lancio di 20.000 individui/ha. Introdurre il 50% della quantità totale in primavera su tutta la superficie con una cadenza quindicinale (iniziando alle prime catture di maschi svernanti e interrompendo alla fine delle catture degli stessi). Il restante 50% va lanciato solo sui focolai della cocciniglia rossa forte. E’ utile effettuare lanci anche dopo il verificarsi di condizioni sfavorevoli per l’entomofauna utile (gelate, elevate temperature, trattamenti chimici non selettivi).",
+   "criteri": "Interventi agronomici: - Ridurre le potature, - Ridurre la presenza di polvere sulla chioma, - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 15% di frutti infestati nel periodo luglio - settembre, con uno o più individui vivi non parassitizzati/frutto. Si consiglia di collocare trappole al feromone gialle o bianche in ragione di due per appezzamento omogeneo. Superata la soglia, intervenire 2-4 settimane dopo il picco delle catture dei maschi sulle trappole. Intervenire sulle formiche (vedi avversità). Interventi biologici: Lanci di Aphytis melinus in quantità totale variabile da 50.000 a 200.000 individui/ha, non superando comunque un massimo per lancio di 20.000 individui/ha. Introdurre il 50% della quantità totale in primavera su tutta la superficie con una cadenza quindicinale (iniziando alle prime catture di maschi svernanti e interrompendo alla fine delle catture degli stessi). Il restante 50% va lanciato solo sui focolai della cocciniglia rossa forte. E’ utile effettuare lanci anche dopo il verificarsi di condizioni sfavorevoli per l’entomofauna utile (gelate, elevate temperature, trattamenti chimici non selettivi).",
+   "sostanze": [
+    {
+     "sostanza": "Confusione sessuale",
+     "note": []
+    },
+    {
+     "sostanza": "Aphytis melinus",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Pyriproxyfen",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 2 interventi l’anno 1) Max 1 intervento/anno (indipendentemente dall’avversità) 2) Al massimo 1 intervento l’anno indipendentemente dall'avversità interventi l’anno",
    "pagina": 34
   },
   {
@@ -163,9 +335,46 @@
    "scientifici": [
     "Planococcus citri"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Effettuare opportune potature per l’arieggiamento della chioma; - Lavorazioni del terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 5 % di frutti infestati in estate e 10 % in autunno, con uno o più individui vivi non parassitizzati/frutto. Intervenire sulle formiche (vedi avversità). Interventi biologici: Si consiglia di collocare trappole bianche al feromone in ragione di almeno 1 per appezzamento omogeneo. Alle prime catture, intervenire con i lanci di Cryptolaemus montrouzieri (1-2 interventi fino a un massimo di 800 individui/ha. Possono essere effettuati anche lanci di Leptomastix dactylopii (2-3 interventi fino a un max di 5000 individui/ha).",
+   "criteri": "Interventi agronomici: - Effettuare opportune potature per l’arieggiamento della chioma; - Lavorazioni del terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 5 % di frutti infestati in estate e 10 % in autunno, con uno o più individui vivi non parassitizzati/frutto. Intervenire sulle formiche (vedi avversità). Interventi biologici: Si consiglia di collocare trappole bianche al feromone in ragione di almeno 1 per appezzamento omogeneo. Alle prime catture, intervenire con i lanci di Cryptolaemus montrouzieri (1-2 interventi fino a un massimo di 800 individui/ha. Possono essere effettuati anche lanci di Leptomastix dactylopii (2-3 interventi fino a un max di 5000 individui/ha).",
+   "sostanze": [
+    {
+     "sostanza": "Cryptolaemus montrouzieri",
+     "note": []
+    },
+    {
+     "sostanza": "Leptomastix dactylopii",
+     "note": []
+    },
+    {
+     "sostanza": "Maltodestrina",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    }
+   ],
+   "note": "1 Max 2 interventi anno indipendentemente dall’avversità 2 Max 1 intervento anno indipendentemente dall’avversità",
    "pagina": 35
   },
   {
@@ -177,9 +386,28 @@
     "Ceroplastes sinensis",
     "Coccus hesperidum, Coccus pseudomagnoliarum"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Effettuare opportune potature per l’arieggiamento; - Ridurre la presenza di polvere sulla chioma. - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 3-5 neanidi di I - II età/foglia e/o 4 esemplari per 40 cm. di rametto. Le osservazioni vanno effettuate su 4 rametti di 10 cm per pianta e/o su 10 frutti per pianta sul 5% delle piante (200 frutti). Intervenire sulle formiche (vedi avversità).",
+   "criteri": "Interventi agronomici: - Effettuare opportune potature per l’arieggiamento; - Ridurre la presenza di polvere sulla chioma. - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 3-5 neanidi di I - II età/foglia e/o 4 esemplari per 40 cm. di rametto. Le osservazioni vanno effettuate su 4 rametti di 10 cm per pianta e/o su 10 frutti per pianta sul 5% delle piante (200 frutti). Intervenire sulle formiche (vedi avversità).",
+   "sostanze": [
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Pyriproxyfen",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 1 intervento l’anno (1) Max 1 intervento/anno indipendentemente dall’avversità;",
    "pagina": 35
   },
   {
@@ -191,9 +419,28 @@
     "Lepidosaphes beckii, Lepidosaphes gloveri",
     "Unaspis yanensis"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Ridurre la presenza di polvere sulla chioma; - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 1 femmina adulta/cm di rametto e/o 2-4 individui/frutto. Le osservazioni vanno effettuate su 4 rametti di 10 cm per pianta e/o su 10 frutti per pianta sul 5% delle piante (200 frutti). Ridurre l’attività delle formiche (vedi interventi su formiche). Intervenire sulle formiche (vedi avversità).",
+   "criteri": "Interventi agronomici: - Ridurre la presenza di polvere sulla chioma; - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento della soglia: 1 femmina adulta/cm di rametto e/o 2-4 individui/frutto. Le osservazioni vanno effettuate su 4 rametti di 10 cm per pianta e/o su 10 frutti per pianta sul 5% delle piante (200 frutti). Ridurre l’attività delle formiche (vedi interventi su formiche). Intervenire sulle formiche (vedi avversità).",
+   "sostanze": [
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Pyriproxyfen",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 1 intervento l’anno; (1) Max 1 intervento l’anno indipendentemente dall’avversità",
    "pagina": 36
   },
   {
@@ -202,9 +449,46 @@
    "scientifici": [
     "Aphis citricola, A.gossypii, Toxoptera aurantii"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: - evitare le eccessive concimazioni azotate e le potature drastiche; - lavorazioni del terreno per disturbare i nidi delle formiche. Interventi chimici: Prima di effettuare interventi chimici valutare l’attività degli ausiliari. Intervenire al raggiungimento delle soglie per le singole specie: - per Aphis citricola, 5% di germogli infestati per clementine e mandarino, e 10% di germogli infestati per gli altri agrumi; - per Toxoptera aurantii e Aphis gossypii, 25% di germogli infestati. Intervenire sulle formiche (vedi avversità).",
+   "criteri": "Interventi agronomici: - evitare le eccessive concimazioni azotate e le potature drastiche; - lavorazioni del terreno per disturbare i nidi delle formiche. Interventi chimici: Prima di effettuare interventi chimici valutare l’attività degli ausiliari. Intervenire al raggiungimento delle soglie per le singole specie: - per Aphis citricola, 5% di germogli infestati per clementine e mandarino, e 10% di germogli infestati per gli altri agrumi; - per Toxoptera aurantii e Aphis gossypii, 25% di germogli infestati. Intervenire sulle formiche (vedi avversità).",
+   "sostanze": [
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    },
+    {
+     "sostanza": "Azadiractina",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Flonicamide",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Tau – Fluvalinate",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "3"
+     ]
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 2 interventi l’anno. 1) Contro questa avversità Max 1 intervento all’anno 2) Solo su impianti giovani (primi tre anni); 3) Max 1 intervento anno indipendentemente dall’avversità",
    "pagina": 36
   },
   {
@@ -213,9 +497,16 @@
    "scientifici": [
     "Calocoris trivialis"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: Con le potature riequilibrare le annate di “scarica” e “carica” dei frutti, cioè potare quando si aspetta l’annata di “carica”. Interventi chimici: Intervenire al raggiungimento della soglia: Solo in caso di scarsa fioritura intervenire in presenza del 20% di germogli infestati durante la fase di boccioli fiorali.",
+   "criteri": "Interventi agronomici: Con le potature riequilibrare le annate di “scarica” e “carica” dei frutti, cioè potare quando si aspetta l’annata di “carica”. Interventi chimici: Intervenire al raggiungimento della soglia: Solo in caso di scarsa fioritura intervenire in presenza del 20% di germogli infestati durante la fase di boccioli fiorali.",
+   "sostanze": [
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 1 intervento l’anno. (1) Max 2 interventi all’anno indipendentemente dall’avversità",
    "pagina": 37
   },
   {
@@ -224,9 +515,22 @@
    "scientifici": [
     "Empoasca decedens"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Monitorare in autunno la presenza dell’insetto utilizzando le stesse trappole gialle usate per la rossa forte. Interventi chimici: Intervenire al superamento della seguente soglia: - 2 % di frutti danneggiati.",
+   "criteri": "Monitorare in autunno la presenza dell’insetto utilizzando le stesse trappole gialle usate per la rossa forte. Interventi chimici: Intervenire al superamento della seguente soglia: - 2 % di frutti danneggiati.",
+   "sostanze": [
+    {
+     "sostanza": "Etofenprox",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    },
+    {
+     "sostanza": "Azadiractina A",
+     "note": []
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 1 intervento l’anno",
    "pagina": 37
   },
   {
@@ -235,18 +539,88 @@
    "scientifici": [
     "Aleurothrixus floccosus"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: Lavorazioni del terreno per disturbare i nidi delle formiche. Interventi biologici: In presenza di livelli di parassitizzazione inferiori al 5%, effettuare lanci inoculativi di Cales noacki o Amitus spiniferus. Interventi chimici: Intervenire al superamento della seguente soglia: 30 neanidi di I e II età/foglia, campionando 8 foglie/pianta sul 5% delle piante. Intervenire sulle formiche (vedi avversità).",
+   "criteri": "Interventi agronomici: Lavorazioni del terreno per disturbare i nidi delle formiche. Interventi biologici: In presenza di livelli di parassitizzazione inferiori al 5%, effettuare lanci inoculativi di Cales noacki o Amitus spiniferus. Interventi chimici: Intervenire al superamento della seguente soglia: 30 neanidi di I e II età/foglia, campionando 8 foglie/pianta sul 5% delle piante. Intervenire sulle formiche (vedi avversità).",
+   "sostanze": [
+    {
+     "sostanza": "Cales noacki",
+     "note": []
+    },
+    {
+     "sostanza": "Amitus spiniferus",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Azadaractina",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    },
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "2"
+     ]
+    }
+   ],
+   "note": "(1) Al massimo 2 interventi anno indipendentemente dall’avversità (2) Max 1 intervento anno indipendentemente dall’avversità",
    "pagina": 37
   },
   {
    "coltura": "AGRUMI",
    "avversita": "Aleirode spinoso Aleurocanthus Spineferus",
    "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici - Vietato raccogliere materiale infestato e trasportarlo al di fuori delle aree delimitate - Potature razionali e distruggere in loco il materiale infestato",
+   "criteri": "Interventi agronomici - Vietato raccogliere materiale infestato e trasportarlo al di fuori delle aree delimitate - Potature razionali e distruggere in loco il materiale infestato",
+   "sostanze": [
+    {
+     "sostanza": "Azadiractina",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    },
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    }
+   ],
+   "note": "(1 ) Al massimo 2 interventi anno indipendentemente dall’avversità (2) Max 1 intervento indipendentemente dall’avversità",
    "pagina": 38
   },
   {
@@ -255,9 +629,42 @@
    "scientifici": [
     "Dialeurodes citri"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Effettuare opportune potature per l’arieggiamento della chioma. - Evitare eccessive concimazioni azotate. Interventi chimici: Intervenire al superamento delle seguenti soglie e in presenza di scarsa parassitizzazione da Encarsia lahorensis. Arancio e limone: 30 neanidi di I-II età/foglia; Clementine e mandarino: 5-10 neanidi I-II età/foglia. Effettuare il conteggio delle colonie su 100 foglie prelevate dal 10 % delle piante e verificare il tasso di parassitizzazione da Encarsia lahorensis.",
+   "criteri": "Interventi agronomici: - Effettuare opportune potature per l’arieggiamento della chioma. - Evitare eccessive concimazioni azotate. Interventi chimici: Intervenire al superamento delle seguenti soglie e in presenza di scarsa parassitizzazione da Encarsia lahorensis. Arancio e limone: 30 neanidi di I-II età/foglia; Clementine e mandarino: 5-10 neanidi I-II età/foglia. Effettuare il conteggio delle colonie su 100 foglie prelevate dal 10 % delle piante e verificare il tasso di parassitizzazione da Encarsia lahorensis.",
+   "sostanze": [
+    {
+     "sostanza": "Encarsia lahorensis",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Azadaractina",
+     "note": []
+    },
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    },
+    {
+     "sostanza": "Pyridaben",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "(1)Max 1 intervento indipendentemente dall’avversità (2)Al massimo un 1 intervento all’anno",
    "pagina": 38
   },
   {
@@ -266,18 +673,28 @@
    "scientifici": [
     "Linepithema humile, Camponotus nylanderi Tapinoma erraticum"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Potatura della chioma a contatto del terreno; - Eliminazione delle infestanti a contatto con la chioma; - Lavorazioni del terreno per disturbare i nidi. Interventi chimici: Si consiglia d’intervenire nel caso in cui il 50% dei siti dove sono presenti insetti che producono melata è visitato dalle formiche.",
+   "criteri": "Interventi agronomici: - Potatura della chioma a contatto del terreno; - Eliminazione delle infestanti a contatto con la chioma; - Lavorazioni del terreno per disturbare i nidi. Interventi chimici: Si consiglia d’intervenire nel caso in cui il 50% dei siti dove sono presenti insetti che producono melata è visitato dalle formiche.",
+   "sostanze": [
+    {
+     "sostanza": "Applicazioni di sostanze collanti al tronco a base di esano o polibutene",
+     "note": []
+    }
+   ],
+   "note": "(1) Per i giovani impianti l'intervento è ammesso mediante l'applicazione delle sostanze collanti su apposite fascette di plastica o alluminio. .",
    "pagina": 38
   },
   {
    "coltura": "AGRUMI",
    "avversita": "Lumache e limacce",
    "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi localizzati al terreno.",
+   "criteri": "Interventi localizzati al terreno.",
+   "sostanze": [
+    {
+     "sostanza": "Fosfato ferrico",
+     "note": []
+    }
+   ],
+   "note": "Solo su impianti giovani (fino a 4 anni di età) e reinnesti.",
    "pagina": 39
   },
   {
@@ -286,9 +703,56 @@
    "scientifici": [
     "Phyllocnistis citrella"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: Regolare i flussi vegetativi: - evitando gli stress idrici; - riducendo gli apporti azotati estivi; - anticipando la potatura, che deve essere annuale e di limitata entità. Interventi meccanici: Le piccole piante possono essere protette con reti \"anti-insetto\" o \"tessuto non tessuto\". Interventi chimici: Intervenire al raggiungimento della seguente soglia: - 20 % di germogli infestati. - Trattare cercando di bagnare la nuova vegetazione.",
+   "criteri": "Interventi agronomici: Regolare i flussi vegetativi: - evitando gli stress idrici; - riducendo gli apporti azotati estivi; - anticipando la potatura, che deve essere annuale e di limitata entità. Interventi meccanici: Le piccole piante possono essere protette con reti \"anti-insetto\" o \"tessuto non tessuto\". Interventi chimici: Intervenire al raggiungimento della seguente soglia: - 20 % di germogli infestati. - Trattare cercando di bagnare la nuova vegetazione.",
+   "sostanze": [
+    {
+     "sostanza": "Olio minerale",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Azadiractina",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Tebufenozide",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Chlorantraniliprole",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Emamectina",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Milbemectina",
+     "note": [
+      "5"
+     ]
+    },
+    {
+     "sostanza": "Cyantraniliprole",
+     "note": [
+      "6"
+     ]
+    }
+   ],
+   "note": "Interventi ammessi solo su piante giovani (fino a 4 anni di età) e reinnesti di 3 anni (1) Alla dose di 0,5 kg/hl di sostanza attiva; utile anche come sinergizzante delle altre sostanze attive indicate. interventi l’anno, prodotti in alternativa tra loro. (2) Max 2 interventi/anno (3) Al massimo 2 interventi l’anno indipendentemente dall’avversità. (4)Su arancio mandarino e limone (5) su Arancio e Mandarino (6) Max 1 intervento/anno 1 volta ogni 3 anni",
    "pagina": 39
   },
   {
@@ -297,9 +761,22 @@
    "scientifici": [
     "Heliothrips haemorrhoidalis, Pezothrips kellyanus,Frankliniella occidentalis, Thrips spp."
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: Razionali potature.",
+   "criteri": "Interventi agronomici: Razionali potature.",
+   "sostanze": [
+    {
+     "sostanza": "Azadiractina",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 39
   },
   {
@@ -308,9 +785,14 @@
    "scientifici": [
     "Otiorhynchus cribricollis"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi meccanici: Applicare preventivamente al punto d’innesto un manicotto di lana di vetro, alla messa a dimora delle piantine e sui reinnesti.",
+   "criteri": "Interventi meccanici: Applicare preventivamente al punto d’innesto un manicotto di lana di vetro, alla messa a dimora delle piantine e sui reinnesti.",
+   "sostanze": [
+    {
+     "sostanza": "Fasce in lana di vetro",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 39
   },
   {
@@ -319,9 +801,60 @@
    "scientifici": [
     "Ceratitis capitata"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi chimici: - Intervenire con esche proteiche avvelenate da metà luglio e ripetere l’intervento ogni 25 giorni. Irrorare parte della chioma di un filare ogni 3 - 4 filari, utilizzando 200 l/ha di soluzione. - Intervenire sull’intera superficie quando si registrano catture pari a 20 adulti/trappola/settimana e/o le prime punture sui frutti. Si consiglia di collocare le trappole per il monitoraggio del fitofago in ragione di almeno una per appezzamento omogeneo da, luglio per le varietà precoci",
+   "criteri": "Interventi chimici: - Intervenire con esche proteiche avvelenate da metà luglio e ripetere l’intervento ogni 25 giorni. Irrorare parte della chioma di un filare ogni 3 - 4 filari, utilizzando 200 l/ha di soluzione. - Intervenire sull’intera superficie quando si registrano catture pari a 20 adulti/trappola/settimana e/o le prime punture sui frutti. Si consiglia di collocare le trappole per il monitoraggio del fitofago in ragione di almeno una per appezzamento omogeneo da, luglio per le varietà precoci",
+   "sostanze": [
+    {
+     "sostanza": "Esche proteiche avvelenate",
+     "note": []
+    },
+    {
+     "sostanza": "Sistema Attract and Kill con deltametrina, Esfenvalerate e Lamdacialotrina.",
+     "note": []
+    },
+    {
+     "sostanza": "Proteine idrolizzate",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Lamdacialotrina",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Spinosad esca",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    },
+    {
+     "sostanza": "Cyantraniliprole",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Azadiractina A",
+     "note": []
+    }
+   ],
+   "note": "Contro questa avversità max 2 interventi larvo-aduldicidi/anno escluso le esche attivate. Si consiglia di intervenire con esche avvelenate su appezzamenti superiori a 2 ha. (1) Con piretroidi max 1 intervento l’anno indipendentemente dall’avversità. prodotti in alternativa tra di loro (2) Max 2 inteventi l’anno indipendentemente avversità (3) Applicazioni con specifica esca pronta all'uso. (3) Al massimo 8 applicazioni l’anno (4) max 3 interventi anno da applicare con specifica esca proteica pronta all’uso (Visarel ) larvo-aduldicidi/anno escluso le esche attivate.",
    "pagina": 40
   },
   {
@@ -331,8 +864,19 @@
     "Prays citri"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "sostanze": [
+    {
+     "sostanza": "Bacillus thuringiensis",
+     "note": []
+    },
+    {
+     "sostanza": "Cyantraniliprole",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "1) Max 1 intervento a stagione 1 volta ogni 3 anni",
    "pagina": 40
   },
   {
@@ -341,9 +885,62 @@
    "scientifici": [
     "Tetranychus urticae, Panonychus citri"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Equilibrare le concimazioni azotate. - Ridurre le potature. - Lavorare il terreno per disturbare i nidi delle formiche. - Evitare gli stress idrici. Interventi chimici: Intervenire al superamento delle seguenti soglie: - 10% di foglie infestate da forme mobili e 2 % di frutti infestati per Tetranychus urticae. - 30% di foglie infestate o 3 acari/foglia per Panonychus citri, con un rapporto tra femmine e fitoseidi superiore a 2:1.",
+   "criteri": "Interventi agronomici: - Equilibrare le concimazioni azotate. - Ridurre le potature. - Lavorare il terreno per disturbare i nidi delle formiche. - Evitare gli stress idrici. Interventi chimici: Intervenire al superamento delle seguenti soglie: - 10% di foglie infestate da forme mobili e 2 % di frutti infestati per Tetranychus urticae. - 30% di foglie infestate o 3 acari/foglia per Panonychus citri, con un rapporto tra femmine e fitoseidi superiore a 2:1.",
+   "sostanze": [
+    {
+     "sostanza": "Maltodestrina",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    },
+    {
+     "sostanza": "Exitiazox",
+     "note": []
+    },
+    {
+     "sostanza": "Tebufenpirad",
+     "note": []
+    },
+    {
+     "sostanza": "Fenpyroximate",
+     "note": []
+    },
+    {
+     "sostanza": "Pyridaben",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Acequinocyl",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Milbemectina",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Cyflumetofen",
+     "note": [
+      "4"
+     ]
+    }
+   ],
+   "note": "Contro quest’avversità al massimo 1 intervento l’anno. Solo su clementine e limoni Max 2 interventi/anno Sono consentiti interventi con miscele di prodotti con diverso meccanismo di azione. (1) Max 1 intervento/anno (2) Solo su arancio e mandarino (3) Solo su arancio, mandarino, clementino, Limone e Pompelmo) (4) 1 intervento ogni 2 anni",
    "pagina": 40
   },
   {
@@ -354,9 +951,18 @@
     "Aculops pelekassi",
     "Polyphagotarsonemus latus"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Equilibrare le concimazioni azotate. - Ridurre le potature. - Evitare gli stress idrici. - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento delle seguenti soglie: - 30 % di gemme infestate per Eriophyes sheldoni. Campionare da rametti verdi una gemma/pianta su 50 piante per appezzamento omogeneo, e valutando con lentina contafili (20x) la presenza dell’acaro. - Alla presenza di frutti infestati per Aculops pelekassi e Polyphagotarsonemus latus.",
+   "criteri": "Interventi agronomici: - Equilibrare le concimazioni azotate. - Ridurre le potature. - Evitare gli stress idrici. - Lavorare il terreno per disturbare i nidi delle formiche. Interventi chimici: Intervenire al raggiungimento delle seguenti soglie: - 30 % di gemme infestate per Eriophyes sheldoni. Campionare da rametti verdi una gemma/pianta su 50 piante per appezzamento omogeneo, e valutando con lentina contafili (20x) la presenza dell’acaro. - Alla presenza di frutti infestati per Aculops pelekassi e Polyphagotarsonemus latus.",
+   "sostanze": [
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    }
+   ],
+   "note": "Su Eriophyes sheldoni si consiglia di intervenire a gemme ferme entro dicembre.",
    "pagina": 41
   },
   {
@@ -365,9 +971,16 @@
    "scientifici": [
     "Phoma tracheiphila"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Asportare e bruciare le parti infette, comprese le ceppaie. - Limitare le lavorazioni allo strato superficiale del terreno per contenere le ferite alle radici ed evitare di intervenire in autunno. Interventi chimici: Solo dopo eventi meteorici avversi che causano ferite (vento, grandinate, ecc.); intervenire entro 24-48 ore dopo l’evento.",
+   "criteri": "Interventi agronomici: - Asportare e bruciare le parti infette, comprese le ceppaie. - Limitare le lavorazioni allo strato superficiale del terreno per contenere le ferite alle radici ed evitare di intervenire in autunno. Interventi chimici: Solo dopo eventi meteorici avversi che causano ferite (vento, grandinate, ecc.); intervenire entro 24-48 ore dopo l’evento.",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "***"
+     ]
+    }
+   ],
+   "note": "Interventi ammessi solo su limone.",
    "pagina": 41
   },
   {
@@ -376,9 +989,20 @@
    "scientifici": [
     "Phytophthora spp."
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: - Migliorare il drenaggio ed eliminare i ristagni idrici. - Potare la chioma a contatto del terreno per favorire la circolazione dell'aria nella zona del colletto. Interventi chimici: I trattamenti chimici vanno effettuati dopo la ripresa vegetativa, solo su piante con sintomi.",
+   "criteri": "Interventi agronomici: - Migliorare il drenaggio ed eliminare i ristagni idrici. - Potare la chioma a contatto del terreno per favorire la circolazione dell'aria nella zona del colletto. Interventi chimici: I trattamenti chimici vanno effettuati dopo la ripresa vegetativa, solo su piante con sintomi.",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Fosetil Al",
+     "note": []
+    }
+   ],
+   "note": "Indipendentemente dai prodotti rameici, contro questa avversità al massimo 1 intervento l’anno (1) Spennellature al tronco. . contro questa avversità al massimo 1 intervento l’anno",
    "pagina": 42
   },
   {
@@ -387,18 +1011,36 @@
    "scientifici": [
     "Phytophthora spp."
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici: Evitare, in autunno, l’eliminazione delle erbe infestanti. Interventi chimici: Intervenire solo in annate piovose o quando si prevede una raccolta che si protrarrà a lungo.",
+   "criteri": "Interventi agronomici: Evitare, in autunno, l’eliminazione delle erbe infestanti. Interventi chimici: Intervenire solo in annate piovose o quando si prevede una raccolta che si protrarrà a lungo.",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "***"
+     ]
+    },
+    {
+     "sostanza": "Metalaxyl",
+     "note": [
+      "1",
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Fosfonato di potassio",
+     "note": []
+    }
+   ],
+   "note": "Irrorazione limitata alla parte bassa della chioma utilizzando 1.200 l/ha di soluzione. Non miscelare con prodotti a base di Olio minerale. (1) Max 1 intervento/ anno (prodotti in alternativa fra di loro) (2) Arancio e pompelmo",
    "pagina": 42
   },
   {
    "coltura": "AGRUMI",
    "avversita": "Fumaggine",
    "scientifici": [],
-   "criteri": "",
+   "criteri": "In genere il corretto contenimento degli insetti che producono melata è sufficiente a prevenire la fusaggine. Interventi agronomici: - Effettuare opportune potature per l’arieggiamento della chioma. - Evitare eccessive concimazioni azotate.",
    "sostanze": [],
-   "note": "In genere il corretto contenimento degli insetti che producono melata è sufficiente a prevenire la fusaggine. Interventi agronomici: - Effettuare opportune potature per l’arieggiamento della chioma. - Evitare eccessive concimazioni azotate.",
+   "note": "",
    "pagina": 42
   },
   {
@@ -407,18 +1049,48 @@
    "scientifici": [
     "Pseudomonas siryngae"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici: Si consiglia di adottare idonee misure di difesa dalle avversità meteoriche (barriere frangivento, ventole antigelo, ecc.). Interventi chimici: Intervenire in autunno-inverno subito dopo eventi meteorici che favoriscono le infezioni (abbassamenti termici e piogge prolungate).",
+   "criteri": "Interventi agronomici: Si consiglia di adottare idonee misure di difesa dalle avversità meteoriche (barriere frangivento, ventole antigelo, ecc.). Interventi chimici: Intervenire in autunno-inverno subito dopo eventi meteorici che favoriscono le infezioni (abbassamenti termici e piogge prolungate).",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "***"
+     ]
+    },
+    {
+     "sostanza": "Bacillus subtilis",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 42
   },
   {
    "coltura": "AGRUMI",
    "avversita": "Maculatura Bruna Alternaria alternata Antracnosi Colletotrichum spp",
    "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agromici - Favorire l'arieggiamento della chioma - utilizzare portinnesti poco vigorosi Interventi chimici - intervenire alla ripresa vegetativa al fine di ridurre l'inoculo",
+   "criteri": "Interventi agromici - Favorire l'arieggiamento della chioma - utilizzare portinnesti poco vigorosi Interventi chimici - intervenire alla ripresa vegetativa al fine di ridurre l'inoculo",
+   "sostanze": [
+    {
+     "sostanza": "Pyraclostrobin",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Dodina",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Fludioxonil",
+     "note": [
+      "3"
+     ]
+    }
+   ],
+   "note": "Contro queste avversità max 3 interventi (1) Max 2 interventi all’anno indipemdentemente dall’avversità (2) Max 2 interventi/anno indipendentemente dall’avversità (3) Max 1 intervento/anno indipendentemente dall’avversità",
    "pagina": 43
   },
   {
@@ -427,9 +1099,9 @@
    "scientifici": [
     "CTV"
    ],
-   "criteri": "",
+   "criteri": "Interventi agronomici - impiegare materiale vivaistico certificato esente da CTV; - effettuare controlli periodici; Applicare il REG di esecuzione (UE) 2019/2072 della Commissione, così come modificato dal REG di esecuzione (UE) 2021/2285\"Misure di fitosanitarie per il controllo del Virirus degli agrumi “Citrus Tristeza Virus” , segnalare tempestivamente al Servizio Fitosanitario regionale l’eventuale presenza si sintomi sospetti della malattia, allo scopo di poter eseguire gli opportuni accertamenti di laboratorio.",
    "sostanze": [],
-   "note": "Interventi agronomici - impiegare materiale vivaistico certificato esente da CTV; - effettuare controlli periodici; Applicare il REG di esecuzione (UE) 2019/2072 della Commissione, così come modificato dal REG di esecuzione (UE) 2021/2285\"Misure di fitosanitarie per il controllo del Virirus degli agrumi “Citrus Tristeza Virus” , segnalare tempestivamente al Servizio Fitosanitario regionale l’eventuale presenza si sintomi sospetti della malattia, allo scopo di poter eseguire gli opportuni accertamenti di laboratorio.",
+   "note": "",
    "pagina": 43
   },
   {
@@ -449,18 +1121,192 @@
    "scientifici": [
     "Monilia laxa, Monilia fructigena"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi chimici: E' opportuno trattare in pre-fioritura. Si consiglia di limitare gli interventi in pre- raccolta alle cvs a elevata suscettibilità o in condizioni climatiche favorevoli all'infezione.",
+   "criteri": "Interventi chimici: E' opportuno trattare in pre-fioritura. Si consiglia di limitare gli interventi in pre- raccolta alle cvs a elevata suscettibilità o in condizioni climatiche favorevoli all'infezione.",
+   "sostanze": [
+    {
+     "sostanza": "Bacillus subtilis",
+     "note": []
+    },
+    {
+     "sostanza": "Trichoderma atroviride",
+     "note": []
+    },
+    {
+     "sostanza": "Bacillus amyloliquefaciens",
+     "note": []
+    },
+    {
+     "sostanza": "Saccharomyces cerevisiae",
+     "note": []
+    },
+    {
+     "sostanza": "Zolfo",
+     "note": []
+    },
+    {
+     "sostanza": "Estratto acquoso dei semi germinati di Lupinus albus dolce",
+     "note": []
+    },
+    {
+     "sostanza": "Tebuconazolo",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Trifloxystrobin",
+     "note": [
+      "9"
+     ]
+    },
+    {
+     "sostanza": "Fludioxonl",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Cipronidil",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Fenexamid",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Pyraclostrobin",
+     "note": [
+      "9"
+     ]
+    },
+    {
+     "sostanza": "Fluopyram + tebuconazolo",
+     "note": []
+    },
+    {
+     "sostanza": "Bicarbonato di K",
+     "note": []
+    },
+    {
+     "sostanza": "Difenoconazolo",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Penthiopirad",
+     "note": [
+      "6"
+     ]
+    },
+    {
+     "sostanza": "Isofetamid",
+     "note": [
+      "7"
+     ]
+    },
+    {
+     "sostanza": "Mefentrifluconazolo",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Pyrimethanil",
+     "note": [
+      "8"
+     ]
+    },
+    {
+     "sostanza": "Mandestrobin",
+     "note": [
+      "9"
+     ]
+    },
+    {
+     "sostanza": "Boscalid",
+     "note": [
+      "10"
+     ]
+    }
+   ],
+   "note": "Al massimo 3 interventi l’anno contro questa avversità con prodotti di sintesi (1) Indipendentemente dall'avversità al massimo 2 interventi l’anno come singola sostanza attiva 3 come gruppo;. (3) Al massimo 2 intervento l’anno da solo o in miscela (4) Al massimo 2 interventi l’anno 3 per il gruppo (5) Al massimo 2 interventi l’anno indipendentemente dall'avversità 6) max 1 intervento/anno (7) Max 1 interventi/anno (8) in alternativa a Cypronidil Max 1 intervento (9) Max 2 interventi/anno prodotti in alternativa tra di loro (10) Max 2 interventi/anno questa avversità con prodotti di sintesi",
    "pagina": 44
   },
   {
    "coltura": "ALBICCCO",
    "avversita": "Mal bianco Podosphaera sp.",
    "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi chimici: Negli impianti solitamente colpiti intervenire preventivamente nelle fasi di scamiciatura e inizio ingrossamento frutti. Successivi interventi andranno effettuati alla comparsa delle prime macchie di oidio",
+   "criteri": "Interventi chimici: Negli impianti solitamente colpiti intervenire preventivamente nelle fasi di scamiciatura e inizio ingrossamento frutti. Successivi interventi andranno effettuati alla comparsa delle prime macchie di oidio",
+   "sostanze": [
+    {
+     "sostanza": "Zolfo",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    },
+    {
+     "sostanza": "(Pyraclostrobin + Boscalid)",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Bupirimate",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "(Tryfloxistrobin + Tebuconazolo)",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Fluopyram",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Fluxapyroxad",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Difenoconazolo",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Penthiopirad",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Cyflufenamide",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Mefentrifluconazolo",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "(1) Indipendentemente dall'avversità con IBE al massimo 2 interventi l’anno 3 come gruppo (2) Al massimo 2 interventi l’anno indipendentemente dall’avversità (4) Al massimo 2 interventi l’anno. (3) Max 1 intervento/anno (*) Tra Fluopyram, Fluxapyroxad, Penthiopyrad e Boscalid max 3 interventi/anno",
    "pagina": 44
   },
   {
@@ -807,7 +1653,7 @@
      "note": []
     }
    ],
-   "note": "",
+   "note": "Max 3 interventi all'anno con i piretroidi",
    "pagina": 47
   },
   {
@@ -912,120 +1758,50 @@
   },
   {
    "coltura": "ALBICOCCO",
-   "avversita": "AVVERSITA’",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [
-    {
-     "sostanza": "CRITERI DÌ INTERVENTO",
-     "note": []
-    }
-   ],
-   "note": "S.A. e AUSILIARI",
-   "pagina": 49
-  },
-  {
-   "coltura": "ALBICOCCO",
    "avversita": "Cimice asiatica (Halyomorpha halys)",
    "scientifici": [
     "Halyomorpha halys"
    ],
-   "criteri": "",
+   "criteri": "Monitoraggio - a partire indicativamente da fine aprile ponendo attenzione, nelle fasi iniziali, ai punti di ingresso (vicinanza ad edifici, siepi, ecc). - eseguire i controlli anche nel periodo degli sfalci e delle trebbiature delle colture erbacee ospiti e nel corso delle raccolte nei frutteti adiacenti, che possono provocare massicci spostamenti della cimice. Monitoraggio visivo: '- controllare la presenza di adulti, ovature e forme giovanili, su foglie e frutti con particolare attenzione alla parte alta delle piante. '- nelle prime ore del mattino la cimice risulta meno mobile. Monitoraggio con trappole: - utilizzare trappole specifiche con feromoni di aggregazione da ispezionare periodicamente. '- installare le trappole sui bordi dell’appezzamento, a distanza di almeno 20-30 m tra loro. - le trappole all’interno dei frutteti possono comportare l’incremento delle popolazioni e dei danni nel raggio di azione del feromone (circa 6/8 metri). - le trappole non forniscono una stima della popolazione ma facilitano il rilievo della presenza dell’insetto. - non esiste al momento una soglia d’intervento. Mezzi fisici - applicare reti antinsetto monofila o monoblocco con chiusura anticipando i primi spostamenti dell’insetto. Interventi chimici - gli interventi devono essere eseguiti sulla base dei riscontri aziendali ' - l’effetto abbattente dei trattamenti è legato soprattutto all’azione diretta per contatto quindi gli interventi vanno correlati alla presenza dell’insetto",
    "sostanze": [
     {
-     "sostanza": "Monitoraggio",
-     "note": []
+     "sostanza": "Deltametrina",
+     "note": [
+      "1"
+     ]
     },
     {
-     "sostanza": "- a partire indicativamente da fine aprile ponendo attenzione, nelle fasi iniziali, ai punti di ingresso",
-     "note": []
+     "sostanza": "Acetamiprid",
+     "note": [
+      "2"
+     ]
     },
     {
-     "sostanza": "(vicinanza ad edifici, siepi, ecc).",
-     "note": []
+     "sostanza": "Etofenprox",
+     "note": [
+      "1"
+     ]
     },
     {
-     "sostanza": "- eseguire i controlli anche nel periodo degli sfalci e delle trebbiature delle colture erbacee ospiti e nel corso delle raccolte nei frutteti adiacenti, che possono provocare massicci spostamenti della cimice.",
-     "note": []
+     "sostanza": "Tau-Fluvalinate",
+     "note": [
+      "1"
+     ]
     },
     {
-     "sostanza": "Monitoraggio visivo:",
-     "note": []
+     "sostanza": "Tebufenozide",
+     "note": [
+      "3"
+     ]
     },
     {
-     "sostanza": "'- controllare la presenza di adulti, ovature e forme giovanili, su foglie e frutti con particolare attenzione alla parte alta delle piante.",
-     "note": []
-    },
-    {
-     "sostanza": "'- nelle prime ore del mattino la cimice risulta meno mobile.",
-     "note": []
-    },
-    {
-     "sostanza": "Monitoraggio con trappole:",
-     "note": []
-    },
-    {
-     "sostanza": "- utilizzare trappole specifiche con feromoni di aggregazione da ispezionare periodicamente.",
-     "note": []
-    },
-    {
-     "sostanza": "'- installare le trappole sui bordi dell’appezzamento, a distanza di almeno 20-30 m tra loro.",
-     "note": []
-    },
-    {
-     "sostanza": "- le trappole all’interno dei frutteti possono comportare l’incremento delle popolazioni e dei danni nel raggio di azione del feromone (circa 6/8 metri).",
-     "note": []
-    },
-    {
-     "sostanza": "- le trappole non forniscono una stima della popolazione ma facilitano il rilievo della presenza dell’insetto.",
-     "note": []
-    },
-    {
-     "sostanza": "- non esiste al momento una soglia d’intervento.",
-     "note": []
-    },
-    {
-     "sostanza": "Mezzi fisici",
-     "note": []
-    },
-    {
-     "sostanza": "- applicare reti antinsetto monofila o monoblocco con chiusura anticipando i primi spostamenti dell’insetto.",
-     "note": []
-    },
-    {
-     "sostanza": "Interventi chimici",
-     "note": []
-    },
-    {
-     "sostanza": "- gli interventi devono essere eseguiti sulla base dei riscontri aziendali '",
-     "note": []
-    },
-    {
-     "sostanza": "- l’effetto abbattente dei trattamenti è legato soprattutto all’azione diretta per contatto quindi gli interventi vanno correlati alla presenza dell’insetto",
-     "note": []
+     "sostanza": "Piretrine Pure",
+     "note": [
+      "4"
+     ]
     }
    ],
-   "note": "Deltametrina (1)* Acetamiprid (2) Etofenprox (1)* Tau-Fluvalinate (1)* Tebufenozide (3) Piretrine Pure (4)*",
-   "pagina": 49
-  },
-  {
-   "coltura": "ALBICOCCO",
-   "avversita": "(***)",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "sostanze": [],
-   "note": "",
-   "pagina": 49
-  },
-  {
-   "coltura": "ALBICOCCO",
-   "avversita": "*Con Piretrine e piretroidi Max 4 interventi/anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "note": "1) Max 1 intervento l’anno 2) max 1 intervento all’anno indipendentemente dall’avversità 3) Max 2 interventi/anno (4)Max 2 interventi/anno",
    "pagina": 49
   },
   {
@@ -1508,45 +2284,7 @@
      ]
     }
    ],
-   "note": "",
-   "pagina": 53
-  },
-  {
-   "coltura": "CILIEGIO",
-   "avversita": "Moscerino dei piccoli frutti (Drosophila suzukii)",
-   "scientifici": [
-    "Drosophila suzukii"
-   ],
-   "criteri": "Interventi agronomici Si consiglia il monitoraggio con trappole innescate con esche di aceto di succo Si consiglia di eliminare tempestivamente tutti i frutti colpiti.",
-   "sostanze": [
-    {
-     "sostanza": "Acetamiprid",
-     "note": [
-      "1"
-     ]
-    },
-    {
-     "sostanza": "Deltametina",
-     "note": [
-      "2"
-     ]
-    },
-    {
-     "sostanza": "Deltametrina (*modalità Attract & Kill Decis Trap)",
-     "note": []
-    },
-    {
-     "sostanza": "Emamectina benzoato",
-     "note": [
-      "2"
-     ]
-    },
-    {
-     "sostanza": "Piretrine pure",
-     "note": []
-    }
-   ],
-   "note": "",
+   "note": "(1) Max 3 interventi l’anno indipendentemente dall’avversità",
    "pagina": 53
   },
   {
@@ -1580,18 +2318,7 @@
      "note": []
     }
    ],
-   "note": "",
-   "pagina": 53
-  },
-  {
-   "coltura": "CILIEGIO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "- (*) Max 4 interventi all’anno con piretroidi e piretrine",
+   "note": "1) Max 1 intervento all'anno 2) Max 1 intervento l’anno",
    "pagina": 53
   },
   {
@@ -1654,17 +2381,6 @@
     }
    ],
    "note": "(1) Applicazioni con specifica esca pronta all'uso. (1) Al massimo 5 applicazioni all'anno",
-   "pagina": 54
-  },
-  {
-   "coltura": "FICO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 54
   },
   {
@@ -2208,7 +2924,7 @@
      "note": []
     }
    ],
-   "note": "",
+   "note": "(1) Al massimo 1 intervento all'anno solo in serra (2) Max 3 interventi/anno (3) solo in serra",
    "pagina": 58
   },
   {
@@ -2219,8 +2935,13 @@
     "Eotetranychus carpini"
    ],
    "criteri": "Interventi biologici Introdurre 4-10 predatori / mq. Se si riscontra la presenza di Fitoseide selvatico si può ridurre il quantitativo di lancio Interventi chimici Infestazione generalizzata",
-   "sostanze": [],
-   "note": "Phytoseiulus persimilis Amblyseius californicus Amblyseius andersoni Beauveria bassiana Abamectina (1) Exitiazox (5) Fenpiroximate Milbemectina Tebufenpirad (2) Piridaben (2) Cyflumetofen (4) Maltosestrina (3)",
+   "sostanze": [
+    {
+     "sostanza": "Phytoseiulus persimilis",
+     "note": []
+    }
+   ],
+   "note": "Contro questa avversità al massimo 2 interventi all'anno (1) Max 2 interventio/anno solo in serra non utilizzare tra novembre e febbraio (2) Max 1 intervento . Ammesso solo in serra (3) Solo in pieno campo (4) 1 intervento ogni 2 anni solo in serra (5) Max 2 interventi/anno",
    "pagina": 58
   },
   {
@@ -2254,7 +2975,7 @@
      ]
     }
    ],
-   "note": "",
+   "note": "(1) max 2 interventi/anno indipendentemente dall’avversità",
    "pagina": 58
   },
   {
@@ -3899,9 +4620,18 @@
    "scientifici": [
     "Cytospora corylicola"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici -sostituire i vecchi impianti debilitati -preferire l’allevamento monocaule -effettuare concimazioni ed irrigazioni equilibrate -effettuare un’idonea sistemazione del terreno -durante la potatura eliminare col fuoco le parti infette Interventi chimici '-in caso di infezioni gravi intervenire a fine estate ed alla ripresa vegetativa -proteggere con mastici o paste cicatrizzanti i tagli o le ferite più ampie e profonde",
+   "criteri": "Interventi agronomici -sostituire i vecchi impianti debilitati -preferire l’allevamento monocaule -effettuare concimazioni ed irrigazioni equilibrate -effettuare un’idonea sistemazione del terreno -durante la potatura eliminare col fuoco le parti infette Interventi chimici '-in caso di infezioni gravi intervenire a fine estate ed alla ripresa vegetativa -proteggere con mastici o paste cicatrizzanti i tagli o le ferite più ampie e profonde",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": []
+    },
+    {
+     "sostanza": "Mastici addizionati con prodotti fungicidi autorizzati",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 71
   },
   {
@@ -3911,8 +4641,21 @@
     "Fusarium lateritium Colletotrichum spp.; Phomopsis spp.; Alternaria spp"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "sostanze": [
+    {
+     "sostanza": "Boscalid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Pyraclostrobin",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "(1) Max 2 interventi/anno da soli o in miscela",
    "pagina": 71
   },
   {
@@ -3922,7 +4665,20 @@
     "Phillactinia spp; Erysiphe Corylacearum"
    ],
    "criteri": "",
-   "sostanze": [],
+   "sostanze": [
+    {
+     "sostanza": "Zolfo",
+     "note": []
+    },
+    {
+     "sostanza": "Mefentrifluconazolo",
+     "note": []
+    },
+    {
+     "sostanza": "Estratto acquoso dei semi germinati di Lupinus albus dolce",
+     "note": []
+    }
+   ],
    "note": "",
    "pagina": 71
   },
@@ -3932,9 +4688,22 @@
    "scientifici": [
     "Monilinia fructigena"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici Eliminazione delle nocciole colpite. Protezione delle piante da agenti che provocano ferite che favoriscono la penetrazione del patogeno.",
+   "criteri": "Interventi agronomici Eliminazione delle nocciole colpite. Protezione delle piante da agenti che provocano ferite che favoriscono la penetrazione del patogeno.",
+   "sostanze": [
+    {
+     "sostanza": "Bacillus amyloliquefaciens",
+     "note": []
+    },
+    {
+     "sostanza": "Bacillus subtilis",
+     "note": []
+    },
+    {
+     "sostanza": "Estratto acquoso dei semi germinati di Lupinus albus dolce",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 71
   },
   {
@@ -3943,9 +4712,14 @@
    "scientifici": [
     "Xanthomonas campestris pv. corylina"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici -eliminare gli organi infetti con le operazioni di potatura -disinfezione degli attrezzi di potatura e dei tagli con solfato di rame o con ipoclorito di sodio al 3% -effettuare concimazioni ed irrigazioni equilibrate Interventi chimici -un trattamento alla caduta delle foglie e subito dopo la potatura e, se necessario, un altro alla ripresa vegetativa o in seguito alle gelate tardive primaverili",
+   "criteri": "Interventi agronomici -eliminare gli organi infetti con le operazioni di potatura -disinfezione degli attrezzi di potatura e dei tagli con solfato di rame o con ipoclorito di sodio al 3% -effettuare concimazioni ed irrigazioni equilibrate Interventi chimici -un trattamento alla caduta delle foglie e subito dopo la potatura e, se necessario, un altro alla ripresa vegetativa o in seguito alle gelate tardive primaverili",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 71
   },
   {
@@ -3965,9 +4739,14 @@
    "scientifici": [
     "Pseudomonas syringae pv. Avellanae, Erwinia amylovora"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici -eliminare gli organi infetti con le operazioni di potatura -disinfezione degli attrezzi di potatura e dei tagli con solfato di rame o con ipoclorito di sodio al 3% -effettuare concimazioni ed irrigazioni equilibrate -assicurare un buon drenaggio al terreno Interventi chimici - In caso di attacco grave: 2 trattamenti autunnali (uno all’inizio caduta foglie e l’altro a metà caduta foglie); 1 o 2 trattamenti alla ripresa vegetativa. - In caso di attacco lieve: 1 trattamento alla caduta delle foglie; 1 trattamento alla ripresa vegetativa. In ogni caso il trattamento deve essere fatto quando sopraggiungono fattori predisponenti l’infezione (es. gelate tardive primaverili).",
+   "criteri": "Interventi agronomici -eliminare gli organi infetti con le operazioni di potatura -disinfezione degli attrezzi di potatura e dei tagli con solfato di rame o con ipoclorito di sodio al 3% -effettuare concimazioni ed irrigazioni equilibrate -assicurare un buon drenaggio al terreno Interventi chimici - In caso di attacco grave: 2 trattamenti autunnali (uno all’inizio caduta foglie e l’altro a metà caduta foglie); 1 o 2 trattamenti alla ripresa vegetativa. - In caso di attacco lieve: 1 trattamento alla caduta delle foglie; 1 trattamento alla ripresa vegetativa. In ogni caso il trattamento deve essere fatto quando sopraggiungono fattori predisponenti l’infezione (es. gelate tardive primaverili).",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": []
+    }
+   ],
+   "note": "**28 Kg in 7 anni e la raccomandazione di non superare il quantitativo medio di 4 Kg di rame per ettaro all'anno",
    "pagina": 72
   },
   {
@@ -3976,9 +4755,22 @@
    "scientifici": [
     "Phytocoptella avellanae"
    ],
-   "criteri": "AVVERSITA’",
-   "sostanze": [],
-   "note": "Interventi agronomici - impiego di varietà con gemme robuste e serrate - scegliere cultivar meno suscettibili (es. Mortarella) Campionamento Alla ripresa vegetativa vanno esaminati 4 rami/pianta sul 10% delle piante presenti in un ettaro, conteggiando il numero di gemme infestate sul totale delle gemme presenti. Soglia: 15-20% delle gemme infestate Interventi chimici - intervenire nel momento in cui si ha la migrazione dell’acaro dalle gemme infestate verso quelle sane, quando i nuovi germogli hanno 3-4 foglie completamente svolte. Questo accade, generalmente, per le varietà precoci, a fine febbraio primi di marzo e per le altre cultivar tra aprile e giugno.",
+   "criteri": "Interventi agronomici - impiego di varietà con gemme robuste e serrate - scegliere cultivar meno suscettibili (es. Mortarella) Campionamento Alla ripresa vegetativa vanno esaminati 4 rami/pianta sul 10% delle piante presenti in un ettaro, conteggiando il numero di gemme infestate sul totale delle gemme presenti. Soglia: 15-20% delle gemme infestate Interventi chimici - intervenire nel momento in cui si ha la migrazione dell’acaro dalle gemme infestate verso quelle sane, quando i nuovi germogli hanno 3-4 foglie completamente svolte. Questo accade, generalmente, per le varietà precoci, a fine febbraio primi di marzo e per le altre cultivar tra aprile e giugno.",
+   "sostanze": [
+    {
+     "sostanza": "Zolfo",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    }
+   ],
+   "note": "",
    "pagina": 72
   },
   {
@@ -3988,8 +4780,19 @@
     "Panonychus ulmi; Tetranychus urticae; Eotetranychus carpini"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "sostanze": [
+    {
+     "sostanza": "Acequinocil",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Maltodestrine",
+     "note": []
+    }
+   ],
+   "note": "(1) Max 1 intervento/anno",
    "pagina": 73
   },
   {
@@ -3998,9 +4801,22 @@
    "scientifici": [
     "Curculio nucum"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Valutare la presenza degli adulti adottando la tecnica dello scuotimento. Soglia: 2 individui per pianta su 6 piante/ha scelte nei punti di maggiore rischio.",
+   "criteri": "Valutare la presenza degli adulti adottando la tecnica dello scuotimento. Soglia: 2 individui per pianta su 6 piante/ha scelte nei punti di maggiore rischio.",
+   "sostanze": [
+    {
+     "sostanza": "Deltametrina",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "2"
+     ]
+    }
+   ],
+   "note": "Al massimo 2 intervento all'anno contro questa avversità Tra Deltametrina, Etofenprox e lambdacialotrina max 3 interventi all’anno indipendentemente dall’avverstà (1) Max 2 intervento all’anno (2) Max 1 intervento all’anno",
    "pagina": 73
   },
   {
@@ -4009,9 +4825,26 @@
    "scientifici": [
     "Pentatomidi Coreidi: Gonocerus acuteangulatus, Palomena prasina"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Interventi agronomici - evitare le consociazioni e la vicinanza di zone incolte in prossimità - Valutare la presenza degli adulti adottando la tecnica del “frappage” nel periodo maggio- luglio. Soglia: 2 individui per pianta.",
+   "criteri": "Interventi agronomici - evitare le consociazioni e la vicinanza di zone incolte in prossimità - Valutare la presenza degli adulti adottando la tecnica del “frappage” nel periodo maggio- luglio. Soglia: 2 individui per pianta.",
+   "sostanze": [
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    },
+    {
+     "sostanza": "Lambdacialotrina",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "2"
+     ]
+    }
+   ],
+   "note": "Tra Deltametrina, Etofenprox e lambdacialotrina max 3 interventi all’anno indipendentemente dall’avverstà (1) Max 2 intervento all’anno (2) Max 1 intervento all’anno",
    "pagina": 73
   },
   {
@@ -4021,8 +4854,25 @@
     "halyomorpha halys"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
+   "sostanze": [
+    {
+     "sostanza": "Deltametrina",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    }
+   ],
+   "note": "Tra Deltametrina, Etofenprox e lambdacialotrina max 3 interventi all’anno indipendentemente dall’avverstà (1) Max 2 intervento all’anno (2) Max 1 intervento all’anno",
    "pagina": 73
   },
   {
@@ -4033,7 +4883,7 @@
    ],
    "criteri": "",
    "sostanze": [],
-   "note": "",
+   "note": "* Tra piretrine e piretroidi max 4 interventi/anno",
    "pagina": 73
   },
   {
@@ -4370,8 +5220,15 @@
     "Euphyllura olivina"
    ],
    "criteri": "Interventi agronomici Effettuare un maggiore arieggiamento della chioma.",
-   "sostanze": [],
-   "note": "",
+   "sostanze": [
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "1"
+     ]
+    }
+   ],
+   "note": "(1) Max 1 intervento/anno",
    "pagina": 79
   },
   {
@@ -4381,34 +5238,12 @@
     "Zeuzera pyrina"
    ],
    "criteri": "Interventi agronomici Durante la potatura eliminare le parti infestate e individuare le larve nell’interno dei rami. In primavera, seguendo lo sfarfallamento a mezzo delle trappole a feromone controllare sui rami la formazione delle gallerie. In caso di galleria appena iniziata, utilizzare un fil di ferro cercando di non far sviluppare molto le larve poiché risulta difficile raggiungerle per la sinuosità delle gallerie. Interventi biotecnici Impiego del metodo della confusione sessuale utilizzando 300-400 diffusori/ha",
-   "sostanze": [],
-   "note": "",
-   "pagina": 79
-  },
-  {
-   "coltura": "OLIVO",
-   "avversita": "Cecidomia (Dasineura oleae)",
-   "scientifici": [
-    "Dasineura oleae"
-   ],
-   "criteri": "",
    "sostanze": [
     {
-     "sostanza": "Solo su impianti giovani (fino a 4 anni)",
+     "sostanza": "Catture massali con trappole a feromoni, Confusione sessuale.",
      "note": []
     }
    ],
-   "note": "",
-   "pagina": 79
-  },
-  {
-   "coltura": "OLIVO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
    "note": "",
    "pagina": 79
   },
@@ -5387,26 +6222,6 @@
     }
    ],
    "note": "(1) Indipendentemente dall’avversità Max 2 interventi/anno",
-   "pagina": 87
-  },
-  {
-   "coltura": "PERO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno * Max",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 87
-  },
-  {
-   "coltura": "PERO",
-   "avversita": "con Taufluvalinate e 3 con Deltametrina.",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 87
   },
   {
@@ -6964,32 +7779,18 @@
   },
   {
    "coltura": "SUSINO",
-   "avversita": "AVVERSITA’",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [
-    {
-     "sostanza": "CRITERI DÌ INTERVENTO",
-     "note": []
-    }
-   ],
-   "note": "S.A. e AUSILIARI",
-   "pagina": 100
-  },
-  {
-   "coltura": "SUSINO",
    "avversita": "FITOFAGI OCCASIONALI Orgia (Orgyia antiqua)",
    "scientifici": [
     "Orgyia antiqua"
    ],
-   "criteri": "",
+   "criteri": "Soglia: presenza di larve giovani",
    "sostanze": [
     {
-     "sostanza": "Soglia: presenza di larve giovani",
+     "sostanza": "Bacillus thuringiensis",
      "note": []
     }
    ],
-   "note": "Bacillus thuringiensis",
+   "note": "",
    "pagina": 100
   },
   {
@@ -6998,18 +7799,30 @@
    "scientifici": [
     "Taeniothrips meridionalis"
    ],
-   "criteri": "",
+   "criteri": "Soglia indicativa: Presenza su cv suscettibili (es. Angeleno).",
    "sostanze": [
     {
-     "sostanza": "Soglia indicativa:",
+     "sostanza": "Deltametrina",
      "note": []
     },
     {
-     "sostanza": "Presenza su cv suscettibili (es. Angeleno).",
+     "sostanza": "Lambdacialotrina",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    },
+    {
+     "sostanza": "Azadiractina A",
      "note": []
     }
    ],
-   "note": "Deltametrina ** Lambdacialotrina ** Sali potassici di acidi grassi Beauveria bassiana Azadiractina A",
+   "note": "Contro questa avversita max 1 intervento/anno",
    "pagina": 100
   },
   {
@@ -7018,18 +7831,14 @@
    "scientifici": [
     "Pandemis cerasana, Archips podanus"
    ],
-   "criteri": "",
+   "criteri": "Soglia: 5 % dei germogli infestati",
    "sostanze": [
     {
-     "sostanza": "Soglia:",
-     "note": []
-    },
-    {
-     "sostanza": "5 % dei germogli infestati",
+     "sostanza": "Bacillus thuringiensis",
      "note": []
     }
    ],
-   "note": "Bacillus thuringiensis",
+   "note": "",
    "pagina": 100
   },
   {
@@ -7038,14 +7847,16 @@
    "scientifici": [
     "Metcalfa pruinosa"
    ],
-   "criteri": "",
+   "criteri": "Difesa da realizzare in modo complementare alle altre avversità",
    "sostanze": [
     {
-     "sostanza": "Difesa da realizzare in modo complementare alle altre avversità",
-     "note": []
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
     }
    ],
-   "note": "Acetamiprid (1)",
+   "note": "(1) Max 2 interventi/anno indipendentemente dall’avversità",
    "pagina": 100
   },
   {
@@ -7054,18 +7865,36 @@
    "scientifici": [
     "Panonychus ulmi, Tetranichus urticae"
    ],
-   "criteri": "",
+   "criteri": "Soglia: 60% di foglie infestate (panonychus)",
    "sostanze": [
     {
-     "sostanza": "Soglia:",
+     "sostanza": "Fempiroximate",
      "note": []
     },
     {
-     "sostanza": "60% di foglie infestate (panonychus)",
+     "sostanza": "Tebfempirad",
+     "note": []
+    },
+    {
+     "sostanza": "Cyflumetofen",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Acequinocyl",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Maltodestrina",
      "note": []
     }
    ],
-   "note": "Fempiroximate Tebfempirad Cyflumetofen (1) Acequinocyl Sali potassici di acidi grassi Maltodestrina",
+   "note": "Al massimo 1 intervento l'anno contro questa avversità (1) 1 intervento ogni 2 anni",
    "pagina": 100
   },
   {
@@ -7074,18 +7903,34 @@
    "scientifici": [
     "Ceratitis capitata"
    ],
-   "criteri": "",
+   "criteri": "Soglia di intervento Prime punture",
    "sostanze": [
     {
-     "sostanza": "Soglia di intervento",
+     "sostanza": "Sistemi attrack and kill attivati con Lambda- cialotrina, Esfenvalerate e Deltametrina",
      "note": []
     },
     {
-     "sostanza": "Prime punture",
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Spinosad esca",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Proteine idrolizzate",
+     "note": []
+    },
+    {
+     "sostanza": "Beauveria bassiana",
      "note": []
     }
    ],
-   "note": "Sistemi attrack and kill attivati con Lambda- cialotrina, Esfenvalerate e Deltametrina Acetamiprid (1) Spinosad esca (2) Proteine idrolizzate Beauveria bassiana",
+   "note": "Installare trappole cromotropiche gialle all'inizio della pre maturazione (1) Al massimo 1 intervento l'anno contro questa avversità (2) Max 8 interventi/anno",
    "pagina": 100
   },
   {
@@ -7095,28 +7940,23 @@
     "Halyomorpha halys,"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "Acetamiprid (1) Sali potassici di acidi grassi Piretrine Pure**",
-   "pagina": 100
-  },
-  {
-   "coltura": "SUSINO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
+   "sostanze": [
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Piretrine Pure",
+     "note": []
+    }
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 100
-  },
-  {
-   "coltura": "SUSINO",
-   "avversita": "con piretroidi",
-   "scientifici": [],
-   "criteri": "e Piretrine, 3 con Lamdacialotrina",
-   "sostanze": [],
-   "note": "",
+   "note": "(1) Max 2 interventi/anno indipendentemente dall’avversità",
    "pagina": 100
   },
   {
@@ -7933,32 +8773,32 @@
   },
   {
    "coltura": "VITE DA TAVOLA",
-   "avversita": "AVVERSITA’",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [
-    {
-     "sostanza": "CRITERI DÌ INTERVENTO",
-     "note": []
-    }
-   ],
-   "note": "S.A. e AUSILIARI",
-   "pagina": 106
-  },
-  {
-   "coltura": "VITE DA TAVOLA",
    "avversita": "Mosca (Ceratitis capitata)",
    "scientifici": [
     "Ceratitis capitata"
    ],
-   "criteri": "",
+   "criteri": "I trattamenti contro la terza generazione di tignoletta son efficaci anche contro le infestazioni di Mosca mediterranea",
    "sostanze": [
     {
-     "sostanza": "I trattamenti contro la terza generazione di tignoletta son efficaci anche contro le infestazioni di Mosca mediterranea",
+     "sostanza": "Pannelli con attrattivi alimentari (sistema Attract and Kill)) con",
      "note": []
+    },
+    {
+     "sostanza": "Deltametrina, Esfenvalerate o",
+     "note": []
+    },
+    {
+     "sostanza": "Labdacialotrina",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
     }
    ],
-   "note": "Pannelli con attrattivi alimentari (sistema Attract and Kill)) con Deltametrina, Esfenvalerate o Labdacialotrina Acetamiprid (1)",
+   "note": "Uso di trappole al trimedlure per il monitoraggio dei voli. (1) Max 1 intervento/anno indipendentemente dall’avversità",
    "pagina": 106
   },
   {
@@ -7967,26 +8807,16 @@
    "scientifici": [
     "Otiorrhynchus spp."
    ],
-   "criteri": "",
+   "criteri": "Interventi agronomici Utilizzare barriere di protezione (resinato acrilico ) per evitare la salita degli adulti Interventi chimici Intervenire alla comparsa degli adulti",
    "sostanze": [
     {
-     "sostanza": "Interventi agronomici",
-     "note": []
-    },
-    {
-     "sostanza": "Utilizzare barriere di protezione (resinato acrilico ) per evitare la salita degli adulti",
-     "note": []
-    },
-    {
-     "sostanza": "Interventi chimici",
-     "note": []
-    },
-    {
-     "sostanza": "Intervenire alla comparsa degli adulti",
-     "note": []
+     "sostanza": "Spinosad",
+     "note": [
+      "1"
+     ]
     }
    ],
-   "note": "Spinosad (1)",
+   "note": "(1) Al massimo 3 interventi/anno indipendentemente dall’avversità.",
    "pagina": 106
   },
   {
@@ -7996,8 +8826,37 @@
     "Drosophila suzukii"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "Deltametrina (3)* Acetamiprid (3) Spinosad (2) Tau Fluvalinate (1)* Piretrine pure*",
+   "sostanze": [
+    {
+     "sostanza": "Deltametrina",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Spinosad",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Tau Fluvalinate",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    }
+   ],
+   "note": "(1) Max 1 intervento/anno (2) Max 3 interventi/anno (3) Max 2 interventi/anno",
    "pagina": 106
   },
   {
@@ -8007,8 +8866,63 @@
     "Empoasca vitis, Zygina rhamni, jacobiasca libica, Erasmoneura vulnerata"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "Sali potassici di acidi grassi Olio minerale Piretrine pure* Olio essenziale di arancio dolce Acetamiprid (1) Etofenprox (3)* Tau-fluvalinate (3)* Azadiractina Flupyradifurone (1) Esfenvalerate (2) Beauveria bassiana",
+   "sostanze": [
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Olio minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Piretrine pure",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
+     "note": []
+    },
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Etofenprox",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Tau-fluvalinate",
+     "note": [
+      "3"
+     ]
+    },
+    {
+     "sostanza": "Azadiractina",
+     "note": []
+    },
+    {
+     "sostanza": "Flupyradifurone",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Esfenvalerate",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    }
+   ],
+   "note": "Max 1 intervento/anno contro questa avversità (1) Al massimo 1 interventi all'anno indipendentemente dall'avversità (2) Al massimo 1 intervento all'anno indipendentemente dall'avversità (3) Max 1 intervento/anno",
    "pagina": 106
   },
   {
@@ -8018,28 +8932,15 @@
     "=Dactulosphaira"
    ],
    "criteri": "",
-   "sostanze": [],
-   "note": "Acetamiprid (1)",
-   "pagina": 106
-  },
-  {
-   "coltura": "VITE DA TAVOLA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
+   "sostanze": [
+    {
+     "sostanza": "Acetamiprid",
+     "note": [
+      "1"
+     ]
+    }
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 106
-  },
-  {
-   "coltura": "VITE DA TAVOLA",
-   "avversita": "IBE",
-   "scientifici": [],
-   "criteri": "* con piretrine e piretroidi max 3 interventi /anno",
-   "sostanze": [],
-   "note": "",
+   "note": "(1) Al massimo 1 intervento all'anno",
    "pagina": 106
   },
   {
@@ -8988,26 +9889,6 @@
    "pagina": 112
   },
   {
-   "coltura": "VITE DA VINO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 112
-  },
-  {
-   "coltura": "VITE DA VINO",
-   "avversita": "piretrine e piretroidi",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 112
-  },
-  {
    "coltura": "ASPARAGO",
    "avversita": "Ruggine (Puccinia asparagi)",
    "scientifici": [
@@ -9137,43 +10018,6 @@
   },
   {
    "coltura": "ASPARAGO",
-   "avversita": "Fusariosi (Fusarium oxysporum f. sp. asparagi) (Fusarium moniliforme) (Fusarium solani) (Fusarium roseum)",
-   "scientifici": [
-    "Fusarium oxysporum f. sp. asparagi",
-    "Fusarium moniliforme",
-    "Fusarium solani",
-    "Fusarium roseum"
-   ],
-   "criteri": "Interventi specifici - impiego di materiale di moltiplicazione (zampe e sementi) sano.",
-   "sostanze": [
-    {
-     "sostanza": "Pythium oligandrum",
-     "note": [
-      "1"
-     ]
-    }
-   ],
-   "note": "",
-   "pagina": 116
-  },
-  {
-   "coltura": "ASPARAGO",
-   "avversita": "Mal vinato (Rhizoctonia violacea)",
-   "scientifici": [
-    "Rhizoctonia violacea"
-   ],
-   "criteri": "Interventi agronomici: - avvicendamento colturale con piante poco recettive; - impiego di zampe sane; - in presenza di focolai di malattia raccogliere e distruggere tempestivamente sia le piante malate che quelle vicine.",
-   "sostanze": [
-    {
-     "sostanza": "Tricoderma spp",
-     "note": []
-    }
-   ],
-   "note": "",
-   "pagina": 116
-  },
-  {
-   "coltura": "ASPARAGO",
    "avversita": "(AV1, AV2)",
    "scientifici": [
     "AV1, AV2"
@@ -9227,22 +10071,13 @@
   },
   {
    "coltura": "ASPARAGO",
-   "avversita": "AVVERSITA’",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "CRITERI DÌ INTERVENTO",
-   "pagina": 117
-  },
-  {
-   "coltura": "ASPARAGO",
    "avversita": "Ipopta (Hypopta caestrum)",
    "scientifici": [
     "Hypopta caestrum"
    ],
-   "criteri": "",
+   "criteri": "Interventi agronomici Asportazione e distruzione dei foderi di incrisalidamento che emergono dal terreno. Prosecuzione della raccolta dei turioni per almeno 20 giorni oltre il normale termine delle raccolte al fine di ostacolare le ovideposizioni del lepidottero al colletto delle piante.",
    "sostanze": [],
-   "note": "Interventi agronomici Asportazione e distruzione dei foderi di incrisalidamento che emergono dal terreno. Prosecuzione della raccolta dei turioni per almeno 20 giorni oltre il normale termine delle raccolte al fine di ostacolare le ovideposizioni del lepidottero al colletto delle piante.",
+   "note": "",
    "pagina": 117
   },
   {
@@ -9251,9 +10086,32 @@
    "scientifici": [
     "Brachycorynella asparagi"
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "Intervenire alla comparsa delle infestazioni in modo localizzato o a pieno campo in funzione della distribuzione dell'infestazione. Negli impianti infestati è raccomandabile la bruciatura dei resti disseccati della vegetazione per distruggere le eventuali uova durevoli presenti",
+   "criteri": "Intervenire alla comparsa delle infestazioni in modo localizzato o a pieno campo in funzione della distribuzione dell'infestazione. Negli impianti infestati è raccomandabile la bruciatura dei resti disseccati della vegetazione per distruggere le eventuali uova durevoli presenti",
+   "sostanze": [
+    {
+     "sostanza": "Piretrine Pure",
+     "note": []
+    },
+    {
+     "sostanza": "Maltodestrine",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
+     "note": []
+    },
+    {
+     "sostanza": "Deltametrina",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Azadiractina A",
+     "note": []
+    }
+   ],
+   "note": "(1) Al massimo 1 intervento all'anno",
    "pagina": 117
   },
   {
@@ -9261,27 +10119,12 @@
    "avversita": "Limacce",
    "scientifici": [],
    "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 117
-  },
-  {
-   "coltura": "ASPARAGO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno - (*) Max 2 interventi con",
-   "scientifici": [
-    "***"
+   "sostanze": [
+    {
+     "sostanza": "Fosfato Ferrico",
+     "note": []
+    }
    ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 117
-  },
-  {
-   "coltura": "ASPARAGO",
-   "avversita": "piretroidi",
-   "scientifici": [],
-   "criteri": "e piretrine",
-   "sostanze": [],
    "note": "",
    "pagina": 117
   },
@@ -9854,55 +10697,6 @@
    ],
    "note": "",
    "pagina": 123
-  },
-  {
-   "coltura": "CAVOLO RAPA",
-   "avversita": "AVVERSITA’",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [
-    {
-     "sostanza": "CRITERI DI INTERVENTO",
-     "note": []
-    }
-   ],
-   "note": "S.A. e AUSILIARI",
-   "pagina": 124
-  },
-  {
-   "coltura": "CAVOLO RAPA",
-   "avversita": "Insetti Terricoli (Agriotes spp.)",
-   "scientifici": [
-    "Agriotes spp."
-   ],
-   "criteri": "",
-   "sostanze": [
-    {
-     "sostanza": "Interventi agronomici",
-     "note": []
-    },
-    {
-     "sostanza": "Eseguire lavorazioni superficiali nell’interfila che modificando l’umidità del terreno favoriscono la discesa delle larve negli strati più profondi; solarizzazione; asportare i residui di coltivazione;",
-     "note": []
-    },
-    {
-     "sostanza": "Le lavorazioni superficiali sono utili nell’impedire la schiusura delle uova; adottare ampie rotazioni.",
-     "note": []
-    }
-   ],
-   "note": "",
-   "pagina": 124
-  },
-  {
-   "coltura": "CAVOLO RAPA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 124
   },
   {
    "coltura": "CAVOLO A INFIORESCENZA",
@@ -10493,26 +11287,6 @@
    "pagina": 129
   },
   {
-   "coltura": "CAVOLO A INFIORESCENZA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 129
-  },
-  {
-   "coltura": "CAVOLO A INFIORESCENZA",
-   "avversita": "3 interventi/anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 129
-  },
-  {
    "coltura": "CAVOLO A FOGLIA",
    "avversita": "Peronospora (Peronospora brassicacae, Peronospora parassitica)",
    "scientifici": [
@@ -10813,26 +11587,6 @@
     }
    ],
    "note": "Distribuire le esche lungo le fasce interessate",
-   "pagina": 132
-  },
-  {
-   "coltura": "CAVOLO A FOGLIA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 132
-  },
-  {
-   "coltura": "CAVOLO A FOGLIA",
-   "avversita": "piretrine e piretroidi",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 132
   },
   {
@@ -11361,26 +12115,6 @@
    "pagina": 136
   },
   {
-   "coltura": "CAVOLO A TESTA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno -",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 136
-  },
-  {
-   "coltura": "CAVOLO A TESTA",
-   "avversita": "max 3 interventi/anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 136
-  },
-  {
    "coltura": "CICORIA",
    "avversita": "Alternaria (Alternaria porri)",
    "scientifici": [
@@ -11819,26 +12553,6 @@
    "pagina": 139
   },
   {
-   "coltura": "CICORIA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 139
-  },
-  {
-   "coltura": "CICORIA",
-   "avversita": "piretrine e piretroidi",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 139
-  },
-  {
    "coltura": "CIPOLLA",
    "avversita": "Peronospora (Peronospora schleideni)",
    "scientifici": [
@@ -12189,34 +12903,21 @@
    "pagina": 143
   },
   {
-   "coltura": "CIPOLLA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 143
-  },
-  {
-   "coltura": "CIPOLLA",
-   "avversita": "3 interventi",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 143
-  },
-  {
    "coltura": "COCOMERO",
    "avversita": "Peronospora (Pseudoperonospora cubensis)",
    "scientifici": [
     "Pseudoperonospora cubensis"
    ],
    "criteri": "Interventi agronomici: - raccogliere e distruggere i residui delle colture precedenti infette - favorire l'arieggiamento delle piante coltivate in ambienti confinati - limitare le irrigazioni, soprattutto alla parte aerea delle piante Interventi chimici: si effettuano solo in casi eccezionali",
-   "sostanze": [],
-   "note": "Prodotti rameici (***) Estratto acquoso dei semi germinati di Lupinus albus dolce Fosetil Al Fosfonato di Potassio (7) Fluopicolide+Propamocarb (4) Zoxamide (3) Cymoxanil (1) Mandipropamide (1) Metalaxyl-M Ametoctradin (7) Azoxystrobin (2) Pyraclostrobin (2) Trichoderma asperellum e gamsii",
+   "sostanze": [
+    {
+     "sostanza": "Prodotti rameici",
+     "note": [
+      "***"
+     ]
+    }
+   ],
+   "note": "1) Al massimo 2 interventi all'anno indipendentemente dall'avversità (4) Max 1 intervento/anno (3) Max 3 interventi/anno (6) max 5 interventi/anno (2) Max 2 Interventi/anno con strobulirine (7) Max 2 interventi/anno",
    "pagina": 144
   },
   {
@@ -12330,7 +13031,7 @@
      ]
     }
    ],
-   "note": "",
+   "note": "1) Complessivamente Azoxystrobin e Tifloxystrobin non più di 2 interventi all'anno indipendentemente dall'avversità (2) Al massimo 1 interventi all'anno (6) Max 6 interventi/anno solo in coltura protetta (7) Max 2 interventi/anno (3) Max 1 intervento/anno (4) Al massimo 2 interventi tra Fluopyram e Fluxapyroxad (5) solo in serra",
    "pagina": 144
   },
   {
@@ -13236,26 +13937,6 @@
    "pagina": 151
   },
   {
-   "coltura": "FAGIOLINO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 151
-  },
-  {
-   "coltura": "FAGIOLINO",
-   "avversita": "interventi all’anno,",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 151
-  },
-  {
    "coltura": "FAGIOLO",
    "avversita": "Patogeni telluri (Rhizoctonia spp., Fusarium spp.)",
    "scientifici": [
@@ -13610,26 +14291,6 @@
     }
    ],
    "note": "Contro questa avversità 1 intervento dopo la formazione del baccello, e comunque non superare cumulativamente i 2 interventi nel corso dell'annata.",
-   "pagina": 154
-  },
-  {
-   "coltura": "FAGIOLO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 154
-  },
-  {
-   "coltura": "FAGIOLO",
-   "avversita": "interventi all’anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 154
   },
   {
@@ -14543,26 +15204,6 @@
    "pagina": 160
   },
   {
-   "coltura": "INDIVIA RICCIA E SCAROLA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 160
-  },
-  {
-   "coltura": "INDIVIA RICCIA E SCAROLA",
-   "avversita": "4 interventi/anno indipendentemente dall’avversità",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 160
-  },
-  {
    "coltura": "LATTUGA",
    "avversita": "Peronospora (Bremia lactucae)",
    "scientifici": [
@@ -15147,26 +15788,6 @@
     }
    ],
    "note": "Presente nei terreni prevalentemente sabbiosi.",
-   "pagina": 165
-  },
-  {
-   "coltura": "LATTUGA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 165
-  },
-  {
-   "coltura": "LATTUGA",
-   "avversita": "piretroidi all’anno e max 3 tra Etofenprox e lamdacialotrina",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 165
   },
   {
@@ -18575,24 +19196,6 @@
   },
   {
    "coltura": "PEPERONE",
-   "avversita": "(8",
-   "scientifici": [],
-   "criteri": ") max 2 interventi/anno",
-   "sostanze": [
-    {
-     "sostanza": "solo in",
-     "note": []
-    },
-    {
-     "sostanza": "solo in serra",
-     "note": []
-    }
-   ],
-   "note": "serra",
-   "pagina": 193
-  },
-  {
-   "coltura": "PEPERONE",
    "avversita": "Nematodi galligeni (Meloidogyne spp.)",
    "scientifici": [
     "Meloidogyne spp."
@@ -18681,26 +19284,6 @@
     }
    ],
    "note": "(1) Al momento sono autorizzati solo formulati commerciali impiegabili in fertirrigazione (3) Max 3 interventi annui indipendentemente dall’avversità. (4) Max 2 interventi annui indipendentemente dall’avversità. Solo in serra. (5) Max 2 interventi/anno (6) Max 2 interventi/anno in coltura protetta",
-   "pagina": 195
-  },
-  {
-   "coltura": "PEPERONE",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 195
-  },
-  {
-   "coltura": "PEPERONE",
-   "avversita": "max 2 interventi/anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 195
   },
   {
@@ -18946,26 +19529,6 @@
     }
    ],
    "note": "(1) Max 1 intervento/anno",
-   "pagina": 197
-  },
-  {
-   "coltura": "PISELLO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 197
-  },
-  {
-   "coltura": "PISELLO",
-   "avversita": "interventi all’anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
    "pagina": 197
   },
   {
@@ -19968,40 +20531,68 @@
   },
   {
    "coltura": "POMODORO IN PIENO CAMPO",
-   "avversita": "AVVERSITA’",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [
-    {
-     "sostanza": "CRITERI DI INTERVENTO",
-     "note": []
-    }
-   ],
-   "note": "S.A. e AUSILIARI",
-   "pagina": 206
-  },
-  {
-   "coltura": "POMODORO IN PIENO CAMPO",
    "avversita": "Ragnetto rosso (Tetranychus urticae)",
    "scientifici": [
     "Tetranychus urticae"
    ],
-   "criteri": "",
+   "criteri": "SOGLIA Presenza diffusa E' bene alternare le diverse sostanze attive con diverso meccanismo d'azione al fine di attenuare fenomeni di resistenza.",
    "sostanze": [
     {
-     "sostanza": "SOGLIA",
+     "sostanza": "Sali potassici di acidi grassi",
      "note": []
     },
     {
-     "sostanza": "Presenza diffusa",
+     "sostanza": "Beauveria bassiana",
      "note": []
     },
     {
-     "sostanza": "E' bene alternare le diverse sostanze attive con diverso meccanismo d'azione al fine di attenuare fenomeni di resistenza.",
+     "sostanza": "Olio essenziale di arancio dolce",
      "note": []
+    },
+    {
+     "sostanza": "Zolfo",
+     "note": []
+    },
+    {
+     "sostanza": "Exitiazox",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Fenpiroximate",
+     "note": [
+      "4"
+     ]
+    },
+    {
+     "sostanza": "Acequinocyl",
+     "note": [
+      "2"
+     ]
+    },
+    {
+     "sostanza": "Olio Minerale",
+     "note": []
+    },
+    {
+     "sostanza": "Ciflumetofen",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Maltodestrine",
+     "note": []
+    },
+    {
+     "sostanza": "Milbemectina",
+     "note": [
+      "3"
+     ]
     }
    ],
-   "note": "Sali potassici di acidi grassi Beauveria bassiana Olio essenziale di arancio dolce Zolfo Exitiazox (4) Fenpiroximate(4) Acequinocyl (2) Olio Minerale Ciflumetofen (1) Maltodestrine Milbemectina (3)",
+   "note": "Al massimo 4 interventi per tale avversità 1) 1 intervento ogni 2 anni 2) Max 2 interventi/anno 3) Max 2 interventi/anno 4) Max 1 intervento/anno",
    "pagina": 206
   },
   {
@@ -20010,18 +20601,32 @@
    "scientifici": [
     "Aculops lycopersici"
    ],
-   "criteri": "",
+   "criteri": "Interventi chimici Presenza diffusa",
    "sostanze": [
     {
-     "sostanza": "Interventi chimici",
+     "sostanza": "Zolfo",
      "note": []
     },
     {
-     "sostanza": "Presenza diffusa",
+     "sostanza": "Fempiroximate",
+     "note": [
+      "1"
+     ]
+    },
+    {
+     "sostanza": "Maltodestrina",
+     "note": []
+    },
+    {
+     "sostanza": "Beauveria bassiana",
+     "note": []
+    },
+    {
+     "sostanza": "Olio essenziale di arancio dolce",
      "note": []
     }
    ],
-   "note": "Zolfo Fempiroximate (1) Maltodestrina Beauveria bassiana Olio essenziale di arancio dolce",
+   "note": "(1) Max 1 intervento/anno",
    "pagina": 206
   },
   {
@@ -20030,87 +20635,30 @@
    "scientifici": [
     "Meloidogyne spp."
    ],
-   "criteri": "",
+   "criteri": "Interventi agronomici: Impiegare varietà e portinnesti tolleranti/resistenti; Eliminare e distruggere i residui della coltura precedente; Evitare ristagni idrici; Utilizzo di panelli di semi di brassica (1) Interventi fisici: Solarizzare il terreno con telo di P.E. trasparente dello spessore di mm 0,050 durante i mesi di giugno-agosto per almeno 50 giorni",
    "sostanze": [
     {
-     "sostanza": "Interventi agronomici:",
+     "sostanza": "Estratto d'aglio",
      "note": []
     },
     {
-     "sostanza": "Impiegare varietà e portinnesti tolleranti/resistenti;",
+     "sostanza": "Geraniolo+Timolo",
      "note": []
     },
     {
-     "sostanza": "Eliminare e distruggere i residui della coltura precedente;",
+     "sostanza": "Fluopyram",
      "note": []
     },
     {
-     "sostanza": "Evitare ristagni idrici;",
+     "sostanza": "Paecilomyces lilacinus",
      "note": []
     },
     {
-     "sostanza": "Utilizzo di panelli di semi di brassica",
-     "note": [
-      "1"
-     ]
-    },
-    {
-     "sostanza": "Interventi fisici:",
-     "note": []
-    },
-    {
-     "sostanza": "Solarizzare il terreno con telo di P.E. trasparente dello spessore di mm 0,050 durante i mesi di giugno-agosto per almeno 50 giorni",
+     "sostanza": "Azadiractina A",
      "note": []
     }
    ],
-   "note": "Estratto d'aglio Geraniolo+Timolo Fluopyram Paecilomyces lilacinus Azadiractina A",
-   "pagina": 206
-  },
-  {
-   "coltura": "POMODORO IN PIENO CAMPO",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 206
-  },
-  {
-   "coltura": "POMODORO IN PIENO CAMPO",
-   "avversita": "di due sostanze attive diverse contemporaneamente per ciascuna avversità. Da questa limitazione vanno esclusi i prodotti rameici, Fosetil Al e tutti i prodotti biologici. Per ciascuna",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 206
-  },
-  {
-   "coltura": "POMODORO IN PIENO CAMPO",
-   "avversita": "sostanza attiva è utilizzabile solo un formulato commerciale; ammesso un impiego di diverse formulazioni con la stessa s.a. solo per lo smaltimento di scorte o problemi",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 206
-  },
-  {
-   "coltura": "POMODORO IN PIENO CAMPO",
-   "avversita": "nell'approvvigionamento; in quest'ultimo caso deve comunque essere globalmente rispettata la quantità massima di s.a. prevista da una delle formulazioni utilizzate.",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 206
-  },
-  {
-   "coltura": "POMODORO IN PIENO CAMPO",
-   "avversita": "con Piretrine e Piretroidi/anno",
-   "scientifici": [],
-   "criteri": "di cui uno di etofenprox, 1 di cipermetrina e uno di Lamdacialotrina",
-   "sostanze": [],
-   "note": "",
+   "note": "Sono presenti nei terreni prevalentemente sabbiosi.",
    "pagina": 206
   },
   {
@@ -21240,26 +21788,6 @@
    "pagina": 216
   },
   {
-   "coltura": "POMODORO IN COLTURA PROTETTA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 216
-  },
-  {
-   "coltura": "POMODORO IN COLTURA PROTETTA",
-   "avversita": "piretrine e Piretroidi",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 216
-  },
-  {
    "coltura": "RADICCHIO",
    "avversita": "Alternaria (Alternaria porrii f.sp. cichorii)",
    "scientifici": [
@@ -22292,26 +22820,6 @@
    "pagina": 225
   },
   {
-   "coltura": "RUCOLA",
-   "avversita": "(***) Prodotti rameici :28 kg/ha in 7 anni. Si raccomanda di non superare il quantitativo medio di 4 kg di rame per ettaro all'anno",
-   "scientifici": [
-    "***"
-   ],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 225
-  },
-  {
-   "coltura": "RUCOLA",
-   "avversita": "e Piretroidi all’anno",
-   "scientifici": [],
-   "criteri": "",
-   "sostanze": [],
-   "note": "",
-   "pagina": 225
-  },
-  {
    "coltura": "AVENA-SEGALE-TRITICALE",
    "avversita": "Carbone ( Ustilago spp.)",
    "scientifici": [
@@ -22686,7 +23194,7 @@
    ],
    "criteri": "Interventi agronomici: - Evitare le semine fitte - Concimazioni azotate equilibrate., Non ammessa la concia con insetticidi",
    "sostanze": [],
-   "note": "",
+   "note": "Al massimo 1 intervento insetticida all’anno",
    "pagina": 234
   },
   {
@@ -22696,22 +23204,17 @@
     "Rhopalosiphum padi, Metopolosiphum dirhodum, Sitobion avenae"
    ],
    "criteri": "Interventi agronomici: - Evitare le semine fitte - Concimazioni azotate equilibrate Lotta biologica: Esistono predatori naturali che nelle nostre aree possono essere numerosi e limitare fortemente le infestazioni (Ditteri sirfidi, Coccinella septempunctata, Propylaea quatuordecimpunctata, Crisope, Imenotteri). Vanno poi ricordati i parassitoidi caratteristica la mummificazione) e, specie con clima umido e piovoso, i funghi entomopatogeni (entomoftoracee). Interventi chimici: Soglia: 80% di culmi con afidi",
-   "sostanze": [],
-   "note": "",
-   "pagina": 235
-  },
-  {
-   "coltura": "FRUMENTO",
-   "avversita": "** Max 2 interventi all’anno con fungicidi",
-   "scientifici": [],
-   "criteri": "",
    "sostanze": [
     {
-     "sostanza": "indipendentemente dall’avversità",
+     "sostanza": "Fluvalinate",
+     "note": []
+    },
+    {
+     "sostanza": "Sali potassici di acidi grassi",
      "note": []
     }
    ],
-   "note": "",
+   "note": "Prima di operare l'intervento valutare la presenza, l'entità dei limitatori naturali e la loro potenziale capacità nel contenimento dello sviluppo della popolazione del fitofago.",
    "pagina": 235
   },
   {
