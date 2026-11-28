@@ -21,7 +21,8 @@ import improve_readers as ir  # noqa: E402
 import estrai_bioclip as eb  # noqa: E402
 from plantcare import readers as rd  # noqa: E402
 
-OUT = ROOT / "models" / "vN"
+import os
+OUT = ROOT / "models" / os.environ.get("LETTORI_OUT", "vN")  # es. LETTORI_OUT=vO per un nuovo giro
 VARIANTI = {
     "disease": [{**ir.FIELD, "plantdoc": 6.0, "plantwild": 4.0, "aperti": 1.0},
                 {**ir.FIELD, "plantdoc": 8.0, "plantwild": 4.0, "aperti": 0.7},

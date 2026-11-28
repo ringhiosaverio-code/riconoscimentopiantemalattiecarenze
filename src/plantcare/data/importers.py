@@ -726,6 +726,10 @@ def import_inat_calabria(seed: int = 42) -> list[ManifestRow]:
     if not man.exists():
         return []
     rows = []
+    # foto con colonie sulle foglie e sui rami (scelte con CLIP e verificate a vista): anche classe "danno:"
+    # del lettore delle malattie, perché quest'ultimo non scambi colonie e melata per malattie
+    col_path = ROOT / "configs" / "colonie_inat.json"
+    colonia = {p: c for c, ps in json.load(open(col_path, encoding="utf-8")).items() for p in ps} if col_path.exists() else {}
     for key, e in sorted(json.load(open(man, encoding="utf-8")).items()):
         disease = e.get("tipo") == "malattia"
         for p in e.get("foto", []):
@@ -737,8 +741,27 @@ def import_inat_calabria(seed: int = 42) -> list[ManifestRow]:
                 rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant=e.get("coltura") or "",
                                         disease=e["classe"], pest="", deficiency="", organ=""))
             else:
-                rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant="", disease="",
+                rows.append(ManifestRow(path=p["path"], source="inat_calabria", split=split, plant="", disease=colonia.get(p["path"], ""),
                                         pest=f"inat:{key}", deficiency="", organ=""))
+    return rows
+
+
+def import_inat_colture(seed: int = 42) -> list[ManifestRow]:
+    """Foglie delle colture del Sud viste dal rovescio, controluce, coperte di insetti, melata o fumaggine
+    (scripts/import_inat_colture.py, iNaturalist con licenze aperte, scelte con CLIP) per il lettore della
+    coltura. Split per autore della foto, come per inat_calabria."""
+    man = EXT / "inat_colture" / "manifest.json"
+    if not man.exists():
+        return []
+    rows = []
+    for cls, e in sorted(json.load(open(man, encoding="utf-8")).items()):
+        for p in e.get("foto", []):
+            if not (DATA / p["path"]).exists():
+                continue
+            h = zlib.crc32(f"{seed}:{p['user']}".encode()) % 100
+            split = "test" if h < 10 else ("val" if h < 20 else "train")
+            rows.append(ManifestRow(path=p["path"], source="inat_colture", split=split, plant=cls, disease="",
+                                    pest="", deficiency="", organ="leaf"))
     return rows
 
 

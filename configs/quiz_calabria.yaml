@@ -209,6 +209,10 @@ parassiti:  # insetti e acari
   - {taxon: "Phytoseiulus persimilis", nome: "Fitoseiulo, acaro predatore del ragnetto rosso", gruppo: utili, utile: true}
   - {taxon: "Phytoseiidae", nome: "Fitoseidi, acari predatori (Amblyseius, Neoseiulus, Typhlodromus)", gruppo: utili, utile: true}
   - {taxon: "Feltiella acarisuga", nome: "Feltiella, cecidomia predatrice di acari", gruppo: utili, utile: true}
+  # gruppi di parassitoidi minuscoli (poche foto per specie su iNaturalist)
+  - {taxon: "Aphidiinae", nome: "Parassitoidi degli afidi (mummie dorate o brune tra gli afidi)", gruppo: utili, utile: true}
+  - {taxon: "Aphelinidae", nome: "Afelinidi, parassitoidi di aleurodidi, cocciniglie e afidi (pupari e mummie nere)", gruppo: utili, utile: true}
+  - {taxon: "Encyrtidae", nome: "Encirtidi, parassitoidi di cocciniglie e cotonello", gruppo: utili, utile: true}
 
 malattie:
   - {taxon: "Venturia oleaginea", nome: "Occhio di pavone dell'olivo", gruppo: olivo, causa: fungo}

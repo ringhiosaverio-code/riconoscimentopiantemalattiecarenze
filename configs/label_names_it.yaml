@@ -158,6 +158,11 @@
 "danno:cimici": "Punture di cimici sui frutti (cimice verde, cimice asiatica)"
 "danno:piralide": "Gallerie della piralide del mais e del peperone (Ostrinia nubilalis)"
 "danno:erinosi_vite": "Erinosi della vite (acaro Colomerus vitis)"
+# colonie sulle foglie e sui rami (foto iNaturalist scelte con CLIP e verificate a vista, configs/colonie_inat.json)
+"danno:aleurodidi": "Colonie di aleurodidi (mosche bianche) sulla pagina inferiore delle foglie"
+"danno:cocciniglie": "Cocciniglie su foglie, rami e frutti (scudetti e corpi cerosi)"
+"danno:cotonello": "Cotonello e Icerya: masse cerose bianche su rami, foglie e frutti"
+"danno:ragnatele_acari": "Ragnetto rosso: punteggiature, bronzatura e ragnatele sulle foglie"
 # malattie di orticole e fruttiferi aggiunte il 27/11/2026
 "inat:uromyces_appendiculatus": "Ruggine del fagiolo (Uromyces appendiculatus)"
 "inat:erysiphe_pisi": "Oidio del pisello e delle leguminose (Erysiphe pisi)"

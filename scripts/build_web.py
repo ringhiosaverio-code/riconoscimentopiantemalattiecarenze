@@ -313,6 +313,8 @@ def main() -> None:
     for raw, hosts in (load_yaml(ROOT / "configs" / "ospiti_classi.yaml").get("ospiti") or {}).items():
         crops_of[raw] |= set(hosts)
     OSPITI_INSETTI = load_yaml(ROOT / "configs" / "ospiti_insetti.yaml").get("ospiti") or {}
+    UTILI = {re.sub(r"[^a-z0-9]+", "_", e["taxon"].lower()).strip("_"): bool(e.get("utile"))
+             for e in load_yaml(ROOT / "configs" / "quiz_calabria.yaml").get("parassiti", [])}
     readers = {}
     for h in heads:
         classes = ck["readers"][h]["classes"]
@@ -339,6 +341,8 @@ def main() -> None:
                 item["name"] = pest_name(raw, ip_en, ip_it)
                 if raw in OSPITI_INSETTI:  # piante ospiti degli insetti specializzati (configs/ospiti_insetti.yaml)
                     item["ospiti"] = OSPITI_INSETTI[raw]
+                if raw.startswith("inat:") and UTILI.get(raw[5:]):  # insetti utili (entomofagi): "non trattare"
+                    item["utile"] = True
             else:
                 item["name"] = DEFICIENCY_NAMES.get(raw, raw)
             if (h, raw) in reg_of:

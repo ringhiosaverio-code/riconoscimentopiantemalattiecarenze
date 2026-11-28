@@ -88,6 +88,14 @@ collegamenti:
     {tipo: danno, insetti: ["inat:ostrinia_nubilalis"], nota: "Fori e gallerie con rosura in fusti, pannocchie e bacche di peperone: piralide."}
   danno:erinosi_vite:
     {tipo: danno, insetti: ["inat:colomerus_vitis"], nota: "Bollosità sulla pagina superiore e feltro biancastro poi rossiccio sotto: acaro eriofide Colomerus vitis. Di solito non serve trattare: lo zolfo usato contro l'oidio lo tiene già sotto controllo."}
+  danno:aleurodidi:
+    {tipo: danno, insetti: ["inat:aleurothrixus_floccosus", "inat:dialeurodes_citri", "inat:aleurocanthus_spiniferus", "inat:trialeurodes_vaporariorum", "inat:bemisia_tabaci"], nota: "Forme giovanili piatte o coperte di cera sotto le foglie, adulti bianchi che volano se si scuote la pianta, melata e fumaggine: aleurodidi. Sugli agrumi Aleurothrixus (fiocchi cerosi), Dialeurodes (forme piatte traslucide) e Aleurocanthus (nere con frangia bianca, da quarantena); sulle orticole Trialeurodes e Bemisia."}
+  danno:cocciniglie:
+    {tipo: danno, insetti: ["inat:saissetia_oleae", "inat:aonidiella_aurantii", "inat:coccus_hesperidum", "inat:ceroplastes_rusci", "inat:ceroplastes_sinensis", "inat:aspidiotus_nerii", "inat:chrysomphalus_dictyospermi", "inat:lichtensia_viburni", "inat:parlatoria_oleae", "inat:parlatoria_pergandii"], nota: "Scudetti fissi su foglie, rami e frutti: cocciniglie. Le lecanine (mezzo grano di pepe, mollo, ceroplaste) producono melata e fumaggine; le diaspine (rossa forte, bianca, grigia) no, ma deprimono la pianta e macchiano i frutti."}
+  danno:cotonello:
+    {tipo: danno, insetti: ["inat:planococcus_citri", "inat:planococcus_ficus", "inat:icerya_purchasi"], nota: "Masse cerose bianche a fiocco tra i frutti, sotto il calice e sui rami: cotonello (Planococcus) o Icerya (grossi ovisacchi bianchi scanalati). Attenzione: le larve del Criptolemo, coccinella utile, sono anch'esse bianche e cerose ma si muovono."}
+  danno:ragnatele_acari:
+    {tipo: danno, insetti: ["inat:tetranychus_urticae", "inat:panonychus_citri"], nota: "Punteggiature gialle, foglie bronzate o argentate e sottili ragnatele sulla pagina inferiore: ragnetto rosso. Con caldo secco si moltiplica in pochi giorni; i fitoseidi predatori lo controllano se non si usano insetticidi ad ampio spettro."}
   inat:cucumovirus_cmv:
     {tipo: vettore, insetti: ["inat:aphis_gossypii", "inat:myzus_persicae", "inat:aphis_fabae", "inat:macrosiphum_euphorbiae"], nota: "Il CMV è trasmesso da molte specie di afidi in modo non persistente: contano reti, pacciamature riflettenti, eliminazione delle infestanti e piante sane."}
   inat:emaravirus_fici:

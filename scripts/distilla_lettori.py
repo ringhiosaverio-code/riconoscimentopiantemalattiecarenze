@@ -22,7 +22,9 @@ import estrai_bioclip as eb  # noqa: E402
 from plantcare import readers as rd  # noqa: E402
 from plantcare.metrics import macro_f1  # noqa: E402
 
-OUT = ROOT / "models" / "vN_distillato"
+import os
+OUT = ROOT / "models" / os.environ.get("DISTILLA_OUT", "vN_distillato")
+MAESTRI = os.environ.get("DISTILLA_MAESTRI", "")  # es. "disease=models/vO,pest=models/vO,plant=models/vO"
 TESTE = []
 
 
@@ -95,6 +97,9 @@ def main():
                                    ("plant", rows, feats, "models/vM/ensemble_plant.pt"), ("deficiency", rows, feats, "models/vM/ensemble_deficiency.pt")):
         if TESTE and head not in TESTE:
             continue
+        alt = dict(x.split("=") for x in MAESTRI.split(",") if x)
+        if head in alt:
+            src_ens = f"{alt[head]}/ensemble_{head}.pt"
         ck, ens = carica(ROOT / src_ens, X.shape[1])
         if head in ("plant", "deficiency"):  # solo le classi del lettore pubblicato (dati nuovi con colture in più)
             noti = set(ck["classes"])

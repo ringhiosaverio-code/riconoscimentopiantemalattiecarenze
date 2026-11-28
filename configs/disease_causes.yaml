@@ -166,6 +166,10 @@ labels:
   "danno:cimici": insetto
   "danno:piralide": insetto
   "danno:erinosi_vite": acaro
+  "danno:aleurodidi": insetto
+  "danno:cocciniglie": insetto
+  "danno:cotonello": insetto
+  "danno:ragnatele_acari": acaro
   # malattie di orticole e fruttiferi aggiunte il 27/11/2026
   "inat:uromyces_appendiculatus": fungo
   "inat:erysiphe_pisi": fungo
