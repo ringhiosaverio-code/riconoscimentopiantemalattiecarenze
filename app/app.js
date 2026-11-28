@@ -707,7 +707,7 @@
   }
 
   // Lettore degli insetti: separato dagli altri, perché ha senso solo se la foto mostra un insetto.
-  function pestBlock(probs, open) {
+  function pestBlock(probs, open, cropUsata) {
     var R = DATA.readers.pest;
     if (!R || !probs) return '';
     var t = top(probs, 3), ok = t[0][0] >= THRESHOLD;
@@ -718,7 +718,8 @@
       '<p class="muted">Vale solo se la foto mostra un insetto o un acaro, non i suoi danni.</p>';
     var c0 = R.classes[t[0][1]];
     if (ok && c0.reg != null && DATA.lab) h += regNote(DATA.lab.organismi_regolamentati[c0.reg], t[0][0], 'Se la foto mostra davvero questo insetto: ');
-    if (ok) h += pestLinks(c0.label) + difesaBlock('pest', c0.label, $('crop').value || null, null);
+    if (ok && c0.utile) h += '<p class="ok"><strong>Insetto utile (entomofago):</strong> si nutre di parassiti o li parassitizza. Non trattare: proteggilo, evitando insetticidi ad ampio spettro.</p>';
+    else if (ok) h += pestLinks(c0.label) + difesaBlock('pest', c0.label, $('crop').value || cropUsata || null, null);
     t.forEach(function (x) {
       h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(R.classes[x[1]].name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
     });
@@ -757,12 +758,70 @@
   };
   function simili(ci) { return SIMILI[ci.label] ? '<p class="muted">' + SIMILI[ci.label] + '</p>' : ''; }
 
+  // gruppo di colture a cui appartengono le piante ospiti (per dire "agrume" oltre a "limone")
+  function gruppoDi(ospiti) {
+    var G = [[/^citrus_/, 'agrume'], [/^olea_/, 'olivo'], [/^vitis_/, 'vite'], [/^prunus_/, 'drupacea'], [/^(malus|pyrus)_/, 'pomacea'],
+      [/^(solanum|capsicum)_/, 'solanacea'], [/^brassica_/, 'cavolo'], [/^allium_/, 'liliacea']];
+    for (var i = 0; i < G.length; i++) if (ospiti.every(function (k) { return G[i][0].test(k); })) return G[i][1];
+    return '';
+  }
+  // coltura dedotta dall'insetto: tra le piante ospiti, quella che il lettore della coltura ritiene più probabile
+  function colturaDaInsetto(ci, res) {
+    var P = DATA.readers.plant.classes, tpl = top(res.plant, 1)[0], vista = P[tpl[1]];
+    var nomeDi = function (k) { var c = P.filter(function (x) { return x.label === k; })[0]; return c ? c.name : k.replace(/^altro:/, ''); };
+    var best = null;
+    ci.ospiti.forEach(function (k) {
+      var i = P.findIndex(function (x) { return x.label === k; }), pr = i >= 0 ? res.plant[i] : -1;
+      if (!best || pr > best[0]) best = [pr, k, i];
+    });
+    var cambiata = ci.ospiti.indexOf(vista.label) < 0, k = cambiata ? best[1] : vista.label;
+    var cls = P.filter(function (x) { return x.label === k; })[0] || { label: k, name: nomeDi(k) };
+    return { cambiata: cambiata, cls: cls, nome: cls.name, gruppo: gruppoDi(ci.ospiti), ospitiNomi: ci.ospiti.map(nomeDi) };
+  }
+  // riquadro di sintesi in cima al risultato quando l'insetto è riconosciuto con sicurezza
+  function sintesiInsetto(ci, p, crop, dedotta) {
+    if (ci.utile) return '<div class="reader sintesi"><h3>Insetto utile: ' + esc(ci.name) + ' (' + pct(p) + ')</h3><p class="ok">È un entomofago, un alleato della coltura: ' +
+      'si nutre di parassiti o li parassitizza. Non trattare contro di lui; se ci sono anche parassiti, scegli mezzi selettivi che lo rispettino.</p></div>';
+    var P = DATA.readers.plant.classes, cn = crop ? (P.filter(function (x) { return x.label === crop; })[0] || {}).name : (dedotta ? dedotta.nome : null);
+    var gr = dedotta ? dedotta.gruppo : '';
+    return '<div class="reader sintesi"><h3>Diagnosi in sintesi</h3><ul>' +
+      (cn ? '<li><strong>Coltura:</strong> ' + esc(cn) + (gr ? ' (' + esc(gr) + ')' : '') + (dedotta && dedotta.cambiata ? ', dedotta dall\'insetto' : '') + '</li>' : '') +
+      '<li><strong>Problema:</strong> danno da insetto o acaro — ' + esc(ci.name) + ' (' + pct(p) + ')</li>' +
+      '<li><strong>Cosa fare:</strong> controlla la soglia e segui la scheda «Come intervenire» qui sotto, nel lettore degli insetti.</li></ul>' + simili(ci) + '</div>';
+  }
+
   function render(res, secs) {
     var organ = $('organ').value, h = '<section class="card"><h2>Risultato dei lettori</h2>';
     var answers = {}, crop = res.crop, dset = null;
+    // insetto riconosciuto con sicurezza (colonie, uova, forme giovanili, adulti): guida la diagnosi, perché il
+    // lettore delle malattie non conosce gli insetti (cerca la malattia più simile, es. "mal bianco") e il
+    // lettore della coltura sbaglia con foglie viste dal rovescio o coperte di insetti
+    var tp = res.pest ? top(res.pest, 1)[0] : null, insettoSicuro = !!(tp && tp[0] >= 0.8);
+    var ci = insettoSicuro ? DATA.readers.pest.classes[tp[1]] : null, dedotta = null;
+    if (insettoSicuro && !ci.utile && !crop && ci.ospiti && ci.ospiti.length) dedotta = colturaDaInsetto(ci, res);
+    if (insettoSicuro) h += sintesiInsetto(ci, tp[0], crop, dedotta);
     HEADS.forEach(function (hd) {
       var R = DATA.readers[hd], t = top(res[hd], 3), best = R.classes[t[0][1]];
       var ok = t[0][0] >= THRESHOLD;
+      if (hd === 'plant' && dedotta && (dedotta.cambiata || !ok)) {  // la coltura proposta non ospita l'insetto
+        answers.plant = dedotta.cls;
+        h += '<div class="reader"><h3>Coltura: ' + esc(dedotta.nome) + (dedotta.gruppo ? ' (' + esc(dedotta.gruppo) + ')' : '') + '</h3><p>Dedotta dall\'insetto: ' + esc(ci.name) +
+          ' vive solo su ' + esc(dedotta.ospitiNomi.join(', ')) + '. Il lettore della coltura ' + (dedotta.cambiata ? 'proponeva ' : 'era incerto: ') + esc(best.name) + ' (' + pct(t[0][0]) +
+          (dedotta.cambiata ? '), ma sbaglia' : '); sbaglia facilmente') + ' con foglie viste dal rovescio, controluce o coperte di insetti. Se è un\'altra coltura, indicala nel menu «Coltura» e ripeti l\'analisi.</p></div>';
+        return;
+      }
+      if (hd === 'disease' && insettoSicuro && !ci.utile) {
+        answers.disease = { label: 'danno:insetto', name: 'Danno da insetto o acaro: ' + ci.name };
+        h += '<div class="reader"><h3>Malattia o danno: danno da insetto o acaro</h3><p><strong>' + esc(ci.name) + '</strong>. Colonie, melata, fumaggine, ' +
+          'ingiallimenti e deformazioni nella foto sono causati da questo parassita: non serve un trattamento contro malattie.</p>' +
+          '<details><summary class="muted">Che cosa avrebbe detto il lettore delle malattie (non conosce gli insetti)</summary>';
+        t.forEach(function (x) {
+          var c = R.classes[x[1]];
+          h += '<div class="cand"><div class="bar"><span style="width:' + (x[0] * 100).toFixed(1) + '%"></span><em>' + esc(c.name) + '</em></div><div class="p">' + pct(x[0]) + '</div></div>';
+        });
+        h += '</details></div>';
+        return;
+      }
       if (hd === 'plant' && crop) {  // coltura indicata dall'utente: il lettore resta come confronto
         var mine = R.classes.filter(function (c) { return c.label === crop; })[0];
         answers.plant = mine || null;
@@ -786,30 +845,26 @@
       var field = R.field && (R.field.plantdoc || R.field.inatag);
       h += '<p class="muted">Affidabilità sul test: ' + pct(R.test_accuracy) + (field ? '; su foto di campo: ' + pct(field.accuracy) : '') + '.</p></div>';
     });
-    var cz = causeBlock(res.disease);
+    var dannoInsetto = insettoSicuro && !ci.utile;
+    var cz = dannoInsetto ? { html: '<div class="reader"><h3>Causa dei sintomi: ' + (/acar|ragnet|eriofid/i.test(ci.name) ? 'acaro' : 'insetto') + '</h3></div>', best: null, pests: 1, ids: [] } : causeBlock(res.disease);
     answers.cause = cz.best;
     h += cz.html;
-    var lk = linkBlock(res, crop, answers.plant && answers.plant.label);
+    var cropUsata = crop || (answers.plant && answers.plant.label);
+    var lk = dannoInsetto ? { html: '', open: true } : linkBlock(res, crop, answers.plant && answers.plant.label);
     h += lk.html;
-    // insetto riconosciuto con sicurezza (colonie, uova, forme giovanili, adulti): lo si dice in chiaro, perché
-    // il lettore delle malattie non sa che cosa sia un insetto e cerca la malattia più simile (es. "mal bianco")
-    var tp = res.pest ? top(res.pest, 1)[0] : null, insettoSicuro = tp && tp[0] >= 0.8;
-    if (insettoSicuro) {
-      var ci = DATA.readers.pest.classes[tp[1]], td0 = top(res.disease, 1)[0];
-      h += '<div class="reader"><h3>Insetto o acaro riconosciuto: ' + esc(ci.name) + ' (' + pct(tp[0]) + ')</h3>' +
-        '<p class="warn">Se nella foto si vedono insetti, uova, forme giovanili o colonie (anche come puntini, cera bianca o melata lucida), la causa è questo parassita' +
-        (td0[0] < tp[0] ? ', non «' + esc(DATA.readers.disease.classes[td0[1]].name) + '» proposto dal lettore delle malattie' : '') + '. La difesa è qui sotto, nel lettore degli insetti.</p>' + coerenzaOspiti(ci, res, crop) + simili(ci) + '</div>';
-    }
-    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open || insettoSicuro);
+    if (insettoSicuro && crop) h += coerenzaOspiti(ci, res, crop);  // coltura indicata che non ospita l'insetto
+    h += pestBlock(res.pest, (cz.pests || 0) >= 0.3 || lk.open || insettoSicuro, cropUsata);
     if (res.pest) h += '<div class="reader"><p><button type="button" class="secondary" id="zone-pest">Cerca più insetti nella foto (analisi per zone)</button></p>' +
       '<p class="muted">Il lettore degli insetti dà una risposta per volta: con più parassiti nella stessa foto (es. aleurodidi e cocciniglie) l\'analisi per zone li cerca in ogni parte dell\'immagine.</p><div id="zone-out"></div></div>';
     // laboratorio: cause possibili, quante ipotesi, organismi regolamentati tra le malattie più probabili
-    var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
-    h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
+    if (!dannoInsetto) {
+      var l95 = hypLevel('disease', '95', crop), regs = regsIn('disease', (l95 ? hypSet(res.disease, l95) : top(res.disease, 1)).filter(function (x) { return x[0] >= 0.1; }));
+      h += labBlock(cz.ids || [], dset ? dset.length : 1, regs);
+    }
     var cropNow = crop || (answers.plant && answers.plant.label);
     if (cropNow && organ) h += woodNote(cropNow, organ);
     var td = top(res.disease, 1)[0], dc = DATA.readers.disease.classes[td[1]];
-    if (td[0] >= THRESHOLD && dc.cause !== 'sano') h += difesaBlock('disease', dc.label, crop, answers.plant && answers.plant.label);
+    if (!dannoInsetto && td[0] >= THRESHOLD && dc.cause !== 'sano') h += difesaBlock('disease', dc.label, crop, answers.plant && answers.plant.label);
     h += referto(answers, organ);
     h += '<p><button type="button" class="secondary" id="go-tank">Prepara la botte</button></p>';
     var unsure = HEADS.some(function (hd) { return !answers[hd]; });
